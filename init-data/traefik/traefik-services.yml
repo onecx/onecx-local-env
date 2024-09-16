@@ -1,0 +1,10 @@
+http:
+  services:
+    local_bff:
+      loadBalancer:
+        servers:
+        - url: "http://host.docker.internal:8585/"
+    local_mfe:
+      loadBalancer:
+        servers:
+        - url: "http://host.docker.internal:4200/"
