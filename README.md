@@ -1,6 +1,6 @@
 # OneCX Local Environment Setup
 
-Setup the local OneCX environment setup using *docker compose*
+Setup the local OneCX environment using *docker compose*
 
 ## Preparation
 
