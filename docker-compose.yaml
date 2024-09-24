@@ -596,6 +596,9 @@ services:
     labels:
       - "traefik.http.services.onecx-tenant-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-tenant-bff.rule=Host(`onecx-tenant-bff`)"
+      #- "traefik.http.routers.local_mfe.entrypoints=web"
+      #- "traefik.http.routers.local_mfe.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/tenant/`)"
+      #- "traefik.http.routers.local_mfe.service=local_mfe@file"
     env_file:
       - common.env
       - bff.env
