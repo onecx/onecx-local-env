@@ -32,7 +32,7 @@
           "text-secondary-color": "#262626",
           "body-bg-color": " #f7f7f7",
           "content-bg-color": " #ffffff",
-          "content-alt-bg-colorr": " #ffffff",
+          "content-alt-bg-color": " #ffffff",
           "overlay-content-bg-color": " #ffffff",
           "hover-bg-color": "#ad1457",
           "solid-surface-text-color": " #ffffff",
@@ -52,7 +52,7 @@
           "menu-item-hover-bg-color": " #e4e4e4",
           "menu-active-item-text-color": " #515c66",
           "menu-active-item-bg-color": " rgba(0, 0, 0, 0.04)",
-          "inline-menu-border-color": " #e4e4e4"
+          "menu-inline-border-color": " #e4e4e4"
         }
       }
     }
