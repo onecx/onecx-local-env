@@ -70,6 +70,8 @@ services:
       - "traefik.http.routers.pgadmin.rule=Host(`pgadmin`)"
     networks:
       - example
+    profiles:
+      - all
 
   #############################################
   ################ Security ###################
@@ -163,8 +165,6 @@ services:
         condition: service_started
       onecx-user-profile-svc:
         condition: service_started
-      onecx-iam-kc-svc:
-        condition: service_started
       onecx-tenant-svc:
         condition: service_started
       onecx-workspace-svc:
@@ -222,6 +222,8 @@ services:
       - bff.env
     networks:
       - example
+    profiles:
+      - all
 
   onecx-theme-ui:
     image: ${ONECX_THEME_UI}
@@ -239,6 +241,8 @@ services:
       - "traefik.http.routers.onecx-theme-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/theme/`)"
     networks:
       - example
+    profiles:
+      - all
 
   ########## ONECX WORKSPACE
   onecx-workspace-svc:
@@ -352,6 +356,8 @@ services:
       - bff.env
     networks:
       - example
+    profiles:
+      - all
 
   onecx-permission-ui:
     image: ${ONECX_PERMISSION_UI}
@@ -369,6 +375,8 @@ services:
       - "traefik.http.routers.onecx-permission-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/permission/`)"
     networks:
       - example
+    profiles:
+      - all
 
   ########## ONECX-PRODUCT-STORE
   onecx-product-store-svc:
@@ -414,6 +422,8 @@ services:
       - bff.env
     networks:
       - example
+    profiles:
+      - all
 
   onecx-product-store-ui:
     image: ${ONECX_PRODUCT_STORE_UI}
@@ -431,6 +441,8 @@ services:
       - "traefik.http.routers.onecx-product-store-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/product-store/`)"
     networks:
       - example
+    profiles:
+      - all
 
   ########## ONECX-USER-PROFILE
   onecx-user-profile-svc:
@@ -476,6 +488,8 @@ services:
       - bff.env
     networks:
       - example
+    profiles:
+      - all
 
   onecx-user-profile-ui:
     image: ${ONECX_USER_PROFILE_UI}
@@ -493,6 +507,8 @@ services:
       - "traefik.http.routers.onecx-user-profile-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/user-profile/`)"
     networks:
       - example
+    profiles:
+      - all
 
   ########## ONECX-IAM
   onecx-iam-kc-svc:
@@ -518,6 +534,8 @@ services:
       - svc.env
     networks:
       - example
+    profiles:
+      - all
 
   onecx-iam-bff:
     image: ${ONECX_IAM_BFF}
@@ -539,6 +557,8 @@ services:
       - bff.env
     networks:
       - example
+    profiles:
+      - all
 
   onecx-iam-ui:
     image: ${ONECX_IAM_UI}
@@ -556,6 +576,8 @@ services:
       - "traefik.http.routers.onecx-iam-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/iam/`)"
     networks:
       - example
+    profiles:
+      - all
 
   ########## ONECX-TENANT
   onecx-tenant-svc:
@@ -604,6 +626,8 @@ services:
       - bff.env
     networks:
       - example
+    profiles:
+      - all
 
   onecx-tenant-ui:
     image: ${ONECX_TENANT_UI}
@@ -621,6 +645,8 @@ services:
       - "traefik.http.routers.onecx-tenant-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/tenant/`)"
     networks:
       - example
+    profiles:
+      - all
 
 volumes:
   postgres:
