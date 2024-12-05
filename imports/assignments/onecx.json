@@ -118,7 +118,8 @@
 					"menu": [ "read", "write", "delete" ],
 					"role": [ "read", "write", "delete" ],
 					"slot": [ "read", "write", "delete" ],
-					"workspace": [ "read", "write", "delete" ]
+					"workspace": [ "read", "write", "delete" ],
+					"product": [ "read", "write", "delete" ]
 				}
 			},
 			"onecx-workspace-ui": {

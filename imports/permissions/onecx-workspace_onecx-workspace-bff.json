@@ -15,6 +15,9 @@
         {"resource": "slot", "action": "write"},
         {"resource": "workspace", "action": "delete"},
         {"resource": "workspace", "action": "read"},
-        {"resource": "workspace", "action": "write"}
+        {"resource": "workspace", "action": "write"},
+        {"resource": "product", "action": "delete"},
+        {"resource": "product", "action": "read"},
+        {"resource": "product", "action": "write"}
     ]
 }
