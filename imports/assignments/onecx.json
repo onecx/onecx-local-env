@@ -1,6 +1,15 @@
 {
     "id": "import-assignemnts-onecx",
     "assignments": {
+		"onecx-shell": {
+			"onecx-shell-bff": {
+				"onecx-admin": {
+				  "workspaceConfig": [ "read" ],
+				  "userProfile": [ "read" ],
+				  "permission": [ "read" ]
+				}
+			}
+		},
         "onecx-permission": {
 			"onecx-permission-bff": {
 				"onecx-admin": {
