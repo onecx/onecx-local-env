@@ -87,7 +87,7 @@
 		"onecx-user-profile": {
 			"onecx-user-profile-bff": {
 				"onecx-admin": {
-					"user-profile": [ "read", "write", "delete", "adminRead", "adminWrite", "adminDetele" ]
+					"userProfile": [ "read", "write", "delete", "adminRead", "adminWrite", "adminDelete" ]
 				}
 			},
 			"onecx-user-profile-ui": {

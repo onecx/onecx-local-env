@@ -1,11 +1,11 @@
 {
     "name": "onecx-user-profile-bff",
     "permissions": [
-        {"resource": "user-profile", "action": "delete"},
-        {"resource": "user-profile", "action": "read"},
-        {"resource": "user-profile", "action": "write"},
-        {"resource": "user-profile", "action": "adminRead"},
-        {"resource": "user-profile", "action": "adminWrite"},
-        {"resource": "user-profile", "action": "adminDelete"}
+        {"resource": "userProfile", "action": "delete"},
+        {"resource": "userProfile", "action": "read"},
+        {"resource": "userProfile", "action": "write"},
+        {"resource": "userProfile", "action": "adminRead"},
+        {"resource": "userProfile", "action": "adminWrite"},
+        {"resource": "userProfile", "action": "adminDelete"}
     ]
 }
