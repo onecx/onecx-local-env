@@ -92,7 +92,7 @@
 			},
 			"onecx-user-profile-ui": {
 				"onecx-admin": {
-					"USERPROFILE": [ "CREATE", "DELETE", "EDIT", "SAVE", "SEARCH", "VIEW", "EXPORT", "IMPORT" ],
+					"USERPROFILE": [ "CREATE", "DELETE", "EDIT", "SAVE", "SEARCH", "VIEW", "EXPORT", "IMPORT", "ADMIN_VIEW", "ADMIN_EDIT", "ADMIN_DELETE" ],
 					"ACCOUNT_SETTINGS": [ "VIEW" ],
 					"ACCOUNT_SETTINGS_LAYOUT_MENU": [ "EDIT" ],
 					"ACCOUNT_SETTINGS_COLOR_SCHEME": [ "EDIT" ],
