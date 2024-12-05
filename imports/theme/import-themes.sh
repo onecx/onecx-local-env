@@ -10,5 +10,9 @@ do
   token_var_name=${tenant}_token
   token=${!token_var_name}
   status_code=`curl --write-out %{http_code} --silent --output /dev/null -X POST -H "apm-principal-token: $token" -H 'Content-Type: application/json' "http://onecx-theme-svc/exim/v1/themes/operator" -d @$entry`
-  echo "Theme $theme were uploaded for tenant $tenant with status code $status_code"
+  if [[ "$status_code" =~ (200|201)$  ]]; then
+    echo -e "${GREEN}Theme $theme were uploaded for tenant $tenant with status code $status_code ${NC}"
+  else
+    echo -e "${RED}Theme $theme were uploaded for tenant $tenant with status code $status_code ${NC}"
+  fi 
 done

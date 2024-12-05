@@ -11,5 +11,9 @@ do
   token=${!token_var_name}
   #echo "curl -X POST -H "apm-principal-token: $token" -H 'Content-Type: application/json' "http://onecx-permission-svc//exim/v1/assignments/operator" -d @$entry"
   status_code=`curl --write-out %{http_code} --silent --output /dev/null -X POST -H "apm-principal-token: $token" -H 'Content-Type: application/json' "http://onecx-permission-svc/exim/v1/assignments/operator" -d @$entry`
-  echo "Assignments uploaded for product $product were uploaded with status code $status_code"
+  if [[ "$status_code" =~ (200|201)$  ]]; then
+    echo -e "${GREEN}Assignments uploaded for product $product were uploaded with status code $status_code ${NC}"
+  else
+    echo -e "${RED}Assignments uploaded for product $product were uploaded with status code $status_code ${NC}"
+  fi 
 done
