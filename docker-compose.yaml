@@ -234,8 +234,6 @@ services:
     depends_on:
       onecx-theme-bff:
         condition: service_healthy
-      onecx-shell-ui:
-        condition: service_started
     labels:
       - "traefik.http.services.onecx-theme-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-theme-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/theme/`)"
@@ -301,8 +299,6 @@ services:
     depends_on:
       onecx-workspace-bff:
         condition: service_healthy
-      onecx-shell-ui:
-        condition: service_started
     labels:
       - "traefik.http.services.onecx-workspace-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-workspace-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/workspace/`)"
@@ -368,8 +364,6 @@ services:
     depends_on:
       onecx-permission-bff:
         condition: service_healthy
-      onecx-shell-ui:
-        condition: service_started
     labels:
       - "traefik.http.services.onecx-permission-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-permission-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/permission/`)"
@@ -434,8 +428,6 @@ services:
     depends_on:
       onecx-product-store-bff:
         condition: service_healthy
-      onecx-shell-ui:
-        condition: service_started
     labels:
       - "traefik.http.services.onecx-product-store-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-product-store-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/product-store/`)"
@@ -500,8 +492,6 @@ services:
     depends_on:
       onecx-user-profile-bff:
         condition: service_healthy
-      onecx-shell-ui:
-        condition: service_started
     labels:
       - "traefik.http.services.onecx-user-profile-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-user-profile-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/user-profile/`)"
@@ -569,8 +559,6 @@ services:
     depends_on:
       onecx-iam-bff:
         condition: service_healthy
-      onecx-shell-ui:
-        condition: service_started
     labels:
       - "traefik.http.services.onecx-iam-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-iam-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/iam/`)"
@@ -638,8 +626,6 @@ services:
     depends_on:
       onecx-tenant-bff:
         condition: service_healthy
-      onecx-shell-ui:
-        condition: service_started
     labels:
       - "traefik.http.services.onecx-tenant-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-tenant-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/tenant/`)"
