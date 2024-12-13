@@ -55,6 +55,8 @@ Therefore, for each service you want to access, add an entry to your *hosts* fil
 127.0.0.1   onecx-iam-bff
 127.0.0.1   onecx-tenant-svc
 127.0.0.1   onecx-tenant-bff
+127.0.0.1   onecx-parameter-svc
+127.0.0.1   onecx-parameter-bff
 ```
 
 ## Databases
