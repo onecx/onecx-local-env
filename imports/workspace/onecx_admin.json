@@ -241,7 +241,9 @@
                   "badge": "ellipsis-h",
                   "external": false,
                   "i18n": {},
-                  "roles": [],
+                  "roles": [
+                    "onecx-admin"
+                  ],
                   "children": []
                 },
                 {
@@ -254,7 +256,9 @@
                   "badge": "palette",
                   "external": false,
                   "i18n": {},
-                  "roles": [],
+                  "roles": [
+                    "onecx-admin"
+                  ],
                   "children": []
                 },
                 {
@@ -267,7 +271,9 @@
                   "scope": "WORKSPACE",
                   "external": false,
                   "i18n": {},
-                  "roles": [],
+                  "roles": [
+                    "onecx-admin"
+                  ],
                   "children": []
                 }
               ]
@@ -295,7 +301,9 @@
                   "badge": "lock",
                   "external": false,
                   "i18n": {},
-                  "roles": [],
+                  "roles": [
+                    "onecx-admin"
+                  ],
                   "children": []
                 },
                 {
@@ -307,7 +315,9 @@
                   "badge": "users",
                   "external": false,
                   "i18n": {},
-                  "roles": [],
+                  "roles": [
+                    "onecx-admin"
+                  ],
                   "children": []
                 }
               ]
@@ -339,7 +349,9 @@
                     "de": "News Management",
                     "en": "News Management"
                   },
-                  "roles": [],
+                  "roles": [
+                    "onecx-admin"
+                  ],
                   "children": []
                 },
                 {
@@ -355,7 +367,9 @@
                     "de": "Hilfe Management",
                     "en": "Help Management"
                   },
-                  "roles": [],
+                  "roles": [
+                    "onecx-admin"
+                  ],
                   "children": []
                 }
               ]
