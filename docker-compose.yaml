@@ -58,7 +58,7 @@ services:
   pgadmin:
     image: ${PGADMIN}
     environment:
-      PGADMIN_DEFAULT_EMAIL: capgemini@capgemini.com
+      PGADMIN_DEFAULT_EMAIL: user@example.com
       PGADMIN_DEFAULT_PASSWORD: mysecretpassword
     volumes:
       - ./init-data/pgadmin/servers.json:/pgadmin4/servers.json
