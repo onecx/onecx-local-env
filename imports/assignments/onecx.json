@@ -133,6 +133,18 @@
 					"WORKSPACE_SLOT": [ "CREATE", "DELETE", "EDIT", "VIEW" ]
 				}
 			}
+		},
+		"onecx-welcome": {
+			"onecx-welcome-bff": {
+				"onecx-admin": {
+					"image": [ "read", "write", "delete" ]
+				}
+			},
+			"onecx-welcome-ui": {
+				"onecx-admin": {
+					"IMAGE": ["DELETE", "EDIT", "VIEW"]
+				}
+			}
 		}
     }
 }
