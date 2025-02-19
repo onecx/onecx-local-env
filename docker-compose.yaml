@@ -1,4 +1,4 @@
-services:     
+services:
   ########################################
   ########### REVERSE-PROXY ##############
   ########################################
@@ -696,6 +696,70 @@ services:
     labels:
       - "traefik.http.services.onecx-welcome-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-welcome-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/welcome/`)"
+    networks:
+      - example
+    profiles:
+      - all
+
+  ########## ONECX-HELP
+  onecx-help-svc:
+    image: ${ONECX_HELP_SVC}
+    environment:
+      QUARKUS_DATASOURCE_USERNAME: onecx_help
+      QUARKUS_DATASOURCE_PASSWORD: onecx_help
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresdb:5432/onecx_help?sslmode=disable
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      postgresdb:
+        condition: service_healthy
+    labels:
+      - traefik.http.services.onecx-help-svc.loadbalancer.server.port=8080
+      - traefik.http.routers.onecx-help-svc.rule=Host(`onecx-help-svc`)
+    env_file:
+      - common.env
+      - svc.env
+    networks:
+      - example
+
+  onecx-help-bff:
+    image: ${ONECX_HELP_BFF}
+    environment:
+      ONECX_PERMISSIONS_PRODUCT_NAME: onecx-help
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-help-svc:
+        condition: service_healthy
+    labels:
+      - traefik.http.services.onecx-help-bff.loadbalancer.server.port=8080
+      - traefik.http.routers.onecx-help-bff.rule=Host(`onecx-help-bff`)
+    env_file:
+      - common.env
+      - bff.env
+    networks:
+      - example
+    profiles:
+      - all
+
+  onecx-help-ui:
+    image: ${ONECX_HELP_UI}
+    environment:
+      APP_BASE_HREF: /mfe/help/
+      APP_ID: onecx-help-ui
+      PRODUCT_NAME: onecx-help
+    depends_on:
+      onecx-help-bff:
+        condition: service_healthy
+    labels:
+      - traefik.http.services.onecx-help-ui.loadbalancer.server.port=8080
+      - traefik.http.routers.onecx-help-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/help/`)
     networks:
       - example
     profiles:

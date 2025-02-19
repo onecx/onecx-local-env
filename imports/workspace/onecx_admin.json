@@ -127,16 +127,6 @@
               "basePath": "/"
             }
           ]
-        },
-        {
-          "productName": "help",
-          "baseUrl": "/help",
-          "microfrontends": [
-            {
-              "appId": "onecx-help",
-              "basePath": "/"
-            }
-          ]
         }
       ],
       "slots": [
@@ -210,9 +200,7 @@
           "badge": "folder",
           "external": false,
           "i18n": {},
-          "roles": [
-            "onecx-admin"
-          ],
+          "roles": ["onecx-admin"],
           "children": [
             {
               "key": "CORE_MFE_CONFIG",
@@ -227,9 +215,7 @@
                 "de": "Application Store",
                 "en": "Application Store"
               },
-              "roles": [
-                "onecx-admin"
-              ],
+              "roles": ["onecx-admin"],
               "children": []
             },
             {
@@ -245,9 +231,7 @@
                 "en": "Workspace Management",
                 "de": "Workspace Management"
               },
-              "roles": [
-                "onecx-admin"
-              ],
+              "roles": ["onecx-admin"],
               "children": [
                 {
                   "key": "CORE_PORTAL_MGMT",
@@ -259,9 +243,7 @@
                   "badge": "ellipsis-h",
                   "external": false,
                   "i18n": {},
-                  "roles": [
-                    "onecx-admin"
-                  ],
+                  "roles": ["onecx-admin"],
                   "children": []
                 },
                 {
@@ -274,9 +256,7 @@
                   "badge": "palette",
                   "external": false,
                   "i18n": {},
-                  "roles": [
-                    "onecx-admin"
-                  ],
+                  "roles": ["onecx-admin"],
                   "children": []
                 },
                 {
@@ -289,9 +269,7 @@
                   "scope": "WORKSPACE",
                   "external": false,
                   "i18n": {},
-                  "roles": [
-                    "onecx-admin"
-                  ],
+                  "roles": ["onecx-admin"],
                   "children": []
                 }
               ]
@@ -305,9 +283,7 @@
               "badge": "users",
               "external": false,
               "i18n": {},
-              "roles": [
-                "onecx-admin"
-              ],
+              "roles": ["onecx-admin"],
               "children": [
                 {
                   "key": "ROLES_AND_PERMISSIONS",
@@ -319,9 +295,7 @@
                   "badge": "lock",
                   "external": false,
                   "i18n": {},
-                  "roles": [
-                    "onecx-admin"
-                  ],
+                  "roles": ["onecx-admin"],
                   "children": []
                 },
                 {
@@ -333,9 +307,7 @@
                   "badge": "users",
                   "external": false,
                   "i18n": {},
-                  "roles": [
-                    "onecx-admin"
-                  ],
+                  "roles": ["onecx-admin"],
                   "children": []
                 }
               ]
@@ -350,9 +322,7 @@
               "badge": "calendar-plus",
               "external": false,
               "i18n": {},
-              "roles": [
-                "onecx-admin"
-              ],
+              "roles": ["onecx-admin"],
               "children": [
                 {
                   "key": "CORE_AHM_MGMT_A",
@@ -367,9 +337,7 @@
                     "de": "News Management",
                     "en": "News Management"
                   },
-                  "roles": [
-                    "onecx-admin"
-                  ],
+                  "roles": ["onecx-admin"],
                   "children": []
                 },
                 {
@@ -385,9 +353,7 @@
                     "de": "Hilfe Management",
                     "en": "Help Management"
                   },
-                  "roles": [
-                    "onecx-admin"
-                  ],
+                  "roles": ["onecx-admin"],
                   "children": []
                 }
               ]
@@ -405,46 +371,8 @@
                 "de": "News",
                 "en": "News"
               },
-              "roles": [
-                "onecx-admin"
-              ],
+              "roles": ["onecx-admin"],
               "children": []
-            },
-            {
-              "key": "CORE_CUSTOM_APP",
-              "name": "Custom Applications",
-              "url": "",
-              "disabled": false,
-              "position": 0,
-              "badge": "folder",
-              "external": false,
-              "i18n": {
-                "en": "Custom Applications",
-                "de": "Custom Applications"
-              },
-              "roles": [
-                "onecx-admin"
-              ],
-              "children": [
-                {
-                  "key": "CUSTOM_ONECX_HELP",
-                  "name": "help",
-                  "url": "/help",
-                  "applicationId": "onecx-help",
-                  "disabled": false,
-                  "position": 0,
-                  "badge": "briefcase",
-                  "external": false,
-                  "i18n": {
-                    "en": "help",
-                    "de": "help"
-                  },
-                  "roles": [
-                    "onecx-admin"
-                  ],
-                  "children": []
-                }
-              ]
             }
           ]
         },
@@ -477,9 +405,7 @@
           "position": 3,
           "external": false,
           "i18n": {},
-          "roles": [
-            "onecx-admin"
-          ],
+          "roles": ["onecx-admin"],
           "children": [
             {
               "key": "FOOTER_CONTACT",
@@ -520,9 +446,7 @@
           "badge": "folder",
           "external": false,
           "i18n": {},
-          "roles": [
-            "onecx-admin"
-          ],
+          "roles": ["onecx-admin"],
           "children": [
             {
               "key": "PERSONAL_INFO",
@@ -563,9 +487,7 @@
               "badge": "key",
               "external": false,
               "i18n": {},
-              "roles": [
-                "onecx-admin"
-              ],
+              "roles": ["onecx-admin"],
               "children": []
             }
           ]
