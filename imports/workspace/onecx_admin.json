@@ -409,6 +409,42 @@
                 "onecx-admin"
               ],
               "children": []
+            },
+            {
+              "key": "CORE_CUSTOM_APP",
+              "name": "Custom Applications",
+              "url": "",
+              "disabled": false,
+              "position": 0,
+              "badge": "folder",
+              "external": false,
+              "i18n": {
+                "en": "Custom Applications",
+                "de": "Custom Applications"
+              },
+              "roles": [
+                "onecx-admin"
+              ],
+              "children": [
+                {
+                  "key": "CUSTOM_ONECX_HELP",
+                  "name": "help",
+                  "url": "/help",
+                  "applicationId": "onecx-help",
+                  "disabled": false,
+                  "position": 0,
+                  "badge": "briefcase",
+                  "external": false,
+                  "i18n": {
+                    "en": "help",
+                    "de": "help"
+                  },
+                  "roles": [
+                    "onecx-admin"
+                  ],
+                  "children": []
+                }
+              ]
             }
           ]
         },
