@@ -127,6 +127,16 @@
               "basePath": "/"
             }
           ]
+        },
+        {
+          "productName": "help",
+          "baseUrl": "/help",
+          "microfrontends": [
+            {
+              "appId": "onecx-help",
+              "basePath": "/"
+            }
+          ]
         }
       ],
       "slots": [
