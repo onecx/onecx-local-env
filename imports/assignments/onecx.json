@@ -393,6 +393,18 @@
             "IMPORT"
           ]
         }
+      },
+      "onecx-help-bff": {
+        "onecx-admin": {
+          "help": [
+            "read",
+            "write",
+            "delete"
+          ],
+          "product": [
+            "read"
+          ]
+        }
       }
     }
   }
