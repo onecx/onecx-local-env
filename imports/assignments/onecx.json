@@ -4,181 +4,78 @@
     "onecx-shell": {
       "onecx-shell-bff": {
         "onecx-admin": {
-          "workspaceConfig": [
-            "read"
-          ],
-          "userProfile": [
-            "read"
-          ],
-          "permission": [
-            "read"
-          ]
+          "workspaceConfig": ["read"],
+          "userProfile": ["read"],
+          "permission": ["read"]
         }
       }
     },
     "onecx-permission": {
       "onecx-permission-bff": {
         "onecx-admin": {
-          "permission": [
-            "read",
-            "write",
-            "delete"
-          ],
-          "role": [
-            "read",
-            "write",
-            "delete"
-          ],
-          "assignment": [
-            "read",
-            "write",
-            "delete"
-          ],
-          "application": [
-            "read",
-            "write",
-            "delete"
-          ],
-          "workspace": [
-            "read",
-            "write",
-            "delete"
-          ]
+          "permission": ["read", "write", "delete"],
+          "role": ["read", "write", "delete"],
+          "assignment": ["read", "write", "delete"],
+          "application": ["read", "write", "delete"],
+          "workspace": ["read", "write", "delete"]
         }
       },
       "onecx-permission-ui": {
         "onecx-admin": {
-          "APP": [
-            "EDIT",
-            "SAVE",
-            "SEARCH",
-            "VIEW"
-          ],
-          "PERMISSION": [
-            "GRANT",
-            "CREATE",
-            "DELETE",
-            "EDIT",
-            "SAVE"
-          ],
-          "ROLE": [
-            "CREATE",
-            "DELETE",
-            "EDIT",
-            "SAVE"
-          ]
+          "APP": ["EDIT", "SAVE", "SEARCH", "VIEW"],
+          "PERMISSION": ["GRANT", "CREATE", "DELETE", "EDIT", "SAVE"],
+          "ROLE": ["CREATE", "DELETE", "EDIT", "SAVE"]
         }
       }
     },
     "onecx-iam": {
       "onecx-iam-bff": {
         "onecx-admin": {
-          "role": [
-            "read"
-          ],
-          "user": [
-            "read",
-            "write"
-          ]
+          "role": ["read"],
+          "user": ["read", "write"]
         }
       },
       "onecx-iam-ui": {
         "onecx-admin": {
-          "USER": [
-            "SEARCH",
-            "EDIT"
-          ],
-          "ROLE": [
-            "SEARCH"
-          ]
+          "USER": ["SEARCH", "EDIT"],
+          "ROLE": ["SEARCH"]
         }
       }
     },
     "onecx-product-store": {
       "onecx-product-store-bff": {
         "onecx-admin": {
-          "image": [
-            "read",
-            "write"
-          ],
-          "microfrontend": [
-            "read",
-            "write",
-            "delete"
-          ],
-          "microservice": [
-            "read",
-            "write",
-            "delete"
-          ],
-          "product": [
-            "read",
-            "write",
-            "delete"
-          ],
-          "slot": [
-            "read",
-            "write",
-            "delete"
-          ]
+          "image": ["read", "write"],
+          "microfrontend": ["read", "write", "delete"],
+          "microservice": ["read", "write", "delete"],
+          "product": ["read", "write", "delete"],
+          "slot": ["read", "write", "delete"]
         }
       },
       "onecx-product-store-ui": {
         "onecx-admin": {
-          "APP": [
-            "CREATE",
-            "DELETE",
-            "EDIT",
-            "SAVE",
-            "SEARCH",
-            "VIEW"
-          ],
-          "PRODUCT": [
-            "CREATE",
-            "DELETE",
-            "EDIT",
-            "SAVE",
-            "SEARCH",
-            "VIEW"
-          ],
-          "SLOT": [
-            "SEARCH",
-            "DELETE"
-          ]
+          "APP": ["CREATE", "DELETE", "EDIT", "SAVE", "SEARCH", "VIEW"],
+          "PRODUCT": ["CREATE", "DELETE", "EDIT", "SAVE", "SEARCH", "VIEW"],
+          "SLOT": ["SEARCH", "DELETE"]
         }
       }
     },
     "onecx-tenant": {
       "onecx-tenant-bff": {
         "onecx-admin": {
-          "tenant": [
-            "read",
-            "write",
-            "delete"
-          ]
+          "tenant": ["read", "write", "delete"]
         }
       },
       "onecx-tenant-ui": {
         "onecx-admin": {
-          "TENANT": [
-            "CREATE",
-            "DELETE",
-            "EDIT",
-            "SAVE",
-            "SEARCH",
-            "VIEW"
-          ]
+          "TENANT": ["CREATE", "DELETE", "EDIT", "SAVE", "SEARCH", "VIEW"]
         }
       }
     },
     "onecx-theme": {
       "onecx-theme-bff": {
         "onecx-admin": {
-          "themes": [
-            "read",
-            "write",
-            "delete"
-          ]
+          "themes": ["read", "write", "delete"]
         }
       },
       "onecx-theme-ui": {
@@ -224,91 +121,33 @@
             "ADMIN_EDIT",
             "ADMIN_DELETE"
           ],
-          "ACCOUNT_SETTINGS": [
-            "VIEW"
-          ],
-          "ACCOUNT_SETTINGS_LAYOUT_MENU": [
-            "EDIT"
-          ],
-          "ACCOUNT_SETTINGS_COLOR_SCHEME": [
-            "EDIT"
-          ],
-          "ACCOUNT_SETTINGS_BREADCRUMBS": [
-            "EDIT"
-          ],
-          "ACCOUNT_SETTINGS_LANGUAGE_TIMEZONE": [
-            "VIEW"
-          ],
-          "ACCOUNT_SETTINGS_LANGUAGE": [
-            "EDIT"
-          ],
-          "ACCOUNT_SETTINGS_TIMEZONE": [
-            "EDIT"
-          ],
-          "ACCOUNT_SETTINGS_LAYOUT_THEME": [
-            "VIEW"
-          ],
-          "ACCOUNT_SETTINGS_PREFERENCES": [
-            "VIEW"
-          ],
-          "ACCOUNT_SETTINGS_PRIVACY": [
-            "EDIT",
-            "VIEW"
-          ],
-          "PROFILE_PERSONAL_INFO": [
-            "VIEW"
-          ],
-          "PROFILE_ADDRESS": [
-            "EDIT",
-            "VIEW"
-          ],
-          "PROFILE_AVATAR": [
-            "EDIT",
-            "VIEW"
-          ],
-          "PROFILE_PHONE": [
-            "EDIT",
-            "VIEW"
-          ],
-          "ROLES_PERMISSIONS": [
-            "VIEW"
-          ]
+          "ACCOUNT_SETTINGS": ["VIEW"],
+          "ACCOUNT_SETTINGS_LAYOUT_MENU": ["EDIT"],
+          "ACCOUNT_SETTINGS_COLOR_SCHEME": ["EDIT"],
+          "ACCOUNT_SETTINGS_BREADCRUMBS": ["EDIT"],
+          "ACCOUNT_SETTINGS_LANGUAGE_TIMEZONE": ["VIEW"],
+          "ACCOUNT_SETTINGS_LANGUAGE": ["EDIT"],
+          "ACCOUNT_SETTINGS_TIMEZONE": ["EDIT"],
+          "ACCOUNT_SETTINGS_LAYOUT_THEME": ["VIEW"],
+          "ACCOUNT_SETTINGS_PREFERENCES": ["VIEW"],
+          "ACCOUNT_SETTINGS_PRIVACY": ["EDIT", "VIEW"],
+          "PROFILE_PERSONAL_INFO": ["VIEW"],
+          "PROFILE_ADDRESS": ["EDIT", "VIEW"],
+          "PROFILE_AVATAR": ["EDIT", "VIEW"],
+          "PROFILE_PHONE": ["EDIT", "VIEW"],
+          "ROLES_PERMISSIONS": ["VIEW"]
         }
       }
     },
     "onecx-workspace": {
       "onecx-workspace-bff": {
         "onecx-admin": {
-          "assignment": [
-            "read",
-            "write",
-            "delete"
-          ],
-          "menu": [
-            "read",
-            "write",
-            "delete"
-          ],
-          "role": [
-            "read",
-            "write",
-            "delete"
-          ],
-          "slot": [
-            "read",
-            "write",
-            "delete"
-          ],
-          "workspace": [
-            "read",
-            "write",
-            "delete"
-          ],
-          "product": [
-            "read",
-            "write",
-            "delete"
-          ]
+          "assignment": ["read", "write", "delete"],
+          "menu": ["read", "write", "delete"],
+          "role": ["read", "write", "delete"],
+          "slot": ["read", "write", "delete"],
+          "workspace": ["read", "write", "delete"],
+          "product": ["read", "write", "delete"]
         }
       },
       "onecx-workspace-ui": {
@@ -334,52 +173,27 @@
             "EXPORT",
             "IMPORT"
           ],
-          "WORKSPACE_CONTACT": [
-            "VIEW"
-          ],
-          "WORKSPACE_INTERNAL": [
-            "VIEW"
-          ],
-          "WORKSPACE_PRODUCTS": [
-            "VIEW",
-            "REGISTER"
-          ],
-          "WORKSPACE_ROLE": [
-            "CREATE",
-            "DELETE",
-            "EDIT",
-            "VIEW"
-          ],
-          "WORKSPACE_SLOT": [
-            "CREATE",
-            "DELETE",
-            "EDIT",
-            "VIEW"
-          ]
+          "WORKSPACE_CONTACT": ["VIEW"],
+          "WORKSPACE_INTERNAL": ["VIEW"],
+          "WORKSPACE_PRODUCTS": ["VIEW", "REGISTER"],
+          "WORKSPACE_ROLE": ["CREATE", "DELETE", "EDIT", "VIEW"],
+          "WORKSPACE_SLOT": ["CREATE", "DELETE", "EDIT", "VIEW"]
         }
       }
     },
     "onecx-welcome": {
       "onecx-welcome-bff": {
         "onecx-admin": {
-          "image": [
-            "read",
-            "write",
-            "delete"
-          ]
+          "image": ["read", "write", "delete"]
         }
       },
       "onecx-welcome-ui": {
         "onecx-admin": {
-          "IMAGE": [
-            "DELETE",
-            "EDIT",
-            "VIEW"
-          ]
+          "IMAGE": ["DELETE", "EDIT", "VIEW"]
         }
       }
     },
-    "help": {
+    "onecx-help": {
       "onecx-help-ui": {
         "onecx-admin": {
           "HELP": [
@@ -396,14 +210,8 @@
       },
       "onecx-help-bff": {
         "onecx-admin": {
-          "help": [
-            "read",
-            "write",
-            "delete"
-          ],
-          "product": [
-            "read"
-          ]
+          "help": ["read", "write", "delete"],
+          "product": ["read"]
         }
       }
     }
