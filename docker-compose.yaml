@@ -724,6 +724,8 @@ services:
       - svc.env
     networks:
       - example
+    profiles:
+      - all
 
   onecx-help-bff:
     image: ${ONECX_HELP_BFF}
