@@ -43,3 +43,8 @@ GRANT ALL PRIVILEGES ON DATABASE onecx_tenant TO onecx_tenant;
 CREATE USER onecx_welcome WITH ENCRYPTED PASSWORD 'onecx_welcome';
 CREATE DATABASE onecx_welcome;
 GRANT ALL PRIVILEGES ON DATABASE onecx_welcome TO onecx_welcome;
+
+-- -- onecx_help
+CREATE USER onecx_help WITH ENCRYPTED PASSWORD 'onecx_help';
+CREATE DATABASE onecx_help;
+GRANT ALL PRIVILEGES ON DATABASE onecx_help TO onecx_help;
