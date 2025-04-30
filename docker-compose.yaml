@@ -775,6 +775,8 @@ services:
       QUARKUS_DATASOURCE_USERNAME: onecx_parameter
       QUARKUS_DATASOURCE_PASSWORD: onecx_parameter
       QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_parameter?sslmode=disable"
+      TKIT_RS_CONTEXT_TENANT_ID_ENABLED: "false"
+      QUARKUS_REST_CLIENT_ONECX_TENANT_URL: "http://onecx-tenant-svc:8080"
     healthcheck:
       test: curl --head -fsS http://localhost:8080/q/health
       interval: 10s
