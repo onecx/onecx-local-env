@@ -13,7 +13,7 @@ If they are not executable then use the command `chmod +x <file name>`
 The docker compose configuration contains settings for the following services:
 
 - `postgresdb` generic postgresql db
-- `pgadmin` UI admin for Postgres, login as capgemini@capgemini.com/mysecretpassword
+- `pgadmin` UI admin for Postgres, login as user@example.com/mysecretpassword
 - `traefik` reverse proxy
 - `keycloak-app` Access and Identity Management Tool
 - OneCX portal products with its MS
