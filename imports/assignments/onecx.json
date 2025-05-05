@@ -214,6 +214,19 @@
           "product": ["read"]
         }
       }
+    },
+		"onecx-parameter": {
+			"onecx-parameter-bff": {
+				"onecx-admin": {
+					"parameter": [ "read", "write", "delete" ],
+					"product": [ "read" ]
+				}
+			},
+			"onecx-parameter-ui": {
+				"onecx-admin": {
+					"PARAMETER": [ "DELETE", "EDIT", "SEARCH", "VIEW" ]
+				}
+			}  
     }
   }
 }

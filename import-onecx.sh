@@ -32,6 +32,11 @@ cd ../permissions
 echo " "
 bash ./import-permissions.sh
 
+cd ../parameters
+
+echo " "
+bash ./import-parameters.sh
+
 cd ../assignments
 
 echo " "
