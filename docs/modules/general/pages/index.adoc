@@ -1,0 +1,6 @@
+= OneCX Local Env
+:idprefix:
+:idseparator: -
+:imagesdir: ../images
+
+TBD
