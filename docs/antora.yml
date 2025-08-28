@@ -1,0 +1,6 @@
+name: onecx-local-env
+title: OneCX Local Env
+version: latest
+start_page: general:index.adoc
+nav:
+- modules/general/nav.adoc

@@ -1,0 +1,6 @@
+= Common Issues
+:idprefix:
+:idseparator: -
+:imagesdir: ../images
+
+This page lists common issues and respective solutions when using OneCX Local Env.
