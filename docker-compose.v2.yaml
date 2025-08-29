@@ -20,6 +20,7 @@ services:
     profiles:
       - all
       - minimal
+      - data-import
 
   ########################################
   ############### DATABASE ###############
@@ -51,6 +52,7 @@ services:
     profiles:
       - all
       - minimal
+      - data-import
 
   pgadmin:
     image: ${PGADMIN}
@@ -70,6 +72,7 @@ services:
       - default
     profiles:
       - all
+      - pgadmin
 
   #############################################
   ################ Security ###################
@@ -102,7 +105,7 @@ services:
       test: "{ printf >&3 'GET /realms/onecx/.well-known/openid-configuration HTTP/1.0\r\nHost: localhost\r\n\r\n'; cat <&3; } 3<>/dev/tcp/localhost/8080 | head -1 | grep 200"
       interval: 10s
       timeout: 5s
-      retries: 3
+      retries: 10
     depends_on:
       postgresdb:
         condition: service_healthy
@@ -114,6 +117,7 @@ services:
     profiles:
       - all
       - minimal
+      - data-import
 
   ##############################################################
   ######### Products #######################################
@@ -201,6 +205,8 @@ services:
     depends_on:
       postgresdb:
         condition: service_healthy
+      keycloak-app:
+        condition: service_healthy
     labels:
       - "traefik.http.services.onecx-theme-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-theme-svc.rule=Host(`onecx-theme-svc`)"
@@ -212,6 +218,7 @@ services:
     profiles:
       - all
       - minimal
+      - data-import
 
   onecx-theme-bff:
     image: ${ONECX_THEME_BFF}
@@ -273,6 +280,8 @@ services:
     depends_on:
       postgresdb:
         condition: service_healthy
+      keycloak-app:
+        condition: service_healthy
     labels:
       - "traefik.http.services.onecx-workspace-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-workspace-svc.rule=Host(`onecx-workspace-svc`)"
@@ -284,6 +293,7 @@ services:
     profiles:
       - all
       - minimal
+      - data-import
 
   onecx-workspace-bff:
     image: ${ONECX_WORKSPACE_BFF}
@@ -346,6 +356,8 @@ services:
     depends_on:
       postgresdb:
         condition: service_healthy
+      keycloak-app:
+        condition: service_healthy
     labels:
       - "traefik.http.services.onecx-permission-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-permission-svc.rule=Host(`onecx-permission-svc`)"
@@ -357,6 +369,7 @@ services:
     profiles:
       - all
       - minimal
+      - data-import
 
   onecx-permission-bff:
     image: ${ONECX_PERMISSION_BFF}
@@ -416,6 +429,8 @@ services:
     depends_on:
       postgresdb:
         condition: service_healthy
+      keycloak-app:
+        condition: service_healthy
     labels:
       - "traefik.http.services.onecx-product-store-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-product-store-svc.rule=Host(`onecx-product-store-svc`)"
@@ -427,6 +442,7 @@ services:
     profiles:
       - all
       - minimal
+      - data-import
 
   onecx-product-store-bff:
     image: ${ONECX_PRODUCT_STORE_BFF}
@@ -486,6 +502,8 @@ services:
     depends_on:
       postgresdb:
         condition: service_healthy
+      keycloak-app:
+        condition: service_healthy
     labels:
       - "traefik.http.services.onecx-user-profile-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-user-profile-svc.rule=Host(`onecx-user-profile-store-svc`)"
@@ -497,6 +515,7 @@ services:
     profiles:
       - all
       - minimal
+      - data-import
 
   onecx-user-profile-bff:
     image: ${ONECX_USER_PROFILE_BFF}
@@ -557,6 +576,8 @@ services:
     depends_on:
       postgresdb:
         condition: service_healthy
+      keycloak-app:
+        condition: service_healthy
     labels:
       - "traefik.http.services.onecx-iam-kc-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-iam-kc-svc.rule=Host(`onecx-iam-kc-svc`)"
@@ -567,6 +588,7 @@ services:
       - default
     profiles:
       - all
+      - data-import
 
   onecx-iam-bff:
     image: ${ONECX_IAM_BFF}
@@ -626,6 +648,8 @@ services:
     depends_on:
       postgresdb:
         condition: service_healthy
+      keycloak-app:
+        condition: service_healthy
     labels:
       - "traefik.http.services.onecx-tenant-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-tenant-svc.rule=Host(`onecx-tenant-svc`)"
@@ -637,6 +661,7 @@ services:
     profiles:
       - all
       - minimal
+      - data-import
 
   onecx-tenant-bff:
     image: ${ONECX_TENANT_BFF}
@@ -696,6 +721,8 @@ services:
     depends_on:
       postgresdb:
         condition: service_healthy
+      keycloak-app:
+        condition: service_healthy
     labels:
       - "traefik.http.services.onecx-welcome-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-welcome-svc.rule=Host(`onecx-welcome-svc`)"
@@ -706,6 +733,7 @@ services:
       - default
     profiles:
       - all
+      - data-import
 
   onecx-welcome-bff:
     image: ${ONECX_WELCOME_BFF}
@@ -765,6 +793,8 @@ services:
     depends_on:
       postgresdb:
         condition: service_healthy
+      keycloak-app:
+        condition: service_healthy
     labels:
       - traefik.http.services.onecx-help-svc.loadbalancer.server.port=8080
       - traefik.http.routers.onecx-help-svc.rule=Host(`onecx-help-svc`)
@@ -775,6 +805,7 @@ services:
       - default
     profiles:
       - all
+      - data-import
       
   onecx-help-bff:
     image: ${ONECX_HELP_BFF}
@@ -836,6 +867,8 @@ services:
     depends_on:
       postgresdb:
         condition: service_healthy
+      keycloak-app:
+        condition: service_healthy
     labels:
       - "traefik.http.services.onecx-parameter-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-parameter-svc.rule=Host(`onecx-parameter-svc`)"
@@ -847,6 +880,7 @@ services:
     profiles:
       - all
       - parameter
+      - data-import
 
   onecx-parameter-bff:
     image: ${ONECX_PARAMETER_BFF}
