@@ -19,8 +19,10 @@ services:
       - default
     profiles:
       - all
+      - pgadmin
       - minimal
       - data-import
+      - base
 
   ########################################
   ############### DATABASE ###############
@@ -51,8 +53,10 @@ services:
       - default
     profiles:
       - all
+      - pgadmin
       - minimal
       - data-import
+      - base
 
   pgadmin:
     image: ${PGADMIN}
@@ -118,6 +122,7 @@ services:
       - all
       - minimal
       - data-import
+      - base
 
   ##############################################################
   ######### Products #######################################
@@ -151,6 +156,7 @@ services:
       - all
       - minimal
       - shell
+      - base
 
   onecx-shell-bff:
     image: ${ONECX_SHELL_BFF}
@@ -190,6 +196,7 @@ services:
       - all
       - minimal
       - shell
+      - base
 
   ########## ONECX THEME
   onecx-theme-svc:
@@ -222,6 +229,7 @@ services:
       - minimal
       - data-import
       - theme
+      - base
 
   onecx-theme-bff:
     image: ${ONECX_THEME_BFF}
@@ -247,6 +255,8 @@ services:
     profiles:
       - all
       - theme
+      - theme-ui
+      - base
 
   onecx-theme-ui:
     image: ${ONECX_THEME_UI}
@@ -266,6 +276,8 @@ services:
     profiles:
       - all
       - theme
+      - theme-ui
+      - base
 
   ########## ONECX WORKSPACE
   onecx-workspace-svc:
@@ -300,6 +312,7 @@ services:
       - minimal
       - data-import
       - workspace
+      - base
 
   onecx-workspace-bff:
     image: ${ONECX_WORKSPACE_BFF}
@@ -325,6 +338,8 @@ services:
     profiles:
       - all
       - workspace
+      - workspace-ui
+      - base
 
   onecx-workspace-ui:
     image: ${ONECX_WORKSPACE_UI}
@@ -344,6 +359,8 @@ services:
     profiles:
       - all
       - workspace
+      - workspace-ui
+      - base
 
   ########## ONECX-PERMISSION
   onecx-permission-svc:
@@ -379,6 +396,7 @@ services:
       - minimal
       - data-import
       - permission
+      - base
 
   onecx-permission-bff:
     image: ${ONECX_PERMISSION_BFF}
@@ -404,6 +422,8 @@ services:
     profiles:
       - all
       - permission
+      - permission-ui
+      - base
 
   onecx-permission-ui:
     image: ${ONECX_PERMISSION_UI}
@@ -423,6 +443,8 @@ services:
     profiles:
       - all
       - permission
+      - permission-ui
+      - base
 
   ########## ONECX-PRODUCT-STORE
   onecx-product-store-svc:
@@ -455,6 +477,7 @@ services:
       - minimal
       - data-import
       - product-store
+      - base
 
   onecx-product-store-bff:
     image: ${ONECX_PRODUCT_STORE_BFF}
@@ -480,6 +503,8 @@ services:
     profiles:
       - all
       - product-store
+      - product-store-ui
+      - base
 
   onecx-product-store-ui:
     image: ${ONECX_PRODUCT_STORE_UI}
@@ -499,6 +524,8 @@ services:
     profiles:
       - all
       - product-store
+      - product-store-ui
+      - base
 
   ########## ONECX-USER-PROFILE
   onecx-user-profile-svc:
@@ -531,6 +558,7 @@ services:
       - minimal
       - data-import
       - user-profile
+      - base
 
   onecx-user-profile-bff:
     image: ${ONECX_USER_PROFILE_BFF}
@@ -556,6 +584,8 @@ services:
     profiles:
       - all
       - user-profile
+      - user-profile-ui
+      - base
 
   onecx-user-profile-ui:
     image: ${ONECX_USER_PROFILE_UI}
@@ -575,6 +605,8 @@ services:
     profiles:
       - all
       - user-profile
+      - user-profile-ui
+      - base
 
   ########## ONECX-IAM
   onecx-iam-kc-svc:
@@ -632,6 +664,7 @@ services:
     profiles:
       - all
       - iam
+      - iam-ui
 
   onecx-iam-ui:
     image: ${ONECX_IAM_UI}
@@ -651,6 +684,7 @@ services:
     profiles:
       - all
       - iam
+      - iam-ui
 
   ########## ONECX-TENANT
   onecx-tenant-svc:
@@ -683,6 +717,7 @@ services:
       - minimal
       - data-import
       - tenant
+      - base
 
   onecx-tenant-bff:
     image: ${ONECX_TENANT_BFF}
@@ -708,6 +743,7 @@ services:
     profiles:
       - all
       - tenant
+      - tenant-ui
 
   onecx-tenant-ui:
     image: ${ONECX_TENANT_UI}
@@ -727,6 +763,7 @@ services:
     profiles:
       - all
       - tenant
+      - tenant-ui
 
   ########## ONECX-WELCOME
   onecx-welcome-svc:
@@ -758,6 +795,7 @@ services:
       - all
       - data-import
       - welcome
+      - base
 
   onecx-welcome-bff:
     image: ${ONECX_WELCOME_BFF}
@@ -783,6 +821,8 @@ services:
     profiles:
       - all
       - welcome
+      - welcome-ui
+      - base
 
   onecx-welcome-ui:
     image: ${ONECX_WELCOME_UI}
@@ -802,6 +842,8 @@ services:
     profiles:
       - all
       - welcome
+      - welcome-ui
+      - base
 
   ########## ONECX-HELP
   onecx-help-svc:
@@ -858,6 +900,7 @@ services:
     profiles:
       - all
       - help
+      - help-ui
       
   onecx-help-ui:
     image: ${ONECX_HELP_UI}
@@ -877,6 +920,7 @@ services:
     profiles:
       - all
       - help
+      - help-ui
 
   ########## ONECX PARAMETER
   onecx-parameter-svc:
@@ -935,6 +979,7 @@ services:
     profiles:
       - all
       - parameter
+      - parameter-ui
 
   onecx-parameter-ui:
     image: ${ONECX_PARAMETER_UI}
@@ -954,6 +999,7 @@ services:
     profiles:
       - all
       - parameter
+      - parameter-ui
 volumes:
   postgres:
 
