@@ -15,7 +15,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
-      - example
+      - default
 
   ########################################
   ############### DATABASE ###############
@@ -43,7 +43,7 @@ services:
       - "traefik.http.services.postgresdb.loadbalancer.server.port=5432"
       - "traefik.http.routers.postgresdb.rule=Host(`postgresdb`)"
     networks:
-      - example
+      - default
 
   pgadmin:
     image: ${PGADMIN}
@@ -59,7 +59,7 @@ services:
       - "traefik.http.services.pgadmin.loadbalancer.server.port=80"
       - "traefik.http.routers.pgadmin.rule=Host(`pgadmin`)"
     networks:
-      - example
+      - default
     profiles:
       - all
 
@@ -102,7 +102,7 @@ services:
       - "traefik.http.services.keycloak-intranet.loadbalancer.server.port=8080"
       - "traefik.http.routers.keycloak-intranet.rule=Host(`keycloak-app`)"
     networks:
-      - example
+      - default
 
   ##############################################################
   ######### Products #######################################
@@ -131,7 +131,7 @@ services:
     env_file:
       - common.env
     networks:
-      - example
+      - default
 
   onecx-shell-bff:
     image: ${ONECX_SHELL_BFF}
@@ -166,7 +166,7 @@ services:
       - common.env
       - bff.env
     networks:
-      - example
+      - default
 
   ########## ONECX THEME
   onecx-theme-svc:
@@ -190,7 +190,7 @@ services:
       - common.env
       - svc.env
     networks:
-      - example
+      - default
 
   onecx-theme-bff:
     image: ${ONECX_THEME_BFF}
@@ -211,7 +211,7 @@ services:
       - common.env
       - bff.env
     networks:
-      - example
+      - default
     profiles:
       - all
 
@@ -228,7 +228,7 @@ services:
       - "traefik.http.services.onecx-theme-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-theme-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/theme/`)"
     networks:
-      - example
+      - default
     profiles:
       - all
 
@@ -257,7 +257,7 @@ services:
       - common.env
       - svc.env
     networks:
-      - example
+      - default
 
   onecx-workspace-bff:
     image: ${ONECX_WORKSPACE_BFF}
@@ -278,7 +278,7 @@ services:
       - common.env
       - bff.env
     networks:
-      - example
+      - default
 
   onecx-workspace-ui:
     image: ${ONECX_WORKSPACE_UI}
@@ -293,7 +293,7 @@ services:
       - "traefik.http.services.onecx-workspace-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-workspace-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/workspace/`)"
     networks:
-      - example
+      - default
 
   ########## ONECX-PERMISSION
   onecx-permission-svc:
@@ -320,7 +320,7 @@ services:
       - common.env
       - svc.env
     networks:
-      - example
+      - default
 
   onecx-permission-bff:
     image: ${ONECX_PERMISSION_BFF}
@@ -341,7 +341,7 @@ services:
       - common.env
       - bff.env
     networks:
-      - example
+      - default
     profiles:
       - all
 
@@ -358,7 +358,7 @@ services:
       - "traefik.http.services.onecx-permission-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-permission-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/permission/`)"
     networks:
-      - example
+      - default
     profiles:
       - all
 
@@ -384,7 +384,7 @@ services:
       - common.env
       - svc.env
     networks:
-      - example
+      - default
 
   onecx-product-store-bff:
     image: ${ONECX_PRODUCT_STORE_BFF}
@@ -405,7 +405,7 @@ services:
       - common.env
       - bff.env
     networks:
-      - example
+      - default
     profiles:
       - all
 
@@ -422,7 +422,7 @@ services:
       - "traefik.http.services.onecx-product-store-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-product-store-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/product-store/`)"
     networks:
-      - example
+      - default
     profiles:
       - all
 
@@ -448,7 +448,7 @@ services:
       - common.env
       - svc.env
     networks:
-      - example
+      - default
 
   onecx-user-profile-bff:
     image: ${ONECX_USER_PROFILE_BFF}
@@ -469,7 +469,7 @@ services:
       - common.env
       - bff.env
     networks:
-      - example
+      - default
     profiles:
       - all
 
@@ -486,7 +486,7 @@ services:
       - "traefik.http.services.onecx-user-profile-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-user-profile-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/user-profile/`)"
     networks:
-      - example
+      - default
     profiles:
       - all
 
@@ -513,7 +513,7 @@ services:
       - common.env
       - svc.env
     networks:
-      - example
+      - default
     profiles:
       - all
 
@@ -536,7 +536,7 @@ services:
       - common.env
       - bff.env
     networks:
-      - example
+      - default
     profiles:
       - all
 
@@ -553,7 +553,7 @@ services:
       - "traefik.http.services.onecx-iam-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-iam-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/iam/`)"
     networks:
-      - example
+      - default
     profiles:
       - all
 
@@ -579,7 +579,7 @@ services:
       - common.env
       - svc.env
     networks:
-      - example
+      - default
 
   onecx-tenant-bff:
     image: ${ONECX_TENANT_BFF}
@@ -600,7 +600,7 @@ services:
       - common.env
       - bff.env
     networks:
-      - example
+      - default
     profiles:
       - all
 
@@ -617,7 +617,7 @@ services:
       - "traefik.http.services.onecx-tenant-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-tenant-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/tenant/`)"
     networks:
-      - example
+      - default
     profiles:
       - all
 
@@ -643,7 +643,7 @@ services:
       - common.env
       - svc.env
     networks:
-      - example
+      - default
 
   onecx-welcome-bff:
     image: ${ONECX_WELCOME_BFF}
@@ -664,7 +664,7 @@ services:
       - common.env
       - bff.env
     networks:
-      - example
+      - default
     profiles:
       - all
 
@@ -681,7 +681,7 @@ services:
       - "traefik.http.services.onecx-welcome-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-welcome-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/welcome/`)"
     networks:
-      - example
+      - default
     profiles:
       - all
 
@@ -707,7 +707,7 @@ services:
       - common.env
       - svc.env
     networks:
-      - example
+      - default
     profiles:
       - all
       
@@ -731,7 +731,7 @@ services:
       - common.env
       - bff.env
     networks:
-      - example
+      - default
     profiles:
       - all
       
@@ -748,7 +748,7 @@ services:
       - traefik.http.services.onecx-help-ui.loadbalancer.server.port=8080
       - traefik.http.routers.onecx-help-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/help/`)
     networks:
-      - example
+      - default
     profiles:
       - all
 
@@ -776,7 +776,7 @@ services:
       - common.env
       - svc.env
     networks:
-      - example
+      - default
     profiles:
       - all
       - parameter
@@ -800,7 +800,7 @@ services:
       - common.env
       - bff.env
     networks:
-      - example
+      - default
     profiles:
       - all
       - parameter
@@ -818,7 +818,7 @@ services:
       - "traefik.http.services.onecx-parameter-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-parameter-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/parameter/`)"
     networks:
-      - example
+      - default
     profiles:
       - all
       - parameter
@@ -826,4 +826,4 @@ volumes:
   postgres:
 
 networks:
-  example:
+  default:
