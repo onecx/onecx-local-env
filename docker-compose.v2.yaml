@@ -17,6 +17,8 @@ services:
       - "host.docker.internal:host-gateway"
     networks:
       - default
+    profiles:
+      - all
 
   ########################################
   ############### DATABASE ###############
@@ -45,6 +47,8 @@ services:
       - "traefik.http.routers.postgresdb.rule=Host(`postgresdb`)"
     networks:
       - default
+    profiles:
+      - all
 
   pgadmin:
     image: ${PGADMIN}
@@ -105,6 +109,8 @@ services:
       - "traefik.http.routers.keycloak-intranet.rule=Host(`keycloak-app`)"
     networks:
       - default
+    profiles:
+      - all
 
   ##############################################################
   ######### Products #######################################
@@ -134,6 +140,8 @@ services:
       - common.env
     networks:
       - default
+    profiles:
+      - all
 
   onecx-shell-bff:
     image: ${ONECX_SHELL_BFF}
@@ -169,6 +177,8 @@ services:
       - bff.env
     networks:
       - default
+    profiles:
+      - all
 
   ########## ONECX THEME
   onecx-theme-svc:
@@ -194,6 +204,8 @@ services:
       - svc.env
     networks:
       - default
+    profiles:
+      - all
 
   onecx-theme-bff:
     image: ${ONECX_THEME_BFF}
@@ -263,6 +275,8 @@ services:
       - svc.env
     networks:
       - default
+    profiles:
+      - all
 
   onecx-workspace-bff:
     image: ${ONECX_WORKSPACE_BFF}
@@ -285,6 +299,8 @@ services:
       - bff.env
     networks:
       - default
+    profiles:
+      - all
 
   onecx-workspace-ui:
     image: ${ONECX_WORKSPACE_UI}
@@ -301,6 +317,8 @@ services:
       - "traefik.http.routers.onecx-workspace-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/workspace/`)"
     networks:
       - default
+    profiles:
+      - all
 
   ########## ONECX-PERMISSION
   onecx-permission-svc:
@@ -329,6 +347,8 @@ services:
       - svc.env
     networks:
       - default
+    profiles:
+      - all
 
   onecx-permission-bff:
     image: ${ONECX_PERMISSION_BFF}
@@ -396,6 +416,8 @@ services:
       - svc.env
     networks:
       - default
+    profiles:
+      - all
 
   onecx-product-store-bff:
     image: ${ONECX_PRODUCT_STORE_BFF}
@@ -463,6 +485,8 @@ services:
       - svc.env
     networks:
       - default
+    profiles:
+      - all
 
   onecx-user-profile-bff:
     image: ${ONECX_USER_PROFILE_BFF}
@@ -600,6 +624,8 @@ services:
       - svc.env
     networks:
       - default
+    profiles:
+      - all
 
   onecx-tenant-bff:
     image: ${ONECX_TENANT_BFF}
@@ -667,6 +693,8 @@ services:
       - svc.env
     networks:
       - default
+    profiles:
+      - all
 
   onecx-welcome-bff:
     image: ${ONECX_WELCOME_BFF}
@@ -753,7 +781,6 @@ services:
     labels:
       - traefik.http.services.onecx-help-bff.loadbalancer.server.port=8080
       - traefik.http.routers.onecx-help-bff.rule=Host(`onecx-help-bff`)
-
     env_file:
       - common.env
       - bff.env
