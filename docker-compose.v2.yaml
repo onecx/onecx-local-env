@@ -4,6 +4,7 @@ services:
   ########################################
   traefik:
     image: ${TRAEFIK}
+    container_name: traefik
     command: --api.insecure=true --providers.docker=true #Enables the web UI and tells Træfik to listen to docker
     ports:
       - "80:80" #The HTTP port
@@ -47,6 +48,7 @@ services:
 
   pgadmin:
     image: ${PGADMIN}
+    container_name: pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: user@example.com
       PGADMIN_DEFAULT_PASSWORD: mysecretpassword
@@ -171,6 +173,7 @@ services:
   ########## ONECX THEME
   onecx-theme-svc:
     image: ${ONECX_THEME_SVC}
+    container_name: onecx-theme-svc
     environment:
       QUARKUS_DATASOURCE_USERNAME: onecx_theme
       QUARKUS_DATASOURCE_PASSWORD: onecx_theme
@@ -194,6 +197,7 @@ services:
 
   onecx-theme-bff:
     image: ${ONECX_THEME_BFF}
+    container_name: onecx-theme-bff
     environment:
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-theme"
     healthcheck:
@@ -217,6 +221,7 @@ services:
 
   onecx-theme-ui:
     image: ${ONECX_THEME_UI}
+    container_name: onecx-theme-ui
     environment:
       APP_BASE_HREF: "/mfe/theme/"
       APP_ID: "onecx-theme-ui"
@@ -261,6 +266,7 @@ services:
 
   onecx-workspace-bff:
     image: ${ONECX_WORKSPACE_BFF}
+    container_name: onecx-workspace-bff
     environment:
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-workspace"
     healthcheck:
@@ -282,6 +288,7 @@ services:
 
   onecx-workspace-ui:
     image: ${ONECX_WORKSPACE_UI}
+    container_name: onecx-workspace-ui
     environment:
       APP_BASE_HREF: "/mfe/workspace/"
       APP_ID: "onecx-workspace-ui"
@@ -298,6 +305,7 @@ services:
   ########## ONECX-PERMISSION
   onecx-permission-svc:
     image: ${ONECX_PERMISSION_SVC}
+    container_name: onecx-permission-svc
     environment:
       QUARKUS_DATASOURCE_USERNAME: onecx_permission
       QUARKUS_DATASOURCE_PASSWORD: onecx_permission
@@ -324,6 +332,7 @@ services:
 
   onecx-permission-bff:
     image: ${ONECX_PERMISSION_BFF}
+    container_name: onecx-permission-bff
     environment:
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-permission"
     healthcheck:
@@ -347,6 +356,7 @@ services:
 
   onecx-permission-ui:
     image: ${ONECX_PERMISSION_UI}
+    container_name: onecx-permission-ui
     environment:
       APP_BASE_HREF: "/mfe/permission/"
       APP_ID: "onecx-permission-ui"
@@ -365,6 +375,7 @@ services:
   ########## ONECX-PRODUCT-STORE
   onecx-product-store-svc:
     image: ${ONECX_PRODUCT_STORE_SVC}
+    container_name: onecx-product-store-svc
     environment:
       QUARKUS_DATASOURCE_USERNAME: onecx_product_store
       QUARKUS_DATASOURCE_PASSWORD: onecx_product_store
@@ -388,6 +399,7 @@ services:
 
   onecx-product-store-bff:
     image: ${ONECX_PRODUCT_STORE_BFF}
+    container_name: onecx-product-store-bff
     environment:
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-product-store"
     healthcheck:
@@ -411,6 +423,7 @@ services:
 
   onecx-product-store-ui:
     image: ${ONECX_PRODUCT_STORE_UI}
+    container_name: onecx-product-store-ui
     environment:
       APP_BASE_HREF: "/mfe/product-store/"
       APP_ID: "onecx-product-store-ui"
@@ -429,6 +442,7 @@ services:
   ########## ONECX-USER-PROFILE
   onecx-user-profile-svc:
     image: ${ONECX_USER_PROFILE_SVC}
+    container_name: onecx-user-profile-svc
     environment:
       QUARKUS_DATASOURCE_USERNAME: onecx_user_profile
       QUARKUS_DATASOURCE_PASSWORD: onecx_user_profile
@@ -452,6 +466,7 @@ services:
 
   onecx-user-profile-bff:
     image: ${ONECX_USER_PROFILE_BFF}
+    container_name: onecx-user-profile-bff
     environment:
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-user-profile"
     healthcheck:
@@ -475,6 +490,7 @@ services:
 
   onecx-user-profile-ui:
     image: ${ONECX_USER_PROFILE_UI}
+    container_name: onecx-user-profile-ui
     environment:
       APP_BASE_HREF: "/mfe/user-profile/"
       APP_ID: "onecx-user-profile-ui"
@@ -493,6 +509,7 @@ services:
   ########## ONECX-IAM
   onecx-iam-kc-svc:
     image: ${ONECX_IAM_KC_SVC}
+    container_name: onecx-iam-kc-svc
     environment:
       QUARKUS_KEYCLOAK_ADMIN_CLIENT_SERVER_URL: http://keycloak-app:8080
       QUARKUS_KEYCLOAK_ADMIN_CLIENT_REALM: master
@@ -519,6 +536,7 @@ services:
 
   onecx-iam-bff:
     image: ${ONECX_IAM_BFF}
+    container_name: onecx-iam-bff
     environment:
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-iam"
     healthcheck:
@@ -542,6 +560,7 @@ services:
 
   onecx-iam-ui:
     image: ${ONECX_IAM_UI}
+    container_name: onecx-iam-ui
     environment:
       APP_BASE_HREF: "/mfe/iam/"
       APP_ID: "onecx-iam-ui"
@@ -560,6 +579,7 @@ services:
   ########## ONECX-TENANT
   onecx-tenant-svc:
     image: ${ONECX_TENANT_SVC}
+    container_name: onecx-tenant-svc
     environment:
       QUARKUS_DATASOURCE_USERNAME: onecx_tenant
       QUARKUS_DATASOURCE_PASSWORD: onecx_tenant
@@ -583,6 +603,7 @@ services:
 
   onecx-tenant-bff:
     image: ${ONECX_TENANT_BFF}
+    container_name: onecx-tenant-bff
     environment:
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-tenant"
     healthcheck:
@@ -606,6 +627,7 @@ services:
 
   onecx-tenant-ui:
     image: ${ONECX_TENANT_UI}
+    container_name: onecx-tenant-ui
     environment:
       APP_BASE_HREF: "/mfe/tenant/"
       APP_ID: "onecx-tenant-ui"
@@ -624,6 +646,7 @@ services:
   ########## ONECX-WELCOME
   onecx-welcome-svc:
     image: ${ONECX_WELCOME_SVC}
+    container_name: onecx-welcome-svc
     environment:
       QUARKUS_DATASOURCE_USERNAME: onecx_welcome
       QUARKUS_DATASOURCE_PASSWORD: onecx_welcome
@@ -647,6 +670,7 @@ services:
 
   onecx-welcome-bff:
     image: ${ONECX_WELCOME_BFF}
+    container_name: onecx-welcome-bff
     environment:
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-welcome"
     healthcheck:
@@ -670,6 +694,7 @@ services:
 
   onecx-welcome-ui:
     image: ${ONECX_WELCOME_UI}
+    container_name: onecx-welcome-ui
     environment:
       APP_BASE_HREF: "/mfe/welcome/"
       APP_ID: "onecx-welcome-ui"
@@ -688,6 +713,7 @@ services:
   ########## ONECX-HELP
   onecx-help-svc:
     image: ${ONECX_HELP_SVC}
+    container_name: onecx-help-svc
     environment:
       QUARKUS_DATASOURCE_USERNAME: onecx_help
       QUARKUS_DATASOURCE_PASSWORD: onecx_help
@@ -713,6 +739,7 @@ services:
       
   onecx-help-bff:
     image: ${ONECX_HELP_BFF}
+    container_name: onecx-help-bff
     environment:
       ONECX_PERMISSIONS_PRODUCT_NAME: onecx-help
     healthcheck:
@@ -737,6 +764,7 @@ services:
       
   onecx-help-ui:
     image: ${ONECX_HELP_UI}
+    container_name: onecx-help-ui
     environment:
       APP_BASE_HREF: /mfe/help/
       APP_ID: onecx-help-ui
@@ -755,6 +783,7 @@ services:
   ########## ONECX PARAMETER
   onecx-parameter-svc:
     image: ${ONECX_PARAMETER_SVC}
+    container_name: onecx-parameter-svc
     environment:
       QUARKUS_DATASOURCE_USERNAME: onecx_parameter
       QUARKUS_DATASOURCE_PASSWORD: onecx_parameter
@@ -783,6 +812,7 @@ services:
 
   onecx-parameter-bff:
     image: ${ONECX_PARAMETER_BFF}
+    container_name: onecx-parameter-bff
     environment:
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-parameter"
     healthcheck:
@@ -807,6 +837,7 @@ services:
 
   onecx-parameter-ui:
     image: ${ONECX_PARAMETER_UI}
+    container_name: onecx-parameter-ui
     environment:
       APP_BASE_HREF: "/mfe/parameter/"
       APP_ID: "onecx-parameter-ui"
