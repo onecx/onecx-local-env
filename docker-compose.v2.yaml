@@ -19,6 +19,7 @@ services:
       - default
     profiles:
       - all
+      - minimal
 
   ########################################
   ############### DATABASE ###############
@@ -49,6 +50,7 @@ services:
       - default
     profiles:
       - all
+      - minimal
 
   pgadmin:
     image: ${PGADMIN}
@@ -111,6 +113,7 @@ services:
       - default
     profiles:
       - all
+      - minimal
 
   ##############################################################
   ######### Products #######################################
@@ -142,6 +145,7 @@ services:
       - default
     profiles:
       - all
+      - minimal
 
   onecx-shell-bff:
     image: ${ONECX_SHELL_BFF}
@@ -179,6 +183,7 @@ services:
       - default
     profiles:
       - all
+      - minimal
 
   ########## ONECX THEME
   onecx-theme-svc:
@@ -206,6 +211,7 @@ services:
       - default
     profiles:
       - all
+      - minimal
 
   onecx-theme-bff:
     image: ${ONECX_THEME_BFF}
@@ -277,6 +283,7 @@ services:
       - default
     profiles:
       - all
+      - minimal
 
   onecx-workspace-bff:
     image: ${ONECX_WORKSPACE_BFF}
@@ -349,6 +356,7 @@ services:
       - default
     profiles:
       - all
+      - minimal
 
   onecx-permission-bff:
     image: ${ONECX_PERMISSION_BFF}
@@ -418,6 +426,7 @@ services:
       - default
     profiles:
       - all
+      - minimal
 
   onecx-product-store-bff:
     image: ${ONECX_PRODUCT_STORE_BFF}
@@ -487,6 +496,7 @@ services:
       - default
     profiles:
       - all
+      - minimal
 
   onecx-user-profile-bff:
     image: ${ONECX_USER_PROFILE_BFF}
@@ -626,6 +636,7 @@ services:
       - default
     profiles:
       - all
+      - minimal
 
   onecx-tenant-bff:
     image: ${ONECX_TENANT_BFF}
