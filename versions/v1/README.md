@@ -6,7 +6,7 @@ v1 was the initial version of the local development environment for OneCX. While
 
 ## Overview
 
-v1 contains services for Traefik, Postgres, Keycloak and all currently existing OneCX products (SVC, BFF, UI). Some of these services are started by default, while others can only be started via specific profiles. For more details on the available services, networks, volumes and profiles, please refer to the ["Components"](#components) section of this document.
+v1 contains services for Traefik, Postgres, Keycloak and all currently existing OneCX products (SVC, BFF, UI). Some of these services are started by default, while others can only be started via specific profiles. For more details on the available services, profiles, environment variables, networks and volumes, please refer to the ["Components"](#components) section of this document.
 
 ## Running OneCX Local Env v1
 
@@ -79,7 +79,7 @@ When starting OneCX Local Env v1 for the first time, some initial data has to be
      ./import-onecx.v1.sh
      ```
 5. Ensure that status messages for each step are green and indicate success.
-6. After the script has completed successfully, all initial data should be imported and the environment is ready to use.
+6. After the script has completed successfully, all initial data has been imported and the environment is ready to use.
 
 ## Components
 
