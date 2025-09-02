@@ -74,10 +74,6 @@ When starting OneCX Local Env v1 for the first time, some initial data has to be
      ```bash
      ./versions/v1/import-onecx.v1.sh
      ```
-   - From the `versions/v1` directory:
-     ```bash
-     ./import-onecx.v1.sh
-     ```
 5. Ensure that status messages for each step are green and indicate success.
 6. After the script has completed successfully, all initial data has been imported and the environment is ready to use.
 
