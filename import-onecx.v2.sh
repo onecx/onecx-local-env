@@ -1,8 +1,16 @@
 #!/bin/bash
-## Start containers using data-import profile
-echo " "
-echo "Starting containers using data-import profile..."
-docker compose -f docker-compose.v2.yaml --profile data-import up -d --wait
+## Set SKIP_CONTAINER_MANAGEMENT to 1 or true to skip starting/stopping containers
+## Can be useful if containers are already running and are still needed after the imports are done (e.g. to run additional custom import scripts)
+SKIP_CONTAINER_MANAGEMENT=${SKIP_CONTAINER_MANAGEMENT:-0}
+
+if [[ "$SKIP_CONTAINER_MANAGEMENT" == "1" || "$SKIP_CONTAINER_MANAGEMENT" == "true" ]]; then
+  echo "SKIP_CONTAINER_MANAGEMENT is set to $SKIP_CONTAINER_MANAGEMENT, skipping container startup..."
+else
+  ## Start containers using data-import profile
+  echo " "
+  echo "Starting containers using data-import profile..."
+  docker compose -f docker-compose.v2.yaml --profile data-import up -d --wait
+fi
 
 ## Fetch token from keycloak
 echo " "
@@ -65,7 +73,13 @@ bash ./import-themes.sh
 
 cd ../..
 
-## Stop containers
-echo " "
-echo "Stopping containers used for data import..."
-docker compose -f docker-compose.v2.yaml --profile data-import down
+
+if [[ "$SKIP_CONTAINER_MANAGEMENT" == "1" || "$SKIP_CONTAINER_MANAGEMENT" == "true" ]]; then
+  echo "SKIP_CONTAINER_MANAGEMENT is set to $SKIP_CONTAINER_MANAGEMENT, skipping container shutdown..."
+  exit 0
+else
+  ## Stop containers
+  echo " "
+  echo "Stopping containers used for data import..."
+  docker compose -f docker-compose.v2.yaml --profile data-import down
+fi
