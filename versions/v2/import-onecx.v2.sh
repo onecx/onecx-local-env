@@ -9,7 +9,7 @@ else
   ## Start containers using data-import profile
   echo " "
   echo "Starting containers using data-import profile..."
-  docker compose -f docker-compose.v2.yaml --profile data-import up -d --wait
+  docker compose --profile=data-import up -d --wait
 fi
 
 ## Fetch token from keycloak
@@ -81,5 +81,5 @@ else
   ## Stop containers
   echo " "
   echo "Stopping containers used for data import..."
-  docker compose -f docker-compose.v2.yaml --profile data-import down
+  docker compose --profile=data-import down
 fi
