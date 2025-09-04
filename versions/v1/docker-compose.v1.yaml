@@ -16,7 +16,7 @@ services:
         #- "traefik.http.routers.local_mfe.entrypoints=web"
         #- "traefik.http.routers.local_mfe.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/onecx-theme-ui`)"
         #- "traefik.http.routers.local_mfe.service=local_mfe@file"
-        ## Localy running BFF has to be started with port 8585
+        ## Locally running BFF has to be started with port 8585
         #- "traefik.http.routers.local_bff.entrypoints=web"
         #- "traefik.http.routers.local_bff.rule=Host(`onecx-theme-bff`)"
         #- "traefik.http.routers.local_bff.service=local_bff@file"
