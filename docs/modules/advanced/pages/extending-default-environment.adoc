@@ -11,15 +11,15 @@ Please under no circumstances use the root `docker-compose.yaml` file or the roo
 
 In order to run the MFE all corresponding BFFs and all corresponding backend services (MS) need to run also.
 
-=== Localy build docker image of the MFE
+=== Locally build docker image of the MFE
 
 After a local docker image of the MFE is created, add it to the docker-compose and started as any other service.
 
-=== Localy started in dev mode `npm start`
+=== Locally started in dev mode `npm start`
 
 In order to use traefik and locally started MFE you need to enhance the npm start script located in package.json with `--host 0.0.0.0 --disable-host-check`
 
-If it runs on the standard port _4200_ you dont need to do anything special as this is already configured for the local_mfe service under `./init-data/traefik/traefik-services.yml`
+If it runs on the standard port _4200_ you don't need to do anything special as this is already configured for the local_mfe service under `./init-data/traefik/traefik-services.yml`
 Only update the traefik config in `docker-compose.yaml`
 
 _EXAMPLE_ for onecx-tenant-ui (its already part of the docker-compose in the part of onecx-tenant-bff)
