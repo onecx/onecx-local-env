@@ -1,6 +1,10 @@
-= Common Issues
+=  OneCX Local Env - Troubleshooting - Common Issues
 :idprefix:
 :idseparator: -
 :imagesdir: ../images
 
 This page lists common issues and respective solutions when using OneCX Local Env.
+
+== Keycloak reported as unhealthy
+
+If the `keycloak-app` service is reported as unhealthy, please try to re-run the docker compose command to start the service again. In some cases, Keycloak might take a bit longer to start up, and re-running the command can help resolve the issue.
