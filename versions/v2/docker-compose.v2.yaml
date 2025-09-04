@@ -91,9 +91,9 @@ services:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
       KC_DB: postgres
-      KC_DB_POOL_INITIAL_SIZE : 1
-      KC_DB_POOL_MAX_SIZE : 5
-      KC_DB_POOL_MIN_SIZE : 2
+      KC_DB_POOL_INITIAL_SIZE: 1
+      KC_DB_POOL_MAX_SIZE: 5
+      KC_DB_POOL_MIN_SIZE: 2
       KC_DB_URL_DATABASE: keycloak
       KC_DB_URL_HOST: postgresdb
       KC_DB_USERNAME: keycloak
@@ -547,7 +547,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-user-profile-svc.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-user-profile-svc.rule=Host(`onecx-user-profile-store-svc`)"
+      - "traefik.http.routers.onecx-user-profile-svc.rule=Host(`onecx-user-profile-svc`)"
     env_file:
       - common.env
       - svc.env
@@ -864,8 +864,8 @@ services:
       keycloak-app:
         condition: service_healthy
     labels:
-      - traefik.http.services.onecx-help-svc.loadbalancer.server.port=8080
-      - traefik.http.routers.onecx-help-svc.rule=Host(`onecx-help-svc`)
+      - "traefik.http.services.onecx-help-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-help-svc.rule=Host(`onecx-help-svc`)"
     env_file:
       - common.env
       - svc.env
@@ -875,12 +875,12 @@ services:
       - all
       - data-import
       - help
-      
+
   onecx-help-bff:
     image: ${ONECX_HELP_BFF}
     container_name: onecx-help-bff
     environment:
-      ONECX_PERMISSIONS_PRODUCT_NAME: onecx-help
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-help"
     healthcheck:
       test: curl --head -fsS http://localhost:8080/q/health
       interval: 10s
@@ -890,8 +890,8 @@ services:
       onecx-help-svc:
         condition: service_healthy
     labels:
-      - traefik.http.services.onecx-help-bff.loadbalancer.server.port=8080
-      - traefik.http.routers.onecx-help-bff.rule=Host(`onecx-help-bff`)
+      - "traefik.http.services.onecx-help-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-help-bff.rule=Host(`onecx-help-bff`)"
     env_file:
       - common.env
       - bff.env
@@ -901,20 +901,20 @@ services:
       - all
       - help
       - help-ui
-      
+
   onecx-help-ui:
     image: ${ONECX_HELP_UI}
     container_name: onecx-help-ui
     environment:
       APP_BASE_HREF: /mfe/help/
       APP_ID: onecx-help-ui
-      PRODUCT_NAME: onecx-help
+      PRODUCT_NAME: "onecx-help"
     depends_on:
       onecx-help-bff:
         condition: service_healthy
     labels:
-      - traefik.http.services.onecx-help-ui.loadbalancer.server.port=8080
-      - traefik.http.routers.onecx-help-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/help/`)
+      - "traefik.http.services.onecx-help-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-help-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/help/`)"
     networks:
       - default
     profiles:

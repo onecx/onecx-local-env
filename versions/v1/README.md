@@ -65,7 +65,9 @@ To stop the started services, run one of the following commands:
   ```
 
 ## Importing initial data
+
 When starting OneCX Local Env v1 for the first time, some initial data has to be imported to set up the environment correctly. To import the initial data, please follow these steps:
+
 1. Start the environment using the `all` profile (see [Running OneCX Local Env v1](#running-onecx-local-env-v1)).
 2. Wait for all services to be healthy.
 3. Wait for at least 30 seconds to ensure that all services are fully initialized and operational.
@@ -126,3 +128,9 @@ OneCX Local Env v1 mounts one global volume:
 - `postgres` — volume used by `postgresdb` to persist its data across container restarts.
 
 Additionally, some services (`traefik`, `postgresdb`, `pgadmin` and `keycloak-app`) mount local directories for initialization data.
+
+## Troubleshooting
+
+### Keycloak reported as unhealthy
+
+If the `keycloak-app` service is reported as unhealthy, please try to re-run the docker compose command to start the service again. In some cases, Keycloak might take a bit longer to start up, and re-running the command can help resolve the issue.
