@@ -55,7 +55,7 @@ If any of the scripts are not executable, please run the following command for e
 === Configure Hosts file
 In order to expose multiple services on the same local port, OneCX Local Env uses the traefik reverse proxy. Traefik will be available via your host's port 80, and will route traffic to containers based on hostnames.
 
-To ensure that these hostnames resolve to your local machine and request reach the traefik proxy, you need to add a few OneCX-specific entries to your system's `hosts` file.
+To ensure that these hostnames resolve to your local machine and requests reach the traefik proxy, you need to add a few OneCX-specific entries to your system's `hosts` file.
 
 ==== Locate your hosts file
 - Windows: `c:\Windows\System32\drivers\etc\hosts`
@@ -128,6 +128,6 @@ After running all desired services as per the version-specific instructions, you
 
 If there are any issues while running services, please try to:
 
-- deleting the volume or
-- clearing the database and
-- starting everything again from scratch
+- delete the volume or
+- clear the database and
+- start everything again from scratch

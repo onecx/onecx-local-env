@@ -105,6 +105,9 @@ When starting OneCX Local Env v1 for the first time, some initial data has to be
   ./versions/v1/import-onecx.v1.sh
 ----
 . Ensure that status messages for each step are green and indicate success.
+  - If any step of the import fails, please verify that all services required for the import (Traefik, Postgres, Keycloak and all OneCX SVCs) are running and healthy.
+    - If they are, please check the logs of the service that failed the import for potential issues. To do so run `docker ps` to get the container ID and `docker logs <container-id>` to view the logs.
+    - If they are not, please start the missing services and wait until they are healthy before re-running the import script.
 . After the script has completed successfully, all initial data has been imported and the environment is ready to use.
 
 == Components

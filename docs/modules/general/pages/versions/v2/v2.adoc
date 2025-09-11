@@ -61,9 +61,35 @@ When starting OneCX Local Env v2 for the first time, some initial data has to be
   ./import-onecx.sh
 ----
 . Wait for the script to finish and ensure that status messages for each step are green and indicate success.
+- If you encounter any issues while running the import script, please first try to increase the timeout defined in line 27 of the `versions/v2/import-onecx.v2.sh` script (default: `30` seconds) and re-run the script.
+- If the issue persists, do the following:
+  - Manually start the `data-import` profile to start only the services required for the import of initial data (Traefik, Postgres, Keycloak and all OneCX product SVCs):
++
+[source,bash]
+----
+      docker compose --profile data-import up -d
+----
+  - Wait for all services to be healthy.
+  - Wait for at least 30 seconds to ensure that all services are fully initialized and operational
+  - Run the import script while skipping container management:
++
+[source,bash]
+----
+      SKIP_CONTAINER_MANAGEMENT=true ./versions/v2/import-onecx.v2.sh
+----
+- If any step of the import fails, please verify that all services required for the import (Traefik, Postgres, Keycloak and all OneCX SVCs) are running and healthy.
+    - If they are, please check the logs of the service that failed the import for potential issues. To do so run `docker ps` to get the container ID and `docker logs <container-id>` to view the logs.
+    - If they are not, please start the missing services and wait until they are healthy before re-running the import script.
+- Stop the `data-import` profile after the import has completed successfully:
++
+[source,bash]
+----
+      docker compose --profile data-import down
+----
 . After the script has completed successfully, all initial data has been imported and the environment is ready to use.
 
 If you want to integrate the import script into your own scripts and want to only perform the actual import operations instead of also starting and stopping all necessary services, you can set the `SKIP_CONTAINER_MANAGEMENT` environment variable to `1` or `true` before executing the script:
+
 - From the repository root:
 +
 [source,bash]
