@@ -1,0 +1,133 @@
+= OneCX Local Env - Getting Started - Run OneCX locally
+:idprefix:
+:idseparator: -
+:imagesdir: ../images
+
+This document provides instructions on how to set up and run OneCX Local Env for local development and testing purposes. It covers the prerequisites, setup steps, importing initial data, and spinning up the environment with different profiles.
+
+== Prerequisites
+
+=== Supported Operating Systems
+`onecx-local-env` fully supports Linux and Windows 10/11 via WSL2. While macOS is also supported, running OneCX images on Apple Silicon devices currently requires some additional workarounds.
+
+==== Linux
+No additional setup steps are required for now. Continue following the instructions in this document.
+
+==== Windows
+Verify that WSL2 is installed by running the following command in PowerShell or Command Prompt: `wsl -l -v`.
+
+If you encounter an error, see no output, or your distributions are listed as version 1, follow the official Microsoft guide to install WSL2 or upgrade from WSL1 before proceeding: https://learn.microsoft.com/en-us/windows/wsl/install
+
+=== macOS
+You can continue with the instructions below, but pay close attention to the section <<preparing-onecx-local-env-for-use-on-apple-silicon-devices>>, as additional steps are required to ensure proper functionality.
+
+
+=== Docker & Docker Compose
+
+`onecx-local-env` requires both Docker and Docker Compose to be installed directly on your system or inside WSL2 for Windows users.
+
+The functionality of `onecx-local-env` has been tested with the following versions:
+
+- Docker version `28.1.1`
+- Docker Compose version `v2.35.1`
+
+To ensure that all used features work correctly, please make sure to, at least, use Docker Compose version `v2.20.0`. If you are running into issues that aren't obviously related to your `onecx-local-env` itself, please try to update Docker and Docker Compose to the latest versions.
+
+=== Select which version of OneCX Local Env to use
+
+`onecx-local-env` contains multiple versions inside the `versions` directory. Instructions for running services, importing initial data and other relevant information may differ between versions. It is therefore important to select a specific version of `onecx-local-env` before following the any other instructions in this document.
+
+The current latest version of `onecx-local-env` is v2. We recommend this version for most users. Other versions, namely v1, still exist to avoid breaking existing workflows, but may not receive new features in the future. *If you are unsure which version to use, please start with v2.*
+
+For more information on the versions please refer to the version-specific documentation:
+
+- xref:general:versions/v2/v2.adoc[OneCX Local Env v2]
+- xref:general:versions/v1/v1.adoc[OneCX Local Env v1]
+
+=== Make all relevant scripts executable
+
+After you selected a version of `onecx-local-env`, please ensure that all .sh scripts in the root directory of the repository, the `imports` directory and the `versions/<selected-version>` directory are executable with `ls -l` command.
+
+- e.g. `-rwxr-xr-x import-onecx.sh`
+
+If any of the scripts are not executable, please run the following command for each non-executable script: `chmod +x <file name>`
+
+=== Configure Hosts file
+In order to expose multiple services on the same local port, OneCX Local Env uses the traefik reverse proxy. Traefik will be available via your host's port 80, and will route traffic to containers based on hostnames.
+
+To ensure that these hostnames resolve to your local machine and requests reach the traefik proxy, you need to add a few OneCX-specific entries to your system's `hosts` file.
+
+==== Locate your hosts file
+- Windows: `c:\Windows\System32\drivers\etc\hosts`
+- Linux: `/etc/hosts`
+- macOS: `/etc/hosts`
+
+==== Open the hosts file with administrator privileges
+Editing the `hosts` file will require administrator privileges on most systems. Please open the file with a tool that has the necessary permissions (e.g. `sudo nano /etc/hosts` on Linux/macOS or Notepad as Administrator on Windows).
+
+==== Add entries to hosts file
+Once you located and opened your `hosts` file, please add the following entries to the end of the file:
+[source]
+----
+127.0.0.1   local-proxy
+127.0.0.1   keycloak-app
+127.0.0.1   pgadmin
+127.0.0.1   onecx-shell-bff
+127.0.0.1   onecx-theme-svc
+127.0.0.1   onecx-theme-bff
+127.0.0.1   onecx-workspace-svc
+127.0.0.1   onecx-workspace-bff
+127.0.0.1   onecx-user-profile-bff
+127.0.0.1   onecx-user-profile-svc
+127.0.0.1   onecx-permission-svc
+127.0.0.1   onecx-permission-bff
+127.0.0.1   onecx-product-store-svc
+127.0.0.1   onecx-product-store-bff
+127.0.0.1   onecx-iam-kc-svc
+127.0.0.1   onecx-iam-bff
+127.0.0.1   onecx-tenant-svc
+127.0.0.1   onecx-tenant-bff
+127.0.0.1   onecx-parameter-svc
+127.0.0.1   onecx-parameter-bff
+----
+If you are using Windows with WSL2, please restart WSL2 after modifying the `hosts` and check if the entries were automatically added to the WSL2 `hosts` file located at `/etc/hosts`. If not, please add the entries manually to the WSL2 `hosts` file as well.
+
+=== Preparing OneCX Local Env for use on Apple Silicon devices
+To be able to run OneCX Local Env on Apple Silicon devices, the images specified in `versions/<selected-version>/.env` have to be adjusted slightly.
+
+Please open the file and adjust each OneCX image to use the `main` tag instead of `main-native`. For example, change: `ONECX_SHELL_BFF=${DOCKER_REPO}/onecx-shell-bff:main-native` to `ONECX_SHELL_BFF=${DOCKER_REPO}/onecx-shell-bff:main`. This will ensure that Docker Compose uses OneCX's JVM-based images which support the ARM architecture used by Apple Silicon devices.
+
+=== Import Initial Data
+
+Before using the selected version of `onecx-local-env`, initial data must be imported to set up the environment correctly. Please refer to the version-specific documentation for instructions on how to import the initial data:
+
+- xref:general:versions/v2/v2.adoc#importing-initial-data[Importing initial data for OneCX Local Env v2]
+- xref:general:versions/v1/v1.adoc#importing-initial-data[Importing initial data for OneCX Local Env v1]
+
+The respective import scripts will import all data located in the `./imports` directory. The structure of the `imports` directory is as follows:
+
+- tenant - import for the tenants
+- theme - import for the themes
+- permissions - import for permissions
+- workspace - import for workspaces
+- assignments - import of the assignments from role to permission
+- product-store - import for all of the product/application store objects:
+  * products - import for products/applications
+  * microfrontends - import for microfrontends
+  * microservices - import for microservices
+  * slots - import for slots
+
+== Running OneCX Local Env
+
+For instructions on how to run your selected version of `onecx-local-env`, please refer to the version-specific documentation:
+
+- xref:general:versions/v2/v2.adoc#running-onecx-local-env-v2[Running OneCX Local Env v2]
+- xref:general:versions/v1/v1.adoc#running-onecx-local-env-v1[Running OneCX Local Env v1]
+
+After running all desired services as per the version-specific instructions, you can access the OneCX Shell via this URL: `http://local-proxy/onecx-shell/admin`. The default user created by the previously-executed import scripts is `onecx` with the password `onecx`.
+
+If there are any issues while running services, please try to:
+
+- delete the volume or
+- clear the database and
+- start everything again from scratch
