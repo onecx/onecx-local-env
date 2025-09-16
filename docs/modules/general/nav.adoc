@@ -2,7 +2,9 @@
 ** Getting Started
 *** xref:general:getting-started.adoc[Run OneCX locally]
 ** Versions
-*** xref:general:versions/v2/v2.adoc[v2 (latest)]
+*** v2 (latest)
+**** xref:general:versions/v2/v2.adoc[v2 (latest)]
+**** xref:general:versions/v2/migrate.adoc[Migration Guide]
 *** xref:general:versions/v1/v1.adoc[v1]
 ** Advanced
 *** xref:advanced:default-database.adoc[Default Databases]
