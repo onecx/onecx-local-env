@@ -14,11 +14,7 @@ If you have any custom services that need to attach to the same network as OneCX
 
 In xref:general:versions/v1/v1.adoc[v1]:
 
-- Some core services started automatically when running:
-
-```bash
-docker compose up -d
-```
+- Some core services started automatically when running: `docker compose up -d`
 
 - Additional services could be started using the two existing profiles: `all` and `parameters`.
 - This approach gave developers very little control over which apps were started, making it hard to, for example, run only a small subset of apps and one OneCX product.
