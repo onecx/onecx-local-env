@@ -11,6 +11,8 @@ ____
 
 v2 is the current latest version of the local development environment for OneCX.
 
+If you are currently using xref:general:versions/v1/v1.adoc[OneCX Local Env v1] and want to migrate to v2, please refer to the xref:general:versions/v2/migrate.adoc[Migrate to v2] guide for detailed migration instructions.
+
 == Overview
 
 v2 contains services for Traefik, Postgres, Keycloak and all currently existing OneCX products (SVC, BFF, UI). To ensure memory-efficiency and allow developers to only start the services they need, all services are grouped into profiles that can be started individually. *No services are started by default and at least one profile must be specified when starting the environment.* For more details on the available services, profiles, environment variables, networks and volumes, please refer to the <<components>> section of this document.
