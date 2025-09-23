@@ -54,3 +54,17 @@ SKIP_CONTAINER_MANAGEMENT=true ./import-onecx.sh
 ```
 
 This ensures the script does not start or stop any containers, allowing you to manage them manually. *Please be aware that in this mode, it's your responsibility to ensure that all required containers (Traefik, Postgres, Keycloak and all OneCX SVCs) are running and healthy before executing the script.*
+
+== Moved ENV Files
+Before the creation of xref:general:versions/v2/v2.adoc[v2], all environment variable files were located in the root directory of the project. To allow for better organization and scoped environment variables per version, all environment variable files are now located in the directory of the version they belong to (e.g., `./versions/v2/` for v2). As of right now, `./versions/v1/` and `./versions/v2/` contain identical `.env`, `bff.env` and `svc.env` files, but this may change in the future (e.g. if different image tags have to be used for different versions). If you or any of your scripts reference these files, please update the paths accordingly.
+
+[NOTE]
+.Checkpoint
+====
+After reading all sections of this document you should be able to make all necessary adjustments to migrate from v1 to v2 of the OneCX Local Env.
+To recap, the main necessary adjustments are:
+* Change any custom services that connect to the `example` network to connect to the `default` network instead.
+* Change any scripts or commands that start services to use profiles instead of relying on default behavior.
+* Adjust import scripts if you need to manage container states manually.
+* Update paths to any `.env`, `bff.env` or `svc.env` files to point to the new locations in the respective version directory.
+====
