@@ -1,0 +1,15 @@
+{
+  "appVersion": "xxx",
+  "appName": "onecx-workspace-ui",
+  "description": "onecx-workspace-ui",
+  "remoteBaseUrl": "/mfe/workspace/",
+  "remoteEntry": "/mfe/workspace/remoteEntry.js",
+  "note": "Workspace logo component",
+  "exposedModule": "./OneCXCurrentWorkspaceLogoComponent",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-workspace",
+  "tagName": "ocx-current-workspace-logo-component",
+  "type": "COMPONENT",
+  "deprecated": false,
+  "undeployed": false
+}
