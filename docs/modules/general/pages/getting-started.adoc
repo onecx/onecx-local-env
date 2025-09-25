@@ -18,8 +18,18 @@ Verify that WSL2 is installed by running the following command in PowerShell or 
 
 If you encounter an error, see no output, or your distributions are listed as version 1, follow the official Microsoft guide to install WSL2 or upgrade from WSL1 before proceeding: https://learn.microsoft.com/en-us/windows/wsl/install
 
-=== macOS
+==== macOS
 You can continue with the instructions below, but pay close attention to the section <<preparing-onecx-local-env-for-use-on-apple-silicon-devices>>, as additional steps are required to ensure proper functionality.
+
+[NOTE]
+.Checkpoint
+====
+By now, you should have confirmed your operating system compatibility. To recap:
+
+* Ensure you are on Linux, Windows 10/11 with WSL2, or macOS.
+* If on Windows, run `wsl -l -v` and confirm WSL2 is active.
+* If on macOS, note that additional steps will be required later for Apple Silicon.
+====
 
 
 === Docker & Docker Compose
@@ -32,6 +42,16 @@ The functionality of `onecx-local-env` has been tested with the following versio
 - Docker Compose version `v2.35.1`
 
 To ensure that all used features work correctly, please make sure to, at least, use Docker Compose version `v2.20.0`. If you are running into issues that aren't obviously related to your `onecx-local-env` itself, please try to update Docker and Docker Compose to the latest versions.
+
+[NOTE]
+.Checkpoint
+====
+By now, you should have supported versions of Docker and Docker Compose installed. To verify:
+
+* Run `docker --version` and confirm it is returning some version information. As stated above, version `28.1.1` and above are known to work. Older versions may work but were not tested.
+* Run `docker compose version` and ensure it returns a version greater than or equal to `v2.20.0`.
+* If you are on Windows, ensure Docker is installed inside WSL2 and not just on Windows itself.
+====
 
 === Select which version of OneCX Local Env to use
 
@@ -51,6 +71,16 @@ After you selected a version of `onecx-local-env`, please ensure that all .sh sc
 - e.g. `-rwxr-xr-x import-onecx.sh`
 
 If any of the scripts are not executable, please run the following command for each non-executable script: `chmod +x <file name>`
+
+[NOTE]
+.Checkpoint
+====
+At this point, you should have ensured all relevant scripts are executable. To verify:
+
+* Run `ls -l` in the root, `imports`, and `versions/<selected-version>` directories.
+* Confirm all `.sh` scripts show `-rwxr-xr-x` or similar permissions.
+* If any scripts are missing execute permissions, run `chmod +x <file name>`.
+====
 
 === Configure Hosts file
 In order to expose multiple services on the same local port, OneCX Local Env uses the traefik reverse proxy. Traefik will be available via your host's port 80, and will route traffic to containers based on hostnames.
@@ -92,10 +122,29 @@ Once you located and opened your `hosts` file, please add the following entries 
 ----
 If you are using Windows with WSL2, please restart WSL2 after modifying the `hosts` and check if the entries were automatically added to the WSL2 `hosts` file located at `/etc/hosts`. If not, please add the entries manually to the WSL2 `hosts` file as well.
 
+[NOTE]
+.Checkpoint
+====
+At this point, you should have added all necessary entries to your system `hosts` file. To verify:
+
+* Confirm the listed OneCX hostnames are added to your system `hosts` file.
+* If using Windows with WSL2, restart WSL2 and check `/etc/hosts` inside WSL2 to ensure entries were synced from Windows.
+* If entries are missing in WSL2, add them manually by following the "Linux" instructions above.
+====
+
 === Preparing OneCX Local Env for use on Apple Silicon devices
 To be able to run OneCX Local Env on Apple Silicon devices, the images specified in `versions/<selected-version>/.env` have to be adjusted slightly.
 
 Please open the file and adjust each OneCX image to use the `main` tag instead of `main-native`. For example, change: `ONECX_SHELL_BFF=${DOCKER_REPO}/onecx-shell-bff:main-native` to `ONECX_SHELL_BFF=${DOCKER_REPO}/onecx-shell-bff:main`. This will ensure that Docker Compose uses OneCX's JVM-based images which support the ARM architecture used by Apple Silicon devices.
+
+[NOTE]
+.Checkpoint
+====
+If you are on Apple Silicon, you should now have updated all OneCX image tags. To verify:
+
+* Open `versions/<selected-version>/.env` and confirm all OneCX images use the `:main` tag instead of `:main-native`.
+====
+
 
 === Import Initial Data
 
@@ -117,6 +166,16 @@ The respective import scripts will import all data located in the `./imports` di
   * microservices - import for microservices
   * slots - import for slots
 
+[NOTE]
+.Checkpoint
+====
+At this point, you should have imported the initial data for your selected version of `onecx-local-env`. To verify:
+
+* Ensure that the logs of the import scripts indicate successful completion without errors.
+* Ensure that the expected data is present in the database (e.g., by accessing pgAdmin).
+* If you encounter issues, follow the troubleshooting steps in the version-specific documentation.
+====
+
 == Running OneCX Local Env
 
 For instructions on how to run your selected version of `onecx-local-env`, please refer to the version-specific documentation:
@@ -131,3 +190,13 @@ If there are any issues while running services, please try to:
 - delete the volume or
 - clear the database and
 - start everything again from scratch
+
+[NOTE]
+.Checkpoint
+====
+At this point, certain services of OneCX Local Env should be running on your machine. To verify:
+
+* Run `docker ps` and confirm that the expected containers are up and running.
+* Access the OneCX Shell at `http://local-proxy/onecx-shell/admin` and log in with the default credentials (`onecx` / `onecx`).
+* If any services are not running or you cannot access the OneCX Shell, refer to the troubleshooting steps linked in the version-specific documentation.
+====
