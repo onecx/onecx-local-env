@@ -172,7 +172,7 @@ The respective import scripts will import all data located in the `./imports` di
 At this point, you should have imported the initial data for your selected version of `onecx-local-env`. To verify:
 
 * Ensure that the logs of the import scripts indicate successful completion without errors.
-* Ensure that the expected data is present in the database (e.g. by accessing pgAdmin).
+* Ensure that the expected data is present in the database (e.g., by accessing pgAdmin).
 * If you encounter issues, follow the troubleshooting steps in the version-specific documentation.
 ====
 
