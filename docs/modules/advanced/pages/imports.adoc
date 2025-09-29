@@ -1,0 +1,123 @@
+= OneCX Local Env - Advanced - Default Data and Imports Overview
+:idprefix:
+:idseparator: -
+:imagesdir: ../images
+
+This document provides an overview of the file and folder structure related to data imports in the OneCX Local Environment. It also explains the purpose of each file and folder, and provides guidelines for adding new files.
+
+[#folder-structure]
+== Folder Structure
+
+The `imports` directory contains all the data and scripts required for importing default data into the OneCX Local Environment. Below is the folder structure:
+
+* `assignments/`
+** Contains scripts and JSON files for importing role-to-permission assignments.
+* `parameters/`
+** Contains scripts and JSON files for importing application parameters.
+* `permissions/`
+** Contains scripts and JSON files for importing permissions.
+* `product-store/`
+** Contains scripts and subfolders for importing product-related data:
+*** `microfrontends/`
+**** Contains JSON files defining microfrontend configurations.
+*** `microservices/`
+**** Contains JSON files defining microservice configurations.
+*** `products/`
+**** Contains JSON files defining product configurations.
+*** `slots/`
+**** Contains JSON files defining slot configurations.
+* `tenant/`
+** Contains scripts and JSON files for importing tenant data.
+* `theme/`
+** Contains scripts and JSON files for importing themes.
+* `workspace/`
+** Contains scripts and JSON files for importing workspace data.
+
+[#convention-and-file-list]
+== Convention and file list
+
+[#assignments]
+=== Assignments
+* `import-assignments.sh`: Bash script to import role-to-permission assignments.
+** Uses: Permission Service.
+* `onecx.json`: JSON file defining assignments for various roles and permissions.
+
+[#parameters]
+=== Parameters
+* `import-parameters.sh`: Bash script to import application parameters.
+** Uses: Parameter Service.
+* `<product_name>_<app_id>.json`: Define parameters for specific applications.
+** Example: `onecx-parameter_onecx-parameter-bff.json`.
+
+[#permissions]
+=== Permissions
+* `import-permissions.sh`: Bash script to import permissions.
+** Uses: Permission Service.
+* `<product_name>_<app_id>.json`: Define permissions for specific applications.
+** Example: `onecx-help_onecx-help-ui.json`.
+
+[#product-store]
+=== Product Store
+
+[#microfrontends]
+==== Microfrontends
+* `import-microfrontends.sh`: Bash script to import microfrontends.
+** Uses: Product Store Service.
+* `<product_name>_<app_id>_<microfrontend_name>.json`: Define microfrontend configurations.
+** Example: `onecx-help_onecx-help-ui_help-item-editor.json`.
+
+[#microservices]
+==== Microservices
+* `import-microservices.sh`: Bash script to import microservices.
+** Uses: Product Store Service.
+* `<product_name>_<app_id>.json`: Define microservice.
+** Example: `onecx-help_onecx-help-bff.json`.
+
+[#products]
+==== Products
+* `import-products.sh`: Bash script to import products.
+** Uses: Product Store Service.
+* `<product_name>.json`: Define product configurations.
+** Example: `onecx-help.json`.
+
+[#slots]
+==== Slots
+* `import-slots.sh`: Bash script to import slots.
+** Uses: Product Store Service.
+* `<product_name>_<app_id>_<slot_name>.json`: Define slot configurations.
+** Example: `onecx-help_onecx-help-ui_onecx-help-search-header-left.json`.
+
+[#tenant]
+=== Tenant
+* `import-tenants.sh`: Bash script to import tenant data.
+** Uses: Tenant Service.
+* `tenant-import.json`: JSON file defining tenant configurations.
+
+[#theme]
+=== Theme
+* `import-themes.sh`: Bash script to import themes.
+** Uses: Theme Service.
+* `<tenant_id>_<theme_name>.json`: Define theme configurations.
+** Example: `onecx_OneCX.json`.
+
+[#workspace]
+=== Workspace
+* `import-workspaces.sh`: Bash script to import workspace data.
+** Uses: Workspace Service.
+* `<tenant_id>_<workspace_name>.json`: Define workspace configurations.
+** Example: `onecx_admin.json`.
+
+[#adding-new-files]
+== Adding New Files
+
+To add new files to the `imports` directory, follow these guidelines:
+
+1. **Naming Conventions** - use consistent naming patterns based on the type of data being imported. The patterns are listed in the <<convention-and-file-list, Convention and file list>> section.
+
+2. **File Structure** - JSON files should adhere to the existing structure that is compliant with the respective service's API.
+
+3. **Script Updates** - If adding a new type of data, add new import script that includes new files and uses the appropriate service. Make sure to define the structure of the JSON files.
+
+4. **Testing** - Test the import process by running the relevant script and verifying the data in the environment.
+
+By adhering to these conventions, you can ensure consistency and maintainability in the OneCX Local Environment.
