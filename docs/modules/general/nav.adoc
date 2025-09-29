@@ -9,5 +9,6 @@
 ** Advanced
 *** xref:advanced:default-database.adoc[Default Databases]
 *** xref:advanced:extending-default-environment.adoc[Extending the default environment]
+*** xref:advanced:imports.adoc[Extending the default environment]
 ** Troubleshooting
 *** xref:troubleshooting:common-issues.adoc[Common Issues]
