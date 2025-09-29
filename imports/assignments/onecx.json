@@ -56,7 +56,7 @@
         "onecx-admin": {
           "APP": ["CREATE", "DELETE", "EDIT", "SAVE", "SEARCH", "VIEW"],
           "PRODUCT": ["CREATE", "DELETE", "EDIT", "SAVE", "SEARCH", "VIEW"],
-          "SLOT": ["SEARCH", "DELETE"]
+          "SLOT": ["SEARCH", "DELETE", "CREATE", "EDIT", "VIEW"]
         }
       }
     },
@@ -215,18 +215,18 @@
         }
       }
     },
-		"onecx-parameter": {
-			"onecx-parameter-bff": {
-				"onecx-admin": {
-					"parameter": [ "read", "write", "delete" ],
-					"product": [ "read" ]
-				}
-			},
-			"onecx-parameter-ui": {
-				"onecx-admin": {
-					"PARAMETER": [ "DELETE", "EDIT", "SEARCH", "VIEW" ]
-				}
-			}  
+    "onecx-parameter": {
+      "onecx-parameter-bff": {
+        "onecx-admin": {
+          "parameter": ["read", "write", "delete"],
+          "product": ["read"]
+        }
+      },
+      "onecx-parameter-ui": {
+        "onecx-admin": {
+          "PARAMETER": ["DELETE", "EDIT", "SEARCH", "VIEW"]
+        }
+      }
     }
   }
 }
