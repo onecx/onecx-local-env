@@ -10,5 +10,7 @@
 *** xref:advanced:default-database.adoc[Default Databases]
 *** xref:advanced:extending-default-environment.adoc[Extending the default environment]
 *** xref:advanced:imports.adoc[Imports]
+** Networking
+*** xref:general:networking.adoc[Networking in OneCX]
 ** Troubleshooting
 *** xref:troubleshooting:common-issues.adoc[Common Issues]
