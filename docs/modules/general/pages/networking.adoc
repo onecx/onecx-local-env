@@ -272,7 +272,7 @@ http:
           - url: "http://host.docker.internal:4200/"
 ----
 
-NOTE: With this configuration, the local MFE/UI must run on port 4200 and the respective BFF must run on port 8585. Refer to this xref:different_ports[different ports note section] for more details on changing to different ports.
+NOTE: With this configuration, the local MFE/UI must run on port 4200 and the respective BFF must run on port 8585. Refer to this {different_ports}[different ports note section] for more details on changing to different ports.
 
 == Security Considerations
 
