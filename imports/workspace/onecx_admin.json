@@ -142,6 +142,16 @@
               "productName": "onecx-workspace",
               "appId": "onecx-workspace-ui",
               "name": "./OneCXVerticalMainMenuComponent"
+            },
+            {
+              "productName": "onecx-workspace",
+              "appId": "onecx-workspace-ui",
+              "name": "./OneCXSlimVerticalMainMenuComponent"
+            },
+            {
+              "productName": "onecx-workspace",
+              "appId": "onecx-workspace-ui",
+              "name": "./OneCXSlimUserMenuComponent"
             }
           ]
         },
