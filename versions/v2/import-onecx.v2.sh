@@ -61,9 +61,9 @@ cd ../permissions
 echo " "
 bash ./import-permissions.sh
 
-cd ../assignments
+cd ../permission-assignments
 echo " "
-bash ./import-assignments.sh
+bash ./import-permission-assignments.sh
 
 
 cd ../..

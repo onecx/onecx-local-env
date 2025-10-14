@@ -322,7 +322,7 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      onecx-iam-kc-svc:
+      onecx-iam-svc:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-iam-bff.loadbalancer.server.port=8080"

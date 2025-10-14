@@ -4,7 +4,6 @@
         { "resource": "USERPROFILE", "action": "CREATE" },
         { "resource": "USERPROFILE", "action": "DELETE" },
         { "resource": "USERPROFILE", "action": "EDIT" },
-        { "resource": "USERPROFILE", "action": "SAVE" },
         { "resource": "USERPROFILE", "action": "SEARCH" },
         { "resource": "USERPROFILE", "action": "VIEW" },
         { "resource": "USERPROFILE", "action": "EXPORT" },
