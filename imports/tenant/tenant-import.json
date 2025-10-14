@@ -1,9 +1,13 @@
 {
-    "id": "manual-import-onecx",
+    "id": "onecx-tenants",
     "tenants": {
-        "onecx": {
-            "orgId": "onecx",
-            "description": "onecx tenant"
+        "tenant1": {
+            "orgId": "t1",
+            "description": "OneCX Tenant 1"
+        },
+        "tenant2": {
+            "orgId": "t2",
+            "description": "OneCX Tenant 2"
         }
     }
 }

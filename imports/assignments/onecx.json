@@ -1,5 +1,5 @@
 {
-  "id": "import-assignemnts-onecx",
+  "id": "import-assignments-onecx",
   "assignments": {
     "onecx-shell": {
       "onecx-shell-bff": {
@@ -22,9 +22,9 @@
       },
       "onecx-permission-ui": {
         "onecx-admin": {
-          "APP": ["EDIT", "SAVE", "SEARCH", "VIEW"],
-          "PERMISSION": ["GRANT", "CREATE", "DELETE", "EDIT", "SAVE"],
-          "ROLE": ["CREATE", "DELETE", "EDIT", "SAVE"]
+          "APP": ["EDIT", "SEARCH", "VIEW"],
+          "PERMISSION": ["GRANT", "CREATE", "DELETE", "EDIT"],
+          "ROLE": ["CREATE", "DELETE", "EDIT"]
         }
       }
     },
@@ -54,8 +54,8 @@
       },
       "onecx-product-store-ui": {
         "onecx-admin": {
-          "APP": ["CREATE", "DELETE", "EDIT", "SAVE", "SEARCH", "VIEW"],
-          "PRODUCT": ["CREATE", "DELETE", "EDIT", "SAVE", "SEARCH", "VIEW"],
+          "APP": ["CREATE", "DELETE", "EDIT", "SEARCH", "VIEW"],
+          "PRODUCT": ["CREATE", "DELETE", "EDIT", "SEARCH", "VIEW"],
           "SLOT": ["SEARCH", "DELETE", "CREATE", "EDIT", "VIEW"]
         }
       }
@@ -68,7 +68,7 @@
       },
       "onecx-tenant-ui": {
         "onecx-admin": {
-          "TENANT": ["CREATE", "DELETE", "EDIT", "SAVE", "SEARCH", "VIEW"]
+          "TENANT": ["CREATE", "DELETE", "EDIT", "SEARCH", "VIEW"]
         }
       }
     },
@@ -84,7 +84,6 @@
             "CREATE",
             "DELETE",
             "EDIT",
-            "SAVE",
             "SEARCH",
             "VIEW",
             "EXPORT",
@@ -112,7 +111,6 @@
             "CREATE",
             "DELETE",
             "EDIT",
-            "SAVE",
             "SEARCH",
             "VIEW",
             "EXPORT",
@@ -156,7 +154,6 @@
             "CREATE",
             "DELETE",
             "EDIT",
-            "SAVE",
             "DRAG_DROP",
             "VIEW",
             "EXPORT",
@@ -167,7 +164,6 @@
             "CREATE",
             "DELETE",
             "EDIT",
-            "SAVE",
             "SEARCH",
             "VIEW",
             "EXPORT",
@@ -200,7 +196,6 @@
             "CREATE",
             "DELETE",
             "EDIT",
-            "SAVE",
             "SEARCH",
             "VIEW",
             "EXPORT",
@@ -210,16 +205,14 @@
       },
       "onecx-help-bff": {
         "onecx-admin": {
-          "help": ["read", "write", "delete"],
-          "product": ["read"]
+          "help": ["read", "write", "delete"]
         }
       }
     },
     "onecx-parameter": {
       "onecx-parameter-bff": {
         "onecx-admin": {
-          "parameter": ["read", "write", "delete"],
-          "product": ["read"]
+          "parameter": ["read", "write", "delete"]
         }
       },
       "onecx-parameter-ui": {

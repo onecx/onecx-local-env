@@ -30,13 +30,12 @@ sleep 30
 echo " "
 echo "Importing data..."
 
-cd imports/tenant
 
+cd imports/tenant
 echo " "
 bash ./import-tenants.sh
 
 cd ../product-store
-
 echo " "
 bash ./import-products.sh
 echo " "
@@ -46,30 +45,26 @@ bash ./import-microservices.sh
 echo " "
 bash ./import-microfrontends.sh
 
-cd ../permissions
-
-echo " "
-bash ./import-permissions.sh
-
 cd ../parameters
-
 echo " "
 bash ./import-parameters.sh
 
-cd ../assignments
-
-echo " "
-bash ./import-assignments.sh
-
 cd ../workspace
-
 echo " "
 bash ./import-workspaces.sh
 
 cd ../theme
-
 echo " "
 bash ./import-themes.sh
+
+cd ../permissions
+echo " "
+bash ./import-permissions.sh
+
+cd ../assignments
+echo " "
+bash ./import-assignments.sh
+
 
 cd ../..
 
