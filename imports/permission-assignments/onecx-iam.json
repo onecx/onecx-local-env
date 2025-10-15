@@ -1,0 +1,33 @@
+{
+  "id": "import-permission-assignments_onecx-iam",
+  "assignments": {
+    "onecx-iam": {
+      "onecx-iam-bff": {
+        "onecx-admin": {
+          "password": ["write"],
+          "provider": ["admin-read", "read"],
+          "role": ["admin-read", "admin-write", "read"],
+          "user": ["admin-read", "admin-write", "read", "write"]
+        },
+        "onecx-user": {
+          "password": ["write"],
+          "provider": ["read"],
+          "role": ["read"],
+          "user": ["read"]
+        }
+      },
+      "onecx-iam-ui": {
+        "onecx-admin": {
+          "PERMISSION": [ "VIEW" ],
+          "ROLE": ["CREATE", "DELETE", "EDIT", "SEARCH"],
+          "USER": ["CREATE", "DELETE", "EDIT", "SEARCH", "VIEW"]
+        },
+        "onecx-user": {
+          "PERMISSION": [ "VIEW" ],
+          "ROLE": ["SEARCH"],
+          "USER": ["SEARCH", "VIEW"]
+        }
+      }
+    }
+  }
+}

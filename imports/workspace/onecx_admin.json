@@ -1,25 +1,23 @@
 {
-  "id": "bc882e03-f72d-45c1-ae12-3d9e4dfe2a50",
+  "id": "onecx-local-env_import-workspaces",
   "created": "2024-06-25T12:38:31.165745721Z",
   "workspaces": {
     "admin": {
       "name": "admin",
-      "displayName": "F@ST - OneCX Admin Workspace",
-      "description": "F@ST - OneCX Admin Workspace",
+      "displayName": "OneCX Admin",
+      "description": "OneCX Admin",
       "theme": "OneCX",
       "baseUrl": "/admin",
       "logoUrl": "",
+      "smallLogoUrl": "",
       "roles": [
         {
-          "name": "onecx-disabled"
-        },
-        {
           "name": "onecx-admin",
-          "description": "OneCX Admin - do all - default tenant"
+          "description": "OneCX Administration (full access)"
         },
         {
           "name": "onecx-user",
-          "description": "OneCX Read only - default tenant"
+          "description": "OneCX Viewing (read access)"
         }
       ],
       "products": [

@@ -1,4 +1,9 @@
-echo "##### Importing workspaces"
+export RED='\033[0;31m'
+export GREEN='\033[0;32m'
+export CYAN='\033[0;36m'
+export NC='\033[0m' # No Color
+
+echo -e "${CYAN}Importing Workspaces ${NC}"
 
 for entry in "."/*_*.json
 do
@@ -9,11 +14,11 @@ do
   workspace=`echo $file | cut -d'_' -f2`
   token_var_name=${tenant}_token
   token=${!token_var_name}
-  #echo "curl -X POST -H "apm-principal-token: $token" -H 'Content-Type: application/json' "http://onecx-workspace-svc/exim/v1/workspace/operator" -d @$entry"
   status_code=`curl --write-out %{http_code} --silent --output /dev/null -X POST -H "apm-principal-token: $token" -H 'Content-Type: application/json' "http://onecx-workspace-svc/exim/v1/workspace/operator" -d @$entry`
+
   if [[ "$status_code" =~ (200|201)$  ]]; then
-    echo -e "${GREEN}Uploaded workspace $workspace for tenant $tenant with status code $status_code ${NC}"
+    echo -e "...imported via exim, status: ${GREEN}$status_code${NC}, tenant: $tenant, workspace: $workspace"
   else
-    echo -e "${RED}Uploaded workspace $workspace for tenant $tenant with status code $status_code ${NC}"
+    echo -e "${RED}...imported via exim, status: $status_code, tenant: $tenant, workspace: $workspace ${NC}"
   fi 
 done

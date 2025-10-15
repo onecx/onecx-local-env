@@ -1,0 +1,23 @@
+{
+  "id": "import-permission-assignments_onecx-welcome",
+  "assignments": {
+    "onecx-welcome": {
+      "onecx-welcome-bff": {
+        "onecx-admin": {
+          "image": ["read", "write", "delete"]
+        },
+        "onecx-user": {
+          "image": ["read"]
+        }
+      },
+      "onecx-welcome-ui": {
+        "onecx-admin": {
+          "IMAGE": ["DELETE", "EDIT", "VIEW"]
+        },
+        "onecx-user": {
+          "IMAGE": ["VIEW"]
+        }
+      }
+    }
+  }
+}

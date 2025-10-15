@@ -1,0 +1,8 @@
+{
+  "name": "onecx-announcement-bff",
+  "permissions": [
+    { "resource": "announcement", "action": "read" },
+    { "resource": "announcement", "action": "write" },
+    { "resource": "announcement", "action": "delete" }
+  ]
+}

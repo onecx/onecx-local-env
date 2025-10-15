@@ -1,0 +1,25 @@
+{
+  "id": "import-permission-assignments_onecx-tenant",
+  "assignments": {
+    "onecx-tenant": {
+      "onecx-tenant-bff": {
+        "onecx-admin": {
+          "tenant": ["read", "write", "delete"]
+        },
+        "onecx-user": {
+          "tenant": ["read"]
+        }
+      },
+      "onecx-tenant-ui": {
+        "onecx-admin": {
+          "TENANT": ["CREATE", "DELETE", "EDIT", "SEARCH", "VIEW"],
+          "SEARCHCONFIG": ["VIEW"]
+        },
+        "onecx-user": {
+          "TENANT": ["VIEW"],
+          "SEARCHCONFIG": ["VIEW"]
+        }
+      }
+    }
+  }
+}
