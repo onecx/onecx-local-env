@@ -1,13 +1,13 @@
 {
-    "id": "onecx-tenants",
-    "tenants": {
-        "tenant1": {
-            "orgId": "t1",
-            "description": "OneCX Tenant 1"
-        },
-        "tenant2": {
-            "orgId": "t2",
-            "description": "OneCX Tenant 2"
-        }
+  "id": "onecx-local-env_import-tenants",
+  "tenants": {
+    "tenant1": {
+      "orgId": "t1",
+      "description": "OneCX Tenant 1"
+    },
+    "tenant2": {
+      "orgId": "t2",
+      "description": "OneCX Tenant 2"
     }
+  }
 }

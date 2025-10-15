@@ -10,22 +10,22 @@ export NC='\033[0m' # No Color
 SKIP_CONTAINER_MANAGEMENT=${SKIP_CONTAINER_MANAGEMENT:-0}
 
 if [[ "$SKIP_CONTAINER_MANAGEMENT" == "1" || "$SKIP_CONTAINER_MANAGEMENT" == "true" ]]; then
-  echo "SKIP_CONTAINER_MANAGEMENT is set to $SKIP_CONTAINER_MANAGEMENT, skipping container startup/shutdown"
+  echo -e "${CYAN}Skipping container startup/shutdown${NC} (SKIP_CONTAINER_MANAGEMENT is set to $SKIP_CONTAINER_MANAGEMENT)"
 else
   echo " "
-  echo "Starting containers using data-import profile..."
+  echo -e "${CYAN}Starting containers using data-import profile...${NC}"
   docker compose --profile=data-import up -d --wait
 fi
 
 ## Fetch token from keycloak
 echo " "
-echo "Fetching token from Keycloak..."
+echo -e "${CYAN}Fetching token from Keycloak... ${NC}"
 export onecx_token=$(curl -X POST "http://keycloak-app/realms/onecx/protocol/openid-connect/token" -H "Content-Type: application/x-www-form-urlencoded" -d "username=onecx" -d "password=onecx"  -d "grant_type=password" -d "client_id=onecx-shell-ui-client" | jq -r .access_token)
 
 ## Sleep for 30 seconds to wait for services to be operational
 if [[ "$SKIP_CONTAINER_MANAGEMENT" == "0" || "$SKIP_CONTAINER_MANAGEMENT" == "false" ]]; then
   echo " "
-  echo "Waiting 30 seconds to ensure all services are operational..."
+  echo -e "${CYAN}Waiting 30 seconds to ensure all services are operational...${NC}"
   sleep 30
 fi
 
