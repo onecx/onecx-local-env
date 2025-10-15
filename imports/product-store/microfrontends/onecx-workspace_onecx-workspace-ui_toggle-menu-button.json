@@ -1,15 +1,15 @@
 {
-    "appVersion": "xxx",
-    "appName": "onecx-workspace-ui",
-    "description": "onecx-workspace-ui",
-    "remoteBaseUrl": "/mfe/workspace/",
-    "remoteEntry": "/mfe/workspace/remoteEntry.js",
-    "note": "Imported MFE",
-    "exposedModule": "./OneCXToggleMenuButtonComponent",
-    "technology": "WEBCOMPONENTMODULE",
-    "remoteName": "onecx-workspace",
-    "tagName": "ocx-toggle-menu-button-component",
-    "type": "COMPONENT",
-    "deprecated": false,
-    "undeployed": false
+  "appVersion": "xxx",
+  "appName": "onecx-workspace-ui",
+  "description": "onecx-workspace-ui",
+  "remoteBaseUrl": "/mfe/workspace/",
+  "remoteEntry": "/mfe/workspace/remoteEntry.js",
+  "note": "Imported MFE",
+  "exposedModule": "./OneCXToggleMenuButtonComponent",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-workspace",
+  "tagName": "ocx-toggle-menu-button-component",
+  "type": "COMPONENT",
+  "deprecated": false,
+  "undeployed": false
 }
