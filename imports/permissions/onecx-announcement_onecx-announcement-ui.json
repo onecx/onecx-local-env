@@ -1,0 +1,25 @@
+{
+  "name": "onecx-announcement-ui",
+  "permissions": [
+    {
+      "resource": "ANNOUNCEMENT",
+      "action": "CREATE"
+    },
+    {
+      "resource": "ANNOUNCEMENT",
+      "action": "DELETE"
+    },
+    {
+      "resource": "ANNOUNCEMENT",
+      "action": "EDIT"
+    },
+    {
+      "resource": "ANNOUNCEMENT",
+      "action": "SEARCH"
+    },
+    {
+      "resource": "ANNOUNCEMENT",
+      "action": "VIEW"
+    }
+  ]
+}

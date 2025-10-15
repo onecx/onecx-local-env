@@ -1,0 +1,81 @@
+{
+  "id": "import-permission-assignments_onecx-user-profile",
+  "assignments": {
+    "onecx-user-profile": {
+      "onecx-user-profile-bff": {
+        "onecx-admin": {
+          "userProfile": [
+            "read",
+            "write",
+            "delete",
+            "adminRead",
+            "adminWrite",
+            "adminDelete"
+          ]
+        },
+        "onecx-user": {
+          "userProfile": ["read"]
+        }
+      },
+      "onecx-user-profile-ui": {
+        "onecx-admin": {
+          "ACCOUNT_SETTINGS": ["VIEW"],
+          "ACCOUNT_SETTINGS_LAYOUT_MENU": ["EDIT"],
+          "ACCOUNT_SETTINGS_COLOR_SCHEME": ["EDIT"],
+          "ACCOUNT_SETTINGS_BREADCRUMBS": ["EDIT"],
+          "ACCOUNT_SETTINGS_LANGUAGE_TIMEZONE": ["VIEW"],
+          "ACCOUNT_SETTINGS_LANGUAGE": ["EDIT"],
+          "ACCOUNT_SETTINGS_TIMEZONE": ["EDIT"],
+          "ACCOUNT_SETTINGS_LAYOUT_THEME": ["VIEW"],
+          "ACCOUNT_SETTINGS_PREFERENCES": ["VIEW"],
+          "ACCOUNT_SETTINGS_PRIVACY": ["EDIT", "VIEW"],
+          "CHANGE_PASSWORD": [ "VIEW" ],
+          "IAM_ROLE": [ "VIEW" ],
+          "USERPROFILE": [
+            "CREATE",
+            "DELETE",
+            "EDIT",
+            "SEARCH",
+            "VIEW",
+            "EXPORT",
+            "IMPORT",
+            "ADMIN_VIEW",
+            "ADMIN_EDIT",
+            "ADMIN_DELETE"
+          ],
+          "PROFILE_PERSONAL_INFO": ["VIEW"],
+          "PROFILE_ADDRESS": ["EDIT", "VIEW"],
+          "PROFILE_AVATAR": ["EDIT", "VIEW"],
+          "PROFILE_PHONE": ["EDIT", "VIEW"],
+          "ROLES_PERMISSIONS": ["ADMIN_VIEW", "VIEW"]
+        },
+        "onecx-user": {
+          "ACCOUNT_SETTINGS": ["VIEW"],
+          "ACCOUNT_SETTINGS_LAYOUT_MENU": ["EDIT"],
+          "ACCOUNT_SETTINGS_COLOR_SCHEME": ["EDIT"],
+          "ACCOUNT_SETTINGS_BREADCRUMBS": ["EDIT"],
+          "ACCOUNT_SETTINGS_LANGUAGE_TIMEZONE": ["VIEW"],
+          "ACCOUNT_SETTINGS_LANGUAGE": ["EDIT"],
+          "ACCOUNT_SETTINGS_TIMEZONE": ["EDIT"],
+          "ACCOUNT_SETTINGS_LAYOUT_THEME": ["VIEW"],
+          "ACCOUNT_SETTINGS_PREFERENCES": ["VIEW"],
+          "ACCOUNT_SETTINGS_PRIVACY": ["EDIT", "VIEW"],
+          "CHANGE_PASSWORD": [ "VIEW" ],
+          "IAM_ROLE": [ "VIEW" ],
+          "USERPROFILE": [
+            "CREATE",
+            "DELETE",
+            "EDIT",
+            "SEARCH",
+            "VIEW"
+          ],
+          "PROFILE_PERSONAL_INFO": ["VIEW"],
+          "PROFILE_ADDRESS": ["EDIT", "VIEW"],
+          "PROFILE_AVATAR": ["EDIT", "VIEW"],
+          "PROFILE_PHONE": ["EDIT", "VIEW"],
+          "ROLES_PERMISSIONS": ["VIEW"]
+        }
+      }
+    }
+  }
+}

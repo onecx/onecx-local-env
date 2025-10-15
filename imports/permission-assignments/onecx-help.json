@@ -1,0 +1,23 @@
+{
+  "id": "import-permission-assignments_onecx-help",
+  "assignments": {
+    "onecx-help": {
+      "onecx-help-ui": {
+        "onecx-admin": {
+          "HELP": [ "CREATE", "DELETE", "EDIT", "SEARCH", "VIEW", "EXPORT", "IMPORT" ]
+        },
+        "onecx-user": {
+          "HELP": [ "SEARCH", "VIEW" ]
+        }
+      },
+      "onecx-help-bff": {
+        "onecx-admin": {
+          "help": ["read", "write", "delete"]
+        },
+        "onecx-user": {
+          "help": ["read"]
+        }
+      }
+    }
+  }
+}

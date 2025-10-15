@@ -1,6 +1,6 @@
 services:
   ########################################
-  ########### REVERSE-PROXY ##############
+  ############# REVERSE-PROXY ############
   ########################################
   traefik:
     image: ${TRAEFIK}
@@ -16,13 +16,12 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
-      - default
+      - onecx
     profiles:
       - all
-      - pgadmin
+      - base
       - minimal
       - data-import
-      - base
 
   ########################################
   ############### DATABASE ###############
@@ -50,13 +49,12 @@ services:
       - "traefik.http.services.postgresdb.loadbalancer.server.port=5432"
       - "traefik.http.routers.postgresdb.rule=Host(`postgresdb`)"
     networks:
-      - default
+      - onecx
     profiles:
       - all
-      - pgadmin
+      - base
       - minimal
       - data-import
-      - base
 
   pgadmin:
     image: ${PGADMIN}
@@ -73,10 +71,9 @@ services:
       - "traefik.http.services.pgadmin.loadbalancer.server.port=80"
       - "traefik.http.routers.pgadmin.rule=Host(`pgadmin`)"
     networks:
-      - default
+      - onecx
     profiles:
       - all
-      - pgadmin
 
   #############################################
   ################ Security ###################
@@ -117,95 +114,25 @@ services:
       - "traefik.http.services.keycloak-intranet.loadbalancer.server.port=8080"
       - "traefik.http.routers.keycloak-intranet.rule=Host(`keycloak-app`)"
     networks:
-      - default
+      - onecx
     profiles:
       - all
+      - base
       - minimal
       - data-import
-      - base
 
-  ##############################################################
-  ######### Products #######################################
-  ##############################################################
+  #############################################
+  ################ Products ###################
+  #############################################
 
-  ########## ONECX-SHELL
-  onecx-shell-ui:
-    image: ${ONECX_SHELL_UI}
-    container_name: onecx-shell-ui
+  ########## ONECX-ANNOUNCEMENT
+  onecx-announcement-svc:
+    image: ${ONECX_ANNOUNCEMENT_SVC}
+    container_name: onecx-announcement-svc
     environment:
-      ONECX_PERMISSIONS_ENABLED: true
-      ONECX_PERMISSIONS_CACHE_ENABLED: false
-      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-shell"
-      APP_BASE_HREF: "/onecx-shell/"
-      KEYCLOAK_URL: http://keycloak-app
-      ONECX_VAR_REMAP: "KEYCLOAK_REALM=KC_REALM;KEYCLOAK_CLIENT_ID=CLIENT_USER_ID"
-      CLIENT_USER_ID: "onecx-shell-ui-client"
-    depends_on:
-      keycloak-app:
-        condition: service_healthy
-      onecx-shell-bff:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-shell-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-shell-ui.rule=Host(`local-proxy`)&&PathPrefix(`/onecx-shell/`)"
-    env_file:
-      - common.env
-    networks:
-      - default
-    profiles:
-      - all
-      - minimal
-      - shell
-      - base
-
-  onecx-shell-bff:
-    image: ${ONECX_SHELL_BFF}
-    container_name: onecx-shell-bff
-    environment:
-      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-shell"
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
-    depends_on:
-      keycloak-app:
-        condition: service_healthy
-      onecx-theme-svc:
-        condition: service_started
-      onecx-permission-svc:
-        condition: service_started
-      onecx-product-store-svc:
-        condition: service_started
-      onecx-user-profile-svc:
-        condition: service_started
-      onecx-tenant-svc:
-        condition: service_started
-      onecx-workspace-svc:
-        condition: service_started
-    labels:
-      - "traefik.http.services.onecx-shell-bff.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-shell-bff.rule=Host(`onecx-shell-bff`)"
-    env_file:
-      - common.env
-      - bff.env
-    networks:
-      - default
-    profiles:
-      - all
-      - minimal
-      - shell
-      - base
-
-  ########## ONECX THEME
-  onecx-theme-svc:
-    image: ${ONECX_THEME_SVC}
-    container_name: onecx-theme-svc
-    environment:
-      QUARKUS_DATASOURCE_USERNAME: onecx_theme
-      QUARKUS_DATASOURCE_PASSWORD: onecx_theme
-      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_theme?sslmode=disable"
+      QUARKUS_DATASOURCE_USERNAME: onecx_announcement
+      QUARKUS_DATASOURCE_PASSWORD: onecx_announcement
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresdb:5432/onecx_announcement?sslmode=disable
     healthcheck:
       test: curl --head -fsS http://localhost:8080/q/health
       interval: 10s
@@ -217,633 +144,57 @@ services:
       keycloak-app:
         condition: service_healthy
     labels:
-      - "traefik.http.services.onecx-theme-svc.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-theme-svc.rule=Host(`onecx-theme-svc`)"
+      - "traefik.http.services.onecx-announcement-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-announcement-svc.rule=Host(`onecx-announcement-svc`)"
     env_file:
       - common.env
       - svc.env
     networks:
-      - default
+      - onecx
     profiles:
       - all
-      - minimal
-      - data-import
-      - theme
-      - base
 
-  onecx-theme-bff:
-    image: ${ONECX_THEME_BFF}
-    container_name: onecx-theme-bff
+  onecx-announcement-bff:
+    image: ${ONECX_ANNOUNCEMENT_BFF}
+    container_name: onecx-announcement-bff
     environment:
-      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-theme"
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-announcement"
     healthcheck:
       test: curl --head -fsS http://localhost:8080/q/health
       interval: 10s
       timeout: 5s
       retries: 3
     depends_on:
-      onecx-theme-svc:
+      onecx-announcement-svc:
         condition: service_healthy
     labels:
-      - "traefik.http.services.onecx-theme-bff.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-theme-bff.rule=Host(`onecx-theme-bff`)"
+      - "traefik.http.services.onecx-announcement-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-announcement-bff.rule=Host(`onecx-announcement-bff`)"
     env_file:
       - common.env
       - bff.env
     networks:
-      - default
+      - onecx
     profiles:
       - all
-      - theme
-      - theme-ui
-      - base
 
-  onecx-theme-ui:
-    image: ${ONECX_THEME_UI}
-    container_name: onecx-theme-ui
+  onecx-announcement-ui:
+    image: ${ONECX_ANNOUNCEMENT_UI}
+    container_name: onecx-announcement-ui
     environment:
-      APP_BASE_HREF: "/mfe/theme/"
-      APP_ID: "onecx-theme-ui"
-      PRODUCT_NAME: "onecx-theme"
+      APP_BASE_HREF: /mfe/announcement/
+      APP_ID: onecx-announcement-ui
+      PRODUCT_NAME: "onecx-announcement"
     depends_on:
-      onecx-theme-bff:
+      onecx-announcement-bff:
         condition: service_healthy
     labels:
-      - "traefik.http.services.onecx-theme-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-theme-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/theme/`)"
+      - "traefik.http.services.onecx-announcement-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-announcement-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/announcement/`)"
     networks:
-      - default
+      - onecx
     profiles:
       - all
-      - theme
-      - theme-ui
-      - base
-
-  ########## ONECX WORKSPACE
-  onecx-workspace-svc:
-    image: ${ONECX_WORKSPACE_SVC}
-    container_name: onecx-workspace-svc
-    user: root
-    environment:
-      QUARKUS_DATASOURCE_USERNAME: onecx_workspace
-      QUARKUS_DATASOURCE_PASSWORD: onecx_workspace
-      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_workspace?sslmode=disable"
-      TKIT_RS_CONTEXT_TENANT_ID_ENABLED: "false"
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      postgresdb:
-        condition: service_healthy
-      keycloak-app:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-workspace-svc.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-workspace-svc.rule=Host(`onecx-workspace-svc`)"
-    env_file:
-      - common.env
-      - svc.env
-    networks:
-      - default
-    profiles:
-      - all
-      - minimal
-      - data-import
-      - workspace
-      - base
-
-  onecx-workspace-bff:
-    image: ${ONECX_WORKSPACE_BFF}
-    container_name: onecx-workspace-bff
-    environment:
-      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-workspace"
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      onecx-workspace-svc:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-workspace-bff.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-workspace-bff.rule=Host(`onecx-workspace-bff`)"
-    env_file:
-      - common.env
-      - bff.env
-    networks:
-      - default
-    profiles:
-      - all
-      - workspace
-      - workspace-ui
-      - base
-
-  onecx-workspace-ui:
-    image: ${ONECX_WORKSPACE_UI}
-    container_name: onecx-workspace-ui
-    environment:
-      APP_BASE_HREF: "/mfe/workspace/"
-      APP_ID: "onecx-workspace-ui"
-      PRODUCT_NAME: "onecx-workspace"
-    depends_on:
-      onecx-workspace-bff:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-workspace-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-workspace-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/workspace/`)"
-    networks:
-      - default
-    profiles:
-      - all
-      - workspace
-      - workspace-ui
-      - base
-
-  ########## ONECX-PERMISSION
-  onecx-permission-svc:
-    image: ${ONECX_PERMISSION_SVC}
-    container_name: onecx-permission-svc
-    environment:
-      QUARKUS_DATASOURCE_USERNAME: onecx_permission
-      QUARKUS_DATASOURCE_PASSWORD: onecx_permission
-      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_permission?sslmode=disable"
-      QUARKUS_REST_CLIENT_ONECX_TENANT_URL: "http://onecx-tenant-svc:8080"
-      ONECX_PERMISSION_TOKEN_VERIFIED: false
-      TKIT_RS_CONTEXT_TENANT_ID_ENABLED: "false"
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      postgresdb:
-        condition: service_healthy
-      keycloak-app:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-permission-svc.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-permission-svc.rule=Host(`onecx-permission-svc`)"
-    env_file:
-      - common.env
-      - svc.env
-    networks:
-      - default
-    profiles:
-      - all
-      - minimal
-      - data-import
-      - permission
-      - base
-
-  onecx-permission-bff:
-    image: ${ONECX_PERMISSION_BFF}
-    container_name: onecx-permission-bff
-    environment:
-      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-permission"
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      onecx-permission-svc:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-permission-bff.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-permission-bff.rule=Host(`onecx-permission-bff`)"
-    env_file:
-      - common.env
-      - bff.env
-    networks:
-      - default
-    profiles:
-      - all
-      - permission
-      - permission-ui
-      - base
-
-  onecx-permission-ui:
-    image: ${ONECX_PERMISSION_UI}
-    container_name: onecx-permission-ui
-    environment:
-      APP_BASE_HREF: "/mfe/permission/"
-      APP_ID: "onecx-permission-ui"
-      PRODUCT_NAME: "onecx-permission"
-    depends_on:
-      onecx-permission-bff:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-permission-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-permission-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/permission/`)"
-    networks:
-      - default
-    profiles:
-      - all
-      - permission
-      - permission-ui
-      - base
-
-  ########## ONECX-PRODUCT-STORE
-  onecx-product-store-svc:
-    image: ${ONECX_PRODUCT_STORE_SVC}
-    container_name: onecx-product-store-svc
-    environment:
-      QUARKUS_DATASOURCE_USERNAME: onecx_product_store
-      QUARKUS_DATASOURCE_PASSWORD: onecx_product_store
-      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_product_store?sslmode=disable"
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      postgresdb:
-        condition: service_healthy
-      keycloak-app:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-product-store-svc.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-product-store-svc.rule=Host(`onecx-product-store-svc`)"
-    env_file:
-      - common.env
-      - svc.env
-    networks:
-      - default
-    profiles:
-      - all
-      - minimal
-      - data-import
-      - product-store
-      - base
-
-  onecx-product-store-bff:
-    image: ${ONECX_PRODUCT_STORE_BFF}
-    container_name: onecx-product-store-bff
-    environment:
-      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-product-store"
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      onecx-product-store-svc:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-product-store-bff.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-product-store-bff.rule=Host(`onecx-product-store-bff`)"
-    env_file:
-      - common.env
-      - bff.env
-    networks:
-      - default
-    profiles:
-      - all
-      - product-store
-      - product-store-ui
-      - base
-
-  onecx-product-store-ui:
-    image: ${ONECX_PRODUCT_STORE_UI}
-    container_name: onecx-product-store-ui
-    environment:
-      APP_BASE_HREF: "/mfe/product-store/"
-      APP_ID: "onecx-product-store-ui"
-      PRODUCT_NAME: "onecx-product-store"
-    depends_on:
-      onecx-product-store-bff:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-product-store-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-product-store-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/product-store/`)"
-    networks:
-      - default
-    profiles:
-      - all
-      - product-store
-      - product-store-ui
-      - base
-
-  ########## ONECX-USER-PROFILE
-  onecx-user-profile-svc:
-    image: ${ONECX_USER_PROFILE_SVC}
-    container_name: onecx-user-profile-svc
-    environment:
-      QUARKUS_DATASOURCE_USERNAME: onecx_user_profile
-      QUARKUS_DATASOURCE_PASSWORD: onecx_user_profile
-      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_user_profile?sslmode=disable"
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      postgresdb:
-        condition: service_healthy
-      keycloak-app:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-user-profile-svc.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-user-profile-svc.rule=Host(`onecx-user-profile-svc`)"
-    env_file:
-      - common.env
-      - svc.env
-    networks:
-      - default
-    profiles:
-      - all
-      - minimal
-      - data-import
-      - user-profile
-      - base
-
-  onecx-user-profile-bff:
-    image: ${ONECX_USER_PROFILE_BFF}
-    container_name: onecx-user-profile-bff
-    environment:
-      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-user-profile"
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      onecx-user-profile-svc:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-user-profile-bff.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-user-profile-bff.rule=Host(`onecx-user-profile-bff`)"
-    env_file:
-      - common.env
-      - bff.env
-    networks:
-      - default
-    profiles:
-      - all
-      - user-profile
-      - user-profile-ui
-      - base
-
-  onecx-user-profile-ui:
-    image: ${ONECX_USER_PROFILE_UI}
-    container_name: onecx-user-profile-ui
-    environment:
-      APP_BASE_HREF: "/mfe/user-profile/"
-      APP_ID: "onecx-user-profile-ui"
-      PRODUCT_NAME: "onecx-user-profile"
-    depends_on:
-      onecx-user-profile-bff:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-user-profile-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-user-profile-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/user-profile/`)"
-    networks:
-      - default
-    profiles:
-      - all
-      - user-profile
-      - user-profile-ui
-      - base
-
-  ########## ONECX-IAM
-  onecx-iam-kc-svc:
-    image: ${ONECX_IAM_KC_SVC}
-    container_name: onecx-iam-kc-svc
-    environment:
-      QUARKUS_KEYCLOAK_ADMIN_CLIENT_SERVER_URL: http://keycloak-app:8080
-      QUARKUS_KEYCLOAK_ADMIN_CLIENT_REALM: master
-      QUARKUS_KEYCLOAK_ADMIN_CLIENT_USERNAME: admin
-      QUARKUS_KEYCLOAK_ADMIN_CLIENT_PASSWORD: admin
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      postgresdb:
-        condition: service_healthy
-      keycloak-app:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-iam-kc-svc.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-iam-kc-svc.rule=Host(`onecx-iam-kc-svc`)"
-    env_file:
-      - common.env
-      - svc.env
-    networks:
-      - default
-    profiles:
-      - all
-      - data-import
-      - iam
-
-  onecx-iam-bff:
-    image: ${ONECX_IAM_BFF}
-    container_name: onecx-iam-bff
-    environment:
-      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-iam"
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      onecx-iam-kc-svc:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-iam-bff.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-iam-bff.rule=Host(`onecx-iam-bff`)"
-    env_file:
-      - common.env
-      - bff.env
-    networks:
-      - default
-    profiles:
-      - all
-      - iam
-      - iam-ui
-
-  onecx-iam-ui:
-    image: ${ONECX_IAM_UI}
-    container_name: onecx-iam-ui
-    environment:
-      APP_BASE_HREF: "/mfe/iam/"
-      APP_ID: "onecx-iam-ui"
-      PRODUCT_NAME: "onecx-iam"
-    depends_on:
-      onecx-iam-bff:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-iam-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-iam-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/iam/`)"
-    networks:
-      - default
-    profiles:
-      - all
-      - iam
-      - iam-ui
-
-  ########## ONECX-TENANT
-  onecx-tenant-svc:
-    image: ${ONECX_TENANT_SVC}
-    container_name: onecx-tenant-svc
-    environment:
-      QUARKUS_DATASOURCE_USERNAME: onecx_tenant
-      QUARKUS_DATASOURCE_PASSWORD: onecx_tenant
-      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_tenant?sslmode=disable"
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      postgresdb:
-        condition: service_healthy
-      keycloak-app:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-tenant-svc.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-tenant-svc.rule=Host(`onecx-tenant-svc`)"
-    env_file:
-      - common.env
-      - svc.env
-    networks:
-      - default
-    profiles:
-      - all
-      - minimal
-      - data-import
-      - tenant
-      - base
-
-  onecx-tenant-bff:
-    image: ${ONECX_TENANT_BFF}
-    container_name: onecx-tenant-bff
-    environment:
-      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-tenant"
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      onecx-tenant-svc:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-tenant-bff.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-tenant-bff.rule=Host(`onecx-tenant-bff`)"
-    env_file:
-      - common.env
-      - bff.env
-    networks:
-      - default
-    profiles:
-      - all
-      - tenant
-      - tenant-ui
-
-  onecx-tenant-ui:
-    image: ${ONECX_TENANT_UI}
-    container_name: onecx-tenant-ui
-    environment:
-      APP_BASE_HREF: "/mfe/tenant/"
-      APP_ID: "onecx-tenant-ui"
-      PRODUCT_NAME: "onecx-tenant"
-    depends_on:
-      onecx-tenant-bff:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-tenant-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-tenant-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/tenant/`)"
-    networks:
-      - default
-    profiles:
-      - all
-      - tenant
-      - tenant-ui
-
-  ########## ONECX-WELCOME
-  onecx-welcome-svc:
-    image: ${ONECX_WELCOME_SVC}
-    container_name: onecx-welcome-svc
-    environment:
-      QUARKUS_DATASOURCE_USERNAME: onecx_welcome
-      QUARKUS_DATASOURCE_PASSWORD: onecx_welcome
-      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_welcome?sslmode=disable"
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      postgresdb:
-        condition: service_healthy
-      keycloak-app:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-welcome-svc.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-welcome-svc.rule=Host(`onecx-welcome-svc`)"
-    env_file:
-      - common.env
-      - svc.env
-    networks:
-      - default
-    profiles:
-      - all
-      - data-import
-      - welcome
-      - base
-
-  onecx-welcome-bff:
-    image: ${ONECX_WELCOME_BFF}
-    container_name: onecx-welcome-bff
-    environment:
-      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-welcome"
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      onecx-welcome-svc:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-welcome-bff.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-welcome-bff.rule=Host(`onecx-welcome-bff`)"
-    env_file:
-      - common.env
-      - bff.env
-    networks:
-      - default
-    profiles:
-      - all
-      - welcome
-      - welcome-ui
-      - base
-
-  onecx-welcome-ui:
-    image: ${ONECX_WELCOME_UI}
-    container_name: onecx-welcome-ui
-    environment:
-      APP_BASE_HREF: "/mfe/welcome/"
-      APP_ID: "onecx-welcome-ui"
-      PRODUCT_NAME: "onecx-welcome"
-    depends_on:
-      onecx-welcome-bff:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-welcome-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-welcome-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/welcome/`)"
-    networks:
-      - default
-    profiles:
-      - all
-      - welcome
-      - welcome-ui
-      - base
 
   ########## ONECX-HELP
   onecx-help-svc:
@@ -870,11 +221,9 @@ services:
       - common.env
       - svc.env
     networks:
-      - default
+      - onecx
     profiles:
       - all
-      - data-import
-      - help
 
   onecx-help-bff:
     image: ${ONECX_HELP_BFF}
@@ -896,11 +245,9 @@ services:
       - common.env
       - bff.env
     networks:
-      - default
+      - onecx
     profiles:
       - all
-      - help
-      - help-ui
 
   onecx-help-ui:
     image: ${ONECX_HELP_UI}
@@ -916,11 +263,79 @@ services:
       - "traefik.http.services.onecx-help-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-help-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/help/`)"
     networks:
-      - default
+      - onecx
     profiles:
       - all
-      - help
-      - help-ui
+
+  ########## ONECX-IAM
+  onecx-iam-svc:
+    image: ${ONECX_IAM_SVC}
+    container_name: onecx-iam-svc
+    environment:
+      QUARKUS_KEYCLOAK_ADMIN_CLIENT_SERVER_URL: http://keycloak-app:8080
+      QUARKUS_KEYCLOAK_ADMIN_CLIENT_REALM: master
+      QUARKUS_KEYCLOAK_ADMIN_CLIENT_USERNAME: admin
+      QUARKUS_KEYCLOAK_ADMIN_CLIENT_PASSWORD: admin
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-iam-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-iam-svc.rule=Host(`onecx-iam-svc`)"
+    env_file:
+      - common.env
+      - svc.env
+    networks:
+      - onecx
+    profiles:
+      - all
+
+  onecx-iam-bff:
+    image: ${ONECX_IAM_BFF}
+    container_name: onecx-iam-bff
+    environment:
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-iam"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-iam-svc:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-iam-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-iam-bff.rule=Host(`onecx-iam-bff`)"
+    env_file:
+      - common.env
+      - bff.env
+    networks:
+      - onecx
+    profiles:
+      - all
+
+  onecx-iam-ui:
+    image: ${ONECX_IAM_UI}
+    container_name: onecx-iam-ui
+    environment:
+      APP_BASE_HREF: "/mfe/iam/"
+      APP_ID: "onecx-iam-ui"
+      PRODUCT_NAME: "onecx-iam"
+    depends_on:
+      onecx-iam-bff:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-iam-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-iam-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/iam/`)"
+    networks:
+      - onecx
+    profiles:
+      - all
 
   ########## ONECX PARAMETER
   onecx-parameter-svc:
@@ -938,8 +353,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -949,10 +362,9 @@ services:
       - common.env
       - svc.env
     networks:
-      - default
+      - onecx
     profiles:
       - all
-      - parameter
       - data-import
 
   onecx-parameter-bff:
@@ -975,11 +387,9 @@ services:
       - common.env
       - bff.env
     networks:
-      - default
+      - onecx
     profiles:
       - all
-      - parameter
-      - parameter-ui
 
   onecx-parameter-ui:
     image: ${ONECX_PARAMETER_UI}
@@ -995,13 +405,598 @@ services:
       - "traefik.http.services.onecx-parameter-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-parameter-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/parameter/`)"
     networks:
-      - default
+      - onecx
     profiles:
       - all
-      - parameter
-      - parameter-ui
+
+  ########## ONECX-PERMISSION
+  onecx-permission-svc:
+    image: ${ONECX_PERMISSION_SVC}
+    container_name: onecx-permission-svc
+    environment:
+      QUARKUS_DATASOURCE_USERNAME: onecx_permission
+      QUARKUS_DATASOURCE_PASSWORD: onecx_permission
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_permission?sslmode=disable"
+      QUARKUS_REST_CLIENT_ONECX_TENANT_URL: "http://onecx-tenant-svc:8080"
+      ONECX_PERMISSION_TOKEN_VERIFIED: false
+      TKIT_RS_CONTEXT_TENANT_ID_ENABLED: "false"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-permission-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-permission-svc.rule=Host(`onecx-permission-svc`)"
+    env_file:
+      - common.env
+      - svc.env
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+      - minimal
+      - data-import
+
+  onecx-permission-bff:
+    image: ${ONECX_PERMISSION_BFF}
+    container_name: onecx-permission-bff
+    environment:
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-permission"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-permission-svc:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-permission-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-permission-bff.rule=Host(`onecx-permission-bff`)"
+    env_file:
+      - common.env
+      - bff.env
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+
+  onecx-permission-ui:
+    image: ${ONECX_PERMISSION_UI}
+    container_name: onecx-permission-ui
+    environment:
+      APP_BASE_HREF: "/mfe/permission/"
+      APP_ID: "onecx-permission-ui"
+      PRODUCT_NAME: "onecx-permission"
+    depends_on:
+      onecx-permission-bff:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-permission-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-permission-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/permission/`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+
+  ########## ONECX-PRODUCT-STORE
+  onecx-product-store-svc:
+    image: ${ONECX_PRODUCT_STORE_SVC}
+    container_name: onecx-product-store-svc
+    environment:
+      QUARKUS_DATASOURCE_USERNAME: onecx_product_store
+      QUARKUS_DATASOURCE_PASSWORD: onecx_product_store
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_product_store?sslmode=disable"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-product-store-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-product-store-svc.rule=Host(`onecx-product-store-svc`)"
+    env_file:
+      - common.env
+      - svc.env
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+      - minimal
+      - data-import
+
+  onecx-product-store-bff:
+    image: ${ONECX_PRODUCT_STORE_BFF}
+    container_name: onecx-product-store-bff
+    environment:
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-product-store"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-product-store-svc:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-product-store-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-product-store-bff.rule=Host(`onecx-product-store-bff`)"
+    env_file:
+      - common.env
+      - bff.env
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+
+  onecx-product-store-ui:
+    image: ${ONECX_PRODUCT_STORE_UI}
+    container_name: onecx-product-store-ui
+    environment:
+      APP_BASE_HREF: "/mfe/product-store/"
+      APP_ID: "onecx-product-store-ui"
+      PRODUCT_NAME: "onecx-product-store"
+    depends_on:
+      onecx-product-store-bff:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-product-store-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-product-store-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/product-store/`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+
+  ########## ONECX-SHELL
+  onecx-shell-bff:
+    image: ${ONECX_SHELL_BFF}
+    container_name: onecx-shell-bff
+    environment:
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-shell"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+      onecx-tenant-svc:
+        condition: service_started
+      onecx-theme-svc:
+        condition: service_started
+      onecx-permission-svc:
+        condition: service_started
+      onecx-product-store-svc:
+        condition: service_started
+      onecx-user-profile-svc:
+        condition: service_started
+      onecx-workspace-svc:
+        condition: service_started
+    labels:
+      - "traefik.http.services.onecx-shell-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-shell-bff.rule=Host(`onecx-shell-bff`)"
+    env_file:
+      - common.env
+      - bff.env
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+      - minimal
+
+  onecx-shell-ui:
+    image: ${ONECX_SHELL_UI}
+    container_name: onecx-shell-ui
+    environment:
+      ONECX_PERMISSIONS_ENABLED: true
+      ONECX_PERMISSIONS_CACHE_ENABLED: false
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-shell"
+      APP_BASE_HREF: "/onecx-shell/"
+      KEYCLOAK_URL: http://keycloak-app
+      ONECX_VAR_REMAP: "KEYCLOAK_REALM=KC_REALM;KEYCLOAK_CLIENT_ID=CLIENT_USER_ID"
+      CLIENT_USER_ID: "onecx-shell-ui-client"
+    depends_on:
+      onecx-shell-bff:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-shell-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-shell-ui.rule=Host(`local-proxy`)&&PathPrefix(`/onecx-shell/`)"
+    env_file:
+      - common.env
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+      - minimal
+
+  ########## ONECX-TENANT
+  onecx-tenant-svc:
+    image: ${ONECX_TENANT_SVC}
+    container_name: onecx-tenant-svc
+    environment:
+      QUARKUS_DATASOURCE_USERNAME: onecx_tenant
+      QUARKUS_DATASOURCE_PASSWORD: onecx_tenant
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_tenant?sslmode=disable"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-tenant-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-tenant-svc.rule=Host(`onecx-tenant-svc`)"
+    env_file:
+      - common.env
+      - svc.env
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+      - minimal
+      - data-import
+
+  onecx-tenant-bff:
+    image: ${ONECX_TENANT_BFF}
+    container_name: onecx-tenant-bff
+    environment:
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-tenant"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-tenant-svc:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-tenant-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-tenant-bff.rule=Host(`onecx-tenant-bff`)"
+    env_file:
+      - common.env
+      - bff.env
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+
+  onecx-tenant-ui:
+    image: ${ONECX_TENANT_UI}
+    container_name: onecx-tenant-ui
+    environment:
+      APP_BASE_HREF: "/mfe/tenant/"
+      APP_ID: "onecx-tenant-ui"
+      PRODUCT_NAME: "onecx-tenant"
+    depends_on:
+      onecx-tenant-bff:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-tenant-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-tenant-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/tenant/`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+
+  ########## ONECX THEME
+  onecx-theme-svc:
+    image: ${ONECX_THEME_SVC}
+    container_name: onecx-theme-svc
+    environment:
+      QUARKUS_DATASOURCE_USERNAME: onecx_theme
+      QUARKUS_DATASOURCE_PASSWORD: onecx_theme
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_theme?sslmode=disable"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-theme-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-theme-svc.rule=Host(`onecx-theme-svc`)"
+    env_file:
+      - common.env
+      - svc.env
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+      - minimal
+      - data-import
+
+  onecx-theme-bff:
+    image: ${ONECX_THEME_BFF}
+    container_name: onecx-theme-bff
+    environment:
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-theme"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-theme-svc:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-theme-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-theme-bff.rule=Host(`onecx-theme-bff`)"
+    env_file:
+      - common.env
+      - bff.env
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+
+  onecx-theme-ui:
+    image: ${ONECX_THEME_UI}
+    container_name: onecx-theme-ui
+    environment:
+      APP_BASE_HREF: "/mfe/theme/"
+      APP_ID: "onecx-theme-ui"
+      PRODUCT_NAME: "onecx-theme"
+    depends_on:
+      onecx-theme-bff:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-theme-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-theme-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/theme/`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+
+  ########## ONECX-USER-PROFILE
+  onecx-user-profile-svc:
+    image: ${ONECX_USER_PROFILE_SVC}
+    container_name: onecx-user-profile-svc
+    environment:
+      QUARKUS_DATASOURCE_USERNAME: onecx_user_profile
+      QUARKUS_DATASOURCE_PASSWORD: onecx_user_profile
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_user_profile?sslmode=disable"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-user-profile-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-user-profile-svc.rule=Host(`onecx-user-profile-svc`)"
+    env_file:
+      - common.env
+      - svc.env
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+      - minimal
+
+  onecx-user-profile-bff:
+    image: ${ONECX_USER_PROFILE_BFF}
+    container_name: onecx-user-profile-bff
+    environment:
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-user-profile"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-user-profile-svc:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-user-profile-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-user-profile-bff.rule=Host(`onecx-user-profile-bff`)"
+    env_file:
+      - common.env
+      - bff.env
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+
+  onecx-user-profile-ui:
+    image: ${ONECX_USER_PROFILE_UI}
+    container_name: onecx-user-profile-ui
+    environment:
+      APP_BASE_HREF: "/mfe/user-profile/"
+      APP_ID: "onecx-user-profile-ui"
+      PRODUCT_NAME: "onecx-user-profile"
+    depends_on:
+      onecx-user-profile-bff:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-user-profile-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-user-profile-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/user-profile/`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+
+  ########## ONECX-WELCOME
+  onecx-welcome-svc:
+    image: ${ONECX_WELCOME_SVC}
+    container_name: onecx-welcome-svc
+    environment:
+      QUARKUS_DATASOURCE_USERNAME: onecx_welcome
+      QUARKUS_DATASOURCE_PASSWORD: onecx_welcome
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_welcome?sslmode=disable"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-welcome-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-welcome-svc.rule=Host(`onecx-welcome-svc`)"
+    env_file:
+      - common.env
+      - svc.env
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+
+  onecx-welcome-bff:
+    image: ${ONECX_WELCOME_BFF}
+    container_name: onecx-welcome-bff
+    environment:
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-welcome"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-welcome-svc:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-welcome-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-welcome-bff.rule=Host(`onecx-welcome-bff`)"
+    env_file:
+      - common.env
+      - bff.env
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+
+  onecx-welcome-ui:
+    image: ${ONECX_WELCOME_UI}
+    container_name: onecx-welcome-ui
+    environment:
+      APP_BASE_HREF: "/mfe/welcome/"
+      APP_ID: "onecx-welcome-ui"
+      PRODUCT_NAME: "onecx-welcome"
+    depends_on:
+      onecx-welcome-bff:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-welcome-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-welcome-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/welcome/`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+
+  ########## ONECX WORKSPACE
+  onecx-workspace-svc:
+    image: ${ONECX_WORKSPACE_SVC}
+    container_name: onecx-workspace-svc
+    user: root
+    environment:
+      QUARKUS_DATASOURCE_USERNAME: onecx_workspace
+      QUARKUS_DATASOURCE_PASSWORD: onecx_workspace
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_workspace?sslmode=disable"
+      TKIT_RS_CONTEXT_TENANT_ID_ENABLED: "false"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-workspace-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-workspace-svc.rule=Host(`onecx-workspace-svc`)"
+    env_file:
+      - common.env
+      - svc.env
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+      - minimal
+      - data-import
+
+  onecx-workspace-bff:
+    image: ${ONECX_WORKSPACE_BFF}
+    container_name: onecx-workspace-bff
+    environment:
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-workspace"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-workspace-svc:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-workspace-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-workspace-bff.rule=Host(`onecx-workspace-bff`)"
+    env_file:
+      - common.env
+      - bff.env
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+
+  onecx-workspace-ui:
+    image: ${ONECX_WORKSPACE_UI}
+    container_name: onecx-workspace-ui
+    environment:
+      APP_BASE_HREF: "/mfe/workspace/"
+      APP_ID: "onecx-workspace-ui"
+      PRODUCT_NAME: "onecx-workspace"
+    depends_on:
+      onecx-workspace-bff:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-workspace-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-workspace-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/workspace/`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+
 volumes:
   postgres:
 
 networks:
-  default:
+  onecx:

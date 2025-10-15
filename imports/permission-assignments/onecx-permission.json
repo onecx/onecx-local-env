@@ -1,0 +1,34 @@
+{
+  "id": "import-permission-assignments_onecx-permission",
+  "assignments": {
+    "onecx-permission": {
+      "onecx-permission-bff": {
+        "onecx-admin": {
+          "permission": ["read", "write", "delete"],
+          "role": ["read", "write", "delete"],
+          "assignment": ["read", "write", "delete"],
+          "application": ["read", "write", "delete"],
+          "workspace": ["read", "write", "delete"]
+        },
+        "onecx-user": {
+          "permission": ["read"],
+          "role": ["read"],
+          "assignment": ["read"],
+          "application": ["read"],
+          "workspace": ["read"]
+        }
+      },
+      "onecx-permission-ui": {
+        "onecx-admin": {
+          "APP": ["EDIT", "SEARCH", "VIEW"],
+          "IAM_ROLE": ["VIEW"],
+          "PERMISSION": ["GRANT", "CREATE", "DELETE", "EDIT"],
+          "ROLE": ["CREATE", "DELETE", "EDIT"]
+        },
+        "onecx-user": {
+          "APP": ["VIEW"]
+        }
+      }
+    }
+  }
+}
