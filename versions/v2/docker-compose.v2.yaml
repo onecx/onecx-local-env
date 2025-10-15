@@ -20,7 +20,6 @@ services:
     profiles:
       - all
       - base
-      - pgadmin
       - minimal
       - data-import
 
@@ -54,7 +53,6 @@ services:
     profiles:
       - all
       - base
-      - pgadmin
       - minimal
       - data-import
 
@@ -76,7 +74,6 @@ services:
       - onecx
     profiles:
       - all
-      - pgadmin
 
   #############################################
   ################ Security ###################
@@ -156,7 +153,6 @@ services:
       - onecx
     profiles:
       - all
-      - announcement
 
   onecx-announcement-bff:
     image: ${ONECX_ANNOUNCEMENT_BFF}
@@ -181,8 +177,6 @@ services:
       - onecx
     profiles:
       - all
-      - announcement
-      - announcement-ui
 
   onecx-announcement-ui:
     image: ${ONECX_ANNOUNCEMENT_UI}
@@ -201,8 +195,6 @@ services:
       - onecx
     profiles:
       - all
-      - announcement
-      - announcement-ui
 
   ########## ONECX-HELP
   onecx-help-svc:
@@ -232,7 +224,6 @@ services:
       - onecx
     profiles:
       - all
-      - help
 
   onecx-help-bff:
     image: ${ONECX_HELP_BFF}
@@ -257,8 +248,6 @@ services:
       - onecx
     profiles:
       - all
-      - help
-      - help-ui
 
   onecx-help-ui:
     image: ${ONECX_HELP_UI}
@@ -277,8 +266,6 @@ services:
       - onecx
     profiles:
       - all
-      - help
-      - help-ui
 
   ########## ONECX-IAM
   onecx-iam-svc:
@@ -295,8 +282,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -309,7 +294,6 @@ services:
       - onecx
     profiles:
       - all
-      - iam
 
   onecx-iam-bff:
     image: ${ONECX_IAM_BFF}
@@ -334,8 +318,6 @@ services:
       - onecx
     profiles:
       - all
-      - iam
-      - iam-ui
 
   onecx-iam-ui:
     image: ${ONECX_IAM_UI}
@@ -354,8 +336,6 @@ services:
       - onecx
     profiles:
       - all
-      - iam
-      - iam-ui
 
   ########## ONECX PARAMETER
   onecx-parameter-svc:
@@ -373,8 +353,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -388,7 +366,6 @@ services:
     profiles:
       - all
       - data-import
-      - parameter
 
   onecx-parameter-bff:
     image: ${ONECX_PARAMETER_BFF}
@@ -413,8 +390,6 @@ services:
       - onecx
     profiles:
       - all
-      - parameter
-      - parameter-ui
 
   onecx-parameter-ui:
     image: ${ONECX_PARAMETER_UI}
@@ -433,8 +408,6 @@ services:
       - onecx
     profiles:
       - all
-      - parameter
-      - parameter-ui
 
   ########## ONECX-PERMISSION
   onecx-permission-svc:
@@ -453,8 +426,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -470,7 +441,6 @@ services:
       - base
       - minimal
       - data-import
-      - permission
 
   onecx-permission-bff:
     image: ${ONECX_PERMISSION_BFF}
@@ -496,8 +466,6 @@ services:
     profiles:
       - all
       - base
-      - permission
-      - permission-ui
 
   onecx-permission-ui:
     image: ${ONECX_PERMISSION_UI}
@@ -517,8 +485,6 @@ services:
     profiles:
       - all
       - base
-      - permission
-      - permission-ui
 
   ########## ONECX-PRODUCT-STORE
   onecx-product-store-svc:
@@ -534,8 +500,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -551,7 +515,6 @@ services:
       - base
       - minimal
       - data-import
-      - product-store
 
   onecx-product-store-bff:
     image: ${ONECX_PRODUCT_STORE_BFF}
@@ -577,8 +540,6 @@ services:
     profiles:
       - all
       - base
-      - product-store
-      - product-store-ui
 
   onecx-product-store-ui:
     image: ${ONECX_PRODUCT_STORE_UI}
@@ -597,8 +558,6 @@ services:
       - onecx
     profiles:
       - all
-      - product-store
-      - product-store-ui
       - base
 
   ########## ONECX-SHELL
@@ -616,6 +575,8 @@ services:
     depends_on:
       keycloak-app:
         condition: service_healthy
+      onecx-tenant-svc:
+        condition: service_started
       onecx-theme-svc:
         condition: service_started
       onecx-permission-svc:
@@ -623,8 +584,6 @@ services:
       onecx-product-store-svc:
         condition: service_started
       onecx-user-profile-svc:
-        condition: service_started
-      onecx-tenant-svc:
         condition: service_started
       onecx-workspace-svc:
         condition: service_started
@@ -640,7 +599,6 @@ services:
       - all
       - base
       - minimal
-      - shell
 
   onecx-shell-ui:
     image: ${ONECX_SHELL_UI}
@@ -654,8 +612,6 @@ services:
       ONECX_VAR_REMAP: "KEYCLOAK_REALM=KC_REALM;KEYCLOAK_CLIENT_ID=CLIENT_USER_ID"
       CLIENT_USER_ID: "onecx-shell-ui-client"
     depends_on:
-      keycloak-app:
-        condition: service_healthy
       onecx-shell-bff:
         condition: service_healthy
     labels:
@@ -669,7 +625,6 @@ services:
       - all
       - base
       - minimal
-      - shell
 
   ########## ONECX-TENANT
   onecx-tenant-svc:
@@ -685,8 +640,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -702,7 +655,6 @@ services:
       - base
       - minimal
       - data-import
-      - tenant
 
   onecx-tenant-bff:
     image: ${ONECX_TENANT_BFF}
@@ -728,8 +680,6 @@ services:
     profiles:
       - all
       - base
-      - tenant
-      - tenant-ui
 
   onecx-tenant-ui:
     image: ${ONECX_TENANT_UI}
@@ -749,8 +699,6 @@ services:
     profiles:
       - all
       - base
-      - tenant
-      - tenant-ui
 
   ########## ONECX THEME
   onecx-theme-svc:
@@ -766,8 +714,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -783,7 +729,6 @@ services:
       - base
       - minimal
       - data-import
-      - theme
 
   onecx-theme-bff:
     image: ${ONECX_THEME_BFF}
@@ -809,8 +754,6 @@ services:
     profiles:
       - all
       - base
-      - theme
-      - theme-ui
 
   onecx-theme-ui:
     image: ${ONECX_THEME_UI}
@@ -830,8 +773,6 @@ services:
     profiles:
       - all
       - base
-      - theme
-      - theme-ui
 
   ########## ONECX-USER-PROFILE
   onecx-user-profile-svc:
@@ -847,8 +788,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -863,7 +802,6 @@ services:
       - all
       - base
       - minimal
-      - user-profile
 
   onecx-user-profile-bff:
     image: ${ONECX_USER_PROFILE_BFF}
@@ -889,8 +827,6 @@ services:
     profiles:
       - all
       - base
-      - user-profile
-      - user-profile-ui
 
   onecx-user-profile-ui:
     image: ${ONECX_USER_PROFILE_UI}
@@ -910,8 +846,6 @@ services:
     profiles:
       - all
       - base
-      - user-profile
-      - user-profile-ui
 
   ########## ONECX-WELCOME
   onecx-welcome-svc:
@@ -927,8 +861,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -942,7 +874,6 @@ services:
     profiles:
       - all
       - base
-      - welcome
 
   onecx-welcome-bff:
     image: ${ONECX_WELCOME_BFF}
@@ -968,8 +899,6 @@ services:
     profiles:
       - all
       - base
-      - welcome
-      - welcome-ui
 
   onecx-welcome-ui:
     image: ${ONECX_WELCOME_UI}
@@ -989,8 +918,6 @@ services:
     profiles:
       - all
       - base
-      - welcome
-      - welcome-ui
 
   ########## ONECX WORKSPACE
   onecx-workspace-svc:
@@ -1008,8 +935,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -1025,7 +950,6 @@ services:
       - base
       - minimal
       - data-import
-      - workspace
 
   onecx-workspace-bff:
     image: ${ONECX_WORKSPACE_BFF}
@@ -1051,8 +975,6 @@ services:
     profiles:
       - all
       - base
-      - workspace
-      - workspace-ui
 
   onecx-workspace-ui:
     image: ${ONECX_WORKSPACE_UI}
@@ -1072,8 +994,6 @@ services:
     profiles:
       - all
       - base
-      - workspace
-      - workspace-ui
 
 volumes:
   postgres:

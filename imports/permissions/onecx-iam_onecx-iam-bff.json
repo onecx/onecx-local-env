@@ -1,7 +1,14 @@
 {
     "name": "onecx-iam-bff",
     "permissions": [
+        { "resource": "password", "action": "write" },
+        { "resource": "provider", "action": "admin-read" },
+        { "resource": "provider", "action": "read" },
+        { "resource": "role", "action": "admin-read" },
+        { "resource": "role", "action": "admin-write" },
         { "resource": "role", "action": "read" },
+        { "resource": "user", "action": "admin-read" },
+        { "resource": "user", "action": "admin-write" },
         { "resource": "user", "action": "read" },
         { "resource": "user", "action": "write" }
     ]

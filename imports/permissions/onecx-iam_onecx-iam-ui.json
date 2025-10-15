@@ -1,15 +1,15 @@
 {
     "name": "onecx-iam-ui",
     "permissions": [
-        {"resource": "ROLE", "action": "CREATE"},
-        {"resource": "ROLE", "action": "DELETE"},
-        {"resource": "ROLE", "action": "EDIT"},
-        {"resource": "ROLE", "action": "SEARCH"},
-        {"resource": "USER", "action": "CREATE"},
-        {"resource": "USER", "action": "DELETE"},
-        {"resource": "USER", "action": "EDIT"},
-        {"resource": "USER", "action": "SEARCH"},
-        {"resource": "USER", "action": "VIEW"},
-        {"resource": "PERMISSION", "action": "VIEW"}
+        { "resource": "PERMISSION", "action": "VIEW" },
+        { "resource": "ROLE", "action": "CREATE" },
+        { "resource": "ROLE", "action": "DELETE" },
+        { "resource": "ROLE", "action": "EDIT" },
+        { "resource": "ROLE", "action": "SEARCH" },
+        { "resource": "USER", "action": "CREATE" },
+        { "resource": "USER", "action": "DELETE" },
+        { "resource": "USER", "action": "EDIT" },
+        { "resource": "USER", "action": "SEARCH" },
+        { "resource": "USER", "action": "VIEW" }
     ]
 }

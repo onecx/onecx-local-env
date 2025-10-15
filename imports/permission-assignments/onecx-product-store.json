@@ -1,0 +1,37 @@
+{
+  "id": "import-permission-assignments_onecx-product-store",
+  "assignments": {
+    "onecx-product-store": {
+      "onecx-product-store-bff": {
+        "onecx-admin": {
+          "image": ["read", "write"],
+          "microfrontend": ["read", "write", "delete"],
+          "microservice": ["read", "write", "delete"],
+          "product": ["read", "write", "delete"],
+          "slot": ["read", "write", "delete"]
+        },
+        "onecx-user": {
+          "image": ["read"],
+          "microfrontend": ["read"],
+          "microservice": ["read"],
+          "product": ["read"],
+          "slot": ["read"]
+        }
+      },
+      "onecx-product-store-ui": {
+        "onecx-admin": {
+          "APP": ["CREATE", "DELETE", "EDIT", "SEARCH", "VIEW"],
+          "ENDPOINT": [ "SEARCH" ],
+          "PRODUCT": ["CREATE", "DELETE", "EDIT", "SEARCH", "VIEW"],
+          "SLOT": ["DELETE", "CREATE", "EDIT", "SEARCH", "VIEW"]
+        },
+        "onecx-user": {
+          "APP": ["SEARCH", "VIEW"],
+          "ENDPOINT": [ "SEARCH" ],
+          "PRODUCT": ["SEARCH", "VIEW"],
+          "SLOT": ["SEARCH", "VIEW"]
+        }
+      }
+    }
+  }
+}
