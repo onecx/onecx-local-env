@@ -159,7 +159,12 @@
             {
               "productName": "onecx-workspace",
               "appId": "onecx-workspace-ui",
-              "name": "./OneCXToggleMenuButtonComponent"
+              "name": "./OneCXSlimVerticalMainMenuComponent"
+            },
+            {
+              "productName": "onecx-workspace",
+              "appId": "onecx-workspace-ui",
+              "name": "./OneCXSlimUserMenuComponent"
             }
           ]
         },
