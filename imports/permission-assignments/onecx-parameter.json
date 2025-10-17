@@ -1,0 +1,23 @@
+{
+  "id": "import-permission-assignments_onecx-parameter",
+  "assignments": {
+    "onecx-parameter": {
+      "onecx-parameter-bff": {
+        "onecx-admin": {
+          "parameter": ["read", "write", "delete"]
+        },
+        "onecx-user": {
+          "parameter": ["read"]
+        }
+      },
+      "onecx-parameter-ui": {
+        "onecx-admin": {
+          "PARAMETER": ["DELETE", "EDIT", "SEARCH", "VIEW"]
+        },
+        "onecx-user": {
+          "PARAMETER": ["SEARCH", "VIEW"]
+        }
+      }
+    }
+  }
+}

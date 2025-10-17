@@ -1,0 +1,31 @@
+{
+  "id": "import-permission-assignments_onecx-theme",
+  "assignments": {
+    "onecx-theme": {
+      "onecx-theme-bff": {
+        "onecx-admin": {
+          "themes": ["read", "write", "delete"]
+        },
+        "onecx-user": {
+          "themes": ["read"]
+        }
+      },
+      "onecx-theme-ui": {
+        "onecx-admin": {
+          "THEME": [
+            "CREATE",
+            "DELETE",
+            "EDIT",
+            "SEARCH",
+            "VIEW",
+            "EXPORT",
+            "IMPORT"
+          ]
+        },
+        "onecx-user": {
+          "THEME": ["SEARCH", "VIEW"]
+        }
+      }
+    }
+  }
+}

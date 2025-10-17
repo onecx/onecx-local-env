@@ -1,0 +1,23 @@
+{
+  "id": "import-permission-assignments_onecx-announcement",
+  "assignments": {
+    "onecx-announcement": {
+      "onecx-announcement-ui": {
+        "onecx-admin": {
+          "ANNOUNCEMENT": [ "CREATE", "DELETE", "EDIT", "SEARCH", "VIEW" ]
+        },
+        "onecx-user": {
+          "ANNOUNCEMENT": [ "SEARCH", "VIEW" ]
+        }
+      },
+      "onecx-announcement-bff": {
+        "onecx-admin": {
+          "announcement": ["read", "write", "delete"]
+        },
+        "onecx-user": {
+          "announcement": ["read"]
+        }
+      }
+    }
+  }
+}

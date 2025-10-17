@@ -1,0 +1,64 @@
+{
+  "id": "import-permission-assignments_onecx-workspace",
+  "assignments": {
+    "onecx-workspace": {
+      "onecx-workspace-bff": {
+        "onecx-admin": {
+          "assignment": ["read", "write", "delete"],
+          "menu": ["read", "write", "delete"],
+          "role": ["read", "write", "delete"],
+          "slot": ["read", "write", "delete"],
+          "workspace": ["read", "write", "delete"],
+          "product": ["read", "write", "delete"]
+        },
+        "onecx-user": {
+          "assignment": ["read"],
+          "menu": ["read"],
+          "role": ["read"],
+          "slot": ["read"],
+          "workspace": ["read"],
+          "product": ["read"]
+        }
+      },
+      "onecx-workspace-ui": {
+        "onecx-admin": {
+          "MENU": [
+            "CREATE",
+            "DELETE",
+            "EDIT",
+            "DRAG_DROP",
+            "VIEW",
+            "EXPORT",
+            "IMPORT",
+            "GRANT"
+          ],
+          "WORKSPACE": [
+            "CREATE",
+            "DELETE",
+            "GOTO_PERMISSION",
+            "GOTO_APP_STORE",
+            "EDIT",
+            "SEARCH",
+            "VIEW",
+            "EXPORT",
+            "IMPORT"
+          ],
+          "WORKSPACE_CONTACT": ["VIEW"],
+          "WORKSPACE_INTERNAL": ["VIEW"],
+          "WORKSPACE_PRODUCTS": ["VIEW", "REGISTER"],
+          "WORKSPACE_ROLE": ["CREATE", "DELETE", "EDIT", "VIEW"],
+          "WORKSPACE_SLOT": ["CREATE", "DELETE", "EDIT", "VIEW"]
+        },
+        "onecx-user": {
+          "MENU": ["VIEW"],
+          "WORKSPACE": ["GOTO_PERMISSION", "GOTO_APP_STORE", "SEARCH", "VIEW"],
+          "WORKSPACE_CONTACT": ["VIEW"],
+          "WORKSPACE_INTERNAL": ["VIEW"],
+          "WORKSPACE_PRODUCTS": ["VIEW"],
+          "WORKSPACE_ROLE": ["VIEW"],
+          "WORKSPACE_SLOT": ["VIEW"]
+        }
+      }
+    }
+  }
+}

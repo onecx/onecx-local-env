@@ -15,10 +15,6 @@
     },
     {
       "resource": "HELP",
-      "action": "SAVE"
-    },
-    {
-      "resource": "HELP",
       "action": "SEARCH"
     },
     {

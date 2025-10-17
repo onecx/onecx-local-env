@@ -1,4 +1,9 @@
-echo "##### Importing permissions"
+export RED='\033[0;31m'
+export GREEN='\033[0;32m'
+export CYAN='\033[0;36m'
+export NC='\033[0m' # No Color
+
+echo -e "${CYAN}Importing Permissions${NC}"
 
 for entry in "."/*.json
 do
@@ -9,8 +14,8 @@ do
   appid=`echo $file | cut -d'_' -f2`
   status_code=`curl --write-out %{http_code} --silent --output /dev/null -X PUT -H 'Content-Type: application/json' "http://onecx-permission-svc/operator/v1/$product/$appid" -d @$entry`
   if [[ "$status_code" =~ (200|201)$  ]]; then
-    echo -e "${GREEN}Permissions for app $appid and product $product was uploaded with result $status_code ${NC}"
+    echo -e "...imported via operator, status: ${GREEN}$status_code${NC}, product: $product, app: $appid"
   else
-    echo -e "${RED}Permissions for app $appid and product $product was uploaded with result $status_code ${NC}"
+    echo -e "...imported via operator, status: ${RED}$status_code${NC}, product: $product, app: $appid"
   fi 
 done
