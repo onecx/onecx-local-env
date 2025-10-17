@@ -129,6 +129,21 @@
       ],
       "slots": [
         {
+          "name": "onecx-shell-header-left",
+          "components": [
+            {
+              "productName": "onecx-workspace",
+              "appId": "onecx-workspace-ui",
+              "name": "./OneCXCurrentWorkspaceLogoComponent"
+            },
+            {
+              "productName": "onecx-workspace",
+              "appId": "onecx-workspace-ui",
+              "name": "./OneCXToggleMenuButtonComponent"
+            }
+          ]
+        },
+        {
           "name": "onecx-shell-vertical-menu",
           "components": [
             {
@@ -140,6 +155,16 @@
               "productName": "onecx-workspace",
               "appId": "onecx-workspace-ui",
               "name": "./OneCXVerticalMainMenuComponent"
+            },
+            {
+              "productName": "onecx-workspace",
+              "appId": "onecx-workspace-ui",
+              "name": "./OneCXSlimVerticalMainMenuComponent"
+            },
+            {
+              "productName": "onecx-workspace",
+              "appId": "onecx-workspace-ui",
+              "name": "./OneCXSlimUserMenuComponent"
             }
           ]
         },
