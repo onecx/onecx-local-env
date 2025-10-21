@@ -83,12 +83,12 @@ services:
     ports:
       - "8080:8080"
     environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
       KC_DB: postgres
-      KC_DB_POOL_INITIAL_SIZE : 1
-      KC_DB_POOL_MAX_SIZE : 5
-      KC_DB_POOL_MIN_SIZE : 2
+      KC_DB_POOL_INITIAL_SIZE: 1
+      KC_DB_POOL_MAX_SIZE: 5
+      KC_DB_POOL_MIN_SIZE: 2
       KC_DB_URL_DATABASE: keycloak
       KC_DB_URL_HOST: postgresdb
       KC_DB_USERNAME: keycloak
@@ -726,7 +726,7 @@ services:
       - example
     profiles:
       - all
-      
+
   onecx-help-bff:
     image: ${ONECX_HELP_BFF}
     environment:
@@ -750,7 +750,7 @@ services:
       - example
     profiles:
       - all
-      
+
   onecx-help-ui:
     image: ${ONECX_HELP_UI}
     environment:

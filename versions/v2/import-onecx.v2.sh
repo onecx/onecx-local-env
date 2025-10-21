@@ -1,13 +1,18 @@
 #!/bin/bash
+
 export RED='\033[0;31m'
 export GREEN='\033[0;32m'
 export CYAN='\033[0;36m'
 export NC='\033[0m' # No Color
 
-## Set SKIP_CONTAINER_MANAGEMENT to 1 or true to skip starting/stopping containers:
-##  export SKIP_CONTAINER_MANAGEMENT=1
-## Can be useful if containers are already running and are still needed after the imports are done (e.g. to run additional custom import scripts)
-SKIP_CONTAINER_MANAGEMENT=${SKIP_CONTAINER_MANAGEMENT:-0}
+echo -e "${CYAN}Import OneCX v2 data${NC}"
+
+
+## Set SKIP_CONTAINER_MANAGEMENT to 0 or false to starting/stopping containers for data import:
+##  export SKIP_CONTAINER_MANAGEMENT=0
+##  default: 1 = SKIP
+##  Can be useful if containers are already running and are still needed after the imports are done (e.g. to run additional custom import scripts)
+SKIP_CONTAINER_MANAGEMENT=${SKIP_CONTAINER_MANAGEMENT:-1}
 
 if [[ "$SKIP_CONTAINER_MANAGEMENT" == "1" || "$SKIP_CONTAINER_MANAGEMENT" == "true" ]]; then
   echo -e "${CYAN}Skipping container startup/shutdown${NC} (SKIP_CONTAINER_MANAGEMENT is set to $SKIP_CONTAINER_MANAGEMENT)"
@@ -29,13 +34,16 @@ if [[ "$SKIP_CONTAINER_MANAGEMENT" == "0" || "$SKIP_CONTAINER_MANAGEMENT" == "fa
   sleep 30
 fi
 
-## Import data
+## Import OneCX data
 
-cd imports/tenant
+cd onecx-data
+
+cd tenant
 echo " "
 bash ./import-tenants.sh
+cd ..
 
-cd ../product-store
+cd product-store
 echo " "
 bash ./import-products.sh
 echo " "
@@ -44,29 +52,34 @@ echo " "
 bash ./import-microservices.sh
 echo " "
 bash ./import-microfrontends.sh
+cd ..
 
-cd ../parameters
+cd parameters
 echo " "
 bash ./import-parameters.sh
+cd ..
 
-cd ../workspace
+cd workspace
 echo " "
 bash ./import-workspaces.sh
+cd ..
 
-cd ../theme
+cd theme
 echo " "
 bash ./import-themes.sh
+cd ..
 
-cd ../permissions
+cd permissions
 echo " "
 bash ./import-permissions.sh
+cd ..
 
-cd ../permission-assignments
+cd permission-assignments
 echo " "
 bash ./import-assignments.sh
+cd ..
 
-
-cd ../..
+cd ..
 
 
 if [[ "$SKIP_CONTAINER_MANAGEMENT" == "1" || "$SKIP_CONTAINER_MANAGEMENT" == "true" ]]; then
@@ -74,6 +87,6 @@ if [[ "$SKIP_CONTAINER_MANAGEMENT" == "1" || "$SKIP_CONTAINER_MANAGEMENT" == "tr
 else
   ## Stop containers
   echo " "
-  echo "Stopping containers used for data import..."
+  echo -e "${CYAN}Stopping containers used for data import...${NC}"
   docker compose --profile=data-import down
 fi
