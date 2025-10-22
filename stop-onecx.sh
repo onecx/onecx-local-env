@@ -1,34 +1,47 @@
 #!/bin/bash
 
+# Stop OneCX Local Enviroment by using a profile (default: all)
+
 export RED='\033[0;31m'
 export GREEN='\033[0;32m'
 export CYAN='\033[0;36m'
 export NC='\033[0m' # No Color
+
+echo -e "${CYAN}Stop OneCX Local Environment${NC}"
+
+print_usage=1
+stop=0
 
 # check script parameter
 
 if [[ ( $# == 0  ) ]]
 then
   profile=all
+  echo -e " ...use profile ${GREEN}'$profile'${NC}"
 elif [[ ( $# == 1  ) ]]
 then
-  if [[ $1 == @(all|base|announcement|help|iam|iam|parameter|permission|product-store|shell|tenant|theme|welcome|workspace|user-profile) ]]
+  if [[ $1 == @(all|base|minimal|announcement|help|iam|iam|parameter|permission|product-store|shell|tenant|theme|welcome|workspace|user-profile) ]]
   then
     profile=$1
+    print_usage=0
+    echo -e " ...use profile ${GREEN}'$profile'${NC}"
   else
-    echo "unknown Docker profile - use one of these:"
-    echo "  all, base, announcement, help, iam, parameter, permission, product-store, shell, tenant, theme, welcome, workspace, user-profile"
-    exit 1
+    stop=1
+    echo -e "${RED} ...unknown Docker profile${NC}"
   fi
 else
-  echo
-  echo "usage:  $0  [ profile ]"
-  echo "  profile:  [ all | base | <product> ]    optional, all is default"
-  echo "            <product> in (announcement, help, iam, parameter, permission, product-store, shell, tenant, theme, welcome, workspace, user-profile)"
+  stop=1
+fi
+
+if [[ ( $print_usage == 1  ) ]]
+then
+  echo "    usage:  $0  [ profile ]  with profile in (all, base, minimal, <onecx-product> ), optional, all is default"
+fi
+
+if [[ ( $stop == 1  ) ]]
+then
   exit 1
 fi
 
-
-echo -e "${CYAN}Stop OneCX local running services using profile '$profile'${NC}"
-
-docker compose -f versions/v2/docker-compose.v2.yaml  --env-file versions/v2/.env  --profile $profile  down
+docker compose -f versions/v2/docker-compose.v2.yaml  --profile $profile  down
+ 

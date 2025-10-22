@@ -34,9 +34,22 @@ if [[ "$SKIP_CONTAINER_MANAGEMENT" == "0" || "$SKIP_CONTAINER_MANAGEMENT" == "fa
   sleep 30
 fi
 
-## Import OneCX data
+## Support starting from different directories: base, v2
 
-cd onecx-data
+current_path=`pwd`
+current_dir=$(basename $current_path)
+
+import_start_dir=./
+
+# import started from v2 directory?
+if [[ ( $current_dir == "v2"  ) ]]
+then
+  import_start_dir="../.."
+fi
+
+
+## Import OneCX data
+cd $import_start_dir/onecx-data
 
 cd tenant
 echo " "
@@ -79,7 +92,10 @@ echo " "
 bash ./import-assignments.sh
 cd ..
 
-cd ..
+if [[ ( $current_dir != "v2"  ) ]]
+then
+  cd ..
+fi
 
 
 if [[ "$SKIP_CONTAINER_MANAGEMENT" == "1" || "$SKIP_CONTAINER_MANAGEMENT" == "true" ]]; then

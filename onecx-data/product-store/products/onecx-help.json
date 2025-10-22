@@ -1,7 +1,12 @@
 {
   "version": "xxx",
-  "description": "help",
+  "description": "Manage Help Items",
+  "imageUrl": "",
+  "iconName": "question-circle",
+  "displayName": "OneCX Help",
   "basePath": "/help",
-  "displayName": "help",
-  "iconName": "pi-briefcase"
+  "provider": "OneCX Team",
+  "classifications": [ 
+    "Administration"
+  ]
 }

@@ -5,8 +5,8 @@
     "admin": {
       "name": "admin",
       "displayName": "OneCX Admin",
-      "description": "OneCX Admin",
-      "theme": "OneCX",
+      "description": "OneCX Administration",
+      "theme": "default",
       "baseUrl": "/admin",
       "logoUrl": "",
       "smallLogoUrl": "",
@@ -525,7 +525,8 @@
           "roles": [],
           "children": []
         }
-      ]
+      ],
+      "mandatory": true
     }
   }
 }

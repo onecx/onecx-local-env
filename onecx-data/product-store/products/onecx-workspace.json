@@ -1,7 +1,12 @@
 {
-    "version": "xxx",
-    "description": "OneCX Workspace",
-    "basePath": "/workspace",
-    "displayName": "OneCX Workspace",
-    "iconName": "pi-ellipsis-h"
+  "version": "xxx",
+  "description": "OneCX Workspace",
+  "imageUrl": "",
+  "iconName": "desktop",
+  "displayName": "OneCX Workspace",
+  "basePath": "/workspace",
+  "provider": "OneCX Team",
+  "classifications": [
+    "Administration"
+  ]
 }

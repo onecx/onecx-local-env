@@ -1,4 +1,13 @@
-name: onecx-v2
+########################################
+############## GENERAL #################
+########################################
+name: onecx-local-env
+volumes:
+  postgres:
+    name: onecx-local-env_postgres
+networks:
+  onecx:
+    name: onecx-local-env_onecx
 
 ########################################
 ####### ENVIRONMENT PRESETS ############
@@ -81,7 +90,7 @@ services:
   keycloak-app:
     image: ${KEYCLOAK}
     command: "start-dev --import-realm"
-    container_name: keycloak-app
+    container_name: ${KC_APP_NAME}
     ports:
       - "8080:8080"
     environment:
@@ -95,7 +104,7 @@ services:
       KC_DB_URL_HOST: postgresdb
       KC_DB_USERNAME: keycloak
       KC_DB_PASSWORD: keycloak
-      KC_HOSTNAME: keycloak-app
+      KC_HOSTNAME: ${KC_APP_NAME}
       KC_HOSTNAME_STRICT: false
       KC_HTTP_ENABLED: true
       KC_HTTP_PORT: 8080
@@ -103,7 +112,7 @@ services:
     volumes:
       - ../../init-data/keycloak/imports:/opt/keycloak/data/import
     healthcheck:
-      test: "{ printf >&3 'GET /realms/${KC_REALM}/.well-known/openid-configuration HTTP/1.0\r\nHost: localhost\r\n\r\n'; cat <&3; } 3<>/dev/tcp/localhost/8080 | head -1 | grep 200"
+      test: "{ printf >&3 'GET /realms/onecx/.well-known/openid-configuration HTTP/1.0\r\nHost: localhost\r\n\r\n'; cat <&3; } 3<>/dev/tcp/localhost/8080 | head -1 | grep 200"
       interval: 10s
       timeout: 5s
       retries: 10
@@ -112,7 +121,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.keycloak-intranet.loadbalancer.server.port=8080"
-      - "traefik.http.routers.keycloak-intranet.rule=Host(`keycloak-app`)"
+      - "traefik.http.routers.keycloak-intranet.rule=Host(`${KC_APP_NAME}`)"
     networks:
       - onecx
     profiles:
@@ -140,8 +149,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -173,7 +180,6 @@ services:
       - onecx
     profiles:
       - all
-      - announcement
 
   onecx-announcement-ui:
     image: ${ONECX_ANNOUNCEMENT_UI}
@@ -601,9 +607,9 @@ services:
       ONECX_PERMISSIONS_CACHE_ENABLED: false
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-shell"
       APP_BASE_HREF: "/onecx-shell/"
-      KEYCLOAK_URL: http://keycloak-app
-      ONECX_VAR_REMAP: "KEYCLOAK_REALM=KC_REALM;KEYCLOAK_CLIENT_ID=CLIENT_USER_ID"
-      CLIENT_USER_ID: "onecx-shell-ui-client"
+      KEYCLOAK_URL: ${KC_URL}
+      KEYCLOAK_REALM: ${KC_REALM}
+      KEYCLOAK_CLIENT_ID: ${KC_CLIENT_ID}
     depends_on:
       onecx-shell-bff:
         condition: service_healthy
@@ -883,6 +889,7 @@ services:
       - onecx
     profiles:
       - all
+      - minimal
       - workspace
 
   onecx-workspace-ui:
@@ -902,6 +909,7 @@ services:
       - onecx
     profiles:
       - all
+      - minimal
       - workspace
 
   ########## ONECX USER-PROFILE
@@ -974,9 +982,3 @@ services:
     profiles:
       - all
       - user-profile
-
-volumes:
-  postgres:
-
-networks:
-  onecx:

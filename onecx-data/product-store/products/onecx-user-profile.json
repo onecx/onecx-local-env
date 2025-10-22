@@ -1,7 +1,12 @@
 {
-    "version": "xxx",
-    "description": "OneCX user profile",
-    "basePath": "/user",
-    "displayName": "OneCX user profile",
-    "iconName": "lock"
+  "version": "xxx",
+  "description": "Manage User Settings",
+  "imageUrl": "",
+  "iconName": "user",
+  "displayName": "OneCX User Profile",
+  "basePath": "/user",
+  "provider": "OneCX Team",
+  "classifications": [
+    "Administration"
+  ]
 }
