@@ -1,0 +1,6 @@
+{
+  "name": "onecx-permission-iam-user-roles",
+  "description": "Receive IAM user roles",
+  "deprecated": false,
+  "undeployed": false
+}

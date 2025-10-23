@@ -1,6 +1,6 @@
 {
-    "description": "List active announcements",
-    "name": "onecx-welcome-list-active",
-    "deprecated": false,
-    "undeployed": false
+  "name": "onecx-welcome-list-active",
+  "description": "List active announcements for workspace",
+  "deprecated": false,
+  "undeployed": false
 }

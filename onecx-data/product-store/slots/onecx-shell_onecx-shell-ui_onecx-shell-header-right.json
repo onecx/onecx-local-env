@@ -1,6 +1,6 @@
 {
-    "description": "Shell header right",
-    "name": "onecx-shell-header-right",
-    "deprecated": false,
-    "undeployed": false
+  "name": "onecx-shell-header-right",
+  "description": "Shell header right region e.g. horizontal menu, top bar",
+  "deprecated": false,
+  "undeployed": false
 }

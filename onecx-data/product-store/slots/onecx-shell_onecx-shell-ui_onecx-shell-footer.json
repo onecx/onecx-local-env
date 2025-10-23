@@ -1,6 +1,6 @@
 {
-    "description": "Shell footer",
-    "name": "onecx-shell-footer",
-    "deprecated": false,
-    "undeployed": false
+  "name": "onecx-shell-footer",
+  "description": "Footer area on the page e.g. logo, footer menu, version info etc.",
+  "deprecated": false,
+  "undeployed": false
 }

@@ -1,0 +1,6 @@
+{
+  "name": "onecx-theme-data",
+  "description": "Getting theme data (like theme logo) to be used within workspace",
+  "deprecated": false,
+  "undeployed": false
+}

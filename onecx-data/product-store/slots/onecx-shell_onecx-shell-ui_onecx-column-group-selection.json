@@ -1,0 +1,6 @@
+{
+  "name": "onecx-column-group-selection",
+  "description": "Slot used by library components that can be used in all applications. Its defined in shell and should not be redefined in products that use the slots. Use this slot to manage table column group selection via assigned remote components.",
+  "deprecated": false,
+  "undeployed": false
+}

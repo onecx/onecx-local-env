@@ -1,6 +1,6 @@
 {
-    "description": "Shell vertical menu",
-    "name": "onecx-shell-vertical-menu",
-    "deprecated": false,
-    "undeployed": false
+  "name": "onecx-shell-vertical-menu",
+  "description": "Shell vertical menu",
+  "deprecated": false,
+  "undeployed": false
 }

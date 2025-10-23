@@ -1,6 +1,6 @@
 {
-    "description": "User Profile avatar image",
-    "name": "onecx-avatar-image",
-    "deprecated": false,
-    "undeployed": false
+  "name": "onecx-avatar-image",
+  "description": "Area to displaying the users avatar provided by avatar image component",
+  "deprecated": false,
+  "undeployed": false
 }
