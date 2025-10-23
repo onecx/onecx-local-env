@@ -1,6 +1,6 @@
 {
-    "version": "xxx",
-    "description": "onecx-product-store-ui",
-    "name": "onecx-product-store-ui",
-    "type": "ui"
+  "version": "xxx",
+  "name": "onecx-product-store-ui",
+  "description": "OneCX Product Store UI",
+  "type": "ui"
 }

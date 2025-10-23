@@ -1,6 +1,6 @@
 {
-    "version": "xxx",
-    "description": "onecx-shell-ui",
-    "name": "onecx-shell-ui",
-    "type": "ui"
+  "version": "xxx",
+  "name": "onecx-shell-ui",
+  "description": "OneCX Shell UI",
+  "type": "ui"
 }

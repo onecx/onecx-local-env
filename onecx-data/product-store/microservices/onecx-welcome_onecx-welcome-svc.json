@@ -1,6 +1,6 @@
 {
-    "version": "xxx",
-    "description": "onecx-welcome-svc",
-    "name": "onecx-welcome-svc",
-    "type": "svc"
+  "version": "xxx",
+  "name": "onecx-welcome-svc",
+  "description": "OneCX Welcome Backend Service",
+  "type": "svc"
 }

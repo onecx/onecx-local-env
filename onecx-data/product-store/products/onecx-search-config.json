@@ -1,0 +1,12 @@
+{
+  "version": "xxx",
+  "description": "Manage Search Configurations",
+  "imageUrl": "",
+  "iconName": "search-plus",
+  "displayName": "OneCX Search Config",
+  "basePath": "/search-config",
+  "provider": "OneCX Team",
+  "classifications": [
+    "Tool"
+  ]
+}

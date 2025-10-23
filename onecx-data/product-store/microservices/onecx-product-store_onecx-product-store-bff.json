@@ -1,6 +1,6 @@
 {
-    "version": "xxx",
-    "description": "onecx-product-store-bff",
-    "name": "onecx-product-store-bff",
-    "type": "bff"
+  "version": "xxx",
+  "name": "onecx-product-store-bff",
+  "description": "OneCX Product Store Backend For Frontend",
+  "type": "bff"
 }

@@ -1,6 +1,6 @@
 {
-    "version": "xxx",
-    "description": "onecx-theme-svc",
-    "name": "onecx-theme-svc",
-    "type": "svc"
+  "version": "xxx",
+  "name": "onecx-theme-svc",
+  "description": "OneCX Theme Backend Service",
+  "type": "svc"
 }

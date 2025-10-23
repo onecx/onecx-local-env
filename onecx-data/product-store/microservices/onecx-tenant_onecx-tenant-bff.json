@@ -1,6 +1,6 @@
 {
-    "version": "xxx",
-    "description": "onecx-tenant-bff",
-    "name": "onecx-tenant-bff",
-    "type": "bff"
+  "version": "xxx",
+  "name": "onecx-tenant-bff",
+  "description": "OneCX Tenant Backend For Frontend",
+  "type": "bff"
 }

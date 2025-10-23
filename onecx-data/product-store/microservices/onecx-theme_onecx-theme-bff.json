@@ -1,6 +1,6 @@
 {
-    "version": "xxx",
-    "description": "onecx-theme-bff",
-    "name": "onecx-theme-bff",
-    "type": "bff"
+  "version": "xxx",
+  "name": "onecx-theme-bff",
+  "description": "OneCX Theme Backend For Frontend",
+  "type": "bff"
 }

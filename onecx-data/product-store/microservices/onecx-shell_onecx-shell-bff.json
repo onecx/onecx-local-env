@@ -1,6 +1,6 @@
 {
-    "version": "xxx",
-    "description": "onecx-shell-bff",
-    "name": "onecx-shell-bff",
-    "type": "bff"
+  "version": "xxx",
+  "name": "onecx-shell-bff",
+  "description": "OneCX Shell Backend For Frontend",
+  "type": "bff"
 }

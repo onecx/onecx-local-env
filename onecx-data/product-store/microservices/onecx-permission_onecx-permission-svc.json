@@ -1,6 +1,6 @@
 {
-    "version": "xxx",
-    "description": "onecx-permission-svc",
-    "name": "onecx-permission-svc",
-    "type": "svc"
+  "version": "xxx",
+  "name": "onecx-permission-svc",
+  "description": "OneCX Permission Backend Service",
+  "type": "svc"
 }

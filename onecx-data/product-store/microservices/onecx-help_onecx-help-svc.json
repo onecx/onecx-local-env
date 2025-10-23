@@ -1,6 +1,6 @@
 {
   "version": "xxx",
-  "description": "onecx-help-svc",
   "name": "onecx-help-svc",
+  "description": "OneCX Help Backend Service",
   "type": "svc"
 }

@@ -1,6 +1,6 @@
 {
-    "version": "xxx",
-    "description": "onecx-user-profile-bff",
-    "name": "onecx-user-profile-bff",
-    "type": "bff"
+  "version": "xxx",
+  "name": "onecx-user-profile-bff",
+  "description": "OneCX User Profile Backend For Frontend",
+  "type": "bff"
 }

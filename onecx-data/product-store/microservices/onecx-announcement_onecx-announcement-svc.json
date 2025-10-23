@@ -1,6 +1,6 @@
 {
   "version": "xxx",
-  "description": "onecx-announcement-svc",
   "name": "onecx-announcement-svc",
+  "description": "OneCX Announcement Backend Service",
   "type": "svc"
 }

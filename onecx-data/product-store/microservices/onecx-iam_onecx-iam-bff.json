@@ -1,6 +1,6 @@
 {
-    "version": "xxx",
-    "description": "onecx-iam-bff",
-    "name": "onecx-iam-bff",
-    "type": "bff"
+  "version": "xxx",
+  "name": "onecx-iam-bff",
+  "description": "OneCX IAM Backend For Frontend",
+  "type": "bff"
 }
