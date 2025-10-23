@@ -1,4 +1,8 @@
 #!/bin/bash
+#
+# Import One data from files
+#
+
 
 export RED='\033[0;31m'
 export GREEN='\033[0;32m'
@@ -56,6 +60,11 @@ echo " "
 bash ./import-tenants.sh
 cd ..
 
+cd parameter
+echo " "
+bash ./import-parameters.sh
+cd ..
+
 cd product-store
 echo " "
 bash ./import-products.sh
@@ -67,14 +76,14 @@ echo " "
 bash ./import-microfrontends.sh
 cd ..
 
-cd parameters
+cd permission
 echo " "
-bash ./import-parameters.sh
+bash ./import-permissions.sh
 cd ..
 
-cd workspace
+cd permission-assignment
 echo " "
-bash ./import-workspaces.sh
+bash ./import-assignments.sh
 cd ..
 
 cd theme
@@ -82,15 +91,16 @@ echo " "
 bash ./import-themes.sh
 cd ..
 
-cd permissions
+cd welcome
 echo " "
-bash ./import-permissions.sh
+bash ./import-welcome-images.sh
 cd ..
 
-cd permission-assignments
+cd workspace
 echo " "
-bash ./import-assignments.sh
+bash ./import-workspaces.sh
 cd ..
+
 
 if [[ ( $current_dir != "v2"  ) ]]
 then

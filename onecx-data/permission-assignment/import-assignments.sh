@@ -1,3 +1,10 @@
+#!/bin/bash
+#
+# Import Permission Assignments from file for Tenant and Product
+#
+# A file contains the assignment of permissions (defined by product/app)
+# to roles
+
 export RED='\033[0;31m'
 export GREEN='\033[0;32m'
 export CYAN='\033[0;36m'
@@ -7,18 +14,19 @@ echo -e "${CYAN}Importing Permission Assignments${NC}"
 
 for entry in "."/*.json
 do
-  #echo "$entry"
-  file=$(basename "$entry")
-  file=`echo $file | cut -d '.' -f 1`
-  tenant=`echo $file | cut -d'-' -f1`
-  product=`echo $file | cut -d'_' -f2`
+  filename=$(basename "$entry")
+  filename=`echo $filename | cut -d '.' -f 1`
+  tenant=`echo $filename | cut -d'-' -f1`
+
+  product=`echo $filename | cut -d'_' -f2`
   token_var_name=${tenant}_token
   token=${!token_var_name}
-  #echo "curl -X POST -H "apm-principal-token: $token" -H 'Content-Type: application/json' "http://onecx-permission-svc//exim/v1/assignments/operator" -d @$entry"
+
   status_code=`curl --write-out %{http_code} --silent --output /dev/null -X POST -H "apm-principal-token: $token" -H 'Content-Type: application/json' "http://onecx-permission-svc/exim/v1/assignments/operator" -d @$entry`
+
   if [[ "$status_code" =~ (200|201)$  ]]; then
-    echo -e "...imported via operator, status: ${GREEN}$status_code${NC}, product: $product"
+    echo -e "...import via operator, status: ${GREEN}$status_code${NC}, product: $product"
   else
-    echo -e "${RED}...imported via operator, status: $status_code, product: $product ${NC}"
+    echo -e "${RED}...import via operator, status: $status_code, product: $product ${NC}"
   fi 
 done
