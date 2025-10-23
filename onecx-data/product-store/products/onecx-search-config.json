@@ -8,5 +8,7 @@
   "provider": "OneCX Team",
   "classifications": [
     "Tool"
-  ]
+  ],
+  "multitenancy": true,
+  "undeployed": false
 }

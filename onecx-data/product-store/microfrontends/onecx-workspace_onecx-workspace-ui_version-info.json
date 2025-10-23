@@ -1,0 +1,15 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX Workspace Version Info",
+  "description": "Display version information of shell and current application",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/workspace/",
+  "remoteEntry": "/mfe/workspace/remoteEntry.js",
+  "exposedModule": "./OneCXVersionInfoComponent",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-workspace",
+  "tagName": "ocx-version-info-component",
+  "type": "COMPONENT",
+  "deprecated": false,
+  "undeployed": false
+}

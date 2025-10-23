@@ -12,5 +12,15 @@
   "tagName": "ocx-permission-component",
   "type": "MODULE",
   "deprecated": false,
-  "undeployed": false
+  "undeployed": false,
+  "endpoints": [
+    {
+      "name": "product",
+      "path": "/product/{product-name}"
+    },
+    {
+      "name": "workspace",
+      "path": "/workspace/{workspace-name}"
+    }
+  ]
 }

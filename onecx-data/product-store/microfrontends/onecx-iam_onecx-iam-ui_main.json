@@ -11,5 +11,15 @@
   "tagName": "ocx-iam-component",
   "type": "MODULE",
   "deprecated": false,
-  "undeployed": false
+  "undeployed": false,
+  "endpoints": [
+    {
+      "name": "roles",
+      "path": "/roles"
+    },
+    {
+      "name": "users",
+      "path": "/users"
+    }
+  ]
 }

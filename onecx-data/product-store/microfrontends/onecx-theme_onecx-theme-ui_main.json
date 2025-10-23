@@ -12,5 +12,11 @@
   "tagName": "ocx-theme-component",
   "type": "MODULE",
   "deprecated": false,
-  "undeployed": false
+  "undeployed": false,
+  "endpoints": [
+    {
+      "name": "theme-detail",
+      "path": "/{theme-name}"
+    }
+  ]
 }

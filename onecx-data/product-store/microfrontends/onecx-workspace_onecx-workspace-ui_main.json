@@ -11,5 +11,11 @@
   "tagName": "ocx-workspace-component",
   "type": "MODULE",
   "deprecated": false,
-  "undeployed": false
+  "undeployed": false,
+  "endpoints": [
+    {
+      "name": "workspace-detail",
+      "path": "/{workspace-name}"
+    }
+  ]
 }

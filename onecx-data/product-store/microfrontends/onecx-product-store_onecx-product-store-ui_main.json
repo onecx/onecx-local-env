@@ -12,5 +12,27 @@
   "tagName": "ocx-product-store-component",
   "type": "MODULE",
   "deprecated": false,
-  "undeployed": false
+  "undeployed": false,
+  "endpoints": [
+    {
+      "name": "product-detail",
+      "path": "/{product-name}"
+    },
+    {
+      "name": "product-detail#apps",
+      "path": "/{product-name}#apps"
+    },
+    {
+      "name": "apps",
+      "path": "/apps"
+    },
+    {
+      "name": "slots",
+      "path": "/slots"
+    },
+    {
+      "name": "endpoints",
+      "path": "/endpoints"
+    }
+  ]
 }
