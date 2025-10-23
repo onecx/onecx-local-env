@@ -1,0 +1,12 @@
+{
+  "version": "xxx",
+  "description": "Manage Workspace Themes",
+  "imageUrl": "",
+  "iconName": "palette",
+  "displayName": "OneCX Theme",
+  "basePath": "/theme",
+  "provider": "OneCX Team",
+  "classifications": [
+    "Administration"
+  ]
+}

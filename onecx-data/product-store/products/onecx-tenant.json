@@ -1,0 +1,12 @@
+{
+  "version": "xxx",
+  "description": "Display Tenants",
+  "imageUrl": "",
+  "iconName": "building-columns",
+  "displayName": "OneCX Tenant",
+  "basePath": "/tenant",
+  "provider": "OneCX Team",
+  "classifications": [
+    "Administration"
+  ]
+}

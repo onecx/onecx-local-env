@@ -1,0 +1,12 @@
+{
+  "version": "xxx",
+  "description": "OneCX Parameter",
+  "imageUrl": "",
+  "iconName": "sliders-h",
+  "displayName": "OneCX Parameter",
+  "basePath": "/parameter",
+  "provider": "OneCX Team",
+  "classifications": [
+    "Administration"
+  ]
+}

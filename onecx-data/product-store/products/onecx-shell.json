@@ -1,0 +1,12 @@
+{
+  "version": "xxx",
+  "description": "The base for the cooperation of OneCX Products",
+  "imageUrl": "",
+  "iconName": "home",
+  "displayName": "OneCX Shell",
+  "basePath": "/newShell",
+  "provider": "OneCX Team",
+  "classifications": [
+    "Administration"
+  ]
+}

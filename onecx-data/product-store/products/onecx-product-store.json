@@ -1,0 +1,12 @@
+{
+  "version": "xxx",
+  "description": "Store Products and Applications",
+  "imageUrl": "",
+  "iconName": "shop",
+  "displayName": "OneCX Product Store",
+  "basePath": "/products",
+  "provider": "OneCX Team",
+  "classifications": [
+    "Administration"
+  ]
+}

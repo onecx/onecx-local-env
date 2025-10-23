@@ -1,0 +1,12 @@
+{
+  "version": "xxx",
+  "description": "OneCX Permission",
+  "imageUrl": "",
+  "iconName": "cog",
+  "displayName": "OneCX Permission",
+  "basePath": "/permission",
+  "provider": "OneCX Team",
+  "classifications": [
+    "Administration"
+  ]
+}

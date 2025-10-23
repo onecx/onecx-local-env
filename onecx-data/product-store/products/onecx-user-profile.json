@@ -1,0 +1,12 @@
+{
+  "version": "xxx",
+  "description": "Manage User Settings",
+  "imageUrl": "",
+  "iconName": "user",
+  "displayName": "OneCX User Profile",
+  "basePath": "/user",
+  "provider": "OneCX Team",
+  "classifications": [
+    "Administration"
+  ]
+}

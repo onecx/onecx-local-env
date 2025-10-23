@@ -1,0 +1,12 @@
+{
+  "version": "xxx",
+  "description": "Manage Announcements",
+  "imageUrl": "",
+  "iconName": "comment",
+  "displayName": "OneCX Announcement",
+  "basePath": "/announcement",
+  "provider": "OneCX Team",
+  "classifications": [ 
+    "Administration"
+  ]
+}
