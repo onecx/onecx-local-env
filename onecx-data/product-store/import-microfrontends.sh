@@ -7,7 +7,6 @@ echo -e "${CYAN}Importing Microfrontends in Product Store ${NC}"
 
 for entry in "./microfrontends"/*
 do
-  #echo "$entry"
   filename=$(basename "$entry")
   filename=`echo $filename | cut -d '.' -f 1`
   product=${filename%%_*}

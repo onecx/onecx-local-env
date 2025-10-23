@@ -7,14 +7,14 @@ echo -e "${CYAN}Importing Products in Product Store ${NC}"
 
 for entry in "./products"/*
 do
-  file_name=$(basename "$entry")
-  file_name=`echo $file_name | cut -d '.' -f 1`
-  #echo "entry: $entry, file name: $file_name"
-  status_code=`curl --write-out %{http_code} --silent --output /dev/null -X PUT -H 'Content-Type: application/json' "http://onecx-product-store-svc/operator/product/v1/update/$file_name" -d @$entry`
+  filename=$(basename "$entry")
+  product=`echo $filename | cut -d '.' -f 1`
+  #echo "entry: $entry, product: $product"
+  status_code=`curl --write-out %{http_code} --silent --output /dev/null -X PUT -H 'Content-Type: application/json' "http://onecx-product-store-svc/operator/product/v1/update/$product" -d @$entry`
 
   if [[ "$status_code" =~ (200|201)$  ]]; then
-    echo -e "...imported via operator, status: ${GREEN}$status_code${NC}, product: $file_name"
+    echo -e "...imported via operator, status: ${GREEN}$status_code${NC}, product: $product"
   else
-    echo -e "${RED}...imported via operator, status: $status_code, product: $file_name ${NC}"
+    echo -e "${RED}...imported via operator, status: $status_code, product: $product ${NC}"
   fi
 done

@@ -198,7 +198,6 @@ services:
       - onecx
     profiles:
       - all
-      - announcement
 
   ########## ONECX HELP
   onecx-help-svc:
@@ -226,7 +225,6 @@ services:
       - onecx
     profiles:
       - all
-      - help
 
   onecx-help-bff:
     image: ${ONECX_HELP_BFF}
@@ -249,7 +247,6 @@ services:
       - onecx
     profiles:
       - all
-      - help
 
   onecx-help-ui:
     image: ${ONECX_HELP_UI}
@@ -268,7 +265,6 @@ services:
       - onecx
     profiles:
       - all
-      - help
 
   ########## ONECX IAM
   onecx-iam-svc:
@@ -297,7 +293,6 @@ services:
       - onecx
     profiles:
       - all
-      - iam
 
   onecx-iam-bff:
     image: ${ONECX_IAM_BFF}
@@ -320,7 +315,6 @@ services:
       - onecx
     profiles:
       - all
-      - iam
 
   onecx-iam-ui:
     image: ${ONECX_IAM_UI}
@@ -339,7 +333,6 @@ services:
       - onecx
     profiles:
       - all
-      - iam
 
   ########## ONECX PARAMETER
   onecx-parameter-svc:
@@ -369,7 +362,6 @@ services:
     profiles:
       - all
       - data-import
-      - parameter
 
   onecx-parameter-bff:
     image: ${ONECX_PARAMETER_BFF}
@@ -392,7 +384,6 @@ services:
       - onecx
     profiles:
       - all
-      - parameter
 
   onecx-parameter-ui:
     image: ${ONECX_PARAMETER_UI}
@@ -411,7 +402,6 @@ services:
       - onecx
     profiles:
       - all
-      - parameter
 
   ########## ONECX PERMISSION
   onecx-permission-svc:
@@ -443,7 +433,6 @@ services:
       - all
       - minimal
       - data-import
-      - permission
 
   onecx-permission-bff:
     image: ${ONECX_PERMISSION_BFF}
@@ -466,7 +455,6 @@ services:
       - onecx
     profiles:
       - all
-      - permission
 
   onecx-permission-ui:
     image: ${ONECX_PERMISSION_UI}
@@ -485,7 +473,6 @@ services:
       - onecx
     profiles:
       - all
-      - permission
 
   ########## ONECX PRODUCT-STORE
   onecx-product-store-svc:
@@ -515,7 +502,6 @@ services:
       - all
       - minimal
       - data-import
-      - product-store
 
   onecx-product-store-bff:
     image: ${ONECX_PRODUCT_STORE_BFF}
@@ -538,7 +524,6 @@ services:
       - onecx
     profiles:
       - all
-      - product-store
 
   onecx-product-store-ui:
     image: ${ONECX_PRODUCT_STORE_UI}
@@ -557,7 +542,6 @@ services:
       - onecx
     profiles:
       - all
-      - product-store
 
   ########## ONECX SHELL
   onecx-shell-bff:
@@ -597,7 +581,6 @@ services:
     profiles:
       - all
       - minimal
-      - shell
 
   onecx-shell-ui:
     image: ${ONECX_SHELL_UI}
@@ -621,7 +604,6 @@ services:
     profiles:
       - all
       - minimal
-      - shell
 
   ########## ONECX TENANT
   onecx-tenant-svc:
@@ -651,7 +633,6 @@ services:
       - all
       - minimal
       - data-import
-      - tenant
 
   onecx-tenant-bff:
     image: ${ONECX_TENANT_BFF}
@@ -674,7 +655,6 @@ services:
       - onecx
     profiles:
       - all
-      - tenant
 
   onecx-tenant-ui:
     image: ${ONECX_TENANT_UI}
@@ -693,7 +673,6 @@ services:
       - onecx
     profiles:
       - all
-      - tenant
 
   ########## ONECX THEME
   onecx-theme-svc:
@@ -723,7 +702,6 @@ services:
       - all
       - minimal
       - data-import
-      - theme
 
   onecx-theme-bff:
     image: ${ONECX_THEME_BFF}
@@ -746,7 +724,6 @@ services:
       - onecx
     profiles:
       - all
-      - theme
 
   onecx-theme-ui:
     image: ${ONECX_THEME_UI}
@@ -765,7 +742,6 @@ services:
       - onecx
     profiles:
       - all
-      - theme
 
   ########## ONECX WELCOME
   onecx-welcome-svc:
@@ -793,7 +769,6 @@ services:
       - onecx
     profiles:
       - all
-      - welcome
 
   onecx-welcome-bff:
     image: ${ONECX_WELCOME_BFF}
@@ -816,7 +791,6 @@ services:
       - onecx
     profiles:
       - all
-      - welcome
 
   onecx-welcome-ui:
     image: ${ONECX_WELCOME_UI}
@@ -835,7 +809,6 @@ services:
       - onecx
     profiles:
       - all
-      - welcome
 
   ########## ONECX WORKSPACE
   onecx-workspace-svc:
@@ -866,7 +839,6 @@ services:
       - all
       - minimal
       - data-import
-      - workspace
 
   onecx-workspace-bff:
     image: ${ONECX_WORKSPACE_BFF}
@@ -890,7 +862,6 @@ services:
     profiles:
       - all
       - minimal
-      - workspace
 
   onecx-workspace-ui:
     image: ${ONECX_WORKSPACE_UI}
@@ -910,7 +881,6 @@ services:
     profiles:
       - all
       - minimal
-      - workspace
 
   ########## ONECX USER-PROFILE
   onecx-user-profile-svc:
@@ -939,7 +909,6 @@ services:
     profiles:
       - all
       - minimal
-      - user-profile
 
   onecx-user-profile-bff:
     image: ${ONECX_USER_PROFILE_BFF}
@@ -962,7 +931,6 @@ services:
       - onecx
     profiles:
       - all
-      - user-profile
 
   onecx-user-profile-ui:
     image: ${ONECX_USER_PROFILE_UI}
@@ -981,4 +949,3 @@ services:
       - onecx
     profiles:
       - all
-      - user-profile
