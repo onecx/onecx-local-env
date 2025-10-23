@@ -1,0 +1,16 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX Announcement Banner",
+  "description": "Display active announcements as banner (carousel)",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/announcement/",
+  "remoteEntry": "/mfe/announcement/remoteEntry.js",
+  "note": "Imported MFE",
+  "exposedModule": "./OneCXAnnouncementBannerComponent",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-announcement",
+  "tagName": "ocx-announcement-banner-component",
+  "type": "COMPONENT",
+  "deprecated": false,
+  "undeployed": false
+}
