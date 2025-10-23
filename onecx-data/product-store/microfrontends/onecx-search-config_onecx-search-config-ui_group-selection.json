@@ -1,0 +1,16 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX Search Config column group selection",
+  "description": "Column group selection",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/search-config/",
+  "remoteEntry": "/mfe/search-config/remoteEntry.js",
+  "note": "Imported MFE",
+  "exposedModule": "./OneCXColumnGroupSelectionComponent",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-search-config",
+  "tagName": "ocx-column-group-selection-component",
+  "type": "COMPONENT",
+  "deprecated": false,
+  "undeployed": false
+}

@@ -1,0 +1,16 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX Search Config",
+  "description": "Search Configurations",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/search-config/",
+  "remoteEntry": "/mfe/search-config/remoteEntry.js",
+  "note": "Imported MFE",
+  "exposedModule": "./OneCXSearchConfigComponent",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-search-config",
+  "tagName": "ocx-search-config-component",
+  "type": "COMPONENT",
+  "deprecated": false,
+  "undeployed": false
+}

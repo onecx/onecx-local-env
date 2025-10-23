@@ -1,16 +1,16 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Product Store UI",
-  "description": "OneCX Product Store UI",
+  "appName": "OneCX Product Data",
+  "description": "Provide Product Data",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/product-store/",
   "remoteEntry": "/mfe/product-store/remoteEntry.js",
   "note": "Imported MFE",
-  "exposedModule": "./OneCXProductStoreModule",
+  "exposedModule": "./OneCXProductDataComponent",
   "technology": "WEBCOMPONENTMODULE",
   "remoteName": "onecx-product-store",
-  "tagName": "ocx-product-store-component",
-  "type": "MODULE",
+  "tagName": "ocx-product-data-component",
+  "type": "COMPONENT",
   "deprecated": false,
   "undeployed": false
 }

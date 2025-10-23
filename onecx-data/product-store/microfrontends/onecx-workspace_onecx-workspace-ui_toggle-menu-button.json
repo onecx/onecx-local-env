@@ -1,10 +1,10 @@
 {
   "appVersion": "xxx",
-  "appName": "onecx-workspace-ui",
-  "description": "onecx-workspace-ui",
+  "appName": "OneCX Workspace Toggle Menu",
+  "description": "Toggle visibility of vertical menu",
+  "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/workspace/",
   "remoteEntry": "/mfe/workspace/remoteEntry.js",
-  "note": "Imported MFE",
   "exposedModule": "./OneCXToggleMenuButtonComponent",
   "technology": "WEBCOMPONENTMODULE",
   "remoteName": "onecx-workspace",

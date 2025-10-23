@@ -1,7 +1,7 @@
 {
   "appVersion": "dev",
-  "appName": "onecx-parameter-ui",
-  "description": "onecx-parameter-ui",
+  "appName": "OneCX Parameter UI",
+  "description": "OneCX Parameter UI",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/parameter/",
   "remoteEntry": "/mfe/parameter/remoteEntry.js",

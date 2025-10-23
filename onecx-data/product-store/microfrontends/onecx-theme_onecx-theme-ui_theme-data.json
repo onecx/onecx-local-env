@@ -1,16 +1,16 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Theme UI",
-  "description": "OneCX Theme UI",
+  "appName": "OneCX Theme Data",
+  "description": "Provide theme data like themes, theme, logo for given theme name(s)",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/theme/",
   "remoteEntry": "/mfe/theme/remoteEntry.js",
   "note": "Imported MFE",
-  "exposedModule": "./OneCXThemeModule",
+  "exposedModule": "./OneCXThemeDataComponent",
   "technology": "WEBCOMPONENTMODULE",
   "remoteName": "onecx-theme",
-  "tagName": "ocx-theme-component",
-  "type": "MODULE",
+  "tagName": "ocx-theme-data-component",
+  "type": "COMPONENT",
   "deprecated": false,
   "undeployed": false
 }
