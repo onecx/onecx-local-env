@@ -22,7 +22,9 @@ do
   status_code=`curl --write-out %{http_code} --silent --output /dev/null -X POST -H "apm-principal-token: $token" -H 'Content-Type: application/json' "http://onecx-theme-svc/exim/v1/themes/operator" -d @$entry`
 
   if [[ "$status_code" =~ (200|201)$  ]]; then
-    echo -e "...import via exim, status: ${GREEN}$status_code${NC}, tenant: $tenant, theme: $theme"
+    if [[ $1 != "silent" ]]; then
+      echo -e "...import via exim, status: ${GREEN}$status_code${NC}, tenant: $tenant, theme: $theme"
+    fi
   else
     echo -e "${RED}...import via exim, status: $status_code, tenant: $tenant, theme: $theme ${NC}"
   fi 

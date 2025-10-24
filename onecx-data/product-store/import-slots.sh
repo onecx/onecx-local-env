@@ -21,7 +21,9 @@ do
   status_code=`curl --write-out %{http_code} --silent --output /dev/null -X PUT -H 'Content-Type: application/json' "http://onecx-product-store-svc/operator/slot/v1/$product/$appid" -d @$entry`
 
   if [[ "$status_code" =~ (200|201)$  ]]; then
-    echo -e "...import via operator, status: ${GREEN}$status_code${NC}, product: $product, slot: $slot"
+    if [[ $1 != "silent" ]]; then
+      echo -e "...import via operator, status: ${GREEN}$status_code${NC}, product: $product, slot: $slot"
+    fi
   else
     echo -e "${RED}...import via operator, status: $status_code, product: $product, slot: $slot ${NC}"
   fi

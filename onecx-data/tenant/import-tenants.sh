@@ -19,7 +19,9 @@ do
   # status_code=`curl --write-out %{http_code} --silent --output /dev/null -X POST -H 'Content-Type: application/json' "http://onecx-tenant-svc/import/tenant" -d @$entry`
   
   if [[ "$status_code" =~ (200|201)$  ]]; then
-    echo -e "...import via exim, status: ${GREEN}$status_code${NC}"
+    if [[ $1 != "silent" ]]; then
+      echo -e "...import via exim, status: ${GREEN}$status_code${NC}"
+    fi
   else
     echo -e "${RED}...import via exim, status: $status_code"
   fi 

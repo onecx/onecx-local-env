@@ -25,7 +25,9 @@ do
   status_code=`curl --write-out %{http_code} --silent --output /dev/null -X POST -H "apm-principal-token: $token" -H 'Content-Type: application/json' "http://onecx-permission-svc/exim/v1/assignments/operator" -d @$entry`
 
   if [[ "$status_code" =~ (200|201)$  ]]; then
-    echo -e "...import via operator, status: ${GREEN}$status_code${NC}, product: $product"
+    if [[ $1 != "silent" ]]; then
+      echo -e "...import via operator, status: ${GREEN}$status_code${NC}, product: $product"
+    fi
   else
     echo -e "${RED}...import via operator, status: $status_code, product: $product ${NC}"
   fi 

@@ -10,7 +10,7 @@ export NC='\033[0m' # No Color
 
 echo -e "${CYAN}Start OneCX Local Environment${NC}"
 
-profile=all
+profile=minimal
 print_usage=1
 stop=0
 
@@ -45,4 +45,3 @@ then
 fi
 
 docker compose -f versions/v2/docker-compose.v2.yaml  --profile $profile   up -d
-# docker compose --profile $profile up -d --wait
