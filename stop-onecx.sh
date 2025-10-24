@@ -55,7 +55,7 @@ if [[ $1 == "clean" ]]
 then
   # clean volumes
   docker compose -f versions/v2/docker-compose.v2.yaml --env-file versions/v2/.env  --profile $profile  down
-  echo -e "${CYAN} ...Clean all Docker volumes${NC}"
+  echo -e "${CYAN}Remove Docker volume 'onecx-local-env_postgres'${NC}"
   docker volume rm -f onecx-local-env_postgres
 else
   echo "stopping profile $profile"
