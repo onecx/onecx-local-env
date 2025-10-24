@@ -15,6 +15,11 @@ CREATE USER onecx_announcement WITH ENCRYPTED PASSWORD 'onecx_announcement';
 CREATE DATABASE onecx_announcement;
 GRANT ALL PRIVILEGES ON DATABASE onecx_announcement TO onecx_announcement;
 
+-- -- onecx_bookmark
+CREATE USER onecx_bookmark WITH ENCRYPTED PASSWORD 'onecx_bookmark';
+CREATE DATABASE onecx_bookmark;
+GRANT ALL PRIVILEGES ON DATABASE onecx_bookmark TO onecx_bookmark;
+
 -- -- onecx_help
 CREATE USER onecx_help WITH ENCRYPTED PASSWORD 'onecx_help';
 CREATE DATABASE onecx_help;

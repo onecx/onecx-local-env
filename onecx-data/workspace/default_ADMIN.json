@@ -266,9 +266,9 @@
           "name": "onecx-shell-footer",
           "components": [
             {
-              "productName": "onecx-theme",
-              "appId": "onecx-theme-ui",
-              "name": "./OneCXCurrentThemeLogoComponent"
+              "productName": "onecx-workspace",
+              "appId": "onecx-workspace-ui",
+              "name": "./OneCXCurrentWorkspaceLogoComponent"
             },
             {
               "productName": "onecx-workspace",
