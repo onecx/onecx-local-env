@@ -1,6 +1,6 @@
 {
   "version": "xxx",
-  "description": "onecx-announcement-bff",
   "name": "onecx-announcement-bff",
+  "description": "OneCX Announcement Backend For Frontend",
   "type": "bff"
 }

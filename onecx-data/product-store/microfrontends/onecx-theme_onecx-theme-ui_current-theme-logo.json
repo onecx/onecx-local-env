@@ -1,0 +1,16 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX Current Theme Logo",
+  "description": "Display the logo of the current theme. Use imageStyleClass as slot input parameter to adjust the image style.",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/theme/",
+  "remoteEntry": "/mfe/theme/remoteEntry.js",
+  "note": "Imported MFE",
+  "exposedModule": "./OneCXCurrentThemeLogoComponent",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-theme",
+  "tagName": "ocx-current-theme-logo-component",
+  "type": "COMPONENT",
+  "deprecated": false,
+  "undeployed": false
+}

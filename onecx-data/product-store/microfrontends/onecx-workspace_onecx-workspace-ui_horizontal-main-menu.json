@@ -1,15 +1,15 @@
 {
-    "appVersion": "xxx",
-    "appName": "onecx-workspace-ui",
-    "description": "onecx-workspace-ui",
-    "remoteBaseUrl": "/mfe/workspace/",
-    "remoteEntry": "/mfe/workspace/remoteEntry.js",
-    "note": "Imported MFE",
-    "exposedModule": "./OneCXHorizontalMainMenuComponent",
-    "technology": "WEBCOMPONENTMODULE",
-    "remoteName": "onecx-workspace",
-    "tagName": "ocx-horizontal-main-menu-component",
-    "type": "COMPONENT",
-    "deprecated": false,
-    "undeployed": false
+  "appVersion": "xxx",
+  "appName": "OneCX Workspace Horizontal Menu",
+  "description": "Creates the main menu in horizontal orientation, displayed only if screen dimension is greather then mobile breakpoint (767px)",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/workspace/",
+  "remoteEntry": "/mfe/workspace/remoteEntry.js",
+  "exposedModule": "./OneCXHorizontalMainMenuComponent",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-workspace",
+  "tagName": "ocx-horizontal-main-menu-component",
+  "type": "COMPONENT",
+  "deprecated": false,
+  "undeployed": false
 }

@@ -1,0 +1,15 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX Workspace Logo",
+  "description": "Display the logo of the current workspace. Use imageStyleClass as slot input parameter to adjust the image style.",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/workspace/",
+  "remoteEntry": "/mfe/workspace/remoteEntry.js",
+  "exposedModule": "./OneCXCurrentWorkspaceLogoComponent",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-workspace",
+  "tagName": "ocx-current-workspace-logo-component",
+  "type": "COMPONENT",
+  "deprecated": false,
+  "undeployed": false
+}

@@ -1,0 +1,16 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX Announcement UI",
+  "description": "OneCX Announcement UI",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/announcement/",
+  "remoteEntry": "/mfe/announcement/remoteEntry.js",
+  "note": "OneCX Announcement UI auto import via MF operator",
+  "exposedModule": "./OneCXAnnouncementModule",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-announcement",
+  "tagName": "ocx-announcement-component",
+  "type": "MODULE",
+  "deprecated": false,
+  "undeployed": false
+}

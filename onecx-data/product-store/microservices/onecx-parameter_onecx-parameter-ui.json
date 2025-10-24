@@ -1,6 +1,6 @@
 {
-    "version": "dev",
-    "description": "onecx-parameter-ui",
-    "name": "onecx-parameter-ui",
-    "type": "ui"
+  "version": "dev",
+  "name": "onecx-parameter-ui",
+  "description": "OneCX Parameter UI",
+  "type": "ui"
 }

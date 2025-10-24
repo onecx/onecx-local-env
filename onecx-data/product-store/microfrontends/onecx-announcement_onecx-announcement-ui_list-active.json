@@ -1,0 +1,16 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX Announcement List Active",
+  "description": "List active announcements",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/announcement/",
+  "remoteEntry": "/mfe/announcement/remoteEntry.js",
+  "note": "Imported MFE",
+  "exposedModule": "./OneCXAnnouncementListActiveComponent",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-announcement",
+  "tagName": "ocx-announcement-list-active-component",
+  "type": "COMPONENT",
+  "deprecated": false,
+  "undeployed": false
+}

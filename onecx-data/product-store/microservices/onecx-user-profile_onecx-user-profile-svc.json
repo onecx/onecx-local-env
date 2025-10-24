@@ -1,6 +1,6 @@
 {
-    "version": "xxx",
-    "description": "onecx-user-profile-svc",
-    "name": "onecx-user-profile-svc",
-    "type": "svc"
+  "version": "xxx",
+  "name": "onecx-user-profile-svc",
+  "description": "OneCX User Profile Backend Service",
+  "type": "svc"
 }

@@ -1,0 +1,16 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX Bookmark Lists",
+  "description": "Show active user and workspace bookmarks",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/bookmark/",
+  "remoteEntry": "/mfe/bookmark/remoteEntry.js",
+  "note": "Imported MFE",
+  "exposedModule": "./OneCXBookmarkListComponent",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-bookmark",
+  "tagName": "ocx-show-bookmark-component",
+  "type": "COMPONENT",
+  "deprecated": false,
+  "undeployed": false
+}

@@ -1,6 +1,6 @@
 {
-    "version": "xxx",
-    "description": "onecx-workspace-ui",
-    "name": "onecx-workspace-ui",
-    "type": "ui"
+  "version": "xxx",
+  "name": "onecx-workspace-ui",
+  "description": "OneCX Workspace UI",
+  "type": "ui"
 }

@@ -1,6 +1,6 @@
 {
-    "version": "xxx",
-    "description": "onecx-iam-svc",
-    "name": "onecx-iam-svc",
-    "type": "svc"
+  "version": "xxx",
+  "name": "onecx-iam-svc",
+  "description": "OneCX IAM Backend Service",
+  "type": "svc"
 }

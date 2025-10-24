@@ -1,4 +1,4 @@
-# OneCX Local Env v2
+# OneCX Local Environment v2
 
 This folder contains the source code for version 2 of `onecx-local-env`.
 

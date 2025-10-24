@@ -1,7 +1,8 @@
 {
   "appVersion": "xxx",
-  "appName": "onecx-help",
+  "appName": "OneCX Help Item Editing",
   "description": "Edit help item",
+  "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/help/",
   "remoteEntry": "/mfe/help/remoteEntry.js",
   "note": "Imported MFE",

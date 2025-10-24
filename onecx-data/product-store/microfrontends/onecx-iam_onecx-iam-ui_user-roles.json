@@ -1,0 +1,16 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX IAM User Roles",
+  "description": "Provide IAM user roles",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/iam/",
+  "remoteEntry": "/mfe/iam/remoteEntry.js",
+  "note": "Imported MFE",
+  "exposedModule": "./OneCXIamUserRolesComponent",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-iam",
+  "tagName": "ocx-iam-user-roles-component",
+  "type": "COMPONENT",
+  "deprecated": false,
+  "undeployed": false
+}

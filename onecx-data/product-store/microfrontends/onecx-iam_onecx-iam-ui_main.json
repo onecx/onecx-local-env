@@ -1,15 +1,25 @@
 {
-    "appVersion": "xxx",
-    "appName": "onecx-iam-ui",
-    "description": "onecx-iam-ui",
-    "remoteBaseUrl": "/mfe/iam/",
-    "remoteEntry": "/mfe/iam/remoteEntry.js",
-    "note": "Imported MFE",
-    "exposedModule": "./OneCXIamModule",
-    "technology": "WEBCOMPONENTMODULE",
-    "remoteName": "onecx-iam",
-    "tagName": "ocx-iam-component",
-    "type": "MODULE",
-    "deprecated": false,
-    "undeployed": false
+  "appVersion": "xxx",
+  "appName": "OneCX IAM UI",
+  "description": "OneCX IAM UI",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/iam/",
+  "remoteEntry": "/mfe/iam/remoteEntry.js",
+  "exposedModule": "./OneCXIamModule",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-iam",
+  "tagName": "ocx-iam-component",
+  "type": "MODULE",
+  "deprecated": false,
+  "undeployed": false,
+  "endpoints": [
+    {
+      "name": "roles",
+      "path": "/roles"
+    },
+    {
+      "name": "users",
+      "path": "/users"
+    }
+  ]
 }

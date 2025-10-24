@@ -1,0 +1,16 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX Theme Data",
+  "description": "Provide theme data like themes, theme, logo for given theme name(s)",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/theme/",
+  "remoteEntry": "/mfe/theme/remoteEntry.js",
+  "note": "Imported MFE",
+  "exposedModule": "./OneCXThemeDataComponent",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-theme",
+  "tagName": "ocx-theme-data-component",
+  "type": "COMPONENT",
+  "deprecated": false,
+  "undeployed": false
+}

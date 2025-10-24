@@ -1,6 +1,6 @@
 {
-    "version": "xxx",
-    "description": "onecx-tenant-ui",
-    "name": "onecx-tenant-ui",
-    "type": "ui"
+  "version": "xxx",
+  "name": "onecx-tenant-ui",
+  "description": "OneCX Tenant UI",
+  "type": "ui"
 }

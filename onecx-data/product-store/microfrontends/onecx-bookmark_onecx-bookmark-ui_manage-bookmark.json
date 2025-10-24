@@ -1,0 +1,16 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX Bookmark Creation & Deletion",
+  "description": "Create and Delete User Bookmarks",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/bookmark/",
+  "remoteEntry": "/mfe/bookmark/remoteEntry.js",
+  "note": "Imported MFE",
+  "exposedModule": "./OneCXManageBookmarkComponent",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-bookmark",
+  "tagName": "ocx-bookmark-manage-component",
+  "type": "COMPONENT",
+  "deprecated": false,
+  "undeployed": false
+}

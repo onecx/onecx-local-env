@@ -1,0 +1,6 @@
+{
+  "version": "xxx",
+  "name": "onecx-search-config-bff",
+  "description": "OneCX Search Config Backend For Frontend",
+  "type": "bff"
+}

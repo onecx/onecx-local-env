@@ -1,6 +1,6 @@
 {
-    "version": "xxx",
-    "description": "onecx-workspace-bff",
-    "name": "onecx-workspace-bff",
-    "type": "bff"
+  "version": "xxx",
+  "name": "onecx-workspace-bff",
+  "description": "OneCX Workspace Backend For Frontend",
+  "type": "bff"
 }

@@ -1,4 +1,8 @@
 #!/bin/bash
+#
+# Import One data from files
+#
+
 
 export RED='\033[0;31m'
 export GREEN='\033[0;32m'
@@ -24,7 +28,7 @@ fi
 
 ## Fetch token from keycloak
 echo " "
-echo -e "${CYAN}Fetching token from Keycloak... ${NC}"
+echo -e "${CYAN}Fetching token from Keycloak (realm: onecx, user: onecx)... ${NC}"
 export onecx_token=$(curl -X POST "http://keycloak-app/realms/onecx/protocol/openid-connect/token" -H "Content-Type: application/x-www-form-urlencoded" -d "username=onecx" -d "password=onecx"  -d "grant_type=password" -d "client_id=onecx-shell-ui-client" | jq -r .access_token)
 
 ## Sleep for 30 seconds to wait for services to be operational
@@ -52,45 +56,40 @@ fi
 cd $import_start_dir/onecx-data
 
 cd tenant
-echo " "
-bash ./import-tenants.sh
+bash ./import-tenants.sh $1
+cd ..
+
+cd parameter
+bash ./import-parameters.sh $1
 cd ..
 
 cd product-store
-echo " "
-bash ./import-products.sh
-echo " "
-bash ./import-slots.sh
-echo " "
-bash ./import-microservices.sh
-echo " "
-bash ./import-microfrontends.sh
+bash ./import-slots.sh $1
+bash ./import-products.sh $1
+bash ./import-microservices.sh $1
+bash ./import-microfrontends.sh $1
 cd ..
 
-cd parameters
-echo " "
-bash ./import-parameters.sh
+cd permission
+bash ./import-permissions.sh $1
 cd ..
 
-cd workspace
-echo " "
-bash ./import-workspaces.sh
+cd permission-assignment
+bash ./import-assignments.sh $1
 cd ..
 
 cd theme
-echo " "
-bash ./import-themes.sh
+bash ./import-themes.sh $1
 cd ..
 
-cd permissions
-echo " "
-bash ./import-permissions.sh
+cd welcome
+bash ./import-welcome-images.sh $1
 cd ..
 
-cd permission-assignments
-echo " "
-bash ./import-assignments.sh
+cd workspace
+bash ./import-workspaces.sh $1
 cd ..
+
 
 if [[ ( $current_dir != "v2"  ) ]]
 then

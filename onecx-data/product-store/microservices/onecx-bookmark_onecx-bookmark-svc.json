@@ -1,0 +1,6 @@
+{
+  "version": "xxx",
+  "name": "onecx-bookmark-svc",
+  "description": "OneCX Bookmark Backend Service",
+  "type": "svc"
+}

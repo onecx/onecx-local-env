@@ -1,7 +1,8 @@
 {
   "appVersion": "xxx",
-  "appName": "onecx-help",
+  "appName": "OneCX Help UI",
   "description": "OneCX Help UI",
+  "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/help/",
   "remoteEntry": "/mfe/help/remoteEntry.js",
   "note": "OneCX Help UI auto import via MF operator",
