@@ -17,7 +17,8 @@ do
   product=${filename%%_*}
   appid=`echo $filename | cut -d'_' -f2`
   
-  status_code=`curl --write-out %{http_code} --silent --output /dev/null -X PUT -H 'Content-Type: application/json' "http://onecx-permission-svc/operator/v1/$product/$appid" -d @$entry`
+  url="http://onecx-permission-svc/operator/v1/$product/$appid"
+  status_code=`curl --write-out %{http_code} --silent --output /dev/null -X PUT -H 'Content-Type: application/json' "$url" -d @$entry`
   
   if [[ "$status_code" =~ (200|201)$  ]]; then
     if [[ $1 != "silent" ]]; then

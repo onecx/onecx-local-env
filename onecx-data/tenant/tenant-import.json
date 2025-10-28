@@ -1,5 +1,5 @@
 {
-  "id": "onecx-local-env_import-tenants",
+  "id": "onecx-local-env_import-onecx-tenants",
   "tenants": {
     "tenant1": {
       "orgId": "t1",

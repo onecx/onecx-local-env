@@ -1,4 +1,4 @@
-# OneCX Local Environment Setup
+# OneCX Local Development Environment
 
 This repository contains the source code for the OneCX local development environment.
 

@@ -12,11 +12,8 @@ echo -e "${CYAN}Importing Tenants ${NC}"
 
 for entry in "."/*.json
 do
-  #filename=$(basename "$entry")
-  #filename=`echo $filename | cut -d '.' -f 1`
-  
-  status_code=`curl --write-out %{http_code} --silent --output /dev/null -X POST -H 'Content-Type: application/json' "http://onecx-tenant-svc/exim/v1/tenants/operator" -d @$entry`
-  # status_code=`curl --write-out %{http_code} --silent --output /dev/null -X POST -H 'Content-Type: application/json' "http://onecx-tenant-svc/import/tenant" -d @$entry`
+  url="http://onecx-tenant-svc/exim/v1/tenants/operator"
+  status_code=`curl --write-out %{http_code} --silent --output /dev/null -X POST -H 'Content-Type: application/json' "$url" -d @$entry`
   
   if [[ "$status_code" =~ (200|201)$  ]]; then
     if [[ $1 != "silent" ]]; then

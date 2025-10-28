@@ -22,7 +22,8 @@ do
   token_var_name=${tenant}_token
   token=${!token_var_name}
 
-  status_code=`curl --write-out %{http_code} --silent --output /dev/null -X POST -H "apm-principal-token: $token" -H 'Content-Type: application/json' "http://onecx-permission-svc/exim/v1/assignments/operator" -d @$entry`
+  url="http://onecx-permission-svc/exim/v1/assignments/operator"
+  status_code=`curl --write-out %{http_code} --silent --output /dev/null -X POST -H "apm-principal-token: $token" -H 'Content-Type: application/json' "$url" -d @$entry`
 
   if [[ "$status_code" =~ (200|201)$  ]]; then
     if [[ $1 != "silent" ]]; then
