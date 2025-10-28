@@ -1,4 +1,4 @@
-= OneCX Local Env
+= OneCX Local Environment
 :idprefix:
 :idseparator: -
 :imagesdir: ../images
@@ -17,14 +17,32 @@ For more in-depth information on `onecx-local-env` including prerequisites, setu
 ====
 If you already followed all setup instructions mentioned in xref:general:getting-started.adoc[Getting Started - Run OneCX locally], you can complete the following steps to run and access a local OneCX environment:
 
-. *Import mock data (optional):* Before starting the local environment, you can import mock data. If you recently followed the setup instructions, mock data should already be present. To (re-)import the latest mock data, run the following command from the onecx-local-env root directory: `./import-onecx.sh`
+. *Start the local environment:* To start a minimal local OneCX environment, run the following command from the `onecx-local-env` root directory: 
++
+[source,bash]
+----
+  ./start-onecx.sh
+----
 
-. *Start the local environment:* To start a minimal local OneCX environment, run the following command from the onecx-local-env root directory: `./start-onecx.sh`
+. *Access your local OneCX environment:* After starting the local environment...
+  * Open your web browser and navigate to `http://local-proxy/onecx-shell/admin`
+  * Login using the following credentials:
+    ** Username: `onecx`
+    ** Password: `onecx`
 
-. *Access your local OneCX environment:* Once the local environment is started, you can access the OneCX Shell by navigating to `http://local-proxy/onecx-shell/admin` in your web browser. Use the following default credentials to log in:
+. *Stop the local environment:* To stop the local OneCX environment, run the following command from the `onecx-local-env` root directory:
++
+[source,bash]
+----
+./stop-onecx.sh
+----
 
-  - Username: `onecx`
-  - Password: `onecx`
+**Optional Steps**
 
-. *Stop the local environment:* After you are done working with your local OneCX environment, you can stop it by running the following command from the onecx-local-env root directory: `./stop-onecx.sh`
+. *Import mock data:* If you notice any errors or missing data in your local environment, re-importing the mock data may help resolve these issues. To import the mock data, run the following command from the `onecx-local-env` root directory:
++
+[source,bash]
+----
+./import-onecx.sh
+----
 ====

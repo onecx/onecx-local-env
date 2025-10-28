@@ -1,9 +1,9 @@
-= OneCX Local Env - Getting Started - Run OneCX locally
+= OneCX Local Environment - Getting Started - Run OneCX locally
 :idprefix:
 :idseparator: -
 :imagesdir: ../images
 
-This document provides instructions on how to set up and run OneCX Local Env for local development and testing purposes. It covers the prerequisites, setup steps, importing initial data, and spinning up the environment with different profiles.
+This document provides instructions on how to set up and run OneCX Local Environment for local development and testing purposes. It covers the prerequisites, setup steps, importing initial data, and spinning up the environment with different profiles.
 
 == Prerequisites
 
@@ -53,7 +53,7 @@ By now, you should have supported versions of Docker and Docker Compose installe
 * If you are on Windows, ensure Docker is installed inside WSL2 and not just on Windows itself.
 ====
 
-=== Select which version of OneCX Local Env to use
+=== Select which version of OneCX Local Environment to use
 
 `onecx-local-env` contains multiple versions inside the `versions` directory. Instructions for running services, importing initial data and other relevant information may differ between versions. It is therefore important to select a specific version of `onecx-local-env` before following the any other instructions in this document.
 
@@ -61,8 +61,8 @@ The current latest version of `onecx-local-env` is v2. We recommend this version
 
 For more information on the versions please refer to the version-specific documentation:
 
-- xref:general:versions/v2/v2.adoc[OneCX Local Env v2]
-- xref:general:versions/v1/v1.adoc[OneCX Local Env v1]
+- xref:general:versions/v2/v2.adoc[OneCX Local Environment v2]
+- xref:general:versions/v1/v1.adoc[OneCX Local Environment v1]
 
 === Make all relevant scripts executable
 
@@ -83,7 +83,7 @@ At this point, you should have ensured all relevant scripts are executable. To v
 ====
 
 === Configure Hosts file
-In order to expose multiple services on the same local port, OneCX Local Env uses the traefik reverse proxy. Traefik will be available via your host's port 80, and will route traffic to containers based on hostnames.
+In order to expose multiple services on the same local port, OneCX Local Environment uses the traefik reverse proxy. Traefik will be available via your host's port 80, and will route traffic to containers based on hostnames.
 
 To ensure that these hostnames resolve to your local machine and requests reach the traefik proxy, you need to add a few OneCX-specific entries to your system's `hosts` file.
 
@@ -132,8 +132,8 @@ At this point, you should have added all necessary entries to your system `hosts
 * If entries are missing in WSL2, add them manually by following the "Linux" instructions above.
 ====
 
-=== Preparing OneCX Local Env for use on Apple Silicon devices
-To be able to run OneCX Local Env on Apple Silicon devices, the images specified in `versions/<selected-version>/.env` have to be adjusted slightly.
+=== Preparing OneCX Local Environment for use on Apple Silicon devices
+To be able to run OneCX Local Environment on Apple Silicon devices, the images specified in `versions/<selected-version>/.env` have to be adjusted slightly.
 
 Please open the file and adjust each OneCX image to use the `main` tag instead of `main-native`. For example, change: `ONECX_SHELL_BFF=${DOCKER_REPO}/onecx-shell-bff:main-native` to `ONECX_SHELL_BFF=${DOCKER_REPO}/onecx-shell-bff:main`. This will ensure that Docker Compose uses OneCX's JVM-based images which support the ARM architecture used by Apple Silicon devices.
 
@@ -150,8 +150,8 @@ If you are on Apple Silicon, you should now have updated all OneCX image tags. T
 
 Before using the selected version of `onecx-local-env`, initial data must be imported to set up the environment correctly. Please refer to the version-specific documentation for instructions on how to import the initial data:
 
-- xref:general:versions/v2/v2.adoc#importing-initial-data[Importing initial data for OneCX Local Env v2]
-- xref:general:versions/v1/v1.adoc#importing-initial-data[Importing initial data for OneCX Local Env v1]
+- xref:general:versions/v2/v2.adoc#importing-initial-data[Importing initial data for OneCX Local Environment v2]
+- xref:general:versions/v1/v1.adoc#importing-initial-data[Importing initial data for OneCX Local Environment v1]
 
 The respective import scripts will import all data located in the `./imports` directory. The structure of the `imports` directory is as follows:
 
@@ -176,12 +176,12 @@ At this point, you should have imported the initial data for your selected versi
 * If you encounter issues, follow the troubleshooting steps in the version-specific documentation.
 ====
 
-== Running OneCX Local Env
+== Running OneCX Local Environment
 
 For instructions on how to run your selected version of `onecx-local-env`, please refer to the version-specific documentation:
 
-- xref:general:versions/v2/v2.adoc#running-onecx-local-env-v2[Running OneCX Local Env v2]
-- xref:general:versions/v1/v1.adoc#running-onecx-local-env-v1[Running OneCX Local Env v1]
+- xref:general:versions/v2/v2.adoc#running-onecx-local-env-v2[Running OneCX Local Environment v2]
+- xref:general:versions/v1/v1.adoc#running-onecx-local-env-v1[Running OneCX Local Environment v1]
 
 After running all desired services as per the version-specific instructions, you can access the OneCX Shell via this URL: `http://local-proxy/onecx-shell/admin`. The default user created by the previously-executed import scripts is `onecx` with the password `onecx`.
 
@@ -194,7 +194,7 @@ If there are any issues while running services, please try to:
 [NOTE]
 .Checkpoint
 ====
-At this point, certain services of OneCX Local Env should be running on your machine. To verify:
+At this point, certain services of OneCX Local Environment should be running on your machine. To verify:
 
 * Run `docker ps` and confirm that the expected containers are up and running.
 * Access the OneCX Shell at `http://local-proxy/onecx-shell/admin` and log in with the default credentials (`onecx` / `onecx`).
