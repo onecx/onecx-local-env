@@ -1,6 +1,6 @@
-# OneCX Local Development Environment
+# OneCX Local Environment
 
-This repository contains the source code for the OneCX local development environment.
+This repository contains the source code for the OneCX Local Environment used as base for local development.
 
 `onecx-local-env` uses Docker and Docker Compose to enable developers to quickly run local instances of the OneCX Shell, selected OneCX products and their dependencies for development and testing purposes.
 

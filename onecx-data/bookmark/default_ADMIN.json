@@ -1,5 +1,5 @@
 {
-  "id": "b9f26e0f-4aac-41e0-9aa5-92b299700931",
+  "id": "onecx-local-env_import-bookmark_ADMIN",
   "created": "2025-10-28T16:46:09.80308884Z",
   "bookmarks": {
     "PUBLIC": [
@@ -197,23 +197,6 @@
         "target": "_self",
         "disabled": null,
         "position": 4
-      },
-      {
-        "displayName": "Google: Capgemini",
-        "endpointName": null,
-        "endpointParameters": {},
-        "query": {},
-        "fragment": null,
-        "url": "https://www.google.com/search?gs_ssp=eJzj4tZP1zcsSUkuzCjJMmC0UjWoMDG3TEk1sDC3NLQwTEoxNrYCCiUBoZFhioFJSlJyWqKll1ByYkF6am5mXqZC7uE9eckZqXkAA-4W-A&q=capgemini+m%C3%BCnchen&rlz=1C1GCEU_de&oq=Capgemini&gs_lcrp=EgZjaHJvbWUqEAgDEC4YrwEYxwEYgAQYjgUyBwgAEAAYjwIyEAgBEC4YxwEYsQMY0QMYgAQyDwgCEEUYORjjAhixAxiABDIQCAMQLhivARjHARiABBiOBTIKCAQQABixAxiABDIQCAUQLhjHARixAxjRAxiABDIHCAYQABiABDIHCAcQABiABDIQCAgQLhivARjHARiABBiOBTIHCAkQABiABNIBCjEwMjYzajBqMTWoAgiwAgE&sourceid=chrome&ie=UTF-8",
-        "productName": null,
-        "appId": null,
-        "scope": "PRIVATE",
-        "imageUrl": null,
-        "image": null,
-        "external": true,
-        "target": "_blank",
-        "disabled": false,
-        "position": 7
       }
     ]
   }
