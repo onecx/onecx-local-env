@@ -20,9 +20,9 @@ If you already followed all setup instructions mentioned in xref:general:getting
 . *Start the local environment:* To start a minimal local OneCX environment, run the following command from the onecx-local-env root directory: 
 +
 [source,bash]
-```
+----
   ./start-onecx.sh
-```
+----
 
 . *Access your local OneCX environment:* After starting the local environment...
   * Open your web browser and navigate to `http://local-proxy/onecx-shell/admin`
@@ -33,16 +33,16 @@ If you already followed all setup instructions mentioned in xref:general:getting
 . *Stop the local environment:* To stop the local OneCX environment, run the following command from the onecx-local-env root directory:
 +
 [source,bash]
-```
+----
 ./stop-onecx.sh
-```
+----
 
 **Optional Steps**
 
 . *Import mock data:* If you notice any errors or missing data in your local environment, re-importing the mock data may help resolve these issues. To import the mock data, run the following command from the onecx-local-env root directory:
 +
 [source,bash]
-```
+----
 ./import-onecx.sh
-```
+----
 ====
