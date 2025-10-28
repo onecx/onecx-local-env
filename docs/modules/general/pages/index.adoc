@@ -17,7 +17,7 @@ For more in-depth information on `onecx-local-env` including prerequisites, setu
 ====
 If you already followed all setup instructions mentioned in xref:general:getting-started.adoc[Getting Started - Run OneCX locally], you can complete the following steps to run and access a local OneCX environment:
 
-. *Start the local environment:* To start a minimal local OneCX environment, run the following command from the onecx-local-env root directory: 
+. *Start the local environment:* To start a minimal local OneCX environment, run the following command from the `onecx-local-env` root directory: 
 +
 [source,bash]
 ----
@@ -30,7 +30,7 @@ If you already followed all setup instructions mentioned in xref:general:getting
     ** Username: `onecx`
     ** Password: `onecx`
 
-. *Stop the local environment:* To stop the local OneCX environment, run the following command from the onecx-local-env root directory:
+. *Stop the local environment:* To stop the local OneCX environment, run the following command from the `onecx-local-env` root directory:
 +
 [source,bash]
 ----
@@ -39,7 +39,7 @@ If you already followed all setup instructions mentioned in xref:general:getting
 
 **Optional Steps**
 
-. *Import mock data:* If you notice any errors or missing data in your local environment, re-importing the mock data may help resolve these issues. To import the mock data, run the following command from the onecx-local-env root directory:
+. *Import mock data:* If you notice any errors or missing data in your local environment, re-importing the mock data may help resolve these issues. To import the mock data, run the following command from the `onecx-local-env` root directory:
 +
 [source,bash]
 ----
