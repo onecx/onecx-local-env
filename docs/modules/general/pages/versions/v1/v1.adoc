@@ -1,14 +1,14 @@
-= OneCX Local Env - Versions - v1
+= OneCX Local Environment - Versions - v1
 :idprefix:
 :idseparator: -
 :imagesdir: ../images
 
 [quote]
 ____
-This document only contains information specific to v1 of the OneCX Local Env. Please make sure to also read the xref:general:getting-started.adoc[*top-level getting started guide*] for general information and instructions that apply to all versions.
+This document only contains information specific to v1 of the OneCX Local Environment. Please make sure to also read the xref:general:getting-started.adoc[*top-level getting started guide*] for general information and instructions that apply to all versions.
 ____
 
-v1 was the initial version of the local development environment for OneCX. While it still works and will be maintained for some time to avoid breaking existing workflows, some significant quality-of-life improvements were implemented in xref:general:versions/v2/v2.adoc[OneCX Local Env v2]. We therefore encourage new users to start with xref:general:versions/v2/v2.adoc[OneCX Local Env v2].
+v1 was the initial version of the local development environment for OneCX. While it still works and will be maintained for some time to avoid breaking existing workflows, some significant quality-of-life improvements were implemented in xref:general:versions/v2/v2.adoc[OneCX Local Environment v2]. We therefore encourage new users to start with xref:general:versions/v2/v2.adoc[OneCX Local Environment v2].
 
 To migrate from v1 to v2, please refer to the xref:general:versions/v2/migrate.adoc[Migrate to v2] guide.
 
@@ -16,7 +16,7 @@ To migrate from v1 to v2, please refer to the xref:general:versions/v2/migrate.a
 
 v1 contains services for Traefik, Postgres, Keycloak and all currently existing OneCX products (SVC, BFF, UI). Some of these services are started by default, while others can only be started via specific profiles. For more details on the available services, profiles, environment variables, networks and volumes, please refer to the <<components>> section of this document.
 
-== Running OneCX Local Env v1
+== Running OneCX Local Environment v1
 
 To start a minimal local development environment (Traefik, Postgres and Keycloak) together with OneCX Shell, OneCX Workspace and their dependencies, run one of the following commands:
 
@@ -63,7 +63,7 @@ To start all services defined in the compose file, use the `--profile all` flag:
   docker compose --profile all up -d
 ----
 
-== Stopping OneCX Local Env v1
+== Stopping OneCX Local Environment v1
 
 To stop the started services, run one of the following commands:
 
@@ -94,7 +94,7 @@ To stop the started services, run one of the following commands:
 
 == Importing initial data
 
-When starting OneCX Local Env v1 for the first time, some initial data has to be imported to set up the environment correctly. To import the initial data, please follow these steps:
+When starting OneCX Local Environment v1 for the first time, some initial data has to be imported to set up the environment correctly. To import the initial data, please follow these steps:
 
 . Start the environment using the `all` profile (see <<running-onecx-local-env-v1>>).
 . Wait for all services to be healthy.
@@ -135,7 +135,7 @@ When starting OneCX Local Env v1 for the first time, some initial data has to be
 
 === Profiles
 
-OneCX Local Env v1 contains a few profiles that can be used to start additional services on top of the default set of services:
+OneCX Local Environment v1 contains a few profiles that can be used to start additional services on top of the default set of services:
 
 - `parameter` — starts the OneCX Parameter product services
 - `all` — starts all services defined in the compose file
@@ -152,11 +152,11 @@ Some services also define additional environment variables directly in the compo
 
 === Networks
 
-- `example` — primary network used by OneCX Local Env v1. All services connect via this network.
+- `example` — primary network used by OneCX Local Environment v1. All services connect via this network.
 
 === Volumes
 
-OneCX Local Env v1 mounts one global volume:
+OneCX Local Environment v1 mounts one global volume:
 
 - `postgres` — volume used by `postgresdb` to persist its data across container restarts.
 
@@ -164,5 +164,5 @@ Additionally, some services (`traefik`, `postgresdb`, `pgadmin` and `keycloak-ap
 
 == Troubleshooting
 
-If you encounter any issues while using OneCX Local Env v1, please refer to the xref:troubleshooting:common-issues.adoc[Troubleshooting - Common Issues] page for potential solutions and workarounds.
+If you encounter any issues while using OneCX Local Environment v1, please refer to the xref:troubleshooting:common-issues.adoc[Troubleshooting - Common Issues] page for potential solutions and workarounds.
 

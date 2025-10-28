@@ -1,4 +1,4 @@
-= OneCX Local Env - Advanced - Default Data and Imports Overview
+= OneCX Local Environment - Advanced - Default Data and Imports Overview
 :idprefix:
 :idseparator: -
 :imagesdir: ../images

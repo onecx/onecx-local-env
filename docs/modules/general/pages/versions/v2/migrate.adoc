@@ -1,6 +1,6 @@
-= OneCX Local Env - Versions - v2 - Migrate to v2
+= OneCX Local Environment - Versions - v2 - Migrate to v2
 
-This guide highlights the key differences between OneCX Local Env xref:general:versions/v1/v1.adoc[v1] and xref:general:versions/v2/v2.adoc[v2], and explains how you can adapt your setup to ensure that it seamlessly works with xref:general:versions/v2/v2.adoc[v2].
+This guide highlights the key differences between OneCX Local Environment xref:general:versions/v1/v1.adoc[v1] and xref:general:versions/v2/v2.adoc[v2], and explains how you can adapt your setup to ensure that it seamlessly works with xref:general:versions/v2/v2.adoc[v2].
 
 == Network Rename
 
@@ -61,7 +61,7 @@ Before the creation of xref:general:versions/v2/v2.adoc[v2], all environment var
 [NOTE]
 .Checkpoint
 ====
-After reading all sections of this document you should be able to make all necessary adjustments to migrate from v1 to v2 of the OneCX Local Env.
+After reading all sections of this document you should be able to make all necessary adjustments to migrate from v1 to v2 of the OneCX Local Environment.
 To recap, the main necessary adjustments are:
 
 * Change any custom services that connect to the `example` network to connect to the `default` network instead.

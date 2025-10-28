@@ -1,27 +1,27 @@
-= OneCX Local Env - Versions - v2
+= OneCX Local Environment - Versions - v2
 :idprefix:
 :idseparator: -
 :imagesdir: ../images
 
 [quote]
 ____
-This document only contains information specific to v2 of the OneCX Local Env. Please make sure to also read the xref:general:getting-started.adoc[*top-level getting started guide*] for general information and instructions that apply to all versions.
+This document only contains information specific to v2 of the OneCX Local Environment. Please make sure to also read the xref:general:getting-started.adoc[*top-level getting started guide*] for general information and instructions that apply to all versions.
 ____
 
 
 v2 is the current latest version of the local development environment for OneCX.
 
-If you are currently using xref:general:versions/v1/v1.adoc[OneCX Local Env v1] and want to migrate to v2, please refer to the xref:general:versions/v2/migrate.adoc[Migrate to v2] guide for detailed migration instructions.
+If you are currently using xref:general:versions/v1/v1.adoc[OneCX Local Environment v1] and want to migrate to v2, please refer to the xref:general:versions/v2/migrate.adoc[Migrate to v2] guide for detailed migration instructions.
 
 == Overview
 
 v2 contains services for Traefik, Postgres, Keycloak and all currently existing OneCX products (SVC, BFF, UI). To ensure memory-efficiency and allow developers to only start the services they need, all services are grouped into profiles that can be started individually. *No services are started by default and at least one profile must be specified when starting the environment.* For more details on the available services, profiles, environment variables, networks and volumes, please refer to the <<components>> section of this document.
 
-== Running OneCX Local Env v2
+== Running OneCX Local Environment v2
 
 [quote]
 ____
-Since the link:https://github.com/onecx/onecx-local-env/blob/main/docker-compose.yaml[root compose file of `onecx-local-env`] always points to the current latest version of the OneCX Local Env, developers can run commands against v2 without needing to specify the versioned compose file explicitly.
+Since the link:https://github.com/onecx/onecx-local-env/blob/main/docker-compose.yaml[root compose file of `onecx-local-env`] always points to the current latest version of the OneCX Local Environment, developers can run commands against v2 without needing to specify the versioned compose file explicitly.
 ____
 
 To start a minimal local development environment (Traefik, Postgres and Keycloak) together with the most commonly used OneCX products (Shell, Workspace, Theme, Permission, Product Store, User Profile and Welcome) and their dependencies, developers can use the `base` profile. This profile is recommended for most users and should be viewed as the default. To start the environment with the `base` profile, run the following command:
@@ -35,7 +35,7 @@ To start a minimal local development environment (Traefik, Postgres and Keycloak
 
 To give developers more flexibility and full control over which services/products to start, several additional profiles are available. Please refer to the <<profiles>> section of this document for a list of all available profiles.
 
-== Stopping OneCX Local Env v2
+== Stopping OneCX Local Environment v2
 
 To stop a started profile, run the following command, replacing `<profile-name>` with the name of the profile to stop (e.g. `base`):
 
@@ -50,10 +50,10 @@ To stop a started profile, run the following command, replacing `<profile-name>`
 
 [quote]
 ____
-Since the link:https://github.com/onecx/onecx-local-env/blob/main/import-onecx.sh[root import script of `onecx-local-env`] always points to the current latest version of the OneCX Local Env, developers can execute the root import script to import initial data into their v2 environment without needing to specify the versioned import script explicitly.
+Since the link:https://github.com/onecx/onecx-local-env/blob/main/import-onecx.sh[root import script of `onecx-local-env`] always points to the current latest version of the OneCX Local Environment, developers can execute the root import script to import initial data into their v2 environment without needing to specify the versioned import script explicitly.
 ____
 
-When starting OneCX Local Env v2 for the first time, some initial data has to be imported to set up the environment correctly. To import the initial data, please follow these steps:
+When starting OneCX Local Environment v2 for the first time, some initial data has to be imported to set up the environment correctly. To import the initial data, please follow these steps:
 
 . Run the automated import script:
 - From the repository root:
@@ -122,7 +122,7 @@ If you want to integrate the import script into your own scripts and want to onl
 
 === Profiles
 
-To give developers more flexibility and ensure the highest possible memory-efficiency, OneCX Local Env v2 exposes all services via a variety of profiles that can be started individually. At least one profile must be specified when starting the environment. The following profiles are available:
+To give developers more flexibility and ensure the highest possible memory-efficiency, OneCX Local Environment v2 exposes all services via a variety of profiles that can be started individually. At least one profile must be specified when starting the environment. The following profiles are available:
 
 - `minimal`
     - starts only a minimal local development environment (Traefik, Postgres and Keycloak) together with OneCX Shell and its dependencies
@@ -172,11 +172,11 @@ Some services also define additional environment variables directly in the compo
 
 === Networks
 
-- `default` — primary network used by OneCX Local Env v2. All services connect via this network.
+- `default` — primary network used by OneCX Local Environment v2. All services connect via this network.
 
 === Volumes
 
-OneCX Local Env v2 mounts one global volume:
+OneCX Local Environment v2 mounts one global volume:
 
 - `postgres` — volume used by `postgresdb` to persist its data across container restarts.
 
@@ -184,4 +184,4 @@ Additionally, some services (`traefik`, `postgresdb`, `pgadmin` and `keycloak-ap
 
 == Troubleshooting
 
-If you encounter any issues while using OneCX Local Env v2, please refer to the xref:troubleshooting:common-issues.adoc[Troubleshooting - Common Issues] page for potential solutions and workarounds.
+If you encounter any issues while using OneCX Local Environment v2, please refer to the xref:troubleshooting:common-issues.adoc[Troubleshooting - Common Issues] page for potential solutions and workarounds.

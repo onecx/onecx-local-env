@@ -1,4 +1,4 @@
-= OneCX Local Env - Advanced - Extending the default environment
+= OneCX Local Environment - Advanced - Extending the default environment
 :idprefix:
 :idseparator: -
 :imagesdir: ../images
