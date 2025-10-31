@@ -1,0 +1,6 @@
+{
+    "name": "onecx-shell-body-footer-end",
+    "description": "End region of the shell body footer (e.g. action buttons)",
+    "deprecated": false,
+    "undeployed": false
+}
