@@ -1,5 +1,5 @@
 {
-  "id": "import-permission-assignments_onecx-iam",
+  "id": "onecx-local-env_import-permission-assignments_onecx-iam",
   "assignments": {
     "onecx-iam": {
       "onecx-iam-bff": {

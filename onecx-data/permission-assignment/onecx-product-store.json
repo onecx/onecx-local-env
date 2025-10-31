@@ -1,5 +1,5 @@
 {
-  "id": "import-permission-assignments_onecx-product-store",
+  "id": "onecx-local-env_import-permission-assignments_onecx-product-store",
   "assignments": {
     "onecx-product-store": {
       "onecx-product-store-bff": {

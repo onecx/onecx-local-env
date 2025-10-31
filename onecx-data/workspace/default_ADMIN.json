@@ -141,16 +141,6 @@
           ]
         },
         {
-          "productName": "onecx-unknown",
-          "baseUrl": "/unknown",
-          "microfrontends": [
-            {
-              "appId": "onecx-unknown-ui",
-              "basePath": "/"
-            }
-          ]
-        },
-        {
           "productName": "onecx-user-profile",
           "baseUrl": "/user",
           "microfrontends": [
@@ -176,16 +166,6 @@
           "microfrontends": [
             {
               "appId": "onecx-workspace-ui",
-              "basePath": "/"
-            }
-          ]
-        },
-        {
-          "productName": "process-log-mgmt",
-          "baseUrl": "/processlog",
-          "microfrontends": [
-            {
-              "appId": "process-log-mgmt-ui",
               "basePath": "/"
             }
           ]

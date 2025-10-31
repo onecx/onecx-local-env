@@ -21,7 +21,7 @@ then
   echo -e " ...use profile ${GREEN}'$profile'${NC}"
 elif [[ ( $# == 1  ) ]]
 then
-  if [[ $1 == @(all|base|minimal|data-import) ]]
+  if [[ $1 == @(all|base|minimal|data-import|product) ]]
   then
     profile=$1
     print_usage=0
@@ -36,7 +36,7 @@ fi
 
 if [[ ( $print_usage == 1  ) ]]
 then
-  echo "    usage:  $0  [ profile ]  with profile in (all, base, minimal, data-import ), optional, 'minimal' is default"
+  echo "    usage:  $0  [ profile ]  with profile in (all, base, minimal, data-import, product ), optional, 'minimal' is default"
 fi
 
 if [[ ( $stop == 1  ) ]]

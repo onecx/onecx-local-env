@@ -1,0 +1,6 @@
+{
+  "version": "xxx",
+  "name": "onecx-data-orchestrator-operator",
+  "description": "OneCX Data Orchestrator Operator",
+  "type": "operator"
+}

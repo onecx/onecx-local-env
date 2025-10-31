@@ -5,7 +5,7 @@
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/user-profile/",
   "remoteEntry": "/mfe/user-profile/remoteEntry.js",
-  "note": "Imported MFE",
+  "note": "Import via MF operator",
   "exposedModule": "./OneCXUserProfileModule",
   "technology": "WEBCOMPONENTMODULE",
   "remoteName": "onecx-user-profile",

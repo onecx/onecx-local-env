@@ -5,6 +5,7 @@
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/iam/",
   "remoteEntry": "/mfe/iam/remoteEntry.js",
+  "note": "Import via MF operator",
   "exposedModule": "./OneCXIamModule",
   "technology": "WEBCOMPONENTMODULE",
   "remoteName": "onecx-iam",

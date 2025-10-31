@@ -8,23 +8,39 @@ export GREEN='\033[0;32m'
 export CYAN='\033[0;36m'
 export NC='\033[0m' # No Color
 
-echo -e "${CYAN}Importing Microfrontends in Product Store ${NC}"
+#################################################################
+# files 
+files=`ls ./microfrontends/*.json 2>/dev/null`
+if [[ $files == "" ]]; then
+  SKIP_MSG=" ==>${RED} skipping${NC}: no files found"
+fi
 
-for entry in "./microfrontends"/*
+echo -e "$OLE_LINE_PREFIX${CYAN}Importing Microfrontends in Product Store ${NC}\t$SKIP_MSG"
+
+
+#################################################################
+# operate on found files
+for entry in $files
 do
   filename=$(basename "$entry")
   filename=`echo $filename | cut -d '.' -f 1`
-  product=${filename%%_*}
-  appid=`echo $filename | cut -d'_' -f2`
-  mfe=`echo $filename | cut -d'_' -f3`
+  product=`echo $filename | cut -d'_' -f 1`
+  appid=`echo $filename | cut -d'_' -f 2`
+  mfe=`echo $filename | cut -d'_' -f 3`
   
-  status_code=`curl --write-out %{http_code} --silent --output /dev/null -X PUT -H 'Content-Type: application/json' "http://onecx-product-store-svc/operator/mfe/v1/$product/$appid" -d @$entry`
+  url="http://onecx-product-store-svc/operator/mfe/v1/$product/$appid"
+  params="--write-out %{http_code} --silent --output /dev/null -X PUT"
+  if [[ $OLE_SECURITY_AUTH_ENABLED == 1 ]]; then
+    status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -H "$OLE_HEADER_AUTH_TOKEN"  -H "$OLE_HEADER_AUTH_TOKEN"  -d @$entry  $url`
+  else
+    status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -d @$entry  $url`
+  fi
 
   if [[ "$status_code" =~ (200|201)$  ]]; then
-    if [[ $1 != "silent" ]]; then
-      echo -e "...import via operator, status: ${GREEN}$status_code${NC}, product: $product, app: $appid, microfrontend: $mfe"
+    if [[ $2 == "true" ]]; then
+      echo -e "  import: operator, status: ${GREEN}$status_code${NC}, product: $product, app: $appid, mfe: $mfe"
     fi
   else
-    echo -e "${RED}...import via operator, status: $status_code, product: $product, app: $appid, microfrontend: $mfe ${NC}"
+    echo -e "${RED}  import: operator, status: $status_code, product: $product, app: $appid, mfe: $mfe ${NC}"
   fi
 done

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Import Workspaces from file for Tenant
+# Import Bookmarks from file for Tenant and Workspace
 #
 
 export RED='\033[0;31m'
@@ -15,7 +15,7 @@ if [[ $tenant_files == "" ]]; then
   SKIP_MSG=" ==>${RED} skipping${NC}: no tenant files found"
 fi
 
-echo -e "$OLE_LINE_PREFIX${CYAN}Importing Workspaces${NC}\t$SKIP_MSG"
+echo -e "$OLE_LINE_PREFIX${CYAN}Importing Bookmarks${NC}\t$SKIP_MSG"
 
 
 #################################################################
@@ -24,9 +24,9 @@ for entry in $tenant_files
 do
   filename=$(basename "$entry")
   filename=`echo $filename | cut -d '.' -f 1`
-  workspace=`echo $filename | cut -d'_' -f2`
+  workspace=`echo $filename | cut -d '_' -f 2`
   
-  url="http://onecx-workspace-svc/exim/v1/workspace/import"
+  url="http://onecx-bookmark-svc/exim/v1/bookmark/$workspace/import?importMode=OVERWRITE&scopes=PRIVATE&scopes=PUBLIC"
   params="--write-out %{http_code} --silent --output /dev/null -X POST"
   if [[ $OLE_SECURITY_AUTH_ENABLED == 1 ]]; then
     status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -H "$OLE_HEADER_AUTH_TOKEN"  -H "$OLE_HEADER_AUTH_TOKEN"  -d @$entry  $url`
