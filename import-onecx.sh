@@ -38,5 +38,11 @@ while getopts ":hvt:" opt; do
 done
 
 echo -e "${CYAN}Ensure that all services used by imports are running${NC}"
-#docker compose -f versions/v2/docker-compose.v2.yaml  --profile data-import   up -d
+docker compose -f versions/v2/docker-compose.v2.yaml  --profile data-import   up -d
+
+if [[ $# == 0 ]]
+then
+  echo "usage  $0 [-h|?] [-v] [-t <tenant>] "
+fi
+
 bash ./versions/v2/import-onecx.v2.sh  $TENANT  $VERBOSE

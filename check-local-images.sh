@@ -8,38 +8,60 @@ GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
-GITHUB_REPO_PATH="ghcr.io/onecx"
+ONECX_REPO_PATH="ghcr.io/onecx"
+ONECX_ORGANIZATION="onecx"
 GITHUB_REPO_TAG_BE="main-native"
 GITHUB_REPO_TAG_FE="main"
 VERSION_LABEL=samo.project.version
 IMAGE_NAME_EXTENSION_UI=ui
 
+usage () {
+  cat <<USAGE
+  $0  <docker image name prefix>
+USAGE
+  exit 0
+}
+
 set -e
 
 echo -e "${CYAN}Check local Docker images ${NC}"
-echo -e "   => Registry path:       ${GREEN}${GITHUB_REPO_PATH}${NC}"
+echo -e "   => OneCX registry path:\t${GREEN}${ONECX_REPO_PATH}${NC}"
 
 if [ "$#" -ne 1 ]; then
-  echo "Usage: $0  <docker image name prefix>"
+  usage
   exit 1
 fi
 
-PREFIX="$1"
+#########################################
+#### Read parameter
+if [[ $# == 1 ]]; then
+  if [[ $1 =~ "$ONECX_ORGANIZATION" ]]; then
+    OLE_IMAGE_PREFIX=${ONECX_REPO_PATH}/$1
+  else
+    OLE_IMAGE_PREFIX=$1
+  fi
+else
+  usage
+  OLE_IMAGE_PREFIX=${ONECX_REPO_PATH}/${ONECX_ORGANIZATION}
+fi
+
 PRINT_FORMAT="%-43s %-13s %-14s %-16s\n"
 
-echo -e "   => Image name prefix:   ${GREEN}${GITHUB_REPO_PATH}/${PREFIX}${NC}"
-echo -e "   => Image version label: ${GREEN}samo.project.version${NC}"
+echo -e "   => Image name prefix:\t${GREEN}${OLE_IMAGE_PREFIX}${NC}"
+echo -e "   => Image version label:\t${GREEN}samo.project.version${NC}"
+
 
 #########################################
 #### Get local images
-IMAGES=$(docker images --format "{{.Repository}}" | grep "^${GITHUB_REPO_PATH}/${PREFIX}" | sort | uniq)
+IMAGES=$(docker images --format "{{.Repository}}" | grep "^${OLE_IMAGE_PREFIX}" | sort | uniq)
 
-echo ""
 if [ -z "$IMAGES" ]; then
   echo -e "${RED}No local Docker images found${NC}"
+  usage
   exit 0
 fi
 
+echo
 PRINT_FORMAT="%-43s %-13s %-14s %-16s\n"
 printf "$PRINT_FORMAT" "IMAGE" "MAIN TAG" "LOCAL ID" "VERSION"
 echo   "------------------------------------------------------------------------------------"
