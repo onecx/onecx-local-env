@@ -27,7 +27,7 @@ do
   filename=$(basename "$entry")
   product=`echo $filename | cut -d '.' -f 1`
   
-  url="http://onecx-theme-svc/exim/v1/themes/operator"
+  url="http://onecx-permission-svc/exim/v1/assignments/operator"
   params="--write-out %{http_code} --silent --output /dev/null -X POST"
   if [[ $OLE_SECURITY_AUTH_ENABLED == 1 ]]; then
     status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -H "$OLE_HEADER_AUTH_TOKEN"  -H "$OLE_HEADER_AUTH_TOKEN"  -d @$entry  $url`

@@ -62,7 +62,7 @@ services:
   postgresdb:
     image: ${POSTGRES}
     container_name: postgresdb
-    command: [-cmax_prepared_transactions=100]
+    command: [-cmax_prepared_transactions=1000]
     ports:
       - "5432:5432"
     environment:

@@ -22,9 +22,9 @@ do
 
   if [[ "$status_code" =~ (200|201)$  ]]; then
     if [[ $2 == "true" ]]; then
-      echo -e "  import: exim, status: ${GREEN}$HTTP_STATUS_CODE ${NC}"
+      echo -e "  import: exim, status: ${GREEN}$status_code ${NC}"
     fi
   else
-    echo -e "${RED}  import: exim, status: $HTTP_STATUS_CODE"
+    echo -e "${RED}  import: exim, status: $status_code${NC}"
   fi 
 done
