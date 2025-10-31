@@ -2,11 +2,15 @@
 #
 # Import Microservices from file for Product and App
 #
+# $1 => tenant
+# $2 => verbose
+#
 
-export RED='\033[0;31m'
-export GREEN='\033[0;32m'
-export CYAN='\033[0;36m'
-export NC='\033[0m' # No Color
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
 
 #################################################################
 # files 

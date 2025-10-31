@@ -10,15 +10,17 @@ export NC='\033[0m' # No Color
 
 usage () {
   cat <<USAGE
-  $0  [-h] [-v] [-t <tenant>]
+  $0  [-h] [-v] [-s] [-t <tenant>]
        -h  display this usage information
-       -v  verbose, if set then details are displayed on imports
+       -s  security enabled
        -t  tenant, one of [ 'default', 't1', 't2' ], default is 'default'
+       -v  verbose: display details on imports
 USAGE
   exit 0
 }
 
 # defaults
+SECURITY=false
 TENANT=default
 VERBOSE=false
 
@@ -26,6 +28,7 @@ VERBOSE=false
 while getopts ":hvt:" opt; do
   case "$opt" in
         v) VERBOSE=true ;;
+        s) SECURITY=true ;;
         t) 
             if [[ $OPTARG != @(default|t1|t2) ]]; then
               usage
@@ -45,4 +48,4 @@ then
   echo "usage  $0 [-h|?] [-v] [-t <tenant>] "
 fi
 
-bash ./versions/v2/import-onecx.v2.sh  $TENANT  $VERBOSE
+bash ./versions/v2/import-onecx.v2.sh  $TENANT  $VERBOSE  $SECURITY
