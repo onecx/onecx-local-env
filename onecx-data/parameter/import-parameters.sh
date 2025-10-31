@@ -8,23 +8,38 @@ export GREEN='\033[0;32m'
 export CYAN='\033[0;36m'
 export NC='\033[0m' # No Color
 
-echo -e "${CYAN}Importing Parameters ${NC}"
+#################################################################
+# files witch have tenant as prefix - NOT HERE
+tenant_files=`ls *.json 2>/dev/null`
+if [[ $tenant_files == "" ]]; then
+  SKIP_MSG=" ==>${RED} skipping${NC}: no tenant files found"
+fi
 
-for entry in "."/*.json
+echo -e "$OLE_LINE_PREFIX${CYAN}Importing Parameter${NC}\t$SKIP_MSG"
+
+
+#################################################################
+# operate on found files
+for entry in $tenant_files
 do
   filename=$(basename "$entry")
   filename=`echo $filename | cut -d '.' -f 1`
-  product=${filename%%_*}
-  appid=`echo $filename | cut -d'_' -f2`
-  
+  product=`echo $filename | cut -d '_' -f 1`
+  appid=`echo $filename | cut -d '_' -f 2`
+
   url="http://onecx-parameter-svc/operator/v1/parameters/$product/$appid"
-  status_code=`curl --write-out %{http_code} --silent --output /dev/null -X PUT -H 'Content-Type: application/json' "$url" -d @$entry`
-  
+  params="--write-out %{http_code} --silent --output /dev/null -X PUT"
+  if [[ $OLE_SECURITY_AUTH_ENABLED == 1 ]]; then
+    status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -H "$OLE_HEADER_AUTH_TOKEN"  -H "$OLE_HEADER_APM_TOKEN"  -d @$entry  $url`
+  else
+    status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -d @$entry  $url`
+  fi
+
   if [[ "$status_code" =~ (200|201|204)$  ]]; then
-    if [[ $1 != "silent" ]]; then
-      echo -e "...import via operator, status: ${GREEN}$status_code${NC}, product: $product, app: $appid"
+    if [[ $2 == "true" ]]; then
+      echo -e "  import: exim, status: ${GREEN}$status_code${NC}, product: $product, app: $appid"
     fi
   else
-    echo -e "${RED}...import via operator, status: $status_code, product: $product, app: $appid ${NC}"
-  fi 
+    echo -e "${RED}  import: exim, status: $status_code, product: $product, app: $appid ${NC}"
+  fi
 done

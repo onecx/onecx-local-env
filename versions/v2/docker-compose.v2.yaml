@@ -21,14 +21,16 @@ x-bff-variables: &bff_environment
   TKIT_SECURITY_AUTH_ENABLED: ${ONECX_SECURITY_AUTH_ENABLED}
 
 x-svc-variables: &svc_single_tenancy
+  QUARKUS_LOG_LEVEL: ${ONECX_LOG_LEVEL}
   QUARKUS_OIDC_AUTH_SERVER_URL: ${ONECX_AUTH_SERVER_URL}
+  QUARKUS_OIDC_TOKEN_ISSUER: ${ONECX_OIDC_TOKEN_ISSUER}
   TKIT_LOG_JSON_ENABLED: ${JSON_LOGGER_ENABLED}
   TKIT_SECURITY_AUTH_ENABLED: ${ONECX_SECURITY_AUTH_ENABLED}
 
 x-svc-multi_tenancy: &svc_multi_tenancy
   <<: *svc_single_tenancy
   ONECX_TENANT_CACHE_ENABLED: ${ONECX_TENANT_CACHE_ENABLED}
-  TKIT_RS_CONTEXT_TENANT_ID_ENABLED: "false"
+  TKIT_RS_CONTEXT_TENANT_ID_ENABLED: ${ONECX_RS_CONTEXT_TENANT_ID_ENABLED}
   TKIT_RS_CONTEXT_TENANT_ID_MOCK_ENABLED: ${ONECX_RS_CONTEXT_TENANT_ID_MOCK_ENABLED}
   QUARKUS_REST_CLIENT_ONECX_TENANT_URL: "http://onecx-tenant-svc:8080"
 
@@ -89,8 +91,8 @@ services:
 
   keycloak-app:
     image: ${KEYCLOAK}
-    command: "start-dev --import-realm"
     container_name: ${KC_APP_NAME}
+    command: "start-dev --import-realm"
     ports:
       - "8080:8080"
     environment:
@@ -110,7 +112,7 @@ services:
       KC_HTTP_PORT: 8080
       KC_HEALTH_ENABLED: true
     volumes:
-      - ../../init-data/keycloak/imports:/opt/keycloak/data/import
+      - ../../init-data/keycloak:/opt/keycloak/data/import
     healthcheck:
       test: "{ printf >&3 'GET /realms/onecx/.well-known/openid-configuration HTTP/1.0\r\nHost: localhost\r\n\r\n'; cat <&3; } 3<>/dev/tcp/localhost/8080 | head -1 | grep 200"
       interval: 10s
@@ -158,6 +160,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   onecx-announcement-bff:
     image: ${ONECX_ANNOUNCEMENT_BFF}
@@ -180,6 +183,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   onecx-announcement-ui:
     image: ${ONECX_ANNOUNCEMENT_UI}
@@ -198,6 +202,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   ########## ONECX BOOKMARK
   onecx-bookmark-svc:
@@ -224,6 +229,7 @@ services:
     profiles:
       - all
       - data-import
+      - product
 
   onecx-bookmark-bff:
     image: ${ONECX_BOOKMARK_BFF}
@@ -246,6 +252,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   onecx-bookmark-ui:
     image: ${ONECX_BOOKMARK_UI}
@@ -264,6 +271,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   ########## ONECX HELP
   onecx-help-svc:
@@ -291,6 +299,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   onecx-help-bff:
     image: ${ONECX_HELP_BFF}
@@ -313,6 +322,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   onecx-help-ui:
     image: ${ONECX_HELP_UI}
@@ -331,6 +341,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   ########## ONECX IAM
   onecx-iam-svc:
@@ -359,6 +370,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   onecx-iam-bff:
     image: ${ONECX_IAM_BFF}
@@ -381,6 +393,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   onecx-iam-ui:
     image: ${ONECX_IAM_UI}
@@ -399,6 +412,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   ########## ONECX PARAMETER
   onecx-parameter-svc:
@@ -409,15 +423,12 @@ services:
       QUARKUS_DATASOURCE_USERNAME: onecx_parameter
       QUARKUS_DATASOURCE_PASSWORD: onecx_parameter
       QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_parameter?sslmode=disable"
-      QUARKUS_REST_CLIENT_ONECX_TENANT_URL: "http://onecx-tenant-svc:8080"
     healthcheck:
       test: curl --head -fsS http://localhost:8080/q/health
       interval: 10s
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -428,6 +439,7 @@ services:
     profiles:
       - all
       - data-import
+      - product
 
   onecx-parameter-bff:
     image: ${ONECX_PARAMETER_BFF}
@@ -450,6 +462,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   onecx-parameter-ui:
     image: ${ONECX_PARAMETER_UI}
@@ -468,6 +481,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   ########## ONECX PERMISSION
   onecx-permission-svc:
@@ -478,7 +492,6 @@ services:
       QUARKUS_DATASOURCE_USERNAME: onecx_permission
       QUARKUS_DATASOURCE_PASSWORD: onecx_permission
       QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_permission?sslmode=disable"
-      QUARKUS_REST_CLIENT_ONECX_TENANT_URL: "http://onecx-tenant-svc:8080"
       ONECX_PERMISSION_TOKEN_VERIFIED: false
     healthcheck:
       test: curl --head -fsS http://localhost:8080/q/health
@@ -499,6 +512,7 @@ services:
       - all
       - minimal
       - data-import
+      - product
 
   onecx-permission-bff:
     image: ${ONECX_PERMISSION_BFF}
@@ -521,6 +535,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   onecx-permission-ui:
     image: ${ONECX_PERMISSION_UI}
@@ -539,6 +554,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   ########## ONECX PRODUCT-STORE
   onecx-product-store-svc:
@@ -568,6 +584,7 @@ services:
       - all
       - minimal
       - data-import
+      - product
 
   onecx-product-store-bff:
     image: ${ONECX_PRODUCT_STORE_BFF}
@@ -590,6 +607,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   onecx-product-store-ui:
     image: ${ONECX_PRODUCT_STORE_UI}
@@ -608,6 +626,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   ########## ONECX SHELL
   onecx-shell-bff:
@@ -647,6 +666,7 @@ services:
     profiles:
       - all
       - minimal
+      - product
 
   onecx-shell-ui:
     image: ${ONECX_SHELL_UI}
@@ -670,6 +690,7 @@ services:
     profiles:
       - all
       - minimal
+      - product
 
   ########## ONECX TENANT
   onecx-tenant-svc:
@@ -699,6 +720,7 @@ services:
       - all
       - minimal
       - data-import
+      - product
 
   onecx-tenant-bff:
     image: ${ONECX_TENANT_BFF}
@@ -721,6 +743,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   onecx-tenant-ui:
     image: ${ONECX_TENANT_UI}
@@ -739,6 +762,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   ########## ONECX THEME
   onecx-theme-svc:
@@ -768,6 +792,7 @@ services:
       - all
       - minimal
       - data-import
+      - product
 
   onecx-theme-bff:
     image: ${ONECX_THEME_BFF}
@@ -790,6 +815,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   onecx-theme-ui:
     image: ${ONECX_THEME_UI}
@@ -808,6 +834,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   ########## ONECX WELCOME
   onecx-welcome-svc:
@@ -837,6 +864,7 @@ services:
     profiles:
       - all
       - data-import
+      - product
 
   onecx-welcome-bff:
     image: ${ONECX_WELCOME_BFF}
@@ -859,6 +887,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   onecx-welcome-ui:
     image: ${ONECX_WELCOME_UI}
@@ -877,6 +906,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   ########## ONECX WORKSPACE
   onecx-workspace-svc:
@@ -907,6 +937,7 @@ services:
       - all
       - minimal
       - data-import
+      - product
 
   onecx-workspace-bff:
     image: ${ONECX_WORKSPACE_BFF}
@@ -930,6 +961,7 @@ services:
     profiles:
       - all
       - minimal
+      - product
 
   onecx-workspace-ui:
     image: ${ONECX_WORKSPACE_UI}
@@ -949,6 +981,7 @@ services:
     profiles:
       - all
       - minimal
+      - product
 
   ########## ONECX USER-PROFILE
   onecx-user-profile-svc:
@@ -977,6 +1010,7 @@ services:
     profiles:
       - all
       - minimal
+      - product
 
   onecx-user-profile-bff:
     image: ${ONECX_USER_PROFILE_BFF}
@@ -999,6 +1033,7 @@ services:
       - onecx
     profiles:
       - all
+      - product
 
   onecx-user-profile-ui:
     image: ${ONECX_USER_PROFILE_UI}
@@ -1017,3 +1052,4 @@ services:
       - onecx
     profiles:
       - all
+      - product

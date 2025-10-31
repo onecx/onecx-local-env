@@ -8,25 +8,37 @@ export GREEN='\033[0;32m'
 export CYAN='\033[0;36m'
 export NC='\033[0m' # No Color
 
-echo -e "${CYAN}Importing Workspaces ${NC}"
+#################################################################
+# files witch have tenant as prefix
+tenant_files=`ls $1_*.json 2>/dev/null`
+if [[ $tenant_files == "" ]]; then
+  SKIP_MSG=" ==>${RED} skipping${NC}: no tenant files found"
+fi
 
-for entry in "."/*_*.json
+echo -e "$OLE_LINE_PREFIX${CYAN}Importing Workspaces${NC}\t$SKIP_MSG"
+
+
+#################################################################
+# operate on found files
+for entry in $tenant_files
 do
   filename=$(basename "$entry")
   filename=`echo $filename | cut -d '.' -f 1`
-  tenant=`echo $filename | cut -d'_' -f1`
   workspace=`echo $filename | cut -d'_' -f2`
-  token_var_name=${tenant}_token
-  token=${!token_var_name}
   
   url="http://onecx-workspace-svc/exim/v1/workspace/import"
-  status_code=`curl --write-out %{http_code} --silent --output /dev/null -X POST -H "apm-principal-token: $token" -H 'Content-Type: application/json' "$url" -d @$entry`
+  params="--write-out %{http_code} --silent --output /dev/null -X POST"
+  if [[ $OLE_SECURITY_AUTH_ENABLED == 1 ]]; then
+    status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -H "$OLE_HEADER_AUTH_TOKEN"  -H "$OLE_HEADER_AUTH_TOKEN"  -d @$entry  $url`
+  else
+    status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -d @$entry  $url`
+  fi
 
   if [[ "$status_code" =~ (200|201)$  ]]; then
-    if [[ $1 != "silent" ]]; then
-      echo -e "...import via exim, status: ${GREEN}$status_code${NC}, tenant: $tenant, workspace: $workspace"
+    if [[ $2 == "true" ]]; then
+      echo -e "  import: exim, status: ${GREEN}$status_code${NC}, workspace: $workspace"
     fi
   else
-    echo -e "${RED}...import via exim, status: $status_code, tenant: $tenant, workspace: $workspace ${NC}"
-  fi 
+    echo -e "${RED}  import: exim, status: $status_code, workspace: $workspace ${NC}"
+  fi
 done

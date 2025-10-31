@@ -1,0 +1,16 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX Data Orchestrator UI",
+  "description": "OneCX Data Orchestrator UI",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/data-orchestrator/",
+  "remoteEntry": "/mfe/data-orchestrator/remoteEntry.js",
+  "note": "Import via MF operator",
+  "exposedModule": "./OneCXDataOrchestratorModule",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-data-orchestrator",
+  "tagName": "ocx-data-orchestrator-component",
+  "type": "MODULE",
+  "deprecated": false,
+  "undeployed": false
+}

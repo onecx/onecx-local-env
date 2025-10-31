@@ -529,9 +529,6 @@
       "lastName": "T1 Admin",
       "email": "onecx_t1_admin@1000kit.org",
       "attributes": {
-        "partyId": [
-          "103"
-        ],
         "orgId": [
           "t1"
         ]
@@ -557,9 +554,6 @@
       "lastName": "T1 User",
       "email": "onecx_t1_user@1000kit.org",
       "attributes": {
-        "partyId": [
-          "103"
-        ],
         "orgId": [
           "t1"
         ]
@@ -822,6 +816,8 @@
     },
     {
       "clientId": "onecx-shell-ui-client",
+      "name": "onecx-shell-ui-client",
+      "description": "Client for OneCX Shell authorization",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
@@ -873,7 +869,110 @@
         "profile",
         "email",
         "partyId",
-        "orgId"
+        "Organization_ID"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "phone",
+        "offline_access",
+        "microprofile-jwt"
+      ]
+    },
+    {
+      "id": "8c947402-1f5f-4cfe-ace6-cab68509465c",
+      "clientId": "onecx-local-env-import",
+      "name": "onecx-local-env-import",
+      "description": "Client for initial OneCX imports",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "t4LXKbpxedZoHn9mynwSih9Cz9W1VbS8u9vaDz5A",
+      "redirectUris": [],
+      "webOrigins": [],
+      "notBefore": 0,
+      "bearerOnly": false,
+      "consentRequired": false,
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "publicClient": false,
+      "frontchannelLogout": false,
+      "protocol": "openid-connect",
+      "attributes": {
+        "realm_client": "false",
+        "backchannel.logout.session.required": "true",
+        "backchannel.logout.revoke.offline.tokens": "false"
+      },
+      "authenticationFlowBindingOverrides": {},
+      "fullScopeAllowed": true,
+      "nodeReRegistrationTimeout": -1,
+      "protocolMappers": [
+        {
+          "id": "d10d5cef-1662-4bef-b122-34b4eb8fa1ab",
+          "name": "Client Host",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "clientHost",
+            "id.token.claim": "true",
+            "introspection.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "clientHost",
+            "jsonType.label": "String"
+          }
+        },
+        {
+          "id": "31324188-8875-412e-9282-cfc90ec4243d",
+          "name": "Client IP Address",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "clientAddress",
+            "id.token.claim": "true",
+            "introspection.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "clientAddress",
+            "jsonType.label": "String"
+          }
+        },
+        {
+          "id": "abd18fc2-23d7-4c47-8c86-ae7db271b112",
+          "name": "Client ID",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usersessionmodel-note-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.session.note": "client_id",
+            "id.token.claim": "true",
+            "introspection.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "client_id",
+            "jsonType.label": "String"
+          }
+        }
+      ],
+      "defaultClientScopes": [
+        "web-origins",
+        "roles",
+        "profile",
+        "email",
+        "Organization_ID",
+        "ocx-an:all",
+        "ocx-bm:all",
+        "ocx-hp:all",
+        "ocx-pa:all",
+        "ocx-pm:all",
+        "ocx-ps:all",
+        "ocx-sc:all",
+        "ocx-th:all",
+        "ocx-tn:all",
+        "ocx-up:all",
+        "ocx-wc:all",
+        "ocx-ws:all"
       ],
       "optionalClientScopes": [
         "address",
@@ -1209,6 +1308,90 @@
       ]
     },
     {
+      "id": "ocx-an:all",
+      "name": "ocx-an:all",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-bm:all",
+      "name": "ocx-bm:all",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-hp:all",
+      "name": "ocx-hp:all",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-pa:all",
+      "name": "ocx-pa:all",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-pm:all",
+      "name": "ocx-pm:all",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-ps:all",
+      "name": "ocx-ps:all",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-sc:all",
+      "name": "ocx-sc:all",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-th:all",
+      "name": "ocx-th:all",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-tn:all",
+      "name": "ocx-tn:all",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-up:all",
+      "name": "ocx-up:all",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-wc:all",
+      "name": "ocx-wc:all",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-ws:all",
+      "name": "ocx-ws:all",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
       "id": "1be5359a-b679-4766-979e-ea1011624123",
       "name": "partyId",
       "description": "party id scope",
@@ -1239,8 +1422,8 @@
     },
     {
       "id": "1be5359a-b679-4766-979e-ea1011624166",
-      "name": "orgId",
-      "description": "oranization id scope",
+      "name": "Organization_ID",
+      "description": "Tenant organization ID, mapping: orgId",
       "protocol": "openid-connect",
       "attributes": {
         "include.in.token.scope": "false",

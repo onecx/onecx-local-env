@@ -1,6 +1,7 @@
 #!/bin/bash
-
+#
 # Stop OneCX Local Enviroment by using a profile (default: all)
+#
 
 export RED='\033[0;31m'
 export GREEN='\033[0;32m'
@@ -24,7 +25,7 @@ then
   then
     print_usage=0
     echo -e " ...stop all services and ${RED}cleanup volumes${NC}"
-  elif [[ $1 == @(all|base|minimal|data-import) ]]
+  elif [[ $1 == @(all|base|minimal|data-import|product) ]]
   then
     profile=$1
     print_usage=0
@@ -39,7 +40,7 @@ fi
 
 if [[ ( $print_usage == 1  ) ]]
 then
-  echo "    usage:  $0  [ profile | clean ]  with profile in (all, base, minimal, data-import ), optional, 'minimal' is default"
+  echo "    usage:  $0  [ profile | clean ]  with profile in (all, base, minimal, data-import, product ), optional, 'minimal' is default"
 fi
 
 if [[ ( $stop == 1  ) ]]

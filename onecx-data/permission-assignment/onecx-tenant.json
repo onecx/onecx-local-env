@@ -1,5 +1,5 @@
 {
-  "id": "import-permission-assignments_onecx-tenant",
+  "id": "onecx-local-env_import-permission-assignments_onecx-tenant",
   "assignments": {
     "onecx-tenant": {
       "onecx-tenant-bff": {

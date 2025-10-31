@@ -5,7 +5,7 @@
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/theme/",
   "remoteEntry": "/mfe/theme/remoteEntry.js",
-  "note": "Imported MFE",
+  "note": "Import via MF operator",
   "exposedModule": "./OneCXThemeModule",
   "technology": "WEBCOMPONENTMODULE",
   "remoteName": "onecx-theme",

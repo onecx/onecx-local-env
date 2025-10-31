@@ -1,0 +1,6 @@
+{
+  "version": "xxx",
+  "name": "onecx-data-orchestrator-bff",
+  "description": "OneCX Data Orchestrator Backend For Frontend",
+  "type": "bff"
+}

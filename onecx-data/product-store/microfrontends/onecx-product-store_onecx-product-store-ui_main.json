@@ -5,7 +5,7 @@
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/product-store/",
   "remoteEntry": "/mfe/product-store/remoteEntry.js",
-  "note": "Imported MFE",
+  "note": "Import via MF operator",
   "exposedModule": "./OneCXProductStoreModule",
   "technology": "WEBCOMPONENTMODULE",
   "remoteName": "onecx-product-store",

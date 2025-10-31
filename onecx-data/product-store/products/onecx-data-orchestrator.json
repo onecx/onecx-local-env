@@ -1,0 +1,14 @@
+{
+  "version": "xxx",
+  "description": "Manage Kubernetes Custom Data Resources",
+  "imageUrl": "",
+  "iconName": "desktop",
+  "displayName": "OneCX Data Orchestrator",
+  "basePath": "/data",
+  "provider": "OneCX Team",
+  "classifications": [
+    "Administration"
+  ],
+  "multitenancy": false,
+  "undeployed": false
+}

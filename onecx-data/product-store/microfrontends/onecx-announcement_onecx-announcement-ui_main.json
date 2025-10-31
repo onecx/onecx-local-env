@@ -5,7 +5,7 @@
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/announcement/",
   "remoteEntry": "/mfe/announcement/remoteEntry.js",
-  "note": "OneCX Announcement UI auto import via MF operator",
+  "note": "Import via MF operator",
   "exposedModule": "./OneCXAnnouncementModule",
   "technology": "WEBCOMPONENTMODULE",
   "remoteName": "onecx-announcement",
