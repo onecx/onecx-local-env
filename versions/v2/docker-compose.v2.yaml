@@ -43,8 +43,8 @@ services:
     container_name: traefik
     command: --api.insecure=true --providers.docker=true #Enables the web UI and tells Træfik to listen to docker
     ports:
-      - "80:80" #The HTTP port
-      - "8082:8080" #The Web UI (enabled by --api)
+      - "80:80" # The HTTP port
+      - "8082:8080" # The Web UI (enabled by --api)
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock #so Traefik can listen to the Docker events
       - ../../init-data/traefik/traefik-conf.yml:/etc/traefik/traefik.yml
@@ -1053,3 +1053,29 @@ services:
     profiles:
       - all
       - product
+
+  onecx-waiting-service:
+    image: alpine:3
+    container_name: onecx-waiting-service
+    depends_on:
+      onecx-bookmark-svc:
+        condition: service_healthy
+      onecx-product-store-svc:
+        condition: service_healthy
+      onecx-parameter-svc:
+        condition: service_healthy
+      onecx-permission-svc:
+        condition: service_healthy
+      onecx-tenant-svc:
+        condition: service_healthy
+      onecx-theme-svc:
+        condition: service_healthy
+      onecx-welcome-svc:
+        condition: service_healthy
+      onecx-workspace-svc:
+        condition: service_healthy
+    networks:
+      - onecx
+    profiles:
+      - all
+      - data-import

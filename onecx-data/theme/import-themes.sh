@@ -3,7 +3,7 @@
 # Import Themes from file for Tenant
 #
 # $1 => tenant
-# $2 => verbose
+# $2 => verbose   (true|false)
 #
 
 RED='\033[0;31m'

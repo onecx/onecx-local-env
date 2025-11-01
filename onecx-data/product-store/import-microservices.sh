@@ -3,7 +3,7 @@
 # Import Microservices from file for Product and App
 #
 # $1 => tenant
-# $2 => verbose
+# $2 => verbose   (true|false)
 #
 
 RED='\033[0;31m'
