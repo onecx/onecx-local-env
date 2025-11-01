@@ -2,38 +2,45 @@
 #
 # Import OneCX data from files below ./onecx-data
 #
+# $1 => tenant
+# $2 => verbose   (true|false)
+# $3 => security  (true|false)
+#
 
 export RED='\033[0;31m'
 export GREEN='\033[0;32m'
 export CYAN='\033[0;36m'
 export NC='\033[0m' # No Color
 
+export OLE_VERSION="v2"
+export OLE_LINE_PREFIX="* "
+export OLE_HEADER_CT_JSON="Content-Type: application/json"
+
 #################################################################
-## Support starting from different directories: base, v2
+## Support starting from different directories: base, vx
 current_path=`pwd`
 current_dir=$(basename $current_path)
 import_start_dir=.
 
-# import started from v2 directory?
-if [[ $current_dir == "v2" ]]
-then
+# import started from version directory?
+if [[ $current_dir == "$OLE_VERSION" ]]; then
   import_start_dir="../.."
 fi
-
-export OLE_LINE_PREFIX="* "
 
 
 #################################################################
 ## Security Authentication enabled?
-export OLE_HEADER_CT_JSON="Content-Type: application/json"
-export OLE_SECURITY_AUTH_ENABLED=`grep -c "ONECX_SECURITY_AUTH_ENABLED=true" $import_start_dir/versions/v2/.env`
+OLE_SECURITY_AUTH_ENABLED=`grep -c "ONECX_SECURITY_AUTH_ENABLED=true" $import_start_dir/versions/$OLE_VERSION/.env`
 # translate for displaying only:
-OLE_SECURITY_AUTH_USED="yes"
-if [[ $OLE_SECURITY_AUTH_ENABLED == 0 ]]; then
-  OLE_SECURITY_AUTH_USED="no"
+OLE_SECURITY_AUTH_USED="no"
+if [[ ($OLE_SECURITY_AUTH_ENABLED == 1) || ($3 == "true") ]]; then
+  OLE_SECURITY_AUTH_USED="yes"
+  export OLE_SECURITY_AUTH_ENABLED=1
 fi
 
 
+#################################################################
+## KEYCLOAK
 
 # Usernames and passwords for clients that exist in Keycloak
 declare -A KC_TENANT_USER=()
@@ -45,8 +52,6 @@ KC_TENANT_PWD['default']="onecx"
 KC_TENANT_PWD['t1']="onecx_t1_admin"
 KC_TENANT_PWD['t2']="onecx_t2_admin"
 
-
-# KEYCLOAK
 KC_USER=${KC_TENANT_USER[$1]}
 KC_PWD=${KC_TENANT_PWD[$1]}
 KC_REALM="onecx"
@@ -57,7 +62,8 @@ KC_AUTH_CLIENT_ID="onecx-local-env-import"
 KC_AUTH_CLIENT_SECRET="t4LXKbpxedZoHn9mynwSih9Cz9W1VbS8u9vaDz5A"
 
 
-echo -e "${CYAN}Import OneCX v2 data${NC} for tenant ${GREEN}$1'${NC}, user ${GREEN}$KC_USER${NC}, security authentication ${GREEN}$OLE_SECURITY_AUTH_USED${NC}"
+echo -e "${CYAN}Import OneCX $OLE_VERSION data${NC} for tenant ${GREEN}$1'${NC}, user ${GREEN}$KC_USER${NC}, security authentication ${GREEN}$OLE_SECURITY_AUTH_USED${NC}"
+
 
 #################################################################
 ## Set SKIP_CONTAINER_MANAGEMENT to 0 or false to starting/stopping containers for data import:
@@ -139,7 +145,7 @@ bash ./import-bookmarks.sh $1 $2
 cd ..
 
 
-if [[ ( $current_dir != "v2"  ) ]]
+if [[ ( $current_dir != "$OLE_VERSION"  ) ]]
 then
   cd ..
 fi

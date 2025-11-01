@@ -10,22 +10,25 @@ export NC='\033[0m' # No Color
 
 usage () {
   cat <<USAGE
-  $0  [-h] [-v] [-t <tenant>]
+  $0  [-h] [-v] [-s] [-t <tenant>]
        -h  display this usage information
-       -v  verbose, if set then details are displayed on imports
+       -s  security enabled
        -t  tenant, one of [ 'default', 't1', 't2' ], default is 'default'
+       -v  verbose: display details on imports
 USAGE
   exit 0
 }
 
 # defaults
+SECURITY=false
 TENANT=default
 VERBOSE=false
 
 # check parameter
-while getopts ":hvt:" opt; do
+while getopts ":hsvt:" opt; do
   case "$opt" in
         v) VERBOSE=true ;;
+        s) SECURITY=true ;;
         t) 
             if [[ $OPTARG != @(default|t1|t2) ]]; then
               usage
@@ -38,11 +41,12 @@ while getopts ":hvt:" opt; do
 done
 
 echo -e "${CYAN}Ensure that all services used by imports are running${NC}"
-docker compose -f versions/v2/docker-compose.v2.yaml  --profile data-import   up -d
+export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
+ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/v2/docker-compose.v2.yaml  --profile data-import  up -d
 
 if [[ $# == 0 ]]
 then
-  echo "usage  $0 [-h|?] [-v] [-t <tenant>] "
+  echo "usage  $0 [-h|?] [-s] [-v] [-t <tenant>]"
 fi
 
-bash ./versions/v2/import-onecx.v2.sh  $TENANT  $VERBOSE
+./versions/v2/import-onecx.v2.sh  $TENANT  $VERBOSE  $SECURITY
