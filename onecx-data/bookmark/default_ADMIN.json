@@ -1,24 +1,24 @@
 {
   "id": "onecx-local-env_import-bookmarks_default-ADMIN",
-  "created": "2025-10-28T16:46:09.80308884Z",
+  "created": "2025-11-03T11:40:25.069932525Z",
   "bookmarks": {
     "PUBLIC": [
       {
-        "displayName": "Products & Applications",
+        "displayName": "Workspaces",
         "endpointName": null,
         "endpointParameters": {},
         "query": {},
         "fragment": null,
         "url": null,
-        "productName": "onecx-product-store",
-        "appId": "onecx-product-store-ui",
+        "productName": "onecx-workspace",
+        "appId": "onecx-workspace-ui",
         "scope": "PUBLIC",
         "imageUrl": null,
         "image": null,
         "external": null,
         "target": "_self",
         "disabled": false,
-        "position": 3
+        "position": 1
       },
       {
         "displayName": "Themes",
@@ -38,21 +38,21 @@
         "position": 2
       },
       {
-        "displayName": "Workspaces",
+        "displayName": "Products & Applications",
         "endpointName": null,
         "endpointParameters": {},
         "query": {},
         "fragment": null,
         "url": null,
-        "productName": "onecx-workspace",
-        "appId": "onecx-workspace-ui",
+        "productName": "onecx-product-store",
+        "appId": "onecx-product-store-ui",
         "scope": "PUBLIC",
         "imageUrl": null,
         "image": null,
         "external": null,
         "target": "_self",
         "disabled": false,
-        "position": 1
+        "position": 3
       },
       {
         "displayName": "Permissions",
@@ -108,23 +108,6 @@
     ],
     "PRIVATE": [
       {
-        "displayName": "Welcome",
-        "endpointName": null,
-        "endpointParameters": {},
-        "query": {},
-        "fragment": null,
-        "url": null,
-        "productName": "onecx-welcome",
-        "appId": "onecx-welcome-ui",
-        "scope": "PRIVATE",
-        "imageUrl": null,
-        "image": null,
-        "external": null,
-        "target": "_self",
-        "disabled": null,
-        "position": 2
-      },
-      {
         "displayName": "Default Theme",
         "endpointName": "theme-detail",
         "endpointParameters": {
@@ -142,6 +125,23 @@
         "target": "_self",
         "disabled": null,
         "position": 1
+      },
+      {
+        "displayName": "Welcome",
+        "endpointName": null,
+        "endpointParameters": {},
+        "query": {},
+        "fragment": null,
+        "url": null,
+        "productName": "onecx-welcome",
+        "appId": "onecx-welcome-ui",
+        "scope": "PRIVATE",
+        "imageUrl": null,
+        "image": null,
+        "external": null,
+        "target": "_self",
+        "disabled": null,
+        "position": 2
       },
       {
         "displayName": "Products for Admin",
@@ -163,23 +163,6 @@
         "position": 3
       },
       {
-        "displayName": "Data Orchestrator",
-        "endpointName": null,
-        "endpointParameters": {},
-        "query": {},
-        "fragment": null,
-        "url": null,
-        "productName": "onecx-data-orchestrator",
-        "appId": "onecx-data-orchestrator-ui",
-        "scope": "PRIVATE",
-        "imageUrl": null,
-        "image": null,
-        "external": null,
-        "target": "_self",
-        "disabled": null,
-        "position": 6
-      },
-      {
         "displayName": "Permissions for Admin",
         "endpointName": "workspace",
         "endpointParameters": {
@@ -197,6 +180,23 @@
         "target": "_self",
         "disabled": null,
         "position": 4
+      },
+      {
+        "displayName": "Data Orchestrator",
+        "endpointName": null,
+        "endpointParameters": {},
+        "query": {},
+        "fragment": null,
+        "url": null,
+        "productName": "onecx-data-orchestrator",
+        "appId": "onecx-data-orchestrator-ui",
+        "scope": "PRIVATE",
+        "imageUrl": null,
+        "image": null,
+        "external": null,
+        "target": "_self",
+        "disabled": null,
+        "position": 6
       }
     ]
   }
