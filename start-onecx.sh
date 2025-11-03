@@ -8,54 +8,61 @@ GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
+echo -e "${CYAN}Start OneCX Local Environment${NC}"
+
 
 #################################################################
+## flags
 usage () {
   cat <<USAGE
-  Usage: $0  [-h|?] [-e <edition>] [-p <profile>] [-s]
+  Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s]
        -e  edition, one of [ 'v1', 'v2'], default is 'v2'
-       -h  display this usage information
+       -h  display this usage information, ignoring other parameters
        -p  profile, one of [ 'all', 'base', 'data-import', 'minimal' ], default is 'minimal'
-       -s  security authentication enabled
+       -s  security authentication enabled, default not enabled
 USAGE
   exit 0
 }
 usage_short () {
   cat <<USAGE
-  Usage: $0  [-h|?] [-e <edition>] [-p <profile>] [-s]
+  Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s]
 USAGE
 }
 
 
 #################################################################
-# defaults
+## defaults
 EDITION=v2
 PROFILE=minimal
 SECURITY=false
 
 
 #################################################################
-# check parameter
-while getopts ":hse:p:" opt; do
+## check parameter
+while getopts ":he:p:s" opt; do
   case "$opt" in
-        s) SECURITY=true ;;
-        e) 
+        e ) 
             if [[ $OPTARG != @(v1|v2) ]]; then
-              echo -e "${RED} ...unknown Edition${NC}"
+              echo -e "${RED}  unknown Edition${NC}"
               usage
             else
               EDITION=$OPTARG
             fi
-           ;;
-        p) 
+            ;;
+        p ) 
             if [[ $OPTARG != @(all|base|data-import|minimal|product) ]]; then
-              echo -e "${RED} ...unknown Docker profile${NC}"
+              echo -e "${RED}  unknown Docker profile${NC}"
               usage
             else
               PROFILE=$OPTARG
             fi
-           ;;
-    ? | h) usage ;; # print usage
+            ;;
+        s ) SECURITY=true ;;
+        h ) 
+            usage ;; # print usage
+       \? )
+            echo -e "${RED}  unknown shorthand flag: ${GREEN}-${OPTARG}${NC}" >&2
+            usage ;;
   esac
 done
 
@@ -71,7 +78,8 @@ fi
 
 
 #################################################################
-echo -e "${CYAN}Start OneCX Local Environment with edition: ${GREEN}$EDITION${NC}${CYAN}, profile: ${GREEN}$PROFILE${NC}${CYAN}, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}"
+## execute
+echo -e "  edition: ${GREEN}$EDITION${NC}, profile: ${GREEN}$PROFILE${NC}, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}"
 
 if [[ $# == 0 ]]; then
   usage_short

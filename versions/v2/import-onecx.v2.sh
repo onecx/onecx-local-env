@@ -12,7 +12,7 @@ export GREEN='\033[0;32m'
 export CYAN='\033[0;36m'
 export NC='\033[0m' # No Color
 
-export OLE_VERSION="v2"
+export OLE_EDITION="v2"
 export OLE_LINE_PREFIX="* "
 export OLE_HEADER_CT_JSON="Content-Type: application/json"
 
@@ -23,14 +23,14 @@ current_dir=$(basename $current_path)
 import_start_dir=.
 
 # import started from version directory?
-if [[ $current_dir == "$OLE_VERSION" ]]; then
+if [[ $current_dir == "$OLE_EDITION" ]]; then
   import_start_dir="../.."
 fi
 
 
 #################################################################
 ## Security Authentication enabled?
-OLE_SECURITY_AUTH_ENABLED=`grep -c "ONECX_SECURITY_AUTH_ENABLED=true" $import_start_dir/versions/$OLE_VERSION/.env`
+OLE_SECURITY_AUTH_ENABLED=`grep -c "ONECX_SECURITY_AUTH_ENABLED=true" $import_start_dir/versions/$OLE_EDITION/.env`
 # translate for displaying only:
 OLE_SECURITY_AUTH_USED="no"
 if [[ ($OLE_SECURITY_AUTH_ENABLED == 1) || ($3 == "true") ]]; then
@@ -62,7 +62,7 @@ KC_AUTH_CLIENT_ID="onecx-local-env-import"
 KC_AUTH_CLIENT_SECRET="t4LXKbpxedZoHn9mynwSih9Cz9W1VbS8u9vaDz5A"
 
 
-echo -e "${CYAN}Import OneCX $OLE_VERSION data${NC} for tenant ${GREEN}$1'${NC}, user ${GREEN}$KC_USER${NC}, security authentication ${GREEN}$OLE_SECURITY_AUTH_USED${NC}"
+echo -e "  edition: ${GREEN}$OLE_EDITION${NC}, tenant: ${GREEN}$1${NC}, user: ${GREEN}$KC_USER${NC}, security authentication: ${GREEN}$OLE_SECURITY_AUTH_USED${NC}"
 
 
 #################################################################
@@ -145,7 +145,7 @@ bash ./import-bookmarks.sh $1 $2
 cd ..
 
 
-if [[ ( $current_dir != "$OLE_VERSION"  ) ]]
+if [[ ( $current_dir != "$OLE_EDITION"  ) ]]
 then
   cd ..
 fi

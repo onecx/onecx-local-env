@@ -8,13 +8,15 @@ GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
+echo -e "${CYAN}Import OneCX Local Environment${NC}"
+
 #################################################################
 usage () {
   cat <<USAGE
-  $0  [-h|?] [-v] [-s] [-t <tenant>]
+  $0  [-h] [-v] [-s] [-t <tenant>]
        -e  edition, one of [ 'v1', 'v2'], default is 'v2'
        -h  display this usage information
-       -s  security authentication enabled
+       -s  security authentication enabled, default not enabled
        -t  tenant, one of [ 'default', 't1', 't2' ], default is 'default'
        -v  verbose: display details on imports
 USAGE
@@ -22,7 +24,7 @@ USAGE
 }
 usage_short () {
   cat <<USAGE
-  Usage: $0  [-h|?] [-v] [-s] [-t <tenant>]
+  Usage: $0  [-h] [-v] [-s] [-t <tenant>]
 USAGE
 }
 
@@ -39,16 +41,19 @@ VERBOSE=false
 # check parameter
 while getopts ":hsvt:" opt; do
   case "$opt" in
-        v) VERBOSE=true ;;
-        s) SECURITY=true ;;
-        t) 
+        v ) VERBOSE=true ;;
+        s ) SECURITY=true ;;
+        t ) 
             if [[ $OPTARG != @(default|t1|t2) ]]; then
               usage
             else
               TENANT=$OPTARG
             fi
-           ;;
-    ? | h) usage ;; # print usage
+            ;;
+    ? | h ) usage ;; # print usage
+       \? )
+            echo -e "${RED}  unknown shorthand flag: ${GREEN}-${OPTARG}${NC}" >&2
+            usage ;;
   esac
 done
 
@@ -64,7 +69,7 @@ fi
 
 
 #################################################################
-echo -e "${CYAN}Ensure that all services used by imports are running${NC}, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}"
+echo -e "  Ensure that all services used by imports are running, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}"
 export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
 ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.$EDITION.yaml  --profile data-import  up -d
 
