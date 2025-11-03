@@ -62,7 +62,7 @@ services:
   postgresdb:
     image: ${POSTGRES}
     container_name: postgresdb
-    command: [-cmax_prepared_transactions=1000]
+    command: [-cmax_prepared_transactions=100]
     ports:
       - "5432:5432"
     environment:
@@ -439,6 +439,7 @@ services:
     profiles:
       - all
       - data-import
+      - minimal
       - product
 
   onecx-parameter-bff:
@@ -864,6 +865,7 @@ services:
     profiles:
       - all
       - data-import
+      - minimal
       - product
 
   onecx-welcome-bff:
@@ -1054,12 +1056,11 @@ services:
       - all
       - product
 
-  onecx-waiting-service:
+  ########## DUMMY service to ensure all needed services are running
+  waiting-on-onecx-services:
     image: alpine:3
-    container_name: onecx-waiting-service
+    container_name: waiting-on-onecx-services
     depends_on:
-      onecx-bookmark-svc:
-        condition: service_healthy
       onecx-product-store-svc:
         condition: service_healthy
       onecx-parameter-svc:
@@ -1078,4 +1079,6 @@ services:
       - onecx
     profiles:
       - all
+      - minimal
       - data-import
+      - product

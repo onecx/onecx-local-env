@@ -1,29 +1,41 @@
 #!/bin/bash
 #
-# Start Imports of OneCX Data in version 2
+# Start Imports of OneCX Data with options
 #
 
-export RED='\033[0;31m'
-export GREEN='\033[0;32m'
-export CYAN='\033[0;36m'
-export NC='\033[0m' # No Color
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
 
+#################################################################
 usage () {
   cat <<USAGE
-  $0  [-h] [-v] [-s] [-t <tenant>]
+  $0  [-h|?] [-v] [-s] [-t <tenant>]
+       -e  edition, one of [ 'v1', 'v2'], default is 'v2'
        -h  display this usage information
-       -s  security enabled
+       -s  security authentication enabled
        -t  tenant, one of [ 'default', 't1', 't2' ], default is 'default'
        -v  verbose: display details on imports
 USAGE
   exit 0
 }
+usage_short () {
+  cat <<USAGE
+  Usage: $0  [-h|?] [-v] [-s] [-t <tenant>]
+USAGE
+}
 
+
+#################################################################
 # defaults
+EDITION=v2
 SECURITY=false
 TENANT=default
 VERBOSE=false
 
+
+#################################################################
 # check parameter
 while getopts ":hsvt:" opt; do
   case "$opt" in
@@ -40,13 +52,24 @@ while getopts ":hsvt:" opt; do
   esac
 done
 
-echo -e "${CYAN}Ensure that all services used by imports are running${NC}"
-export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
-ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/v2/docker-compose.v2.yaml  --profile data-import  up -d
 
-if [[ $# == 0 ]]
-then
-  echo "usage  $0 [-h|?] [-s] [-v] [-t <tenant>]"
+#################################################################
+## Security Authentication enabled?
+OLE_SECURITY_AUTH_ENABLED=`grep -c "ONECX_SECURITY_AUTH_ENABLED=true" versions/$EDITION/.env`
+# translate for displaying only:
+SECURITY_AUTH_USED="no"
+if [[ ($OLE_SECURITY_AUTH_ENABLED == 1) || ($SECURITY == "true") ]]; then
+  SECURITY_AUTH_USED="yes"
 fi
 
-./versions/v2/import-onecx.v2.sh  $TENANT  $VERBOSE  $SECURITY
+
+#################################################################
+echo -e "${CYAN}Ensure that all services used by imports are running${NC}, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}"
+export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
+ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.$EDITION.yaml  --profile data-import  up -d
+
+if [[ $# == 0 ]]; then
+  usage_short
+fi
+
+./versions/$EDITION/import-onecx.$EDITION.sh  $TENANT  $VERBOSE  $SECURITY

@@ -28,9 +28,9 @@ for entry in $files
 do
   filename=$(basename "$entry")
   filename=`echo $filename | cut -d '.' -f 1`
-  product=`echo $filename | cut -d'_' -f 1`
-  appid=`echo $filename | cut -d'_' -f 2`
-  slot=`echo $filename | cut -d'_' -f 3`
+  product=`echo $filename | cut -d '_' -f 1`
+  appid=`echo $filename | cut -d '_' -f 2`
+  slot=`echo $filename | cut -d '_' -f 3`
   
   url="http://onecx-product-store-svc/operator/slot/v1/$product/$appid"
   params="--write-out %{http_code} --silent --output /dev/null -X PUT"
