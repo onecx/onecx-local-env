@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Stop OneCX Local Enviroment by using a profile (default: all)
+# Stop OneCX Local Enviroment with options
 #
 
 export RED='\033[0;31m'
@@ -8,57 +8,94 @@ export GREEN='\033[0;32m'
 export CYAN='\033[0;36m'
 export NC='\033[0m' # No Color
 
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
+
+#################################################################
+## flags
+usage () {
+  cat <<USAGE
+  Usage: $0  [-h] [-c] [-e <edition>] [-p <profile>]
+       -c  cleanup, remove volumes
+       -e  edition, one of [ 'v1', 'v2'], default is 'v2'
+       -h  display this usage information, ignoring other parameters
+       -p  profile, one of [ 'all', 'base', 'data-import', 'minimal' ], default is 'minimal'
+USAGE
+  exit 0
+}
+usage_short () {
+  cat <<USAGE
+  Usage: $0  [-h] [-c] [-e <edition>] [-p <profile>]
+USAGE
+}
+
+
+#################################################################
+## defaults
+CLEANUP=false
+EDITION=v2
+PROFILE=minimal
+
 echo -e "${CYAN}Stop OneCX Local Environment${NC}"
 
-profile=minimal
-print_usage=1
-stop=0
 
-# check script parameter
+#################################################################
+## check parameter
+while getopts ":ce:hp:" opt; do
+  case "$opt" in
+        c ) CLEANUP=true ;;
+        e ) 
+            if [[ $OPTARG != @(v1|v2) ]]; then
+              echo -e "${RED} unknown Edition${NC}"
+              usage
+            else
+              EDITION=$OPTARG
+            fi
+            ;;
+        p ) 
+            if [[ $OPTARG != @(all|base|data-import|minimal|product) ]]; then
+              echo -e "${RED} unknown Docker profile${NC}"
+              usage
+            else
+              PROFILE=$OPTARG
+            fi
+            ;;
+        h ) 
+            usage ;; # print usage
+       \? )
+            echo -e "${RED}  unknown shorthand flag: ${GREEN}-${OPTARG}${NC}" >&2
+            usage ;;
+  esac
+done
 
-if [[ ( $# == 0  ) ]]
-then
-  echo -e " ...use profile ${GREEN}'$profile'${NC}"
-elif [[ ( $# == 1  ) ]]
-then
-  if [[ $1 == clean ]]
-  then
-    print_usage=0
-    echo -e " ...stop all services and ${RED}cleanup volumes${NC}"
-  elif [[ $1 == @(all|base|minimal|data-import|product) ]]
-  then
-    profile=$1
-    print_usage=0
-    echo -e " ...use profile ${GREEN}'$profile'${NC} without cleanup"
+
+#################################################################
+## execute
+echo -e "  edition: ${GREEN}$EDITION${NC}, profile: ${GREEN}$PROFILE${NC}, cleanup: ${GREEN}$CLEANUP${NC}"
+
+if [[ $# == 0 ]]; then
+  usage_short
+fi
+
+DOCKER_RUNNING_SERVICES=`docker ps | wc -l`
+if [[ $DOCKER_RUNNING_SERVICES == "1" ]]; then
+  echo -e "${CYAN}no running services${NC}"
+  exit 0
+else
+  docker compose -f versions/$EDITION/docker-compose.$EDITION.yaml --profile $PROFILE  down
+fi
+
+
+#################################################################
+## volume
+if [[ $CLEANUP == "true" ]]; then
+  echo -e "${CYAN}Remove Docker volumes${NC}"
+  if [[ $EDITION == "v1" ]]; then
+    docker compose -v -f versions/$EDITION/docker-compose.$EDITION.yaml  down --volumes
   else
-    stop=1
-    echo -e "${RED} ...unknown Docker profile${NC}"
+    docker volume rm -f onecx-local-env_postgres
   fi
-else
-  stop=1
-fi
-
-if [[ ( $print_usage == 1  ) ]]
-then
-  echo "    usage:  $0  [ profile | clean ]  with profile in (all, base, minimal, data-import, product ), optional, 'minimal' is default"
-fi
-
-if [[ ( $stop == 1  ) ]]
-then
-  exit 1
-fi
-
-
-######################################
-########## STOP & CLEANUP ############
-######################################
-if [[ $1 == "clean" ]]
-then
-  # clean volumes
-  docker compose -v -f versions/v2/docker-compose.v2.yaml --env-file versions/v2/.env  --profile all  down
-  echo -e "${CYAN}Remove Docker volume 'onecx-local-env_postgres'${NC}"
-  docker volume rm -f onecx-local-env_postgres
-else
-  echo "stopping profile $profile"
-  docker compose -f versions/v2/docker-compose.v2.yaml --profile $profile  down
 fi
