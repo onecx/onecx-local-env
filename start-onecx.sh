@@ -16,10 +16,10 @@ echo -e "${CYAN}Start OneCX Local Environment${NC}"
 usage () {
   cat <<USAGE
   Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s]
-       -e  edition, one of [ 'v1', 'v2'], default is 'v2'
+       -e  edition, one of [ 'v1', 'v2'], default: 'v2'
        -h  display this usage information, ignoring other parameters
-       -p  profile, one of [ 'all', 'base', 'data-import', 'minimal' ], default is 'minimal'
-       -s  security authentication enabled, default not enabled
+       -p  profile, one of [ 'all', 'base', 'data-import', 'minimal' ], default: 'minimal'
+       -s  security authentication enabled, default: not enabled
 USAGE
   exit 0
 }
@@ -86,4 +86,3 @@ if [[ $# == 0 ]]; then
 fi
 
 ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.$EDITION.yaml  --profile $PROFILE  up -d
-
