@@ -71,10 +71,10 @@ fi
 #################################################################
 echo -e "  Ensure that all services used by imports are running, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}"
 export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
-ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.$EDITION.yaml  --profile data-import  up -d
+ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile data-import  up -d
 
 if [[ $# == 0 ]]; then
   usage_short
 fi
 
-./versions/$EDITION/import-onecx.$EDITION.sh  $TENANT  $VERBOSE  $SECURITY
+./versions/$EDITION/import-onecx.sh  $TENANT  $VERBOSE  $SECURITY
