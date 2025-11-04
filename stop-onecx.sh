@@ -85,7 +85,7 @@ if [[ $DOCKER_RUNNING_SERVICES == "1" ]]; then
   echo -e "${CYAN}no running services${NC}"
   exit 0
 else
-  docker compose -f versions/$EDITION/docker-compose.$EDITION.yaml --profile $PROFILE  down
+  docker compose -f versions/$EDITION/docker-compose.yaml --profile $PROFILE  down
 fi
 
 
@@ -94,7 +94,7 @@ fi
 if [[ $CLEANUP == "true" ]]; then
   echo -e "${CYAN}Remove Docker volumes${NC}"
   if [[ $EDITION == "v1" ]]; then
-    docker compose -v -f versions/$EDITION/docker-compose.$EDITION.yaml  down --volumes
+    docker compose -v -f versions/$EDITION/docker-compose.yaml  down --volumes
   else
     docker volume rm -f onecx-local-env_postgres
   fi
