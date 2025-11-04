@@ -1057,15 +1057,17 @@ services:
       - product
 
   ########## DUMMY service to ensure all needed services are running
-  waiting-on-onecx-services:
+  waiting-on-onecx-data-import:
     image: alpine:3
-    container_name: waiting-on-onecx-services
+    container_name: waiting-on-onecx-data-import
     depends_on:
-      onecx-product-store-svc:
+      onecx-bookmark-svc:
         condition: service_healthy
       onecx-parameter-svc:
         condition: service_healthy
       onecx-permission-svc:
+        condition: service_healthy
+      onecx-product-store-svc:
         condition: service_healthy
       onecx-tenant-svc:
         condition: service_healthy
@@ -1079,6 +1081,26 @@ services:
       - onecx
     profiles:
       - all
-      - minimal
       - data-import
-      - product
+
+  waiting-on-onecx-minimal:
+    image: alpine:3
+    container_name: waiting-on-onecx-minimal
+    depends_on:
+      onecx-permission-svc:
+        condition: service_healthy
+      onecx-product-store-svc:
+        condition: service_healthy
+      onecx-tenant-svc:
+        condition: service_healthy
+      onecx-theme-svc:
+        condition: service_healthy
+      onecx-shell-bff:
+        condition: service_healthy
+      onecx-workspace-bff:
+        condition: service_healthy
+    networks:
+      - onecx
+    profiles:
+      - all
+      - minimal
