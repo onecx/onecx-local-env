@@ -1,0 +1,2 @@
+include:
+  - ./versions/v2/docker-compose.yaml

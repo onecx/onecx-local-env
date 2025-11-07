@@ -163,7 +163,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   onecx-announcement-bff:
     image: ${ONECX_ANNOUNCEMENT_BFF}
@@ -186,7 +185,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   onecx-announcement-ui:
     image: ${ONECX_ANNOUNCEMENT_UI}
@@ -205,7 +203,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   ########## ONECX BOOKMARK
   onecx-bookmark-svc:
@@ -232,7 +229,6 @@ services:
     profiles:
       - all
       - data-import
-      - product
 
   onecx-bookmark-bff:
     image: ${ONECX_BOOKMARK_BFF}
@@ -255,7 +251,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   onecx-bookmark-ui:
     image: ${ONECX_BOOKMARK_UI}
@@ -274,7 +269,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   ########## ONECX HELP
   onecx-help-svc:
@@ -302,7 +296,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   onecx-help-bff:
     image: ${ONECX_HELP_BFF}
@@ -325,7 +318,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   onecx-help-ui:
     image: ${ONECX_HELP_UI}
@@ -344,7 +336,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   ########## ONECX IAM
   onecx-iam-svc:
@@ -373,7 +364,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   onecx-iam-bff:
     image: ${ONECX_IAM_BFF}
@@ -396,7 +386,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   onecx-iam-ui:
     image: ${ONECX_IAM_UI}
@@ -415,7 +404,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   ########## ONECX PARAMETER
   onecx-parameter-svc:
@@ -443,7 +431,6 @@ services:
       - all
       - data-import
       - minimal
-      - product
 
   onecx-parameter-bff:
     image: ${ONECX_PARAMETER_BFF}
@@ -466,7 +453,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   onecx-parameter-ui:
     image: ${ONECX_PARAMETER_UI}
@@ -485,7 +471,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   ########## ONECX PERMISSION
   onecx-permission-svc:
@@ -516,7 +501,6 @@ services:
       - all
       - minimal
       - data-import
-      - product
 
   onecx-permission-bff:
     image: ${ONECX_PERMISSION_BFF}
@@ -539,7 +523,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   onecx-permission-ui:
     image: ${ONECX_PERMISSION_UI}
@@ -558,7 +541,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   ########## ONECX PRODUCT-STORE
   onecx-product-store-svc:
@@ -588,7 +570,6 @@ services:
       - all
       - minimal
       - data-import
-      - product
 
   onecx-product-store-bff:
     image: ${ONECX_PRODUCT_STORE_BFF}
@@ -611,7 +592,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   onecx-product-store-ui:
     image: ${ONECX_PRODUCT_STORE_UI}
@@ -630,7 +610,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   ########## ONECX SHELL
   onecx-shell-bff:
@@ -670,7 +649,6 @@ services:
     profiles:
       - all
       - minimal
-      - product
 
   onecx-shell-ui:
     image: ${ONECX_SHELL_UI}
@@ -694,7 +672,6 @@ services:
     profiles:
       - all
       - minimal
-      - product
 
   ########## ONECX TENANT
   onecx-tenant-svc:
@@ -724,7 +701,6 @@ services:
       - all
       - minimal
       - data-import
-      - product
 
   onecx-tenant-bff:
     image: ${ONECX_TENANT_BFF}
@@ -747,7 +723,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   onecx-tenant-ui:
     image: ${ONECX_TENANT_UI}
@@ -766,7 +741,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   ########## ONECX THEME
   onecx-theme-svc:
@@ -796,7 +770,6 @@ services:
       - all
       - minimal
       - data-import
-      - product
 
   onecx-theme-bff:
     image: ${ONECX_THEME_BFF}
@@ -819,7 +792,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   onecx-theme-ui:
     image: ${ONECX_THEME_UI}
@@ -838,7 +810,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   ########## ONECX WELCOME
   onecx-welcome-svc:
@@ -866,7 +837,6 @@ services:
     profiles:
       - all
       - data-import
-      - product
 
   onecx-welcome-bff:
     image: ${ONECX_WELCOME_BFF}
@@ -889,7 +859,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   onecx-welcome-ui:
     image: ${ONECX_WELCOME_UI}
@@ -908,7 +877,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   ########## ONECX WORKSPACE
   onecx-workspace-svc:
@@ -939,7 +907,6 @@ services:
       - all
       - minimal
       - data-import
-      - product
 
   onecx-workspace-bff:
     image: ${ONECX_WORKSPACE_BFF}
@@ -963,7 +930,6 @@ services:
     profiles:
       - all
       - minimal
-      - product
 
   onecx-workspace-ui:
     image: ${ONECX_WORKSPACE_UI}
@@ -983,7 +949,6 @@ services:
     profiles:
       - all
       - minimal
-      - product
 
   ########## ONECX USER-PROFILE
   onecx-user-profile-svc:
@@ -1012,7 +977,6 @@ services:
     profiles:
       - all
       - minimal
-      - product
 
   onecx-user-profile-bff:
     image: ${ONECX_USER_PROFILE_BFF}
@@ -1035,7 +999,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   onecx-user-profile-ui:
     image: ${ONECX_USER_PROFILE_UI}
@@ -1054,7 +1017,6 @@ services:
       - onecx
     profiles:
       - all
-      - product
 
   ########## DUMMY service to ensure all needed services are running
   waiting-on-onecx-data-import:
