@@ -727,7 +727,7 @@ services:
   ########## ONECX-HELP
   onecx-help-svc:
     image: ${ONECX_HELP_SVC}
-    container_name: onecx-help-bff
+    container_name: onecx-help-svc
     environment:
       QUARKUS_DATASOURCE_USERNAME: onecx_help
       QUARKUS_DATASOURCE_PASSWORD: onecx_help
