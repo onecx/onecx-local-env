@@ -1,0 +1,6 @@
+{
+    "name": "onecx-shell-header-end",
+    "description": "End region of the shell header (e.g. user profile)",
+    "deprecated": false,
+    "undeployed": false
+}

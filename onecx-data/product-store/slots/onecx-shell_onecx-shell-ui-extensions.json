@@ -1,0 +1,6 @@
+{
+    "name": "onecx-shell-extensions",
+    "description": "For providing additional functions, that will not be displayed inside the slot (e.g. toast messages, cookie banner)",
+    "deprecated": false,
+    "undeployed": false
+}
