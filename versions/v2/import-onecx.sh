@@ -7,10 +7,30 @@
 # $3 => security  (true|false)
 #
 
-export RED='\033[0;31m'
-export GREEN='\033[0;32m'
-export CYAN='\033[0;36m'
-export NC='\033[0m' # No Color
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
+
+#################################################################
+## flags
+usage () {
+  cat <<USAGE
+  Usage: $0  [-h] [-c] [-e <edition>] [-p <profile>]
+       -e  edition, one of [ 'v1', 'v2'], default is 'v2'
+       -h  display this usage information, ignoring other parameters
+       -p  profile, one of [ 'all', 'base', 'data-import', 'minimal' ], default is 'base'
+       -t  tenant, one of [ 'default', 't1', 't2' ], default is 'default'
+USAGE
+  exit 0
+}
+usage_short () {
+  cat <<USAGE
+  Usage: $0  [-h] [-c] [-e <edition>] [-p <profile>] [-t <tenant>]
+USAGE
+}
+
 
 export OLE_EDITION="v2"
 export OLE_LINE_PREFIX="* "
@@ -64,6 +84,7 @@ KC_AUTH_CLIENT_SECRET="t4LXKbpxedZoHn9mynwSih9Cz9W1VbS8u9vaDz5A"
 
 echo -e "  edition: ${GREEN}$OLE_EDITION${NC}, tenant: ${GREEN}$1${NC}, user: ${GREEN}$KC_USER${NC}, security authentication: ${GREEN}$OLE_SECURITY_AUTH_USED${NC}"
 
+exit 0
 
 #################################################################
 ## Set SKIP_CONTAINER_MANAGEMENT to 0 or false to starting/stopping containers for data import:

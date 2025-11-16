@@ -3,11 +3,6 @@
 # Stop OneCX Local Enviroment with options
 #
 
-export RED='\033[0;31m'
-export GREEN='\033[0;32m'
-export CYAN='\033[0;36m'
-export NC='\033[0m' # No Color
-
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 CYAN='\033[0;36m'
@@ -22,7 +17,7 @@ usage () {
        -c  cleanup, remove volumes
        -e  edition, one of [ 'v1', 'v2'], default is 'v2'
        -h  display this usage information, ignoring other parameters
-       -p  profile, one of [ 'all', 'base', 'data-import', 'minimal' ], default is 'minimal'
+       -p  profile, one of [ 'all', 'base', 'data-import', 'minimal' ], default is 'base'
 USAGE
   exit 0
 }
