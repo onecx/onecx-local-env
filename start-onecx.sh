@@ -18,7 +18,7 @@ usage () {
   Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s]
        -e  edition, one of [ 'v1', 'v2'], default: 'v2'
        -h  display this usage information, ignoring other parameters
-       -p  profile, one of [ 'all', 'base', 'data-import', 'minimal' ], default: 'minimal'
+       -p  profile, one of [ 'all', 'base', 'data-import', 'minimal' ], default: 'base'
        -s  security authentication enabled, default: not enabled
 USAGE
   exit 0
@@ -33,7 +33,7 @@ USAGE
 #################################################################
 ## defaults
 EDITION=v2
-PROFILE=minimal
+PROFILE=base
 SECURITY=false
 
 

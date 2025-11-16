@@ -37,7 +37,7 @@ USAGE
 ## defaults
 CLEANUP=false
 EDITION=v2
-PROFILE=minimal
+PROFILE=base
 
 echo -e "${CYAN}Stop OneCX Local Environment${NC}"
 
@@ -80,22 +80,28 @@ if [[ $# == 0 ]]; then
   usage_short
 fi
 
+
 DOCKER_RUNNING_SERVICES=`docker ps | wc -l`
 if [[ $DOCKER_RUNNING_SERVICES == "1" ]]; then
-  echo -e "${CYAN}no running services${NC}"
-  exit 0
+  echo -e "${CYAN}No running services${NC}"
 else
-  docker compose -f versions/$EDITION/docker-compose.yaml --profile $PROFILE  down
+  docker compose  -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  down
 fi
 
 
 #################################################################
 ## volume
 if [[ $CLEANUP == "true" ]]; then
-  echo -e "${CYAN}Remove Docker volumes${NC}"
-  if [[ $EDITION == "v1" ]]; then
-    docker compose -v -f versions/$EDITION/docker-compose.yaml  down --volumes
-  else
-    docker volume rm -f onecx-local-env_postgres
+  echo -e "${CYAN}Remove Docker volumes and orphans${NC}"
+  
+  if [[ $DOCKER_RUNNING_SERVICES == "1" ]]; then
+    docker compose down --volumes --remove-orphans 2>/dev/null
+  #  docker volume rm -f onecx-local-env_postgres
   fi
+
+  #if [[ $EDITION == "v1" ]]; then
+  #  docker compose down --volumes --remove-orphans 
+  #else
+  #  docker volume rm -f onecx-local-env_postgres
+  #fi
 fi
