@@ -5,11 +5,9 @@ name: onecx-local-env
 volumes:
   postgres:
     name: onecx-local-env_postgres
-    external: true
 networks:
   onecx:
     name: onecx-local-env_onecx
-    external: true
 
 ########################################
 ####### ENVIRONMENT PRESETS ############
@@ -490,8 +488,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -560,8 +556,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -629,8 +623,6 @@ services:
       retries: 3
       start_period: 10s
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
       onecx-tenant-svc:
@@ -668,8 +660,8 @@ services:
       KEYCLOAK_CLIENT_ID: ${KC_CLIENT_ID}
     healthcheck:
       test: ["CMD", "curl", "--fail", "-G", "http://localhost:8080"]
-      interval: 5s
-      timeout: 3s
+      interval: 10s
+      timeout: 5s
       retries: 3
     depends_on:
       onecx-shell-bff:
@@ -699,8 +691,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -769,8 +759,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -839,8 +827,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -976,8 +962,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -1023,8 +1007,8 @@ services:
       PRODUCT_NAME: "onecx-workspace"
     healthcheck:
       test: ["CMD", "curl", "--fail", "-G", "http://localhost:8080"]
-      interval: 5s
-      timeout: 3s
+      interval: 10s
+      timeout: 5s
       retries: 3
     depends_on:
       onecx-workspace-bff:
@@ -1104,7 +1088,7 @@ services:
         condition: service_healthy
       onecx-user-profile-svc:
         condition: service_healthy
-      onecx-workspace-bff:
+      onecx-workspace-ui:
         condition: service_healthy
     networks:
       - onecx

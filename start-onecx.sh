@@ -78,7 +78,7 @@ fi
 
 
 #################################################################
-## execute
+## start profile services
 echo -e "  edition: ${GREEN}$EDITION${NC}, profile: ${GREEN}$PROFILE${NC}, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}"
 
 if [[ $# == 0 ]]; then
@@ -86,3 +86,8 @@ if [[ $# == 0 ]]; then
 fi
 
 ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d
+
+
+#################################################################
+## remove profile helper service, ignoring any error message
+docker compose down waiting-on-profile-$PROFILE 2>/dev/null

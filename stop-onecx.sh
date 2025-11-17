@@ -2,6 +2,7 @@
 #
 # Stop OneCX Local Enviroment with options
 #
+OLE_DOCKER_COMPOSE_PROJECT="onecx-local-env"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -76,27 +77,30 @@ if [[ $# == 0 ]]; then
 fi
 
 
-DOCKER_RUNNING_SERVICES=`docker ps | wc -l`
-if [[ $DOCKER_RUNNING_SERVICES == "1" ]]; then
+number_of_running_services=`docker ps | wc -l`
+number_of_running_services=$(($number_of_running_services -1))
+if [[ $number_of_running_services == 0 ]]; then
   echo -e "${CYAN}No running services${NC}"
 else
   docker compose  -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  down
 fi
 
+# after down profile services: check running container again...
+number_of_running_services=`docker ps | wc -l`
+number_of_running_services=$(($number_of_running_services -1))
+if [[ $number_of_running_services != 0 ]]; then
+  if [[ $CLEANUP == "true" ]]; then
+    cannot_remove_text=" ...cannot remove volumes and network - use 'all' profile to remove all services"
+  fi
+  echo -e "${CYAN}Remaining running services: $number_of_running_services${NC}$cannot_remove_text"
+  ./list-containers.sh
+fi
+
 
 #################################################################
 ## volume
-if [[ $CLEANUP == "true" ]]; then
+if [[ ($number_of_running_services == 0) && ($CLEANUP == "true") ]]; then
   echo -e "${CYAN}Remove Docker volumes and orphans${NC}"
-  
-  if [[ $DOCKER_RUNNING_SERVICES == "1" ]]; then
-    docker compose down --volumes --remove-orphans 2>/dev/null
-  #  docker volume rm -f onecx-local-env_postgres
-  fi
-
-  #if [[ $EDITION == "v1" ]]; then
-  #  docker compose down --volumes --remove-orphans 
-  #else
-  #  docker volume rm -f onecx-local-env_postgres
-  #fi
+  docker compose down --volumes --remove-orphans 2>/dev/null
+  docker volume rm -f $OLE_DOCKER_COMPOSE_PROJECT_postgres
 fi
