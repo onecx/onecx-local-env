@@ -429,6 +429,7 @@ services:
       - onecx
     profiles:
       - all
+      - base
       - data-import
       - minimal
 
@@ -1027,6 +1028,8 @@ services:
     image: alpine:3
     container_name: waiting-on-profile-base
     depends_on:
+      onecx-parameter-svc:
+        condition: service_healthy
       onecx-permission-svc:
         condition: service_healthy
       onecx-product-store-svc:
