@@ -8,13 +8,14 @@ GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
-echo -e "${CYAN}Import OneCX Local Environment${NC}"
+echo -e "${CYAN}Import data for OneCX Local Environment${NC}"
 
 #################################################################
 usage () {
   cat <<USAGE
-  $0  [-h] [-v] [-s] [-t <tenant>]
-       -e  edition, one of [ 'v1', 'v2'], default is 'v2'
+  $0  [-h] [-d <import data type>] [-v] [-s] [-t <tenant>]
+       -d  data type, one of [ all, base, permission, assignment, mfe, ms, product, slot, theme, workspace], base is default
+       -e  edition, one of [ 'v1', 'v2' ], default is 'v2'
        -h  display this usage information
        -s  security authentication enabled, default not enabled
        -t  tenant, one of [ 'default', 't1', 't2' ], default is 'default'
@@ -24,7 +25,7 @@ USAGE
 }
 usage_short () {
   cat <<USAGE
-  Usage: $0  [-h] [-v] [-s] [-t <tenant>]
+  Usage: $0  [-h] [-d <import data type>] [-v] [-s] [-t <tenant>]
 USAGE
 }
 
@@ -35,12 +36,23 @@ EDITION=v2
 SECURITY=false
 TENANT=default
 VERBOSE=false
+PROFILE=base
 
 
 #################################################################
 # check parameter
-while getopts ":hsvt:" opt; do
+while getopts ":hd:svt:" opt; do
   case "$opt" in
+        d ) 
+            if [[ $OPTARG != @(all|base|permission|assignment|mfe|ms|product|slot|theme|workspace) ]]; then
+              usage
+            else
+              IMPORT_TYPE=$OPTARG
+            fi
+            if [[ $OPTARG == "all" ]]; then
+              PROFILE=data-import
+            fi
+            ;;
         v ) VERBOSE=true ;;
         s ) SECURITY=true ;;
         t ) 
@@ -71,10 +83,10 @@ fi
 #################################################################
 echo -e "  Ensure that all services used by imports are running, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}"
 export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
-ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile data-import  up -d
+ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d  > /dev/null 2>&1
 
 if [[ $# == 0 ]]; then
   usage_short
 fi
 
-./versions/$EDITION/import-onecx.sh  $TENANT  $VERBOSE  $SECURITY
+./versions/$EDITION/import-onecx.sh  $TENANT  $VERBOSE  $SECURITY  $IMPORT_TYPE

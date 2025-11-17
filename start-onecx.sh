@@ -18,7 +18,7 @@ usage () {
   Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s]
        -e  edition, one of [ 'v1', 'v2'], default: 'v2'
        -h  display this usage information, ignoring other parameters
-       -p  profile, one of [ 'all', 'base', 'data-import', 'minimal' ], default: 'minimal'
+       -p  profile, one of [ 'all', 'base', 'data-import', 'minimal' ], default: 'base'
        -s  security authentication enabled, default: not enabled
 USAGE
   exit 0
@@ -33,7 +33,7 @@ USAGE
 #################################################################
 ## defaults
 EDITION=v2
-PROFILE=minimal
+PROFILE=base
 SECURITY=false
 
 
@@ -78,7 +78,7 @@ fi
 
 
 #################################################################
-## execute
+## start profile services
 echo -e "  edition: ${GREEN}$EDITION${NC}, profile: ${GREEN}$PROFILE${NC}, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}"
 
 if [[ $# == 0 ]]; then
@@ -86,3 +86,18 @@ if [[ $# == 0 ]]; then
 fi
 
 ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d
+
+
+#################################################################
+## import profile data if profile is "base"
+if [[ $PROFILE == "base" ]]; then
+  ./import-onecx.sh -d base
+fi
+if [[ $PROFILE == "data-import" ]]; then
+  ./import-onecx.sh -d all
+fi
+
+
+#################################################################
+## remove profile helper service, ignoring any error message
+docker compose down   waiting-on-profile-$PROFILE  > /dev/null 2>&1

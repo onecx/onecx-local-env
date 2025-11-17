@@ -429,6 +429,7 @@ services:
       - onecx
     profiles:
       - all
+      - base
       - data-import
       - minimal
 
@@ -488,8 +489,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -499,6 +498,7 @@ services:
       - onecx
     profiles:
       - all
+      - base
       - minimal
       - data-import
 
@@ -557,8 +557,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -568,6 +566,7 @@ services:
       - onecx
     profiles:
       - all
+      - base
       - minimal
       - data-import
 
@@ -625,8 +624,6 @@ services:
       retries: 3
       start_period: 10s
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
       onecx-tenant-svc:
@@ -648,6 +645,7 @@ services:
       - onecx
     profiles:
       - all
+      - base
       - minimal
 
   onecx-shell-ui:
@@ -661,6 +659,11 @@ services:
       KEYCLOAK_URL: ${KC_URL}
       KEYCLOAK_REALM: ${KC_REALM}
       KEYCLOAK_CLIENT_ID: ${KC_CLIENT_ID}
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "-G", "http://localhost:8080"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     depends_on:
       onecx-shell-bff:
         condition: service_healthy
@@ -671,6 +674,7 @@ services:
       - onecx
     profiles:
       - all
+      - base
       - minimal
 
   ########## ONECX TENANT
@@ -688,8 +692,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -699,6 +701,7 @@ services:
       - onecx
     profiles:
       - all
+      - base
       - minimal
       - data-import
 
@@ -757,8 +760,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -768,6 +769,7 @@ services:
       - onecx
     profiles:
       - all
+      - base
       - minimal
       - data-import
 
@@ -806,6 +808,73 @@ services:
     labels:
       - "traefik.http.services.onecx-theme-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-theme-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/theme/`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+
+  ########## ONECX USER-PROFILE
+  onecx-user-profile-svc:
+    image: ${ONECX_USER_PROFILE_SVC}
+    container_name: onecx-user-profile-svc
+    environment:
+      <<: *svc_multi_tenancy
+      QUARKUS_DATASOURCE_USERNAME: onecx_user_profile
+      QUARKUS_DATASOURCE_PASSWORD: onecx_user_profile
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_user_profile?sslmode=disable"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-user-profile-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-user-profile-svc.rule=Host(`onecx-user-profile-svc`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+      - minimal
+
+  onecx-user-profile-bff:
+    image: ${ONECX_USER_PROFILE_BFF}
+    container_name: onecx-user-profile-bff
+    environment:
+      <<: *bff_environment
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-user-profile"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-user-profile-svc:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-user-profile-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-user-profile-bff.rule=Host(`onecx-user-profile-bff`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+
+  onecx-user-profile-ui:
+    image: ${ONECX_USER_PROFILE_UI}
+    container_name: onecx-user-profile-ui
+    environment:
+      APP_BASE_HREF: "/mfe/user-profile/"
+      APP_ID: "onecx-user-profile-ui"
+      PRODUCT_NAME: "onecx-user-profile"
+    depends_on:
+      onecx-user-profile-bff:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-user-profile-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-user-profile-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/user-profile/`)"
     networks:
       - onecx
     profiles:
@@ -894,8 +963,6 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      postgresdb:
-        condition: service_healthy
       keycloak-app:
         condition: service_healthy
     labels:
@@ -905,6 +972,7 @@ services:
       - onecx
     profiles:
       - all
+      - base
       - minimal
       - data-import
 
@@ -938,6 +1006,11 @@ services:
       APP_BASE_HREF: "/mfe/workspace/"
       APP_ID: "onecx-workspace-ui"
       PRODUCT_NAME: "onecx-workspace"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "-G", "http://localhost:8080"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     depends_on:
       onecx-workspace-bff:
         condition: service_healthy
@@ -950,78 +1023,35 @@ services:
       - all
       - minimal
 
-  ########## ONECX USER-PROFILE
-  onecx-user-profile-svc:
-    image: ${ONECX_USER_PROFILE_SVC}
-    container_name: onecx-user-profile-svc
-    environment:
-      <<: *svc_multi_tenancy
-      QUARKUS_DATASOURCE_USERNAME: onecx_user_profile
-      QUARKUS_DATASOURCE_PASSWORD: onecx_user_profile
-      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_user_profile?sslmode=disable"
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
+  ########## DUMMY service to ensure all depended services are running
+  waiting-on-profile-base:
+    image: alpine:3
+    container_name: waiting-on-profile-base
     depends_on:
-      postgresdb:
+      onecx-parameter-svc:
         condition: service_healthy
-      keycloak-app:
+      onecx-permission-svc:
         condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-user-profile-svc.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-user-profile-svc.rule=Host(`onecx-user-profile-svc`)"
-    networks:
-      - onecx
-    profiles:
-      - all
-      - minimal
-
-  onecx-user-profile-bff:
-    image: ${ONECX_USER_PROFILE_BFF}
-    container_name: onecx-user-profile-bff
-    environment:
-      <<: *bff_environment
-      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-user-profile"
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
+      onecx-product-store-svc:
+        condition: service_healthy
+      onecx-shell-ui:
+        condition: service_healthy
+      onecx-tenant-svc:
+        condition: service_healthy
+      onecx-theme-svc:
+        condition: service_healthy
       onecx-user-profile-svc:
         condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-user-profile-bff.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-user-profile-bff.rule=Host(`onecx-user-profile-bff`)"
-    networks:
-      - onecx
-    profiles:
-      - all
-
-  onecx-user-profile-ui:
-    image: ${ONECX_USER_PROFILE_UI}
-    container_name: onecx-user-profile-ui
-    environment:
-      APP_BASE_HREF: "/mfe/user-profile/"
-      APP_ID: "onecx-user-profile-ui"
-      PRODUCT_NAME: "onecx-user-profile"
-    depends_on:
-      onecx-user-profile-bff:
+      onecx-workspace-svc:
         condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-user-profile-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-user-profile-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/user-profile/`)"
     networks:
       - onecx
     profiles:
-      - all
+      - base
 
-  ########## DUMMY service to ensure all needed services are running
-  waiting-on-onecx-data-import:
+  waiting-on-profile-data-import:
     image: alpine:3
-    container_name: waiting-on-onecx-data-import
+    container_name: waiting-on-profile-data-import
     depends_on:
       onecx-bookmark-svc:
         condition: service_healthy
@@ -1045,13 +1075,15 @@ services:
       - all
       - data-import
 
-  waiting-on-onecx-minimal:
+  waiting-on-profile-minimal:
     image: alpine:3
-    container_name: waiting-on-onecx-minimal
+    container_name: waiting-on-profile-minimal
     depends_on:
       onecx-permission-svc:
         condition: service_healthy
       onecx-product-store-svc:
+        condition: service_healthy
+      onecx-shell-bff:
         condition: service_healthy
       onecx-tenant-svc:
         condition: service_healthy
@@ -1059,12 +1091,20 @@ services:
         condition: service_healthy
       onecx-user-profile-svc:
         condition: service_healthy
-      onecx-shell-bff:
+      onecx-workspace-ui:
         condition: service_healthy
-      onecx-workspace-bff:
+    networks:
+      - onecx
+    profiles:
+      - minimal
+
+  waiting-on-profile-all:
+    image: alpine:3
+    container_name: waiting-on-profile-all
+    depends_on:
+      onecx-workspace-ui:
         condition: service_healthy
     networks:
       - onecx
     profiles:
       - all
-      - minimal

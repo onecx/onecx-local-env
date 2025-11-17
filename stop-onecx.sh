@@ -2,11 +2,7 @@
 #
 # Stop OneCX Local Enviroment with options
 #
-
-export RED='\033[0;31m'
-export GREEN='\033[0;32m'
-export CYAN='\033[0;36m'
-export NC='\033[0m' # No Color
+OLE_DOCKER_COMPOSE_PROJECT="onecx-local-env"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -22,7 +18,7 @@ usage () {
        -c  cleanup, remove volumes
        -e  edition, one of [ 'v1', 'v2'], default is 'v2'
        -h  display this usage information, ignoring other parameters
-       -p  profile, one of [ 'all', 'base', 'data-import', 'minimal' ], default is 'minimal'
+       -p  profile, one of [ 'all', 'base', 'data-import', 'minimal' ], default is 'base'
 USAGE
   exit 0
 }
@@ -37,7 +33,7 @@ USAGE
 ## defaults
 CLEANUP=false
 EDITION=v2
-PROFILE=minimal
+PROFILE=base
 
 echo -e "${CYAN}Stop OneCX Local Environment${NC}"
 
@@ -80,22 +76,31 @@ if [[ $# == 0 ]]; then
   usage_short
 fi
 
-DOCKER_RUNNING_SERVICES=`docker ps | wc -l`
-if [[ $DOCKER_RUNNING_SERVICES == "1" ]]; then
-  echo -e "${CYAN}no running services${NC}"
-  exit 0
+
+number_of_running_services=`docker ps | wc -l`
+number_of_running_services=$(($number_of_running_services -1))
+if [[ $number_of_running_services == 0 ]]; then
+  echo -e "${CYAN}No running services${NC}"
 else
-  docker compose -f versions/$EDITION/docker-compose.yaml --profile $PROFILE  down
+  docker compose  -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  down
+fi
+
+# after down profile services: check running container again...
+number_of_running_services=`docker ps | wc -l`
+number_of_running_services=$(($number_of_running_services -1))
+if [[ $number_of_running_services != 0 ]]; then
+  if [[ $CLEANUP == "true" ]]; then
+    cannot_remove_text=" ...cannot remove volumes and network - use 'all' profile to remove all services"
+  fi
+  echo -e "${CYAN}Remaining running services: $number_of_running_services${NC}$cannot_remove_text"
+  ./list-containers.sh
 fi
 
 
 #################################################################
 ## volume
-if [[ $CLEANUP == "true" ]]; then
-  echo -e "${CYAN}Remove Docker volumes${NC}"
-  if [[ $EDITION == "v1" ]]; then
-    docker compose -v -f versions/$EDITION/docker-compose.yaml  down --volumes
-  else
-    docker volume rm -f onecx-local-env_postgres
-  fi
+if [[ ($number_of_running_services == 0) && ($CLEANUP == "true") ]]; then
+  echo -e "${CYAN}Remove Docker volumes and orphans${NC}"
+  docker compose down --volumes --remove-orphans 2>/dev/null
+  docker volume rm -f $OLE_DOCKER_COMPOSE_PROJECT_postgres
 fi

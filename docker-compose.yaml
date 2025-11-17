@@ -1,2 +1,8 @@
+########################################
+############## GENERAL #################
+########################################
+# IMPORTANT: use the same project name as the subsequent compose files using same network/volumes
+name: onecx-local-env
+
 include:
   - ./versions/v2/docker-compose.yaml
