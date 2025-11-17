@@ -5,9 +5,11 @@ name: onecx-local-env
 volumes:
   postgres:
     name: onecx-local-env_postgres
+    external: true
 networks:
   onecx:
     name: onecx-local-env_onecx
+    external: true
 
 ########################################
 ####### ENVIRONMENT PRESETS ############

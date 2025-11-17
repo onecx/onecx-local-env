@@ -3,38 +3,28 @@
 # Import OneCX data from files below ./onecx-data
 #
 # $1 => tenant
-# $2 => verbose   (true|false)
-# $3 => security  (true|false)
+# $2 => verbose      (true|false)
+# $3 => security     (true|false)
+# $4 => import type  (all|base|slot|theme|workspace)
 #
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-CYAN='\033[0;36m'
-NC='\033[0m' # No Color
-
-
-#################################################################
-## flags
-usage () {
-  cat <<USAGE
-  Usage: $0  [-h] [-c] [-e <edition>] [-p <profile>]
-       -e  edition, one of [ 'v1', 'v2'], default is 'v2'
-       -h  display this usage information, ignoring other parameters
-       -p  profile, one of [ 'all', 'base', 'data-import', 'minimal' ], default is 'base'
-       -t  tenant, one of [ 'default', 't1', 't2' ], default is 'default'
-USAGE
-  exit 0
-}
-usage_short () {
-  cat <<USAGE
-  Usage: $0  [-h] [-c] [-e <edition>] [-p <profile>] [-t <tenant>]
-USAGE
-}
-
+export RED='\033[0;31m'
+export GREEN='\033[0;32m'
+export CYAN='\033[0;36m'
+export NC='\033[0m' # No Color
 
 export OLE_EDITION="v2"
 export OLE_LINE_PREFIX="* "
 export OLE_HEADER_CT_JSON="Content-Type: application/json"
+
+
+#################################################################
+## Check and set import type
+IMPORT_TYPE="base"
+if [[ (-n $4) && ($4 == @(all|base|permission|assignment|mfe|ms|product|slot|theme|workspace)) ]]; then
+  IMPORT_TYPE=$4
+fi
+
 
 #################################################################
 ## Support starting from different directories: base, vx
@@ -82,9 +72,8 @@ KC_AUTH_CLIENT_ID="onecx-local-env-import"
 KC_AUTH_CLIENT_SECRET="t4LXKbpxedZoHn9mynwSih9Cz9W1VbS8u9vaDz5A"
 
 
-echo -e "  edition: ${GREEN}$OLE_EDITION${NC}, tenant: ${GREEN}$1${NC}, user: ${GREEN}$KC_USER${NC}, security authentication: ${GREEN}$OLE_SECURITY_AUTH_USED${NC}"
+echo -e "  edition: ${GREEN}$OLE_EDITION${NC}, tenant: ${GREEN}$1${NC}, type: ${GREEN}$IMPORT_TYPE${NC}, user: ${GREEN}$KC_USER${NC}, security authentication: ${GREEN}$OLE_SECURITY_AUTH_USED${NC}"
 
-exit 0
 
 #################################################################
 ## Set SKIP_CONTAINER_MANAGEMENT to 0 or false to starting/stopping containers for data import:
@@ -126,44 +115,70 @@ fi
 ## IMPORT OneCX data
 cd $import_start_dir/onecx-data
 
-cd tenant
-bash ./import-tenants.sh $1 $2
-cd ..
+if [[ $IMPORT_TYPE == @(all|base|tenant) ]]; then
+  cd tenant
+  bash ./import-tenants.sh $1 $2
+  cd ..
+fi
 
-cd product-store
-bash ./import-slots.sh $1 $2
-bash ./import-products.sh $1 $2
-bash ./import-microservices.sh $1 $2
-bash ./import-microfrontends.sh $1 $2
-cd ..
+if [[ $IMPORT_TYPE == @(all|base|slot|product|ms|mfe) ]]; then
+  cd product-store
+  if [[ $IMPORT_TYPE == @(all|base|product) ]]; then
+    bash ./import-products.sh $1 $2
+  fi
+  if [[ $IMPORT_TYPE == @(all|base|slot) ]]; then
+    bash ./import-slots.sh $1 $2
+  fi
+  if [[ $IMPORT_TYPE == @(all|base|ms) ]]; then
+    bash ./import-microservices.sh $1 $2
+  fi
+  if [[ $IMPORT_TYPE == @(all|base|mfe) ]]; then
+    bash ./import-microfrontends.sh $1 $2
+  fi
+  cd ..
+fi
 
-cd parameter
-bash ./import-parameters.sh $1 $2
-cd ..
+if [[ $IMPORT_TYPE == @(all|base|parameter) ]]; then
+  cd parameter
+  bash ./import-parameters.sh $1 $2
+  cd ..
+fi
 
-cd permission
-bash ./import-permissions.sh $1 $2
-cd ..
+if [[ $IMPORT_TYPE == @(all|base|permission) ]]; then
+  cd permission
+  bash ./import-permissions.sh $1 $2
+  cd ..
+fi
 
-cd permission-assignment
-bash ./import-assignments.sh $1 $2
-cd ..
+if [[ $IMPORT_TYPE == @(all|base|assignment) ]]; then
+  cd permission-assignment
+  bash ./import-assignments.sh $1 $2
+  cd ..
+fi
 
-cd theme
-bash ./import-themes.sh $1 $2
-cd ..
+if [[ $IMPORT_TYPE == @(all|base|theme) ]]; then
+  cd theme
+  bash ./import-themes.sh $1 $2
+  cd ..
+fi
 
-cd welcome
-bash ./import-welcome-images.sh $1 $2
-cd ..
+if [[ $IMPORT_TYPE == @(all|base|workspace) ]]; then
+  cd workspace
+  bash ./import-workspaces.sh $1 $2
+  cd ..
+fi
 
-cd workspace
-bash ./import-workspaces.sh $1 $2
-cd ..
+if [[ $IMPORT_TYPE == @(all|welcome) ]]; then
+  cd welcome
+  bash ./import-welcome-images.sh $1 $2
+  cd ..
+fi
 
-cd bookmark
-bash ./import-bookmarks.sh $1 $2
-cd ..
+if [[ $IMPORT_TYPE == @(all|bookmark) ]]; then
+  cd bookmark
+  bash ./import-bookmarks.sh $1 $2
+  cd ..
+fi
 
 
 if [[ ( $current_dir != "$OLE_EDITION"  ) ]]
