@@ -89,5 +89,15 @@ ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docke
 
 
 #################################################################
+## import profile data if profile is "base"
+if [[ $PROFILE == "base" ]]; then
+  ./import-onecx.sh -d base
+fi
+if [[ $PROFILE == "data-import" ]]; then
+  ./import-onecx.sh -d all
+fi
+
+
+#################################################################
 ## remove profile helper service, ignoring any error message
-docker compose down waiting-on-profile-$PROFILE 2>/dev/null
+docker compose down   waiting-on-profile-$PROFILE  > /dev/null 2>&1

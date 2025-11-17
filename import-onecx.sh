@@ -14,7 +14,7 @@ echo -e "${CYAN}Import data for OneCX Local Environment${NC}"
 usage () {
   cat <<USAGE
   $0  [-h] [-d <import data type>] [-v] [-s] [-t <tenant>]
-       -d  import data type, one of [ 'all', 'base', 'permission', 'assignment', 'mfe', 'ms', 'product', 'slot', 'theme', 'workspace']
+       -d  data type, one of [ all, base, permission, assignment, mfe, ms, product, slot, theme, workspace], base is default
        -e  edition, one of [ 'v1', 'v2' ], default is 'v2'
        -h  display this usage information
        -s  security authentication enabled, default not enabled
@@ -83,7 +83,7 @@ fi
 #################################################################
 echo -e "  Ensure that all services used by imports are running, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}"
 export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
-ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d
+ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d  > /dev/null 2>&1
 
 if [[ $# == 0 ]]; then
   usage_short
