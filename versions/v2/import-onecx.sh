@@ -14,7 +14,7 @@ export CYAN='\033[0;36m'
 export NC='\033[0m' # No Color
 
 export OLE_EDITION="v2"
-export OLE_LINE_PREFIX="* "
+export OLE_LINE_PREFIX="  * "
 export OLE_HEADER_CT_JSON="Content-Type: application/json"
 
 

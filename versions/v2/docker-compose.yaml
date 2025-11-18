@@ -59,7 +59,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
       - data-import
 
   postgresdb:
@@ -89,7 +88,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
       - data-import
 
   keycloak-app:
@@ -132,7 +130,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
       - data-import
 
   ########################################
@@ -431,7 +428,6 @@ services:
       - all
       - base
       - data-import
-      - minimal
 
   onecx-parameter-bff:
     image: ${ONECX_PARAMETER_BFF}
@@ -499,7 +495,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
       - data-import
 
   onecx-permission-bff:
@@ -567,7 +562,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
       - data-import
 
   onecx-product-store-bff:
@@ -646,7 +640,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
 
   onecx-shell-ui:
     image: ${ONECX_SHELL_UI}
@@ -675,7 +668,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
 
   ########## ONECX TENANT
   onecx-tenant-svc:
@@ -702,7 +694,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
       - data-import
 
   onecx-tenant-bff:
@@ -770,7 +761,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
       - data-import
 
   onecx-theme-bff:
@@ -838,7 +828,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
 
   onecx-user-profile-bff:
     image: ${ONECX_USER_PROFILE_BFF}
@@ -861,6 +850,7 @@ services:
       - onecx
     profiles:
       - all
+      - base
 
   onecx-user-profile-ui:
     image: ${ONECX_USER_PROFILE_UI}
@@ -869,6 +859,11 @@ services:
       APP_BASE_HREF: "/mfe/user-profile/"
       APP_ID: "onecx-user-profile-ui"
       PRODUCT_NAME: "onecx-user-profile"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "-G", "http://localhost:8080"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     depends_on:
       onecx-user-profile-bff:
         condition: service_healthy
@@ -879,6 +874,7 @@ services:
       - onecx
     profiles:
       - all
+      - base
 
   ########## ONECX WELCOME
   onecx-welcome-svc:
@@ -973,7 +969,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
       - data-import
 
   onecx-workspace-bff:
@@ -997,7 +992,7 @@ services:
       - onecx
     profiles:
       - all
-      - minimal
+      - base
 
   onecx-workspace-ui:
     image: ${ONECX_WORKSPACE_UI}
@@ -1021,34 +1016,25 @@ services:
       - onecx
     profiles:
       - all
-      - minimal
+      - base
 
   ########## DUMMY service to ensure all depended services are running
   waiting-on-profile-base:
     image: alpine:3
     container_name: waiting-on-profile-base
     depends_on:
-      onecx-parameter-svc:
-        condition: service_healthy
-      onecx-permission-svc:
-        condition: service_healthy
-      onecx-product-store-svc:
-        condition: service_healthy
       onecx-shell-ui:
         condition: service_healthy
-      onecx-tenant-svc:
+      onecx-user-profile-ui:
         condition: service_healthy
-      onecx-theme-svc:
-        condition: service_healthy
-      onecx-user-profile-svc:
-        condition: service_healthy
-      onecx-workspace-svc:
+      onecx-workspace-ui:
         condition: service_healthy
     networks:
       - onecx
     profiles:
       - base
 
+  # internal used to ensure that all services used by imports are running
   waiting-on-profile-data-import:
     image: alpine:3
     container_name: waiting-on-profile-data-import
@@ -1075,33 +1061,12 @@ services:
       - all
       - data-import
 
-  waiting-on-profile-minimal:
-    image: alpine:3
-    container_name: waiting-on-profile-minimal
-    depends_on:
-      onecx-permission-svc:
-        condition: service_healthy
-      onecx-product-store-svc:
-        condition: service_healthy
-      onecx-shell-bff:
-        condition: service_healthy
-      onecx-tenant-svc:
-        condition: service_healthy
-      onecx-theme-svc:
-        condition: service_healthy
-      onecx-user-profile-svc:
-        condition: service_healthy
-      onecx-workspace-ui:
-        condition: service_healthy
-    networks:
-      - onecx
-    profiles:
-      - minimal
-
   waiting-on-profile-all:
     image: alpine:3
     container_name: waiting-on-profile-all
     depends_on:
+      onecx-shell-ui:
+        condition: service_healthy
       onecx-workspace-ui:
         condition: service_healthy
     networks:

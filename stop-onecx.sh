@@ -18,7 +18,7 @@ usage () {
        -c  cleanup, remove volumes
        -e  edition, one of [ 'v1', 'v2'], default is 'v2'
        -h  display this usage information, ignoring other parameters
-       -p  profile, one of [ 'all', 'base', 'data-import', 'minimal' ], default is 'base'
+       -p  profile, one of [ 'all', 'base' ], default is 'base'
 USAGE
   exit 0
 }
@@ -52,7 +52,7 @@ while getopts ":ce:hp:" opt; do
             fi
             ;;
         p ) 
-            if [[ $OPTARG != @(all|base|data-import|minimal|product) ]]; then
+            if [[ $OPTARG != @(all|base) ]]; then
               echo -e "${RED} unknown Docker profile${NC}"
               usage
             else
@@ -102,5 +102,5 @@ fi
 if [[ ($number_of_running_services == 0) && ($CLEANUP == "true") ]]; then
   echo -e "${CYAN}Remove Docker volumes and orphans${NC}"
   docker compose down --volumes --remove-orphans 2>/dev/null
-  docker volume rm -f $OLE_DOCKER_COMPOSE_PROJECT_postgres
+  docker volume rm -f ${OLE_DOCKER_COMPOSE_PROJECT}_postgres
 fi

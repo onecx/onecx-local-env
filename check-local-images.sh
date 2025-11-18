@@ -17,20 +17,16 @@ IMAGE_NAME_EXTENSION_UI=ui
 
 usage () {
   cat <<USAGE
-  $0  <docker image name prefix>
+  Usage: $0  [ <image name prefix for filtering> ]
 USAGE
-  exit 0
 }
 
 set -e
 
 echo -e "${CYAN}Check local Docker images ${NC}"
-echo -e "   => OneCX registry path:\t${GREEN}${ONECX_REPO_PATH}${NC}"
+usage
+echo -e "  => OneCX registry path:\t\t${GREEN}${ONECX_REPO_PATH}${NC}"
 
-if [ "$#" -ne 1 ]; then
-  usage
-  exit 1
-fi
 
 #########################################
 #### Read parameter
@@ -40,24 +36,22 @@ if [[ $# == 1 ]]; then
   else
     OLE_IMAGE_PREFIX=$1
   fi
+  echo -e "  => Filtered image name prefix:\t${GREEN}${OLE_IMAGE_PREFIX}${NC}"
+  IMAGES=$(docker images --format "{{.Repository}}" | grep "^${OLE_IMAGE_PREFIX}" | sort | uniq)
 else
-  usage
-  OLE_IMAGE_PREFIX=${ONECX_REPO_PATH}/${ONECX_ORGANIZATION}
+  IMAGES=$(docker images --format "{{.Repository}}" | sort | uniq)
 fi
 
 PRINT_FORMAT="%-43s %-13s %-14s %-16s\n"
 
-echo -e "   => Image name prefix:\t${GREEN}${OLE_IMAGE_PREFIX}${NC}"
-echo -e "   => Image version label:\t${GREEN}samo.project.version${NC}"
+echo -e "  => OneCX image version label:\t\t${GREEN}samo.project.version${NC}"
 
 
 #########################################
 #### Get local images
-IMAGES=$(docker images --format "{{.Repository}}" | grep "^${OLE_IMAGE_PREFIX}" | sort | uniq)
 
 if [ -z "$IMAGES" ]; then
   echo -e "${RED}No local Docker images found${NC}"
-  usage
   exit 0
 fi
 

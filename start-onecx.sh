@@ -8,7 +8,7 @@ GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
-echo -e "${CYAN}Start OneCX Local Environment${NC}"
+echo -e "${CYAN}Starting OneCX Local Environment ...${NC}"
 
 
 #################################################################
@@ -18,7 +18,7 @@ usage () {
   Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s]
        -e  edition, one of [ 'v1', 'v2'], default: 'v2'
        -h  display this usage information, ignoring other parameters
-       -p  profile, one of [ 'all', 'base', 'data-import', 'minimal' ], default: 'base'
+       -p  profile, one of [ 'all', 'base' ], default: 'base'
        -s  security authentication enabled, default: not enabled
 USAGE
   exit 0
@@ -50,7 +50,7 @@ while getopts ":he:p:s" opt; do
             fi
             ;;
         p ) 
-            if [[ $OPTARG != @(all|base|data-import|minimal|product) ]]; then
+            if [[ $OPTARG != @(all|base) ]]; then
               echo -e "${RED}  unknown Docker profile${NC}"
               usage
             else
@@ -93,7 +93,7 @@ ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docke
 if [[ $PROFILE == "base" ]]; then
   ./import-onecx.sh -d base
 fi
-if [[ $PROFILE == "data-import" ]]; then
+if [[ $PROFILE == "all" ]]; then
   ./import-onecx.sh -d all
 fi
 
@@ -101,3 +101,8 @@ fi
 #################################################################
 ## remove profile helper service, ignoring any error message
 docker compose down   waiting-on-profile-$PROFILE  > /dev/null 2>&1
+
+
+#################################################################
+## End of starting
+echo -e "To use OneCX, navigate to http://local-proxy/onecx-shell/admin/"
