@@ -44,12 +44,13 @@ PROFILE=base
 while getopts ":hd:svt:" opt; do
   case "$opt" in
         d ) 
-            if [[ $OPTARG != @(all|base|permission|assignment|mfe|ms|product|slot|theme|workspace) ]]; then
+            if [[ $OPTARG != @(all|base|assignment|bookmark|permission|mfe|ms|product|slot|theme|welcome|workspace) ]]; then
               usage
             else
               IMPORT_TYPE=$OPTARG
             fi
-            if [[ $OPTARG == "all" ]]; then
+            # use data-import profile to ensure running services
+            if [[ $OPTARG == @(all|bookmark|welcome) ]]; then
               PROFILE=data-import
             fi
             ;;
@@ -90,3 +91,10 @@ if [[ $# == 0 ]]; then
 fi
 
 ./versions/$EDITION/import-onecx.sh  $TENANT  $VERBOSE  $SECURITY  $IMPORT_TYPE
+
+
+#################################################################
+## remove profile helper service, ignoring any error message
+if [[ $PROFILE == "data-import" ]]; then
+  docker compose down   waiting-on-profile-$PROFILE  > /dev/null 2>&1
+fi

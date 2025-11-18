@@ -45,7 +45,7 @@ while getopts ":ce:hp:" opt; do
         c ) CLEANUP=true ;;
         e ) 
             if [[ $OPTARG != @(v1|v2) ]]; then
-              echo -e "${RED} unknown Edition${NC}"
+              echo -e "${RED}  Unknown Edition${NC}"
               usage
             else
               EDITION=$OPTARG
@@ -53,7 +53,7 @@ while getopts ":ce:hp:" opt; do
             ;;
         p ) 
             if [[ $OPTARG != @(all|base) ]]; then
-              echo -e "${RED} unknown Docker profile${NC}"
+              echo -e "${RED}  Unknown Docker profile${NC}"
               usage
             else
               PROFILE=$OPTARG
@@ -62,7 +62,7 @@ while getopts ":ce:hp:" opt; do
         h ) 
             usage ;; # print usage
        \? )
-            echo -e "${RED}  unknown shorthand flag: ${GREEN}-${OPTARG}${NC}" >&2
+            echo -e "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}" >&2
             usage ;;
   esac
 done
@@ -85,7 +85,9 @@ else
   docker compose  -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  down
 fi
 
-# after down profile services: check running container again...
+
+#################################################################
+## Check success after downing
 number_of_running_services=`docker ps | wc -l`
 number_of_running_services=$(($number_of_running_services -1))
 if [[ $number_of_running_services != 0 ]]; then
@@ -98,7 +100,7 @@ fi
 
 
 #################################################################
-## volume
+## Cleanup volume?
 if [[ ($number_of_running_services == 0) && ($CLEANUP == "true") ]]; then
   echo -e "${CYAN}Remove Docker volumes and orphans${NC}"
   docker compose down --volumes --remove-orphans 2>/dev/null

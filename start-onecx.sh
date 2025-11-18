@@ -89,13 +89,8 @@ ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docke
 
 
 #################################################################
-## import profile data if profile is "base"
-if [[ $PROFILE == "base" ]]; then
-  ./import-onecx.sh -d base
-fi
-if [[ $PROFILE == "all" ]]; then
-  ./import-onecx.sh -d all
-fi
+## import profile data
+./import-onecx.sh -d $PROFILE
 
 
 #################################################################
