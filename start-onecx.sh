@@ -72,10 +72,10 @@ done
 
 #################################################################
 ## Security Authentication enabled?
-OLE_SECURITY_AUTH_ENABLED=`grep -c "ONECX_SECURITY_AUTH_ENABLED=true" versions/$EDITION/.env`
+OLE_SECURITY_AUTH_ENABLED_INT=`grep -c "ONECX_SECURITY_AUTH_ENABLED=true" versions/$EDITION/.env`
 # translate for displaying only:
 SECURITY_AUTH_USED="no"
-if [[ ($OLE_SECURITY_AUTH_ENABLED == 1) || ($SECURITY == "true") ]]; then
+if [[ ($OLE_SECURITY_AUTH_ENABLED_INT == 1) || ($SECURITY == "true") ]]; then
   SECURITY_AUTH_USED="yes"
 fi
 

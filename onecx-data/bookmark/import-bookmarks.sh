@@ -32,7 +32,7 @@ do
   
   url="http://onecx-bookmark-svc/exim/v1/bookmark/$workspace/import?importMode=OVERWRITE&scopes=PRIVATE&scopes=PUBLIC"
   params="--write-out %{http_code} --silent --output /dev/null -X POST"
-  if [[ $OLE_SECURITY_AUTH_ENABLED == 1 ]]; then
+  if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then
     status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -H "$OLE_HEADER_AUTH_TOKEN"  -H "$OLE_HEADER_AUTH_TOKEN"  -d @$entry  $url`
   else
     status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -d @$entry  $url`

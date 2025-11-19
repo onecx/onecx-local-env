@@ -73,22 +73,24 @@ done
 
 #################################################################
 ## Security Authentication enabled?
-OLE_SECURITY_AUTH_ENABLED=`grep -c "ONECX_SECURITY_AUTH_ENABLED=true" versions/$EDITION/.env`
+OLE_SECURITY_AUTH_ENABLED_INT=`grep -c "ONECX_SECURITY_AUTH_ENABLED=true" versions/$EDITION/.env`
 # translate for displaying only:
 SECURITY_AUTH_USED="no"
-if [[ ($OLE_SECURITY_AUTH_ENABLED == 1) || ($SECURITY == "true") ]]; then
+if [[ ($OLE_SECURITY_AUTH_ENABLED_INT == 1) || ($SECURITY == "true") ]]; then
   SECURITY_AUTH_USED="yes"
+else
+  SECURITY=false
 fi
+export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
 
 
 #################################################################
-echo -e "  Ensure that all services used by imports are running, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}"
-export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
-ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d  > /dev/null 2>&1
+#echo -e "  Ensure that all services used by imports are running, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}"
+#ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d  > /dev/null 2>&1
 
-if [[ $# == 0 ]]; then
-  usage_short
-fi
+#if [[ $# == 0 ]]; then
+#  usage_short
+#fi
 
 ./versions/$EDITION/import-onecx.sh  $TENANT  $VERBOSE  $SECURITY  $IMPORT_TYPE
 

@@ -40,12 +40,14 @@ fi
 
 #################################################################
 ## Security Authentication enabled?
-OLE_SECURITY_AUTH_ENABLED=`grep -c "ONECX_SECURITY_AUTH_ENABLED=true" $import_start_dir/versions/$OLE_EDITION/.env`
+OLE_SECURITY_AUTH_ENABLED_INT=`grep -c "ONECX_SECURITY_AUTH_ENABLED=true" $import_start_dir/versions/$OLE_EDITION/.env`
 # translate for displaying only:
 OLE_SECURITY_AUTH_USED="no"
-if [[ ($OLE_SECURITY_AUTH_ENABLED == 1) || ($3 == "true") ]]; then
+if [[ ($OLE_SECURITY_AUTH_ENABLED_INT == 1) || ($3 == "true") ]]; then
   OLE_SECURITY_AUTH_USED="yes"
-  export OLE_SECURITY_AUTH_ENABLED=1
+  export OLE_SECURITY_AUTH_ENABLED=true
+else
+  export OLE_SECURITY_AUTH_ENABLED=false
 fi
 
 

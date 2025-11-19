@@ -1,0 +1,13 @@
+[
+  {
+    "appId": "onecx-permission-ui",
+    "slots": [
+      {
+        "name": "onecx-permission-iam-user-roles",
+        "description": "Receive IAM user roles",
+        "deprecated": false,
+        "undeployed": false
+      }    
+    ]
+  }
+]
