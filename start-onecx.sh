@@ -12,7 +12,7 @@ echo -e "${CYAN}Starting OneCX Local Environment ...${NC}"
 
 
 #################################################################
-## flags
+## Usage
 usage () {
   cat <<USAGE
   Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s]
@@ -32,7 +32,7 @@ USAGE
 
 
 #################################################################
-## defaults
+## Defaults
 EDITION=v2
 PROFILE=base
 SECURITY=false
@@ -40,12 +40,12 @@ IMPORT=yes
 
 
 #################################################################
-## check parameter
+## Check flags and parameter
 while getopts ":he:p:sx" opt; do
   case "$opt" in
         e ) 
             if [[ $OPTARG != @(v1|v2) ]]; then
-              echo -e "${RED}  unknown Edition${NC}"
+              echo -e "${RED}  Unknown Edition${NC}"
               usage
             else
               EDITION=$OPTARG
@@ -53,7 +53,7 @@ while getopts ":he:p:sx" opt; do
             ;;
         p ) 
             if [[ $OPTARG != @(all|base) ]]; then
-              echo -e "${RED}  unknown Docker profile${NC}"
+              echo -e "${RED}  Unknown Docker profile${NC}"
               usage
             else
               PROFILE=$OPTARG
@@ -64,7 +64,7 @@ while getopts ":he:p:sx" opt; do
         h ) 
             usage ;; # print usage
        \? )
-            echo -e "${RED}  unknown shorthand flag: ${GREEN}-${OPTARG}${NC}" >&2
+            echo -e "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}" >&2
             usage ;;
   esac
 done

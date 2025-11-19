@@ -2,16 +2,17 @@
 #
 # Stop OneCX Local Enviroment with options
 #
-OLE_DOCKER_COMPOSE_PROJECT="onecx-local-env"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
+echo -e "${CYAN}Stop OneCX Local Environment${NC}"
+
 
 #################################################################
-## flags
+## Usage
 usage () {
   cat <<USAGE
   Usage: $0  [-h] [-c] [-e <edition>] [-p <profile>]
@@ -30,22 +31,21 @@ USAGE
 
 
 #################################################################
-## defaults
+## Defaults
+OLE_DOCKER_COMPOSE_PROJECT="onecx-local-env"
 CLEANUP=false
 EDITION=v2
 PROFILE=base
 
-echo -e "${CYAN}Stop OneCX Local Environment${NC}"
-
 
 #################################################################
-## check parameter
+## Check flags and parameter
 while getopts ":ce:hp:" opt; do
   case "$opt" in
         c ) CLEANUP=true ;;
         e ) 
             if [[ $OPTARG != @(v1|v2) ]]; then
-              echo -e "${RED}  Unknown Edition${NC}"
+              echo -e "${RED}  Missing Edition${NC}"
               usage
             else
               EDITION=$OPTARG
@@ -53,7 +53,7 @@ while getopts ":ce:hp:" opt; do
             ;;
         p ) 
             if [[ $OPTARG != @(all|base) ]]; then
-              echo -e "${RED}  Unknown Docker profile${NC}"
+              echo -e "${RED}  Missing Docker profile${NC}"
               usage
             else
               PROFILE=$OPTARG
@@ -69,7 +69,7 @@ done
 
 
 #################################################################
-## execute
+## Execute
 echo -e "  edition: ${GREEN}$EDITION${NC}, profile: ${GREEN}$PROFILE${NC}, cleanup: ${GREEN}$CLEANUP${NC}"
 
 if [[ $# == 0 ]]; then
@@ -77,6 +77,8 @@ if [[ $# == 0 ]]; then
 fi
 
 
+#################################################################
+## Check and Downing
 number_of_running_services=`docker ps | wc -l`
 number_of_running_services=$(($number_of_running_services -1))
 if [[ $number_of_running_services == 0 ]]; then
