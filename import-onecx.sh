@@ -63,7 +63,7 @@ while getopts ":hd:svt:" opt; do
               TENANT=$OPTARG
             fi
             ;;
-    ? | h ) usage ;; # print usage
+    ? | h ) usage ;;
        \? )
             echo -e "${RED}  unknown shorthand flag: ${GREEN}-${OPTARG}${NC}" >&2
             usage ;;
@@ -85,12 +85,12 @@ export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
 
 
 #################################################################
-#echo -e "  Ensure that all services used by imports are running, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}"
-#ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d  > /dev/null 2>&1
+echo -e "  Ensure that all services used by imports are running, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}"
+ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d  > /dev/null 2>&1
 
-#if [[ $# == 0 ]]; then
-#  usage_short
-#fi
+if [[ $# == 0 ]]; then
+  usage_short
+fi
 
 ./versions/$EDITION/import-onecx.sh  $TENANT  $VERBOSE  $SECURITY  $IMPORT_TYPE
 
