@@ -1,0 +1,13 @@
+[
+  {
+    "appId": "onecx-theme-ui",
+    "slots": [
+      {
+        "name": "onecx-workspace-data",
+        "description": "Getting data from Workspaces for the current Theme",
+        "deprecated": false,
+        "undeployed": false
+      }    
+    ]
+  }
+]
