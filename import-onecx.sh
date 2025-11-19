@@ -14,7 +14,7 @@ echo -e "${CYAN}Import data for OneCX Local Environment${NC}"
 usage () {
   cat <<USAGE
   $0  [-h] [-d <import data type>] [-v] [-s] [-t <tenant>]
-       -d  data type, one of [ all, base, permission, assignment, mfe, ms, product, slot, theme, workspace], base is default
+       -d  data type, one of [ all, base, bookmark, assignment, permission, mfe, ms, product, slot, theme, welcome, workspace], base is default
        -e  edition, one of [ 'v1', 'v2' ], default is 'v2'
        -h  display this usage information
        -s  security authentication enabled, default not enabled
