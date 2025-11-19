@@ -2,23 +2,24 @@
 #
 # Stop OneCX Local Enviroment with options
 #
-OLE_DOCKER_COMPOSE_PROJECT="onecx-local-env"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
+echo -e "${CYAN}Stop OneCX Local Environment${NC}"
+
 
 #################################################################
-## flags
+## Usage
 usage () {
   cat <<USAGE
   Usage: $0  [-h] [-c] [-e <edition>] [-p <profile>]
        -c  cleanup, remove volumes
        -e  edition, one of [ 'v1', 'v2'], default is 'v2'
        -h  display this usage information, ignoring other parameters
-       -p  profile, one of [ 'all', 'base', 'data-import', 'minimal' ], default is 'base'
+       -p  profile, one of [ 'all', 'base' ], default is 'base'
 USAGE
   exit 0
 }
@@ -30,30 +31,29 @@ USAGE
 
 
 #################################################################
-## defaults
+## Defaults
+OLE_DOCKER_COMPOSE_PROJECT="onecx-local-env"
 CLEANUP=false
 EDITION=v2
 PROFILE=base
 
-echo -e "${CYAN}Stop OneCX Local Environment${NC}"
-
 
 #################################################################
-## check parameter
+## Check flags and parameter
 while getopts ":ce:hp:" opt; do
   case "$opt" in
         c ) CLEANUP=true ;;
         e ) 
             if [[ $OPTARG != @(v1|v2) ]]; then
-              echo -e "${RED} unknown Edition${NC}"
+              echo -e "${RED}  Missing Edition${NC}"
               usage
             else
               EDITION=$OPTARG
             fi
             ;;
         p ) 
-            if [[ $OPTARG != @(all|base|data-import|minimal|product) ]]; then
-              echo -e "${RED} unknown Docker profile${NC}"
+            if [[ $OPTARG != @(all|base) ]]; then
+              echo -e "${RED}  Missing Docker profile${NC}"
               usage
             else
               PROFILE=$OPTARG
@@ -62,14 +62,14 @@ while getopts ":ce:hp:" opt; do
         h ) 
             usage ;; # print usage
        \? )
-            echo -e "${RED}  unknown shorthand flag: ${GREEN}-${OPTARG}${NC}" >&2
+            echo -e "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}" >&2
             usage ;;
   esac
 done
 
 
 #################################################################
-## execute
+## Execute
 echo -e "  edition: ${GREEN}$EDITION${NC}, profile: ${GREEN}$PROFILE${NC}, cleanup: ${GREEN}$CLEANUP${NC}"
 
 if [[ $# == 0 ]]; then
@@ -77,6 +77,8 @@ if [[ $# == 0 ]]; then
 fi
 
 
+#################################################################
+## Check and Downing
 number_of_running_services=`docker ps | wc -l`
 number_of_running_services=$(($number_of_running_services -1))
 if [[ $number_of_running_services == 0 ]]; then
@@ -85,7 +87,9 @@ else
   docker compose  -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  down
 fi
 
-# after down profile services: check running container again...
+
+#################################################################
+## Check success after downing
 number_of_running_services=`docker ps | wc -l`
 number_of_running_services=$(($number_of_running_services -1))
 if [[ $number_of_running_services != 0 ]]; then
@@ -98,9 +102,9 @@ fi
 
 
 #################################################################
-## volume
+## Cleanup volume?
 if [[ ($number_of_running_services == 0) && ($CLEANUP == "true") ]]; then
   echo -e "${CYAN}Remove Docker volumes and orphans${NC}"
   docker compose down --volumes --remove-orphans 2>/dev/null
-  docker volume rm -f $OLE_DOCKER_COMPOSE_PROJECT_postgres
+  docker volume rm -f ${OLE_DOCKER_COMPOSE_PROJECT}_postgres
 fi
