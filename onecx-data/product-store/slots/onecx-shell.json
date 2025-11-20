@@ -123,24 +123,6 @@
         "undeployed": false
       },
       {
-        "name": "onecx-shell-body-end.start",
-        "description": "Start region of the shell body end (e.g. quick links)",
-        "deprecated": false,
-        "undeployed": false
-      },
-      {
-        "name": "onecx-shell-body-end.center",
-        "description": "Center region of the shell body end (e.g. sidebar navigation)",
-        "deprecated": false,
-        "undeployed": false
-      },
-      {
-        "name": "onecx-shell-body-end.end",
-        "description": "End region of the shell body end (e.g. action buttons)",
-        "deprecated": false,
-        "undeployed": false
-      },
-      {
         "name": "onecx-shell-body-footer.start",
         "description": "Start region of the shell body footer (e.g. info)",
         "deprecated": false,
@@ -155,6 +137,24 @@
       {
         "name": "onecx-shell-body-footer.end",
         "description": "End region of the shell body footer (e.g. action buttons)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-body-end.start",
+        "description": "Start region of the shell body end (e.g. quick links)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-body-end.center",
+        "description": "Center region of the shell body end (e.g. sidebar navigation)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-body-end.end",
+        "description": "End region of the shell body end (e.g. action buttons)",
         "deprecated": false,
         "undeployed": false
       },
