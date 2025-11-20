@@ -1,47 +1,108 @@
 #!/bin/bash
 #
-# Start OneCX Local Enviroment by using a profile (default: all)
+# Start OneCX Local Enviroment with options
 #
 
-export RED='\033[0;31m'
-export GREEN='\033[0;32m'
-export CYAN='\033[0;36m'
-export NC='\033[0m' # No Color
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
 
-echo -e "${CYAN}Start OneCX Local Environment${NC}"
+echo -e "${CYAN}Starting OneCX Local Environment ...${NC}"
 
-profile=minimal
-print_usage=1
-stop=0
 
-# check script parameter
+#################################################################
+## Usage
+usage () {
+  cat <<USAGE
+  Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s]
+       -e  edition, one of [ 'v1', 'v2'], default: 'v2'
+       -h  display this usage information, ignoring other parameters
+       -p  profile, one of [ 'all', 'base' ], default: 'base'
+       -s  security authentication enabled, default: not enabled
+       -x  skip import
+USAGE
+  exit 0
+}
+usage_short () {
+  cat <<USAGE
+  Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s]
+USAGE
+}
 
-if [[ ( $# == 0  ) ]]
-then
-  echo -e " ...use profile ${GREEN}'$profile'${NC}"
-elif [[ ( $# == 1  ) ]]
-then
-  if [[ $1 == @(all|base|minimal|data-import|product) ]]
-  then
-    profile=$1
-    print_usage=0
-    echo -e " ...use profile ${GREEN}'$profile'${NC}"
-  else
-    stop=1
-    echo -e "${RED} ...unknown Docker profile${NC}"
-  fi
-else
-  stop=1
+
+#################################################################
+## Defaults
+EDITION=v2
+PROFILE=base
+SECURITY=false
+IMPORT=yes
+
+
+#################################################################
+## Check flags and parameter
+while getopts ":he:p:sx" opt; do
+  case "$opt" in
+        e ) 
+            if [[ $OPTARG != @(v1|v2) ]]; then
+              echo -e "${RED}  Unknown Edition${NC}"
+              usage
+            else
+              EDITION=$OPTARG
+            fi
+            ;;
+        p ) 
+            if [[ $OPTARG != @(all|base) ]]; then
+              echo -e "${RED}  Unknown Docker profile${NC}"
+              usage
+            else
+              PROFILE=$OPTARG
+            fi
+            ;;
+        s ) SECURITY=true ;;
+        x ) IMPORT=no ;;
+        h ) 
+            usage ;; # print usage
+       \? )
+            echo -e "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}" >&2
+            usage ;;
+  esac
+done
+
+
+#################################################################
+## Security Authentication enabled?
+OLE_SECURITY_AUTH_ENABLED_INT=`grep -c "ONECX_SECURITY_AUTH_ENABLED=true" versions/$EDITION/.env`
+# translate for displaying only:
+SECURITY_AUTH_USED="no"
+if [[ ($OLE_SECURITY_AUTH_ENABLED_INT == 1) || ($SECURITY == "true") ]]; then
+  SECURITY_AUTH_USED="yes"
 fi
 
-if [[ ( $print_usage == 1  ) ]]
-then
-  echo "    usage:  $0  [ profile ]  with profile in (all, base, minimal, data-import, product ), optional, 'minimal' is default"
+
+#################################################################
+## Start profile services
+echo -e "  edition: ${GREEN}$EDITION${NC}, profile: ${GREEN}$PROFILE${NC}, import: ${GREEN}$IMPORT${NC}, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}"
+
+if [[ $# == 0 ]]; then
+  usage_short
 fi
 
-if [[ ( $stop == 1  ) ]]
-then
-  exit 1
+ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d
+
+
+#################################################################
+## Import profile data
+if [[ $IMPORT == "yes" ]]; then
+  ./import-onecx.sh -d $PROFILE
 fi
 
-docker compose -f versions/v2/docker-compose.v2.yaml  --profile $profile   up -d
+
+#################################################################
+## Remove profile helper service, ignoring any error message
+docker compose down   waiting-on-profile-$PROFILE  > /dev/null 2>&1
+
+
+#################################################################
+## End of starting
+echo -e "To use OneCX, navigate to http://local-proxy/onecx-shell/admin/"

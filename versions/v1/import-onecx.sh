@@ -6,45 +6,45 @@ export RED='\033[0;31m'
 export GREEN='\033[0;32m'
 export NC='\033[0m' # No Color
 
-cd imports/tenant
+cd onecx-data/tenant
 
 echo " "
-bash ./import-tenants.sh
+bash ./import-tenants.sh  $1 $2
 
 cd ../theme
 
 echo " "
-bash ./import-themes.sh
+bash ./import-themes.sh  $1 $2
 
 cd ../product-store
 
 echo " "
-bash ./import-products.sh
+bash ./import-products.sh  $1 $2
 echo " "
-bash ./import-slots.sh
+bash ./import-slots.sh  $1 $2
 echo " "
-bash ./import-microservices.sh
+bash ./import-microservices.sh  $1 $2
 echo " "
-bash ./import-microfrontends.sh
+bash ./import-microfrontends.sh  $1 $2
 
 cd ../permissions
 
 echo " "
-bash ./import-permissions.sh
+bash ./import-permissions.sh  $1 $2
 
 cd ../parameters
 
 echo " "
-bash ./import-parameters.sh
+bash ./import-parameters.sh  $1 $2
 
 cd ../assignments
 
 echo " "
-bash ./import-assignments.sh
+bash ./import-assignments.sh  $1 $2
 
 cd ../workspace
 
 echo " "
-bash ./import-workspaces.sh
+bash ./import-workspaces.sh  $1 $2
 
 cd ../..

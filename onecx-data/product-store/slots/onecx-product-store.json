@@ -1,0 +1,13 @@
+[
+  {
+    "appId": "onecx-product-store-ui",
+    "slots": [
+      {
+        "name": "onecx-workspace-data",
+        "description": "Get Workspaces using a given Product",
+        "deprecated": false,
+        "undeployed": false
+      }    
+    ]
+  }
+]

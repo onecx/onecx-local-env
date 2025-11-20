@@ -1,6 +1,7 @@
 {
   "version": "xxx",
-  "name": "onecx-announcement-ui",
+  "name": "onecx-announcement-ui",  
+  "displayName": "OneCX Announcement UI",
   "description": "OneCX Announcement UI",
   "type": "ui"
 }

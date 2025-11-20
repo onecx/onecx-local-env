@@ -961,18 +961,21 @@
         "profile",
         "email",
         "Organization_ID",
-        "ocx-an:all",
-        "ocx-bm:all",
-        "ocx-hp:all",
-        "ocx-pa:all",
-        "ocx-pm:all",
-        "ocx-ps:all",
-        "ocx-sc:all",
-        "ocx-th:all",
-        "ocx-tn:all",
-        "ocx-up:all",
-        "ocx-wc:all",
-        "ocx-ws:all"
+        "ocx-an:write",
+        "ocx-bm:write",
+        "ocx-hp:write",
+        "ocx-pa-op:write",
+        "ocx-pm:write",
+        "ocx-ps-mfe:write",
+        "ocx-ps-ms:write",
+        "ocx-ps-product:write",
+        "ocx-ps-slot:write",
+        "ocx-sc:write",
+        "ocx-th:write",
+        "ocx-tn:write",
+        "ocx-up:write",
+        "ocx-wc:write",
+        "ocx-ws:write"
       ],
       "optionalClientScopes": [
         "address",
@@ -1308,85 +1311,106 @@
       ]
     },
     {
-      "id": "ocx-an:all",
-      "name": "ocx-an:all",
+      "id": "ocx-an:write",
+      "name": "ocx-an:write",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
     },
     {
-      "id": "ocx-bm:all",
-      "name": "ocx-bm:all",
+      "id": "ocx-bm:write",
+      "name": "ocx-bm:write",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
     },
     {
-      "id": "ocx-hp:all",
-      "name": "ocx-hp:all",
+      "id": "ocx-hp:write",
+      "name": "ocx-hp:write",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
     },
     {
-      "id": "ocx-pa:all",
-      "name": "ocx-pa:all",
+      "id": "ocx-pa-op:write",
+      "name": "ocx-pa-op:write",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
     },
     {
-      "id": "ocx-pm:all",
-      "name": "ocx-pm:all",
+      "id": "ocx-pm:write",
+      "name": "ocx-pm:write",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
     },
     {
-      "id": "ocx-ps:all",
-      "name": "ocx-ps:all",
+      "id": "ocx-ps-mfe:write",
+      "name": "ocx-ps-mfe:write",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
     },
     {
-      "id": "ocx-sc:all",
-      "name": "ocx-sc:all",
+      "id": "ocx-ps-ms:write",
+      "name": "ocx-ps-ms:write",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
     },
     {
-      "id": "ocx-th:all",
-      "name": "ocx-th:all",
+      "id": "ocx-ps-product:write",
+      "name": "ocx-ps-product:write",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
     },
     {
-      "id": "ocx-tn:all",
-      "name": "ocx-tn:all",
+      "id": "ocx-ps-slot:write",
+      "name": "ocx-ps-slot:write",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
     },
     {
-      "id": "ocx-up:all",
-      "name": "ocx-up:all",
+      "id": "ocx-sc:write",
+      "name": "ocx-sc:write",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
     },
     {
-      "id": "ocx-wc:all",
-      "name": "ocx-wc:all",
+      "id": "ocx-th:write",
+      "name": "ocx-th:write",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
     },
     {
-      "id": "ocx-ws:all",
-      "name": "ocx-ws:all",
+      "id": "ocx-tn:write",
+      "name": "ocx-tn:write",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-up:write",
+      "name": "ocx-up:write",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-wc:write",
+      "name": "ocx-wc:write",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-ws:write",
+      "name": "ocx-ws:write",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
