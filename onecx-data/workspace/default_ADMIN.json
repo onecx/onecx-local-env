@@ -408,12 +408,12 @@
           ]
         },
         {
-          "name": "onecx-shell-extensions",
+          "name": "onecx-shell-toast",
           "components": [
             {
               "productName": "onecx-shell",
               "appId": "onecx-shell-ui",
-              "name": "./OneCXShellExtensionsComponent"
+              "name": "./OneCXShellToastComponent"
             }
           ]
         }
