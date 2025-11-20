@@ -1,0 +1,4 @@
+= Setup & Installation
+:idprefix:
+:idseparator: -
+:imagesdir: ../images

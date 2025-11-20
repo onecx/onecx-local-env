@@ -1,4 +1,4 @@
-= OneCX Local Environment - Versions - v2
+= Versions - v2
 :idprefix:
 :idseparator: -
 :imagesdir: ../images

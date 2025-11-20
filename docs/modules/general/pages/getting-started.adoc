@@ -1,4 +1,4 @@
-= OneCX Local Environment - Getting Started - Run OneCX locally
+= Getting Started - Running OneCX locally
 :idprefix:
 :idseparator: -
 :imagesdir: ../images
