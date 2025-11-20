@@ -17,36 +17,168 @@
       {
         "name": "onecx-shell-footer",
         "description": "Footer area on the page e.g. logo, footer menu, version info etc.",
-        "deprecated": false,
+        "deprecated": true,
         "undeployed": false
       },
       {
         "name": "onecx-shell-header-left",
         "description": "Shell header left region",
-        "deprecated": false,
+        "deprecated": true,
         "undeployed": false
       },
       {
         "name": "onecx-shell-header-right",
         "description": "Shell header right region e.g. horizontal menu, top bar",
-        "deprecated": false,
+        "deprecated": true,
         "undeployed": false
       },
       {
         "name": "onecx-shell-horizontal-menu",
         "description": "Shell horizontal menu within shell header right",
-        "deprecated": false,
+        "deprecated": true,
         "undeployed": false
       },
       {
         "name": "onecx-shell-sub-header",
         "description": "Shell sub header region e.g. banner bar",
-        "deprecated": false,
+        "deprecated": true,
         "undeployed": false
       },
       {
         "name": "onecx-shell-vertical-menu",
         "description": "Shell vertical menu",
+        "deprecated": true,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-header.start",
+        "description": "Start region of the shell header (e.g. logo)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-header.center",
+        "description": "Center region of the shell header (e.g. horizontal menu, search bar)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-header.end",
+        "description": "End region of the shell header (e.g. user profile)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-sub-header.start",
+        "description": "Start region of the shell sub header (e.g. bookmarks)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-sub-header.center",
+        "description": "Center region of the shell sub header (e.g. action buttons)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-sub-header.end",
+        "description": "End region of the shell sub header (e.g. action buttons)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-body-start.start",
+        "description": "Start region of the shell body start (e.g. quick links)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-body-start.center",
+        "description": "Center region of the shell body start (e.g. sidebar navigation)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-body-start.end",
+        "description": "End region of the shell body start (e.g. action buttons)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-body-header.start",
+        "description": "Start region of the shell body header (e.g. breadcrumbs)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-body-header.center",
+        "description": "Center region of the shell body header (e.g. title)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-body-header.end",
+        "description": "End region of the shell body header (e.g. action buttons)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-body-footer.start",
+        "description": "Start region of the shell body footer (e.g. info)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-body-footer.center",
+        "description": "Center region of the shell body footer (e.g. comment section)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-body-footer.end",
+        "description": "End region of the shell body footer (e.g. action buttons)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-body-end.start",
+        "description": "Start region of the shell body end (e.g. quick links)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-body-end.center",
+        "description": "Center region of the shell body end (e.g. sidebar navigation)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-body-end.end",
+        "description": "End region of the shell body end (e.g. action buttons)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-footer.start",
+        "description": "Start region of the shell footer (e.g. logo)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-footer.center",
+        "description": "Center region of the shell footer (e.g. footer menu)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-footer.end",
+        "description": "End region of the shell footer (e.g. version info)",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-shell-extensions",
+        "description": "For providing additional functions, that will not be displayed inside the slot (e.g. toast messages, cookie banner)",
         "deprecated": false,
         "undeployed": false
       }
