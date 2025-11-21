@@ -1,0 +1,4 @@
+= Advanced - Scripts - `start-onecx.sh`
+:idprefix:
+:idseparator: -
+:imagesdir: ../images

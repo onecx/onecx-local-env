@@ -1,0 +1,4 @@
+= Advanced - Scripts - `stop-onecx.sh`
+:idprefix:
+:idseparator: -
+:imagesdir: ../images
