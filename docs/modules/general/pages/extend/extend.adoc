@@ -3,6 +3,12 @@
 :idseparator: -
 :imagesdir: ../images
 
+[NOTE]
+.Disclaimer
+====
+This page was created for an older version of OneCX Local Environment and may not reflect the current state of the project. It will be updated in the near future.
+====
+
 If you need to extend this environment with your own containers or import additional data, please utilize preferred version folder and its `docker-compose` and `imports` files and follow the guidelines from the respective version-specific documentation.
 
 Please under no circumstances use the root `docker-compose.yaml` file or the root `imports` folder for your own extensions, as these files can change between versions and may break your setup.

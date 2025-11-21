@@ -3,6 +3,12 @@
 :idseparator: -
 :imagesdir: ../images
 
+[NOTE]
+.Disclaimer
+====
+This page was created for an older version of OneCX Local Environment and may not reflect the current state of the project. It will be updated in the near future.
+====
+
 [quote]
 ____
 This document only contains information specific to v2 of the OneCX Local Environment. Please make sure to also read the xref:general:getting-started.adoc[*top-level getting started guide*] for general information and instructions that apply to all versions.

@@ -1,6 +1,6 @@
 * xref:general:index.adoc[Overview]
-* xref:general:getting-started.adoc[Getting Started]
 * xref:general:setup/installation.adoc[Setup]
+* xref:general:getting-started.adoc[Getting Started]
 * xref:general:extend/extend.adoc[Extend default environment]
 * FAQ & Help
 ** xref:faq:faq.adoc[FAQ]

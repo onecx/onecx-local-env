@@ -3,46 +3,12 @@
 :idseparator: -
 :imagesdir: ../images
 
-`onecx-local-env` is the local development environment for OneCX products. It is based on Docker and Docker Compose, and enables developers to quickly run local instances of the OneCX Shell, selected OneCX products and their dependencies for development and testing purposes.
+`onecx-local-env` is the local development environment for OneCX. It is based on Docker/Docker Compose, and enables developers to quickly run local instances of the OneCX Shell, selected OneCX products and their dependencies for development and testing purposes.
 
-`onecx-local-env` can either be used as a standalone tool, or integrated into custom development environments via Git submodules. To avoid introducing breaking changes for any existing workflows or custom environments, multiple versions of `onecx-local-env` exist in parallel.
+`onecx-local-env` can either be used as a standalone tool, or integrated into custom development environments via Git submodules. Custom development environments can interact with `onecx-local-env` via provided lifecycle-scripts and extend its functionality by wrapping the provided Docker Compose and script files with custom implementations.
 
-For more in-depth information on `onecx-local-env` including prerequisites, setup instructions, available versions and more please refer to the following documentation:
+Detailed information on how to set up and install `onecx-local-env` can be found in the xref:general:setup/installation.adoc[Setup & Installation] documentation.
 
-- xref:general:getting-started.adoc[Getting Started - Run OneCX locally]
-- xref:troubleshooting:common-issues.adoc[Troubleshooting - Common Issues]
+After completing the setup, the quickest way to get started is to follow the steps outlined in the xref:general:getting-started.adoc[Getting Started - Run OneCX locally] guide.
 
-[NOTE]
-.Quick Start
-====
-If you already followed all setup instructions mentioned in xref:general:getting-started.adoc[Getting Started - Run OneCX locally], you can complete the following steps to run and access a local OneCX environment:
-
-. *Start the local environment:* To start a minimal local OneCX environment, run the following command from the `onecx-local-env` root directory: 
-+
-[source,bash]
-----
-  ./start-onecx.sh
-----
-
-. *Access your local OneCX environment:* After starting the local environment...
-  * Open your web browser and navigate to `http://local-proxy/onecx-shell/admin`
-  * Login using the following credentials:
-    ** Username: `onecx`
-    ** Password: `onecx`
-
-. *Stop the local environment:* To stop the local OneCX environment, run the following command from the `onecx-local-env` root directory:
-+
-[source,bash]
-----
-./stop-onecx.sh
-----
-
-**Optional Steps**
-
-. *Import mock data:* If you notice any errors or missing data in your local environment, re-importing the mock data may help resolve these issues. To import the mock data, run the following command from the `onecx-local-env` root directory:
-+
-[source,bash]
-----
-./import-onecx.sh
-----
-====
+Additional information on extending the default environment, advanced configuration options, as well as FAQ & Help resources can be found in the navigation on the left.
