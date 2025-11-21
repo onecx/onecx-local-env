@@ -7,6 +7,10 @@
 # $3 => security     (true|false)
 # $4 => import type  (all|base|slot|theme|workspace)
 #
+# For macOS Bash compatibility:
+#   * Use printf instead of echo -e
+#   * Replaced @(...) with Regex =~ ^(...)
+#
 
 export RED='\033[0;31m'
 export GREEN='\033[0;32m'
@@ -22,7 +26,6 @@ export OLE_HEADER_CT_JSON="Content-Type: application/json"
 ## Check and set import type
 IMPORT_TYPE="base"
 
-# FIX: Replaced @(...) with Regex for macOS compatibility
 if [[ -n "$4" && "$4" =~ ^(all|base|bookmark|assignment|permission|mfe|ms|product|slot|theme|welcome|workspace)$ ]]; then
   IMPORT_TYPE=$4
 fi
@@ -42,7 +45,6 @@ fi
 
 #################################################################
 ## Security Authentication enabled?
-# FIX: Added check to ensure file exists
 ENV_FILE="$import_start_dir/versions/$OLE_EDITION/.env"
 
 if [ -f "$ENV_FILE" ]; then
@@ -88,7 +90,6 @@ case "$1" in
         ;;
 esac
 
-# Use printf instead of echo -e for portability
 printf "  edition: ${GREEN}$OLE_EDITION${NC}, tenant: ${GREEN}$1${NC}, type: ${GREEN}$IMPORT_TYPE${NC}, user: ${GREEN}$KC_USER${NC}, security authentication: ${GREEN}$OLE_SECURITY_AUTH_USED${NC}\n"
 
 
@@ -118,7 +119,6 @@ fi
 ## IMPORT OneCX data
 cd "$import_start_dir/onecx-data" || exit 1
 
-# FIX: Replaced all @(...) checks with Regex =~ ^(...)$
 
 if [[ "$IMPORT_TYPE" =~ ^(all|base|tenant)$ ]]; then
   cd tenant

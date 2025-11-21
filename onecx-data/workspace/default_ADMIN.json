@@ -430,7 +430,7 @@
       },
       "menuItems": [
         {
-          "key": "PORTAL_USER_PROFILE",
+          "key": "USER_PROFILE_MENU",
           "name": "User Profile Menu",
           "disabled": false,
           "position": 1,
@@ -444,7 +444,7 @@
           ],
           "children": [
             {
-              "key": "PUP_PERSONAL_INFO",
+              "key": "UPM_PERSONAL_INFO",
               "name": "Personal Info",
               "url": "/user",
               "disabled": false,
@@ -460,7 +460,7 @@
               "children": []
             },
             {
-              "key": "PUP_ACCOUNT_SETTINGS",
+              "key": "UPM_ACCOUNT_SETTINGS",
               "name": "Account Settings",
               "url": "/user/account",
               "disabled": false,
@@ -479,7 +479,7 @@
               "children": []
             },
             {
-              "key": "PUP_PERMISSIONS",
+              "key": "UPM_PERMISSIONS",
               "name": "My Permissions",
               "url": "/user/roles",
               "disabled": false,
@@ -498,7 +498,7 @@
               "children": []
             },
             {
-              "key": "PUP_BOOKMARKS",
+              "key": "UPM_BOOKMARKS",
               "name": "My Bookmarks",
               "url": "/bookmark",
               "disabled": false,
@@ -517,7 +517,7 @@
               "children": []
             },
             {
-              "key": "PUP_CHANGE_PASSWORD",
+              "key": "UPM_CHANGE_PASSWORD",
               "name": "Change Password",
               "url": "/user/account/change-password",
               "disabled": false,

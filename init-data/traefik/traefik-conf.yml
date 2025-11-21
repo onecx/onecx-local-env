@@ -1,5 +1,4 @@
 # NOTE : conf in this file are not cumulative and cancel any option passed to traefik at launch with command in docker compose file
-
 api:
   dashboard: true
   debug: false
@@ -7,7 +6,6 @@ api:
 
 log:
   level: "DEBUG"
-
 
 entryPoints:
   web:
@@ -19,4 +17,4 @@ providers:
     # If set to false, containers that don't have a traefik.enable=true label will be ignored from the resulting routing configuration
     #exposedByDefault: false
   file:
-    filename: /etc/traefik/services.yml
+    directory: /etc/traefik/

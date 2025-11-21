@@ -2,13 +2,15 @@
 #
 # Start Imports of OneCX Data with options
 #
+# For macOS Bash compatibility:
+#   * Use printf instead of echo -e
+#   * Replaced @(...) with Regex =~ ^(...)
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
-# Use printf for macOS compatibility
 printf "${CYAN}Import data for OneCX Local Environment${NC}\n"
 
 #################################################################
@@ -38,12 +40,11 @@ SECURITY=false
 TENANT=default
 VERBOSE=false
 PROFILE=base
-IMPORT_TYPE=base  # FIX: Added default value so script works if -d is omitted
+IMPORT_TYPE=base
 
 
 #################################################################
 # check parameter
-# FIX: Added 'e:' to getopts string so the Edition flag works
 while getopts ":hd:svt:e:" opt; do
   case "$opt" in
         d ) 
@@ -56,13 +57,11 @@ while getopts ":hd:svt:e:" opt; do
             fi
             
             # use data-import profile to ensure running services
-            # FIX: Replaced @(...) with Regex
             if [[ "$OPTARG" =~ ^(all|bookmark|welcome)$ ]]; then
               PROFILE=data-import
             fi
             ;;
         e )
-            # FIX: Added logic to handle Edition flag
             if [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
                printf "${RED}  Unknown Edition${NC}\n"
                usage
@@ -73,7 +72,6 @@ while getopts ":hd:svt:e:" opt; do
         v ) VERBOSE=true ;;
         s ) SECURITY=true ;;
         t ) 
-            # FIX: Replaced @(...) with Regex
             if [[ ! "$OPTARG" =~ ^(default|t1|t2)$ ]]; then
               printf "${RED}  Unknown tenant${NC}\n"
               usage
@@ -119,9 +117,7 @@ printf "  Ensure that all services used by imports are running, security authent
 # Using 'docker compose' (v2). If using older docker, change to 'docker-compose'
 ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d  > /dev/null 2>&1
 
-# FIX: Check if the target script exists and make it executable
 IMPORT_SCRIPT="./versions/$EDITION/import-onecx.sh"
-
 if [ ! -f "$IMPORT_SCRIPT" ]; then
     printf "${RED}Error: Script not found at $IMPORT_SCRIPT${NC}\n"
     exit 1
