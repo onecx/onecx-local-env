@@ -1,7 +1,7 @@
 * xref:general:index.adoc[Overview]
 * Getting Started
 ** xref:general:getting-started.adoc[Run OneCX locally]
-* xref:general:setup/installation.adoc[Setup & Installation]
+* xref:general:setup/installation.adoc[Setup]
 * xref:general:extend/extend.adoc[Extend default environment]
 * FAQ & Help
 ** xref:faq:faq.adoc[FAQ]
