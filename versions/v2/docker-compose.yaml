@@ -620,18 +620,18 @@ services:
     depends_on:
       keycloak-app:
         condition: service_healthy
-      onecx-tenant-svc:
-        condition: service_started
-      onecx-theme-svc:
-        condition: service_started
       onecx-permission-svc:
-        condition: service_started
+        condition: service_healthy
       onecx-product-store-svc:
-        condition: service_started
+        condition: service_healthy
+      onecx-tenant-svc:
+        condition: service_healthy
+      onecx-theme-svc:
+        condition: service_healthy
       onecx-user-profile-svc:
-        condition: service_started
+        condition: service_healthy
       onecx-workspace-svc:
-        condition: service_started
+        condition: service_healthy
     labels:
       - "traefik.http.services.onecx-shell-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-shell-bff.rule=Host(`onecx-shell-bff`)"
@@ -1023,6 +1023,8 @@ services:
     image: alpine:3
     container_name: waiting-on-profile-base
     depends_on:
+      onecx-parameter-svc:
+        condition: service_healthy
       onecx-shell-ui:
         condition: service_healthy
       onecx-user-profile-ui:
