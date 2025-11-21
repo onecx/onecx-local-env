@@ -1,6 +1,6 @@
-name: onecx-local-env
-title: OneCX Local Environment
+name: dev-env-tools
+title: Development Tools
 version: latest
 start_page: general:index.adoc
 nav:
-- modules/general/nav.adoc
+  - modules/general/nav.adoc

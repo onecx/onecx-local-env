@@ -1,4 +1,4 @@
-* xref:general:index.adoc[General]
+* xref:general:index.adoc[Local Env]
 ** Getting Started
 *** xref:general:getting-started.adoc[Run OneCX locally]
 ** Versions
@@ -14,3 +14,34 @@
 *** xref:general:networking.adoc[Networking in OneCX]
 ** Troubleshooting
 *** xref:troubleshooting:common-issues.adoc[Common Issues]
+
+* xref:latest@dev-env-tools:nx-plugins:index.adoc[Generator]
+** Getting started with the OneCX generator
+*** xref:latest@dev-env-tools:nx-plugins:getting_started/prerequisites.adoc[Check your prerequisites]
+*** xref:latest@dev-env-tools:nx-plugins:getting_started/new-onecx-app.adoc[Create a new OneCX App]
+**** xref:latest@dev-env-tools:nx-plugins:getting_started/basic-onecx-app/further-actions.adoc[Check for further actions]
+**** xref:latest@dev-env-tools:nx-plugins:getting_started/basic-onecx-app/commit-changes.adoc[Commit the changes]
+*** xref:latest@dev-env-tools:nx-plugins:getting_started/feature-module.adoc[Create a feature module]
+**** xref:latest@dev-env-tools:nx-plugins:getting_started/feature/further-actions.adoc[Check for further actions]
+**** xref:latest@dev-env-tools:nx-plugins:getting_started/feature/commit-changes.adoc[Commit the changes]
+*** xref:latest@dev-env-tools:nx-plugins:getting_started/search-page.adoc[Create a search page]
+**** xref:latest@dev-env-tools:nx-plugins:getting_started/search/configure-search-criteria.adoc[Configure search criteria]
+**** xref:latest@dev-env-tools:nx-plugins:getting_started/search/configure-search-results.adoc[Configure search results]
+**** xref:latest@dev-env-tools:nx-plugins:getting_started/search/configure-result-diagram.adoc[Configure result diagram]
+**** xref:latest@dev-env-tools:nx-plugins:getting_started/search/update-header-actions.adoc[Update header actions]
+**** xref:latest@dev-env-tools:nx-plugins:getting_started/search/update-permissions.adoc[Update permissions]
+**** xref:latest@dev-env-tools:nx-plugins:getting_started/search/further-actions.adoc[Check for further actions]
+**** xref:latest@dev-env-tools:nx-plugins:getting_started/search/commit-changes.adoc[Commit the changes]
+*** xref:latest@dev-env-tools:nx-plugins:getting_started/create-update-dialog.adoc[Create create-update dialog]
+**** xref:latest@dev-env-tools:nx-plugins:getting_started/create-update/extend-form-fields.adoc[Extend form fields]
+**** xref:latest@dev-env-tools:nx-plugins:getting_started/create-update/commit-changes.adoc[Commit the changes]
+*** xref:latest@dev-env-tools:nx-plugins:getting_started/delete-dialog.adoc[Create delete dialog]
+**** xref:latest@dev-env-tools:nx-plugins:getting_started/delete/commit-changes.adoc[Commit the changes]
+*** xref:latest@dev-env-tools:nx-plugins:getting_started/details-page.adoc[Create details page]
+**** xref:latest@dev-env-tools:nx-plugins:getting_started/details/core-data.adoc[Add core data to details page header]
+**** xref:latest@dev-env-tools:nx-plugins:getting_started/details/further-actions.adoc[Check for further actions]
+**** xref:latest@dev-env-tools:nx-plugins:getting_started/details/commit-changes.adoc[Commit the changes]
+** Further generators
+*** xref:latest@dev-env-tools:nx-plugins:further_generators/ngrx-page/ngrx-page.adoc[NGRX-Page Generator]
+*** xref:latest@dev-env-tools:nx-plugins:further_generators/pre-commit-validation.adoc[Pre-Commit Validation Generator]
+** xref:latest@dev-env-tools:nx-plugins:getting_started/glossary.adoc[Glossary]
