@@ -77,9 +77,9 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-    depends_on:
-      traefik:
-        condition: service_started
+    #depends_on:
+    #  traefik:
+    #    condition: service_started
     labels:
       - "traefik.http.services.postgresdb.loadbalancer.server.port=5432"
       - "traefik.http.routers.postgresdb.rule=Host(`postgresdb`)"
@@ -151,7 +151,8 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
-      keycloak-app:
+      #keycloak-app:
+      postgresdb:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-announcement-svc.loadbalancer.server.port=8080"
