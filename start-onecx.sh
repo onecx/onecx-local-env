@@ -2,13 +2,15 @@
 #
 # Start OneCX Local Enviroment with options
 #
+# For macOS Bash compatibility:
+#   * Use printf instead of echo -e
+#   * Replaced @(...) with Regex =~ ^(...)
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
-# Use printf instead of echo -e for better macOS compatibility
 printf "${CYAN}Starting OneCX Local Environment ...${NC}\n"
 
 
@@ -45,7 +47,6 @@ IMPORT=yes
 while getopts ":he:p:sx" opt; do
   case "$opt" in
         e ) 
-            # FIX: Changed from @(v1|v2) to standard logical OR (||)
             if [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
               printf "${RED}  Unknown Edition${NC}\n"
               usage
@@ -54,7 +55,6 @@ while getopts ":he:p:sx" opt; do
             fi
             ;;
         p ) 
-            # FIX: Changed from @(all|base) to standard logical OR (||)
             if [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
               printf "${RED}  Unknown Docker profile${NC}\n"
               usage
@@ -75,7 +75,6 @@ done
 
 #################################################################
 ## Security Authentication enabled?
-# Ensure the file exists before grepping to avoid errors
 ENV_FILE="versions/$EDITION/.env"
 SECURITY_AUTH_USED="no"
 
@@ -85,7 +84,6 @@ if [ -f "$ENV_FILE" ]; then
       SECURITY_AUTH_USED="yes"
     fi
 else 
-    # Fallback if env file is missing, only rely on flag
     if [[ "$SECURITY" == "true" ]]; then
       SECURITY_AUTH_USED="yes"
     fi
@@ -100,8 +98,7 @@ if [[ $# == 0 ]]; then
   usage_short
 fi
 
-# Note: Ensure you have Docker Desktop installed for 'docker compose' (v2)
-# If you have an older docker setup, you might need 'docker-compose' (with a dash)
+# Using 'docker compose' (v2). If using older docker, change to 'docker-compose'
 ONECX_SECURITY_AUTH_ENABLED=$SECURITY docker compose -f versions/$EDITION/docker-compose.yaml --profile $PROFILE up -d
 
 
