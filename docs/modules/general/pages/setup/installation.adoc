@@ -1,0 +1,149 @@
+= Setup & Installation
+:idprefix:
+:idseparator: -
+:imagesdir: ../images
+
+This guide provides step-by-step instructions for setting up and installing `onecx-local-env`, the local development environment for OneCX. It covers prerequisites, installation steps, and initial configuration required to get `onecx-local-env` up and running on your local machine.
+
+== Prerequisites
+=== Supported Operating Systems
+`onecx-local-env` fully supports Linux, MacOS and Windows 10/11 via WSL2.
+
+==== Linux & MacOS
+Linux and MacOS are natively supported operating systems for `onecx-local-env` and do not require any operating-system-specific adjustments. Users of these operating systems can safely proceed to the next section of this guide.
+
+==== Windows
+To run `onecx-local-env` on Windows, Windows Subsystem for Linux version 2 (WSL2) must be installed and configured on the system.
+
+To verify if WSL2 is currently installed, users can open PowerShell or Command Prompt and run the following command:
+[source,powershell]
+----
+wsl -l -v
+----
+This command lists all installed WSL distributions along with their version numbers. To run `onecx-local-env`, at least one distribution must be installed and its version must be 2.
+
+In case of errors, no output, or no WSL2 distributions listed, WSL2 is either not installed or not properly configured. Official guidance on installing and configuring WSL2 can be found here: https://learn.microsoft.com/en-us/windows/wsl/install
+
+[NOTE]
+.Checkpoint
+====
+At this point, users should have verified that their operating system is supported and, if using Windows, that WSL2 is properly installed and configured.
+====
+
+
+=== Docker & Docker Compose
+
+`onecx-local-env` requires both Docker and Docker Compose to be installed directly on the operating system for Linux and MacOS users, or inside WSL2 for Windows users.
+
+The functionality of `onecx-local-env` has been tested with the following versions:
+
+- Docker version `28.1.1`
+- Docker Compose version `v2.35.1`
+
+To ensure that all used features work correctly, it is recommended to use Docker Compose version `v2.20.0` or higher. If any other versions are used, some features may not work as expected. In case of issues that aren't clearly related to the local environment itself, a version upgrade of Docker and/or Docker Compose should be considered as a troubleshooting step.
+
+[NOTE]
+.Checkpoint
+====
+By now, a supported version of Docker and Docker Compose should be installed on the user's system. 
+To verify:
+
+* Run `docker --version` to check the installed Docker version.
+* Run `docker compose version` to check the installed Docker Compose version.
+====
+
+=== Git
+To clone the `onecx-local-env` repository and proceed with the installation instructions, Git must be installed on the local machine or inside WSL2 for Windows users.
+
+== Installation Steps
+
+=== Cloning the repository
+Before starting the installation, the `onecx-local-env` repository needs to be cloned into a folder on the local machine/inside WSL2. This can be done using the following command:
+[source,bash]
+----
+git clone https://github.com/onecx/onecx-local-env.git
+----
+
+=== Ensuring script executability
+
+After cloning the repository, it is important to ensure that all provided shell scripts are executable. This includes the main lifecycle scripts located in the root directory, as well as any scripts located in the `onecx-data` and `versions/*` directories.
+
+To verify that the scripts are executable, the command `ls -l` can be run in the respective directories. Executable scripts will have an `x` in their permission string, for example:
+- e.g. `-rwxr-xr-x import-onecx.sh`
+
+If any of the scripts are not executable, the following command can be used to add execute permissions:
+[source,bash]
+----
+chmod +x <file name>
+----
+
+[NOTE]
+.Checkpoint
+====
+At this point, the `onecx-local-env` repository should be cloned and all necessary scripts should have execute permissions.
+To verify:
+
+* Run `ls -l` in the root, `onecx-data`, and `versions/*` directories.
+* Confirm all `.sh` scripts have execute permissions (indicated by an `x` in the permission string).
+* If any scripts are missing execute permissions, run `chmod +x <file name>`.
+====
+
+=== Modifying the hosts file
+In order to expose multiple services on the same local port, OneCX Local Environment uses the Traefik reverse proxy. Traefik will be available via the host's port 80, and route requests to the appropriate services based on the requested hostname.
+
+To ensure that all relevant hostnames are correctly routed to the local machine and resolved by the Traefik proxy, the system `hosts` file needs to be modified to include entries for all OneCX services.
+
+==== Hosts file locations
+* Windows: `c:\Windows\System32\drivers\etc\hosts`
+* Linux: `/etc/hosts`
+* macOS: `/etc/hosts`
+
+==== Editing the hosts file
+After identifying the relevant file location, the `hosts` file can be edited using any text editor of choice. It is important to note that editing the `hosts` file will require administrator privileges on most systems. It's therefore important to edit the file with elevated permissions (e.g. by running `sudo nano /etc/hosts` on Linux/MacOS or opening Notepad as Administrator on Windows).
+
+The following entries need to be added to the end of the `hosts` file:
+[source]
+----
+127.0.0.1   local-proxy
+127.0.0.1   keycloak-app
+127.0.0.1   pgadmin
+127.0.0.1   onecx-shell-bff
+127.0.0.1   onecx-theme-svc
+127.0.0.1   onecx-theme-bff
+127.0.0.1   onecx-workspace-svc
+127.0.0.1   onecx-workspace-bff
+127.0.0.1   onecx-user-profile-bff
+127.0.0.1   onecx-user-profile-svc
+127.0.0.1   onecx-permission-svc
+127.0.0.1   onecx-permission-bff
+127.0.0.1   onecx-product-store-svc
+127.0.0.1   onecx-product-store-bff
+127.0.0.1   onecx-iam-kc-svc
+127.0.0.1   onecx-iam-bff
+127.0.0.1   onecx-tenant-svc
+127.0.0.1   onecx-tenant-bff
+127.0.0.1   onecx-parameter-svc
+127.0.0.1   onecx-parameter-bff
+----
+
+Windows users should ensure that the entries are automatically synced to WSL2 by following these steps:
+
+* Restart WSL2 after modifying the Windows `hosts` file.
+* Open the WSL2 terminal and run `cat /etc/hosts` to verify that the entries were added.
+
+If the entries are not present in the WSL2 `hosts` file, they need to be added manually by following the instructions for Linux/MacOS above.
+
+[NOTE]
+.Checkpoint
+====
+At this point, all necessary entries should be added to the system `hosts` file.
+To verify:
+
+* Confirm the listed OneCX hostnames are added to your system `hosts` file.
+* If using Windows with WSL2, restart WSL2 and check `/etc/hosts` inside WSL2 to ensure entries were synced from Windows.
+* If entries are missing in WSL2, add them manually by following the "Linux" instructions above.
+====
+
+== Next Steps
+After completing the steps outlined in this guide, `onecx-local-env` is now set up and ready to run a local OneCX environment. Instructions on how to start, access, and stop the local environment can be found in the xref:general:getting-started.adoc[Getting Started - Running OneCX locally] guide.
+

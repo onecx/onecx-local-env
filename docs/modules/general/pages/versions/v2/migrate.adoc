@@ -1,4 +1,10 @@
-= OneCX Local Environment - Versions - v2 - Migrate to v2
+= Versions - v2 - Migrate to v2
+
+[NOTE]
+.Disclaimer
+====
+This page was created for an older version of OneCX Local Environment and may not reflect the current state of the project. It will be updated in the near future.
+====
 
 This guide highlights the key differences between OneCX Local Environment xref:general:versions/v1/v1.adoc[v1] and xref:general:versions/v2/v2.adoc[v2], and explains how you can adapt your setup to ensure that it seamlessly works with xref:general:versions/v2/v2.adoc[v2].
 

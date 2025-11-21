@@ -1,7 +1,13 @@
-= OneCX Local Environment - Advanced - Extending the default environment
+= Extending the default environment
 :idprefix:
 :idseparator: -
 :imagesdir: ../images
+
+[NOTE]
+.Disclaimer
+====
+This page was created for an older version of OneCX Local Environment and may not reflect the current state of the project. It will be updated in the near future.
+====
 
 If you need to extend this environment with your own containers or import additional data, please utilize preferred version folder and its `docker-compose` and `imports` files and follow the guidelines from the respective version-specific documentation.
 

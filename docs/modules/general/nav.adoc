@@ -1,16 +1,19 @@
-* xref:general:index.adoc[General]
-** Getting Started
-*** xref:general:getting-started.adoc[Run OneCX locally]
+* xref:general:index.adoc[Overview]
+* xref:general:setup/installation.adoc[Setup]
+* xref:general:getting-started.adoc[Getting Started]
+* xref:general:extend/extend.adoc[Extend default environment]
+* FAQ & Help
+** xref:faq:faq.adoc[FAQ]
+** xref:faq:common-issues.adoc[Common Issues]
+* Advanced
+** Scripts
+*** xref:advanced:scripts/start.adoc[`start-onecx.sh`]
+*** xref:advanced:scripts/stop.adoc[`stop-onecx.sh`]
 ** Versions
 *** v2 (latest)
 **** xref:general:versions/v2/v2.adoc[v2 (latest)]
 **** xref:general:versions/v2/migrate.adoc[Migration Guide]
 *** xref:general:versions/v1/v1.adoc[v1]
-** Advanced
-*** xref:advanced:default-database.adoc[Default Databases]
-*** xref:advanced:extending-default-environment.adoc[Extending the default environment]
-*** xref:advanced:imports.adoc[Imports]
-** Networking
-*** xref:general:networking.adoc[Networking in OneCX]
-** Troubleshooting
-*** xref:troubleshooting:common-issues.adoc[Common Issues]
+** xref:advanced:default-database.adoc[Default Databases]
+** xref:advanced:imports.adoc[Default Data & Imports]
+** xref:advanced:networking.adoc[Networking in OneCX]

@@ -1,7 +1,13 @@
-= OneCX Local Environment - Versions - v2
+= Versions - v2
 :idprefix:
 :idseparator: -
 :imagesdir: ../images
+
+[NOTE]
+.Disclaimer
+====
+This page was created for an older version of OneCX Local Environment and may not reflect the current state of the project. It will be updated in the near future.
+====
 
 [quote]
 ____
