@@ -29,7 +29,7 @@ USAGE
 }
 usage_short () {
   cat <<USAGE
-  Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s]
+  Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s] [-x]
 USAGE
 }
 
@@ -48,7 +48,7 @@ while getopts ":he:p:sx" opt; do
   case "$opt" in
         e ) 
             if [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
-              printf "${RED}  Unknown Edition${NC}\n"
+              printf "${RED}  inacceptable Edition, should be one of [ 'v1', 'v2' ]${NC}\n"
               usage
             else
               EDITION=$OPTARG
@@ -56,7 +56,7 @@ while getopts ":he:p:sx" opt; do
             ;;
         p ) 
             if [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
-              printf "${RED}  Unknown Docker profile, should be one of [ 'all', 'base' ]${NC}\n"
+              printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base' ]${NC}\n"
               usage
             else
               PROFILE=$OPTARG
