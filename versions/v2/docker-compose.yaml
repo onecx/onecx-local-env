@@ -1067,7 +1067,11 @@ services:
     image: alpine:3
     container_name: waiting-on-profile-all
     depends_on:
+      onecx-parameter-svc:
+        condition: service_healthy
       onecx-shell-ui:
+        condition: service_healthy
+      onecx-user-profile-ui:
         condition: service_healthy
       onecx-workspace-ui:
         condition: service_healthy
