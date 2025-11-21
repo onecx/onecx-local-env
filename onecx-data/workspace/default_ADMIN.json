@@ -248,11 +248,6 @@
             {
               "productName": "onecx-workspace",
               "appId": "onecx-workspace-ui",
-              "name": "./OneCXCurrentWorkspaceLogoComponent"
-            },
-            {
-              "productName": "onecx-workspace",
-              "appId": "onecx-workspace-ui",
               "name": "./OneCXFooterMenuComponent"
             },
             {

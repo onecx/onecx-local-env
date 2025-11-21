@@ -18,7 +18,7 @@ printf "${CYAN}Starting OneCX Local Environment ...${NC}\n"
 ## Usage
 usage () {
   cat <<USAGE
-  Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s]
+  Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s] [-x]
        -e  edition, one of [ 'v1', 'v2'], default: 'v2'
        -h  display this usage information, ignoring other parameters
        -p  profile, one of [ 'all', 'base' ], default: 'base'
@@ -29,7 +29,7 @@ USAGE
 }
 usage_short () {
   cat <<USAGE
-  Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s]
+  Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s] [-x]
 USAGE
 }
 
@@ -48,7 +48,7 @@ while getopts ":he:p:sx" opt; do
   case "$opt" in
         e ) 
             if [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
-              printf "${RED}  Unknown Edition${NC}\n"
+              printf "${RED}  inacceptable Edition, should be one of [ 'v1', 'v2' ]${NC}\n"
               usage
             else
               EDITION=$OPTARG
@@ -56,7 +56,7 @@ while getopts ":he:p:sx" opt; do
             ;;
         p ) 
             if [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
-              printf "${RED}  Unknown Docker profile${NC}\n"
+              printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base' ]${NC}\n"
               usage
             else
               PROFILE=$OPTARG
@@ -64,8 +64,7 @@ while getopts ":he:p:sx" opt; do
             ;;
         s ) SECURITY=true ;;
         x ) IMPORT=no ;;
-        h ) 
-            usage ;; # print usage
+        h ) usage ;; # print usage
        \? )
             printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n" >&2
             usage ;;

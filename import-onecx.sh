@@ -17,7 +17,7 @@ printf "${CYAN}Import data for OneCX Local Environment${NC}\n"
 usage () {
   cat <<USAGE
   $0  [-h] [-d <import data type>] [-v] [-s] [-t <tenant>] [-e <edition>]
-       -d  data type, one of [ all, base, bookmark, assignment, permission, mfe, ms, product, slot, theme, welcome, workspace], base is default
+       -d  data type, one of [ all, base, bookmark, assignment, parameter, permission, mfe, ms, product, slot, theme, welcome, workspace], base is default
        -e  edition, one of [ 'v1', 'v2' ], default is 'v2'
        -h  display this usage information
        -s  security authentication enabled, default not enabled
@@ -49,7 +49,7 @@ while getopts ":hd:svt:e:" opt; do
   case "$opt" in
         d ) 
             # FIX: Replaced @(...) with Regex (=~) for macOS Bash 3.2 compatibility
-            if [[ ! "$OPTARG" =~ ^(all|base|assignment|bookmark|permission|mfe|ms|product|slot|theme|welcome|workspace)$ ]]; then
+            if [[ ! "$OPTARG" =~ ^(all|base|assignment|bookmark|parameter|permission|mfe|ms|product|slot|theme|welcome|workspace)$ ]]; then
               printf "${RED}  Unknown data type: $OPTARG${NC}\n"
               usage
             else
