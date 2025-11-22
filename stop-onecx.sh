@@ -2,13 +2,16 @@
 #
 # Stop OneCX Local Enviroment with options
 #
+# For macOS Bash compatibility:
+#   * Use printf instead of echo -e
+#   * Replaced @(...) with Regex =~ ^(...)
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
-echo -e "${CYAN}Stop OneCX Local Environment${NC}"
+printf "${CYAN}Stopping OneCX Local Environment ...${NC}\n"
 
 
 #################################################################
@@ -44,16 +47,16 @@ while getopts ":ce:hp:" opt; do
   case "$opt" in
         c ) CLEANUP=true ;;
         e ) 
-            if [[ $OPTARG != @(v1|v2) ]]; then
-              echo -e "${RED}  Missing Edition${NC}"
+            if [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
+              printf "${RED}  Inacceptable Edition, should be one of [ 'v1', 'v2' ]${NC}\n"
               usage
             else
               EDITION=$OPTARG
             fi
             ;;
         p ) 
-            if [[ $OPTARG != @(all|base) ]]; then
-              echo -e "${RED}  Missing Docker profile${NC}"
+            if [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
+              printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base' ]${NC}\n"
               usage
             else
               PROFILE=$OPTARG
@@ -62,7 +65,7 @@ while getopts ":ce:hp:" opt; do
         h ) 
             usage ;; # print usage
        \? )
-            echo -e "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}" >&2
+            printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n"
             usage ;;
   esac
 done
@@ -70,7 +73,7 @@ done
 
 #################################################################
 ## Execute
-echo -e "  edition: ${GREEN}$EDITION${NC}, profile: ${GREEN}$PROFILE${NC}, cleanup: ${GREEN}$CLEANUP${NC}"
+printf "  edition: ${GREEN}$EDITION${NC}, profile: ${GREEN}$PROFILE${NC}, cleanup: ${GREEN}$CLEANUP${NC}\n"
 
 if [[ $# == 0 ]]; then
   usage_short
@@ -82,7 +85,7 @@ fi
 number_of_running_services=`docker ps | wc -l`
 number_of_running_services=$(($number_of_running_services -1))
 if [[ $number_of_running_services == 0 ]]; then
-  echo -e "${CYAN}No running services${NC}"
+  printf "${CYAN}No running services${NC}\n"
 else
   docker compose  -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  down
 fi
@@ -96,7 +99,7 @@ if [[ $number_of_running_services != 0 ]]; then
   if [[ $CLEANUP == "true" ]]; then
     cannot_remove_text=" ...cannot remove volumes and network - use 'all' profile to remove all services"
   fi
-  echo -e "${CYAN}Remaining running services: $number_of_running_services${NC}$cannot_remove_text"
+  printf "${CYAN}Remaining running services: $number_of_running_services${NC}$cannot_remove_text\n"
   ./list-containers.sh
 fi
 
@@ -104,7 +107,7 @@ fi
 #################################################################
 ## Cleanup volume?
 if [[ ($number_of_running_services == 0) && ($CLEANUP == "true") ]]; then
-  echo -e "${CYAN}Remove Docker volumes and orphans${NC}"
+  printf "${CYAN}Remove Docker volumes and orphans${NC}\n"
   docker compose down --volumes --remove-orphans 2>/dev/null
   docker volume rm -f ${OLE_DOCKER_COMPOSE_PROJECT}_postgres
 fi
