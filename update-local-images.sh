@@ -1,0 +1,100 @@
+#!/bin/bash
+#
+# Update local Docker images
+#
+# For macOS Bash compatibility:
+#   * Use printf instead of echo -e
+#   * Replaced @(...) with Regex =~ ^(...)
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
+printf "${CYAN}Update local Docker images${NC}\n"
+
+
+#################################################################
+## Usage
+usage () {
+  cat <<USAGE
+  Usage: $0  [-h] [-c] [-n <text>]
+       -c  cleanup, remove orphan images
+       -h  display this usage information, ignoring other parameters
+       -n  name filter, find images which have <text> into image name
+USAGE
+  exit 0
+}
+usage_short () {
+  cat <<USAGE
+  Usage: $0  [-h] [-c] [-n <text>]
+USAGE
+}
+
+
+#################################################################
+## Defaults
+CLEANUP=false
+NAME_FILTER=""
+
+
+#################################################################
+## Check flags and parameter
+while getopts ":hcn:" opt; do
+  case "$opt" in
+        c ) CLEANUP=true ;;
+        n )
+            if [[ -z "$OPTARG" ]]; then
+              printf "${RED}  Missing image name${NC}\n"
+              usage
+            else
+              NAME_FILTER=$OPTARG
+            fi
+            ;;
+        h ) 
+            usage ;; # print usage
+       \? )
+            printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n"
+            usage ;;
+  esac
+done
+
+
+usage_short
+
+
+#################################################################
+## Collect images
+if [[ -n "$NAME_FILTER" ]]; then
+  IMAGES=$(docker images --format "{{.Repository}}:{{.Tag}}:{{.ID}}" | grep -E "$NAME_FILTER" || true)
+else
+  IMAGES=$(docker images --format "{{.Repository}}:{{.Tag}}:{{.ID}}")
+fi
+
+if [[ -z "$IMAGES" ]]; then
+  printf "  No images matched your filter ${GREEN}$NAME_FILTER${NC}.\n"
+  exit 0
+fi
+
+printf "${CYAN}Pulling...${NC}\n"
+
+#################################################################
+# Pull images
+while IFS= read -r IMAGE; do
+  [[ -z "$IMAGE" ]] && continue
+  IFS=:
+  set $IMAGE   # split by IFS separator to $1...$n
+
+  if [[ "$2" =~ "<none>" ]]; then
+    ORPHAN_TEXT="  * ${GREEN}$1:$2  orphan${NC}"
+    if [[ $CLEANUP == "true" ]]; then
+      printf "$ORPHAN_TEXT  remove\n"
+      docker image rm "$3" || printf "${RED}Failed to remove $IMAGE${NC}\n"
+    else
+      printf "$ORPHAN_TEXT  skip pulling\n"
+    fi
+  else
+    printf "  * ${GREEN}$1:$2${NC}\n"
+    docker pull "$1:$2" || printf "    ${RED}Failed to pull $1:$2${NC}\n"
+  fi
+done <<< "$IMAGES"

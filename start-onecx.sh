@@ -46,15 +46,15 @@ IMPORT=yes
 ## Check flags and parameter
 while getopts ":he:p:sx" opt; do
   case "$opt" in
-        e ) 
+        e )
             if [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
-              printf "${RED}  inacceptable Edition, should be one of [ 'v1', 'v2' ]${NC}\n"
+              printf "${RED}  Inacceptable Edition, should be one of [ 'v1', 'v2' ]${NC}\n"
               usage
             else
               EDITION=$OPTARG
             fi
             ;;
-        p ) 
+        p )
             if [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
               printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base' ]${NC}\n"
               usage
