@@ -1,0 +1,29 @@
+# NOTE : conf in this file are not cumulative and cancel any option passed to traefik at launch with command in docker compose file
+api:
+  # http://traefik:8082/dashboard/
+  dashboard: true
+  insecure: true
+  debug: false
+  disabledashboardad: true
+
+#log:
+#  level: "INFO"
+#  filePath: "/var/log/traefik/traefik.log"
+#accessLog:
+#  filePath: "/var/log/traefik/access.log"
+#  bufferingSize: 0
+
+entryPoints:
+  web:
+    address: ":80"
+
+providers:
+  docker:
+    endpoint: unix:///var/run/docker.sock
+    # If set to false, containers that don't have a traefik.enable=true label will be ignored from the resulting routing configuration
+    #exposedByDefault: false
+  file:
+    # read all local microfrontend configurations automatically
+    directory: /etc/traefik/active
+    watch: true
+

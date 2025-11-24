@@ -1,0 +1,19 @@
+[
+  {
+    "appId": "onecx-announcement-ui",
+    "slots": [
+      {
+        "name": "onecx-product-data",
+        "description": "Getting base data of all products provided by product store",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-workspace-data",
+        "description": "Get Workspaces using a given Product",
+        "deprecated": false,
+        "undeployed": false
+      }    
+    ]
+  }
+]

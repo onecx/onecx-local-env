@@ -1,0 +1,25 @@
+####################################################
+# Integrate a local running Microfrontend into OneCX
+####################################################
+# Any local Microfrontend
+http:
+  routers:
+    local_local_mfe_router:
+      # path prefix as used for MFE registration in product store
+      rule: "Host(`local-proxy`) && PathPrefix(`/mfe/local/`)"
+      service: local_mfe
+      middlewares:
+        - local_mfe
+
+  # Remove the used mfe path so that it maps directly to localhost:port
+  middlewares:
+    local_mfe:
+      stripPrefix:
+        prefixes:
+          - "/mfe/local"
+
+  services:
+    local_mfe:
+      loadBalancer:
+        servers:
+        - url: "http://host.docker.internal:4200/"   # Angular project started outside Docker with this port

@@ -1,99 +1,118 @@
 #!/bin/bash
 #
-# List versions of local Docker images matching a name prefix
+# List local Docker images
 #
+# For macOS Bash compatibility:
+#   * Use printf instead of echo -e
+#   * Replaced @(...) with Regex =~ ^(...)
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
-ONECX_REPO_PATH="ghcr.io/onecx"
-ONECX_ORGANIZATION="onecx"
-GITHUB_REPO_TAG_BE="main-native"
-GITHUB_REPO_TAG_FE="main"
-VERSION_LABEL=samo.project.version
-IMAGE_NAME_EXTENSION_UI=ui
+echo -e "${CYAN}Check local Docker images ${NC}"
 
+
+#################################################################
+## flags
 usage () {
   cat <<USAGE
-  $0  <docker image name prefix>
+  Usage: $0  [-h] [-f <image filter>] [-n <text>]
+       -f  image filter, see https://docs.docker.com/reference/cli/docker/image/ls/#filter
+       -h  display this usage information, ignoring other parameters
+       -n  name filter, find images which have <text> into image name
 USAGE
   exit 0
 }
+usage_short () {
+  cat <<USAGE
+  Usage: $0  [-h] [-f <filter>] [-n <text>]
+USAGE
+}
+
+
+#################################################################
+## Defaults
+ONECX_REPO_PATH="ghcr.io/onecx"
+VERSION_LABEL=samo.project.version
+
+
+#################################################################
+## Check flags and parameter
+while getopts ":hf:n:" opt; do
+  case "$opt" in
+        f ) 
+            if [ -z "$OPTARG" ]; then
+              printf "${RED}  Missing filter value${NC}\n"
+              usage
+            else
+              FILTER=$OPTARG
+            fi
+            ;;
+        n ) 
+            if [ -z "$OPTARG"  ]; then
+              printf "${RED}  Missing image name${NC}\n"
+              usage
+            else
+              NAME_FILTER=$OPTARG
+            fi
+            ;;
+        h ) 
+            usage ;; # print usage
+       \? )
+            printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n"
+            usage ;;
+  esac
+done
+
+
+usage_short
 
 set -e
 
-echo -e "${CYAN}Check local Docker images ${NC}"
-echo -e "   => OneCX registry path:\t${GREEN}${ONECX_REPO_PATH}${NC}"
-
-if [ "$#" -ne 1 ]; then
-  usage
-  exit 1
-fi
+printf "  => OneCX image version label:\t\t${GREEN}samo.project.version${NC}\n"
 
 #########################################
-#### Read parameter
-if [[ $# == 1 ]]; then
-  if [[ $1 =~ "$ONECX_ORGANIZATION" ]]; then
-    OLE_IMAGE_PREFIX=${ONECX_REPO_PATH}/$1
-  else
-    OLE_IMAGE_PREFIX=$1
-  fi
+#### Parameter
+if [[ -n $FILTER ]]; then
+  printf "  => Filter value:\t\t\t${GREEN}${FILTER}${NC}\n"
+fi
+
+if [[ -n $NAME_FILTER ]]; then
+  printf "  => Filtered image name prefix:\t${GREEN}${NAME_FILTER}${NC}\n"
+  IMAGES=$(docker image ls --format "{{.Repository}}" --filter "$FILTER" | grep "${NAME_FILTER}" | sort | uniq)
 else
-  usage
-  OLE_IMAGE_PREFIX=${ONECX_REPO_PATH}/${ONECX_ORGANIZATION}
+  IMAGES=$(docker image ls --format "{{.Repository}}"  --filter "$FILTER" | sort | uniq)
 fi
 
 PRINT_FORMAT="%-43s %-13s %-14s %-16s\n"
 
-echo -e "   => Image name prefix:\t${GREEN}${OLE_IMAGE_PREFIX}${NC}"
-echo -e "   => Image version label:\t${GREEN}samo.project.version${NC}"
-
 
 #########################################
-#### Get local images
-IMAGES=$(docker images --format "{{.Repository}}" | grep "^${OLE_IMAGE_PREFIX}" | sort | uniq)
-
+#### Check existence
 if [ -z "$IMAGES" ]; then
-  echo -e "${RED}No local Docker images found${NC}"
-  usage
+  if [ -n "$FILTER" ]; then
+    FILTER_TEXT="using filter value"
+  fi
+  printf "${RED}No local Docker images found ${FILTER_TEXT}${NC}\n"
   exit 0
 fi
 
+#########################################
+#### Get local images
 echo
-PRINT_FORMAT="%-43s %-13s %-14s %-16s\n"
-printf "$PRINT_FORMAT" "IMAGE" "MAIN TAG" "LOCAL ID" "VERSION"
-echo   "------------------------------------------------------------------------------------"
+PRINT_FORMAT="%-43s %-13s %-14s %-16s %-16s\n"
+printf "$PRINT_FORMAT" "IMAGE" "TAG" "LOCAL ID" "VERSION" "SIZE"
+echo   "-------------------------------------------------------------------------------------------------"
 
 
 #########################################
 #### LIST IMAGES
 #########################################
 for IMAGE in $IMAGES; do
-  # REMOTE
-  #IMAGE_TYPE=`echo $IMAGE | cut -d '-' -f3`
-  #if [[ $IMAGE_TYPE == $IMAGE_NAME_EXTENSION_UI ]]; then
-  #  IMAGE_TAG=$GITHUB_REPO_TAG_FE
-  #else
-  #  IMAGE_TAG=$GITHUB_REPO_TAG_BE
-  #fi
-
-  #MANIFEST=$(docker manifest inspect $IMAGE:$IMAGE_TAG 2>/dev/null)
-  #if [ -z "$MANIFEST" ]; then
-  #  echo -e "${RED}Could not retrieve manifest. Is the image public?${NC}"
-  #  exit 1
-  #fi
-
-  DIGEST=$(echo "$MANIFEST" \
-    | grep -o '"digest"[[:space:]]*:[[:space:]]*"sha256:[a-f0-9]\+"' \
-    | head -n 1 | sed -E 's/.*"(sha256:[a-f0-9]+)".*/\1/')
-
-  # Extract version label
-  #REMOTE_VERSION=$(echo "$MANIFEST" | grep -o "\"$VERSION_LABEL\"[[:space:]]*:[[:space:]]*\"[^\"]*\"" | sed -E "s/.*: \"(.*)\"/\1/")
-
   # LOCAL
-  docker images $IMAGE --format "{{.Repository}} {{.Tag}} {{.ID}}" | while read -r REPO TAG ID; do
+  docker images $IMAGE --format "{{.Repository}} {{.Tag}} {{.ID}} {{.Size}}" | while read -r REPO TAG ID SIZE; do
     # Read version label
     LOCAL_VERSION=$(docker inspect --format "{{ index .Config.Labels \"$VERSION_LABEL\" }}" "$ID" 2>/dev/null)
   
@@ -101,6 +120,6 @@ for IMAGE in $IMAGES; do
     if [ -z "$LOCAL_VERSION" ] || [ "$LOCAL_VERSION" = "<no value>" ]; then
       LOCAL_VERSION="(no Label)"
     fi  
-    printf "$PRINT_FORMAT" "$REPO" "$TAG" "$ID" "$LOCAL_VERSION"
+    printf "$PRINT_FORMAT" "$REPO" "$TAG" "$ID" "$LOCAL_VERSION" "$SIZE"
   done
 done

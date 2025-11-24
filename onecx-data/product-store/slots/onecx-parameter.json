@@ -1,0 +1,13 @@
+[
+  {
+    "appId": "onecx-parameter-ui",
+    "slots": [
+      {
+        "name": "onecx-product-data",
+        "description": "Getting base data of all products provided by product store",
+        "deprecated": false,
+        "undeployed": false
+      }
+    ]
+  }
+]

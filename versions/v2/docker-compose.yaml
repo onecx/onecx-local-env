@@ -49,9 +49,10 @@ services:
       - "80:80" # The HTTP port
       - "8082:8080" # The Web UI (enabled by --api)
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock #so Traefik can listen to the Docker events
-      - ../../init-data/traefik/traefik-conf.yml:/etc/traefik/traefik.yml
-      - ../../init-data/traefik/traefik-services.yml:/etc/traefik/services.yml
+      - /var/run/docker.sock:/var/run/docker.sock # Traefik can listen to the Docker events
+      - ../../init-data/traefik/base/traefik-conf.yml:/etc/traefik/traefik.yml
+      - ../../init-data/traefik/active:/etc/traefik/active # location of activated local Microfrontends
+      - ./logs/traefik:/var/log/traefik
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
@@ -59,7 +60,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
       - data-import
 
   postgresdb:
@@ -89,7 +89,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
       - data-import
 
   keycloak-app:
@@ -132,7 +131,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
       - data-import
 
   ########################################
@@ -198,7 +196,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-announcement-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-announcement-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/announcement/`)"
+      - "traefik.http.routers.onecx-announcement-ui.rule=Host(`local-proxy`) && PathPrefix(`/mfe/announcement/`)"
     networks:
       - onecx
     profiles:
@@ -264,7 +262,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-bookmark-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-bookmark-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/bookmark/`)"
+      - "traefik.http.routers.onecx-bookmark-ui.rule=Host(`local-proxy`) && PathPrefix(`/mfe/bookmark/`)"
     networks:
       - onecx
     profiles:
@@ -331,7 +329,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-help-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-help-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/help/`)"
+      - "traefik.http.routers.onecx-help-ui.rule=Host(`local-proxy`) && PathPrefix(`/mfe/help/`)"
     networks:
       - onecx
     profiles:
@@ -399,7 +397,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-iam-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-iam-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/iam/`)"
+      - "traefik.http.routers.onecx-iam-ui.rule=Host(`local-proxy`) && PathPrefix(`/mfe/iam/`)"
     networks:
       - onecx
     profiles:
@@ -431,7 +429,6 @@ services:
       - all
       - base
       - data-import
-      - minimal
 
   onecx-parameter-bff:
     image: ${ONECX_PARAMETER_BFF}
@@ -467,7 +464,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-parameter-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-parameter-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/parameter/`)"
+      - "traefik.http.routers.onecx-parameter-ui.rule=Host(`local-proxy`) && PathPrefix(`/mfe/parameter/`)"
     networks:
       - onecx
     profiles:
@@ -499,7 +496,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
       - data-import
 
   onecx-permission-bff:
@@ -536,7 +532,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-permission-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-permission-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/permission/`)"
+      - "traefik.http.routers.onecx-permission-ui.rule=Host(`local-proxy`) && PathPrefix(`/mfe/permission/`)"
     networks:
       - onecx
     profiles:
@@ -567,7 +563,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
       - data-import
 
   onecx-product-store-bff:
@@ -604,7 +599,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-product-store-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-product-store-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/product-store/`)"
+      - "traefik.http.routers.onecx-product-store-ui.rule=Host(`local-proxy`) && PathPrefix(`/mfe/product-store/`)"
     networks:
       - onecx
     profiles:
@@ -626,18 +621,18 @@ services:
     depends_on:
       keycloak-app:
         condition: service_healthy
-      onecx-tenant-svc:
-        condition: service_started
-      onecx-theme-svc:
-        condition: service_started
       onecx-permission-svc:
-        condition: service_started
+        condition: service_healthy
       onecx-product-store-svc:
-        condition: service_started
+        condition: service_healthy
+      onecx-tenant-svc:
+        condition: service_healthy
+      onecx-theme-svc:
+        condition: service_healthy
       onecx-user-profile-svc:
-        condition: service_started
+        condition: service_healthy
       onecx-workspace-svc:
-        condition: service_started
+        condition: service_healthy
     labels:
       - "traefik.http.services.onecx-shell-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-shell-bff.rule=Host(`onecx-shell-bff`)"
@@ -646,7 +641,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
 
   onecx-shell-ui:
     image: ${ONECX_SHELL_UI}
@@ -669,13 +663,12 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-shell-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-shell-ui.rule=Host(`local-proxy`)&&PathPrefix(`/onecx-shell/`)"
+      - "traefik.http.routers.onecx-shell-ui.rule=Host(`local-proxy`) && PathPrefix(`/onecx-shell/`)"
     networks:
       - onecx
     profiles:
       - all
       - base
-      - minimal
 
   ########## ONECX TENANT
   onecx-tenant-svc:
@@ -702,7 +695,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
       - data-import
 
   onecx-tenant-bff:
@@ -739,7 +731,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-tenant-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-tenant-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/tenant/`)"
+      - "traefik.http.routers.onecx-tenant-ui.rule=Host(`local-proxy`) && PathPrefix(`/mfe/tenant/`)"
     networks:
       - onecx
     profiles:
@@ -770,7 +762,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
       - data-import
 
   onecx-theme-bff:
@@ -807,7 +798,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-theme-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-theme-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/theme/`)"
+      - "traefik.http.routers.onecx-theme-ui.rule=Host(`local-proxy`) && PathPrefix(`/mfe/theme/`)"
     networks:
       - onecx
     profiles:
@@ -838,7 +829,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
 
   onecx-user-profile-bff:
     image: ${ONECX_USER_PROFILE_BFF}
@@ -861,6 +851,7 @@ services:
       - onecx
     profiles:
       - all
+      - base
 
   onecx-user-profile-ui:
     image: ${ONECX_USER_PROFILE_UI}
@@ -869,16 +860,22 @@ services:
       APP_BASE_HREF: "/mfe/user-profile/"
       APP_ID: "onecx-user-profile-ui"
       PRODUCT_NAME: "onecx-user-profile"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "-G", "http://localhost:8080"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     depends_on:
       onecx-user-profile-bff:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-user-profile-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-user-profile-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/user-profile/`)"
+      - "traefik.http.routers.onecx-user-profile-ui.rule=Host(`local-proxy`) && PathPrefix(`/mfe/user-profile/`)"
     networks:
       - onecx
     profiles:
       - all
+      - base
 
   ########## ONECX WELCOME
   onecx-welcome-svc:
@@ -941,7 +938,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-welcome-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-welcome-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/welcome/`)"
+      - "traefik.http.routers.onecx-welcome-ui.rule=Host(`local-proxy`) && PathPrefix(`/mfe/welcome/`)"
     networks:
       - onecx
     profiles:
@@ -973,7 +970,6 @@ services:
     profiles:
       - all
       - base
-      - minimal
       - data-import
 
   onecx-workspace-bff:
@@ -997,7 +993,7 @@ services:
       - onecx
     profiles:
       - all
-      - minimal
+      - base
 
   onecx-workspace-ui:
     image: ${ONECX_WORKSPACE_UI}
@@ -1016,12 +1012,12 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-workspace-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-workspace-ui.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/workspace/`)"
+      - "traefik.http.routers.onecx-workspace-ui.rule=Host(`local-proxy`) && PathPrefix(`/mfe/workspace/`)"
     networks:
       - onecx
     profiles:
       - all
-      - minimal
+      - base
 
   ########## DUMMY service to ensure all depended services are running
   waiting-on-profile-base:
@@ -1030,25 +1026,18 @@ services:
     depends_on:
       onecx-parameter-svc:
         condition: service_healthy
-      onecx-permission-svc:
-        condition: service_healthy
-      onecx-product-store-svc:
-        condition: service_healthy
       onecx-shell-ui:
         condition: service_healthy
-      onecx-tenant-svc:
+      onecx-user-profile-ui:
         condition: service_healthy
-      onecx-theme-svc:
-        condition: service_healthy
-      onecx-user-profile-svc:
-        condition: service_healthy
-      onecx-workspace-svc:
+      onecx-workspace-ui:
         condition: service_healthy
     networks:
       - onecx
     profiles:
       - base
 
+  # internal used to ensure that all services used by imports are running
   waiting-on-profile-data-import:
     image: alpine:3
     container_name: waiting-on-profile-data-import
@@ -1075,33 +1064,16 @@ services:
       - all
       - data-import
 
-  waiting-on-profile-minimal:
-    image: alpine:3
-    container_name: waiting-on-profile-minimal
-    depends_on:
-      onecx-permission-svc:
-        condition: service_healthy
-      onecx-product-store-svc:
-        condition: service_healthy
-      onecx-shell-bff:
-        condition: service_healthy
-      onecx-tenant-svc:
-        condition: service_healthy
-      onecx-theme-svc:
-        condition: service_healthy
-      onecx-user-profile-svc:
-        condition: service_healthy
-      onecx-workspace-ui:
-        condition: service_healthy
-    networks:
-      - onecx
-    profiles:
-      - minimal
-
   waiting-on-profile-all:
     image: alpine:3
     container_name: waiting-on-profile-all
     depends_on:
+      onecx-parameter-svc:
+        condition: service_healthy
+      onecx-shell-ui:
+        condition: service_healthy
+      onecx-user-profile-ui:
+        condition: service_healthy
       onecx-workspace-ui:
         condition: service_healthy
     networks:

@@ -1,0 +1,26 @@
+[
+  {
+    "appId": "onecx-user-profile-ui",
+    "slots": [
+      {
+        "name": "onecx-user-profile-change-password",
+        "description": "User Profile change password",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-user-profile-permissions",
+        "description": "User Profile show user roles and permissions",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-user-profile-admin-view-permissions",
+        "description": "User Profile show other user roles and permissions for admin",
+        "deprecated": false,
+        "undeployed": false
+      }    
+    ]
+  }
+]
+

@@ -1,6 +1,0 @@
-{
-  "name": "onecx-search-config",
-  "description": "Slot used by library components that can be used in all applications. Its defined in shell and should not be redefined in products that use the slots. Use this slot to manage search configurations on the search pages via assigned remote components.",
-  "deprecated": false,
-  "undeployed": false
-}

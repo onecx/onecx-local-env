@@ -1,0 +1,42 @@
+= Getting Started - Running OneCX locally
+:idprefix:
+:idseparator: -
+:imagesdir: ../images
+
+[NOTE]
+====
+This guide assumes that `onecx-local-env` has already been set up and installed according to the instructions provided in the xref:general:setup/installation.adoc[Setup & Installation] documentation.
+====
+
+This guide provides a quick overview of the steps required to run a local OneCX environment. It includes instructions on starting the environment, accessing OneCX in a browser, and stopping the environment when finished.
+
+== Starting the local environment
+
+After setting up `onecx-local-env`, a local OneCX environment can be started by running a single command from the root directory of `onecx-local-env`.
+
+[source,bash]
+----
+./start-onecx.sh
+----
+
+This command will start all required services and import default data into the environment. This process may take several minutes, especially on the first run, as Docker images may need to be pulled.
+
+[NOTE]
+====
+The `start-onecx.sh` script accepts optional flags to customize its behavior (e.g. skipping data imports, starting additional services etc.). A full list of all available flags can be found in the xref:advanced:scripts/start.adoc[`start-onecx.sh` documentation] or by running `./start-onecx.sh -h`.
+====
+
+== Accessing OneCX in a browser
+
+After, starting the local environment, OneCX can be accessed in a web browser by navigating to http://local-proxy/onecx-shell/admin.
+The default login credentials are:
+- Username: `onecx`
+- Password: `onecx`
+
+== Stopping the local environment
+
+When finished using the local OneCX environment, it can be stopped by running the following command from the root directory of `onecx-local-env`:
+[source,bash]
+----
+./stop-onecx.sh
+----

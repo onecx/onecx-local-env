@@ -1,4 +1,4 @@
-= OneCX Local Environment - Advanced - Default Databases
+= Advanced - Default Databases
 :idprefix:
 :idseparator: -
 :imagesdir: ../images

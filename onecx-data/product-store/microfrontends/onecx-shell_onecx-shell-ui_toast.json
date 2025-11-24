@@ -1,0 +1,15 @@
+{
+  "appVersion": "xxx",
+  "appName": "onecx-shell-ui",
+  "description": "onecx-shell-ui",
+  "remoteBaseUrl": "/onecx-shell/",
+  "remoteEntry": "/onecx-shell/remoteEntry.js",
+  "note": "Imported MFE",
+  "exposedModule": "./OneCXShellToastComponent",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-shell",
+  "tagName": "ocx-shell-toast-component",
+  "type": "COMPONENT",
+  "deprecated": false,
+  "undeployed": false
+}

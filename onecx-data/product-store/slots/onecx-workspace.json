@@ -1,0 +1,31 @@
+[
+  {
+    "appId": "onecx-workspace-ui",
+    "slots": [
+      {
+        "name": "onecx-avatar-image",
+        "description": "Area to displaying the users avatar provided by avatar image component",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-custom-user-info",
+        "description": "Area on top of the avatar menu for displaying specific user info",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-iam-user-roles",
+        "description": "Receive IAM user roles",
+        "deprecated": false,
+        "undeployed": false
+      },
+      {
+        "name": "onecx-theme-data",
+        "description": "Getting theme data (like theme logo) to be used within workspace",
+        "deprecated": false,
+        "undeployed": false
+      }
+    ]
+  }
+]
