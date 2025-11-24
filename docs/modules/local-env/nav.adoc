@@ -1,0 +1,16 @@
+* xref:general:index.adoc[Local Env]
+** Getting Started
+*** xref:general:getting-started.adoc[Run OneCX locally]
+** Versions
+*** v2 (latest)
+**** xref:general:versions/v2/v2.adoc[v2 (latest)]
+**** xref:general:versions/v2/migrate.adoc[Migration Guide]
+*** xref:general:versions/v1/v1.adoc[v1]
+** Advanced
+*** xref:advanced:default-database.adoc[Default Databases]
+*** xref:advanced:extending-default-environment.adoc[Extending the default environment]
+*** xref:advanced:imports.adoc[Imports]
+** Networking
+*** xref:general:networking.adoc[Networking in OneCX]
+** Troubleshooting
+*** xref:troubleshooting:common-issues.adoc[Common Issues]

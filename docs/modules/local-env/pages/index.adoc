@@ -9,13 +9,13 @@
 
 For more in-depth information on `onecx-local-env` including prerequisites, setup instructions, available versions and more please refer to the following documentation:
 
-- xref:general:getting-started.adoc[Getting Started - Run OneCX locally]
+- xref:local-env:getting-started.adoc[Getting Started - Run OneCX locally]
 - xref:troubleshooting:common-issues.adoc[Troubleshooting - Common Issues]
 
 [NOTE]
 .Quick Start
 ====
-If you already followed all setup instructions mentioned in xref:general:getting-started.adoc[Getting Started - Run OneCX locally], you can complete the following steps to run and access a local OneCX environment:
+If you already followed all setup instructions mentioned in xref:local-env:getting-started.adoc[Getting Started - Run OneCX locally], you can complete the following steps to run and access a local OneCX environment:
 
 . *Start the local environment:* To start a minimal local OneCX environment, run the following command from the `onecx-local-env` root directory: 
 +

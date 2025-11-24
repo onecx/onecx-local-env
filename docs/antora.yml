@@ -1,6 +1,3 @@
-name: dev-env-tools
-title: Development Tools
+name: utilities
+title: Utilities
 version: latest
-start_page: general:index.adoc
-nav:
-  - modules/general/nav.adoc

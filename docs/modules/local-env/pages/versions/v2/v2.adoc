@@ -5,13 +5,13 @@
 
 [quote]
 ____
-This document only contains information specific to v2 of the OneCX Local Environment. Please make sure to also read the xref:general:getting-started.adoc[*top-level getting started guide*] for general information and instructions that apply to all versions.
+This document only contains information specific to v2 of the OneCX Local Environment. Please make sure to also read the xref:local-env:getting-started.adoc[*top-level getting started guide*] for general information and instructions that apply to all versions.
 ____
 
 
 v2 is the current latest version of the local development environment for OneCX.
 
-If you are currently using xref:general:versions/v1/v1.adoc[OneCX Local Environment v1] and want to migrate to v2, please refer to the xref:general:versions/v2/migrate.adoc[Migrate to v2] guide for detailed migration instructions.
+If you are currently using xref:local-env:versions/v1/v1.adoc[OneCX Local Environment v1] and want to migrate to v2, please refer to the xref:local-env:versions/v2/migrate.adoc[Migrate to v2] guide for detailed migration instructions.
 
 == Overview
 

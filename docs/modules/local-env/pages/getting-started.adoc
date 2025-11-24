@@ -61,8 +61,8 @@ The current latest version of `onecx-local-env` is v2. We recommend this version
 
 For more information on the versions please refer to the version-specific documentation:
 
-- xref:general:versions/v2/v2.adoc[OneCX Local Environment v2]
-- xref:general:versions/v1/v1.adoc[OneCX Local Environment v1]
+- xref:local-env:versions/v2/v2.adoc[OneCX Local Environment v2]
+- xref:local-env:versions/v1/v1.adoc[OneCX Local Environment v1]
 
 === Make all relevant scripts executable
 
@@ -150,8 +150,8 @@ If you are on Apple Silicon, you should now have updated all OneCX image tags. T
 
 Before using the selected version of `onecx-local-env`, initial data must be imported to set up the environment correctly. Please refer to the version-specific documentation for instructions on how to import the initial data:
 
-- xref:general:versions/v2/v2.adoc#importing-initial-data[Importing initial data for OneCX Local Environment v2]
-- xref:general:versions/v1/v1.adoc#importing-initial-data[Importing initial data for OneCX Local Environment v1]
+- xref:local-env:versions/v2/v2.adoc#importing-initial-data[Importing initial data for OneCX Local Environment v2]
+- xref:local-env:versions/v1/v1.adoc#importing-initial-data[Importing initial data for OneCX Local Environment v1]
 
 The respective import scripts will import all data located in the `./imports` directory. The structure of the `imports` directory is as follows:
 
@@ -180,8 +180,8 @@ At this point, you should have imported the initial data for your selected versi
 
 For instructions on how to run your selected version of `onecx-local-env`, please refer to the version-specific documentation:
 
-- xref:general:versions/v2/v2.adoc#running-onecx-local-env-v2[Running OneCX Local Environment v2]
-- xref:general:versions/v1/v1.adoc#running-onecx-local-env-v1[Running OneCX Local Environment v1]
+- xref:local-env:versions/v2/v2.adoc#running-onecx-local-env-v2[Running OneCX Local Environment v2]
+- xref:local-env:versions/v1/v1.adoc#running-onecx-local-env-v1[Running OneCX Local Environment v1]
 
 After running all desired services as per the version-specific instructions, you can access the OneCX Shell via this URL: `http://local-proxy/onecx-shell/admin`. The default user created by the previously-executed import scripts is `onecx` with the password `onecx`.
 
