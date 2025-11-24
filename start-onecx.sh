@@ -20,7 +20,7 @@ usage () {
   cat <<USAGE
   Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s] [-x]
        -e  edition, one of [ 'v1', 'v2'], default: 'v2'
-       -h  display this usage information, ignoring other parameters
+       -h  display this help and exit
        -p  profile, one of [ 'all', 'base' ], default: 'base'
        -s  security authentication enabled, default: not enabled
        -x  skip import

@@ -50,8 +50,9 @@ services:
       - "8082:8080" # The Web UI (enabled by --api)
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock #so Traefik can listen to the Docker events
-      - ../../init-data/traefik/traefik-conf.yml:/etc/traefik/traefik.yml
-      - ../../init-data/traefik/traefik-services.yml:/etc/traefik/services.yml
+      - ../../init-data/traefik/base/traefik-conf.yml:/etc/traefik/traefik.yml
+      - ../../init-data/traefik/active:/etc/traefik/active
+      - ./logs/traefik:/var/log/traefik
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
