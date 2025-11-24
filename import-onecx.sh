@@ -19,7 +19,7 @@ usage () {
   $0  [-h] [-d <import data type>] [-v] [-s] [-t <tenant>] [-e <edition>]
        -d  data type, one of [ all, base, bookmark, assignment, parameter, permission, mfe, ms, product, slot, theme, welcome, workspace], base is default
        -e  edition, one of [ 'v1', 'v2' ], default is 'v2'
-       -h  display this usage information
+       -h  display this help and exit
        -s  security authentication enabled, default not enabled
        -t  tenant, one of [ 'default', 't1', 't2' ], default is 'default'
        -v  verbose: display details on imports

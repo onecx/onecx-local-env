@@ -21,7 +21,7 @@ usage () {
   Usage: $0  [-h] [-c] [-e <edition>] [-p <profile>]
        -c  cleanup, remove volumes
        -e  edition, one of [ 'v1', 'v2'], default is 'v2'
-       -h  display this usage information, ignoring other parameters
+       -h  display this help and exit
        -p  profile, one of [ 'all', 'base' ], default is 'base'
 USAGE
   exit 0
