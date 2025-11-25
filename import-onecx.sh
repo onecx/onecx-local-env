@@ -48,7 +48,6 @@ IMPORT_TYPE=base
 while getopts ":hd:svt:e:" opt; do
   case "$opt" in
         d ) 
-            # FIX: Replaced @(...) with Regex (=~) for macOS Bash 3.2 compatibility
             if [[ ! "$OPTARG" =~ ^(all|base|assignment|bookmark|parameter|permission|mfe|ms|product|slot|theme|welcome|workspace)$ ]]; then
               printf "${RED}  Unknown data type: $OPTARG${NC}\n"
               usage
