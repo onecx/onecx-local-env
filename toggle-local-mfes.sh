@@ -16,6 +16,7 @@ printf "${CYAN}Integrate Local Microfrontends into OneCX Local Enviroment${NC}\n
 
 #################################################################
 ## Defaults
+ANGULAR_DEFAULT_PORT="4200"
 TRAEFIK_ACTIVE_DIR="./init-data/traefik/active"
 TRAEFIK_LOCAL_DIR="./init-data/traefik/inactive"
 MFE_TEMPLATE_NAME="_mfe_template.yml"
@@ -23,7 +24,8 @@ MFE_TEMPLATE_PATH="$TRAEFIK_LOCAL_DIR/$MFE_TEMPLATE_NAME"
 MFES=()
 MODE=""
 LINE_PREFIX="  * "
-declare -A predefined_onecx_ports=(\
+onecx_products="announcement|help|parameter|permission|product-store|tenant|theme|shell|user-profile|welcome|workspace"
+declare -A onecx_products_predefined_ports=(\
   ["announcement"]="5024" ["bookmark"]="5031" ["help"]="5023" ["iam"]="5029" \
   ["permission"]="5026" ["product-store"]="5021" \
   ["shell"]="5000" ["tenant"]="5022" ["theme"]="5020" \
@@ -33,19 +35,19 @@ declare -A predefined_onecx_ports=(\
 ## Usage
 usage () {
   cat <<USAGE
-  Usage: $0  [-ch]  [-a <mfe1:port> [<mfe2:port> ...]]  [-d <mfe1> [<mfe2> ...]]
-       -a  activate one or more local Microfrontends, port is optional, default is 4200
-           if the mfe is one of OneCX Core products then the default port is defined in ${TRAEFIK_LOCAL_DIR}
-       -c  cleanup, restore original state
-       -d  deactivate one or more local Microfrontends
-       -h  display this help and exit
-       -l  list of integrated local Microfrontends
+  Usage: $0  [-chl]  [-a <mfe1:port> [<mfe2:port> ...]]  [-d <mfe1> [<mfe2> ...]]
+       -a  Activate one or more local Microfrontends, port is optional, default is 4200
+           If the mfe is one of OneCX Core products and no port is specified then predefined ports are used.
+       -c  Cleanup, restore original state
+       -d  Deactivate one or more local Microfrontends
+       -h  Display this help and exit
+       -l  List of currently integrated local microfrontends
 USAGE
   exit 0
 }
 usage_short () {
   cat <<USAGE
-  Usage: $0  [-ch]  [-a <mfe1:port> [<mfe2:port> ...]]  [-d <mfe1> [<mfe2> ...]]
+  Usage: $0  [-chl]  [-a <mfe1:port> [<mfe2:port> ...]]  [-d <mfe1> [<mfe2> ...]]
 USAGE
 }
 
@@ -69,6 +71,7 @@ activate_mfe() {
     return
   fi
 
+  # replace variables and copy to target
   sed \
     -e "s/{{MFE_NAME}}/${name}/g" \
     -e "s/{{MFE_PORT}}/${port}/g" \
@@ -168,11 +171,11 @@ if [[ "$MODE" == "activate" || "$MODE" == "deactivate" ]]; then
     name=$1
     port=$2
     if [[ -z $port ]]; then  # no port
-      if [[ "$name" =~ ^(announcement|help|parameter|permission|product-store|tenant|theme|shell|user-profile|welcome|workspace) ]]; then
-        port="${predefined_onecx_ports[$name]}"  # get predefined port
+      if [[ "$name" =~ ^($onecx_products) ]]; then
+        port="${onecx_products_predefined_ports[$name]}"  # get predefined port
       fi
-      if [[ -z $port ]]; then  # no port
-        port=4200
+      if [[ -z $port ]]; then  # no port => use Angular default
+        port=${ANGULAR_DEFAULT_PORT}
       fi
     fi
     if [[ "$MODE" == "activate" ]]; then
