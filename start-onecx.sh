@@ -18,18 +18,18 @@ printf "${CYAN}Starting OneCX Local Environment ...${NC}\n"
 ## Usage
 usage () {
   cat <<USAGE
-  Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s] [-x]
-       -e  edition, one of [ 'v1', 'v2'], default: 'v2'
-       -h  display this help and exit
-       -p  profile, one of [ 'all', 'base' ], default: 'base'
-       -s  security authentication enabled, default: not enabled
-       -x  skip import
+  Usage: $0  [-hsx] [-e <edition>] [-p <profile>]
+    -e  Edition, one of [ 'v1', 'v2'], default: 'v2'
+    -h  Display this help and exit
+    -p  Profile, one of [ 'all', 'base' ], default: 'base'
+    -s  Security authentication enabled, default: not enabled
+    -x  Skip import
 USAGE
   exit 0
 }
 usage_short () {
   cat <<USAGE
-  Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s] [-x]
+  Usage: $0  [-hsx] [-e <edition>] [-p <profile>]
 USAGE
 }
 

@@ -71,6 +71,12 @@ CREATE DATABASE onecx_search_config with owner onecx_search_config;
 GRANT ALL PRIVILEGES ON DATABASE onecx_search_config TO onecx_search_config;
 GRANT ALL PRIVILEGES ON SCHEMA public TO onecx_search_config;
 
+-- -- onecx_user_profile_avatar
+CREATE USER onecx_user_profile_avatar WITH ENCRYPTED PASSWORD 'onecx_user_profile_avatar';
+CREATE DATABASE onecx_user_profile_avatar with owner onecx_user_profile_avatar;
+GRANT ALL PRIVILEGES ON DATABASE onecx_user_profile_avatar TO onecx_user_profile_avatar;
+GRANT ALL PRIVILEGES ON SCHEMA public TO onecx_user_profile_avatar;
+
 -- -- onecx_user_profile
 CREATE USER onecx_user_profile WITH ENCRYPTED PASSWORD 'onecx_user_profile';
 CREATE DATABASE onecx_user_profile with owner onecx_user_profile;

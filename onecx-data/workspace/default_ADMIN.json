@@ -243,6 +243,16 @@
           ]
         },
         {
+          "name": "onecx-shell-extension",
+          "components": [
+            {
+              "productName": "onecx-shell-extension",
+              "appId": "onecx-shell-ui",
+              "name": "./OneCXShellToastComponent"
+            }
+          ]
+        },
+        {
           "name": "onecx-shell-footer",
           "components": [
             {
