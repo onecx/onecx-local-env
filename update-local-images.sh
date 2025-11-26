@@ -31,6 +31,15 @@ usage_short () {
 USAGE
 }
 
+confirm() {
+  read -p "$1 (y/N): " answer
+  case "$answer" in
+    [yY]* ) ;;
+    * ) printf "${GREEN}  Execution aborted${NC}\n"
+        exit 1
+        ;;
+  esac
+}
 
 #################################################################
 ## Defaults
@@ -68,16 +77,22 @@ if [[ -n "$NAME_FILTER" ]]; then
 else
   IMAGES=$(docker images --format "{{.Repository}}:{{.Tag}}:{{.ID}}")
 fi
-
+## Check images
 if [[ -z "$IMAGES" ]]; then
   printf "  No images matched your filter ${GREEN}$NAME_FILTER${NC}.\n"
   exit 0
 fi
+## Count images
+number_of_images=$(echo "$IMAGES" | wc -l)
 
-printf "${CYAN}Pulling...${NC}\n"
+if [[ -z "$NAME_FILTER" ]]; then
+  confirm "  No filter specified. Do you really want to activate all ${number_of_images} images?"
+fi
+
 
 #################################################################
 # Pull images
+printf "${CYAN}Pulling ${number_of_images} images${NC}\n"
 while IFS= read -r IMAGE; do
   [[ -z "$IMAGE" ]] && continue
   IFS=:
