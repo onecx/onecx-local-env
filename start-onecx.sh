@@ -98,14 +98,15 @@ if [[ $# == 0 ]]; then
 fi
 
 # Using 'docker compose' (v2). If using older docker, change to 'docker-compose'
-ONECX_SECURITY_AUTH_ENABLED=$SECURITY docker compose -f versions/$EDITION/docker-compose.yaml --profile $PROFILE up -d  2> a.log
+ONECX_SECURITY_AUTH_ENABLED=$SECURITY docker compose -f versions/$EDITION/docker-compose.yaml --profile $PROFILE up -d
 
+# check success
+shell_is_running=`docker compose ps -q onecx-shell-ui  --filter "status=running"`
 
-exit 0
 
 #################################################################
 ## Import profile data
-if [[ $IMPORT == "yes" ]]; then
+if [[ -n $shell_is_running && $IMPORT == "yes" ]]; then
   # Ensure script is executable
   if [ -f "./import-onecx.sh" ]; then
       chmod +x ./import-onecx.sh
