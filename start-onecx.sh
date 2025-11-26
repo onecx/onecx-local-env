@@ -101,12 +101,12 @@ fi
 ONECX_SECURITY_AUTH_ENABLED=$SECURITY docker compose -f versions/$EDITION/docker-compose.yaml --profile $PROFILE up -d
 
 # check success
-shell_is_running=`docker compose ps -q onecx-shell-ui  --filter "status=running"`
+shell_is_healthy=`docker compose inspect --format='{{.State.Health.Status}}'  onecx-shell-bff`
 
 
 #################################################################
 ## Import profile data
-if [[ -n $shell_is_running && $IMPORT == "yes" ]]; then
+if [[ $shell_is_healthy == "healthy" && $IMPORT == "yes" ]]; then
   # Ensure script is executable
   if [ -f "./import-onecx.sh" ]; then
       chmod +x ./import-onecx.sh
