@@ -98,8 +98,10 @@ if [[ $# == 0 ]]; then
 fi
 
 # Using 'docker compose' (v2). If using older docker, change to 'docker-compose'
-ONECX_SECURITY_AUTH_ENABLED=$SECURITY docker compose -f versions/$EDITION/docker-compose.yaml --profile $PROFILE up -d
+ONECX_SECURITY_AUTH_ENABLED=$SECURITY docker compose -f versions/$EDITION/docker-compose.yaml --profile $PROFILE up -d  2> a.log
 
+
+exit 0
 
 #################################################################
 ## Import profile data

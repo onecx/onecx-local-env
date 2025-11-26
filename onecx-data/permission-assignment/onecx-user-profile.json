@@ -46,6 +46,7 @@
           "PROFILE_PERSONAL_INFO": ["VIEW"],
           "PROFILE_ADDRESS": ["EDIT", "VIEW"],
           "PROFILE_AVATAR": ["EDIT", "VIEW"],
+          "PROFILE_IDM": ["VIEW"],
           "PROFILE_PHONE": ["EDIT", "VIEW"],
           "ROLES_PERMISSIONS": ["ADMIN_VIEW", "VIEW"]
         },

@@ -17,7 +17,7 @@ printf "${CYAN}Import data for OneCX Local Environment${NC}\n"
 usage () {
   cat <<USAGE
   Usage: $0  [-hsv] [-d <import data type>] [-t <tenant>] [-e <edition>]
-    -d  Data type, one of [ all, base, bookmark, assignment, parameter, permission, mfe, ms, product, slot, theme, welcome, workspace], base is default
+    -d  Data type, one of [ all, base, bookmark, assignment, parameter, permission, mfe, ms, product, slot, tenant theme, welcome, workspace], base is default
     -e  Edition, one of [ 'v1', 'v2' ], default is 'v2'
     -h  Display this help and exit
     -s  Security authentication enabled, default not enabled
@@ -48,7 +48,7 @@ IMPORT_TYPE=base
 while getopts ":hd:svt:e:" opt; do
   case "$opt" in
         d ) 
-            if [[ ! "$OPTARG" =~ ^(all|base|assignment|bookmark|parameter|permission|mfe|ms|product|slot|theme|welcome|workspace)$ ]]; then
+            if [[ ! "$OPTARG" =~ ^(all|base|assignment|bookmark|parameter|permission|mfe|ms|product|slot|tenant|theme|welcome|workspace)$ ]]; then
               printf "${RED}  Unknown data type: $OPTARG${NC}\n"
               usage
             else
