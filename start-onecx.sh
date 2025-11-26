@@ -114,12 +114,10 @@ if [[ -n $shell_is_running && $IMPORT == "yes" ]]; then
   else
       printf "${RED}Error: import-onecx.sh not found.${NC}\n"
   fi
+else
+  # Remove profile helper service, ignoring any error message
+  docker compose down waiting-on-profile-$PROFILE > /dev/null 2>&1
 fi
-
-
-#################################################################
-## Remove profile helper service, ignoring any error message
-docker compose down waiting-on-profile-$PROFILE > /dev/null 2>&1
 
 
 #################################################################

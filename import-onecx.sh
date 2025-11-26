@@ -128,6 +128,6 @@ chmod +x "$IMPORT_SCRIPT"
 
 #################################################################
 ## remove profile helper service, ignoring any error message
-if [[ $PROFILE == "data-import" ]]; then
-  docker compose down   waiting-on-profile-$PROFILE  > /dev/null 2>&1
+if [ -n $PROFILE ]; then
+  docker compose down  waiting-on-profile-$PROFILE  > /dev/null 2>&1
 fi
