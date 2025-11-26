@@ -18,18 +18,18 @@ printf "${CYAN}Starting OneCX Local Environment ...${NC}\n"
 ## Usage
 usage () {
   cat <<USAGE
-  Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s] [-x]
-       -e  edition, one of [ 'v1', 'v2'], default: 'v2'
-       -h  display this help and exit
-       -p  profile, one of [ 'all', 'base' ], default: 'base'
-       -s  security authentication enabled, default: not enabled
-       -x  skip import
+  Usage: $0  [-hsx] [-e <edition>] [-p <profile>]
+    -e  Edition, one of [ 'v1', 'v2'], default: 'v2'
+    -h  Display this help and exit
+    -p  Profile, one of [ 'all', 'base' ], default: 'base'
+    -s  Security authentication enabled, default: not enabled
+    -x  Skip import
 USAGE
   exit 0
 }
 usage_short () {
   cat <<USAGE
-  Usage: $0  [-h] [-e <edition>] [-p <profile>] [-s] [-x]
+  Usage: $0  [-hsx] [-e <edition>] [-p <profile>]
 USAGE
 }
 
@@ -100,10 +100,13 @@ fi
 # Using 'docker compose' (v2). If using older docker, change to 'docker-compose'
 ONECX_SECURITY_AUTH_ENABLED=$SECURITY docker compose -f versions/$EDITION/docker-compose.yaml --profile $PROFILE up -d
 
+# check success
+shell_is_running=`docker compose ps -q onecx-shell-ui  --filter "status=running"`
+
 
 #################################################################
 ## Import profile data
-if [[ $IMPORT == "yes" ]]; then
+if [[ -n $shell_is_running && $IMPORT == "yes" ]]; then
   # Ensure script is executable
   if [ -f "./import-onecx.sh" ]; then
       chmod +x ./import-onecx.sh
@@ -111,12 +114,10 @@ if [[ $IMPORT == "yes" ]]; then
   else
       printf "${RED}Error: import-onecx.sh not found.${NC}\n"
   fi
+else
+  # Remove profile helper service, ignoring any error message
+  docker compose down waiting-on-profile-$PROFILE > /dev/null 2>&1
 fi
-
-
-#################################################################
-## Remove profile helper service, ignoring any error message
-docker compose down waiting-on-profile-$PROFILE > /dev/null 2>&1
 
 
 #################################################################

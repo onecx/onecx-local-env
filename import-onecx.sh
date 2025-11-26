@@ -16,19 +16,19 @@ printf "${CYAN}Import data for OneCX Local Environment${NC}\n"
 #################################################################
 usage () {
   cat <<USAGE
-  $0  [-h] [-d <import data type>] [-v] [-s] [-t <tenant>] [-e <edition>]
-       -d  data type, one of [ all, base, bookmark, assignment, parameter, permission, mfe, ms, product, slot, theme, welcome, workspace], base is default
-       -e  edition, one of [ 'v1', 'v2' ], default is 'v2'
-       -h  display this help and exit
-       -s  security authentication enabled, default not enabled
-       -t  tenant, one of [ 'default', 't1', 't2' ], default is 'default'
-       -v  verbose: display details on imports
+  Usage: $0  [-hsv] [-d <import data type>] [-t <tenant>] [-e <edition>]
+    -d  Data type, one of [ all, base, bookmark, assignment, parameter, permission, mfe, ms, product, slot, tenant theme, welcome, workspace], base is default
+    -e  Edition, one of [ 'v1', 'v2' ], default is 'v2'
+    -h  Display this help and exit
+    -s  Security authentication enabled, default not enabled
+    -t  Tenant, one of [ 'default', 't1', 't2' ], default is 'default'
+    -v  Verbose: display details during import of objects
 USAGE
   exit 0
 }
 usage_short () {
   cat <<USAGE
-  Usage: $0  [-h] [-d <import data type>] [-v] [-s] [-t <tenant>] [-e <edition>]
+  Usage: $0  [-hsv] [-d <import data type>] [-t <tenant>] [-e <edition>]
 USAGE
 }
 
@@ -48,7 +48,7 @@ IMPORT_TYPE=base
 while getopts ":hd:svt:e:" opt; do
   case "$opt" in
         d ) 
-            if [[ ! "$OPTARG" =~ ^(all|base|assignment|bookmark|parameter|permission|mfe|ms|product|slot|theme|welcome|workspace)$ ]]; then
+            if [[ ! "$OPTARG" =~ ^(all|base|assignment|bookmark|parameter|permission|mfe|ms|product|slot|tenant|theme|welcome|workspace)$ ]]; then
               printf "${RED}  Unknown data type: $OPTARG${NC}\n"
               usage
             else
@@ -128,6 +128,6 @@ chmod +x "$IMPORT_SCRIPT"
 
 #################################################################
 ## remove profile helper service, ignoring any error message
-if [[ $PROFILE == "data-import" ]]; then
-  docker compose down   waiting-on-profile-$PROFILE  > /dev/null 2>&1
+if [ -n $PROFILE ]; then
+  docker compose down  waiting-on-profile-$PROFILE  > /dev/null 2>&1
 fi

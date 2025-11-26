@@ -18,16 +18,16 @@ printf "${CYAN}Update local Docker images${NC}\n"
 ## Usage
 usage () {
   cat <<USAGE
-  Usage: $0  [-h] [-c] [-n <text>]
-       -c  cleanup, remove orphan images
-       -h  display this usage information, ignoring other parameters
-       -n  name filter, find images which have <text> into image name
+  Usage: $0  [-ch] [-n <text>]
+    -c  Cleanup, remove orphan images
+    -h  Display this usage information, ignoring other parameters
+    -n  Name filter, update images which have <text> into image name
 USAGE
   exit 0
 }
 usage_short () {
   cat <<USAGE
-  Usage: $0  [-h] [-c] [-n <text>]
+  Usage: $0  [-ch] [-n <text>]
 USAGE
 }
 
@@ -51,10 +51,8 @@ while getopts ":hcn:" opt; do
               NAME_FILTER=$OPTARG
             fi
             ;;
-        h ) 
-            usage ;; # print usage
-       \? )
-            printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n"
+        h ) usage ;; # print usage
+       \? ) printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n"
             usage ;;
   esac
 done

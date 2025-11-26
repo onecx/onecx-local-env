@@ -27,6 +27,7 @@
         { "resource": "PROFILE_ADDRESS", "action": "EDIT" },
         { "resource": "PROFILE_AVATAR", "action": "VIEW" },
         { "resource": "PROFILE_AVATAR", "action": "EDIT" },
+        { "resource": "PROFILE_IDM", "action": "VIEW" },
         { "resource": "PROFILE_PHONE", "action": "EDIT" },
         { "resource": "PROFILE_PHONE", "action": "VIEW" },
         { "resource": "CHANGE_PASSWORD", "action": "VIEW" },

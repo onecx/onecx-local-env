@@ -805,6 +805,31 @@ services:
       - all
 
   ########## ONECX USER-PROFILE
+  onecx-user-profile-avatar-svc:
+    image: ${ONECX_USER_PROFILE_AVATAR_SVC}
+    container_name: onecx-user-profile-avatar-svc
+    environment:
+      <<: *svc_multi_tenancy
+      QUARKUS_DATASOURCE_USERNAME: onecx_user_profile_avatar
+      QUARKUS_DATASOURCE_PASSWORD: onecx_user_profile_avatar
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_user_profile_avatar?sslmode=disable"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-user-profile-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-user-profile-svc.rule=Host(`onecx-user-profile-avatar-svc`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
+
   onecx-user-profile-svc:
     image: ${ONECX_USER_PROFILE_SVC}
     container_name: onecx-user-profile-svc
@@ -842,6 +867,8 @@ services:
       timeout: 5s
       retries: 3
     depends_on:
+      onecx-user-profile-avatar-svc:
+        condition: service_healthy
       onecx-user-profile-svc:
         condition: service_healthy
     labels:

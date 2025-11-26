@@ -243,13 +243,28 @@
           ]
         },
         {
-          "name": "onecx-shell-footer",
+          "name": "onecx-shell-extension",
+          "components": [
+            {
+              "productName": "onecx-shell-extension",
+              "appId": "onecx-shell-ui",
+              "name": "./OneCXShellToastComponent"
+            }
+          ]
+        },
+        {
+          "name": "onecx-shell-body-footer.start",
           "components": [
             {
               "productName": "onecx-workspace",
               "appId": "onecx-workspace-ui",
               "name": "./OneCXFooterMenuComponent"
-            },
+            }
+          ]
+        },
+        {
+          "name": "onecx-shell-body-footer.end",
+          "components": [
             {
               "productName": "onecx-workspace",
               "appId": "onecx-workspace-ui",
@@ -258,7 +273,7 @@
           ]
         },
         {
-          "name": "onecx-shell-header-left",
+          "name": "onecx-shell-header.start",
           "components": [
             {
               "productName": "onecx-workspace",
@@ -273,7 +288,7 @@
           ]
         },
         {
-          "name": "onecx-shell-header-right",
+          "name": "onecx-shell-header.end",
           "components": [
             {
               "productName": "onecx-help",
@@ -308,7 +323,7 @@
           ]
         },
         {
-          "name": "onecx-shell-sub-header",
+          "name": "onecx-shell-body-header.center",
           "components": [
             {
               "productName": "onecx-announcement",
@@ -318,8 +333,18 @@
           ]
         },
         {
-          "name": "onecx-shell-vertical-menu",
+          "name": "onecx-shell-body-start.start",
           "components": [
+            {
+              "productName": "onecx-workspace",
+              "appId": "onecx-workspace-ui",
+              "name": "./OneCXSlimUserMenuComponent"
+            },
+            {
+              "productName": "onecx-workspace",
+              "appId": "onecx-workspace-ui",
+              "name": "./OneCXSlimVerticalMainMenuComponent"
+            },
             {
               "productName": "onecx-workspace",
               "appId": "onecx-workspace-ui",

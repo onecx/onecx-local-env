@@ -36,12 +36,12 @@ declare -A onecx_products_predefined_ports=(\
 usage () {
   cat <<USAGE
   Usage: $0  [-chl]  [-a <mfe1:port> [<mfe2:port> ...]]  [-d <mfe1> [<mfe2> ...]]
-       -a  Activate one or more local Microfrontends, port is optional, default is 4200
-           If the mfe is one of OneCX Core products and no port is specified then predefined ports are used.
-       -c  Cleanup, restore original state
-       -d  Deactivate one or more local Microfrontends
-       -h  Display this help and exit
-       -l  List of currently integrated local microfrontends
+    -a  Activate one or more local Microfrontends, port is optional, default is 4200
+        If the mfe is one of OneCX Core products and no port is specified then predefined ports are used.
+    -c  Cleanup, restore original state
+    -d  Deactivate one or more local Microfrontends
+    -h  Display this help and exit
+    -l  List of currently integrated local microfrontends
 USAGE
   exit 0
 }
