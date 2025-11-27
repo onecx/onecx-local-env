@@ -101,7 +101,7 @@ fi
 ONECX_SECURITY_AUTH_ENABLED=$SECURITY docker compose -f versions/$EDITION/docker-compose.yaml --profile $PROFILE up -d
 
 # check success
-shell_is_healthy=`docker compose inspect --format='{{.State.Health.Status}}'  onecx-shell-bff`
+shell_is_healthy=`docker inspect --format='{{.State.Health.Status}}'  onecx-shell-bff`
 
 
 #################################################################
