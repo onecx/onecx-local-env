@@ -5,6 +5,15 @@ name: onecx-local-env
 volumes:
   postgres:
     name: onecx-local-env_postgres
+    labels:
+      - "onecx-local-env.volume=postgres"
+  pgadmin:
+    name: onecx-local-env_pgadmin
+    labels:
+      - "onecx-local-env.volume=pgadmin"
+      - "com.docker.compose.project=onecx-local-env"
+      - "com.docker.compose.description=Postgres database administration"
+      - "com.docker.compose.volume=pgAdmin"
 networks:
   onecx:
     name: onecx-local-env_onecx
@@ -135,11 +144,18 @@ services:
 
   pgadmin:
     image: ${PGADMIN}
+    container_name: pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_USER}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PWD}
     volumes:
+      - pgadmin:/var/lib/pgadmin
       - ../../init-data/pgadmin/servers.json:/pgadmin4/servers.json
+    healthcheck:
+      test: ["CMD", "wget", "-O", "-", "http://localhost:80/misc/ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
     depends_on:
       postgresdb:
         condition: service_healthy
@@ -1070,6 +1086,8 @@ services:
     image: alpine:3
     container_name: waiting-on-profile-base
     depends_on:
+      pgadmin:
+        condition: service_healthy
       onecx-parameter-svc:
         condition: service_healthy
       onecx-shell-ui:

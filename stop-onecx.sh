@@ -84,8 +84,8 @@ fi
 
 
 #################################################################
-## Check and Downing
-number_of_running_services=`docker ps | wc -l`
+## Check and Downing the profile
+number_of_running_services=`docker compose ps | wc -l`
 number_of_running_services=$(($number_of_running_services -1))
 if [[ $number_of_running_services == 0 ]]; then
   printf "${CYAN}No running services${NC}\n"
@@ -95,8 +95,8 @@ fi
 
 
 #################################################################
-## Check success after downing
-number_of_running_services=`docker ps | wc -l`
+## Check project after downing: remaining services?
+number_of_running_services=`docker compose ps | wc -l`
 number_of_running_services=$(($number_of_running_services -1))
 if [[ $number_of_running_services != 0 ]]; then
   if [[ $CLEANUP == "true" ]]; then
@@ -108,9 +108,16 @@ fi
 
 
 #################################################################
-## Cleanup volume?
+## Cleanup volumes of project 'onecx-local-env'?
+number_of_running_volumes=`docker volume ls --filter "label=onecx-local-env.volume" | wc -l`
+number_of_running_volumes=$(($number_of_running_volumes -1))
 if [[ ($number_of_running_services == 0) && ($CLEANUP == "true") ]]; then
-  printf "${CYAN}Remove Docker volumes and orphans${NC}\n"
-  docker compose down --volumes --remove-orphans 2>/dev/null
-  docker volume rm -f ${OLE_DOCKER_COMPOSE_PROJECT}_postgres
+  if [[ ($number_of_running_volumes == 0 ) ]]; then
+    printf "${CYAN}No project volumes exist${NC}\n"
+  else
+    printf "${CYAN}Remove project volumes and orphans${NC}\n"
+    docker compose down --volumes --remove-orphans              2>/dev/null
+    docker volume rm -f ${OLE_DOCKER_COMPOSE_PROJECT}_postgres  2> /dev/null
+    docker volume rm -f ${OLE_DOCKER_COMPOSE_PROJECT}_pgadmin   2> /dev/null
+  fi
 fi
