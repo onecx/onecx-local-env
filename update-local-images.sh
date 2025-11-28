@@ -22,6 +22,11 @@ usage () {
     -c  Cleanup, remove orphan images
     -h  Display this usage information, ignoring other parameters
     -n  Name filter, update images which have <text> into image name
+  Examples:
+    $0               => If no name filter is specified, additional confirmation is required
+    $0  -n onecx     => Check and retrieve new images if "onecx" is included in the image name
+    $0  -n ui        => Check and retrieve new images if "ui" is included in the image name
+    $0  -c           => Remove orphaned images and images whose name contains <none>
 USAGE
   exit 0
 }

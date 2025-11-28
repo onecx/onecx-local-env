@@ -11,7 +11,7 @@ GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
-printf "${CYAN}Stopping OneCX Local Environment ...${NC}\n"
+printf "${CYAN}Stopping OneCX Local Environment${NC}\n"
 
 
 #################################################################
@@ -23,6 +23,9 @@ usage () {
     -e  Edition, one of [ 'v1', 'v2'], default is 'v2'
     -h  Display this help and exit
     -p  Profile, one of [ 'all', 'base' ], default is 'base'
+  Examples:
+    $0              => standard OneCX setup is stoppend, existing data remains
+    $0  -p all -c   => complete OneCX setup is stopped and data are removed completely
 USAGE
   exit 0
 }

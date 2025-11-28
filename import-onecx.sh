@@ -23,6 +23,10 @@ usage () {
     -s  Security authentication enabled, default not enabled
     -t  Tenant, one of [ 'default', 't1', 't2' ], default is 'default'
     -v  Verbose: display details during import of objects
+  Examples:
+    $0                  => Import all OneCX data
+    $0  -d workspace    => Import only Worspace data 
+    $0  -t t1           => Import all not tenant specific OneCX data and for tenant 't1'
 USAGE
   exit 0
 }
