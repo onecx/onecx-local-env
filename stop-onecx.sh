@@ -48,28 +48,30 @@ PROFILE=base
 ## Check flags and parameter
 while getopts ":ce:hp:" opt; do
   case "$opt" in
-        c ) CLEANUP=true ;;
-        e ) 
-            if [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
-              printf "${RED}  Inacceptable Edition, should be one of [ 'v1', 'v2' ]${NC}\n"
-              usage
-            else
-              EDITION=$OPTARG
-            fi
-            ;;
-        p ) 
-            if [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
-              printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base' ]${NC}\n"
-              usage
-            else
-              PROFILE=$OPTARG
-            fi
-            ;;
-        h ) 
-            usage ;; # print usage
-       \? )
-            printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n"
-            usage ;;
+    c ) CLEANUP=true ;;
+    e ) 
+        if [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
+          printf "${RED}  Inacceptable Edition, should be one of [ 'v1', 'v2' ]${NC}\n"
+          usage
+        else
+          EDITION=$OPTARG
+        fi
+        ;;
+    p ) 
+        if [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
+          printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base' ]${NC}\n"
+          usage
+        else
+          PROFILE=$OPTARG
+        fi
+        ;;
+    h ) 
+        usage
+        ;;
+   \? )
+        printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n"
+        usage
+        ;;
   esac
 done
 

@@ -56,18 +56,21 @@ NAME_FILTER=""
 ## Check flags and parameter
 while getopts ":hcn:" opt; do
   case "$opt" in
-        c ) CLEANUP=true ;;
-        n )
-            if [[ -z "$OPTARG" ]]; then
-              printf "${RED}  Missing image name${NC}\n"
-              usage
-            else
-              NAME_FILTER=$OPTARG
-            fi
-            ;;
-        h ) usage ;; # print usage
-       \? ) printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n"
-            usage ;;
+    c ) CLEANUP=true
+        ;;
+    n )
+        if [[ -z "$OPTARG" ]]; then
+          printf "${RED}  Missing image name${NC}\n"
+          usage
+        else
+          NAME_FILTER=$OPTARG
+        fi
+        ;;
+    h ) usage 
+        ;;
+   \? ) printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n"
+        usage
+        ;;
   esac
 done
 
