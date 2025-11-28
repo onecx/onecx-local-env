@@ -35,19 +35,25 @@ declare -A onecx_products_predefined_ports=(\
 ## Usage
 usage () {
   cat <<USAGE
-  Usage: $0  [-chl]  [-a <mfe1:port> [<mfe2:port> ...]]  [-d <mfe1> [<mfe2> ...]]
+  Usage: $0  [-chl]  [-a <mfe1:port:path> [<mfe2:port:path> ...]]  [-d <mfe1:port> [<mfe2:port> ...]]
     -a  Activate one or more local Microfrontends, port is optional, default is 4200
         If the mfe is one of OneCX Core products and no port is specified then predefined ports are used.
-    -c  Cleanup, restore original state
+    -c  Cleanup, remove all, restore original state
     -d  Deactivate one or more local Microfrontends
     -h  Display this help and exit
     -l  List of currently integrated local microfrontends
+  Examples:
+    $0  -a workspace  user-profile:12345   => enable workspace on standard port and user-profile with port 12345
+    $0  -a my-app::/my-app-path            => enable my-app with port 4200 and path /my-app-path
+    $0  -a my-app:4567:/my-app-path        => enable my-app with port 4567 and path /my-app-path
+    $0  -l                                 => List all local microfrontends that are enabled
+    $0  -c                                 => Remove all local microfrontends that are enabled
 USAGE
   exit 0
 }
 usage_short () {
   cat <<USAGE
-  Usage: $0  [-chl]  [-a <mfe1:port> [<mfe2:port> ...]]  [-d <mfe1> [<mfe2> ...]]
+  Usage: $0  [-chl]  [-a <mfe1:port:path> [<mfe2:port:path> ...]]  [-d <mfe1:port> [<mfe2:port> ...]]
 USAGE
 }
 
@@ -57,10 +63,11 @@ USAGE
 activate_mfe() {
   local name="$1"
   local port="$2"
+  local path="$3"
   local template="$MFE_TEMPLATE_PATH"
   local dst="${name}_${port}"
   local dstf="$TRAEFIK_ACTIVE_DIR/${dst}.yml"
-  local path="\/mfe\/"
+  local mfe_path="/mfe/${name}" # onecx standard path
 
   if [[ -f "$dstf" ]]; then
     printf "${LINE_PREFIX}$dst  ${GREEN}already activated${NC}\n"
@@ -70,12 +77,16 @@ activate_mfe() {
     printf " ⚠️ ${RED}template '${template}' not found${NC}\n"
     return
   fi
+  if [[ -n "$path" ]]; then
+    printf " ${GREEN}path '${path}' is used${NC}\n"
+    mfe_path="$path"
+  fi
 
   # replace variables and copy to target
   sed \
-    -e "s/{{MFE_NAME}}/${name}/g" \
-    -e "s/{{MFE_PORT}}/${port}/g" \
-    -e "s/{{MFE_PATH}}/${path}${name}/g" \
+    -e "s|{{MFE_NAME}}|${name}|g" \
+    -e "s|{{MFE_PORT}}|${port}|g" \
+    -e "s|{{MFE_PATH}}|${mfe_path}|g" \
     "$template" > "$dstf"
   printf "${LINE_PREFIX}${dst}\t✔\n"
 }
@@ -170,6 +181,7 @@ if [[ "$MODE" == "activate" || "$MODE" == "deactivate" ]]; then
     set $mfe   # split by IFS separator to $1...$n
     name=$1
     port=$2
+    path=$3
     if [[ -z $port ]]; then  # no port
       if [[ "$name" =~ ^($onecx_products) ]]; then
         port="${onecx_products_predefined_ports[$name]}"  # get predefined port
@@ -179,7 +191,7 @@ if [[ "$MODE" == "activate" || "$MODE" == "deactivate" ]]; then
       fi
     fi
     if [[ "$MODE" == "activate" ]]; then
-      activate_mfe "$name" "$port"
+      activate_mfe "$name" "$port" "$path"
     else
       deactivate_mfe "$name" "$port"
     fi

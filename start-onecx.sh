@@ -11,7 +11,7 @@ GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
-printf "${CYAN}Starting OneCX Local Environment ...${NC}\n"
+printf "${CYAN}Starting OneCX Local Environment${NC}\n"
 
 
 #################################################################
@@ -24,6 +24,11 @@ usage () {
     -p  Profile, one of [ 'all', 'base' ], default: 'base'
     -s  Security authentication enabled, default: not enabled
     -x  Skip import
+  Examples:
+    $0              => standard OneCX setup is started and initialized
+    $0  -p all      => complete OneCX setup is started and initialized
+    $0  -p all -x   => complete OneCX setup is started only (no imports)
+    $0  -s          => standard OneCX setup is started with security
 USAGE
   exit 0
 }
