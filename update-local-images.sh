@@ -80,41 +80,43 @@ usage_short
 
 #################################################################
 ## Collect images
-if [[ -n "$NAME_FILTER" ]]; then
+if [ -n "$NAME_FILTER" ]; then
   IMAGES=$(docker images --format "{{.Repository}}:{{.Tag}}:{{.ID}}" | grep -E "$NAME_FILTER" || true)
 else
   IMAGES=$(docker images --format "{{.Repository}}:{{.Tag}}:{{.ID}}")
 fi
 ## Check images
-if [[ -z "$IMAGES" ]]; then
+if [ -z "$IMAGES" ]; then
   printf "  No images matched your filter ${GREEN}$NAME_FILTER${NC}.\n"
   exit 0
 fi
 ## Count images
 number_of_images=$(echo "$IMAGES" | wc -l)
 
-if [[ -z "$NAME_FILTER" ]]; then
-  confirm "  No filter specified. Do you really want to activate all ${number_of_images} images?"
+# Confirmation?
+if [ -z "$NAME_FILTER" ]; then
+  confirm "  No filter specified. ${number_of_images} images could be affected. Do you really want to continue?"
 fi
 
 
 #################################################################
-# Pull images
-printf "${CYAN}Pulling ${number_of_images} images${NC}\n"
+# Process images
+printf "${CYAN}Process ${number_of_images} images${NC}\n"
+
 while IFS= read -r IMAGE; do
   [[ -z "$IMAGE" ]] && continue
   IFS=:
   set $IMAGE   # split by IFS separator to $1...$n
 
   if [[ "$2" =~ "<none>" ]]; then
-    ORPHAN_TEXT="  * ${GREEN}$1:$2  orphan${NC}"
+    ORPHAN_TEXT="  * ${GREEN}$1:$2:$3  orphan${NC}"
     if [[ $CLEANUP == "true" ]]; then
       printf "$ORPHAN_TEXT  remove\n"
-      docker image rm "$3" || printf "${RED}Failed to remove $IMAGE${NC}\n"
+      docker image rm "$3" || printf "${RED}    Failed to remove${NC}\n"
     else
       printf "$ORPHAN_TEXT  skip pulling\n"
     fi
-  else
+  elif [ -n "$NAME_FILTER" ]; then
     printf "  * ${GREEN}$1:$2${NC}\n"
     docker pull "$1:$2" || printf "    ${RED}Failed to pull $1:$2${NC}\n"
   fi
