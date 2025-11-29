@@ -11,7 +11,7 @@ GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
-echo -e "${CYAN}Check local Docker images ${NC}"
+echo -e "${CYAN}List local Docker images with tag, version and size${NC}"
 
 
 #################################################################
@@ -19,9 +19,12 @@ echo -e "${CYAN}Check local Docker images ${NC}"
 usage () {
   cat <<USAGE
   Usage: $0  [-h] [-f <image filter>] [-n <text>]
-       -f  image filter, see https://docs.docker.com/reference/cli/docker/image/ls/#filter
-       -h  display this usage information, ignoring other parameters
-       -n  name filter, find images which have <text> into image name
+       -f  Image filter, see https://docs.docker.com/reference/cli/docker/image/ls/#filter
+       -h  Display this usage information, ignoring other parameters
+       -n  Name filter, find images which have <text> into image name
+  Examples:
+    $0  -n onecx            => List images filtered by 'onecx' in image name
+    $0  -f dangling=true    => List images filtered by "dangling=true"
 USAGE
   exit 0
 }
