@@ -23,12 +23,12 @@ usage () {
     -h  Display this help and exit
     -p  Profile, one of [ 'all', 'base' ], default: 'base'
     -s  Security authentication enabled, default: not enabled
-    -x  Skip import
+    -x  Skip imports
   Examples:
-    $0              => standard OneCX setup is started and initialized
-    $0  -p all      => complete OneCX setup is started and initialized
-    $0  -p all -x   => complete OneCX setup is started only (no imports)
-    $0  -s          => standard OneCX setup is started with security
+    $0              => Standard OneCX setup is started and initialized
+    $0  -s          => Standard OneCX setup is started with security
+    $0  -p all      => Complete OneCX setup is started and initialized
+    $0  -p all -x   => Complete OneCX setup is started only (no imports)
 USAGE
   exit 0
 }
@@ -51,28 +51,28 @@ IMPORT=yes
 ## Check flags and parameter
 while getopts ":he:p:sx" opt; do
   case "$opt" in
-        e )
-            if [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
-              printf "${RED}  Inacceptable Edition, should be one of [ 'v1', 'v2' ]${NC}\n"
-              usage
-            else
-              EDITION=$OPTARG
-            fi
-            ;;
-        p )
-            if [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
-              printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base' ]${NC}\n"
-              usage
-            else
-              PROFILE=$OPTARG
-            fi
-            ;;
-        s ) SECURITY=true ;;
-        x ) IMPORT=no ;;
-        h ) usage ;; # print usage
-       \? )
-            printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n" >&2
-            usage ;;
+    e )
+        if [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
+          printf "${RED}  Inacceptable Edition, should be one of [ 'v1', 'v2' ]${NC}\n"
+          usage
+        else
+          EDITION=$OPTARG
+        fi
+        ;;
+    p )
+        if [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
+          printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base' ]${NC}\n"
+          usage
+        else
+          PROFILE=$OPTARG
+        fi
+        ;;
+    s ) SECURITY=true ;;
+    x ) IMPORT=no ;;
+    h ) usage ;; # print usage
+   \? )
+        printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n" >&2
+        usage ;;
   esac
 done
 
@@ -83,14 +83,14 @@ ENV_FILE="versions/$EDITION/.env"
 SECURITY_AUTH_USED="no"
 
 if [ -f "$ENV_FILE" ]; then
-    OLE_SECURITY_AUTH_ENABLED_INT=$(grep -c "ONECX_SECURITY_AUTH_ENABLED=true" "$ENV_FILE")
-    if [[ ($OLE_SECURITY_AUTH_ENABLED_INT == 1) || ($SECURITY == "true") ]]; then
-      SECURITY_AUTH_USED="yes"
-    fi
+  OLE_SECURITY_AUTH_ENABLED_INT=$(grep -c "ONECX_SECURITY_AUTH_ENABLED=true" "$ENV_FILE")
+  if [[ ($OLE_SECURITY_AUTH_ENABLED_INT == 1) || ($SECURITY == "true") ]]; then
+    SECURITY_AUTH_USED="yes"
+  fi
 else 
-    if [[ "$SECURITY" == "true" ]]; then
-      SECURITY_AUTH_USED="yes"
-    fi
+  if [[ "$SECURITY" == "true" ]]; then
+    SECURITY_AUTH_USED="yes"
+  fi
 fi
 
 
@@ -114,10 +114,10 @@ shell_is_healthy=`docker inspect --format='{{.State.Health.Status}}'  onecx-shel
 if [[ $shell_is_healthy == "healthy" && $IMPORT == "yes" ]]; then
   # Ensure script is executable
   if [ -f "./import-onecx.sh" ]; then
-      chmod +x ./import-onecx.sh
-      ./import-onecx.sh -d $PROFILE
+    chmod +x ./import-onecx.sh
+    ./import-onecx.sh -d $PROFILE
   else
-      printf "${RED}Error: import-onecx.sh not found.${NC}\n"
+    printf "${RED}Error: import-onecx.sh not found.${NC}\n"
   fi
 else
   # Remove profile helper service, ignoring any error message

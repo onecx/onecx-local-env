@@ -35,7 +35,7 @@ declare -A onecx_products_predefined_ports=(\
 ## Usage
 usage () {
   cat <<USAGE
-  Usage: $0  [-chl]  [-a <mfe1:port:path> [<mfe2:port:path> ...]]  [-d <mfe1:port> [<mfe2:port> ...]]
+  Usage: $0  [-chl]  [-a <mfe1:port1:path1> [<mfe2:port2:path2> ...]]  [-d <mfe1:port1> [<mfe2:port2> ...]]
     -a  Activate one or more local Microfrontends, port is optional, default is 4200
         If the mfe is one of OneCX Core products and no port is specified then predefined ports are used.
     -c  Cleanup, remove all, restore original state
@@ -53,7 +53,7 @@ USAGE
 }
 usage_short () {
   cat <<USAGE
-  Usage: $0  [-chl]  [-a <mfe1:port:path> [<mfe2:port:path> ...]]  [-d <mfe1:port> [<mfe2:port> ...]]
+  Usage: $0  [-chl]  [-a <mfe1:port1:path1> [<mfe2:port2:path2> ...]]  [-d <mfe1:port1> [<mfe2:port2> ...]]
 USAGE
 }
 
@@ -82,7 +82,7 @@ activate_mfe() {
     mfe_path="$path"
   fi
 
-  # replace variables and copy to target
+  # replace variables and copy to target, don't use '/' as delimiter
   sed \
     -e "s|{{MFE_NAME}}|${name}|g" \
     -e "s|{{MFE_PORT}}|${port}|g" \
@@ -90,6 +90,7 @@ activate_mfe() {
     "$template" > "$dstf"
   printf "${LINE_PREFIX}${dst}\t✔\n"
 }
+
 
 #################################################################
 ## Deactivate a Microfrontend with name and optional port
@@ -110,6 +111,7 @@ deactivate_mfe() {
   fi
 }
 
+
 #################################################################
 ## Disable all Microfrontends
 clean_all() {
@@ -122,41 +124,41 @@ clean_all() {
 #################################################################
 ## Check flags and parameter
 while [[ "$#" -gt 0 ]]; do
-    case "$1" in
-        -a)
-            MODE="activate"
-            shift
-            while [[ "$#" -gt 0 && ! "$1" =~ ^- ]]; do
-              MFES+=("$1")
-              shift
-            done
-            ;;
-        -c)
-            MODE="clean"
-            shift
-            ;;
-        -d)
-            MODE="deactivate"
-            shift
-            while [[ "$#" -gt 0 && ! "$1" =~ ^- ]]; do
-              MFES+=("$1")
-              shift
-            done
-            ;;
-        -h|--help)
-            usage
-            exit 0
-            ;;
-        -l)
-            MODE="list"
-            shift
-            ;;
-        *)
-            printf "${RED}  Unknown shorthand flag: ${GREEN}$1${NC}\n"
-            usage
-            exit 1
-            ;;
-    esac
+  case "$1" in
+    -a)
+        MODE="activate"
+        shift
+        while [[ "$#" -gt 0 && ! "$1" =~ ^- ]]; do
+          MFES+=("$1")
+          shift
+        done
+        ;;
+    -c)
+        MODE="clean"
+        shift
+        ;;
+    -d)
+        MODE="deactivate"
+        shift
+        while [[ "$#" -gt 0 && ! "$1" =~ ^- ]]; do
+          MFES+=("$1")
+          shift
+        done
+        ;;
+    -h|--help)
+        usage
+        exit 0
+        ;;
+    -l)
+        MODE="list"
+        shift
+        ;;
+     *)
+        printf "${RED}  Unknown shorthand flag: ${GREEN}$1${NC}\n"
+        usage
+        exit 1
+        ;;
+  esac
 done
 
 
@@ -227,4 +229,3 @@ fi
 
 
 usage
-exit 1

@@ -5,6 +5,15 @@ name: onecx-local-env
 volumes:
   postgres:
     name: onecx-local-env_postgres
+    labels:
+      - "onecx-local-env.volume=postgres"
+  pgadmin:
+    name: onecx-local-env_pgadmin
+    labels:
+      - "onecx-local-env.volume=pgadmin"
+      - "com.docker.compose.project=onecx-local-env"
+      - "com.docker.compose.description=Postgres database administration"
+      - "com.docker.compose.volume=pgAdmin"
 networks:
   onecx:
     name: onecx-local-env_onecx
@@ -98,16 +107,16 @@ services:
     ports:
       - "8080:8080"
     environment:
-      KC_BOOTSTRAP_ADMIN_USERNAME: admin
-      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_ADMIN_USERNAME}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_ADMIN_PASSWORD}
       KC_DB: postgres
       KC_DB_POOL_INITIAL_SIZE: 1
       KC_DB_POOL_MAX_SIZE: 5
       KC_DB_POOL_MIN_SIZE: 2
       KC_DB_URL_DATABASE: keycloak
       KC_DB_URL_HOST: postgresdb
-      KC_DB_USERNAME: keycloak
-      KC_DB_PASSWORD: keycloak
+      KC_DB_USERNAME: ${KC_DB_USERNAME}
+      KC_DB_PASSWORD: ${KC_DB_PASSWORD}
       KC_HOSTNAME: ${KC_APP_NAME}
       KC_HOSTNAME_STRICT: false
       KC_HTTP_ENABLED: true
@@ -132,6 +141,32 @@ services:
       - all
       - base
       - data-import
+
+  pgadmin:
+    image: ${PGADMIN}
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_USER}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PWD}
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+      - ../../init-data/pgadmin/servers.json:/pgadmin4/servers.json
+    healthcheck:
+      test: ["CMD", "wget", "-O", "-", "http://localhost:80/misc/ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    depends_on:
+      postgresdb:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.pgadmin.loadbalancer.server.port=80"
+      - "traefik.http.routers.pgadmin.rule=Host(`pgadmin`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
 
   ########################################
   ########### OneCX Products #############
@@ -1051,6 +1086,8 @@ services:
     image: alpine:3
     container_name: waiting-on-profile-base
     depends_on:
+      pgadmin:
+        condition: service_healthy
       onecx-parameter-svc:
         condition: service_healthy
       onecx-shell-ui:
@@ -1095,6 +1132,8 @@ services:
     image: alpine:3
     container_name: waiting-on-profile-all
     depends_on:
+      pgadmin:
+        condition: service_healthy
       onecx-parameter-svc:
         condition: service_healthy
       onecx-shell-ui:

@@ -24,8 +24,8 @@ usage () {
     -h  Display this help and exit
     -p  Profile, one of [ 'all', 'base' ], default is 'base'
   Examples:
-    $0              => standard OneCX setup is stoppend, existing data remains
-    $0  -p all -c   => complete OneCX setup is stopped and data are removed completely
+    $0              => Standard OneCX setup is stoppend, existing data remains
+    $0  -p all -c   => Complete OneCX setup is stopped and all data are removed
 USAGE
   exit 0
 }
@@ -48,28 +48,30 @@ PROFILE=base
 ## Check flags and parameter
 while getopts ":ce:hp:" opt; do
   case "$opt" in
-        c ) CLEANUP=true ;;
-        e ) 
-            if [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
-              printf "${RED}  Inacceptable Edition, should be one of [ 'v1', 'v2' ]${NC}\n"
-              usage
-            else
-              EDITION=$OPTARG
-            fi
-            ;;
-        p ) 
-            if [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
-              printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base' ]${NC}\n"
-              usage
-            else
-              PROFILE=$OPTARG
-            fi
-            ;;
-        h ) 
-            usage ;; # print usage
-       \? )
-            printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n"
-            usage ;;
+    c ) CLEANUP=true ;;
+    e ) 
+        if [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
+          printf "${RED}  Inacceptable Edition, should be one of [ 'v1', 'v2' ]${NC}\n"
+          usage
+        else
+          EDITION=$OPTARG
+        fi
+        ;;
+    p ) 
+        if [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
+          printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base' ]${NC}\n"
+          usage
+        else
+          PROFILE=$OPTARG
+        fi
+        ;;
+    h ) 
+        usage
+        ;;
+   \? )
+        printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n"
+        usage
+        ;;
   esac
 done
 
@@ -84,10 +86,10 @@ fi
 
 
 #################################################################
-## Check and Downing
-number_of_running_services=`docker ps | wc -l`
-number_of_running_services=$(($number_of_running_services -1))
-if [[ $number_of_running_services == 0 ]]; then
+## Check and Downing the profile
+number_of_services=`docker compose ps | wc -l`
+number_of_services=$(($number_of_services -1))
+if [[ $number_of_services == 0 ]]; then
   printf "${CYAN}No running services${NC}\n"
 else
   docker compose  -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  down
@@ -95,22 +97,29 @@ fi
 
 
 #################################################################
-## Check success after downing
-number_of_running_services=`docker ps | wc -l`
-number_of_running_services=$(($number_of_running_services -1))
-if [[ $number_of_running_services != 0 ]]; then
+## Check project after downing: remaining services?
+number_of_services=`docker compose ps | wc -l`
+number_of_services=$(($number_of_services -1))
+if [[ $number_of_services != 0 ]]; then
   if [[ $CLEANUP == "true" ]]; then
     cannot_remove_text=" ...cannot remove volumes and network - use 'all' profile to remove all services"
   fi
-  printf "${CYAN}Remaining running services: $number_of_running_services${NC}$cannot_remove_text\n"
+  printf "${CYAN}Remaining running services: $number_of_services${NC}$cannot_remove_text\n"
   ./list-containers.sh
 fi
 
 
 #################################################################
-## Cleanup volume?
-if [[ ($number_of_running_services == 0) && ($CLEANUP == "true") ]]; then
-  printf "${CYAN}Remove Docker volumes and orphans${NC}\n"
-  docker compose down --volumes --remove-orphans 2>/dev/null
-  docker volume rm -f ${OLE_DOCKER_COMPOSE_PROJECT}_postgres
+## Cleanup volumes of project 'onecx-local-env'?
+number_of_volumes=`docker volume ls --filter "label=onecx-local-env.volume" | wc -l`
+number_of_volumes=$(($number_of_volumes -1))
+if [[ ($number_of_services == 0) && ($CLEANUP == "true") ]]; then
+  if [[ ($number_of_volumes == 0 ) ]]; then
+    printf "${CYAN}No project volumes exist${NC}\n"
+  else
+    printf "${CYAN}Remove project volumes and orphans${NC}\n"
+    docker compose down --volumes --remove-orphans              2> /dev/null
+    docker volume rm -f ${OLE_DOCKER_COMPOSE_PROJECT}_postgres  2> /dev/null
+    docker volume rm -f ${OLE_DOCKER_COMPOSE_PROJECT}_pgadmin   2> /dev/null
+  fi
 fi
