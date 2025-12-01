@@ -87,9 +87,9 @@ fi
 
 #################################################################
 ## Check and Downing the profile
-number_of_running_services=`docker compose ps | wc -l`
-number_of_running_services=$(($number_of_running_services -1))
-if [[ $number_of_running_services == 0 ]]; then
+number_of_services=`docker compose ps | wc -l`
+number_of_services=$(($number_of_services -1))
+if [[ $number_of_services == 0 ]]; then
   printf "${CYAN}No running services${NC}\n"
 else
   docker compose  -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  down
@@ -98,27 +98,27 @@ fi
 
 #################################################################
 ## Check project after downing: remaining services?
-number_of_running_services=`docker compose ps | wc -l`
-number_of_running_services=$(($number_of_running_services -1))
-if [[ $number_of_running_services != 0 ]]; then
+number_of_services=`docker compose ps | wc -l`
+number_of_services=$(($number_of_services -1))
+if [[ $number_of_services != 0 ]]; then
   if [[ $CLEANUP == "true" ]]; then
     cannot_remove_text=" ...cannot remove volumes and network - use 'all' profile to remove all services"
   fi
-  printf "${CYAN}Remaining running services: $number_of_running_services${NC}$cannot_remove_text\n"
+  printf "${CYAN}Remaining running services: $number_of_services${NC}$cannot_remove_text\n"
   ./list-containers.sh
 fi
 
 
 #################################################################
 ## Cleanup volumes of project 'onecx-local-env'?
-number_of_running_volumes=`docker volume ls --filter "label=onecx-local-env.volume" | wc -l`
-number_of_running_volumes=$(($number_of_running_volumes -1))
-if [[ ($number_of_running_services == 0) && ($CLEANUP == "true") ]]; then
-  if [[ ($number_of_running_volumes == 0 ) ]]; then
+number_of_volumes=`docker volume ls --filter "label=onecx-local-env.volume" | wc -l`
+number_of_volumes=$(($number_of_running_volumes -1))
+if [[ ($number_of_services == 0) && ($CLEANUP == "true") ]]; then
+  if [[ ($number_of_volumes == 0 ) ]]; then
     printf "${CYAN}No project volumes exist${NC}\n"
   else
     printf "${CYAN}Remove project volumes and orphans${NC}\n"
-    docker compose down --volumes --remove-orphans              2>/dev/null
+    docker compose down --volumes --remove-orphans              2> /dev/null
     docker volume rm -f ${OLE_DOCKER_COMPOSE_PROJECT}_postgres  2> /dev/null
     docker volume rm -f ${OLE_DOCKER_COMPOSE_PROJECT}_pgadmin   2> /dev/null
   fi
