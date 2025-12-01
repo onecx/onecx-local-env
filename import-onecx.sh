@@ -93,10 +93,19 @@ done
 #################################################################
 ## Security Authentication enabled?
 ENV_FILE="versions/$EDITION/.env"
-SECURITY_AUTH_USED="no"
+SECURITY="false"          # used as flag for docker compose start services
+SECURITY_AUTH_USED="no"   # used for displaying
 
+# Check flag set by start script
+if [ -n $OLE_SECURITY_AUTH_ENABLED ]; then
+  if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then
+    SECURITY="true"
+    SECURITY_AUTH_USED="yes"
+  fi
+#
+# if this script was executed directly then check security by itself:
 # Check if file exists to prevent crash
-if [ -f "$ENV_FILE" ]; then
+elif [ -f "$ENV_FILE" ]; then
     OLE_SECURITY_AUTH_ENABLED_INT=$(grep -c "ONECX_SECURITY_AUTH_ENABLED=true" "$ENV_FILE")
     if [[ ($OLE_SECURITY_AUTH_ENABLED_INT == 1) || ($SECURITY == "true") ]]; then
       SECURITY_AUTH_USED="yes"
@@ -118,7 +127,8 @@ export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
 printf "  Ensure that all services used by imports are running, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}\n"
 
 # Using 'docker compose' (v2). If using older docker, change to 'docker-compose'
-ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d  > /dev/null 2>&1
+echo "$PROFILE"
+ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d
 
 IMPORT_SCRIPT="./versions/$EDITION/import-onecx.sh"
 if [ ! -f "$IMPORT_SCRIPT" ]; then

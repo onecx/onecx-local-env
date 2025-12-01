@@ -81,17 +81,22 @@ done
 ## Security Authentication enabled?
 ENV_FILE="versions/$EDITION/.env"
 SECURITY_AUTH_USED="no"
+export OLE_SECURITY_AUTH_ENABLED=false
+
 
 if [ -f "$ENV_FILE" ]; then
-  OLE_SECURITY_AUTH_ENABLED_INT=$(grep -c "ONECX_SECURITY_AUTH_ENABLED=true" "$ENV_FILE")
-  if [[ ($OLE_SECURITY_AUTH_ENABLED_INT == 1) || ($SECURITY == "true") ]]; then
+  security_enabled=$(grep -c "ONECX_SECURITY_AUTH_ENABLED=true" "$ENV_FILE")
+  if [[ ($security_enabled == 1) || ($SECURITY == "true") ]]; then
     SECURITY_AUTH_USED="yes"
+    export OLE_SECURITY_AUTH_ENABLED=true
   fi
 else 
   if [[ "$SECURITY" == "true" ]]; then
     SECURITY_AUTH_USED="yes"
+    export OLE_SECURITY_AUTH_ENABLED=true
   fi
 fi
+
 
 
 #################################################################
