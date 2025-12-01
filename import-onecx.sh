@@ -40,10 +40,11 @@ USAGE
 #################################################################
 # defaults
 EDITION=v2
-SECURITY=false
+SECURITY="false"          # used as flag for docker compose start services
+SECURITY_AUTH_USED="no"   # used for displaying
 TENANT=default
-VERBOSE=false
-PROFILE=base
+VERBOSE=false             # more details on each import request
+PROFILE=base              # used as standard in start script
 IMPORT_TYPE=base
 
 
@@ -73,7 +74,9 @@ while getopts ":hd:svt:e:" opt; do
             fi
             ;;
         v ) VERBOSE=true ;;
-        s ) SECURITY=true ;;
+        s ) SECURITY=true
+            SECURITY_AUTH_USED="yes"
+            ;;
         t ) 
             if [[ ! "$OPTARG" =~ ^(default|t1|t2)$ ]]; then
               printf "${RED}  Unknown tenant${NC}\n"
@@ -93,8 +96,6 @@ done
 #################################################################
 ## Security Authentication enabled?
 ENV_FILE="versions/$EDITION/.env"
-SECURITY="false"          # used as flag for docker compose start services
-SECURITY_AUTH_USED="no"   # used for displaying
 
 # Check flag set by start script
 if [ -n $OLE_SECURITY_AUTH_ENABLED ]; then
@@ -102,22 +103,13 @@ if [ -n $OLE_SECURITY_AUTH_ENABLED ]; then
     SECURITY="true"
     SECURITY_AUTH_USED="yes"
   fi
-#
-# if this script was executed directly then check security by itself:
-# Check if file exists to prevent crash
+  #
+  # if this script was executed directly then check the security need by itself:
+  # Check if file exists to prevent crash
 elif [ -f "$ENV_FILE" ]; then
     OLE_SECURITY_AUTH_ENABLED_INT=$(grep -c "ONECX_SECURITY_AUTH_ENABLED=true" "$ENV_FILE")
     if [[ ($OLE_SECURITY_AUTH_ENABLED_INT == 1) || ($SECURITY == "true") ]]; then
       SECURITY_AUTH_USED="yes"
-    else
-      SECURITY=false
-    fi
-else
-    # Fallback if env file missing
-    if [[ "$SECURITY" == "true" ]]; then
-        SECURITY_AUTH_USED="yes"
-    else
-        SECURITY=false
     fi
 fi
 export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
