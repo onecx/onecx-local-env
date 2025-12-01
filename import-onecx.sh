@@ -40,11 +40,11 @@ USAGE
 #################################################################
 # defaults
 EDITION=v2
-SECURITY="false"          # used as flag for docker compose start services
-SECURITY_AUTH_USED="no"   # used for displaying
+SECURITY=false          # used as flag for docker compose start services
+SECURITY_AUTH_USED=no   # used for displaying
 TENANT=default
-VERBOSE=false             # more details on each import request
-PROFILE=base              # used as standard in start script
+VERBOSE=false           # more details on each import request
+PROFILE=base            # used as standard in start script
 IMPORT_TYPE=base
 
 
@@ -73,22 +73,23 @@ while getopts ":hd:svt:e:" opt; do
                EDITION=$OPTARG
             fi
             ;;
-        v ) VERBOSE=true ;;
+        v ) VERBOSE=true
+            ;;
         s ) SECURITY=true
             SECURITY_AUTH_USED="yes"
             ;;
-        t ) 
-            if [[ ! "$OPTARG" =~ ^(default|t1|t2)$ ]]; then
+        t ) if [[ ! "$OPTARG" =~ ^(default|t1|t2)$ ]]; then
               printf "${RED}  Unknown tenant${NC}\n"
               usage
             else
               TENANT=$OPTARG
             fi
             ;;
-    ? | h ) usage ;;
-       \? )
-            printf "${RED}  unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n" >&2
-            usage ;;
+    ? | h ) usage
+            ;;
+       \? ) printf "${RED}  unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n" >&2
+            usage
+            ;;
   esac
 done
 
@@ -119,6 +120,7 @@ export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
 printf "  Ensure that all services used by imports are running, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}\n"
 
 # Using 'docker compose' (v2). If using older docker, change to 'docker-compose'
+# Docker services are restartet only if some setting was different (e.g. security)
 echo "$PROFILE"
 ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d
 
