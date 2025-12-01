@@ -24,8 +24,8 @@ usage () {
     -h  Display this help and exit
     -p  Profile, one of [ 'all', 'base' ], default is 'base'
   Examples:
-    $0              => standard OneCX setup is stoppend, existing data remains
-    $0  -p all -c   => complete OneCX setup is stopped and data are removed completely
+    $0              => Standard OneCX setup is stoppend, existing data remains
+    $0  -p all -c   => Complete OneCX setup is stopped and all data are removed
 USAGE
   exit 0
 }
@@ -112,7 +112,7 @@ fi
 #################################################################
 ## Cleanup volumes of project 'onecx-local-env'?
 number_of_volumes=`docker volume ls --filter "label=onecx-local-env.volume" | wc -l`
-number_of_volumes=$(($number_of_running_volumes -1))
+number_of_volumes=$(($number_of_volumes -1))
 if [[ ($number_of_services == 0) && ($CLEANUP == "true") ]]; then
   if [[ ($number_of_volumes == 0 ) ]]; then
     printf "${CYAN}No project volumes exist${NC}\n"

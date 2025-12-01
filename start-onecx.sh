@@ -23,12 +23,12 @@ usage () {
     -h  Display this help and exit
     -p  Profile, one of [ 'all', 'base' ], default: 'base'
     -s  Security authentication enabled, default: not enabled
-    -x  Skip import
+    -x  Skip imports
   Examples:
-    $0              => standard OneCX setup is started and initialized
-    $0  -s          => standard OneCX setup is started with security
-    $0  -p all      => complete OneCX setup is started and initialized
-    $0  -p all -x   => complete OneCX setup is started only (no imports)
+    $0              => Standard OneCX setup is started and initialized
+    $0  -s          => Standard OneCX setup is started with security
+    $0  -p all      => Complete OneCX setup is started and initialized
+    $0  -p all -x   => Complete OneCX setup is started only (no imports)
 USAGE
   exit 0
 }
