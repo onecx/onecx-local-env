@@ -101,8 +101,8 @@ ENV_FILE="versions/$EDITION/.env"
 # Check flag set by start script
 if [ -n $OLE_SECURITY_AUTH_ENABLED ]; then
   if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then
-    SECURITY="true"
-    SECURITY_AUTH_USED="yes"
+    SECURITY=true
+    SECURITY_AUTH_USED=yes
   fi
   #
   # if this script was executed directly then check the security need by itself:
@@ -110,7 +110,7 @@ if [ -n $OLE_SECURITY_AUTH_ENABLED ]; then
 elif [ -f "$ENV_FILE" ]; then
     OLE_SECURITY_AUTH_ENABLED_INT=$(grep -c "ONECX_SECURITY_AUTH_ENABLED=true" "$ENV_FILE")
     if [[ ($OLE_SECURITY_AUTH_ENABLED_INT == 1) || ($SECURITY == "true") ]]; then
-      SECURITY_AUTH_USED="yes"
+      SECURITY_AUTH_USED=yes
     fi
 fi
 export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
@@ -121,8 +121,7 @@ printf "  Ensure that all services used by imports are running, security authent
 
 # Using 'docker compose' (v2). If using older docker, change to 'docker-compose'
 # Docker services are restartet only if some setting was different (e.g. security)
-echo "$PROFILE"
-ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d
+ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d  > /dev/null 2>&1
 
 IMPORT_SCRIPT="./versions/$EDITION/import-onecx.sh"
 if [ ! -f "$IMPORT_SCRIPT" ]; then
