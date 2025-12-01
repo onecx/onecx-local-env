@@ -20,7 +20,7 @@ usage () {
     -d  Data type, one of [ all, base, bookmark, assignment, parameter, permission, mfe, ms, product, slot, tenant theme, welcome, workspace], base is default
     -e  Edition, one of [ 'v1', 'v2' ], default is 'v2'
     -h  Display this help and exit
-    -s  Security authentication enabled, default not enabled
+    -s  Security authentication enabled, default not enabled (value is inherited from start-onecx.sh)
     -t  Tenant, one of [ 'default', 't1', 't2' ], default is 'default'
     -v  Verbose: display details during import of objects
   Examples:
