@@ -20,11 +20,12 @@ usage () {
     -d  Data type, one of [ all, base, bookmark, assignment, parameter, permission, mfe, ms, product, slot, tenant theme, welcome, workspace], base is default
     -e  Edition, one of [ 'v1', 'v2' ], default is 'v2'
     -h  Display this help and exit
-    -s  Security authentication enabled, default not enabled
+    -s  Security authentication enabled, default not enabled (value is inherited from start-onecx.sh)
     -t  Tenant, one of [ 'default', 't1', 't2' ], default is 'default'
     -v  Verbose: display details during import of objects
   Examples:
-    $0                  => Import all OneCX data
+    $0                  => Import OneCX data used by standard setup (same as "-d base")
+    $0  -d all -s       => Import all OneCX data, services are running with security context (restarted if req.)
     $0  -d workspace    => Import only Worspace data 
     $0  -t t1           => Import all not tenant specific OneCX data and for tenant 't1'
 USAGE
@@ -40,10 +41,11 @@ USAGE
 #################################################################
 # defaults
 EDITION=v2
-SECURITY=false
+SECURITY=false          # used as flag for docker compose start services
+SECURITY_AUTH_USED=no   # used for displaying
 TENANT=default
-VERBOSE=false
-PROFILE=base
+VERBOSE=false           # more details on each import request
+PROFILE=base            # used as standard in start script
 IMPORT_TYPE=base
 
 
@@ -72,20 +74,23 @@ while getopts ":hd:svt:e:" opt; do
                EDITION=$OPTARG
             fi
             ;;
-        v ) VERBOSE=true ;;
-        s ) SECURITY=true ;;
-        t ) 
-            if [[ ! "$OPTARG" =~ ^(default|t1|t2)$ ]]; then
+        v ) VERBOSE=true
+            ;;
+        s ) SECURITY=true
+            SECURITY_AUTH_USED="yes"
+            ;;
+        t ) if [[ ! "$OPTARG" =~ ^(default|t1|t2)$ ]]; then
               printf "${RED}  Unknown tenant${NC}\n"
               usage
             else
               TENANT=$OPTARG
             fi
             ;;
-    ? | h ) usage ;;
-       \? )
-            printf "${RED}  unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n" >&2
-            usage ;;
+    ? | h ) usage
+            ;;
+       \? ) printf "${RED}  unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n" >&2
+            usage
+            ;;
   esac
 done
 
@@ -93,22 +98,20 @@ done
 #################################################################
 ## Security Authentication enabled?
 ENV_FILE="versions/$EDITION/.env"
-SECURITY_AUTH_USED="no"
 
-# Check if file exists to prevent crash
-if [ -f "$ENV_FILE" ]; then
+# Check flag set by start script
+if [ -n $OLE_SECURITY_AUTH_ENABLED ]; then
+  if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then
+    SECURITY=true
+    SECURITY_AUTH_USED=yes
+  fi
+  #
+  # if this script was executed directly then check the security need by itself:
+  # Check if file exists to prevent crash
+elif [ -f "$ENV_FILE" ]; then
     OLE_SECURITY_AUTH_ENABLED_INT=$(grep -c "ONECX_SECURITY_AUTH_ENABLED=true" "$ENV_FILE")
     if [[ ($OLE_SECURITY_AUTH_ENABLED_INT == 1) || ($SECURITY == "true") ]]; then
-      SECURITY_AUTH_USED="yes"
-    else
-      SECURITY=false
-    fi
-else
-    # Fallback if env file missing
-    if [[ "$SECURITY" == "true" ]]; then
-        SECURITY_AUTH_USED="yes"
-    else
-        SECURITY=false
+      SECURITY_AUTH_USED=yes
     fi
 fi
 export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
@@ -118,6 +121,7 @@ export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
 printf "  Ensure that all services used by imports are running, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}\n"
 
 # Using 'docker compose' (v2). If using older docker, change to 'docker-compose'
+# Docker services are restartet only if some setting was different (e.g. security)
 ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d  > /dev/null 2>&1
 
 IMPORT_SCRIPT="./versions/$EDITION/import-onecx.sh"
