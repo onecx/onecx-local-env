@@ -44,6 +44,7 @@ USAGE
 EDITION=v2
 PROFILE=base
 SECURITY=false
+SECURITY_AUTH_USED=no
 IMPORT=yes
 
 
@@ -51,28 +52,29 @@ IMPORT=yes
 ## Check flags and parameter
 while getopts ":he:p:sx" opt; do
   case "$opt" in
-    e )
-        if [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
+    e ) if [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
           printf "${RED}  Inacceptable Edition, should be one of [ 'v1', 'v2' ]${NC}\n"
           usage
         else
           EDITION=$OPTARG
         fi
         ;;
-    p )
-        if [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
+    p ) if [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
           printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base' ]${NC}\n"
           usage
         else
           PROFILE=$OPTARG
         fi
         ;;
-    s ) SECURITY=true ;;
-    x ) IMPORT=no ;;
-    h ) usage ;; # print usage
-   \? )
-        printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n" >&2
-        usage ;;
+    s ) SECURITY=true
+        ;;
+    x ) IMPORT=no
+        ;;
+    h ) usage
+        ;;
+   \? ) printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n" >&2
+        usage
+        ;;
   esac
 done
 
@@ -80,23 +82,16 @@ done
 #################################################################
 ## Security Authentication enabled?
 ENV_FILE="versions/$EDITION/.env"
-SECURITY_AUTH_USED="no"
 export OLE_SECURITY_AUTH_ENABLED=false
 
 
 if [ -f "$ENV_FILE" ]; then
   security_enabled=$(grep -c "ONECX_SECURITY_AUTH_ENABLED=true" "$ENV_FILE")
-  if [[ ($security_enabled == 1) || ($SECURITY == "true") ]]; then
-    SECURITY_AUTH_USED="yes"
-    export OLE_SECURITY_AUTH_ENABLED=true
-  fi
-else 
-  if [[ "$SECURITY" == "true" ]]; then
-    SECURITY_AUTH_USED="yes"
-    export OLE_SECURITY_AUTH_ENABLED=true
-  fi
 fi
-
+if [[ ($security_enabled == 1) || ($SECURITY == "true") ]]; then
+  SECURITY_AUTH_USED=yes
+  export OLE_SECURITY_AUTH_ENABLED=true
+fi
 
 
 #################################################################

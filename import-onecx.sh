@@ -24,7 +24,8 @@ usage () {
     -t  Tenant, one of [ 'default', 't1', 't2' ], default is 'default'
     -v  Verbose: display details during import of objects
   Examples:
-    $0                  => Import all OneCX data
+    $0                  => Import OneCX data used by standard setup (same as "-d base")
+    $0  -d all -s       => Import all OneCX data, services are running with security context (restarted if req.)
     $0  -d workspace    => Import only Worspace data 
     $0  -t t1           => Import all not tenant specific OneCX data and for tenant 't1'
 USAGE
