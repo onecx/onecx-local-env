@@ -35,16 +35,16 @@ do
   url="http://onecx-product-store-svc/operator/mfe/v1/$product/$appid"
   params="--write-out %{http_code} --silent --output /dev/null -X PUT"
   if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then
-    status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -H "$OLE_HEADER_AUTH_TOKEN"  -H "$OLE_HEADER_AUTH_TOKEN"  -d @$entry  $url`
+    status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -H "$OLE_HEADER_AUTH_TOKEN"  -H "$OLE_HEADER_APM_TOKEN"  -d @$entry  $url`
   else
     status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -d @$entry  $url`
   fi
 
   if [[ "$status_code" =~ (200|201)$  ]]; then
     if [[ $2 == "true" ]]; then
-      echo -e "  import: operator, status: ${GREEN}$status_code${NC}, product: $product, app: $appid, mfe: $mfe"
+      echo -e "    import: operator, status: ${GREEN}$status_code${NC}, product: $product, app: $appid, mfe: $mfe"
     fi
   else
-    echo -e "${RED}  import: operator, status: $status_code, product: $product, app: $appid, mfe: $mfe ${NC}"
+    echo -e "${RED}    import: operator, status: $status_code, product: $product, app: $appid, mfe: $mfe ${NC}"
   fi
 done

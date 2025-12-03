@@ -23,11 +23,12 @@ usage () {
     -s  Security authentication enabled, default not enabled (value is inherited from start-onecx.sh)
     -t  Tenant, one of [ 'default', 't1', 't2' ], default is 'default'
     -v  Verbose: display details during import of objects
+    -x  Skip checking running Docker services
   Examples:
-    $0                  => Import OneCX data used by standard setup (same as "-d base")
-    $0  -d all -s       => Import all OneCX data, services are running with security context (restarted if req.)
-    $0  -d workspace    => Import only Worspace data 
-    $0  -t t1           => Import all not tenant specific OneCX data and for tenant 't1'
+    $0                    => Import OneCX data used by standard setup (same as "-d base"), default tenant
+    $0  -d all -s         => Import all OneCX data, services are running with security context (restarted if req.)
+    $0  -d workspace -x   => Import only Worspace data, default tenant, no check for Docker services
+    $0  -t t1             => Import all tenant independent OneCX data and for tenant 't1'
 USAGE
   exit 0
 }
@@ -47,11 +48,12 @@ TENANT=default
 VERBOSE=false           # more details on each import request
 PROFILE=base            # used as standard in start script
 IMPORT_TYPE=base
+CHECKING_SERVICES=true  # check running Docker services before import
 
 
 #################################################################
 # check parameter
-while getopts ":hd:svt:e:" opt; do
+while getopts ":hd:svt:e:x" opt; do
   case "$opt" in
         d ) 
             if [[ ! "$OPTARG" =~ ^(all|base|assignment|bookmark|parameter|permission|mfe|ms|product|slot|tenant|theme|welcome|workspace)$ ]]; then
@@ -83,8 +85,12 @@ while getopts ":hd:svt:e:" opt; do
               printf "${RED}  Unknown tenant${NC}\n"
               usage
             else
+              SECURITY=true
+              SECURITY_AUTH_USED="yes"
               TENANT=$OPTARG
             fi
+            ;;
+        x ) CHECKING_SERVICES=false
             ;;
     ? | h ) usage
             ;;
@@ -118,16 +124,20 @@ export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
 
 
 #################################################################
-printf "  Ensure that all services used by imports are running, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}\n"
-
-# Using 'docker compose' (v2). If using older docker, change to 'docker-compose'
-# Docker services are restartet only if some setting was different (e.g. security)
-ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d  > /dev/null 2>&1
-
+if [[ "$CHECKING_SERVICES" == "true" ]]; then
+  printf "  Ensure that all services used by imports are running, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}   (to skip this start with -x option)\n"
+  
+  # Using 'docker compose' (v2). If using older docker, change to 'docker-compose'
+  # Docker services are restartet only if some setting was different (e.g. security)
+  ONECX_SECURITY_AUTH_ENABLED=$SECURITY  docker compose -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  up -d  > /dev/null 2>&1
+fi
+  
+#################################################################
+# Import
 IMPORT_SCRIPT="./versions/$EDITION/import-onecx.sh"
 if [ ! -f "$IMPORT_SCRIPT" ]; then
-    printf "${RED}Error: Script not found at $IMPORT_SCRIPT${NC}\n"
-    exit 1
+  printf "${RED}Error: Script not found at $IMPORT_SCRIPT${NC}\n"
+  exit 1
 fi
 
 chmod +x "$IMPORT_SCRIPT"

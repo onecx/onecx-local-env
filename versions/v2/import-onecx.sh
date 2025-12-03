@@ -106,7 +106,7 @@ if [[ "$OLE_SECURITY_AUTH_ENABLED" == "true" || "$OLE_SECURITY_AUTH_ENABLED" == 
   # Capture token, handle potential curl errors cleanly
   TOKEN_RES=$(curl $OLE_CURL_PARAMETER "$KC_TOKEN_URL")
   export OLE_HEADER_APM_TOKEN="apm-principal-token: $(echo "$TOKEN_RES" | jq -r .access_token)"
-  
+
   ## Get AUTH (Bearer, access) token: scopes for SVCs
   OLE_CURL_PARAMETER="--silent -d client_secret=$KC_AUTH_CLIENT_SECRET -d grant_type=client_credentials -d client_id=$KC_AUTH_CLIENT_ID"
   
@@ -120,15 +120,8 @@ fi
 cd "$import_start_dir/onecx-data" || exit 1
 
 
-if [[ "$IMPORT_TYPE" =~ ^(all|base|tenant)$ ]]; then
-  cd tenant
-  bash ./import-tenants.sh "$1" "$2"
-  cd ..
-fi
-
 if [[ "$IMPORT_TYPE" =~ ^(all|base|slot|product|ms|mfe)$ ]]; then
   cd product-store
-  
   if [[ "$IMPORT_TYPE" =~ ^(all|base|product)$ ]]; then
     bash ./import-products.sh "$1" "$2"
   fi
@@ -141,7 +134,6 @@ if [[ "$IMPORT_TYPE" =~ ^(all|base|slot|product|ms|mfe)$ ]]; then
   if [[ "$IMPORT_TYPE" =~ ^(all|base|slot)$ ]]; then
     bash ./import-slots.sh "$1" "$2"
   fi
-  
   cd ..
 fi
 
@@ -160,6 +152,12 @@ fi
 if [[ "$IMPORT_TYPE" =~ ^(all|base|assignment)$ ]]; then
   cd permission-assignment
   bash ./import-assignments.sh "$1" "$2"
+  cd ..
+fi
+
+if [[ "$IMPORT_TYPE" =~ ^(all|base|tenant)$ ]]; then
+  cd tenant
+  bash ./import-tenants.sh "$1" "$2"
   cd ..
 fi
 
