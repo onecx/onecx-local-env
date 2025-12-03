@@ -111,7 +111,6 @@ ONECX_SECURITY_AUTH_ENABLED=${SECURITY}  TKIT_RS_CONTEXT_TENANT_ID_ENABLED=${SEC
 # check success
 shell_is_healthy=`docker inspect --format='{{.State.Health.Status}}'  onecx-shell-bff`
 
-exit 0
 
 #################################################################
 ## Import profile data
