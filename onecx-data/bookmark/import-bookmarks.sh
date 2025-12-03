@@ -33,16 +33,16 @@ do
   url="http://onecx-bookmark-svc/exim/v1/bookmark/$workspace/import?importMode=OVERWRITE&scopes=PRIVATE&scopes=PUBLIC"
   params="--write-out %{http_code} --silent --output /dev/null -X POST"
   if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then
-    status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -H "$OLE_HEADER_AUTH_TOKEN"  -H "$OLE_HEADER_AUTH_TOKEN"  -d @$entry  $url`
+    status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -H "$OLE_HEADER_AUTH_TOKEN"  -H "$OLE_HEADER_APM_TOKEN"  -d @$entry  $url`
   else
     status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -d @$entry  $url`
   fi
 
   if [[ "$status_code" =~ (200|201)$  ]]; then
     if [[ $2 == "true" ]]; then
-      echo -e "  import: exim, status: ${GREEN}$status_code${NC}, workspace: $workspace"
+      echo -e "    import: exim, status: ${GREEN}$status_code${NC}, workspace: $workspace"
     fi
   else
-    echo -e "${RED}  import: exim, status: $status_code, workspace: $workspace ${NC}"
+    echo -e "${RED}    import: exim, status: $status_code, workspace: $workspace ${NC}"
   fi
 done

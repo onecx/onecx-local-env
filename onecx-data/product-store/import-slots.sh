@@ -70,17 +70,17 @@ do
 
       status_code=200
       if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then
-        status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -H "$OLE_HEADER_AUTH_TOKEN"  -H "$OLE_HEADER_AUTH_TOKEN"  -d "${app_item}"  $url`
+        status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -H "$OLE_HEADER_AUTH_TOKEN"  -H "$OLE_HEADER_APM_TOKEN"  -d "${app_item}"  $url`
       else
         status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -d "${app_item}"  $url`
       fi
     
       if [[ "$status_code" =~ (200|201)$  ]]; then
         if [[ $2 == "true" ]]; then
-          echo -e "  import: operator, status: ${GREEN}$status_code${NC}, product: $product, app: $app_id, slot: $app_item_name"
+          echo -e "    import: operator, status: ${GREEN}$status_code${NC}, product: $product, app: $app_id, slot: $app_item_name"
         fi
       else
-        echo -e "${RED}  import: operator, status: $status_code, product: $product, app: $app_id, slot: $app_item_name ${NC}"
+        echo -e "${RED}    import: operator, status: $status_code, product: $product, app: $app_id, slot: $app_item_name ${NC}"
       fi
     done
   done

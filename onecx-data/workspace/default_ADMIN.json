@@ -243,10 +243,10 @@
           ]
         },
         {
-          "name": "onecx-shell-extension",
+          "name": "onecx-shell-extensions",
           "components": [
             {
-              "productName": "onecx-shell-extension",
+              "productName": "onecx-shell",
               "appId": "onecx-shell-ui",
               "name": "./OneCXShellToastComponent"
             }
@@ -424,16 +424,6 @@
               "productName": "onecx-workspace",
               "appId": "onecx-workspace-ui",
               "name": "./OneCXWorkspaceDataComponent"
-            }
-          ]
-        },
-        {
-          "name": "onecx-shell-toast",
-          "components": [
-            {
-              "productName": "onecx-shell",
-              "appId": "onecx-shell-ui",
-              "name": "./OneCXShellToastComponent"
             }
           ]
         }

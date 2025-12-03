@@ -106,7 +106,7 @@ if [[ "$OLE_SECURITY_AUTH_ENABLED" == "true" || "$OLE_SECURITY_AUTH_ENABLED" == 
   # Capture token, handle potential curl errors cleanly
   TOKEN_RES=$(curl $OLE_CURL_PARAMETER "$KC_TOKEN_URL")
   export OLE_HEADER_APM_TOKEN="apm-principal-token: $(echo "$TOKEN_RES" | jq -r .access_token)"
-  
+
   ## Get AUTH (Bearer, access) token: scopes for SVCs
   OLE_CURL_PARAMETER="--silent -d client_secret=$KC_AUTH_CLIENT_SECRET -d grant_type=client_credentials -d client_id=$KC_AUTH_CLIENT_ID"
   

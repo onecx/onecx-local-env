@@ -1,0 +1,65 @@
+{
+  "id": "onecx-local-env_import-themes_default-theme2",
+  "created": "2025-12-02T06:09:10.961983301Z",
+  "themes": {
+    "theme2": {
+      "displayName": "Theme 2",
+      "cssFile": null,
+      "description": "Theme 2",
+      "assetsUrl": null,
+      "logoUrl": null,
+      "smallLogoUrl": null,
+      "faviconUrl": null,
+      "previewImageUrl": null,
+      "assetsUpdateDate": null,
+      "properties": {
+        "font": {
+          "font-family": "",
+          "font-size": ""
+        },
+        "topbar": {
+          "topbar-bg-color": "#10384F",
+          "topbar-item-text-color": "#FFFFFF",
+          "topbar-text-color": "#FFFFFF",
+          "topbar-left-bg-color": "#10384F",
+          "topbar-item-text-hover-bg-color": "",
+          "topbar-menu-button-bg-color": "",
+          "topbar-menu-button-text-color": "",
+          "logo-color": "#FFFFFF"
+        },
+        "general": {
+          "primary-color": "#007CBF",
+          "secondary-color": "#5EA611",
+          "text-color": "#10384F",
+          "text-secondary-color": "#10384F",
+          "body-bg-color": "#FFFFFF",
+          "content-bg-color": "#FFFFFF",
+          "content-alt-bg-color": "#624963",
+          "overlay-content-bg-color": "#FFFFFF",
+          "hover-bg-color": "#E6F2F5",
+          "solid-surface-text-color": "#10384F",
+          "divider-color": "#D9D9D9",
+          "button-hover-bg": "#00607E",
+          "button-active-bg": "#007CBF",
+          "danger-button-bg": "#D30F4B",
+          "info-message-bg": "#00BCFF",
+          "success-message-bg": "#89D329",
+          "warning-message-bg": "#FF3162",
+          "error-message-bg": "#D30F4B "
+        },
+        "sidebar": {
+          "menu-text-color": "#10384F",
+          "menu-bg-color": "#FFFFFF",
+          "menu-item-text-color": "#10384F",
+          "menu-item-bg-color": "#FFFFFF",
+          "menu-item-hover-bg-color": "#E6F2F5",
+          "menu-active-item-text-color": "#10384F",
+          "menu-active-item-bg-color": "#cce5ee",
+          "menu-inline-border-color": ""
+        }
+      },
+      "overrides": null,
+      "mandatory": false
+    }
+  }
+}
