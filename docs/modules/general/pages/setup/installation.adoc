@@ -1,9 +1,10 @@
-= Setup & Installation
+= OneCX Local Environment - Setup
 :idprefix:
 :idseparator: -
 :imagesdir: ../images
 
-This guide provides step-by-step instructions for setting up and installing `onecx-local-env`, the local development environment for OneCX. It covers prerequisites, installation steps, and initial configuration required to get `onecx-local-env` up and running on your local machine.
+This guide provides instructions for setting up and installing `onecx-local-env`, the local development environment for OneCX. It covers prerequisites, installation steps and initial configuration required to get `onecx-local-env` up and running on your local machine.
+Once setup is done the environment can be started, see xref:general:getting-started.adoc[Getting Started].
 
 == Prerequisites
 === Supported Operating Systems
@@ -55,6 +56,12 @@ To verify:
 === Git
 To clone the `onecx-local-env` repository and proceed with the installation instructions, Git must be installed on the local machine or inside WSL2 for Windows users.
 
+=== node.js
+To working on local microfrontends and import OneCX data, node.js must be installed inside WSL2.
+
+=== jq
+To import OneCX data, jq must be installed inside WSL2.
+
 == Installation Steps
 
 === Cloning the repository
@@ -104,26 +111,49 @@ After identifying the relevant file location, the `hosts` file can be edited usi
 The following entries need to be added to the end of the `hosts` file:
 [source]
 ----
-127.0.0.1   local-proxy
-127.0.0.1   keycloak-app
-127.0.0.1   pgadmin
-127.0.0.1   onecx-shell-bff
-127.0.0.1   onecx-theme-svc
-127.0.0.1   onecx-theme-bff
-127.0.0.1   onecx-workspace-svc
-127.0.0.1   onecx-workspace-bff
-127.0.0.1   onecx-user-profile-bff
-127.0.0.1   onecx-user-profile-svc
-127.0.0.1   onecx-permission-svc
-127.0.0.1   onecx-permission-bff
-127.0.0.1   onecx-product-store-svc
-127.0.0.1   onecx-product-store-bff
-127.0.0.1   onecx-iam-kc-svc
-127.0.0.1   onecx-iam-bff
-127.0.0.1   onecx-tenant-svc
-127.0.0.1   onecx-tenant-bff
-127.0.0.1   onecx-parameter-svc
-127.0.0.1   onecx-parameter-bff
+# OneCX - base
+127.0.0.1 traefik
+127.0.0.1 postgresdb
+127.0.0.1 pgadmin
+127.0.0.1 keycloak-app
+127.0.0.1 keycloak-app2
+
+# OneCX - local services
+127.0.0.1 local-proxy
+127.0.0.1 sonar
+
+# OneCX - products
+127.0.0.1 onecx-announcement-svc
+127.0.0.1 onecx-announcement-bff
+127.0.0.1 onecx-announcement-ui
+127.0.0.1 onecx-bookmark-svc
+127.0.0.1 onecx-bookmark-bff
+127.0.0.1 onecx-document-svc
+127.0.0.1 onecx-document-bff
+127.0.0.1 onecx-help-svc
+127.0.0.1 onecx-help-bff
+127.0.0.1 onecx-iam-bff
+127.0.0.1 onecx-iam-svc
+127.0.0.1 onecx-parameter-svc
+127.0.0.1 onecx-parameter-bff
+127.0.0.1 onecx-permission-svc
+127.0.0.1 onecx-permission-bff
+127.0.0.1 onecx-product-store-svc
+127.0.0.1 onecx-product-store-bff
+127.0.0.1 onecx-search-config-svc
+127.0.0.1 onecx-search-config-bff
+127.0.0.1 onecx-shell-bff
+127.0.0.1 onecx-tenant-svc
+127.0.0.1 onecx-tenant-bff
+127.0.0.1 onecx-theme-svc
+127.0.0.1 onecx-theme-bff
+127.0.0.1 onecx-welcome-svc
+127.0.0.1 onecx-welcome-bff
+127.0.0.1 onecx-workspace-svc
+127.0.0.1 onecx-workspace-bff
+127.0.0.1 onecx-user-profile-avatar-svc
+127.0.0.1 onecx-user-profile-svc
+127.0.0.1 onecx-user-profile-bff
 ----
 
 Windows users should ensure that the entries are automatically synced to WSL2 by following these steps:
