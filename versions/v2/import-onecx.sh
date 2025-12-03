@@ -120,15 +120,8 @@ fi
 cd "$import_start_dir/onecx-data" || exit 1
 
 
-if [[ "$IMPORT_TYPE" =~ ^(all|base|tenant)$ ]]; then
-  cd tenant
-  bash ./import-tenants.sh "$1" "$2"
-  cd ..
-fi
-
 if [[ "$IMPORT_TYPE" =~ ^(all|base|slot|product|ms|mfe)$ ]]; then
   cd product-store
-  
   if [[ "$IMPORT_TYPE" =~ ^(all|base|product)$ ]]; then
     bash ./import-products.sh "$1" "$2"
   fi
@@ -141,7 +134,6 @@ if [[ "$IMPORT_TYPE" =~ ^(all|base|slot|product|ms|mfe)$ ]]; then
   if [[ "$IMPORT_TYPE" =~ ^(all|base|slot)$ ]]; then
     bash ./import-slots.sh "$1" "$2"
   fi
-  
   cd ..
 fi
 
@@ -160,6 +152,12 @@ fi
 if [[ "$IMPORT_TYPE" =~ ^(all|base|assignment)$ ]]; then
   cd permission-assignment
   bash ./import-assignments.sh "$1" "$2"
+  cd ..
+fi
+
+if [[ "$IMPORT_TYPE" =~ ^(all|base|tenant)$ ]]; then
+  cd tenant
+  bash ./import-tenants.sh "$1" "$2"
   cd ..
 fi
 

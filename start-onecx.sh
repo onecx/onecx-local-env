@@ -45,6 +45,7 @@ EDITION=v2
 PROFILE=base
 SECURITY=false
 SECURITY_AUTH_USED=no
+SECURITY_TENANT_ID_ENABLED=false
 IMPORT=yes
 
 
@@ -67,6 +68,7 @@ while getopts ":he:p:sx" opt; do
         fi
         ;;
     s ) SECURITY=true
+        SECURITY_TENANT_ID_ENABLED=true
         ;;
     x ) IMPORT=no
         ;;
@@ -91,6 +93,7 @@ fi
 if [[ ($security_enabled == 1) || ($SECURITY == "true") ]]; then
   SECURITY_AUTH_USED=yes
   export OLE_SECURITY_AUTH_ENABLED=true
+  SECURITY_TENANT_ID_ENABLED=true
 fi
 
 
@@ -101,13 +104,14 @@ printf "  edition: ${GREEN}$EDITION${NC}, profile: ${GREEN}$PROFILE${NC}, import
 if [[ $# == 0 ]]; then
   usage_short
 fi
-
 # Using 'docker compose' (v2). If using older docker, change to 'docker-compose'
-ONECX_SECURITY_AUTH_ENABLED=$SECURITY docker compose -f versions/$EDITION/docker-compose.yaml --profile $PROFILE up -d
+ONECX_SECURITY_AUTH_ENABLED=${SECURITY}  TKIT_RS_CONTEXT_TENANT_ID_ENABLED=${SECURITY_TENANT_ID_ENABLED}  \
+   docker compose --profile $PROFILE  up -d
 
 # check success
 shell_is_healthy=`docker inspect --format='{{.State.Health.Status}}'  onecx-shell-bff`
 
+exit 0
 
 #################################################################
 ## Import profile data
