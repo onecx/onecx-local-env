@@ -1,9 +1,9 @@
-= Advanced - Scripts - `start-onecx.sh`
+= Start the Environment - `start-onecx.sh`
 :idprefix:
 :idseparator: -
 :imagesdir: ../images
 
-The `start-onecx.sh` script is used to start the OneCX Local Environment. By default, it will start a minimal set of services and import initial mock data on startup. Data imports will not overwrite any custom data that may already exist in the environment and can be skipped using the appropriate flag. To start the environment, the script can be run from the root directory of the `onecx-local-env` repository:
+The `start-onecx.sh` script is used to start the OneCX Local Environment. By default, it will start a minimal set of services and import initial mock data on startup. Data imports will not overwrite any custom data that may already exist in the environment and can be skipped using the appropriate flag. The script can be run from the root directory of the `onecx-local-env` repository:
 
 [source,bash]
 ----
@@ -20,5 +20,10 @@ The `start-onecx.sh` script accepts several optional flags to customize its beha
 * `-p <profile-name>`: The profile to use when starting the environment. The supported profiles are:
     ** `base`: Starts a minimal version of OneCX Local Environment with only essential services. (Default)
     ** `all`: Starts all available services defined in the Docker Compose file.
-* `-s`: Enables secure mode, which enforces authentication/authorization. *This is in an experimental stage and may not be fully supported yet.* (Default: disabled)
-* `-x`: Skips the import of initial data after starting the services. (Default: import initial data)
+* `-s`: Enables secure mode, which enforces authentication/authorization. (Default: disabled)
+* `-x`: Skips the import of initial data after starting the services. (Default: import data according to the used profile)
+
+[NOTE]
+====
+The script can be started anytime. Docker checks the configuration of the services and the services are restated if there are changes.
+====
