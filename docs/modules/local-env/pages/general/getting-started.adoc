@@ -22,7 +22,7 @@ After setting up `onecx-local-env`, a local OneCX environment can be started by 
 This command starts the minimal set of required Docker services and imports the necessary data for them to function. This process may take several minutes, especially on the first run, as Docker images may need to be pulled.
 
 Successful starting::
-image$script_start-onecx.sh.png[]
+image::script_start-onecx.sh.png[]
 
 
 [NOTE]
@@ -35,9 +35,7 @@ The `start-onecx.sh` script accepts optional flags to customize its behavior. A 
 
 == Accessing OneCX in a browser
 
-After starting the local environment, OneCX can be accessed in a web browser by navigating to 
-
-http://local-proxy/onecx-shell/admin[http://local-proxy/onecx-shell/admin]
+After starting the local environment, OneCX can be accessed in a web browser by navigating to http://local-proxy/onecx-shell/admin[http://local-proxy/onecx-shell/admin].
 
 The default login credentials are:
 
