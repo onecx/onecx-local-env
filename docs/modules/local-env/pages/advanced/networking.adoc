@@ -3,7 +3,7 @@
 :idprefix:
 :idseparator: -
 
-:different_ports: xref:latest@guides:general:getting-started/enable_hot_reload.adoc#note-different-ports
+:different_ports: xref:latest@documentation:getting-started/enable_hot_reload.adoc#note-different-ports
 
 This document explains how networking is configured and managed in the OneCX local development environment.
 

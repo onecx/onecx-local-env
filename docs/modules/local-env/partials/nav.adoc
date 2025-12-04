@@ -1,0 +1,20 @@
+* Local Environment
+** xref:documentation:local-env:general/index.adoc[Overview]
+** xref:documentation:local-env:general/setup.adoc[Setup]
+** xref:documentation:local-env:general/getting-started.adoc[Getting Started]
+** xref:documentation:local-env:general/extend/extend.adoc[Extend the Environment]
+** Scripts
+**** xref:documentation:local-env:advanced/scripts/start.adoc[`start-onecx.sh`]
+**** xref:documentation:local-env:advanced/scripts/stop.adoc[`stop-onecx.sh`]
+** Advanced
+**** Versions
+****** v2 (latest)
+******** xref:documentation:local-env:general/versions/v2/v2.adoc[v2 (latest)]
+******** xref:documentation:local-env:general/versions/v2/migrate.adoc[Migration Guide]
+****** xref:documentation:local-env:general/versions/v1/v1.adoc[v1]
+**** xref:documentation:local-env:advanced/default-database.adoc[Default Databases]
+**** xref:documentation:local-env:advanced/imports.adoc[Default Data & Imports]
+**** xref:documentation:local-env:advanced/networking.adoc[Networking in OneCX]
+** FAQ & Help
+**** xref:documentation:local-env:faq/faq.adoc[FAQ]
+**** xref:documentation:local-env:faq/common-issues.adoc[Common Issues]
