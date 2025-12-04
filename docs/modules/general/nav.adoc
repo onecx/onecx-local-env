@@ -2,9 +2,6 @@
 * xref:general:setup.adoc[Setup]
 * xref:general:getting-started.adoc[Getting Started]
 * xref:general:extend/extend.adoc[Extend the Environment]
-* FAQ & Help
-** xref:faq:faq.adoc[FAQ]
-** xref:faq:common-issues.adoc[Common Issues]
 * Scripts
 ** xref:advanced:scripts/start.adoc[`start-onecx.sh`]
 ** xref:advanced:scripts/stop.adoc[`stop-onecx.sh`]
@@ -17,3 +14,6 @@
 ** xref:advanced:default-database.adoc[Default Databases]
 ** xref:advanced:imports.adoc[Default Data & Imports]
 ** xref:advanced:networking.adoc[Networking in OneCX]
+* FAQ & Help
+** xref:faq:faq.adoc[FAQ]
+** xref:faq:common-issues.adoc[Common Issues]
