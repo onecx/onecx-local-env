@@ -31,6 +31,11 @@ In case of errors, no output, or no WSL2 distributions listed, WSL2 is either no
 At this point, users should have verified that their operating system is supported and, if using Windows, that WSL2 is properly installed and configured.
 ====
 
+[IMPORTANT]
+====
+If you are using Windows and WSL, you should install and use your entire development environment in WSL. This includes cloning Git repositories and installing tools like Docker, Git, and jq. Development environments like Visual Studio Code must also be connected to WSL. Avoid any access to your files from Windows, i.e., via mount paths like /mnt/c/...
+====
+
 
 === Docker & Docker Compose
 
