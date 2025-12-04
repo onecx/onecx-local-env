@@ -1,4 +1,4 @@
-= OneCX Local Environment - Setup
+= Set up OneCX Local Environment
 :idprefix:
 :idseparator: -
 :imagesdir: ../images

@@ -103,6 +103,7 @@ fi
 # Process images
 printf "${CYAN}Process ${number_of_images} images${NC}\n"
 
+
 while IFS= read -r IMAGE; do
   [[ -z "$IMAGE" ]] && continue
   IFS=:
@@ -116,7 +117,7 @@ while IFS= read -r IMAGE; do
     else
       printf "$ORPHAN_TEXT  skip pulling\n"
     fi
-  elif [ -n "$NAME_FILTER" ]; then
+  else
     printf "  * ${GREEN}$1:$2${NC}\n"
     docker pull "$1:$2" || printf "    ${RED}Failed to pull $1:$2${NC}\n"
   fi

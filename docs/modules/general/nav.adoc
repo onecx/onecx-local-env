@@ -1,14 +1,14 @@
 * xref:general:index.adoc[Overview]
-* xref:general:setup/installation.adoc[Setup]
+* xref:general:setup.adoc[Setup]
 * xref:general:getting-started.adoc[Getting Started]
 * xref:general:extend/extend.adoc[Extend the Environment]
 * FAQ & Help
 ** xref:faq:faq.adoc[FAQ]
 ** xref:faq:common-issues.adoc[Common Issues]
+* Scripts
+** xref:advanced:scripts/start.adoc[`start-onecx.sh`]
+** xref:advanced:scripts/stop.adoc[`stop-onecx.sh`]
 * Advanced
-** Scripts
-*** xref:advanced:scripts/start.adoc[`start-onecx.sh`]
-*** xref:advanced:scripts/stop.adoc[`stop-onecx.sh`]
 ** Versions
 *** v2 (latest)
 **** xref:general:versions/v2/v2.adoc[v2 (latest)]

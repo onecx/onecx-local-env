@@ -3,7 +3,7 @@
 :idseparator: -
 :imagesdir: ../images
 
-The `stop-onecx.sh` script is used to stop the OneCX Local Environment. It can be run from the root directory of the `onecx-local-env` repository:
+The `stop-onecx.sh` script is used to stop the OneCX Local Environment. It can be run from the root directory of the `onecx-local-env` repository. Here the command for stopping the essential services without removing data:
 
 [source,bash]
 ----
@@ -21,3 +21,19 @@ The script accepts several optional flags to customize its behavior. The availab
 * `-p <profile-name>`: The profile to use when stopping the environment. This must match the profile that was used to start the environment. The supported profiles are:
 ** `base` (Default)
 ** `all`
+
+== Examples
+
+Stop base and Cleanup::
+The Docker services *essential* for OneCX will be terminated, including the deletion of all data. Technically, this involves deleting the Docker volumes used by OneCX.
+[source,bash]
+----
+./stop-onecx.sh -c
+----
+
+Stop ALL and Cleanup::
+*All* Docker services for OneCX will be terminated, including the deletion of all data. Technically, this involves deleting the Docker volumes used by OneCX.
+[source,bash]
+----
+./stop-onecx.sh -p all -c
+----
