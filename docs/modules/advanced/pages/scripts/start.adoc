@@ -11,7 +11,7 @@ The `start-onecx.sh` script is used to start the OneCX Local Environment. By def
 ----
 
 == Available Flags
-The `start-onecx.sh` script accepts several optional flags to customize its behavior. The available flags are:
+The `start-onecx.sh` script accepts several optional flags to customize its behavior. Some flags can be combined. The flags are:
 
 * `-e`: The edition of OneCX to start. Supported editions are:
     ** `v2`: Starts the current version of OneCX Local Environment (Default).
@@ -25,5 +25,28 @@ The `start-onecx.sh` script accepts several optional flags to customize its beha
 
 [NOTE]
 ====
-The script can be started anytime. Docker checks the configuration of the services and the services are restated if there are changes.
+The script can be executed at any time. Docker checks the configuration of the services and restarts them if there are changes. Without changes, running services are not affected, and missing services are started.
 ====
+
+== Examples
+
+Start essential Services::
+The Docker services *essential* for OneCX are started. The necessary Docker volumes are created and required data are imported. Technically, the relevant services are marked with the *base* profile in the docker-compose file used.
+[source,bash]
+----
+./start-onecx.sh
+----
+
+Start ALL Services::
+*All* Docker services for OneCX are started. The necessary Docker volumes are created and required data are imported. Technically, the relevant services are marked with the *all* profile in the docker-compose file used.
+[source,bash]
+----
+./start-onecx.sh -p all 
+----
+
+Start essential Services with Security enabled::
+The Docker services *essential* for OneCX are started with enabled security authetication. The necessary Docker volumes are created but no data are imported.
+[source,bash]
+----
+./start-onecx.sh -s -x
+----
