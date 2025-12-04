@@ -1,7 +1,7 @@
 = Getting Started - Running OneCX locally
 :idprefix:
 :idseparator: -
-:imagesdir: ../images
+:imagesdir: images
 
 [NOTE]
 ====
