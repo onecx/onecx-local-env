@@ -7,8 +7,8 @@
 
 `onecx-local-env` can either be used as a standalone tool, or integrated into custom development environments via Git submodules. Custom development environments can interact with `onecx-local-env` via provided lifecycle-scripts and extend its functionality by wrapping the provided Docker Compose and script files with custom implementations.
 
-Detailed information on how to set up and install `onecx-local-env` can be found in the xref:general:setup/installation.adoc[Setup] documentation.
+Detailed information on how to set up and install `onecx-local-env` can be found in the xref:documentation:local-env:general/setup.adoc[Setup] documentation.
 
-After completing the setup, the quickest way to get started is to follow the steps outlined in the xref:general:getting-started.adoc[Getting Started] guide.
+After completing the setup, the quickest way to get started is to follow the steps outlined in the xref:documentation:local-env:general/getting-started.adoc[Getting Started] guide.
 
 Additional information on extending the default environment, advanced configuration options, as well as FAQ & Help resources can be found in the navigation on the left.

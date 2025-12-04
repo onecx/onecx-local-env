@@ -5,7 +5,7 @@
 
 [NOTE]
 ====
-This guide assumes that `onecx-local-env` has already been set up and installed according to the instructions provided in xref:general:setup.adoc[Setup].
+This guide assumes that `onecx-local-env` has already been set up and installed according to the instructions provided in xref:documentation:local-env:general/setup.adoc[Setup].
 ====
 
 This guide provides a quick overview of the steps required to run a local OneCX environment. It includes instructions on starting the environment, accessing OneCX in a browser, and stopping the environment when finished.
@@ -27,7 +27,7 @@ image$script_start-onecx.sh.png[]
 
 [NOTE]
 ====
-The `start-onecx.sh` script accepts optional flags to customize its behavior. A list of available flags can be found in the xref:advanced:scripts/start.adoc[start-onecx.sh documentation] or by running
+The `start-onecx.sh` script accepts optional flags to customize its behavior. A list of available flags can be found in the xref:documentation:local-env:advanced/scripts/start.adoc[start-onecx.sh documentation] or by running
 
 `./start-onecx.sh -h`.
 ====
@@ -55,7 +55,7 @@ When finished using the local OneCX environment, it can be stopped by running th
 
 [NOTE]
 ====
-The `stop-onecx.sh` script accepts optional flags to customize its behavior. A list of available flags can be found in the xref:advanced:scripts/stop.adoc[stop-onecx.sh documentation] or by running
+The `stop-onecx.sh` script accepts optional flags to customize its behavior. A list of available flags can be found in the xref:documentation:local-env:advanced/scripts/stop.adoc[stop-onecx.sh documentation] or by running
 
 `./stop-onecx.sh -h`.
 ====
