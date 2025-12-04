@@ -26,10 +26,6 @@ The script accepts several optional flags to customize its behavior. The availab
 
 == Examples
 
-    $0  -d workspace -x   => Import only Worspace data, default tenant, no check for Docker services
-    $0  -t t1             => Import all tenant independent OneCX data and for tenant 't1'
-
-
 Import ALL data, tenant `default`::
 Import all available OneCX data as:
 * Non-tenant specific data
