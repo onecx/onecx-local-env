@@ -1,7 +1,7 @@
 = Check local Docker images
 :idprefix:
 :idseparator: -
-:imagesdir: ../../images
+:imagesdir: ../../../images
 
 The *check-images.sh* script is used to list Docker images with version information. It can be run from the root directory of the *onecx-local-env* repository.
 

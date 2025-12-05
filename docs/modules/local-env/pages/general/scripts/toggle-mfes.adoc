@@ -1,7 +1,7 @@
 = Integrate Microfrontends into OneCX
 :idprefix:
 :idseparator: -
-:imagesdir: ../../images
+:imagesdir: ../../../images
 
 The script *toggle-mfes.sh* integrates (activates) a locally running microfrontend into the OneCX environment, allowing it to interact with other microfrontends. This process is also reversible. 
 
