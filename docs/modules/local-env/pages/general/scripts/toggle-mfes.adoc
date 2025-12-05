@@ -1,39 +1,72 @@
-= Stop the Environment - `stop-onecx.sh`
+= Toggle MFEs - `toggle-mfes.sh`
 :idprefix:
 :idseparator: -
-:imagesdir: ../images
+:imagesdir: ../../images
 
-The `stop-onecx.sh` script is used to stop the OneCX Local Environment. It can be run from the root directory of the `onecx-local-env` repository. Here the command for stopping the essential services without removing data:
+The script `toggle-mfes.sh` integrates (activates) a locally running microfrontend into the OneCX environment, allowing it to interact with other microfrontends. This process is also reversible. 
+
+The script creates a small configuration file in Traefik, tailored to the local microfrontend. Traefik then forwards requests from the Docker network to the external local microfrontend.
+It can be run from the root directory of the `onecx-local-env` repository.
+
+The Traefik configuration files are stored in `init-data/traefik/active/`. Traefik immediately detects any changes there.
+
+Here is the command to list the currently integrated microfrontends.:
 
 [source,bash]
 ----
-./stop-onecx.sh
+./toggle-mfes.sh  -l
 ----
 
 == Available Flags
 The script accepts several optional flags to customize its behavior. The available flags are:
 
-* `-c`: Cleans up all volumes associated with the OneCX Local Environment when stopping the services. This will remove all data stored in the volumes, so use this flag with caution. (Default: disabled)
-* `-e`: The edition of OneCX to stop. This must match the edition that was used to start the environment. Supported editions are:
-** `v2` (Default).
-** `v1`
-* `-h`: Displays help information about the script and its available flags. If used then all other options are ignored.
-* `-p <profile-name>`: The profile to use when stopping the environment. This must match the profile that was used to start the environment. The supported profiles are:
-** `base` (Default)
-** `all`
+-a::
+Enable one or more local microfrontends. In addition to the microfrontend name, you can optionally specify a port and path. The default port is 4200.
+If the mfe is one of OneCX Core products and no port is specified then predefined ports are used.
+
+-c:: Cleanup, remove all existing configurations
+
+-d:: Deactivate one or more local Microfrontends
+
+-h:: Display this help and exit
+
+-l::  List of currently integrated local microfrontends
+
 
 == Examples
 
-Stop base and Cleanup::
-The Docker services *essential* for OneCX will be terminated, including the deletion of all data. Technically, this involves deleting the Docker volumes used by OneCX.
+Integrate my App with specific path::
+The local microfrontend `my-app` runs on http://localhost:4200 (standard Angular).
+`/my-app-path` is the path under which the microfrontend is accessible within OneCX.
+
 [source,bash]
 ----
-./stop-onecx.sh -c
+./toggle-mfes.sh  -a my-app::/my-app-path
 ----
 
-Stop ALL and Cleanup::
-*All* Docker services for OneCX will be terminated, including the deletion of all data. Technically, this involves deleting the Docker volumes used by OneCX.
+Integrate several Apps::
+Integrate the apps 'workspace' (with standard port) and user-profile on port `12345`.
+Since no path is specified, the default path is used: /mfe/<name-of-microfrontend>
+
 [source,bash]
 ----
-./stop-onecx.sh -p all -c
+./toggle-mfes.sh  -a workspace  user-profile:12345
+----
+
+
+Deintegrate my App::
+The -d option allows you to undo an integration. The same rule applies to the port: if the port is not 4200, it must be specified.
+
+[source,bash]
+----
+./toggle-mfes.sh  -d my-app:12345
+----
+
+
+Deintegrate ALL Apps::
+The Traefik configurations are being cleaned up: All specific configuration files for the Microfrontend integration are being deleted.
+
+[source,bash]
+----
+./toggle-mfes.sh  -c
 ----

@@ -1,7 +1,7 @@
 = Import Data - `import-onecx.sh`
 :idprefix:
 :idseparator: -
-:imagesdir: ../images
+:imagesdir: ../../images
 
 The `import-onecx.sh` script is used to import data needed by the OneCX services. It can be run from the root directory of the `onecx-local-env` repository. Here the command for importing the data for the essential services:
 
@@ -13,15 +13,23 @@ The `import-onecx.sh` script is used to import data needed by the OneCX services
 == Available Flags
 The script accepts several optional flags to customize its behavior. The available flags are:
 
-* `-d`: Data type, one of [ all, base, bookmark, assignment, parameter, permission, mfe, ms, product, slot, tenant theme, welcome, workspace], base is default
-* `-e`: The edition of OneCX. This must match the edition that was used to start the environment. Supported editions are:
-** `v2` (Default).
-** `v1`
-* `-h`: Displays help information about the script and its available flags. If used then all other options are ignored.
-* `-s`: Security authentication enabled, default not enabled (value is inherited from start-onecx.sh)
-* `-t`: Tenant, one of [ 'default', 't1', 't2' ], default is 'default'
-* `-v`: Verbose: display details during import of objects
-* `-x`: Skip checking running Docker services
+-d::
+Data type, one of [ all, base, bookmark, assignment, parameter, permission, mfe, ms, product, slot, tenant theme, welcome, workspace], base is default
+
+-e::
+The edition of OneCX. This must match the edition that was used to start the environment. Supported editions are:
+* `v2` (Default).
+* `v1`
+
+-h::
+Displays help information about the script and its available flags. If used then all other options are ignored.
+
+-s::
+Security authentication enabled, default not enabled (value is inherited from start-onecx.sh)
+
+-t:: Tenant, one of [ 'default', 't1', 't2' ], default is 'default'
+-v:: Verbose: display details during import of objects
+-x:: Skip checking running Docker services
 
 
 == Examples

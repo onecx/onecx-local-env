@@ -13,19 +13,28 @@ The `start-onecx.sh` script is used to start the OneCX Local Environment. By def
 == Available Flags
 The `start-onecx.sh` script accepts several optional flags to customize its behavior. Some flags can be combined. The flags are:
 
-* `-e`: The edition of OneCX to start. Supported editions are:
-    ** `v2`: Starts the current version of OneCX Local Environment (Default).
-    ** `v1`: Starts the legacy version of OneCX Local Environment (Not recommended for new setups).
-* `-h`: Displays help information about the script and its available flags.
-* `-p <profile-name>`: The profile to use when starting the environment. The supported profiles are:
-    ** `base`: Starts a minimal version of OneCX Local Environment with only essential services. (Default)
-    ** `all`: Starts all available services defined in the Docker Compose file.
-* `-s`: Enables secure mode, which enforces authentication/authorization. (Default: disabled)
-* `-x`: Skips the import of initial data after starting the services. (Default: import data according to the used profile)
+-e::
+The edition of OneCX to start. Supported editions are:
+  * `v2`: Starts the current version of OneCX Local Environment (Default).
+  * `v1`: Starts the legacy version of OneCX Local Environment (Not recommended for new setups).
+
+-h:: Displays help information about the script and its available flags.
+
+-p <profile-name>::
+The profile to use when starting the environment. The supported profiles are:
+  * `base`: Starts a minimal version of OneCX Local Environment with only essential services. (Default)
+  * `all`: Starts all available services defined in the Docker Compose file.
+
+-s::
+Enables secure mode, which enforces authentication/authorization. (Default: disabled)
+
+-x::
+Skips the import of initial data after starting the services. (Default: import data according to the used profile)
+
 
 [NOTE]
 ====
-The script can be executed at any time. Docker checks the configuration of the services and restarts them if there are changes. Without changes, running services are not affected, and missing services are started.
+The script can be executed at any time. Docker checks the configuration of the services and restarts them if there are changes. Without changes, running services are not affected, and only missing services are started.
 ====
 
 == Examples
