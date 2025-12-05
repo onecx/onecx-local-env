@@ -3,14 +3,14 @@
 :idseparator: -
 :imagesdir: ../../images
 
-`onecx-local-env` is the local development environment for OneCX. It is based on Docker/Docker Compose, and enables developers to quickly run local instances of the OneCX Shell, selected OneCX products and their dependencies for development and testing purposes.
+*onecx-local-env* is the local development environment for OneCX. It is based on Docker/Docker Compose, and enables developers to quickly run local instances of the OneCX Shell, selected OneCX products and their dependencies for development and testing purposes.
 
-`onecx-local-env` can either be used as a standalone tool, or integrated into custom development environments via Git submodules. Custom development environments can interact with `onecx-local-env` via provided lifecycle-scripts and extend its functionality by wrapping the provided Docker Compose and script files with custom implementations.
+*onecx-local-env* can either be used as a standalone tool, or integrated into custom development environments via Git submodules. Custom development environments can interact with *onecx-local-env* via provided lifecycle-scripts and extend its functionality by wrapping the provided Docker Compose and script files with custom implementations.
 
 Start here::
-. xref:documentation:local-env:general/setup.adoc[Setup]: Details on how to set up and install
+  . xref:documentation:local-env:general/setup.adoc[Setup]: Details on how to set up and install
 
-. xref:documentation:local-env:general/getting-started.adoc[Getting Started]: The quickest way to get started
+  . xref:documentation:local-env:general/getting-started.adoc[Getting Started]: The quickest way to get started
 
 
 Additional information::

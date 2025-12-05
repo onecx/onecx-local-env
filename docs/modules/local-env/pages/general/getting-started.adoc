@@ -1,18 +1,18 @@
-= Getting Started - Running OneCX locally
+= Running OneCX locally
 :idprefix:
 :idseparator: -
 :imagesdir: ../../images
 
 [NOTE]
 ====
-This guide assumes that `onecx-local-env` has already been set up and installed according to the instructions provided in xref:documentation:local-env:general/setup.adoc[Setup].
+This guide assumes that *onecx-local-env* has already been set up and installed according to the instructions provided in xref:documentation:local-env:general/setup.adoc[Setup].
 ====
 
 This guide provides a quick overview of the steps required to run a local OneCX environment. It includes instructions on starting the environment, accessing OneCX in a browser, and stopping the environment when finished.
 
 == Starting the local environment
 
-After setting up `onecx-local-env`, a local OneCX environment can be started by running a single command from the root directory of `onecx-local-env`.
+After setting up *onecx-local-env*, a local OneCX environment can be started by running a single command from the root directory of *onecx-local-env*.
 
 [source,bash]
 ----
@@ -27,7 +27,7 @@ image::script_start-onecx.sh.png[]
 
 [TIP]
 ====
-The `start-onecx.sh` script accepts optional flags to customize its behavior. A list of available flags can be found in the xref:documentation:local-env:scripts/start.adoc[start-onecx.sh documentation] or by running
+The *start-onecx.sh* script accepts optional flags to customize its behavior. A list of available flags can be found in the xref:documentation:local-env:scripts/start.adoc[start-onecx.sh] documentation or by running
 
 `./start-onecx.sh -h`.
 ====
@@ -45,7 +45,7 @@ The default login credentials are:
 
 == Stopping the local environment
 
-When finished using the local OneCX environment, it can be stopped by running the following command from the root directory of `onecx-local-env`:
+When finished using the local OneCX environment, it can be stopped by running the following command from the root directory of *onecx-local-env*:
 [source,bash]
 ----
 ./stop-onecx.sh
