@@ -1,0 +1,8 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# local microfrontend activations
+init-data/traefik/active/*
+
+# misc
+.vscode
+*.log

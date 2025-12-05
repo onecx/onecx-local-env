@@ -33,7 +33,9 @@ At this point, users should have verified that their operating system is support
 
 [IMPORTANT]
 ====
-If you are using Windows and WSL, you should install and use your entire development environment in WSL. This includes cloning Git repositories and installing tools like Docker, Git, and jq. Development environments like Visual Studio Code must also be connected to WSL. Avoid any access to your files from Windows, i.e., via mount paths like /mnt/c/...
+If you are using Windows and WSL, you should install and use your entire development environment in WSL. This includes cloning Git repositories and installing tools like Docker, Git, and jq. Development environments like Visual Studio Code also need to be connected to WSL, and their extensions/plugins installed in WSL.
+
+Avoid any access to your files from Windows, i.e., via mount paths like `/mnt/c/...`
 ====
 
 
@@ -43,10 +45,10 @@ If you are using Windows and WSL, you should install and use your entire develop
 
 The functionality of *onecx-local-env* has been tested with the following versions:
 
-- Docker version `28.1.1`
-- Docker Compose version `v2.35.1`
+- Docker version *28.1.1*
+- Docker Compose version *v2.35.1*
 
-To ensure that all used features work correctly, it is recommended to use Docker Compose version `v2.20.0` or higher. If any other versions are used, some features may not work as expected. In case of issues that aren't clearly related to the local environment itself, a version upgrade of Docker and/or Docker Compose should be considered as a troubleshooting step.
+To ensure that all used features work correctly, it is recommended to use Docker Compose version *v2.20.0* or higher. If any other versions are used, some features may not work as expected. In case of issues that aren't clearly related to the local environment itself, a version upgrade of Docker and/or Docker Compose should be considered as a troubleshooting step.
 
 [NOTE]
 .Checkpoint
@@ -62,10 +64,10 @@ To verify:
 To clone the *onecx-local-env* repository and proceed with the installation instructions, Git must be installed on the local machine or inside WSL2 for Windows users.
 
 === node.js
-To working on local microfrontends and import OneCX data, node.js must be installed inside WSL2.
+To working on local microfrontends and import OneCX data, *node.js* must be installed inside WSL2.
 
 === jq
-To import OneCX data, jq must be installed inside WSL2.
+To import OneCX data, *jq* must be installed inside WSL2.
 
 == Installation Steps
 
@@ -80,7 +82,7 @@ git clone https://github.com/onecx/onecx-local-env.git
 
 After cloning the repository, it is important to ensure that all provided shell scripts are executable. This includes the main lifecycle scripts located in the root directory, as well as any scripts located in the `onecx-data` and `versions/*` directories.
 
-To verify that the scripts are executable, the command `ls -l` can be run in the respective directories. Executable scripts will have an `x` in their permission string, for example:
+To verify that the scripts are executable, the command `ls -l` can be run in the respective directories. Executable scripts will have an *x* in their permission string, for example:
 - e.g. `-rwxr-xr-x import-onecx.sh`
 
 If any of the scripts are not executable, the following command can be used to add execute permissions:
@@ -96,7 +98,7 @@ At this point, the *onecx-local-env* repository should be cloned and all necessa
 To verify:
 
 * Run `ls -l` in the root, `onecx-data`, and `versions/*` directories.
-* Confirm all `.sh` scripts have execute permissions (indicated by an `x` in the permission string).
+* Confirm all *.sh* scripts have execute permissions (indicated by an *x* in the permission string).
 * If any scripts are missing execute permissions, run `chmod +x <file name>`.
 ====
 
