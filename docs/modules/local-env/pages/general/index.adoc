@@ -42,23 +42,22 @@ However, for a more convenient approach and taking into account specific OneCX f
 |===
 
 
-
-== Additional information
-....
-Information on extending the standard environment, advanced configuration options, frequently asked questions and help can be found in the navigation on the left.
-....
-
 == Utilities
+
 In addition to the OneCX Core products, further services will be launched.
 
-.Keycloak
-The IAM service used by OneCX.
+.Available Utilities 
+[.stripes-even,cols="20,~"]
+|===
+| xref:utilities.adoc#Keycloak[Keycloak]
+| The IAM service used by OneCX
 
-.Postgres
-Storing the data. For each OneCX backend service a separate database exists.
+| xref:utilities.adoc#Postgres[Postgres]
+| Storing the data. For each OneCX backend service a separate database exists.
 
-.pgAdmin
-Manage the Postgres databases.
+| xref:utilities.adoc#pgAdmin[pgAdmin]
+| Manage the Postgres databases.
 
-.Traefik
-Proxy service for routing requests between services within the Docker network and from/to outside.  
+| xref:utilities.adoc#Traefik[Traefik]
+| Proxy service for routing requests between services within the Docker network and from/to outside.  
+|===
