@@ -33,8 +33,14 @@ Displays help information about the script and its available flags. If used then
 
 -s::
 Security authentication enabled, default not enabled (value is inherited from start-onecx.sh)
+[IMPORTANT]
+====
+Once Docker services have been started with the security option enabled, all subsequent actions require an authenticated user. For example, an import operation must then be started with the `-s` option to succeed.
+====
 
--t:: Tenant, for tenant-specific imports (e.g. workspace, theme)
+-t:: 
+Define the tenant for tenant-specific imports (e.g. workspace, theme). In consequence of using a tenant different than default the security option is set.
+An appropriate user is used to execute the import. The user is authorized, the token are getted and then the import is executed with the token as request header. Therefore the security option is enabled.
   * default (default)
   * t1
   * t2
@@ -71,9 +77,18 @@ Import base data, tenant `t1`::
 Import essential OneCX data as:
 * Non-tenant specific data
 * Tenant data for *t1* tenant
+
 To import tenant-specific data, services with security authentication enabled must be running. Without the *-x* flag, Docker restarts the services with the security option enabled. A corresponding user exists for each tenant. The import is performed using this authorized user.
 
 [source,bash]
 ----
 ./import-onecx.sh -t t1
 ----
+
+.Successful import of *t1* data via authenticated user *onecx_t1_admin*
+image::script_import-onecx.sh_tenant.png[]
+
+[TIP]
+====
+If you want only import tenant-specific data but do not working afterwards with security authentication then execute the start-onecx.sh script without *-s* option again. This reset the security option on running services.
+====
