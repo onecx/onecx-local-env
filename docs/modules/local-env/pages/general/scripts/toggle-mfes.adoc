@@ -36,7 +36,7 @@ If the mfe is one of OneCX Core products and no port is specified then predefine
 == Examples
 
 Integrate my App with specific path::
-The local microfrontend `my-app` runs on http://localhost:4200 (standard Angular).
+The local microfrontend `my-app` runs on `http://localhost:4200` (standard Angular).
 `/my-app-path` is the path under which the microfrontend is accessible within OneCX.
 
 [source,bash]
@@ -50,7 +50,7 @@ Since no path is specified, the default path is used: /mfe/<name-of-microfronten
 
 [source,bash]
 ----
-./toggle-mfes.sh  -a workspace  user-profile:12345
+./toggle-mfes.sh  -a workspace user-profile:12345
 ----
 
 

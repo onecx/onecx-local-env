@@ -1,9 +1,9 @@
-= Import Data - `import-onecx.sh`
+= Import OneCX Data
 :idprefix:
 :idseparator: -
 :imagesdir: ../../images
 
-The `import-onecx.sh` script is used to import data needed by the OneCX services. It can be run from the root directory of the `onecx-local-env` repository. Here the command for importing the data for the essential services:
+The *import-onecx.sh* script is used to import data needed by the OneCX services. It can be run from the root directory of the *onecx-local-env* repository. Here the command for importing the data for the essential services:
 
 [source,bash]
 ----
@@ -39,6 +39,7 @@ Import all available OneCX data as:
 * Non-tenant specific data
 * Tenant data for `default` tenant
 Before the import, a check is performed to ensure that all required services are already running. Any missing services are started.
+
 [source,bash]
 ----
 ./import-onecx.sh -d all
@@ -48,6 +49,7 @@ Before the import, a check is performed to ensure that all required services are
 Import specific data, skip check::
 Only workspace data is imported. If the data are tenant-specific data then the default tenant is used (use flag -t for a different tenant)
 Running services are not checked beforehand. If a required service is not running, the import will fail.
+
 [source,bash]
 ----
 ./import-onecx.sh -d workspace -x
@@ -59,6 +61,7 @@ Import essential OneCX data as:
 * Non-tenant specific data
 * Tenant data for `t1` tenant
 To import tenant-specific data, services with security authentication enabled must be running. Without the `-x` flag, Docker restarts the services with the security option enabled. A corresponding user exists for each tenant. The import is performed using this authorized user.
+
 [source,bash]
 ----
 ./import-onecx.sh -t t1

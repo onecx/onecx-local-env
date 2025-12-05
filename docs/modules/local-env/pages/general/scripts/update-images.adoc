@@ -1,39 +1,52 @@
-= Stop the Environment - `stop-onecx.sh`
+= Update local Docker images
 :idprefix:
 :idseparator: -
-:imagesdir: ../images
+:imagesdir: ../../images
 
-The `stop-onecx.sh` script is used to stop the OneCX Local Environment. It can be run from the root directory of the `onecx-local-env` repository. Here the command for stopping the essential services without removing data:
+The *update-images.sh* script is used to renew local Docker images. It can be run from the root directory of the *onecx-local-env* repository.
+
+Here is the command to display the available flags:
 
 [source,bash]
 ----
-./stop-onecx.sh
+./update-images.sh
 ----
+
+[TIP]
+====
+To get an overview of the Docker images and their versions on your local machine, run the Docker command `docker image ls`. If images with the tag *<none>* are displayed, you can run the script with the parameter `-c` to clean them up.
+====
+
 
 == Available Flags
 The script accepts several optional flags to customize its behavior. The available flags are:
 
-* `-c`: Cleans up all volumes associated with the OneCX Local Environment when stopping the services. This will remove all data stored in the volumes, so use this flag with caution. (Default: disabled)
-* `-e`: The edition of OneCX to stop. This must match the edition that was used to start the environment. Supported editions are:
-** `v2` (Default).
-** `v1`
-* `-h`: Displays help information about the script and its available flags. If used then all other options are ignored.
-* `-p <profile-name>`: The profile to use when stopping the environment. This must match the profile that was used to start the environment. The supported profiles are:
-** `base` (Default)
-** `all`
+-c::
+Cleaned up orphaned images
+
+-h::
+Displays help information about the script and its available flags. If used then all other options are ignored.
+
+-n <text>::
+Name filter, update images which have <text> into image name
+
 
 == Examples
 
-Stop base and Cleanup::
-The Docker services *essential* for OneCX will be terminated, including the deletion of all data. Technically, this involves deleting the Docker volumes used by OneCX.
+Update all Images with `ui` in name::
+The Docker which have *ui* in image name are pulled from remote registry.
+
 [source,bash]
 ----
-./stop-onecx.sh -c
+./update-images.sh  -n ui
 ----
 
-Stop ALL and Cleanup::
-*All* Docker services for OneCX will be terminated, including the deletion of all data. Technically, this involves deleting the Docker volumes used by OneCX.
+Cleanup only::
+Starting the script without any name filter will require a confirmation to proceed. Without this confirmation, the script will terminate.
+
+With confirmation, all images will be checked and removed if they are outdated. If orphaned images are found (e.g., with "<none>" in their name), the script will attempt to delete them. This is only possible if the image is not in use.
+
 [source,bash]
 ----
-./stop-onecx.sh -p all -c
+./update-images.sh  -c
 ----
