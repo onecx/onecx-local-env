@@ -14,7 +14,7 @@ Here is the command to display the available flags:
 
 [TIP]
 ====
-To get an overview of the Docker images and their versions on your local machine, run the Docker command `docker image ls`. If images with the tag *<none>* are displayed, you can run the script with the parameter `-c` to clean them up.
+To get an overview of the Docker images and their versions on your local machine, run the Docker command `*docker image ls*`. If images with the tag *<none>* are displayed, you can run the script with the parameter `*-c*` to clean them up.
 ====
 
 
@@ -44,7 +44,7 @@ The Docker which have *ui* in image name are pulled from remote registry.
 Cleanup only::
 Starting the script without any name filter will require a confirmation to proceed. Without this confirmation, the script will terminate.
 
-With confirmation, all images will be checked and removed if they are outdated. If orphaned images are found (e.g., with "<none>" in their name), the script will attempt to delete them. This is only possible if the image is not in use.
+With confirmation, all images will be checked and removed if they are outdated. If orphaned images are found (e.g., with *<none>* in their name), the script will attempt to delete them. This is only possible if the image is not in use.
 
 [source,bash]
 ----
