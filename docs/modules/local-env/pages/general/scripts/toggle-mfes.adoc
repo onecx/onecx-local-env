@@ -6,7 +6,7 @@
 The script *toggle-mfes.sh* integrates (activates) a locally running microfrontend into the OneCX environment, allowing it to interact with other microfrontends. This process is also reversible. 
 
 The script creates a small configuration file in Traefik, tailored to the local microfrontend. Traefik then forwards requests from the Docker network to the external local microfrontend.
-It can be run from the root directory of the *onecx-local-env* repository.
+The script can be run from the root directory of the *onecx-local-env* repository.
 
 The Traefik configuration files are stored in `init-data/traefik/active/`. Traefik immediately detects any changes there.
 
@@ -82,7 +82,7 @@ image::script_toggle-mfes.sh_activate.png[]
 
 
 Deintegrate my App::
-The -d option allows you to undo an integration. The same rule applies to the port: if the port is not 4200, it must be specified.
+The *-d* option allows you to undo an integration. The same rule applies to the port: if the port is not 4200, it must be specified.
 
 [source,bash]
 ----
@@ -97,3 +97,6 @@ The Traefik configurations are being cleaned up: All specific configuration file
 ----
 ./toggle-mfes.sh  -c
 ----
+
+.Reset all Microfrontend configurations in Traefik
+image::script_toggle-mfes.sh_cleanup.png[]
