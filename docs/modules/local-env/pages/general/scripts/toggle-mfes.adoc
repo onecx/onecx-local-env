@@ -1,12 +1,12 @@
-= Toggle MFEs - `toggle-mfes.sh`
+= Integrate Microfrontends into OneCX
 :idprefix:
 :idseparator: -
 :imagesdir: ../../images
 
-The script `toggle-mfes.sh` integrates (activates) a locally running microfrontend into the OneCX environment, allowing it to interact with other microfrontends. This process is also reversible. 
+The script *toggle-mfes.sh* integrates (activates) a locally running microfrontend into the OneCX environment, allowing it to interact with other microfrontends. This process is also reversible. 
 
 The script creates a small configuration file in Traefik, tailored to the local microfrontend. Traefik then forwards requests from the Docker network to the external local microfrontend.
-It can be run from the root directory of the `onecx-local-env` repository.
+It can be run from the root directory of the *onecx-local-env* repository.
 
 The Traefik configuration files are stored in `init-data/traefik/active/`. Traefik immediately detects any changes there.
 
@@ -18,7 +18,7 @@ Here is the command to list the currently integrated microfrontends.:
 ----
 
 == Available Flags
-The script accepts several optional flags to customize its behavior. The available flags are:
+The script accepts several optional flags to customize its behavior. Some flags can be combined. The flags are:
 
 -a::
 Enable one or more local microfrontends. In addition to the microfrontend name, you can optionally specify a port and path. The default port is 4200.

@@ -1,9 +1,9 @@
-= Start the Environment - `start-onecx.sh`
+= Start the Environment
 :idprefix:
 :idseparator: -
-:imagesdir: ../images
+:imagesdir: ../../images
 
-The `start-onecx.sh` script is used to start the OneCX Local Environment. By default, it will start a minimal set of services and import initial mock data on startup. Data imports will not overwrite any custom data that may already exist in the environment and can be skipped using the appropriate flag. The script can be run from the root directory of the `onecx-local-env` repository:
+The *start-onecx.sh* script is used to start the OneCX Local Environment. By default, it will start a minimal set of services and import initial mock data on startup. Data imports will not overwrite any custom data that may already exist in the environment and can be skipped using the appropriate flag. The script can be run from the root directory of the *onecx-local-env* repository:
 
 [source,bash]
 ----
@@ -11,7 +11,7 @@ The `start-onecx.sh` script is used to start the OneCX Local Environment. By def
 ----
 
 == Available Flags
-The `start-onecx.sh` script accepts several optional flags to customize its behavior. Some flags can be combined. The flags are:
+The script accepts several optional flags to customize its behavior. Some flags can be combined. The flags are:
 
 -e::
 The edition of OneCX to start. Supported editions are:

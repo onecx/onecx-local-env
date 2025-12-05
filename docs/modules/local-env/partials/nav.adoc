@@ -7,8 +7,8 @@
 **** xref:documentation:local-env:general/scripts/start.adoc[`start-onecx.sh`]
 **** xref:documentation:local-env:general/scripts/stop.adoc[`stop-onecx.sh`]
 **** xref:documentation:local-env:general/scripts/import.adoc[`import-onecx.sh`]
-**** xref:documentation:local-env:general/scripts/toggle-mfe.adoc[`toggle-local-mfe.sh`]
-**** xref:documentation:local-env:general/scripts/update-images.adoc[`update-local-images.sh`]
+**** xref:documentation:local-env:general/scripts/toggle-mfes.adoc[`toggle-mfes.sh`]
+**** xref:documentation:local-env:general/scripts/update-images.adoc[`update-images.sh`]
 ** Advanced
 **** Versions
 ****** v2 (latest)

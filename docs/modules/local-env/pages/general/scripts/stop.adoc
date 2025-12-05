@@ -1,9 +1,9 @@
-= Stop the Environment - `stop-onecx.sh`
+= Stop the Environment
 :idprefix:
 :idseparator: -
-:imagesdir: ../images
+:imagesdir: ../../images
 
-The `stop-onecx.sh` script is used to stop the OneCX Local Environment. It can be run from the root directory of the `onecx-local-env` repository. Here the command for stopping the essential services without removing data:
+The *stop-onecx.sh* script is used to stop the OneCX Local Environment. It can be run from the root directory of the *onecx-local-env* repository. Here the command for stopping the essential services without removing data:
 
 [source,bash]
 ----
@@ -11,7 +11,7 @@ The `stop-onecx.sh` script is used to stop the OneCX Local Environment. It can b
 ----
 
 == Available Flags
-The script accepts several optional flags to customize its behavior. The available flags are:
+The script accepts several optional flags to customize its behavior. Some flags can be combined. The flags are:
 
 -c::
 Cleans up all volumes associated with the OneCX Local Environment when stopping the services. This will remove all data stored in the volumes, so use this flag with caution. (Default: disabled)
