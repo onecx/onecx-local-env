@@ -4,12 +4,12 @@
 ** xref:documentation:local-env:general/setup.adoc[Setup]
 ** xref:documentation:local-env:general/extend/extend.adoc[Extend the Environment]
 ** Scripts
-**** xref:documentation:local-env:general/scripts/start.adoc[`start-onecx.sh`]
-**** xref:documentation:local-env:general/scripts/stop.adoc[`stop-onecx.sh`]
-**** xref:documentation:local-env:general/scripts/import.adoc[`import-onecx.sh`]
-**** xref:documentation:local-env:general/scripts/toggle-mfes.adoc[`toggle-mfes.sh`]
-**** xref:documentation:local-env:general/scripts/check-images.adoc[`check-images.sh`]
-**** xref:documentation:local-env:general/scripts/update-images.adoc[`update-images.sh`]
+**** xref:documentation:local-env:general/scripts/start.adoc[start-onecx.sh]
+**** xref:documentation:local-env:general/scripts/stop.adoc[stop-onecx.sh]
+**** xref:documentation:local-env:general/scripts/import.adoc[import-onecx.sh]
+**** xref:documentation:local-env:general/scripts/toggle-mfes.adoc[toggle-mfes.sh]
+**** xref:documentation:local-env:general/scripts/check-images.adoc[check-images.sh]
+**** xref:documentation:local-env:general/scripts/update-images.adoc[update-images.sh]
 ** Advanced
 **** Versions
 ****** v2 (latest)
