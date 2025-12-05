@@ -49,13 +49,13 @@ In addition to the OneCX Core products, further services will be launched.
 .Available Utilities 
 [.stripes-even,cols="20,~"]
 |===
-| link:utilities.adoc#Keycloak[Keycloak]
+| xref:documentation:local-env:general:utilities.adoc#Keycloak[Keycloak]
 | The IAM service used by OneCX
 
-| link:utilities.adoc#Postgres[Postgres]
+| link:utilities.html#Postgres[Postgres]
 | Storing the data. For each OneCX backend service a separate database exists.
 
-| link:utilities.adoc#pgAdmin[pgAdmin]
+| link:utilities.html#pgAdmin[pgAdmin]
 | Manage the Postgres databases.
 
 | link:utilities.adoc#Traefik[Traefik]
