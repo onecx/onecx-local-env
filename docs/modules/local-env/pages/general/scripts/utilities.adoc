@@ -1,0 +1,40 @@
+== Additional Services
+:idprefix:
+:idseparator: -
+:imagesdir: ../../../images
+
+=== Keycloak
+The IAM service used by OneCX can accessed via http://keycloak-app/admin/master/console/#/onecx[].
+https://www.keycloak.org/[Keycloak] is an open-source software for Identity and Access Management (IAM) that provides features like single sign-on (SSO), user authentication, and authorization for modern applications and services.
+
+The default login credentials are:
+
+* Username: *admin*
+* Password: *admin*
+
+.Keycloak running on localhost
+image::screenshot_successful-keycloak-onecx.png[]
+
+
+=== pgAdmin
+The pgAdmin service used by OneCX to manage the Postgres databases can accessed via http://pgadmin/[]
+
+https://www.pgadmin.org/[pgAdmin] is a popular, open-source administration and development platform for https://www.postgresql.org/[PostgreSQL] databases.
+
+The default login credentials are:
+
+* Username: *admin*
+* Password: *admin*
+
+.pgAdmin running on localhost
+image::screenshot_successful-pgadmin.png[]
+
+
+
+=== Traefik
+The reverse proxy service Traefik can accessed via http://traefik:8082/dashboard/[]
+
+No login required
+
+.Traefik running on localhost
+image::screenshot_successful-traefik.png[]

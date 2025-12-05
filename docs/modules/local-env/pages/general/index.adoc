@@ -7,19 +7,17 @@
 
 *onecx-local-env* can either be used as a standalone tool, or integrated into custom development environments via Git submodules. Custom development environments can interact with *onecx-local-env* via provided lifecycle-scripts and extend its functionality by wrapping the provided Docker Compose and script files with custom implementations.
 
-.Start here
---
-  . xref:documentation:local-env:general/setup.adoc[Setup]: Details on how to set up and install
 
-  . xref:documentation:local-env:general/getting-started.adoc[Getting Started]: The quickest way to get started
---
+== Start here
+. xref:documentation:local-env:general/setup.adoc[Setup]: Details on how to set up and install
+
+. xref:documentation:local-env:general/getting-started.adoc[Getting Started]: The quickest way to get started
 
 
-.Use Scripts for Management
---
+== Use Scripts for Management
+
 Since OneCX runs in a Docker Compose environment, most settings can be managed directly through Docker and Docker Compose.
 However, for a more convenient approach and taking into account specific OneCX features, various shell scripts are available. Each script has the *-h* flag to explain how to use.
---
 
 .Available Scripts 
 [.stripes-even,cols="20,~"]
@@ -45,18 +43,22 @@ However, for a more convenient approach and taking into account specific OneCX f
 
 
 
-.Additional information
+== Additional information
 ....
 Information on extending the standard environment, advanced configuration options, frequently asked questions and help can be found in the navigation on the left.
 ....
 
-.Main Services - delimited block
-....
-delimited block
-....
+== Utilities
+In addition to the OneCX Core products, further services will be launched.
 
+.Keycloak
+The IAM service used by OneCX.
 
-.Main Services - delimited block
-====
-delimited block
-====
+.Postgres
+Storing the data. For each OneCX backend service a separate database exists.
+
+.pgAdmin
+Manage the Postgres databases.
+
+.Traefik
+Proxy service for routing requests between services within the Docker network and from/to outside.  
