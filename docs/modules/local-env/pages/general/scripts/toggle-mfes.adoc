@@ -17,6 +17,10 @@ Here is the command to list the currently integrated microfrontends.:
 ./toggle-mfes.sh  -l
 ----
 
+.List of integrated Microfrontends
+image::script_toggle-mfes.sh_list.png[]
+
+
 == Precondition
 Before a microfrontend can be successfully integrated into OneCX, it must be started.
 
@@ -32,8 +36,8 @@ npm run start -- --port 6021 --host 0.0.0.0 --disable-host-check --public-host=h
 npm run start -- --port=6021 --host 0.0.0.0 --disableHostCheck --publicHost=http://localhost:6021
 ----
 
-.CheckPoint
-Please check the microfrontend is up and running by using the *public host URL* (see start command) in Browser. The *remoteEntry.js* should be loaded.
+CheckPoint::
+Please check the microfrontend is up and running by accessing the *public host URL* (see start command) in Browser. The *remoteEntry.js* should be loaded. The *./toggle-mfes.sh* script does not check this.
 
 
 
@@ -65,13 +69,16 @@ The local microfrontend `my-app` runs on `http://localhost:4200` (standard Angul
 ----
 
 Integrate several Apps::
-Integrate the apps 'workspace' (with standard port) and user-profile on port `12345`.
-Since no path is specified, the default path is used: /mfe/<name-of-microfrontend>
+Integrate the apps 'workspace' (with specific standard port *5025*) and user-profile on port *5027*.
+Since no path is specified, the default path is used: */mfe/<name-of-microfrontend>*
 
 [source,bash]
 ----
-./toggle-mfes.sh  -a workspace user-profile:12345
+./toggle-mfes.sh  -a workspace user-profile:5027
 ----
+
+.Successful integrated Microfrontends
+image::script_toggle-mfes.sh_activate.png[]
 
 
 Deintegrate my App::
