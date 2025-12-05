@@ -116,7 +116,7 @@ deactivate_mfe() {
 ## Disable all Microfrontends
 clean_all() {
   printf " 🧹 Cleaning all local Microfrontend activations\n"
-  find "$TRAEFIK_ACTIVE_DIR" -maxdepth 1 -type f -exec rm {} \;
+  find "${TRAEFIK_ACTIVE_DIR}/*.yml" -maxdepth 1 -type f -exec rm {} \;
   printf "    All local Microfrontends deactivated\n"
 }
 
