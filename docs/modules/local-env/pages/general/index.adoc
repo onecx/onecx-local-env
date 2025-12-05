@@ -7,11 +7,51 @@
 
 *onecx-local-env* can either be used as a standalone tool, or integrated into custom development environments via Git submodules. Custom development environments can interact with *onecx-local-env* via provided lifecycle-scripts and extend its functionality by wrapping the provided Docker Compose and script files with custom implementations.
 
-Start here::
+.Start here
+....
   . xref:documentation:local-env:general/setup.adoc[Setup]: Details on how to set up and install
 
   . xref:documentation:local-env:general/getting-started.adoc[Getting Started]: The quickest way to get started
+....
 
 
-Additional information::
+.Use Scripts for Management
+....
+Since OneCX runs in a Docker Compose environment, most settings can be managed directly through Docker and Docker Compose.
+However, for a more convenient approach and taking into account specific OneCX features, various shell scripts are available. Each script has the *-h* flag to explain how to use.
+....
+
+.Available Scripts 
+[cols="30,~"]
+|===
+| xref:documentation:local-env:general/scripts/start.adoc[start-onecx.sh]
+| Start the local environment including import of inital neccessary data
+
+| xref:documentation:local-env:general/scripts/stop.adoc[stop-onecx.sh]
+| Stop the local environment
+
+| xref:documentation:local-env:general/scripts/import.adoc[import-onecx.sh]
+| Import data
+|===
+
+  * import-onecx.sh
+  * toggle-mfes.sh
+  * update-images.sh
+
+
+
+.Additional information
+....
 Information on extending the standard environment, advanced configuration options, frequently asked questions and help can be found in the navigation on the left.
+....
+
+.Main Services - delimited block
+....
+delimited block
+....
+
+
+.Main Services - delimited block
+====
+delimited block
+====
