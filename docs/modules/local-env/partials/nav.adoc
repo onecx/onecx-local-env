@@ -1,7 +1,7 @@
 * Local Environment
 ** xref:documentation:local-env:general/index.adoc[Overview]
-** xref:documentation:local-env:general/setup.adoc[Setup]
 ** xref:documentation:local-env:general/getting-started.adoc[Getting Started]
+** xref:documentation:local-env:general/setup.adoc[Setup]
 ** xref:documentation:local-env:general/extend/extend.adoc[Extend the Environment]
 ** Scripts
 **** xref:documentation:local-env:general/scripts/start.adoc[`start-onecx.sh`]

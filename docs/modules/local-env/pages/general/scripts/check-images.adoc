@@ -1,0 +1,45 @@
+= Check local Docker images
+:idprefix:
+:idseparator: -
+:imagesdir: ../../images
+
+The *check-images.sh* script is used to list Docker images with version information. It can be run from the root directory of the *onecx-local-env* repository.
+
+Here is the command to list all Docker images (without any filter).
+
+[source,bash]
+----
+./check-images.sh
+----
+
+
+== Available Flags
+The script accepts several optional flags to customize its behavior. The available flags are:
+
+-f::
+Image filter, see https://docs.docker.com/reference/cli/docker/image/ls/#filter
+
+-h::
+Displays help information about the script and its available flags. If used then all other options are ignored.
+
+-n <text>::
+Name filter, find images which have <text> into image name
+
+
+== Examples
+
+List images with onecx in name::
+
+[source,bash]
+----
+./check-images.sh   -n onecx
+----
+
+
+List images marked as dangling::
+Candidates for deletion
+
+[source,bash]
+----
+./check-images.sh   -f "dangling=true"
+----

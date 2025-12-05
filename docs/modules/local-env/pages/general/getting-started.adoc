@@ -3,15 +3,13 @@
 :idseparator: -
 :imagesdir: ../../images
 
-[NOTE]
-====
-This guide assumes that *onecx-local-env* has already been set up and installed according to the instructions provided in xref:documentation:local-env:general/setup.adoc[Setup].
-====
-
 This guide provides a quick overview of the steps required to run a local OneCX environment. It includes instructions on starting the environment, accessing OneCX in a browser, and stopping the environment when finished.
 
-== Starting the local environment
+== Set up the local environment
+Follow the instructions at xref:documentation:local-env:general/setup.adoc[Setup] to configure the base on your local machine. The following steps assume that *onecx-local-env* has already been configured and installed according to the installation instructions.
 
+
+== Starting the local environment
 After setting up *onecx-local-env*, a local OneCX environment can be started by running a single command from the root directory of *onecx-local-env*.
 
 [source,bash]
@@ -21,8 +19,11 @@ After setting up *onecx-local-env*, a local OneCX environment can be started by 
 
 This command starts the minimal set of required Docker services and imports the necessary data for them to function. This process may take several minutes, especially on the first run, as Docker images may need to be pulled.
 
-Successful starting::
+.Successful starting
 image::script_start-onecx.sh.png[]
+.Successful import
+image::script_import-onecx.sh.png[]
+
 
 
 [TIP]
@@ -41,6 +42,9 @@ The default login credentials are:
 
 ** Username: `onecx`
 ** Password: `onecx`
+
+.OneCX UI after login
+image::screenshot_successful-start-onecx.png[]
 
 
 == Stopping the local environment

@@ -1,7 +1,7 @@
 = Import OneCX Data
 :idprefix:
 :idseparator: -
-:imagesdir: ../../images
+:imagesdir: ../../../images
 
 The *import-onecx.sh* script is used to import data needed by the OneCX services. It can be run from the root directory of the *onecx-local-env* repository. Here the command for importing the data for the essential services:
 
@@ -9,6 +9,10 @@ The *import-onecx.sh* script is used to import data needed by the OneCX services
 ----
 ./import-onecx.sh
 ----
+
+.Successful import
+image::script_import-onecx.sh.png[]
+
 
 == Available Flags
 The script accepts several optional flags to customize its behavior. The available flags are:
