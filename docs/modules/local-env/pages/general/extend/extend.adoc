@@ -19,6 +19,6 @@ This approach enables hot-reloading of your local micro-frontend: changes you ma
 == Adding a custom docker-compose file
 To integrate Docker images into OneCX, you need a separate docker.compose file to manage the integration.
 
-Follow the instructions in xref:./docker-images.adoc[Integrating Docker Images] to integrate your images into OneCX.
+Follow the instructions in xref:./local-images.adoc[Integrate Docker Images] to integrate your images into OneCX.
 
 

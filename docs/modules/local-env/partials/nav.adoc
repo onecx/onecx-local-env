@@ -3,7 +3,8 @@
 ** xref:documentation:local-env:general/getting-started.adoc[Getting Started]
 ** xref:documentation:local-env:general/setup.adoc[Setup]
 ** xref:documentation:local-env:general/extend/extend.adoc[Extending]
-*** xref:general/extend/local-mfe.adoc[Local MFE]
+*** xref:documentation:local-env:general/extend/local-mfe.adoc[Local MFE]
+*** xref:documentation:local-env:general/extend/local-images.adoc[Local Images]
 ** Scripts
 *** xref:documentation:local-env:general/scripts/start.adoc[start-onecx.sh]
 *** xref:documentation:local-env:general/scripts/stop.adoc[stop-onecx.sh]
