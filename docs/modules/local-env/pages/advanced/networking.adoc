@@ -1,7 +1,8 @@
-= Advanced - Networking in OneCX Local Environment
+= Networking in OneCX Local Environment
 
 :idprefix:
 :idseparator: -
+:imagesdir: ../../images
 
 :different_ports: xref:latest@documentation:getting-started/enable_hot_reload.adoc#note-different-ports
 

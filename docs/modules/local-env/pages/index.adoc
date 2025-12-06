@@ -1,7 +1,7 @@
 = OneCX Local Environment - Overview
 :idprefix:
 :idseparator: -
-:imagesdir: ../../images
+:imagesdir: ../images
 
 *onecx-local-env* is the local development environment for OneCX. It is based on Docker/Docker Compose, and enables developers to quickly run local instances of the OneCX Shell, selected OneCX products and their dependencies for development and testing purposes.
 
@@ -37,7 +37,7 @@ However, for a more convenient approach and taking into account specific OneCX f
 | xref:./scripts/check-images.adoc[check-images.sh]
 | List local images with state and version
 
-| link:./scripts/update-images.adoc[update-images.sh]
+| xref:./scripts/update-images.adoc[update-images.sh]
 | Update local images
 |===
 

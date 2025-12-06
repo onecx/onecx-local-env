@@ -1,7 +1,7 @@
 = Update local Docker images
 :idprefix:
 :idseparator: -
-:imagesdir: ../../../images
+:imagesdir: ../../images
 
 The *update-images.sh* script is used to renew local Docker images. It can be run from the root directory of the *onecx-local-env* repository.
 

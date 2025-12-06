@@ -1,4 +1,4 @@
-= FAQ & Help - Frequently Asked Questions
+= Frequently Asked Questions
 :idprefix:
 :idseparator: -
-:imagesdir: ../images
+:imagesdir: ../../images

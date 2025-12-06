@@ -1,7 +1,7 @@
 = Extending the default Environment
 :idprefix:
 :idseparator: -
-:imagesdir: ../../../images
+:imagesdir: ../../images
 
 There are several ways to expand the OneCX local environment:
 

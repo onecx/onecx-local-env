@@ -1,7 +1,7 @@
 = Advanced - Default Data and Imports Overview
 :idprefix:
 :idseparator: -
-:imagesdir: ../images
+:imagesdir: ../../images
 
 This document provides an overview of the file and folder structure related to data imports in the OneCX Local Environment. It also explains the purpose of each file and folder, and provides guidelines for adding new files.
 
