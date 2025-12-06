@@ -3,6 +3,8 @@
 :idseparator: -
 :imagesdir: ../../images
 
+To operate a local OneCX, some services require initial data, e.g., the theme, the admin workspace, permissions, etc.
+
 The *import-onecx.sh* script is used to import data needed by the OneCX services. It can be run from the root directory of the *onecx-local-env* repository. Here the command for importing the data for the essential services:
 
 [source,bash]
@@ -35,12 +37,12 @@ Displays help information about the script and its available flags. If used then
 Security authentication enabled, default not enabled (value is inherited from start-onecx.sh)
 [IMPORTANT]
 ====
-Once Docker services have been started with the security option enabled, all subsequent actions require an authenticated user. For example, an import operation must then be started with the `-s` option to succeed.
+Once Docker services have been started with the security option enabled, all subsequent actions require an authenticated user. For example, an import operation must then be started with the *-s* option to succeed.
 ====
 
 -t:: 
 Define the tenant for tenant-specific imports (e.g. workspace, theme). In consequence of using a tenant different than default the security option is set.
-An appropriate user is used to execute the import. The user is authorized, the token are getted and then the import is executed with the token as request header. Therefore the security option is enabled.
+An appropriate user is used to execute the import. The user is authorized, the tokens are getted and then the import is executed with the tokens as request header. Therefore the security option is enabled.
   * default (default)
   * t1
   * t2
@@ -51,10 +53,10 @@ An appropriate user is used to execute the import. The user is authorized, the t
 
 == Examples
 
-Import ALL data, tenant `default`::
+Import ALL data, tenant "default"::
 Import all available OneCX data as:
 * Non-tenant specific data
-* Tenant data for `default` tenant
+* Tenant data for *default* tenant
 Before the import, a check is performed to ensure that all required services are already running. Any missing services are started.
 
 [source,bash]
