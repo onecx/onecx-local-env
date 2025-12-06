@@ -3,3 +3,31 @@
 :idseparator: -
 :imagesdir: ../../../images
 
+
+This approach enables hot-reloading of your local micro-frontend: changes you make there are automatically visible in OneCX after the rebuild. The best way for fast frontend development.
+
+== Start your local Microfrontend
+
+Start the Microfrontend with following command, depending on which Angular setup you are working:
+
+.Start Angular *ng* Microfrontend on port 6021
+[source,bash]
+----
+npm run start -- --port 6021 --host 0.0.0.0 --disable-host-check --public-host=http://localhost:6021
+----
+
+.Start Angular *nx* Microfrontend on port 6021
+[source,bash]
+----
+npm run start -- --port=6021 --host 0.0.0.0 --disableHostCheck --publicHost=http://localhost:6021
+----
+
+CheckPoint::
+Please check the microfrontend is up and running by accessing the *public host URL* (see start command) in Browser. The *remoteEntry.js* should be loaded. The *./toggle-mfes.sh* script does not check this.
+
+.Local running Microfrontend
+image::screenshot_successful-start-local-mfe.png[]
+
+
+[TIP]
+If the microfrontend requires its own backend functionality, then these backend services must be started.
