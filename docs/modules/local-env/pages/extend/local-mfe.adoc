@@ -36,7 +36,7 @@ The integration can be easily accomplished through routing and path rewriting by
 
 This step is done with the script *toggle-mfes.sh*. It creates a configuration file with routing and path rewrite instructions that are read by Traefik. See also the documentation for xref:../scripts/toggle-mfes.adoc[toggle-mfes.sh].
 
-.Command for Integration local app running on `http://localhost:6021`
+Command for integrating the local app running on http://localhost:6021::
 [source,bash]
 ----
   ./toggle-mfes.sh -a my-app:6021

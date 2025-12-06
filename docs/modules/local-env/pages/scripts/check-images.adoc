@@ -12,6 +12,8 @@ Here is the command to list all Docker images (without any filter).
 ./check-images.sh
 ----
 
+[HINT]
+The local Docker images can be updated using the script xref:./update-images.adoc[update-images.sh].
 
 == Available Flags
 The script accepts several optional flags to customize its behavior. The available flags are:
