@@ -15,6 +15,7 @@ The default login credentials are:
 .Keycloak running on localhost
 image::screenshot_successful-keycloak-onecx.png[]
 
+There is an OneCX realm which contains all configurations needed by OneCX like users, roles, clients etc.
 
 === pgAdmin
 The pgAdmin service used by OneCX to manage the Postgres databases can accessed via http://pgadmin/[]
@@ -29,10 +30,13 @@ The default login credentials are:
 .pgAdmin running on localhost
 image::screenshot_successful-pgadmin.png[]
 
+[TIP]
+This service is optional, as it is not strictly necessary for OneCX to function. For a better user experience, use a native client directly on your computer.
 
 
 === Traefik
 The reverse proxy service Traefik can accessed via http://traefik:8082/dashboard/[]
+Traefik is required for routing within Docker Compose networks as well as to and from networks outside this network.
 
 No login required
 

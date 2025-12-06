@@ -3,17 +3,19 @@
 :idseparator: -
 :imagesdir: ../../images
 
-There are several ways to expand the OneCX local environment:
+OneCX functions as a collection of microservices and microfrontends. The OneCX Shell orchestrates the microfrontends for a unified user interface. This concept allows for the easy integration of other services that are launched outside the OneCX network.
+
+There are several ways to expand the OneCX local environment
 
 
-== Integrate directly a local running Microfrontend
+== Integrate a local running Microfrontend
 
 If a microfrontend has been started separately, integration can be easily accomplished through routing and path rewriting by xref:../utilities.adoc#traefik[Traefik].
 
 Follow the instructions xref:./local-mfe.adoc[Integrate a local Microfrontend] to use your microfrontend directly in OneCX.
 
 [TIP]
-This is the recommended aproach to integrate a local running microfrontend. Please use this.
+This is the recommended procedure for integrating a locally running microfrontend. Please use this method.
 
 
 == Adding a custom docker-compose file
@@ -22,4 +24,5 @@ To integrate Docker images into OneCX, you need a separate docker.compose file t
 
 Follow the instructions in xref:./local-images.adoc[Integrate Docker Images] to integrate your images into OneCX.
 
-
+[TIP]
+This is the recommended approach for integrating additional microservices. For integrating locally running microfrontends, use the method described above.

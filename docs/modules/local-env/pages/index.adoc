@@ -52,8 +52,8 @@ In addition to the OneCX Core products, further services will be launched.
 | xref:./utilities.adoc#keycloak[Keycloak]
 | The IAM service used by OneCX
 
-| xref:./utilities.adoc#postgres[Postgres]
-| Storing the data. For each OneCX backend service a separate database exists.
+| Postgres
+| Storing the data. Each OneCX backend service has its own separate database. Access can be gained using pgAdmin.
 
 | xref:./utilities.adoc#pgadmin[pgAdmin]
 | Manage the Postgres databases.

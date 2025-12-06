@@ -1,4 +1,4 @@
-= Versions - v2 - Migrate to v2
+= Migrate to v2 Edition
 
 [NOTE]
 .Disclaimer
@@ -6,26 +6,26 @@
 This page was created for an older version of OneCX Local Environment and may not reflect the current state of the project. It will be updated in the near future.
 ====
 
-This guide highlights the key differences between OneCX Local Environment xref:documentation:local-env:general/versions/v1/v1.adoc[v1] and xref:documentation:local-env:general/versions/v2/v2.adoc[v2], and explains how you can adapt your setup to ensure that it seamlessly works with xref:documentation:local-env:general/versions/v2/v2.adoc[v2].
+This guide highlights the key differences between OneCX Local Environment xref:../v1/v1.adoc[v1] and xref:./v2.adoc[v2], and explains how you can adapt your setup to ensure that it seamlessly works with xref:./v2.adoc[v2].
 
 == Network Rename
 
-In xref:documentation:local-env:general/versions/v1/v1.adoc[v1], the network that all services connected to was named `example`.  
-In xref:documentation:local-env:general/versions/v2/v2.adoc[v2], this network is now named `default`.
+In xref:../v1/v1.adoc[v1], the network that all services connected to was named `example`.  
+In xref:./v2.adoc[v2], this network is now named `default`.
 
 If you have any custom services that need to attach to the same network as OneCX, make sure they connect to `default` from now on.
 
 
 == Service Startup Behavior
 
-In xref:documentation:local-env:general/versions/v1/v1.adoc[v1]:
+In xref:../v1/v1.adoc[v1]:
 
 - Some core services started automatically when running: `docker compose up -d`
 
 - Additional services could be started using the two existing profiles: `all` and `parameters`.
 - This approach gave developers very little control over which apps were started, making it hard to, for example, run only a small subset of apps and one OneCX product.
 
-In xref:documentation:local-env:general/versions/v2/v2.adoc[v2]:
+In xref:./v2.adoc[v2]:
 
 - The system is **fully profile-based**.
 - **Nothing** starts by default when you run: `docker compose up -d`
@@ -35,16 +35,16 @@ In xref:documentation:local-env:general/versions/v2/v2.adoc[v2]:
 docker compose --profile base up -d
 ```
 - Profiles allow fine-grained control over which services run.
-- For details on available profiles, see xref:documentation:local-env:general/versions/v2/v2.adoc[the v2 documentation].
+- For details on available profiles, see xref:./v2.adoc[the v2 documentation].
 
 == Data Import Script Improvements
 
-In xref:documentation:local-env:general/versions/v1/v1.adoc[v1]:
+In xref:../v1/v1.adoc[v1]:
 
 - The data import script had the sole purpose of sending data to services to trigger the import.
 - This caused issues if containers were not running, unhealthy, or still starting up.
 
-In xref:documentation:local-env:general/versions/v2/v2.adoc[v2]:
+In xref:./v2.adoc[v2]:
 
 - The import script now:
   * Starts all required services.
