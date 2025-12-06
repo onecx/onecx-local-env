@@ -1,7 +1,7 @@
 = Running OneCX locally
 :idprefix:
 :idseparator: -
-:imagesdir: ../../images
+:imagesdir: ../images
 
 This guide provides a quick overview of the steps required to run a local OneCX environment. It includes instructions on starting the environment, accessing OneCX in a browser, and stopping the environment when finished.
 

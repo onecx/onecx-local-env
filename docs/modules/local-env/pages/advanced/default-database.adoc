@@ -1,7 +1,7 @@
 = Advanced - Default Databases
 :idprefix:
 :idseparator: -
-:imagesdir: ../images
+:imagesdir: ../../images
 
 Postgres server is automatically created with the necessary databases.
 If any database needs to be added please modify the file `init-data/db/init-db.sql`

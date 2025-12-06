@@ -21,6 +21,7 @@ To verify if WSL2 is currently installed, users can open PowerShell or Command P
 ----
 wsl -l -v
 ----
+
 This command lists all installed WSL distributions along with their version numbers. To run *onecx-local-env*, at least one distribution must be installed and its version must be 2.
 
 In case of errors, no output, or no WSL2 distributions listed, WSL2 is either not installed or not properly configured. Official guidance on installing and configuring WSL2 can be found here: https://learn.microsoft.com/en-us/windows/wsl/install
@@ -181,6 +182,6 @@ To verify:
 * If entries are missing in WSL2, add them manually by following the *Linux* instructions above.
 ====
 
-== Next Steps
-After completing the steps outlined in this guide, *onecx-local-env* is now set up and ready to run a local OneCX environment. Instructions on how to start, access, and stop the local environment can be found in the xref:./general:getting-started.adoc[Getting Started] guide.
+== Next Step
+After completing the steps outlined in this guide, *onecx-local-env* is now set up and ready to run a local OneCX environment. Instructions on how to start, access, and stop the local environment can be found in the xref:./getting-started.adoc[Getting Started] guide.
 

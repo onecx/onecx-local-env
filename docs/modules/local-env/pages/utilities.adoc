@@ -1,7 +1,7 @@
 == Additional Services
 :idprefix:
 :idseparator: -
-:imagesdir: ../../../images
+:imagesdir: ../images
 
 === Keycloak
 The IAM service used by OneCX can accessed via http://keycloak-app/admin/master/console/#/onecx[].
