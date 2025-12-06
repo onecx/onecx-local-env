@@ -5,6 +5,7 @@
 
 There are several ways to expand the OneCX local environment:
 
+
 == Integrate directly a local running Microfrontend
 
 If a microfrontend has been started separately, integration can be easily accomplished through routing and path rewriting by Traefik.
@@ -14,9 +15,14 @@ If the microfrontend requires its own backend functionality, then these services
 Follow the instructions xref:./local-mfe.adoc[Integrate a local Microfrontend] to use your microfrontend directly in OneCX.
 
 [TIP]
+.Recommondation
+This is the recommended aproach to integrate a local running microfrontend. Please use this.
+
 This approach enables hot-reloading of your local micro-frontend: changes you make there are automatically visible in OneCX after the rebuild. The best way for fast frontend development.
 
+
 == Adding a custom docker-compose file
+
 To integrate Docker images into OneCX, you need a separate docker.compose file to manage the integration.
 
 Follow the instructions in xref:./local-images.adoc[Integrate Docker Images] to integrate your images into OneCX.
