@@ -2,6 +2,7 @@
 :idprefix:
 :idseparator: -
 :imagesdir: ../../../images
+:source-highlighter: coderay
 
 
 This approach enables hot-reloading of your local micro-frontend: changes you make there are automatically visible in OneCX after the rebuild. The best way for fast frontend development.
@@ -44,7 +45,7 @@ This step is done with the script *toggle-mfes.sh*. It creates a configuration f
 image::screenshot_successful-activate-local-mfe.png[]
 
 .Traefik Configuration located in *init_data/traefik/active*
-[source,yaml]
+[%linenums,yaml,highlight=9]
 ----
 ####################################################
 # Integrate a local running Microfrontend into OneCX
