@@ -1,4 +1,5 @@
 * Local Environment
+** xref:documentation:local-env:setup.adoc[Setup2]
 ** xref:documentation:local-env:general/index.adoc[Overview]
 ** xref:documentation:local-env:general/getting-started.adoc[Getting Started]
 ** xref:documentation:local-env:general/setup.adoc[Setup]
