@@ -8,7 +8,7 @@ There are several ways to expand the OneCX local environment:
 
 == Integrate directly a local running Microfrontend
 
-If a microfrontend has been started separately, integration can be easily accomplished through routing and path rewriting by xref:./utilities.adoc#traefik[Traefik].
+If a microfrontend has been started separately, integration can be easily accomplished through routing and path rewriting by xref:./../utilities.adoc#traefik[Traefik].
 
 Follow the instructions xref:./local-mfe.adoc[Integrate a local Microfrontend] to use your microfrontend directly in OneCX.
 
