@@ -1,4 +1,4 @@
-= Integrate a local MIcrofrontend
+= Integrate a local Microfrontend
 :idprefix:
 :idseparator: -
 :imagesdir: ../../../images
@@ -6,9 +6,9 @@
 
 This approach enables hot-reloading of your local micro-frontend: changes you make there are automatically visible in OneCX after the rebuild. The best way for fast frontend development.
 
-== Start your local Microfrontend
+== Start the local Microfrontend
 
-Start the Microfrontend with following command, depending on which Angular setup you are working:
+Use one of the following command to start the Microfrontend. It depends on type of the Angular application.
 
 .Start Angular *ng* Microfrontend on port 6021
 [source,bash]
@@ -33,11 +33,44 @@ image::screenshot_successful-start-local-mfe.png[]
 
 The integration can be easily accomplished through routing and path rewriting by xref:./../utilities.adoc#traefik[Traefik]. This is necessary because the Docker Compose project's network for OneCX is isolated from the outside world. And the meaning of "localhost" within the OneCX network (Docker uses "host.docker.internal" internally) differs from "localhost" outside of it. Therefore, requests from the Docker environment must be routed to the outside world and mapped to the localhost address.
 
-This step is done with the script *toggle-mfes.sh*. It creates a configuration file with routing and path rewrite instructions that are read by Traefik. See also the documentation for xref:./../scripts/toggle-mfes.sh[toggle-mfes.sh].
+This step is done with the script *toggle-mfes.sh*. It creates a configuration file with routing and path rewrite instructions that are read by Traefik. See also the documentation for xref:./../scripts/toggle-mfes.adoc[toggle-mfes.sh].
 
 .Command for Integration local app running on http://localhost:6021
 ----
   ./toggle-mfes.sh -a my-app:6021
+----
+
+.Successful Integration
+image::screenshot_successful-activate-local-mfe.png[]
+
+.Traefik Configuration located in *init_data/traefik/active*
+[source,yaml]
+----
+####################################################
+# Integrate a local running Microfrontend into OneCX
+####################################################
+# Microfrontend: "my-app""
+http:
+  routers:
+    local_my-app:
+      # path prefix as used for MFE registration in product store
+      rule: "Host(`local-proxy`) && PathPrefix(`/mfe/my-app/`)"
+      service: local_my-app
+      middlewares:
+        - strip_my-app
+
+  # Remove the used mfe path so that it maps directly to localhost:port
+  middlewares:
+    strip_my-app:
+      stripPrefix:
+        prefixes:
+          - "/mfe/my-app"
+
+  services:
+    local_my-app:
+      loadBalancer:
+        servers:
+        - url: "http://host.docker.internal:6021/"   # Angular project started outside Docker with this port
 ----
 
 [TIP]
