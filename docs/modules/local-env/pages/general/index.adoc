@@ -9,9 +9,9 @@
 
 
 == Start here
-. xref:documentation:local-env:general/setup.adoc[Setup]: Details on how to set up and install
+. xref:setup.adoc[Setup]: Details on how to set up and install
 
-. xref:documentation:local-env:general/getting-started.adoc[Getting Started]: The quickest way to get started
+. xref:getting-started.adoc[Getting Started]: The quickest way to get started
 
 
 == Use Scripts for Management
@@ -22,22 +22,22 @@ However, for a more convenient approach and taking into account specific OneCX f
 .Available Scripts 
 [.stripes-even,cols="20,~"]
 |===
-| xref:documentation:local-env:general/scripts/start.adoc[start-onecx.sh]
+| xref:scripts/start.adoc[start-onecx.sh]
 | Start the local environment including import of inital neccessary data
 
-| xref:documentation:local-env:general/scripts/stop.adoc[stop-onecx.sh]
+| xref:scripts/stop.adoc[stop-onecx.sh]
 | Stop the local environment
 
-| xref:documentation:local-env:general/scripts/import.adoc[import-onecx.sh]
+| xref:scripts/import.adoc[import-onecx.sh]
 | Import data
 
-| xref:documentation:local-env:general/scripts/toggle-mfes.adoc[toggle-mfes.sh]
+| xref:scripts/toggle-mfes.adoc[toggle-mfes.sh]
 | Integrate local running microfrontends directly into OneCX
 
-| xref:documentation:local-env:general/scripts/check-images.adoc[check-images.sh]
+| xref:scripts/check-images.adoc[check-images.sh]
 | List local images with state and version
 
-| link:scripts/update-images.html[update-images.sh]
+| link:scripts/update-images.adoc[update-images.sh]
 | Update local images
 |===
 
@@ -49,15 +49,15 @@ In addition to the OneCX Core products, further services will be launched.
 .Available Utilities 
 [.stripes-even,cols="20,~"]
 |===
-| link:utilities.html#Keycloak[Keycloak]
+| xref:utilities.adoc#keycloak[Keycloak]
 | The IAM service used by OneCX
 
-| link:utilities.html#Postgres[Postgres]
+| xref:utilities.adoc#postgres[Postgres]
 | Storing the data. For each OneCX backend service a separate database exists.
 
-| link:utilities.html#pgAdmin[pgAdmin]
+| xref:utilities.adoc#pgadmin[pgAdmin]
 | Manage the Postgres databases.
 
-| link:utilities.html#Traefik[Traefik]
+| xref:utilities.adoc#traefik[Traefik]
 | Proxy service for routing requests between services within the Docker network and from/to outside.  
 |===

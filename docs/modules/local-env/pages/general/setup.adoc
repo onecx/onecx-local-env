@@ -4,7 +4,7 @@
 :imagesdir: ../../images
 
 This guide provides instructions for setting up and installing *onecx-local-env*, the local development environment for OneCX. It covers prerequisites, installation steps and initial configuration required to get *onecx-local-env* up and running on your local machine.
-Once setup is done the environment can be started, see xref:documentation:local-env:general/getting-started.adoc[Getting Started].
+Once setup is done the environment can be started, see xref:getting-started.adoc[Getting Started].
 
 == Prerequisites
 === Supported Operating Systems
