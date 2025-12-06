@@ -1,7 +1,7 @@
 = Extending the default Environment
 :idprefix:
 :idseparator: -
-:imagesdir: ../images
+:imagesdir: ../../../images
 
 There are several ways to expand the OneCX local environment:
 
@@ -11,7 +11,7 @@ If a microfrontend has been started separately, integration can be easily accomp
 
 If the microfrontend requires its own backend functionality, then these services must be started.
 
-Follow the instructions xref:local-mfe.adoc[Integrate a local Microfrontend] to use your microfrontend directly in OneCX.
+Follow the instructions xref:./local-mfe.adoc[Integrate a local Microfrontend] to use your microfrontend directly in OneCX.
 
 [TIP]
 This approach enables hot-reloading of your local micro-frontend: changes you make there are automatically visible in OneCX after the rebuild. The best way for fast frontend development.
@@ -19,6 +19,6 @@ This approach enables hot-reloading of your local micro-frontend: changes you ma
 == Adding a custom docker-compose file
 To integrate Docker images into OneCX, you need a separate docker.compose file to manage the integration.
 
-Follow the instructions in xref:local-mfe.adoc [Integrating Docker Images] to integrate your images into OneCX.
+Follow the instructions in xref:./docker-images.adoc[Integrating Docker Images] to integrate your images into OneCX.
 
 
