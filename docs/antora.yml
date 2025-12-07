@@ -1,2 +1,6 @@
-name: documentation
+name: onecx-local-env
+title: Local Environment
 version: latest
+start_page: local-env:index.adoc
+nav:
+  - modules/local-env/nav.adoc
