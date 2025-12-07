@@ -1,6 +1,6 @@
 * Local Environment
 ** xref:onecx-local-env:local-env:overview.adoc[Overview]
-** xref:documentation:local-env:getting-started.adoc[Getting Started]
+** xref:local-env:getting-started.adoc[Getting Started]
 ** xref:documentation:local-env:setup.adoc[Setup]
 ** xref:documentation:local-env:extend/extend.adoc[Extend OneCX]
 *** xref:documentation:local-env:extend/local-mfe.adoc[Local Microfrontend]
