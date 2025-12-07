@@ -1,2 +1,4 @@
 name: documentation
 version: latest
+nav:
+  - modules/local-env/nav.adoc     # Registers the module's nav
