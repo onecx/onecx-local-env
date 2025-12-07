@@ -1,0 +1,6 @@
+= Troubleshooting Common Errors
+:idprefix:
+:idseparator: -
+:imagesdir: ../../images
+
+...coming soon
