@@ -1,8 +1,8 @@
 * Local Environment
-** xref:documentation:local-env:index.adoc[Overview]
+** xref:documentation:local-env:overview.adoc[Overview]
 ** xref:documentation:local-env:getting-started.adoc[Getting Started]
 ** xref:documentation:local-env:setup.adoc[Setup]
-** xref:documentation:local-env:extend/extend.adoc[Extending]
+** xref:documentation:local-env:extend/extend.adoc[Extend OneCX]
 *** xref:documentation:local-env:extend/local-mfe.adoc[Local Microfrontend]
 *** xref:documentation:local-env:extend/local-images.adoc[Local Images]
 ** Scripts
@@ -21,6 +21,7 @@
 *** xref:documentation:local-env:advanced/default-database.adoc[Default Databases]
 *** xref:documentation:local-env:advanced/imports.adoc[Default Data & Imports]
 *** xref:documentation:local-env:advanced/networking.adoc[Networking in OneCX]
-** FAQ & Help
-*** xref:documentation:local-env:faq/faq.adoc[FAQ]
-*** xref:documentation:local-env:faq/common-issues.adoc[Common Issues]
+** xref:documentation:local-env:help/troubleshooting.adoc[Troubleshooting]
+//** Get Help
+//*** xref:documentation:local-env:help/faq.adoc[FAQ]
+//*** xref:documentation:local-env:help/common-issues.adoc[Common Issues]
