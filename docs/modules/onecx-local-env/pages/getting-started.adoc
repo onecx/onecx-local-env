@@ -46,7 +46,7 @@ The default login credentials for the admin user are:
 image::screenshot_successful-start-onecx.png[]
 
 
-[HINT]
+[NOTE]
 ====
 If the environment was started with only essential services, not all UI functions are available. This is not a bug, but by design. To start all services, start with
 

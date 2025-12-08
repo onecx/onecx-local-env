@@ -116,7 +116,11 @@ To ensure that all relevant hostnames are correctly routed to the local machine 
 ==== Editing the hosts file
 After identifying the relevant file location, the *hosts* file can be edited using any text editor of choice. It is important to note that editing the *hosts* file will require administrator privileges on most systems. It's therefore important to edit the file with elevated permissions (e.g. by running `sudo nano /etc/hosts` on Linux/MacOS or opening Notepad as Administrator on Windows).
 
+[#hosts]
 The following entries need to be added to the end of the *hosts* file:
+.Click to open
+[%collapsible]
+====
 [source:text]
 ----
 # OneCX - base
@@ -163,6 +167,7 @@ The following entries need to be added to the end of the *hosts* file:
 127.0.0.1 onecx-user-profile-svc
 127.0.0.1 onecx-user-profile-bff
 ----
+====
 
 Windows users should ensure that the entries are automatically synced to WSL2 by following these steps:
 
