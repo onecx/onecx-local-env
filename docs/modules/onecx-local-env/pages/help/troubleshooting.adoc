@@ -14,27 +14,22 @@ This page provides information for how to troubleshoot common problems and error
 image::./issues/status-code-000-import-onecx.sh.png[]
 
 .Solution
-Check if the hosts files is up-to-date. See xref:../setup.adoc#hosts[Setup hosts] instructions.
+* Check if the hosts files is up-to-date. See xref:../setup.adoc#hosts[Setup hosts] instructions.
 
 
 == Cannot successful pull the latest version onecx-local-env
 .Occurrence
-----
 * On `git pull` (get latest of onecx-local-env)
-----
 
 .Untracked local files on pulling
 image::./issues/untracked-files-on-pull.sh.png[]
 
 .Probably also your init_data/traefik/active was created by root
-
 image::./issues/traefik-active_created-by-root.sh.png[]
 
 .Solution
-----
 * Remove the active directory of Traefik
 ** `sudo rm -rf init_data/traefik/active`
 * Reset local repo
 ** `git reset --hard origin/main`
-----
 
