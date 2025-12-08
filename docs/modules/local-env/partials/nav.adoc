@@ -1,5 +1,5 @@
 * Local Environment
-** xref:onecx-local-env:local-env:overview.adoc[Overview]
+** xref:local-env:overview.adoc[Overview]
 ** xref:local-env:getting-started.adoc[Getting Started]
 ** xref:local-env:setup.adoc[Setup]
 ** xref:local-env:extend/extend.adoc[Extend OneCX]
