@@ -20,6 +20,7 @@ export NC='\033[0m' # No Color
 export OLE_EDITION="v2"
 export OLE_LINE_PREFIX="  * "
 export OLE_HEADER_CT_JSON="Content-Type: application/json"
+ENV_FILE="versions/${OLE_EDITION}/.env"
 
 
 #################################################################
@@ -45,8 +46,6 @@ fi
 
 #################################################################
 ## Security Authentication enabled?
-ENV_FILE="$import_start_dir/versions/$OLE_EDITION/.env"
-
 if [ -f "$ENV_FILE" ]; then
     OLE_SECURITY_AUTH_ENABLED_INT=$(grep -c "ONECX_SECURITY_AUTH_ENABLED=true" "$ENV_FILE")
 else
@@ -65,15 +64,31 @@ fi
 
 #################################################################
 ## KEYCLOAK
+if [ -f "$ENV_FILE" ]; then
+  kc_realm=$(grep "^KC_REALM=" "$ENV_FILE" | cut -d '=' -f2)
+  kc_apm_client_id=$(grep "^KC_CLIENT_ID=" "$ENV_FILE" | cut -d '=' -f2)
+  kc_auth_client_id=$(grep "^ONECX_OIDC_CLIENT_CLIENT_ID=" "$ENV_FILE" | cut -d '=' -f2)
+  kc_auth_client_secret=$(grep "^ONECX_OIDC_CLIENT_SECRET=" "$ENV_FILE" | cut -d '=' -f2)
+fi
+# Missing?
+if [ -z "$kc_realm" ]; then
+  printf "${RED}Could not read 'KC_REALM' from "$ENV_FILE"${NC}\n"
+  exit 1
+elif [ -z "$kc_apm_client_id" ]; then
+  printf "${RED}Could not read 'KC_CLIENT_ID' from "$ENV_FILE"${NC}\n"
+  exit 1
+elif [ -z "$kc_auth_client_id" ]; then
+  printf "${RED}Could not read 'ONECX_OIDC_CLIENT_CLIENT_ID' from "$ENV_FILE"${NC}\n"
+  exit 1
+elif [ -z "$kc_auth_client_secret" ]; then
+  printf "${RED}Could not read 'ONECX_OIDC_CLIENT_SECRET' from "$ENV_FILE"${NC}\n"
+  exit 1
+fi
 
-# FIX: Replaced 'declare -A' (Bash 4+) with 'case' (Bash 3.2 compatible)
-KC_REALM="onecx"
-KC_TOKEN_URL="http://keycloak-app/realms/$KC_REALM/protocol/openid-connect/token"
+KC_TOKEN_URL="http://keycloak-app/realms/${kc_realm}/protocol/openid-connect/token"
 KC_TOKEN_CT="Content-Type: application/x-www-form-urlencoded"
-KC_APM_CLIENT_ID="onecx-shell-ui-client"
-KC_AUTH_CLIENT_ID="onecx-local-env-import"
-KC_AUTH_CLIENT_SECRET="t4LXKbpxedZoHn9mynwSih9Cz9W1VbS8u9vaDz5A"
 
+# Identify user for tenants
 case "$1" in
     "t1")
         KC_USER="onecx_t1_admin"
@@ -90,28 +105,28 @@ case "$1" in
         ;;
 esac
 
-printf "  edition: ${GREEN}$OLE_EDITION${NC}, tenant: ${GREEN}$1${NC}, type: ${GREEN}$IMPORT_TYPE${NC}, user: ${GREEN}$KC_USER${NC}, security authentication: ${GREEN}$OLE_SECURITY_AUTH_USED${NC}\n"
+printf "  edition: ${GREEN}${OLE_EDITION}${NC}, tenant: ${GREEN}$1${NC}, type: ${GREEN}${IMPORT_TYPE}${NC}, user: ${GREEN}${KC_USER}${NC}, security authentication: ${GREEN}${OLE_SECURITY_AUTH_USED}${NC}\n"
 
 
 unset OLE_HEADER_APM_TOKEN
 unset OLE_HEADER_AUTH_TOKEN
 #################################################################
 ## If Security Authentication is enabled then get tokens
-if [[ "$OLE_SECURITY_AUTH_ENABLED" == "true" || "$OLE_SECURITY_AUTH_ENABLED" == "1" ]]; then
+if [[ "${OLE_SECURITY_AUTH_ENABLED}" == "true" || "${OLE_SECURITY_AUTH_ENABLED}" == "1" ]]; then
   ## Get APM token for user: User info, roles, scope: Organization_ID
-  printf "${CYAN}Fetching tokens (APM, AUTH) from Keycloak (realm: $KC_REALM, user: $KC_USER)... ${NC}\n"
+  printf "${CYAN}Fetching tokens (APM, AUTH) from Keycloak (realm: ${kc_realm}, user: ${KC_USER})... ${NC}\n"
   
-  OLE_CURL_PARAMETER="--silent -d username=$KC_USER -d password=$KC_PWD -d grant_type=password -d client_id=$KC_APM_CLIENT_ID"
+  OLE_CURL_PARAMETER="--silent -d username=${KC_USER} -d password=${KC_PWD} -d grant_type=password -d client_id=${kc_apm_client_id}"
   
   # Capture token, handle potential curl errors cleanly
   TOKEN_RES=$(curl $OLE_CURL_PARAMETER "$KC_TOKEN_URL")
-  export OLE_HEADER_APM_TOKEN="apm-principal-token: $(echo "$TOKEN_RES" | jq -r .access_token)"
+  export OLE_HEADER_APM_TOKEN="apm-principal-token: $(echo "${TOKEN_RES}" | jq -r .access_token)"
 
   ## Get AUTH (Bearer, access) token: scopes for SVCs
-  OLE_CURL_PARAMETER="--silent -d client_secret=$KC_AUTH_CLIENT_SECRET -d grant_type=client_credentials -d client_id=$KC_AUTH_CLIENT_ID"
+  OLE_CURL_PARAMETER="--silent -d client_secret=${kc_auth_client_secret} -d grant_type=client_credentials -d client_id=${kc_auth_client_id}"
   
   TOKEN_RES=$(curl $OLE_CURL_PARAMETER "$KC_TOKEN_URL")
-  export OLE_HEADER_AUTH_TOKEN="Authorization: Bearer $(echo "$TOKEN_RES" | jq -r .access_token)"
+  export OLE_HEADER_AUTH_TOKEN="Authorization: Bearer $(echo "${TOKEN_RES}" | jq -r .access_token)"
 fi
 
 

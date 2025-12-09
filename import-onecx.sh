@@ -125,7 +125,7 @@ export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
 
 #################################################################
 if [[ "$CHECKING_SERVICES" == "true" ]]; then
-  printf "  Ensure that all services used by imports are running, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}   (to skip this start with -x option)\n"
+  printf "  Ensure that all services used by imports are running, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}   (skip this using -x option)\n"
   
   # Using 'docker compose' (v2). If using older docker, change to 'docker-compose'
   # Docker services are restartet only if some setting was different (e.g. security)

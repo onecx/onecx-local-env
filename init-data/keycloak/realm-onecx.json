@@ -106,7 +106,6 @@
       }
     ],
     "client": {
-      "dummy": [],
       "realm-management": [
         {
           "id": "10df2e04-bbc0-489e-ba4f-90e811381f75",
@@ -880,9 +879,9 @@
     },
     {
       "id": "8c947402-1f5f-4cfe-ace6-cab68509465c",
-      "clientId": "onecx-local-env-import",
-      "name": "onecx-local-env-import",
-      "description": "Client for initial OneCX imports",
+      "clientId": "onecx-local-env-client-id",
+      "name": "onecx-local-env-client",
+      "description": "Client for OneCX",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
@@ -961,21 +960,46 @@
         "profile",
         "email",
         "Organization_ID",
+        "ocx-an:read",
         "ocx-an:write",
+        "ocx-an:delete",
+        "ocx-bm:read",
         "ocx-bm:write",
+        "ocx-bm:delete",
+        "ocx-hp:read",
         "ocx-hp:write",
+        "ocx-hp:delete",
+        "ocx-pa:read",
+        "ocx-pa:write",
+        "ocx-pa:delete",
         "ocx-pa-op:write",
+        "ocx-pm:read",
         "ocx-pm:write",
+        "ocx-pm:delete",
+        "ocx-ps:read",
+        "ocx-ps:write",
+        "ocx-ps:delete",
         "ocx-ps-mfe:write",
         "ocx-ps-ms:write",
         "ocx-ps-product:write",
         "ocx-ps-slot:write",
+        "ocx-sc:read",
         "ocx-sc:write",
+        "ocx-sc:delete",
+        "ocx-th:read",
         "ocx-th:write",
+        "ocx-th:delete",
+        "ocx-tn:read",
         "ocx-tn:write",
+        "ocx-up:read",
         "ocx-up:write",
+        "ocx-up:delete",
+        "ocx-wc:read",
         "ocx-wc:write",
-        "ocx-ws:write"
+        "ocx-wc:delete",
+        "ocx-ws:read",
+        "ocx-ws:write",
+        "ocx-ws:delete"
       ],
       "optionalClientScopes": [
         "address",
@@ -1082,84 +1106,6 @@
         "offline_access",
         "microprofile-jwt"
       ]
-    },
-    {
-      "clientId": "dummy",
-      "name": "dummy",
-      "description": "Dummy client for the BFFs",
-      "surrogateAuthRequired": false,
-      "enabled": true,
-      "alwaysDisplayInConsole": false,
-      "clientAuthenticatorType": "client-secret",
-      "secret": "dummy",
-      "redirectUris": [],
-      "webOrigins": [],
-      "notBefore": 0,
-      "bearerOnly": false,
-      "consentRequired": false,
-      "standardFlowEnabled": false,
-      "implicitFlowEnabled": false,
-      "directAccessGrantsEnabled": false,
-      "serviceAccountsEnabled": true,
-      "publicClient": false,
-      "frontchannelLogout": false,
-      "protocol": "openid-connect",
-      "attributes": {},
-      "authenticationFlowBindingOverrides": {},
-      "fullScopeAllowed": true,
-      "nodeReRegistrationTimeout": -1,
-      "protocolMappers": [
-        {
-          "id": "c13fc4f3-a370-4b51-905e-b2b08ae244f2",
-          "name": "Client ID",
-          "protocol": "openid-connect",
-          "protocolMapper": "oidc-usersessionmodel-note-mapper",
-          "consentRequired": false,
-          "config": {
-            "user.session.note": "clientId",
-            "id.token.claim": "true",
-            "access.token.claim": "true",
-            "claim.name": "clientId",
-            "jsonType.label": "String"
-          }
-        },
-        {
-          "id": "1ce77cf0-b924-4f94-a65b-a9496486d14c",
-          "name": "Client IP Address",
-          "protocol": "openid-connect",
-          "protocolMapper": "oidc-usersessionmodel-note-mapper",
-          "consentRequired": false,
-          "config": {
-            "user.session.note": "clientAddress",
-            "id.token.claim": "true",
-            "access.token.claim": "true",
-            "claim.name": "clientAddress",
-            "jsonType.label": "String"
-          }
-        },
-        {
-          "id": "9d38c513-0815-41b2-8056-d0c6796783eg",
-          "name": "Client Host",
-          "protocol": "openid-connect",
-          "protocolMapper": "oidc-usersessionmodel-note-mapper",
-          "consentRequired": false,
-          "config": {
-            "user.session.note": "clientHost",
-            "id.token.claim": "true",
-            "access.token.claim": "true",
-            "claim.name": "clientHost",
-            "jsonType.label": "String"
-          }
-        }
-      ],
-      "defaultClientScopes": [
-        "web-origins",
-        "idm:apm:read",
-        "profile",
-        "roles",
-        "email"
-      ],
-      "optionalClientScopes": []
     }
   ],
   "clientScopes": [
@@ -1311,8 +1257,29 @@
       ]
     },
     {
+      "id": "ocx-an:read",
+      "name": "ocx-an:read",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
       "id": "ocx-an:write",
       "name": "ocx-an:write",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-an:delete",
+      "name": "ocx-an:delete",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-bm:read",
+      "name": "ocx-bm:read",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
@@ -1325,8 +1292,50 @@
       "attributes": {}
     },
     {
+      "id": "ocx-bm:delete",
+      "name": "ocx-bm:delete",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-hp:read",
+      "name": "ocx-hp:read",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
       "id": "ocx-hp:write",
       "name": "ocx-hp:write",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-hp:delete",
+      "name": "ocx-hp:delete",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-pa:read",
+      "name": "ocx-pa:read",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-pa:write",
+      "name": "ocx-pa:write",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-pa:delete",
+      "name": "ocx-pa:delete",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
@@ -1339,8 +1348,43 @@
       "attributes": {}
     },
     {
+      "id": "ocx-pm:read",
+      "name": "ocx-pm:read",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
       "id": "ocx-pm:write",
       "name": "ocx-pm:write",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-pm:delete",
+      "name": "ocx-pm:delete",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-ps:read",
+      "name": "ocx-ps:read",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-ps:write",
+      "name": "ocx-ps:write",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-ps:delete",
+      "name": "ocx-ps:delete",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
@@ -1374,8 +1418,29 @@
       "attributes": {}
     },
     {
+      "id": "ocx-sc:read",
+      "name": "ocx-sc:read",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
       "id": "ocx-sc:write",
       "name": "ocx-sc:write",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-sc:delete",
+      "name": "ocx-sc:delete",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-th:read",
+      "name": "ocx-th:read",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
@@ -1388,8 +1453,29 @@
       "attributes": {}
     },
     {
+      "id": "ocx-th:delete",
+      "name": "ocx-th:delete",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-tn:read",
+      "name": "ocx-tn:read",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
       "id": "ocx-tn:write",
       "name": "ocx-tn:write",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-up:read",
+      "name": "ocx-up:read",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
@@ -1402,6 +1488,20 @@
       "attributes": {}
     },
     {
+      "id": "ocx-up:delete",
+      "name": "ocx-up:delete",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-wc:read",
+      "name": "ocx-wc:read",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
       "id": "ocx-wc:write",
       "name": "ocx-wc:write",
       "description": "created by initial import",
@@ -1409,8 +1509,29 @@
       "attributes": {}
     },
     {
+      "id": "ocx-wc:delete",
+      "name": "ocx-wc:delete",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-ws:read",
+      "name": "ocx-ws:read",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
       "id": "ocx-ws:write",
       "name": "ocx-ws:write",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-ws:delete",
+      "name": "ocx-ws:delete",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
