@@ -119,7 +119,7 @@ After identifying the relevant file location, the *hosts* file can be edited usi
 [#hosts]
 The following entries need to be added to the end of the *hosts* file:
 
-.Click to open
+.Click to open for hosts entries
 [%collapsible]
 ====
 [source:text]
