@@ -1,7 +1,8 @@
 = Troubleshooting Common Errors
 :idprefix:
 :idseparator: -
-:imagesdir: ../../images/issues
+:icons: font
+:imagesdir: ../images/issues
 
 This page provides information for how to troubleshoot common problems and errors.
 
@@ -18,18 +19,17 @@ image::status-code-000-import-onecx.sh.png[]
 
 
 == Cannot successful pull the latest version onecx-local-env
-.Occurrence
-* On `git pull` (get latest of onecx-local-env)
+The issue occurs if the repository is updated with `git pull` (get latest version of onecx-local-env)
 
-.Untracked local files on pulling
+.Message: Untracked local files on pulling
 image::untracked-files-on-pull.sh.png[]
 
-.Probably also your init_data/traefik/active was created by root
+.The directory init_data/traefik/active was created by root
 image::traefik-active_created-by-root.sh.png[]
 
-.Solution
-* Remove the active directory of Traefik
+.Solution icon:lightbulb-o[yellow]
+* Remove the active directory of Traefik manually by execution of
 ** `sudo rm -rf init_data/traefik/active`
-* Reset local repo
+* Reset the local repo (all other changes will be lost)
 ** `git reset --hard origin/main`
 
