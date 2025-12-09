@@ -2,30 +2,29 @@
 :idprefix:
 :idseparator: -
 :icons: font
-:imagesdir: ../images/issues
+:imagesdir: ../images
 
 This page provides information for how to troubleshoot common problems and errors.
 
 
 == Starting with Status Code "000" on Imports
-.Issue
-* The issue occurs when the script xref:../scripts/import.adoc[`./import-onecx.sh`] is executed (importing OneCX data)
+The issue occurs when the script xref:scripts/import.adoc[`import-onecx.sh`] is executed (importing OneCX data)
 
 .Status code 000 on initial imports
-image::status-code-000-import-onecx.sh.png[]
+image::issues/status-code-000-import-onecx.sh.png[]
 
 .Solution
-* Check if the hosts files is up-to-date. See xref:../setup.adoc#hosts[Setup hosts] instructions.
+* Check if the hosts files is up-to-date. See xref:setup.adoc#hosts[Setup hosts] instructions.
 
 
 == Cannot successful pull the latest version onecx-local-env
 The issue occurs if the repository is updated with `git pull` (get latest version of onecx-local-env)
 
 .Message: Untracked local files on pulling
-image::untracked-files-on-pull.sh.png[]
+image::issues/untracked-files-on-pull.sh.png[]
 
 .The directory init_data/traefik/active was created by root
-image::traefik-active_created-by-root.sh.png[]
+image::issues/traefik-active_created-by-root.sh.png[]
 
 .Solution icon:lightbulb-o[yellow]
 * Remove the active directory of Traefik manually by execution of
