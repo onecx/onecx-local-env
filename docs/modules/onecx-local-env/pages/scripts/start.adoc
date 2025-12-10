@@ -10,6 +10,11 @@ The *start-onecx.sh* script is used to start the OneCX Local Environment. By def
 ./start-onecx.sh
 ----
 
+[NOTE]
+====
+The script can be executed at any time. Docker checks the configuration of the services and restarts them if there are changes. Without changes, running services are not affected, and only missing services are started. Existing data that was imported or added by the user remains unchanged. 
+====
+
 == Available Flags
 The script accepts several optional flags to customize its behavior. Some flags can be combined. The flags are:
 
@@ -34,12 +39,6 @@ When used, the services are started in such a way that they always require authe
 
 -x::
 Skips the import of initial data after starting the services. (Default: import data according to the used profile)
-
-
-[NOTE]
-====
-The script can be executed at any time. Docker checks the configuration of the services and restarts them if there are changes. Without changes, running services are not affected, and only missing services are started.
-====
 
 == Examples
 
