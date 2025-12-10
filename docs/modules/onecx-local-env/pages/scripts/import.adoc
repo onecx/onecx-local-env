@@ -17,7 +17,7 @@ image::script_import-onecx.sh.png[]
 
 
 == Available Flags
-The script accepts several optional flags to customize its behavior. The available flags are:
+The script accepts several optional flags to customize its behavior. Some flags can be combined. The flags are:
 
 -d::
 Specify a set of data to be imported (all, base) or a specific data type like workspace, theme etc.
@@ -50,7 +50,7 @@ Define the tenant for tenant-specific imports (e.g. workspace, theme). In conseq
 
 -x:: Skip checking running Docker services
 [CAUTION]
-When used, Docker does not check whether services require authentication. Please use the same security settings as when starting Docker.
+When used, Docker does not check whether services require authentication. Please use the same security settings as when starting with xref:./start.adoc[start-onecx.sh].
 
 
 == Examples
