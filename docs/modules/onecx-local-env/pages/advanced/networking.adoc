@@ -197,7 +197,6 @@ Key networking-related shared environment variables in `common.env`:
 ----
 KC_REALM=onecx
 QUARKUS_OIDC_AUTH_SERVER_URL=http://keycloak-app:8080/realms/${KC_REALM}
-QUARKUS_OIDC_TOKEN_ISSUER=http://keycloak-app/realms/${KC_REALM}
 ----
 
 ==== Service-Specific Configuration
