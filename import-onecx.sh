@@ -54,6 +54,10 @@ CHECKING_SERVICES=true  # check running Docker services before import
 #################################################################
 # check parameter
 while getopts ":hd:svt:e:x" opt; do
+  if [[ "$opt" == ":" && ("$OPTARG" == "d" || "$OPTARG" == "e" || "$OPTARG" == "t") ]]; then
+    printf "${RED}  Missing paramter for option -${OPTARG}${NC}\n"
+    usage
+  fi
   case "$opt" in
         d ) 
             if [[ ! "$OPTARG" =~ ^(all|base|assignment|bookmark|parameter|permission|mfe|ms|product|slot|tenant|theme|welcome|workspace)$ ]]; then
@@ -68,12 +72,11 @@ while getopts ":hd:svt:e:x" opt; do
               PROFILE=data-import
             fi
             ;;
-        e )
-            if [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
-               printf "${RED}  Unknown Edition${NC}\n"
-               usage
+        e ) if [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
+              printf "${RED}  Unknown Edition, should be one of [ 'v1', 'v2' ]${NC}\n"
+              usage
             else
-               EDITION=$OPTARG
+              EDITION=$OPTARG
             fi
             ;;
         v ) VERBOSE=true
@@ -112,11 +115,11 @@ if [ -n $OLE_SECURITY_AUTH_ENABLED ]; then
     SECURITY_AUTH_USED=yes
   fi
   #
-  # if this script was executed directly then check the security need by itself:
-  # Check if file exists to prevent crash
+  # If this script was executed directly, check the security settings.:
 elif [ -f "$ENV_FILE" ]; then
-    OLE_SECURITY_AUTH_ENABLED_INT=$(grep -c "ONECX_SECURITY_AUTH_ENABLED=true" "$ENV_FILE")
-    if [[ ($OLE_SECURITY_AUTH_ENABLED_INT == 1) || ($SECURITY == "true") ]]; then
+    OLE_SECURITY_AUTH_ENABLED=$(grep "^ONECX_SECURITY_AUTH_ENABLED=" "$ENV_FILE" | cut -d '=' -f2 )
+    # env file enabling or -s
+    if [[ ($OLE_SECURITY_AUTH_ENABLED == "true") || ($SECURITY == "true") ]]; then
       SECURITY_AUTH_USED=yes
     fi
 fi
@@ -125,7 +128,7 @@ export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
 
 #################################################################
 if [[ "$CHECKING_SERVICES" == "true" ]]; then
-  printf "  Ensure that all services used by imports are running, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}   (to skip this start with -x option)\n"
+  printf "  Ensure that all services used by imports are running with security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}   (skip this using -x option)\n"
   
   # Using 'docker compose' (v2). If using older docker, change to 'docker-compose'
   # Docker services are restartet only if some setting was different (e.g. security)

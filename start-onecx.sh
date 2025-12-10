@@ -52,6 +52,11 @@ IMPORT=yes
 #################################################################
 ## Check flags and parameter
 while getopts ":he:p:sx" opt; do
+  # check parameter of option
+  if [[ "$opt" == ":" && ("$OPTARG" == "e" || "$OPTARG" == "p") ]]; then
+    printf "${RED}  Missing paramter for option -${OPTARG}${NC}\n"
+    usage
+  fi
   case "$opt" in
     e ) if [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
           printf "${RED}  Inacceptable Edition, should be one of [ 'v1', 'v2' ]${NC}\n"

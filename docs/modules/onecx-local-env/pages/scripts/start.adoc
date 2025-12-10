@@ -27,6 +27,10 @@ The profile to use when starting the environment. The supported profiles are:
 
 -s::
 Enables secure mode, which enforces authentication/authorization. (Default: disabled)
+[CAUTION]
+====
+When used, the services are started in such a way that they always require authentication, i.e., during import and when used via the browser!
+====
 
 -x::
 Skips the import of initial data after starting the services. (Default: import data according to the used profile)
