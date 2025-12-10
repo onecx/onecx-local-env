@@ -80,15 +80,9 @@
         "description": "${role_default-roles}",
         "composite": true,
         "composites": {
-          "realm": [
-            "offline_access",
-            "uma_authorization"
-          ],
+          "realm": ["offline_access", "uma_authorization"],
           "client": {
-            "account": [
-              "manage-account",
-              "view-profile"
-            ]
+            "account": ["manage-account", "view-profile"]
           }
         },
         "clientRole": false,
@@ -174,10 +168,7 @@
           "composite": true,
           "composites": {
             "client": {
-              "realm-management": [
-                "query-groups",
-                "query-users"
-              ]
+              "realm-management": ["query-groups", "query-users"]
             }
           },
           "clientRole": true,
@@ -263,9 +254,7 @@
           "composite": true,
           "composites": {
             "client": {
-              "realm-management": [
-                "query-clients"
-              ]
+              "realm-management": ["query-clients"]
             }
           },
           "clientRole": true,
@@ -341,9 +330,7 @@
           "composite": true,
           "composites": {
             "client": {
-              "account": [
-                "manage-account-links"
-              ]
+              "account": ["manage-account-links"]
             }
           },
           "clientRole": true,
@@ -357,9 +344,7 @@
           "composite": true,
           "composites": {
             "client": {
-              "account": [
-                "view-consent"
-              ]
+              "account": ["view-consent"]
             }
           },
           "clientRole": true,
@@ -432,9 +417,7 @@
     "clientRole": false,
     "containerId": "onecx"
   },
-  "requiredCredentials": [
-    "password"
-  ],
+  "requiredCredentials": ["password"],
   "otpPolicyType": "totp",
   "otpPolicyAlgorithm": "HmacSHA1",
   "otpPolicyInitialCounter": 0,
@@ -449,9 +432,7 @@
   ],
   "localizationTexts": {},
   "webAuthnPolicyRpEntityName": "keycloak",
-  "webAuthnPolicySignatureAlgorithms": [
-    "ES256"
-  ],
+  "webAuthnPolicySignatureAlgorithms": ["ES256"],
   "webAuthnPolicyRpId": "",
   "webAuthnPolicyAttestationConveyancePreference": "not specified",
   "webAuthnPolicyAuthenticatorAttachment": "not specified",
@@ -462,9 +443,7 @@
   "webAuthnPolicyAcceptableAaguids": [],
   "webAuthnPolicyExtraOrigins": [],
   "webAuthnPolicyPasswordlessRpEntityName": "keycloak",
-  "webAuthnPolicyPasswordlessSignatureAlgorithms": [
-    "ES256"
-  ],
+  "webAuthnPolicyPasswordlessSignatureAlgorithms": ["ES256"],
   "webAuthnPolicyPasswordlessRpId": "",
   "webAuthnPolicyPasswordlessAttestationConveyancePreference": "not specified",
   "webAuthnPolicyPasswordlessAuthenticatorAttachment": "not specified",
@@ -492,9 +471,7 @@
           "value": "onecx"
         }
       ],
-      "realmRoles": [
-        "onecx-admin"
-      ]
+      "realmRoles": ["onecx-admin"]
     },
     {
       "id": "3248e0b4-a5a8-4091-94e2-64e4f961f268",
@@ -513,9 +490,7 @@
           "value": "onecx_user"
         }
       ],
-      "realmRoles": [
-        "onecx-user"
-      ]
+      "realmRoles": ["onecx-user"]
     },
     {
       "id": "9e70a802-b9bd-496c-a03f-e866c4a7f8ca",
@@ -528,9 +503,7 @@
       "lastName": "T1 Admin",
       "email": "onecx_t1_admin@1000kit.org",
       "attributes": {
-        "orgId": [
-          "t1"
-        ]
+        "orgId": ["t1"]
       },
       "credentials": [
         {
@@ -538,9 +511,7 @@
           "value": "onecx_t1_admin"
         }
       ],
-      "realmRoles": [
-        "onecx-admin"
-      ]
+      "realmRoles": ["onecx-admin"]
     },
     {
       "id": "f9d671d6-995b-49d7-9328-56d8020db58c",
@@ -553,9 +524,7 @@
       "lastName": "T1 User",
       "email": "onecx_t1_user@1000kit.org",
       "attributes": {
-        "orgId": [
-          "t1"
-        ]
+        "orgId": ["t1"]
       },
       "credentials": [
         {
@@ -563,9 +532,7 @@
           "value": "onecx_t1_user"
         }
       ],
-      "realmRoles": [
-        "onecx-user"
-      ]
+      "realmRoles": ["onecx-user"]
     },
     {
       "id": "3a16329a-825b-4b8f-bcbb-4dee95c688a8",
@@ -578,12 +545,8 @@
       "lastName": "T2 Admin",
       "email": "onecx_t2_admin@1000kit.org",
       "attributes": {
-        "partyId": [
-          "107"
-        ],
-        "orgId": [
-          "t2"
-        ]
+        "partyId": ["107"],
+        "orgId": ["t2"]
       },
       "credentials": [
         {
@@ -591,9 +554,7 @@
           "value": "onecx_t2_admin"
         }
       ],
-      "realmRoles": [
-        "onecx-admin"
-      ]
+      "realmRoles": ["onecx-admin"]
     },
     {
       "id": "58ed91c9-0444-4399-9070-ec28d6aaa00a",
@@ -606,12 +567,8 @@
       "lastName": "T2 User",
       "email": "onecx_t2_user@1000kit.org",
       "attributes": {
-        "partyId": [
-          "107"
-        ],
-        "orgId": [
-          "t2"
-        ]
+        "partyId": ["107"],
+        "orgId": ["t2"]
       },
       "credentials": [
         {
@@ -619,28 +576,20 @@
           "value": "onecx_t2_user"
         }
       ],
-      "realmRoles": [
-        "onecx-user"
-      ]
+      "realmRoles": ["onecx-user"]
     }
-
   ],
   "scopeMappings": [
     {
       "clientScope": "offline_access",
-      "roles": [
-        "offline_access"
-      ]
+      "roles": ["offline_access"]
     }
   ],
   "clientScopeMappings": {
     "account": [
       {
         "client": "account-console",
-        "roles": [
-          "manage-account",
-          "view-groups"
-        ]
+        "roles": ["manage-account", "view-groups"]
       }
     ]
   },
@@ -655,9 +604,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "redirectUris": [
-        "/realms/onecx/account/*"
-      ],
+      "redirectUris": ["/realms/onecx/account/*"],
       "webOrigins": [],
       "notBefore": 0,
       "bearerOnly": false,
@@ -673,12 +620,7 @@
       "authenticationFlowBindingOverrides": {},
       "fullScopeAllowed": false,
       "nodeReRegistrationTimeout": 0,
-      "defaultClientScopes": [
-        "web-origins",
-        "roles",
-        "profile",
-        "email"
-      ],
+      "defaultClientScopes": ["web-origins", "roles", "profile", "email"],
       "optionalClientScopes": [
         "address",
         "phone",
@@ -696,9 +638,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "redirectUris": [
-        "/realms/onecx/account/*"
-      ],
+      "redirectUris": ["/realms/onecx/account/*"],
       "webOrigins": [],
       "notBefore": 0,
       "bearerOnly": false,
@@ -726,12 +666,7 @@
           "config": {}
         }
       ],
-      "defaultClientScopes": [
-        "web-origins",
-        "roles",
-        "profile",
-        "email"
-      ],
+      "defaultClientScopes": ["web-origins", "roles", "profile", "email"],
       "optionalClientScopes": [
         "address",
         "phone",
@@ -763,12 +698,7 @@
       "authenticationFlowBindingOverrides": {},
       "fullScopeAllowed": false,
       "nodeReRegistrationTimeout": 0,
-      "defaultClientScopes": [
-        "web-origins",
-        "roles",
-        "profile",
-        "email"
-      ],
+      "defaultClientScopes": ["web-origins", "roles", "profile", "email"],
       "optionalClientScopes": [
         "address",
         "phone",
@@ -800,12 +730,7 @@
       "authenticationFlowBindingOverrides": {},
       "fullScopeAllowed": false,
       "nodeReRegistrationTimeout": 0,
-      "defaultClientScopes": [
-        "web-origins",
-        "roles",
-        "profile",
-        "email"
-      ],
+      "defaultClientScopes": ["web-origins", "roles", "profile", "email"],
       "optionalClientScopes": [
         "address",
         "phone",
@@ -821,12 +746,8 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "redirectUris": [
-        "*"
-      ],
-      "webOrigins": [
-        "*"
-      ],
+      "redirectUris": ["*"],
+      "webOrigins": ["*"],
       "notBefore": 0,
       "bearerOnly": false,
       "consentRequired": false,
@@ -1033,12 +954,7 @@
       "authenticationFlowBindingOverrides": {},
       "fullScopeAllowed": false,
       "nodeReRegistrationTimeout": 0,
-      "defaultClientScopes": [
-        "web-origins",
-        "roles",
-        "profile",
-        "email"
-      ],
+      "defaultClientScopes": ["web-origins", "roles", "profile", "email"],
       "optionalClientScopes": [
         "address",
         "phone",
@@ -1056,12 +972,8 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "redirectUris": [
-        "/admin/onecx/console/*"
-      ],
-      "webOrigins": [
-        "+"
-      ],
+      "redirectUris": ["/admin/onecx/console/*"],
+      "webOrigins": ["+"],
       "notBefore": 0,
       "bearerOnly": false,
       "consentRequired": false,
@@ -1095,12 +1007,7 @@
           }
         }
       ],
-      "defaultClientScopes": [
-        "web-origins",
-        "roles",
-        "profile",
-        "email"
-      ],
+      "defaultClientScopes": ["web-origins", "roles", "profile", "email"],
       "optionalClientScopes": [
         "address",
         "phone",
@@ -1349,8 +1256,8 @@
       "attributes": {}
     },
     {
-      "id": "ocx-pa-ext:write",
-      "name": "ocx-pa-ext:write",
+      "id": "ocx-pa-ext:read",
+      "name": "ocx-pa-ext:read",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
@@ -1964,9 +1871,7 @@
   },
   "smtpServer": {},
   "eventsEnabled": false,
-  "eventsListeners": [
-    "jboss-logging"
-  ],
+  "eventsListeners": ["jboss-logging"],
   "enabledEventTypes": [],
   "adminEventsEnabled": false,
   "adminEventsDetailsEnabled": false,
@@ -1981,9 +1886,7 @@
         "subType": "authenticated",
         "subComponents": {},
         "config": {
-          "allow-default-scopes": [
-            "true"
-          ]
+          "allow-default-scopes": ["true"]
         }
       },
       {
@@ -2020,9 +1923,7 @@
         "subType": "anonymous",
         "subComponents": {},
         "config": {
-          "allow-default-scopes": [
-            "true"
-          ]
+          "allow-default-scopes": ["true"]
         }
       },
       {
@@ -2040,9 +1941,7 @@
         "subType": "anonymous",
         "subComponents": {},
         "config": {
-          "max-clients": [
-            "200"
-          ]
+          "max-clients": ["200"]
         }
       },
       {
@@ -2071,12 +1970,8 @@
         "subType": "anonymous",
         "subComponents": {},
         "config": {
-          "host-sending-registration-request-must-match": [
-            "true"
-          ],
-          "client-uris-must-match": [
-            "true"
-          ]
+          "host-sending-registration-request-must-match": ["true"],
+          "client-uris-must-match": ["true"]
         }
       }
     ],
@@ -2087,9 +1982,7 @@
         "providerId": "rsa-generated",
         "subComponents": {},
         "config": {
-          "priority": [
-            "100"
-          ]
+          "priority": ["100"]
         }
       },
       {
@@ -2098,12 +1991,8 @@
         "providerId": "hmac-generated",
         "subComponents": {},
         "config": {
-          "priority": [
-            "100"
-          ],
-          "algorithm": [
-            "HS256"
-          ]
+          "priority": ["100"],
+          "algorithm": ["HS256"]
         }
       },
       {
@@ -2112,9 +2001,7 @@
         "providerId": "aes-generated",
         "subComponents": {},
         "config": {
-          "priority": [
-            "100"
-          ]
+          "priority": ["100"]
         }
       }
     ]
