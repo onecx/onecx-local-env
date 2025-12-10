@@ -94,8 +94,6 @@ done
 
 #################################################################
 ## Security Authentication enabled?
-export OLE_SECURITY_AUTH_ENABLED=false
-
 if [[ $SECURITY == "false" ]]; then
   # read preset
   if [ -f "$ENV_FILE" ]; then
@@ -105,6 +103,8 @@ if [[ $SECURITY == "false" ]]; then
     fi
   fi
 fi
+# Visible for subsequent scripts
+export OLE_SECURITY_AUTH_ENABLED=$SECURITY
 
 
 #################################################################
