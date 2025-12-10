@@ -973,6 +973,7 @@
         "ocx-pa:write",
         "ocx-pa:delete",
         "ocx-pa-op:write",
+        "ocx-pa-ext:read",
         "ocx-pm:read",
         "ocx-pm:write",
         "ocx-pm:delete",
@@ -1343,6 +1344,13 @@
     {
       "id": "ocx-pa-op:write",
       "name": "ocx-pa-op:write",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-pa-ext:write",
+      "name": "ocx-pa-ext:write",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
@@ -2794,7 +2802,7 @@
     "oauth2DeviceCodeLifespan": "600",
     "parRequestUriLifespan": "60",
     "clientSessionMaxLifespan": "0",
-    "frontendUrl": "",
+    "frontendUrl": "http://keycloak-app:8080",
     "acr.loa.map": "{}"
   },
   "keycloakVersion": "23.0.4",
