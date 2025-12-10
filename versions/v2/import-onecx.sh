@@ -20,7 +20,6 @@ export NC='\033[0m' # No Color
 export OLE_EDITION="v2"
 export OLE_LINE_PREFIX="  * "
 export OLE_HEADER_CT_JSON="Content-Type: application/json"
-ENV_FILE="versions/${OLE_EDITION}/.env"
 
 
 #################################################################
@@ -43,6 +42,7 @@ if [[ "$current_dir" == "$OLE_EDITION" ]]; then
   import_start_dir="../.."
 fi
 
+ENV_FILE="$import_start_dir/versions/${OLE_EDITION}/.env"
 
 #################################################################
 ## Security Authentication enabled?
