@@ -46,20 +46,23 @@ fi
 
 #################################################################
 ## Security Authentication enabled?
-if [ -f "$ENV_FILE" ]; then
-    OLE_SECURITY_AUTH_ENABLED_INT=$(grep -c "ONECX_SECURITY_AUTH_ENABLED=true" "$ENV_FILE")
+# Check flag set by start script
+if [ -n $3 ]; then
+  if [[ $3 == "true" ]]; then
+    OLE_SECURITY_AUTH_ENABLED=true
+  fi
+elif [ -f "$ENV_FILE" ]; then
+  OLE_SECURITY_AUTH_ENABLED=$(grep "^ONECX_SECURITY_AUTH_ENABLED=" "$ENV_FILE" | cut -d '=' -f2 )
 else
-    OLE_SECURITY_AUTH_ENABLED_INT=0
+    OLE_SECURITY_AUTH_ENABLED=false
 fi
 
 # translate for displaying only:
 OLE_SECURITY_AUTH_USED="no"
-if [[ ($OLE_SECURITY_AUTH_ENABLED_INT == 1) || ($3 == "true") ]]; then
+if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then
   OLE_SECURITY_AUTH_USED="yes"
-  export OLE_SECURITY_AUTH_ENABLED=true
-else
-  export OLE_SECURITY_AUTH_ENABLED=false
 fi
+export OLE_SECURITY_AUTH_ENABLED
 
 
 #################################################################
@@ -112,7 +115,7 @@ unset OLE_HEADER_APM_TOKEN
 unset OLE_HEADER_AUTH_TOKEN
 #################################################################
 ## If Security Authentication is enabled then get tokens
-if [[ "${OLE_SECURITY_AUTH_ENABLED}" == "true" || "${OLE_SECURITY_AUTH_ENABLED}" == "1" ]]; then
+if [[ "${OLE_SECURITY_AUTH_ENABLED}" == "true" ]]; then
   ## Get APM token for user: User info, roles, scope: Organization_ID
   printf "${CYAN}Fetching tokens (APM, AUTH) from Keycloak (realm: ${kc_realm}, user: ${KC_USER})... ${NC}\n"
   
