@@ -50,7 +50,7 @@ Define the tenant for tenant-specific imports (e.g. workspace, theme). In conseq
 
 -x:: Skip checking running Docker services
 [CAUTION]
-When used, the services are started in such a way that they always require authentication, i.e., during import and when used via the browser!
+When used, Docker does not check whether services require authentication. Please use the same security settings as when starting Docker.
 
 
 == Examples
