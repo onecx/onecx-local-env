@@ -13,7 +13,7 @@ The *import-onecx.sh* script is used to import data needed by the OneCX services
 ----
 
 .Successful import
-image::./scripts/script_import-onecx.sh.png[]
+image::scripts/script_import-onecx.sh.png[]
 
 
 == Available Flags
@@ -90,7 +90,7 @@ To import tenant-specific data, services with secure authentication enabled must
 ----
 
 .Successful import of *t1* data via authenticated user *onecx_t1_admin*
-image::./scripts/script_import-onecx.sh_tenant.png[]
+image::scripts/script_import-onecx.sh_tenant.png[]
 
 
 [TIP]

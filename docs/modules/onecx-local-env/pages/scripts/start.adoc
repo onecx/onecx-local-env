@@ -11,7 +11,7 @@ The *start-onecx.sh* script is used to start the OneCX Local Environment. By def
 ----
 
 .Successful starting
-image::./scripts/script_start-onecx.sh.png[]
+image::scripts/script_start-onecx.sh.png[]
 
 [NOTE]
 ====
