@@ -35,7 +35,7 @@ The profile to use when starting the environment. The supported profiles are:
 
 -s::
 Enables secure mode, which enforces authentication/authorization and taken into account the tenant ID of the user. (Default: disabled)
-
++
 [CAUTION]
 ====
 When used, the services are started in such a way that they always require authentication AND taken into account the tenant ID, i.e., during import and login on UI!
@@ -52,6 +52,7 @@ Start essential Services::
 The Docker services *essential* for OneCX are started. The necessary Docker volumes are created and required data are imported. Technically, these services are labelled with the *base* profile in the docker-compose file used.
 +
 There is no security context defined. All logins are using the default tenant!
++
 [source,bash]
 ----
 ./start-onecx.sh
@@ -59,6 +60,7 @@ There is no security context defined. All logins are using the default tenant!
 
 Start ALL Services::
 *All* Docker services for OneCX are started. The necessary Docker volumes are created and required data are imported. Technically, the relevant services are marked with the *all* profile in the docker-compose file used.
++
 [source,bash]
 ----
 ./start-onecx.sh -p all 
@@ -68,7 +70,7 @@ Start essential Services with Security enabled::
 The Docker services *essential* for OneCX are started with enabled secure authentication and also the tenant id is taken into account. This is the main precondition for tenant-compliant logins.
 +
 The necessary Docker volumes are created but no data are imported.
-
++
 [source,bash]
 ----
 ./start-onecx.sh -s -x

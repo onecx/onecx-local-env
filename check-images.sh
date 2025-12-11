@@ -38,7 +38,7 @@ USAGE
 #################################################################
 ## Defaults
 ONECX_REPO_PATH="ghcr.io/onecx"
-VERSION_LABEL=samo.project.version
+VERSION_LABEL="samo.project.version"
 
 
 #################################################################

@@ -38,19 +38,19 @@ Name filter, find images which have <text> into image name
 == Examples
 
 List images with onecx in name::
-
++
 [source,bash]
 ----
 ./check-images.sh   -n onecx
 ----
-
++
 .List of local OneCX Docker images
 image::scripts/script_check-images.sh_filter-onecx.png[]
 
 
 List images marked as dangling::
 Candidates for deletion
-
++
 [source,bash]
 ----
 ./check-images.sh   -f "dangling=true"
@@ -59,9 +59,14 @@ Candidates for deletion
 
 == Understanding the Listing
 
-Over time, local Docker images become outdated. Especially after updates, images with the tag "<none>" may be listed.
+OneCX Version Labelling::
+When building OneCX images, the version is set in the label *samo.project.version*. The value of this label is displayed in the listing as *VERSION*.
 
+
+Outdated Images::
+Over time, local Docker images become outdated. Especially after updates, images with the tag "<none>" may be listed.
++
 .List of outdated Docker images
 image::scripts/script_check-images.sh_none-images.png[]
-
++
 Such images can be removed. The script xref:./update-images.adoc[update-images.sh] can be used or native with `docker image rm <image-id>`

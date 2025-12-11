@@ -36,9 +36,11 @@ npm run start -- --port 6021 --host 0.0.0.0 --disable-host-check --public-host=h
 npm run start -- --port=6021 --host 0.0.0.0 --disableHostCheck --publicHost=http://localhost:6021
 ----
 
-CheckPoint::
+[NOTE]
+.Checkpoint
+====
 Please check the microfrontend is up and running by accessing the *public host URL* (see start command) in Browser. The *remoteEntry.js* should be loaded. The *./toggle-mfes.sh* script does not check this.
-
+====
 
 
 == Available Flags
@@ -46,7 +48,7 @@ The script accepts several optional flags to customize its behavior. Some flags 
 
 -a::
 Enable one or more local microfrontends. In addition to the microfrontend name, you can optionally specify a port and path. The default port is 4200.
-If the mfe is one of OneCX Core products and no port is specified then predefined ports are used.
+If the microfrontend is one of OneCX Core products and no port is specified then predefined ports are used.
 
 -c:: Cleanup, remove all existing configurations
 
@@ -62,7 +64,7 @@ If the mfe is one of OneCX Core products and no port is specified then predefine
 Integrate my App with specific path::
 The local microfrontend `my-app` runs on `http://localhost:4200` (standard Angular).
 `/my-app-path` is the path under which the microfrontend is accessible within OneCX.
-
++
 [source,bash]
 ----
 ./toggle-mfes.sh  -a my-app::/my-app-path
@@ -71,19 +73,19 @@ The local microfrontend `my-app` runs on `http://localhost:4200` (standard Angul
 Integrate several Apps::
 Integrate the apps 'workspace' (with specific standard port *5025*) and user-profile on port *5027*.
 Since no path is specified, the default path is used: */mfe/<name-of-microfrontend>*
-
++
 [source,bash]
 ----
 ./toggle-mfes.sh  -a workspace user-profile:5027
 ----
-
++
 .Successful integrated Microfrontends
 image::scripts/script_toggle-mfes.sh_activate.png[]
 
 
 Deintegrate my App::
 The *-d* option allows you to undo an integration. The same rule applies to the port: if the port is not 4200, it must be specified.
-
++
 [source,bash]
 ----
 ./toggle-mfes.sh  -d my-app:12345
@@ -92,7 +94,7 @@ The *-d* option allows you to undo an integration. The same rule applies to the 
 
 Deintegrate ALL Apps::
 The Traefik configurations are being cleaned up: All specific configuration files for the Microfrontend integration are being deleted.
-
++
 [source,bash]
 ----
 ./toggle-mfes.sh  -c

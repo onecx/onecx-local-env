@@ -45,7 +45,7 @@ The Docker which have *ui* in image name are pulled from remote registry.
 
 Cleanup only::
 Starting the script without any name filter will require a confirmation to proceed. Without this confirmation, the script will terminate.
-
++
 With confirmation, all images will be checked and removed if they are outdated. If orphaned images are found (e.g., with *<none>* in their name), the script will attempt to delete them. This is only possible if the image is not in use.
 
 [source,bash]

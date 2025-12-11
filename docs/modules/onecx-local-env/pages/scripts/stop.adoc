@@ -33,6 +33,7 @@ The profile to use when stopping the environment. This must match the profile th
 
 Stop base and Cleanup::
 The Docker services *essential* for OneCX will be terminated, including the deletion of all data. Technically, this involves deleting the Docker volumes used by OneCX.
++
 [source,bash]
 ----
 ./stop-onecx.sh -c
@@ -40,6 +41,7 @@ The Docker services *essential* for OneCX will be terminated, including the dele
 
 Stop ALL and Cleanup::
 *All* Docker services for OneCX will be terminated, including the deletion of all data. Technically, this involves deleting the Docker volumes used by OneCX.
++
 [source,bash]
 ----
 ./stop-onecx.sh -p all -c
