@@ -13,7 +13,7 @@ The *import-onecx.sh* script is used to import data needed by the OneCX services
 ----
 
 .Successful import
-image::script_import-onecx.sh.png[]
+image::./scripts/script_import-onecx.sh.png[]
 
 
 == Available Flags
@@ -34,7 +34,7 @@ The edition of OneCX. This must match the edition that was used to start the env
 Displays help information about the script and its available flags. If used then all other options are ignored.
 
 -s::
-Security authentication enabled, default not enabled (value is inherited from xref:./start.adoc[start-onecx.sh])
+Secure authentication enabled, default not enabled (value is inherited from xref:./start.adoc[start-onecx.sh])
 [CAUTION]
 ====
 Once Docker services have been started with the security option enabled, all subsequent actions require an authenticated user. For example, an import operation must then be started with the *-s* option to succeed.
@@ -81,8 +81,8 @@ Import base data, tenant `t1`::
 Import essential OneCX data as:
 * Non-tenant specific data
 * Tenant data for *t1* tenant
-
-To import tenant-specific data, services with security authentication enabled must be running. Without the *-x* flag, Docker restarts the services with the security option enabled. A corresponding user exists for each tenant. The import is performed using this authorized user.
++
+To import tenant-specific data, services with secure authentication enabled must be running. Without the *-x* flag, Docker restarts the services with the security option enabled. A corresponding user exists for each tenant. The import is performed using this authorized user.
 
 [source,bash]
 ----
@@ -90,9 +90,10 @@ To import tenant-specific data, services with security authentication enabled mu
 ----
 
 .Successful import of *t1* data via authenticated user *onecx_t1_admin*
-image::script_import-onecx.sh_tenant.png[]
+image::./scripts/script_import-onecx.sh_tenant.png[]
+
 
 [TIP]
 ====
-If you want only import tenant-specific data but do not working afterwards with security authentication then execute the xref:./start.adoc[start-onecx.sh] script without *-s* option again. This reset the security option on running services.
+If you want only import tenant-specific data but do not working afterwards with secure authentication then execute the xref:./start.adoc[start-onecx.sh] script without *-s* option again. This reset the security option on running services.
 ====

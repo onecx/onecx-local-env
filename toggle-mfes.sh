@@ -122,7 +122,7 @@ clean_all() {
 
 
 #################################################################
-## Check flags and parameter
+## Check options and parameter
 while [[ "$#" -gt 0 ]]; do
   case "$1" in
     -a)
@@ -154,7 +154,7 @@ while [[ "$#" -gt 0 ]]; do
         shift
         ;;
      *)
-        printf "${RED}  Unknown shorthand flag: ${GREEN}$1${NC}\n"
+        printf "${RED}  Unknown shorthand option: ${GREEN}$1${NC}\n"
         usage
         exit 1
         ;;

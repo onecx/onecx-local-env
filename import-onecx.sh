@@ -20,7 +20,7 @@ usage () {
     -d  Data type, one of [ all, base, bookmark, assignment, parameter, permission, mfe, ms, product, slot, tenant theme, welcome, workspace], base is default
     -e  Edition, one of [ 'v1', 'v2' ], default is 'v2'
     -h  Display this help and exit
-    -s  Security authentication enabled, default not enabled (value is inherited from start-onecx.sh)
+    -s  Secure authentication enabled, default not enabled (value is inherited from start-onecx.sh)
     -t  Tenant, one of [ 'default', 't1', 't2' ], default is 'default'
     -v  Verbose: display details during import of objects
     -x  Skip checking running Docker services
@@ -97,7 +97,7 @@ while getopts ":hd:svt:e:x" opt; do
             ;;
     ? | h ) usage
             ;;
-       \? ) printf "${RED}  unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n" >&2
+       \? ) printf "${RED}  unknown shorthand option: ${GREEN}-${OPTARG}${NC}\n" >&2
             usage
             ;;
   esac
@@ -105,10 +105,10 @@ done
 
 
 #################################################################
-## Security Authentication enabled?
+## Secure Authentication enabled?
 ENV_FILE="versions/$EDITION/.env"
 
-# Check flag set by start script
+# Check option set by start script
 if [ -n $OLE_SECURITY_AUTH_ENABLED ]; then
   if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then
     SECURITY=true
@@ -128,7 +128,7 @@ export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
 
 #################################################################
 if [[ "$CHECKING_SERVICES" == "true" ]]; then
-  printf "  Ensure that all services used by imports are running with security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}   (skip this using -x option)\n"
+  printf "  Ensure that all services used by imports are running with secure authentication: ${GREEN}$SECURITY_AUTH_USED${NC}   (skip with -x option)\n"
   
   # Using 'docker compose' (v2). If using older docker, change to 'docker-compose'
   # Docker services are restartet only if some setting was different (e.g. security)

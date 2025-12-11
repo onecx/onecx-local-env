@@ -10,6 +10,9 @@ The *start-onecx.sh* script is used to start the OneCX Local Environment. By def
 ./start-onecx.sh
 ----
 
+.Successful starting
+image::./scripts/script_start-onecx.sh.png[]
+
 [NOTE]
 ====
 The script can be executed at any time. Docker checks the configuration of the services and restarts them if there are changes. Without changes, running services are not affected, and only missing services are started. Existing data that was imported or added by the user remains unchanged. 
@@ -31,10 +34,13 @@ The profile to use when starting the environment. The supported profiles are:
   * `all`: Starts all available services defined in the Docker Compose file.
 
 -s::
-Enables secure mode, which enforces authentication/authorization. (Default: disabled)
+Enables secure mode, which enforces authentication/authorization and taken into account the tenant ID of the user. (Default: disabled)
+
 [CAUTION]
 ====
 When used, the services are started in such a way that they always require authentication AND taken into account the tenant ID, i.e., during import and login on UI!
+
+Consequently, the login takes place in the correct tenant.
 ====
 
 -x::
@@ -43,8 +49,8 @@ Skips the import of initial data after starting the services. (Default: import d
 == Examples
 
 Start essential Services::
-The Docker services *essential* for OneCX are started. The necessary Docker volumes are created and required data are imported. Technically, the relevant services are marked with the *base* profile in the docker-compose file used.
-
+The Docker services *essential* for OneCX are started. The necessary Docker volumes are created and required data are imported. Technically, these services are labelled with the *base* profile in the docker-compose file used.
++
 There is no security context defined. All logins are using the default tenant!
 [source,bash]
 ----
@@ -60,12 +66,16 @@ Start ALL Services::
 
 Start essential Services with Security enabled::
 The Docker services *essential* for OneCX are started with enabled secure authentication and also the tenant id is taken into account. This is the main precondition for tenant-compliant logins.
-
++
 The necessary Docker volumes are created but no data are imported.
+
 [source,bash]
 ----
 ./start-onecx.sh -s -x
 ----
 
+
+== Additional Started Services
+In addition to the original OneCX products, some open-source tools are also used and launched.
 
 include::../utilities.adoc[]

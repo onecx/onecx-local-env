@@ -53,7 +53,7 @@ NAME_FILTER=""
 
 
 #################################################################
-## Check flags and parameter
+## Check options and parameter
 while getopts ":hcn:" opt; do
   case "$opt" in
     c ) CLEANUP=true
@@ -68,7 +68,7 @@ while getopts ":hcn:" opt; do
         ;;
     h ) usage 
         ;;
-   \? ) printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n"
+   \? ) printf "${RED}  Unknown shorthand option: ${GREEN}-${OPTARG}${NC}\n"
         usage
         ;;
   esac
