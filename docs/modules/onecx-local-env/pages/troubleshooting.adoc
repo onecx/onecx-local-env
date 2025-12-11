@@ -34,8 +34,8 @@ image::issues/traefik-active_created-by-root.sh.png[]
 
 
 
-== error response from daemon: Failed to set up container networking
-The problem occurs when there are collisions between Docker networks.
+== Error response from daemon: Failed to set up container networking
+The problem occurs when during start up there are collisions between Docker networks.
 
 .Message: Failed to set up networking
 image::issues/docker-deamon_failed-to-setup-container-netwrorking.png[]
@@ -47,4 +47,6 @@ image::issues/docker-deamon_failed-to-setup-container-netwrorking.png[]
 ----
 docker network prune
 ----
++
+* Start again
 
