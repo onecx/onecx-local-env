@@ -24,7 +24,9 @@ To get an overview of the Docker images and their versions on your local machine
 The script accepts several optional flags to customize its behavior. The available flags are:
 
 -c::
-Cleaned up orphaned images
+Cleaned up orphaned images (e.g. if they have *<none>* in their name)
++
+This option can be used in combination with *-n* or separately. If used without a name filter, all orphaned images will be removed. No additional confirmation is required.
 
 -h::
 Displays help information about the script and its available flags. If used then all other options are ignored.
@@ -37,18 +39,24 @@ Name filter, update images which have <text> into image name
 
 Update all Images with `ui` in name::
 The Docker which have *ui* in image name are pulled from remote registry.
-
++
 [source,bash]
 ----
 ./update-images.sh  -n ui
 ----
 
 Cleanup only::
-Starting the script without any name filter will require a confirmation to proceed. Without this confirmation, the script will terminate.
+Started without any name filter will remove all orphaned images. No additional confirmation is required.
 +
-With confirmation, all images will be checked and removed if they are outdated. If orphaned images are found (e.g., with *<none>* in their name), the script will attempt to delete them. This is only possible if the image is not in use.
-
+.Excerpt from the list of orphaned images
+image::scripts/script_check-images.sh_none-images.png[]
++
 [source,bash]
 ----
 ./update-images.sh  -c
 ----
++
+The deletion is only possible if the image is not in use. If so then stop the appropriate container first and try again.
++
+.Image deletion failed
+image::scripts/script_check-images.sh_rm-image-failed.png[]

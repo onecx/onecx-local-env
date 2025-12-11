@@ -49,31 +49,34 @@ confirm() {
 #################################################################
 ## Defaults
 CLEANUP=false
+CLEANUP_ONLY=false
 NAME_FILTER=""
 
 
 #################################################################
 ## Check options and parameter
 while getopts ":hcn:" opt; do
+  # check parameter of options
   case "$opt" in
+    : ) printf "${RED}  Missing paramter for option -${OPTARG}${NC}\n"
+        usage
+        ;;
     c ) CLEANUP=true
         ;;
-    n )
-        if [[ -z "$OPTARG" ]]; then
-          printf "${RED}  Missing image name${NC}\n"
+    n ) if [[ "$OPTARG" == -* ]]; then
+          printf "${RED}  Missing paramter for option -n${NC}\n"
           usage
         else
           NAME_FILTER=$OPTARG
         fi
         ;;
-    h ) usage 
+    h ) usage
         ;;
    \? ) printf "${RED}  Unknown shorthand option: ${GREEN}-${OPTARG}${NC}\n"
         usage
         ;;
   esac
 done
-
 
 usage_short
 
@@ -93,9 +96,14 @@ fi
 ## Count images
 number_of_images=$(echo "$IMAGES" | wc -l)
 
-# Confirmation?
+
+# Confirmation in case no name filter was provided ... only if -c is not used exclusively
 if [ -z "$NAME_FILTER" ]; then
-  confirm "  No filter specified. ${number_of_images} images could be affected. Do you really want to continue?"
+  if [[ "$CLEANUP" == "true" ]]; then
+    CLEANUP_ONLY=true
+  else
+    confirm "  No filter specified. ${number_of_images} images could be affected. Do you really want to continue?"
+  fi
 fi
 
 
@@ -117,7 +125,7 @@ while IFS= read -r IMAGE; do
     else
       printf "$ORPHAN_TEXT  skip pulling\n"
     fi
-  else
+  elif [[ "$CLEANUP_ONLY" == "false" ]]; then
     printf "  * ${GREEN}$1:$2${NC}\n"
     docker pull "$1:$2" || printf "    ${RED}Failed to pull $1:$2${NC}\n"
   fi
