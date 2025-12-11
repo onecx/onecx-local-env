@@ -15,7 +15,7 @@ echo -e "${CYAN}List local Docker images with tag, version and size${NC}"
 
 
 #################################################################
-## flags
+## Usage
 usage () {
   cat <<USAGE
   Usage: $0  [-h] [-f <image filter>] [-n <text>]
@@ -42,30 +42,28 @@ VERSION_LABEL=samo.project.version
 
 
 #################################################################
-## Check flags and parameter
+## Check options and parameter
 while getopts ":hf:n:" opt; do
   case "$opt" in
-        f ) 
-            if [ -z "$OPTARG" ]; then
-              printf "${RED}  Missing filter value${NC}\n"
-              usage
-            else
-              FILTER=$OPTARG
-            fi
-            ;;
-        n ) 
-            if [ -z "$OPTARG"  ]; then
-              printf "${RED}  Missing image name${NC}\n"
-              usage
-            else
-              NAME_FILTER=$OPTARG
-            fi
-            ;;
-        h ) 
-            usage ;; # print usage
-       \? )
-            printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n"
-            usage ;;
+    f ) if [ -z "$OPTARG" ]; then
+          printf "${RED}  Missing filter value${NC}\n"
+          usage
+        else
+          FILTER=$OPTARG
+        fi
+        ;;
+    n ) if [ -z "$OPTARG"  ]; then
+          printf "${RED}  Missing image name${NC}\n"
+          usage
+        else
+          NAME_FILTER=$OPTARG
+        fi
+        ;;
+    h ) usage
+        ;;
+   \? ) printf "${RED}  Unknown shorthand option: ${GREEN}-${OPTARG}${NC}\n"
+        usage
+        ;;
   esac
 done
 

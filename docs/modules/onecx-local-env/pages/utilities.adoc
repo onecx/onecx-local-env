@@ -1,9 +1,6 @@
-== Additional Started Services
 :idprefix:
 :idseparator: -
 :imagesdir: ../images
-
-In addition to the original OneCX products, some open-source tools are also used and launched.
 
 === Keycloak
 The IAM service used by OneCX can accessed via http://keycloak-app/admin/master/console/#/onecx[].

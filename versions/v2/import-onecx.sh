@@ -45,8 +45,8 @@ fi
 ENV_FILE="$import_start_dir/versions/${OLE_EDITION}/.env"
 
 #################################################################
-## Security Authentication enabled?
-# Check flag set by start script
+## Secure Authentication enabled?
+# Check option set by start script
 if [ -n $3 ]; then
   if [[ $3 == "true" ]]; then
     OLE_SECURITY_AUTH_ENABLED=true
@@ -108,13 +108,13 @@ case "$1" in
         ;;
 esac
 
-printf "  edition: ${GREEN}${OLE_EDITION}${NC}, tenant: ${GREEN}$1${NC}, type: ${GREEN}${IMPORT_TYPE}${NC}, user: ${GREEN}${KC_USER}${NC}, security authentication: ${GREEN}${OLE_SECURITY_AUTH_USED}${NC}\n"
+printf "  edition: ${GREEN}${OLE_EDITION}${NC}, tenant: ${GREEN}$1${NC}, type: ${GREEN}${IMPORT_TYPE}${NC}, user: ${GREEN}${KC_USER}${NC}, secure authentication: ${GREEN}${OLE_SECURITY_AUTH_USED}${NC}\n"
 
 
 unset OLE_HEADER_APM_TOKEN
 unset OLE_HEADER_AUTH_TOKEN
 #################################################################
-## If Security Authentication is enabled then get tokens
+## If Secure Authentication is enabled then get tokens
 if [[ "${OLE_SECURITY_AUTH_ENABLED}" == "true" ]]; then
   ## Get APM token for user: User info, roles, scope: Organization_ID
   printf "${CYAN}Fetching tokens (APM, AUTH) from Keycloak (realm: ${kc_realm}, user: ${KC_USER})... ${NC}\n"

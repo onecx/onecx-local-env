@@ -3,7 +3,7 @@
 :idseparator: -
 :imagesdir: ../../images
 
-The *check-images.sh* script is used to list Docker images with version information. It can be run from the root directory of the *onecx-local-env* repository.
+The *check-images.sh* script is used to list local Docker images with version information. It can be run from the root directory of the *onecx-local-env* repository.
 
 Here is the command to list all Docker images (without any filter).
 
@@ -12,7 +12,11 @@ Here is the command to list all Docker images (without any filter).
 ./check-images.sh
 ----
 
-[HINT]
+.List of local Docker images
+image::./scripts/script_check-images.sh.png[]
+
+
+[TIP]
 ====
 The local Docker images can easily be updated using the script xref:./update-images.adoc[update-images.sh].
 ====
@@ -40,6 +44,9 @@ List images with onecx in name::
 ./check-images.sh   -n onecx
 ----
 
+.List of local OneCX Docker images
+image::./scripts/script_check-images.sh_filter-onecx.png[]
+
 
 List images marked as dangling::
 Candidates for deletion
@@ -48,3 +55,13 @@ Candidates for deletion
 ----
 ./check-images.sh   -f "dangling=true"
 ----
+
+
+== Understanding the Listing
+
+Over time, local Docker images become outdated. Especially after updates, images with the tag "<none>" may be listed.
+
+.List of outdated Docker images
+image::./scripts/script_check-images.sh_none-images.png[]
+
+Such images can be removed. The script xref:./update-images.adoc[update-images.sh] can be used or native with `docker image rm <image-id>`

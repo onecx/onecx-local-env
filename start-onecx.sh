@@ -22,7 +22,7 @@ usage () {
     -e  Edition, one of [ 'v1', 'v2'], default: 'v2'
     -h  Display this help and exit
     -p  Profile, one of [ 'all', 'base' ], default: 'base'
-    -s  Security authentication enabled, default: not enabled
+    -s  Secure authentication enabled, default: not enabled
     -x  Skip imports
   Examples:
     $0              => Standard OneCX setup is started and initialized
@@ -57,7 +57,7 @@ ENV_FILE="versions/$EDITION/.env"
 
 
 #################################################################
-## Check flags and parameter
+## Check options and parameter
 while getopts ":he:p:sx" opt; do
   # check parameter of option
   if [[ "$opt" == ":" && ("$OPTARG" == "e" || "$OPTARG" == "p") ]]; then
@@ -85,7 +85,7 @@ while getopts ":he:p:sx" opt; do
         ;;
     h ) usage
         ;;
-   \? ) printf "${RED}  Unknown shorthand flag: ${GREEN}-${OPTARG}${NC}\n" >&2
+   \? ) printf "${RED}  Unknown shorthand option: ${GREEN}-${OPTARG}${NC}\n" >&2
         usage
         ;;
   esac
@@ -93,7 +93,7 @@ done
 
 
 #################################################################
-## Security Authentication enabled?
+## Secure Authentication enabled?
 if [[ $SECURITY == "false" ]]; then
   # read preset
   if [ -f "$ENV_FILE" ]; then
@@ -110,7 +110,7 @@ export OLE_SECURITY_AUTH_ENABLED=$SECURITY
 #################################################################
 #################################################################
 ## Start profile services
-printf "  edition: ${GREEN}$EDITION${NC}, profile: ${GREEN}$PROFILE${NC}, import: ${GREEN}$IMPORT${NC}, security authentication: ${GREEN}$SECURITY_AUTH_USED${NC}\n"
+printf "  edition: ${GREEN}$EDITION${NC}, profile: ${GREEN}$PROFILE${NC}, import: ${GREEN}$IMPORT${NC}, secure authentication: ${GREEN}$SECURITY_AUTH_USED${NC}\n"
 
 if [[ $# == 0 ]]; then
   usage_short
