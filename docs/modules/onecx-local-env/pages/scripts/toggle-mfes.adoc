@@ -26,6 +26,7 @@ image::scripts/script_toggle-mfes.sh_list.png[]
 Before a microfrontend can be successfully integrated into OneCX, it must be started.
 
 Start Angular *ng* Microfrontend on port 6021::
++
 [source,bash]
 ----
 npm run start -- --port 6021 --host 0.0.0.0 --disable-host-check --public-host=http://localhost:6021
