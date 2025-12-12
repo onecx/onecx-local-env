@@ -104,7 +104,6 @@ The integration of the shell requires a special path mapping. Hereby the path is
 ----
 ./toggle-mfes.sh  -a shell::/onecx-shell/:/
 ----
-+
 .Successful integrated OneCX Shell
 image::scripts/script_toggle-mfes.sh_activate-shell.png[]
 
