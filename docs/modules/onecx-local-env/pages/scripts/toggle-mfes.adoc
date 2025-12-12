@@ -102,7 +102,7 @@ The integration of the shell requires a special path mapping. Hereby the path is
 +
 [source,bash]
 ----
-./toggle-mfes.sh  -a workspace user-profile:5027 shell::/onecx-shell/:/
+./toggle-mfes.sh  -a shell::/onecx-shell/:/
 ----
 +
 .Successful integrated OneCX Shell
