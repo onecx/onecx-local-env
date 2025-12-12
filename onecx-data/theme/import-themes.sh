@@ -28,7 +28,7 @@ for entry in $tenant_files
 do
   filename=$(basename "$entry")
   filename=`echo $filename | cut -d '.' -f 1`
-  theme=`echo $filename | cut -d'_' -f 2`
+  theme=`echo $filename | cut -d '_' -f 2`
   
   url="http://onecx-theme-svc/exim/v1/themes/operator"
   params="--write-out %{http_code} --silent --output /dev/null -X POST"

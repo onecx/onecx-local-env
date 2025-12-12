@@ -56,7 +56,6 @@ NAME_FILTER=""
 #################################################################
 ## Check options and parameter
 while getopts ":hcn:" opt; do
-  # check parameter of options
   case "$opt" in
     : ) printf "${RED}  Missing paramter for option -${OPTARG}${NC}\n"
         usage
@@ -111,22 +110,31 @@ fi
 # Process images
 printf "${CYAN}Process ${number_of_images} images${NC}\n"
 
-
+# PULL
+if [[ "$CLEANUP_ONLY" == "false" ]]; then
 while IFS= read -r IMAGE; do
   [[ -z "$IMAGE" ]] && continue
   IFS=:
   set $IMAGE   # split by IFS separator to $1...$n
-
-  if [[ "$2" =~ "<none>" ]]; then
-    ORPHAN_TEXT="  * ${GREEN}$1:$2:$3  orphan${NC}"
-    if [[ $CLEANUP == "true" ]]; then
-      printf "$ORPHAN_TEXT  remove\n"
-      docker image rm "$3" || printf "${RED}    Failed to remove${NC}\n"
-    else
-      printf "$ORPHAN_TEXT  skip pulling\n"
-    fi
-  elif [[ "$CLEANUP_ONLY" == "false" ]]; then
+  if [[ ! "$2" =~ "<none>" ]]; then
     printf "  * ${GREEN}$1:$2${NC}\n"
     docker pull "$1:$2" || printf "    ${RED}Failed to pull $1:$2${NC}\n"
   fi
 done <<< "$IMAGES"
+
+# CLEAN
+if [[ $CLEANUP == "true" ]]; then
+  while IFS= read -r IMAGE; do
+    [[ -z "$IMAGE" ]] && continue
+    IFS=:
+    set $IMAGE   # split by IFS separator to $1...$n
+    if [[ "$2" =~ "<none>" ]]; then
+      ORPHAN_TEXT="  * ${GREEN}$1:$2:$3  orphan${NC}"
+      printf "$ORPHAN_TEXT  remove\n"
+      docker image rm "$3" || printf "${RED}    Failed to remove${NC}\n"
+    fi
+  fi
+done <<< "$IMAGES"
+
+
+printf "\n"

@@ -5,9 +5,10 @@
 
 The script *toggle-mfes.sh* integrates (activates) a locally running microfrontend into the OneCX environment, allowing it to interact with other microfrontends. This process is also reversible. 
 
+How it works::
 The script creates a small configuration file in Traefik, tailored to the local microfrontend. Traefik then forwards requests from the Docker network to the external local microfrontend.
 The script can be run from the root directory of the *onecx-local-env* repository.
-
++
 The Traefik configuration files are stored in `init-data/traefik/active/`. Traefik immediately detects any changes there.
 
 Here is the command to list the currently integrated microfrontends.:
@@ -24,13 +25,13 @@ image::scripts/script_toggle-mfes.sh_list.png[]
 == Precondition
 Before a microfrontend can be successfully integrated into OneCX, it must be started.
 
-.Start Angular *ng* Microfrontend on port 6021
+Start Angular *ng* Microfrontend on port 6021::
 [source,bash]
 ----
 npm run start -- --port 6021 --host 0.0.0.0 --disable-host-check --public-host=http://localhost:6021
 ----
 
-.Start Angular *nx* Microfrontend on port 6021
+Start Angular *nx* Microfrontend on port 6021::
 [source,bash]
 ----
 npm run start -- --port=6021 --host 0.0.0.0 --disableHostCheck --publicHost=http://localhost:6021
@@ -47,7 +48,8 @@ Please check the microfrontend is up and running by accessing the *public host U
 The script accepts several optional flags to customize its behavior. Some flags can be combined. The flags are:
 
 -a::
-Enable one or more local microfrontends. In addition to the microfrontend name, you can optionally specify a port and path. The default port is 4200.
+Enable one or more local microfrontends. In addition to the microfrontend name, you can optionally specify a port and path. The default port is *4200*.
++
 If the microfrontend is one of OneCX Core products and no port is specified then predefined ports are used.
 
 -c:: Cleanup, remove all existing configurations
@@ -71,12 +73,15 @@ The local microfrontend `my-app` runs on `http://localhost:4200` (standard Angul
 ----
 
 Integrate several Apps::
-Integrate the apps 'workspace' (with specific standard port *5025*) and user-profile on port *5027*.
+Integrate the following apps:
+  * *workspace* ==> on standard port *5025*
+  * *user-profile* ==> on port *5027*
+  * *shell* ==> on port *5000*, with special path mapping
 Since no path is specified, the default path is used: */mfe/<name-of-microfrontend>*
 +
 [source,bash]
 ----
-./toggle-mfes.sh  -a workspace user-profile:5027
+./toggle-mfes.sh  -a workspace user-profile:5027 shell::/onecx-shell/:/
 ----
 +
 .Successful integrated Microfrontends
@@ -90,6 +95,9 @@ The *-d* option allows you to undo an integration. The same rule applies to the 
 ----
 ./toggle-mfes.sh  -d my-app:12345
 ----
++
+.Successful deintegration
+image::scripts/script_toggle-mfes.sh_deactivate.png[]
 
 
 Deintegrate ALL Apps::
