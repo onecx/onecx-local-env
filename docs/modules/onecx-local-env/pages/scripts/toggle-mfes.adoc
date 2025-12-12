@@ -65,12 +65,17 @@ If the microfrontend is one of OneCX Core products and no port is specified then
 
 Integrate my App with specific path::
 The local microfrontend `my-app` runs on `http://localhost:4200` (standard Angular).
++
 `/my-app-path` is the path under which the microfrontend is accessible within OneCX.
 +
 [source,bash]
 ----
 ./toggle-mfes.sh  -a my-app::/my-app-path
 ----
++
+.Successful integrated "my-app"
+image::scripts/script_toggle-mfes.sh_activate-my-app.png[]
+
 
 Integrate several Apps::
 Integrate the following apps:
