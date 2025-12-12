@@ -89,21 +89,32 @@ Integrate several Apps::
 Integrate the following apps:
   * *workspace* => on standard port *5025*
   * *user-profile* => on port *5027*
-  * *shell* => on port *5000*, with special path mapping
 +
 Since no path is specified, the default path is used: */mfe/<name-of-microfrontend>*
 +
 [source,bash]
 ----
-./toggle-mfes.sh  -a workspace user-profile:5027 shell::/onecx-shell/:/
+./toggle-mfes.sh  -a workspace user-profile:5027
 ----
 +
 .Successful integrated Microfrontends
 image::scripts/script_toggle-mfes.sh_activate.png[]
 
 
+Integrate OneCX Shell::
+The integration of the shell requires a special path mapping. Hereby the path is not completely stripped. Define the strip path to be used at the end. 
++
+[source,bash]
+----
+./toggle-mfes.sh  -a workspace user-profile:5027 shell::/onecx-shell/:/
+----
++
+.Successful integrated OneCX Shell
+image::scripts/script_toggle-mfes.sh_activate-shell.png[]
+
+
 Deintegrate my App::
-The *-d* option allows you to undo an integration. The same rule applies to the port: if the port is not 4200, it must be specified.
+The *-d* option allows you to undo an integration. The same rule applies to the port: if the port is not *4200*, it must be specified.
 +
 [source,bash]
 ----
