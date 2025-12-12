@@ -108,6 +108,15 @@ The integration of the shell requires a special path mapping. Hereby the path is
 .Successful integrated OneCX Shell
 image::scripts/script_toggle-mfes.sh_activate-shell.png[]
 
+[HINT]
+====
+Because OneCX Shell is a microfrontend with a special role in OneCX it have to be started with a specific command:
++
+[source,bash]
+----
+npm run start:local-env
+----
+====
 
 Deintegrate my App::
 The *-d* option allows you to undo an integration. The same rule applies to the port: if the port is not *4200*, it must be specified.
