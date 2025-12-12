@@ -51,7 +51,9 @@ The *remoteEntry.js* should be loaded - the content is displayed. The *./toggle-
 
 
 == Available Flags
-The script accepts several optional flags to customize its behavior. Some flags can be combined. The flags are:
+The script accepts several optional flags to customize its behavior. *All options may only be used separately!*
++
+The flags are:
 
 -a::
 Enable one or more local microfrontends. In addition to the microfrontend name, you can optionally specify a port and path. The default port is *4200*.
