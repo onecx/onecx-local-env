@@ -47,32 +47,36 @@ enable_security () {
 
 #################################################################
 ## Defaults
+IMPORT=yes
 EDITION=v2
 PROFILE=base
 SECURITY=false
 SECURITY_AUTH_USED=no
 SECURITY_TENANT_ID_ENABLED=false
-IMPORT=yes
 ENV_FILE="versions/$EDITION/.env"
 
 
 #################################################################
 ## Check options and parameter
 while getopts ":he:p:sx" opt; do
-  # check parameter of option
-  if [[ "$opt" == ":" && ("$OPTARG" == "e" || "$OPTARG" == "p") ]]; then
-    printf "${RED}  Missing paramter for option -${OPTARG}${NC}\n"
-    usage
-  fi
   case "$opt" in
-    e ) if [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
+    : ) printf "${RED}  Missing paramter for option -${OPTARG}${NC}\n"
+        usage
+        ;;
+    e ) if [[ "$OPTARG" == -* ]]; then
+          printf "${RED}  Missing paramter for option -e${NC}\n"
+          usage
+        elif [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
           printf "${RED}  Inacceptable Edition, should be one of [ 'v1', 'v2' ]${NC}\n"
           usage
         else
           EDITION=$OPTARG
         fi
         ;;
-    p ) if [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
+    p ) if [[ "$OPTARG" == -* ]]; then
+          printf "${RED}  Missing paramter for option -p${NC}\n"
+          usage
+        elif [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
           printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base' ]${NC}\n"
           usage
         else
@@ -143,3 +147,5 @@ fi
 #################################################################
 ## End of starting
 printf "To use OneCX, navigate to http://local-proxy/onecx-shell/admin/\n"
+
+printf "\n"

@@ -6,7 +6,7 @@ http:
   routers:
     local_{{MFE_NAME}}:
       # path prefix as used for MFE registration in product store
-      rule: "Host(`local-proxy`) && PathPrefix(`{{MFE_PATH}}/`)"
+      rule: "Host(`local-proxy`) && PathPrefix(`{{MFE_PATH}}`)"
       service: local_{{MFE_NAME}}
       middlewares:
         - strip_{{MFE_NAME}}
@@ -16,7 +16,7 @@ http:
     strip_{{MFE_NAME}}:
       stripPrefix:
         prefixes:
-          - "{{MFE_PATH}}"
+          - "{{MFE_STRIPPATH}}"
 
   services:
     local_{{MFE_NAME}}:

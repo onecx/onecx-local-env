@@ -34,8 +34,9 @@ declare -A onecx_products_predefined_ports=(\
 #################################################################
 ## Usage
 usage () {
-  cat <<USAGE
-  Usage: $0  [-chl]  [-a <mfe1:port1:path1> [<mfe2:port2:path2> ...]]  [-d <mfe1:port1> [<mfe2:port2> ...]]
+  printf \
+"  Usage: $0  [-chl]  [-a <mfe1:port1:path1> [<mfe2:port2:path2> ...]]  [-d <mfe1:port1> [<mfe2:port2> ...]]
+        ${CYAN}All options may only be used separately!${NC}
     -a  Activate one or more local Microfrontends, port is optional, default is 4200
         If the mfe is one of OneCX Core products and no port is specified then predefined ports are used.
     -c  Cleanup, remove all, restore original state
@@ -43,18 +44,18 @@ usage () {
     -h  Display this help and exit
     -l  List of currently integrated local microfrontends
   Examples:
-    $0  -a workspace  user-profile:12345   => enable workspace on standard port and user-profile with port 12345
-    $0  -a my-app::/my-app-path            => enable my-app with port 4200 and path /my-app-path
-    $0  -a my-app:4567:/my-app-path        => enable my-app with port 4567 and path /my-app-path
+    $0  -a workspace  user-profile:12345   => Enable workspace on standard port and user-profile with port 12345
+    $0  -a my-app::/my-app-path            => Enable my-app with port 4200 and path /my-app-path
+    $0  -a my-app:4567:/my-app-path        => Enable my-app with port 4567 and path /my-app-path
     $0  -l                                 => List all local microfrontends that are enabled
     $0  -c                                 => Remove all local microfrontends that are enabled
-USAGE
+\n"
   exit 0
 }
 usage_short () {
-  cat <<USAGE
-  Usage: $0  [-chl]  [-a <mfe1:port1:path1> [<mfe2:port2:path2> ...]]  [-d <mfe1:port1> [<mfe2:port2> ...]]
-USAGE
+  printf \
+"  Usage: $0  [-chl]  [-a <mfe1:port1:path1> [<mfe2:port2:path2> ...]]  [-d <mfe1:port1> [<mfe2:port2> ...]]
+\n"
 }
 
 
@@ -64,22 +65,28 @@ activate_mfe() {
   local name="$1"
   local port="$2"
   local path="$3"
+  local strippath="$4"
   local template="$MFE_TEMPLATE_PATH"
   local dst="${name}_${port}"
   local dstf="$TRAEFIK_ACTIVE_DIR/${dst}.yml"
   local mfe_path="/mfe/${name}" # onecx standard path
 
-  if [[ -f "$dstf" ]]; then
+  if [ -f "$dstf" ]; then
     printf "${LINE_PREFIX}$dst  ${GREEN}already activated${NC}\n"
     return
   fi
-  if [[ ! -f "$template" ]]; then
+  if [ ! -f "$template" ]; then
     printf " ⚠️ ${RED}template '${template}' not found${NC}\n"
     return
   fi
-  if [[ -n "$path" ]]; then
-    printf " ${GREEN}path '${path}' is used${NC}\n"
+  if [ -n "$path" ]; then
     mfe_path="$path"
+  fi
+  if [ -z "$strippath" ]; then # no strip path = normal case: same path
+    strippath="$mfe_path"
+  fi
+  if [[ ${mfe_path: -1} != "/" ]]; then  # add slash if not already present
+    mfe_path="${mfe_path}/"
   fi
 
   # replace variables and copy to target, don't use '/' as delimiter
@@ -87,10 +94,10 @@ activate_mfe() {
     -e "s|{{MFE_NAME}}|${name}|g" \
     -e "s|{{MFE_PORT}}|${port}|g" \
     -e "s|{{MFE_PATH}}|${mfe_path}|g" \
+    -e "s|{{MFE_STRIPPATH}}|${strippath}|g" \
     "$template" > "$dstf"
-  printf "${LINE_PREFIX}${dst}\t✔\n"
+  printf "${LINE_PREFIX}${dst}\t✔\t\tmapping: ${mfe_path} => localhost:${port}\n"
 }
-
 
 #################################################################
 ## Deactivate a Microfrontend with name and optional port
@@ -111,12 +118,11 @@ deactivate_mfe() {
   fi
 }
 
-
 #################################################################
 ## Disable all Microfrontends
 clean_all() {
   printf " 🧹 Cleaning all local Microfrontend activations\n"
-  find "${TRAEFIK_ACTIVE_DIR}/*.yml" -type f -exec rm {} \; 2> /dev/null
+  find ${TRAEFIK_ACTIVE_DIR}/*.yml -type f -exec rm {} \; 2> /dev/null
   printf "    All local Microfrontends deactivated\n"
 }
 
@@ -124,21 +130,22 @@ clean_all() {
 #################################################################
 ## Check options and parameter
 while [[ "$#" -gt 0 ]]; do
+  if [[ "$MODE" != "" ]]; then
+    printf "${RED}  More than one option used. Pls. use only one.${NC}\n"
+    usage
+  fi
   case "$1" in
-    -a)
-        MODE="activate"
+    -a) MODE="activate"
         shift
         while [[ "$#" -gt 0 && ! "$1" =~ ^- ]]; do
           MFES+=("$1")
           shift
         done
         ;;
-    -c)
-        MODE="clean"
+    -c) MODE="clean"
         shift
         ;;
-    -d)
-        MODE="deactivate"
+    -d) MODE="deactivate"
         shift
         while [[ "$#" -gt 0 && ! "$1" =~ ^- ]]; do
           MFES+=("$1")
@@ -149,12 +156,10 @@ while [[ "$#" -gt 0 ]]; do
         usage
         exit 0
         ;;
-    -l)
-        MODE="list"
+    -l) MODE="list"
         shift
         ;;
-     *)
-        printf "${RED}  Unknown shorthand option: ${GREEN}$1${NC}\n"
+     *) printf "${RED}  Unknown shorthand option: ${GREEN}$1${NC}\n"
         usage
         exit 1
         ;;
@@ -184,6 +189,7 @@ if [[ "$MODE" == "activate" || "$MODE" == "deactivate" ]]; then
     name=$1
     port=$2
     path=$3
+    strippath=$4
     if [[ -z $port ]]; then  # no port
       if [[ "$name" =~ ^($onecx_products) ]]; then
         port="${onecx_products_predefined_ports[$name]}"  # get predefined port
@@ -193,11 +199,12 @@ if [[ "$MODE" == "activate" || "$MODE" == "deactivate" ]]; then
       fi
     fi
     if [[ "$MODE" == "activate" ]]; then
-      activate_mfe "$name" "$port" "$path"
+      activate_mfe "$name" "$port" "$path" "$strippath"
     else
       deactivate_mfe "$name" "$port"
     fi
   done
+  printf "\n"
   exit 0
 fi
 
