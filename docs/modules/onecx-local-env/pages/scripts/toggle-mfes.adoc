@@ -79,9 +79,9 @@ image::scripts/script_toggle-mfes.sh_activate-my-app.png[]
 
 Integrate several Apps::
 Integrate the following apps:
-  * *workspace* ==> on standard port *5025*
-  * *user-profile* ==> on port *5027*
-  * *shell* ==> on port *5000*, with special path mapping
+  * *workspace* => on standard port *5025*
+  * *user-profile* => on port *5027*
+  * *shell* => on port *5000*, with special path mapping
 +
 Since no path is specified, the default path is used: */mfe/<name-of-microfrontend>*
 +
