@@ -33,6 +33,7 @@ npm run start -- --port 6021 --host 0.0.0.0 --disable-host-check --public-host=h
 ----
 
 Start Angular *nx* Microfrontend on port 6021::
++
 [source,bash]
 ----
 npm run start -- --port=6021 --host 0.0.0.0 --disableHostCheck --publicHost=http://localhost:6021
@@ -45,14 +46,13 @@ Please check the microfrontend is up and running by accessing the *public host U
 ----
 http://localhost:6021/remoteEntry.js
 ----
-+
 The *remoteEntry.js* should be loaded - the content is displayed. The *./toggle-mfes.sh* script does not check this.
 ====
 
 
 == Available Flags
 The script accepts several optional flags to customize its behavior. *All options may only be used separately!*
-+
+
 The flags are:
 
 -a::
