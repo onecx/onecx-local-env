@@ -41,7 +41,12 @@ npm run start -- --port=6021 --host 0.0.0.0 --disableHostCheck --publicHost=http
 [NOTE]
 .Checkpoint
 ====
-Please check the microfrontend is up and running by accessing the *public host URL* (see start command) in Browser. The *remoteEntry.js* should be loaded. The *./toggle-mfes.sh* script does not check this.
+Please check the microfrontend is up and running by accessing the *public host URL* in Browser.
+----
+http://localhost:6021/remoteEntry.js
+----
++
+The *remoteEntry.js* should be loaded - the content is displayed. The *./toggle-mfes.sh* script does not check this.
 ====
 
 
