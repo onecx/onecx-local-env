@@ -110,7 +110,6 @@ image::scripts/script_toggle-mfes.sh_activate-shell.png[]
 [HINT]
 ====
 Because OneCX Shell is a microfrontend with a special role in OneCX it have to be started with a specific command:
-+
 [source,bash]
 ----
 npm run start:local-env
