@@ -17,6 +17,46 @@ image::issues/status-code-000-import-onecx.sh.png[]
 * Check if the hosts files is up-to-date. See xref:setup.adoc#hosts[Setup hosts] instructions.
 
 
+== Failed Services on Start up
+The problem occurs when some services cannot be started successfully even after several attempts and timeouts.
+
+.Message: Failed Services on Start up
+image::issues/incomplete-onecx-start.png[]
+
+.Solution icon:lightbulb-o[yellow]
+[source,bash]
+* Start again
+
+
+== Bad gateway in Browser
+The problem occurs sometimes after succesful starting the service
+
+.Message: Bad gateway in Browser
+image::issues/bad-gateway-on-mfe-start.png[]
+
+.Solution icon:lightbulb-o[yellow]
+[source,bash]
+* Start again
+* Refresh browser
+
+
+== Error response from daemon: Failed to set up container networking
+The problem occurs when during start up there are collisions between Docker networks.
+
+.Message: Failed to set up networking
+image::issues/docker-deamon_failed-to-setup-container-networking.png[]
+
+.Solution icon:lightbulb-o[yellow]
+* Remove all Docker networks with
++
+[source,bash]
+----
+docker network prune
+----
++
+* Start again
+
+
 == Cannot successful pull the latest version onecx-local-env
 The issue occurs if the repository is updated with `git pull` (get latest version of onecx-local-env)
 
@@ -31,22 +71,3 @@ image::issues/traefik-active_created-by-root.sh.png[]
 ** `sudo rm -rf init_data/traefik/active`
 * Reset the local repo (all other changes will be lost)
 ** `git reset --hard origin/main`
-
-
-
-== Error response from daemon: Failed to set up container networking
-The problem occurs when during start up there are collisions between Docker networks.
-
-.Message: Failed to set up networking
-image::issues/docker-deamon_failed-to-setup-container-netwrorking.png[]
-
-.Solution icon:lightbulb-o[yellow]
-* Remove all Docker networks with
-+
-[source,bash]
-----
-docker network prune
-----
-+
-* Start again
-
