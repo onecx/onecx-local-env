@@ -28,8 +28,20 @@ image::issues/incomplete-onecx-start.png[]
 * Start again
 
 
+== Missing Menu in Browser
+The problem occurs sometimes after succesful starting the services
+
+.Message: Missing Menu in Browser
+image::issues/missing-menu-on-start.png[]
+
+.Solution icon:lightbulb-o[yellow]
+[source,bash]
+* Remove Browser Cache & Cookies
+* Refresh browser
+
+
 == Bad gateway in Browser
-The problem occurs sometimes after succesful starting the service
+The problem occurs sometimes after succesful starting the services
 
 .Message: Bad gateway in Browser
 image::issues/bad-gateway-on-mfe-start.png[]
