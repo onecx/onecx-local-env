@@ -3,7 +3,7 @@
 :idseparator: -
 :imagesdir: ../../images
 
-To run a local OneCX instance, Docker images with the latest version are downloaded. Over time, these images become outdated, meaning that even if a newer version is available, the old version is still being used locally.
+To run a local OneCX instance, Docker images with the latest version are downloaded. Over time, these images become outdated, meaning that even if a newer version is available, the old version is still being used locally. Check versions with script xref:./check-images.adoc[check-images.sh].
 
 The *update-images.sh* script is used to renew local Docker images. It can be run from the root directory of the *onecx-local-env* repository.
 
@@ -17,6 +17,15 @@ Here is the command to display the available flags:
 [TIP]
 ====
 To get an overview of the Docker images and their versions on your local machine, run the Docker command `*docker image ls*`. If images with the tag *<none>* are displayed, you can run the script with the parameter `*-c*` to clean them up.
+====
+
+[TIP]
+====
+After successful updating images it is recommendet to cleanup outdated docker resources with command
+[source,bash]
+----
+docker system prune
+----
 ====
 
 
