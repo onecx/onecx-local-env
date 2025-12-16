@@ -21,7 +21,7 @@ To get an overview of the Docker images and their versions on your local machine
 
 [TIP]
 ====
-After successful updating images it is recommendet to cleanup outdated docker resources with command
+After successfully updating the images, it is recommended to clean up outdated Docker resources using the command
 [source,bash]
 ----
 docker system prune
