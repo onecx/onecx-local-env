@@ -1,0 +1,16 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX Chat",
+  "description": "OneCX Chat",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/chat/",
+  "remoteEntry": "/mfe/chat/remoteEntry.js",
+  "note": "Imported MFE",
+  "exposedModule": "./OnecxChatUiModule",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-chat",
+  "tagName": "ocx-chat-ui-component",
+  "type": "MODULE",
+  "deprecated": false,
+  "undeployed": false
+}
