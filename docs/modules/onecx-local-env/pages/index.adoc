@@ -77,7 +77,6 @@ These applications are available within the OneCX Local Environment:
 * xref:documentation:onecx-product-store:page$index.adoc[Product Store]
 * xref:documentation:onecx-shell:page$index.adoc[Shell]
 * xref:documentation:onecx-tenant:page$index.adoc[Tenant]
-* xref:documentation:onecx-test:page$index.adoc[Test]
 * xref:documentation:onecx-theme:page$index.adoc[Theme]
 * xref:documentation:onecx-user-profile:page$index.adoc[User Profile]
 * xref:documentation:onecx-welcome:page$index.adoc[Welcome]
