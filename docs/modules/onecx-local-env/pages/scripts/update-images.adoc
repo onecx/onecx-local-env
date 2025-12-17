@@ -46,26 +46,26 @@ Name filter, update images which have <text> into image name
 
 == Examples
 
-Update all Images with `ui` in name::
+=== Update UI Images
 The Docker which have *ui* in image name are pulled from remote registry.
-+
+
 [source,bash]
 ----
 ./update-images.sh  -n ui
 ----
 
-Cleanup only::
+=== Cleanup only
 Started without any name filter will remove all orphaned images. No additional confirmation is required.
-+
+
 .Excerpt from the list of orphaned images
 image::scripts/script_check-images.sh_none-images.png[]
-+
+
 [source,bash]
 ----
 ./update-images.sh  -c
 ----
-+
+
 The deletion is only possible if the image is not in use. If so then stop the appropriate container first and try again.
-+
+
 .Image deletion failed
 image::scripts/script_check-images.sh_rm-image-failed.png[]

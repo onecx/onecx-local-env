@@ -139,7 +139,7 @@ The Traefik configurations are being cleaned up: All specific configuration file
 image::scripts/script_toggle-mfes.sh_cleanup.png[]
 
 
-== Good to know: Routing & Priorities
+== Routing & Priorities
 
 As described earlier, Traefik is responsible for routing. Each route is assigned a priority, which Traefik derives by default from the length of the rule: the longer the rule, the higher the priority. To avoid routing collisions, the local microfrontends are configured with a significantly higher priority.
 

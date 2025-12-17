@@ -31,17 +31,17 @@ The profile to use when stopping the environment. This must match the profile th
 
 == Examples
 
-Stop base and Cleanup::
+=== Stop base and Cleanup
 The Docker services *essential* for OneCX will be terminated, including the deletion of all data. Technically, this involves deleting the Docker volumes used by OneCX.
-+
+
 [source,bash]
 ----
 ./stop-onecx.sh -c
 ----
 
-Stop ALL and Cleanup::
+=== Stop ALL and Cleanup
 *All* Docker services for OneCX will be terminated, including the deletion of all data. Technically, this involves deleting the Docker volumes used by OneCX.
-+
+
 [source,bash]
 ----
 ./stop-onecx.sh -p all -c

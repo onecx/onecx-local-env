@@ -51,7 +51,9 @@ Skips the import of initial data after starting the services. (Default: import d
 === Start essential Services
 The Docker services *essential* for OneCX are started. The necessary Docker volumes are created and required data are imported. Technically, these services are labelled with the *base* profile in the docker-compose file used.
 
-There is no security context defined. All logins are using the default tenant!
+There is no security context defined:
+* All data are owned by *default* tenant.
+* All logins are using the *default* tenant!
 
 [source,bash]
 ----
@@ -75,6 +77,11 @@ The necessary Docker volumes are created but no data are imported.
 ----
 ./start-onecx.sh -s -x
 ----
+
+[TIP]
+====
+If data needs to be imported in a tenant-specific manner, then use the script xref:./import.adoc[import-onecx.sh] with the appropriate flags after starting the services.
+====
 
 
 == Additional Started Services
