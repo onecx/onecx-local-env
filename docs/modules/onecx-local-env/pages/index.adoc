@@ -68,3 +68,17 @@ In addition to the OneCX Core products, further services will be launched.
 These applications are available within the OneCX Local Environment:
 
 * xref:documentation:onecx-announcement:page$index.adoc[Announcement]
+* xref:documentation:onecx-bookmark:page$index.adoc[Bookmark]
+* xref:documentation:onecx-data-orchestrator:page$index.adoc[Data Orchestrator]
+* xref:documentation:onecx-help:page$index.adoc[Help]
+* xref:documentation:onecx-iam:page$index.adoc[IAM]
+* xref:documentation:onecx-parameter:page$index.adoc[Parameter]
+* xref:documentation:onecx-permission:page$index.adoc[Permission]
+* xref:documentation:onecx-product-store:page$index.adoc[Product Store]
+* xref:documentation:onecx-shell:page$index.adoc[Shell]
+* xref:documentation:onecx-tenant:page$index.adoc[Tenant]
+* xref:documentation:onecx-test:page$index.adoc[Test]
+* xref:documentation:onecx-theme:page$index.adoc[Theme]
+* xref:documentation:onecx-user-profile:page$index.adoc[User Profile]
+* xref:documentation:onecx-welcome:page$index.adoc[Welcome]
+* xref:documentation:onecx-workspace:page$index.adoc[Workspace]
