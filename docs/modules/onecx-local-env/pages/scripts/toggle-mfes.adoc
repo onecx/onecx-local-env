@@ -71,42 +71,42 @@ If the microfrontend is one of OneCX Core products and no port is specified then
 
 == Examples
 
-Integrate my App with specific path::
+=== Integrate my App with specific path
 The local microfrontend `my-app` runs on `http://localhost:4200` (standard Angular).
-+
+
 `/my-app-path` is the path under which the microfrontend is accessible within OneCX.
-+
+
 [source,bash]
 ----
 ./toggle-mfes.sh  -a my-app::/my-app-path
 ----
-+
+
 .Successful integrated "my-app"
 image::scripts/script_toggle-mfes.sh_activate-my-app.png[]
 
 
-Integrate several Apps::
+=== Integrate several Apps
 Integrate *workspace* on standard port *5025* AND *user-profile* on port *5027*. Since no path is specified, the default path is used: */mfe/<name-of-microfrontend>*
-+
+
 [source,bash]
 ----
 ./toggle-mfes.sh  -a workspace user-profile:5027
 ----
-+
+
 .Successful integrated Microfrontends
 image::scripts/script_toggle-mfes.sh_activate.png[]
 
 
-Integrate OneCX Shell::
+=== Integrate OneCX Shell
 The integration of the shell requires a special path mapping. Hereby the path is not completely stripped. Define the strip path to be used at the end. 
-+
+
 [source,bash]
 ----
 ./toggle-mfes.sh  -a shell::/onecx-shell/:/
 ----
 .Successful integrated OneCX Shell
 image::scripts/script_toggle-mfes.sh_activate-shell.png[]
-+
+
 [HINT]
 Because OneCX Shell is a microfrontend with a special role in OneCX it have to be started with a specific command:
 +
@@ -115,21 +115,21 @@ Because OneCX Shell is a microfrontend with a special role in OneCX it have to b
 npm run start:local-env
 ----
 
-Deintegrate my App::
+=== Deintegrate my App
 The *-d* option allows you to undo an integration. The same rule applies to the port: if the port is not *4200*, it must be specified.
-+
+
 [source,bash]
 ----
 ./toggle-mfes.sh  -d my-app:12345
 ----
-+
+
 .Successful deintegration
 image::scripts/script_toggle-mfes.sh_deactivate.png[]
 
 
-Deintegrate ALL Apps::
+=== Deintegrate ALL Apps
 The Traefik configurations are being cleaned up: All specific configuration files for the Microfrontend integration are being deleted.
-+
+
 [source,bash]
 ----
 ./toggle-mfes.sh  -c
