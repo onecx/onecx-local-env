@@ -8,6 +8,8 @@ http:
       # path prefix as used for MFE registration in product store
       rule: "Host(`local-proxy`) && PathPrefix(`{{MFE_PATH}}`)"
       service: local_{{MFE_NAME}}
+      # higher prio than calculated based on rule length (traefik standard)
+      priority: 323
       middlewares:
         - strip_{{MFE_NAME}}
 

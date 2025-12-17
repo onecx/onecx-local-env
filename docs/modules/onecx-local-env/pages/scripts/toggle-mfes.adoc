@@ -11,7 +11,7 @@ The script can be run from the root directory of the *onecx-local-env* repositor
 +
 The Traefik configuration files are stored in `init-data/traefik/active/`. Traefik immediately detects any changes there.
 
-Here is the command to list the currently integrated microfrontends.:
+Here is the command to list the currently integrated microfrontends:
 
 [source,bash]
 ----
@@ -137,3 +137,20 @@ The Traefik configurations are being cleaned up: All specific configuration file
 
 .Reset all Microfrontend configurations in Traefik
 image::scripts/script_toggle-mfes.sh_cleanup.png[]
+
+
+== Good to know: Routing & Priorities
+
+As described earlier, Traefik is responsible for routing. Each route is assigned a priority, which Traefik derives by default from the length of the rule: the longer the rule, the higher the priority. To avoid routing collisions, the local microfrontends are configured with a significantly higher priority.
+
+This means you can run multiple microfrontends with the same routing rule in parallel and still control which microfrontend is used in OneCX. This is very useful if you want to use locally running microfrontends without having to stop the corresponding service in Docker Compose.
+
+The Traefik configuration generated when integrating a microfrontend (see above) sets a significantly higher priority for this route, so that the local microfrontend is used preferentially.
+
+
+=== Example: Prioritize local Microfrontend
+In this example, the OneCX Workspace microfrontend is running both in Docker Compose (Service: onecxworkspace-ui) and locally (Service: local_workspace). The local instance is used preferentially because it has a higher priority (323) than the Docker Compose instance (52).
+
+
+.Example routing for OneCX Workspace microservices
+image::scripts/script_toggle-mfes.sh_priotize-routes.png[]
