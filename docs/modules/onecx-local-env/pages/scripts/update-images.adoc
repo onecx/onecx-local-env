@@ -11,7 +11,7 @@ Here is the command to display the available flags:
 
 [source,bash]
 ----
-./update-images.sh
+./update-images.sh -h
 ----
 
 [TIP]
