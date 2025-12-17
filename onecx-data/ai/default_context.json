@@ -1,0 +1,13 @@
+{
+  "name": "default",
+  "llmSystemMessage": "system message",
+  "llmProvider": {
+    "name": "ollama",
+    "description": "Ollama LLM service",
+    "llmUrl": "https://ollama.one-cx.org",
+    "modelName": "llama2",
+    "modelVersion": "latest",
+    "appId": "v1",
+    "apiKey": "replace"
+  }
+}

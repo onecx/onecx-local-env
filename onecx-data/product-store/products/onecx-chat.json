@@ -1,0 +1,14 @@
+{
+  "version": "xxx",
+  "description": "Chat with AI and users",
+  "imageUrl": "",
+  "iconName": "chat",
+  "displayName": "OneCX Chat",
+  "basePath": "/chat",
+  "provider": "OneCX Team",
+  "classifications": [ 
+    "Tool"
+  ],
+  "multitenancy": true,
+  "undeployed": false
+}

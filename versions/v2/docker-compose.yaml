@@ -241,6 +241,33 @@ services:
     profiles:
       - all
 
+  ########## ONECX AI
+  onecx-ai-svc:
+    image: ${ONECX_AI_SVC}
+    container_name: onecx-ai-svc
+    environment:
+      <<: *svc_multi_tenancy
+      QUARKUS_DATASOURCE_USERNAME: onecx_ai
+      QUARKUS_DATASOURCE_PASSWORD: onecx_ai
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresdb:5432/onecx_ai?sslmode=disable
+      QUARKUS_TLS_TRUST_ALL: true
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-ai-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-ai-svc.rule=Host(`onecx-ai-svc`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+      - data-import
+
   ########## ONECX BOOKMARK
   onecx-bookmark-svc:
     image: ${ONECX_BOOKMARK_SVC}
@@ -302,6 +329,72 @@ services:
     labels:
       - "traefik.http.services.onecx-bookmark-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-bookmark-ui.rule=Host(`local-proxy`) && PathPrefix(`/mfe/bookmark/`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+
+
+  ########## ONECX CHAT
+  onecx-chat-svc:
+    image: ${ONECX_CHAT_SVC}
+    container_name: onecx-chat-svc
+    environment:
+      <<: *svc_multi_tenancy
+      QUARKUS_DATASOURCE_USERNAME: onecx_chat
+      QUARKUS_DATASOURCE_PASSWORD: onecx_chat
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresdb:5432/onecx_chat?sslmode=disable
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-chat-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-chat-svc.rule=Host(`onecx-chat-svc`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+
+  onecx-chat-bff:
+    image: ${ONECX_CHAT_BFF}
+    container_name: onecx-chat-bff
+    environment:
+      <<: *bff_environment
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-chat"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-chat-svc:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-chat-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-chat-bff.rule=Host(`onecx-chat-bff`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+
+  onecx-chat-ui:
+    image: ${ONECX_CHAT_UI}
+    container_name: onecx-chat-ui
+    environment:
+      APP_BASE_HREF: /mfe/chat/
+      APP_ID: onecx-chat-ui
+      PRODUCT_NAME: "onecx-chat"
+    depends_on:
+      onecx-chat-bff:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-chat-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-chat-ui.rule=Host(`local-proxy`) && PathPrefix(`/mfe/chat/`)"
     networks:
       - onecx
     profiles:
@@ -1110,6 +1203,8 @@ services:
     image: alpine:3
     container_name: waiting-on-profile-data-import
     depends_on:
+      onecx-ai-svc:
+        condition: service_healthy
       onecx-bookmark-svc:
         condition: service_healthy
       onecx-parameter-svc:

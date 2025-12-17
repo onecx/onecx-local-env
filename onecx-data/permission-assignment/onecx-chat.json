@@ -1,0 +1,27 @@
+{
+  "id": "onecx-local-env_import-permission-assignments_onecx-chat",
+  "assignments": {
+    "onecx-chat": {
+      "onecx-chat-ui": {
+        "onecx-admin": {
+          "CHAT": [ "CREATE", "DELETE", "EDIT", "SEARCH", "VIEW", "EXPORT", "IMPORT", "SAVE" ]
+        },
+        "onecx-user": {
+          "CHAT": [ "SEARCH", "VIEW" ]
+        }
+      },
+      "onecx-chat-bff": {
+        "onecx-admin": {
+          "chat": ["read", "write", "delete"],
+          "message": ["read", "write", "delete"],
+          "participant": ["read", "write", "delete"]
+        },
+        "onecx-user": {
+          "chat": ["read"],
+          "message": ["read"],
+          "participant": ["read"]
+        }
+      }
+    }
+  }
+}
