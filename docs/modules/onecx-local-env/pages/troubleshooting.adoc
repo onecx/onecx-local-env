@@ -76,7 +76,7 @@ The issue occurs if the repository is updated with `git pull` (get latest versio
 image::issues/untracked-files-on-pull.sh.png[]
 
 .The directory init_data/traefik/active was created by root
-image::issues/traefik-active_created-by-root.sh.png[]
+image::issues/traefik-active_created-by-root.sh.png[width=250]
 
 .Solution icon:lightbulb-o[yellow]
 * Remove the active directory of Traefik manually by execution of
