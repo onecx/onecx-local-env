@@ -1,0 +1,8 @@
+= Utilities
+:idprefix:
+:idseparator: -
+:imagesdir: ../../images
+
+In addition to the original OneCX products, some open-source tools are also used and launched.
+
+include::../utilities.adoc[]
