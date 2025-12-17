@@ -19,7 +19,7 @@ Here is the command to list the currently integrated microfrontends:
 ----
 
 .List of integrated Microfrontends
-image::scripts/script_toggle-mfes.sh_list.png[width=300]
+image::scripts/script_toggle-mfes.sh_list.png[width=400]
 
 
 == Precondition
