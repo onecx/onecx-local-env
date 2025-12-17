@@ -67,4 +67,4 @@ In addition to the OneCX Core products, further services will be launched.
 
 These applications are available within the OneCX Local Environment:
 
-* xref:documentation:onecx-announcement:partial$nav.adoc[Announcement]
+* xref:documentation:onecx-announcement:page$index.adoc[Announcement]
