@@ -138,6 +138,11 @@ The Traefik configurations are being cleaned up: All specific configuration file
 .Reset all Microfrontend configurations in Traefik
 image::scripts/script_toggle-mfes.sh_cleanup.png[]
 
+[TIP]
+====
+There is no need to deintegrate a microfrontend after use. Simply stopping the local microfrontend is sufficient. Traefik will then automatically route requests to the corresponding microfrontend in Docker Compose.
+====
+
 
 == Routing & Priorities
 
