@@ -9,7 +9,7 @@ This is an overview of the data and how its organized.
 
 
 .OneCX Default Data
-[.stripes-even,cols="20,~"]
+[.stripes-even,cols="20,~,~"]
 |===
 | Data Type | Managed in | Description
 
