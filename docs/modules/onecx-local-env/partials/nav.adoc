@@ -17,12 +17,12 @@
 
 ** Internal
 *** xref:onecx-local-env:internal/utils.adoc[Utilities]
-*** xref:onecx-local-env:internal/data.adoc[Default Data]
+*** xref:onecx-local-env:internal/onecx-data.adoc[Default Data]
 *** xref:onecx-local-env:internal/networking.adoc[Networking]
+
 *** Versions
-**** v2 (latest)
-***** xref:onecx-local-env:versions/v2/v2.adoc[v2 (latest)]
-***** xref:onecx-local-env:versions/v2/migrate.adoc[Migration Guide]
+**** xref:onecx-local-env:versions/v2/v2.adoc[v2 (latest)]
+**** xref:onecx-local-env:versions/v2/migrate.adoc[v2 Migration]
 **** xref:onecx-local-env:versions/v1/v1.adoc[v1]
 
 ** xref:onecx-local-env:troubleshooting.adoc[Troubleshooting]
