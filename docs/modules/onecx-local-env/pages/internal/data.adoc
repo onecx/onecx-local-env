@@ -1,9 +1,9 @@
-= OneCX Data and Imports Overview
+= OneCX Data
 :idprefix:
 :idseparator: -
 :imagesdir: ../../images
 
-Why we have OneCX data and why we have to import them?
+The OneCX Local Environment contains data required for initial xref:../scripts/start.adoc[startup]. This data is xref:../scripts/import.adoc[imported] after the services have started.
 
 This is an overview of the file and folder structure related to data imports in the OneCX Local Environment. It also explains the purpose of each file and folder, and provides guidelines for adding new files.
 
