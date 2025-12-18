@@ -7,8 +7,6 @@ https://www.keycloak.org/[Keycloak] is an open-source software for Identity and 
 
 There is an OneCX realm which contains all configurations needed by OneCX like users, roles, clients etc.
 
-Access::
-
 * http://keycloak-app/admin/master/console/#/onecx[]
 * Username: *admin*
 * Password: *admin*
@@ -23,8 +21,6 @@ https://www.pgadmin.org/[pgAdmin] is a popular, open-source administration and d
 [TIP]
 This service is optional, as it is not strictly necessary for OneCX to function. For a better user experience, use a native client directly on your computer.
 
-Access:
-
 * http://pgadmin/[]
 * Username: *admin*
 * Password: *admin*
@@ -37,8 +33,6 @@ image::screenshot_successful-pgadmin.png[]
 Traefik is required for routing within Docker Compose networks as well as to and from networks outside this network.
 
 xref:documentation:onecx-local-env:page$/scripts/toggle-mfes.adoc#routing-and-prioritize[Use Traefik for routing Microfrontends]
-
-Access:
 
 * http://traefik:8082/dashboard/[]
 
