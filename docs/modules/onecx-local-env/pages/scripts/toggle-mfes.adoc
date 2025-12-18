@@ -136,7 +136,7 @@ The Traefik configurations are being cleaned up: All specific configuration file
 ----
 
 .Reset all Microfrontend configurations in Traefik
-image::scripts/script_toggle-mfes.sh_cleanup.png[]
+image::scripts/script_toggle-mfes.sh_cleanup.png[width=500]
 
 [TIP]
 ====
