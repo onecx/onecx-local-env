@@ -11,7 +11,7 @@ This is an overview of the data and how its organized.
 .OneCX Default Data
 [.stripes-even,cols="20,~,~"]
 |===
-| Data Type | Managed in | Description
+| Data Type | Managed by | Description
 
 | Assignments
 | xref:documentation:onecx-permission:page$index.adoc[Permission Management]
