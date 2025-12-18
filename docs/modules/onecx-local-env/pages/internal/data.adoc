@@ -11,29 +11,35 @@ This is an overview of the data and how its organized.
 .OneCX Default Data
 [.stripes-even,cols="20,~"]
 |===
-| Data Type
-| Description
+| Data Type | Managed in | Description
 
 | Assignments
-| Relationship between roles and permissions. Managed in xref:documentation:onecx-permission:page$index.adoc[Permission Management].
+| xref:documentation:onecx-permission:page$index.adoc[Permission Management]
+| Relationship between roles and permissions
 
 | Parameters
-| Used by some applications and managed in xref:documentation:onecx-parameter:page$index.adoc[Parameter Management].
+| xref:documentation:onecx-parameter:page$index.adoc[Parameter Management]
+| Used by some applications
 
 | Permissions
-| Declared and used in applications. Managed in xref:documentation:onecx-permission:page$index.adoc[Permission Management].
+| xref:documentation:onecx-permission:page$index.adoc[Permission Management]
+| Declared and used in applications.
 
 | Products (Applications)
-| Application data (components, slots etc.). Managed in xref:documentation:onecx-product-store:page$index.adoc[Application Store].
+| xref:documentation:onecx-product-store:page$index.adoc[Application Store]
+| Application data (components, slots etc.)
 
 | Tenants
-| Represents a customer or organizational unit using OneCX. Managed in xref:documentation:onecx-tenant:page$index.adoc[Tenant Management].
+| xref:documentation:onecx-tenant:page$index.adoc[Tenant Management]
+| Represents a customer or organizational unit using OneCX
 
 | Themes
-| Used to customize the look and feel of OneCX for a tenant. Managed in xref:documentation:onecx-theme:page$index.adoc[Theme Management].
+| xref:documentation:onecx-theme:page$index.adoc[Theme Management]
+| Customizing the look and feel of OneCX for a tenant
 
 | Workspaces
-| Represents a customer or organizational unit using OneCX. Managed in xref:documentation:onecx-workspace:page$index.adoc[Workspace Management].
+| xref:documentation:onecx-workspace:page$index.adoc[Workspace Management]
+| Customizing the working areas for users
 |===
 
 
