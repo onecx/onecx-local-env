@@ -7,7 +7,6 @@ The OneCX Local Environment contains data required for initial xref:../scripts/s
 
 This is an overview of the file and folder structure related to data imports in the OneCX Local Environment. It also explains the purpose of each file and folder, and provides guidelines for adding new files.
 
-[#folder-structure]
 == Folder Structure
 
 The `imports` directory contains all the data and scripts required for importing default data into the OneCX Local Environment. Below is the folder structure:

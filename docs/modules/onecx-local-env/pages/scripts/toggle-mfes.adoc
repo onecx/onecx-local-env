@@ -144,6 +144,7 @@ There is no need to deintegrate a microfrontend after use. Simply stopping the l
 ====
 
 
+[#routing-and-prioritize]
 == Routing & Priorities
 
 As described earlier, Traefik is responsible for routing. Each route is assigned a *priority*, which Traefik derives by default from the length of the rule: the longer the rule, the higher the priority. To avoid routing collisions, the *local microfrontends are configured with a significantly higher priority*.
