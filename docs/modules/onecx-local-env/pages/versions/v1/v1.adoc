@@ -11,12 +11,12 @@ This page was created for an older version of OneCX Local Environment and may no
 
 [quote]
 ____
-This document only contains information specific to v1 of the OneCX Local Environment. Please make sure to also read the xref:documentation:local-env:general/getting-started.adoc[*top-level getting started guide*] for general information and instructions that apply to all versions.
+This document only contains information specific to v1 of the OneCX Local Environment. Please make sure to also read the xref:documentation:onecx-local-env:getting-started.adoc[*top-level getting started guide*] for general information and instructions that apply to all versions.
 ____
 
-v1 was the initial version of the local development environment for OneCX. While it still works and will be maintained for some time to avoid breaking existing workflows, some significant quality-of-life improvements were implemented in xref:documentation:local-env:general/versions/v2/v2.adoc[OneCX Local Environment v2]. We therefore encourage new users to start with xref:documentation:local-env:general/versions/v2/v2.adoc[OneCX Local Environment v2].
+v1 was the initial version of the local development environment for OneCX. While it still works and will be maintained for some time to avoid breaking existing workflows, some significant quality-of-life improvements were implemented in xref:documentation:onecx-local-env:versions/v2/v2.adoc[OneCX Local Environment v2]. We therefore encourage new users to start with xref:documentation:onecx-local-env:versions/v2/v2.adoc[OneCX Local Environment v2].
 
-To migrate from v1 to v2, please refer to the xref:documentation:local-env:general/versions/v2/migrate.adoc[Migrate to v2] guide.
+To migrate from v1 to v2, please refer to the xref:documentation:onecx-local-env:versions/v2/migrate.adoc[Migrate to v2] guide.
 
 == Overview
 
