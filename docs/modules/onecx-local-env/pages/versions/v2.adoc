@@ -190,4 +190,4 @@ Additionally, some services (`traefik`, `postgresdb`, `pgadmin` and `keycloak-ap
 
 == Troubleshooting
 
-If you encounter any issues while using OneCX Local Environment v2, please refer to the xref:documentation:local-env:faq/common-issues.adoc[Troubleshooting - Common Issues] page for potential solutions and workarounds.
+If you encounter any issues while using OneCX Local Environment v2, please refer to the xref:../help/common-issues.adoc[Troubleshooting - Common Issues] page for potential solutions and workarounds.
