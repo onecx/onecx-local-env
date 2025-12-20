@@ -1,4 +1,7 @@
-= Migrate to v2 Edition
+= Migrate to v2
+:idprefix:
+:idseparator: -
+:imagesdir: ../../images
 
 [NOTE]
 .Disclaimer
@@ -10,7 +13,7 @@ This guide highlights the key differences between OneCX Local Environment xref:.
 
 == Network Rename
 
-In xref::./v1.adoc[v1], the network that all services connected to was named `example`.  
+In xref:./v1.adoc[v1], the network that all services connected to was named `example`.  
 In xref:./v2.adoc[v2], this network is now named `default`.
 
 If you have any custom services that need to attach to the same network as OneCX, make sure they connect to `default` from now on.

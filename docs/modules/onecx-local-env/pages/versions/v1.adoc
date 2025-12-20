@@ -1,7 +1,7 @@
-= Versions - v1
+= Version - v1
 :idprefix:
 :idseparator: -
-:imagesdir: ../images
+:imagesdir: ../../images
 
 [NOTE]
 .Disclaimer

@@ -1,7 +1,7 @@
-= v2 Edition
+= Version - v2
 :idprefix:
 :idseparator: -
-:imagesdir: ../../../images
+:imagesdir: ../../images
 
 [NOTE]
 .Disclaimer
@@ -17,7 +17,7 @@ ____
 
 v2 is the current latest version of the local development environment for OneCX.
 
-If you are currently using xref:./v1.adoc[OneCX Local Environment v1] and want to migrate to v2, please refer to the xref:./migrate.adoc[Migrate to v2] guide for detailed migration instructions.
+If you are currently using xref:./v1.adoc[v1] and want to migrate to v2, please refer to the xref:./migrate.adoc[Migrate to v2] guide for detailed migration instructions.
 
 == Overview
 
