@@ -84,7 +84,4 @@ If data needs to be imported in a tenant-specific manner, then use the script xr
 ====
 
 
-== Additional Started Services
-In addition to the original OneCX products, some open-source tools are also used and launched.
-
 include::../utilities.adoc[]
