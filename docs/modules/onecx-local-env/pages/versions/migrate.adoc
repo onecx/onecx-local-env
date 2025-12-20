@@ -6,11 +6,11 @@
 This page was created for an older version of OneCX Local Environment and may not reflect the current state of the project. It will be updated in the near future.
 ====
 
-This guide highlights the key differences between OneCX Local Environment xref:../v1/v1.adoc[v1] and xref:./v2.adoc[v2], and explains how you can adapt your setup to ensure that it seamlessly works with xref:./v2.adoc[v2].
+This guide highlights the key differences between OneCX Local Environment xref:./v1.adoc[v1] and xref:./v2.adoc[v2], and explains how you can adapt your setup to ensure that it seamlessly works with xref:./v2.adoc[v2].
 
 == Network Rename
 
-In xref:../v1/v1.adoc[v1], the network that all services connected to was named `example`.  
+In xref::./v1.adoc[v1], the network that all services connected to was named `example`.  
 In xref:./v2.adoc[v2], this network is now named `default`.
 
 If you have any custom services that need to attach to the same network as OneCX, make sure they connect to `default` from now on.
@@ -18,7 +18,7 @@ If you have any custom services that need to attach to the same network as OneCX
 
 == Service Startup Behavior
 
-In xref:../v1/v1.adoc[v1]:
+In xref:./v1.adoc[v1]:
 
 - Some core services started automatically when running: `docker compose up -d`
 
@@ -39,7 +39,7 @@ docker compose --profile base up -d
 
 == Data Import Script Improvements
 
-In xref:../v1/v1.adoc[v1]:
+In xref:./v1.adoc[v1]:
 
 - The data import script had the sole purpose of sending data to services to trigger the import.
 - This caused issues if containers were not running, unhealthy, or still starting up.
