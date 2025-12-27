@@ -1,13 +1,12 @@
 // This menu tree is included in main menu of parent project https://github.com/onecx/docs
 * xref:onecx-local-env:index.adoc[Local Environment]
-** xref:onecx-local-env:index.adoc[Overview]
-** xref:onecx-local-env:getting-started.adoc[Getting Started]
-** xref:onecx-local-env:setup.adoc[Setup]
+** xref:onecx-local-env:setup.adoc[Setting up]
+** xref:onecx-local-env:run-onecx.adoc[Run OneCX]
 ** xref:onecx-local-env:extend/extend.adoc[Extend OneCX]
 *** xref:onecx-local-env:extend/local-mfe.adoc[Local Microfrontend]
 *** xref:onecx-local-env:extend/local-images.adoc[Local Images]
 
-** Scripts
+** xref:onecx-local-env:scripts.adoc[Scripts]
 *** xref:onecx-local-env:scripts/start.adoc[start-onecx.sh]
 *** xref:onecx-local-env:scripts/stop.adoc[stop-onecx.sh]
 *** xref:onecx-local-env:scripts/import.adoc[import-onecx.sh]

@@ -1,0 +1,30 @@
+== Use Scripts for Management
+
+Since OneCX runs in a Docker Compose environment, most settings can be managed directly through Docker and Docker Compose.
+However, for a more convenient approach and taking into account specific OneCX features, various shell scripts are available.
+
+[TIP]
+Each script has the *-h* flag to explain how to use.
+
+.Available Scripts 
+[.stripes-even,cols="20,~"]
+|===
+| xref:./scripts/start.adoc[start-onecx.sh]
+| Start the local environment including import of inital neccessary data
+
+| xref:./scripts/stop.adoc[stop-onecx.sh]
+| Stop the local environment
+
+| xref:./scripts/import.adoc[import-onecx.sh]
+| Import data
+
+| xref:./scripts/toggle-mfes.adoc[toggle-mfes.sh]
+| Integrate local running microfrontends directly into OneCX
+
+| xref:./scripts/check-images.adoc[check-images.sh]
+| List local images with state and version
+
+| xref:./scripts/update-images.adoc[update-images.sh]
+| Update local images
+|===
+
