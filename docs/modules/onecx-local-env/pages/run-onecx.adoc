@@ -6,7 +6,7 @@
 This guide provides a quick overview of the steps required to run a local OneCX environment. It includes instructions on starting the environment, accessing OneCX in a browser, and stopping the environment when finished.
 
 == Set up the local environment
-Follow the instructions at xref:./setup.adoc[Setup] to configure the base on your local machine.
+Follow the instructions at xref:./setup.adoc[Setting up] to configure the base on your local machine.
 
 The following steps assume that *onecx-local-env* has already been configured and installed according to the installation instructions.
 

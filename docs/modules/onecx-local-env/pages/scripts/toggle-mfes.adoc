@@ -9,7 +9,7 @@ How it works::
 The script creates a small configuration file in Traefik, tailored to the local microfrontend. Traefik then forwards requests from the Docker network to the external local microfrontend.
 The script can be run from the root directory of the *onecx-local-env* repository.
 +
-The Traefik configuration files are stored in `init-data/traefik/active/`. Traefik immediately detects any changes there.
+The Traefik configuration files are stored in `init-data/traefik/active/`. Traefik immediately detects any changes there, no extra restart is necessary.
 
 Here is the command to list the currently integrated microfrontends:
 
@@ -24,6 +24,8 @@ image::scripts/script_toggle-mfes.sh_list.png[width=500]
 
 == Precondition
 Before a microfrontend can be successfully integrated into OneCX, it must be started.
+
+In the following examples, 6021 is used as the port where the microfrontend is running locally. Adjust the port as needed.
 
 Start Angular *ng* Microfrontend on port 6021::
 +
@@ -51,7 +53,7 @@ The *remoteEntry.js* should be loaded - the content is displayed. The *./toggle-
 
 
 == Available Flags
-The script accepts several optional flags to customize its behavior. *All options may only be used separately!*
+The script accepts multiple flags to customize its behavior; one of each is required. *All options may only be used separately!*
 
 The flags are:
 

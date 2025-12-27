@@ -3,7 +3,7 @@
 :idseparator: -
 :imagesdir: ../../images
 
-To run a local OneCX instance, Docker images with the latest version are downloaded. Over time, these images become outdated, meaning that even if a newer version is available, the old version is still being used locally. Check versions with script xref:./check-images.adoc[check-images.sh].
+To run a local OneCX instance, Docker images with the latest version are downloaded and used. Over time, these images become outdated, meaning that even if a newer version is available, the old version is still being used locally. Check versions with script xref:./check-images.adoc[check-images.sh].
 
 The *update-images.sh* script is used to renew local Docker images. It can be run from the root directory of the *onecx-local-env* repository.
 
@@ -30,7 +30,7 @@ docker system prune
 
 
 == Available Flags
-The script accepts several optional flags to customize its behavior. The available flags are:
+The script accepts several optional flags to customize its behavior. Some flags can be combined. The available flags are:
 
 -c::
 Cleaned up orphaned images (e.g. if they have *<none>* in their name)

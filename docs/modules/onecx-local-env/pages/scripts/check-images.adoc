@@ -71,8 +71,8 @@ image::scripts/script_check-images.sh_none-images.png[]
 
 Such images can be removed. The script xref:./update-images.adoc[update-images.sh] can be used or native with
 
+
 [source,bash]
 ----
 docker image rm <image-id>
 ----
-

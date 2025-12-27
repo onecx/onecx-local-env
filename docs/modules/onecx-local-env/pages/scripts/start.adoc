@@ -1,4 +1,4 @@
-= Start the Environment
+= Start local OneCX
 :idprefix:
 :idseparator: -
 :imagesdir: ../../images
@@ -51,7 +51,8 @@ Skips the import of initial data after starting the services. (Default: import d
 === Start essential Services
 The Docker services *essential* for OneCX are started. The necessary Docker volumes are created and required data are imported. Technically, these services are labelled with the *base* profile in the docker-compose file used.
 
-There is no security context defined:
+There is no security context defined, so authentication/authorization on services is disabled.
+
 * All data are owned by *default* tenant.
 * All logins are using the *default* tenant!
 
@@ -60,6 +61,7 @@ There is no security context defined:
 ./start-onecx.sh
 ----
 
+
 === Start ALL Services
 *All* Docker services for OneCX are started. The necessary Docker volumes are created and required data are imported. Technically, the relevant services are marked with the *all* profile in the docker-compose file used.
 
@@ -67,6 +69,7 @@ There is no security context defined:
 ----
 ./start-onecx.sh -p all 
 ----
+
 
 === Start with Security, skipping Import
 The Docker services *essential* for OneCX are started with enabled secure authentication and also the tenant id is taken into account. This is the main precondition for tenant-compliant logins.

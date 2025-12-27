@@ -1,45 +1,20 @@
-= OneCX Local Environment - Overview
+= OneCX Local Environment
 :idprefix:
 :idseparator: -
 :imagesdir: ../images
 
-*onecx-local-env* is the local development environment for OneCX. It is based on Docker/Docker Compose, and enables developers to quickly run local instances of the OneCX Shell, selected OneCX products and their dependencies for development and testing purposes.
+*onecx-local-env* is the local development environment for OneCX. It is based on Docker/Docker Compose, and enables developers to quickly run a local instance for development and testing purposes.
 
 *onecx-local-env* can either be used as a standalone tool, or integrated into custom development environments via Git submodules. Custom development environments can interact with *onecx-local-env* via provided lifecycle-scripts and extend its functionality by wrapping the provided Docker Compose and script files with custom implementations.
 
 
-== Start here
-. xref:./setup.adoc[Setup]: Details on how to set up and install
+== Get and Run OneCX
+. xref:./setup.adoc[Setting up]: Details on how to get and install OneCX locally
 
-. xref:./getting-started.adoc[Getting Started]: The quickest way to get started
+. xref:./run-onecx.adoc[Run OneCX]: How to start and access OneCX
 
 
-== Use Scripts for Management
-
-Since OneCX runs in a Docker Compose environment, most settings can be managed directly through Docker and Docker Compose.
-However, for a more convenient approach and taking into account specific OneCX features, various shell scripts are available. Each script has the *-h* flag to explain how to use.
-
-.Available Scripts 
-[.stripes-even,cols="20,~"]
-|===
-| xref:./scripts/start.adoc[start-onecx.sh]
-| Start the local environment including import of inital neccessary data
-
-| xref:./scripts/stop.adoc[stop-onecx.sh]
-| Stop the local environment
-
-| xref:./scripts/import.adoc[import-onecx.sh]
-| Import data
-
-| xref:./scripts/toggle-mfes.adoc[toggle-mfes.sh]
-| Integrate local running microfrontends directly into OneCX
-
-| xref:./scripts/check-images.adoc[check-images.sh]
-| List local images with state and version
-
-| xref:./scripts/update-images.adoc[update-images.sh]
-| Update local images
-|===
+include::partial$scripts.adoc[]
 
 
 == Utilities
@@ -67,17 +42,17 @@ In addition to the OneCX Core products, further services will be launched.
 
 These applications are available within the OneCX Local Environment:
 
-* xref:documentation:onecx-announcement:page$index.adoc[Announcement]
-* xref:documentation:onecx-bookmark:page$index.adoc[Bookmark]
-* xref:documentation:onecx-data-orchestrator:page$index.adoc[Data Orchestrator]
-* xref:documentation:onecx-help:page$index.adoc[Help]
-* xref:documentation:onecx-iam:page$index.adoc[IAM]
-* xref:documentation:onecx-parameter:page$index.adoc[Parameter]
-* xref:documentation:onecx-permission:page$index.adoc[Permission]
-* xref:documentation:onecx-product-store:page$index.adoc[Product Store]
-* xref:documentation:onecx-shell:page$index.adoc[Shell]
-* xref:documentation:onecx-tenant:page$index.adoc[Tenant]
-* xref:documentation:onecx-theme:page$index.adoc[Theme]
-* xref:documentation:onecx-user-profile:page$index.adoc[User Profile]
-* xref:documentation:onecx-welcome:page$index.adoc[Welcome]
-* xref:documentation:onecx-workspace:page$index.adoc[Workspace]
+* xref:documentation:onecx-announcement:index.adoc[Announcement]
+* xref:documentation:onecx-bookmark:index.adoc[Bookmark]
+* xref:documentation:onecx-data-orchestrator:index.adoc[Data Orchestrator]
+* xref:documentation:onecx-help:index.adoc[Help]
+* xref:documentation:onecx-iam:index.adoc[IAM]
+* xref:documentation:onecx-parameter:index.adoc[Parameter]
+* xref:documentation:onecx-permission:index.adoc[Permission]
+* xref:documentation:onecx-product-store:index.adoc[Product Store]
+* xref:documentation:onecx-shell:index.adoc[Shell]
+* xref:documentation:onecx-tenant:index.adoc[Tenant]
+* xref:documentation:onecx-theme:index.adoc[Theme]
+* xref:documentation:onecx-user-profile:index.adoc[User Profile]
+* xref:documentation:onecx-welcome:index.adoc[Welcome]
+* xref:documentation:onecx-workspace:index.adoc[Workspace]

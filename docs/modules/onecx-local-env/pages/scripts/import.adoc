@@ -2,6 +2,8 @@
 :idprefix:
 :idseparator: -
 :imagesdir: ../../images
+:source-highlighter: highlight.js
+
 
 To operate a local OneCX, some services require initial data, e.g., the theme, the admin workspace, permissions, etc.
 
@@ -61,8 +63,10 @@ When used, Docker does not check whether services require authentication. Please
 
 === Import ALL data
 Import all available OneCX data as:
+
 * Non-tenant specific data
 * Tenant data for *default* tenant
+
 Before the import, a check is performed to ensure that all required services are already running. Any missing services are started.
 
 [source,bash]
@@ -72,8 +76,9 @@ Before the import, a check is performed to ensure that all required services are
 
 
 === Import specific data, skip check
-Only workspace data is imported. If the data are tenant-specific data then the default tenant is used (use flag *-t* for a different tenant)
-Running services are not checked beforehand. If a required service is not running, the import will fail.
+Only workspace data is imported. If the data are tenant-specific data then the default tenant is used (use flag *-t* for a different tenant).
+
+With *-x* running services are not checked beforehand. If a required service is not running, corresponding imports will fail.
 
 [source,bash]
 ----
