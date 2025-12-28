@@ -1,7 +1,9 @@
-= Integrate Microfrontends into OneCX
-:idprefix:
-:idseparator: -
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
 :imagesdir: ../../images
+
+= Integrate Microfrontends into OneCX
 
 The script *toggle-mfes.sh* integrates (activates) a locally running microfrontend into the OneCX environment, allowing it to interact with other microfrontends. This process is also reversible. 
 
@@ -140,9 +142,9 @@ The Traefik configurations are being cleaned up: All specific configuration file
 .Reset all Microfrontend configurations in Traefik
 image::scripts/script_toggle-mfes.sh_cleanup.png[width=500]
 
-[TIP]
+[CAUTION]
 ====
-There is no need to deintegrate a microfrontend after use. Simply stopping the local microfrontend is sufficient. Traefik will then automatically route requests to the corresponding microfrontend in Docker Compose.
+Microfrontends integrated using the methods described above take precedence over those running in Docker Compose. If the microfrontends started with Docker Compose are needed again, the locally integrated microfrontends must first be deintegrated using the `-d` option. (A failover mechanism is not implemented due to different need of path stripping.)
 ====
 
 

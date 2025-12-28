@@ -1,7 +1,9 @@
-= Extending the default Environment
-:idprefix:
-:idseparator: -
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
 :imagesdir: ../../images
+
+= Extending the default Environment
 
 OneCX functions as a collection of microservices and microfrontends. The OneCX Shell orchestrates the microfrontends for a unified user interface. This concept allows for the easy integration of other services that are launched outside the OneCX network.
 
@@ -15,14 +17,14 @@ If a microfrontend has been started separately, integration can be easily accomp
 Follow the instructions xref:./local-mfe.adoc[Integrate a local Microfrontend] to use your microfrontend directly in OneCX.
 
 [TIP]
-This is the recommended procedure for integrating a locally running microfrontend. Please use this method.
+This is the recommended procedure for integrating a *locally running microfrontend*. Please use this method.
 
 
-== Adding a custom docker-compose file
+== Integrate Microservice Images
 
 To integrate Docker images into OneCX, you need a separate docker.compose file to manage the integration.
 
-Follow the instructions in xref:./local-images.adoc[Integrate Docker Images] to integrate your images into OneCX.
+Follow the instructions in xref:./local-images.adoc[Integrate Microservice Images] to integrate your images into OneCX.
 
 [TIP]
-This is the recommended approach for integrating additional microservices. For integrating locally running microfrontends, use the method described above.
+This is the recommended approach for *integrating additional microservices*. For integrating locally running microfrontends, use the method described above.

@@ -1,17 +1,20 @@
-= Running OneCX locally
-:idprefix:
-:idseparator: -
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
 :imagesdir: ../images
+
+= Running OneCX locally
 
 This guide provides a quick overview of the steps required to run a local OneCX environment. It includes instructions on starting the environment, accessing OneCX in a browser, and stopping the environment when finished.
 
-== Set up the local environment
-Follow the instructions at xref:./setup.adoc[Setting up] to configure the base on your local machine.
+[horizontal]
+Set up OneCX::
+=> Follow the instructions at xref:./setup.adoc[Setting up] to configure the base on your local machine.
 
 The following steps assume that *onecx-local-env* has already been configured and installed according to the installation instructions.
 
 
-== Starting the local environment
+== Starting OneCX
 After setting up a local OneCX environment can be started by running a single command from the root directory of *onecx-local-env*.
 
 [source,bash]
@@ -27,13 +30,13 @@ image::scripts/script_start-onecx.sh.png[]
 
 [TIP]
 ====
-The *start-onecx.sh* script accepts optional flags to customize its behavior. A list of available flags can be found in the xref:./scripts/start.adoc[start-onecx.sh] documentation or by running
+The *start-onecx.sh* script accepts optional flags to customize its behavior. A list of available flags can be found in the xref:./scripts/start.adoc#available-flags[start-onecx.sh] documentation or by running
 
-`./start-onecx.sh -h`.
+`./start-onecx.sh -h`
 ====
 
 
-== Accessing OneCX in a browser
+== Accessing OneCX
 
 After starting the local environment, OneCX can be accessed in a web browser by navigating to http://local-proxy/onecx-shell/admin[http://local-proxy/onecx-shell/admin].
 
@@ -50,11 +53,11 @@ image::screenshot_successful-start-onecx.png[]
 ====
 If the environment was started with only essential services, not all UI functions are available. This is not a bug, but by design. To start all services, start with
 
-`./start-onecx.sh -p all`.
+`./start-onecx.sh -p all`
 ====
 
 
-== Stopping the local environment
+== Stopping OneCX
 
 When finished using the local OneCX environment, it can be stopped by running the following command from the root directory of *onecx-local-env*:
 [source,bash]

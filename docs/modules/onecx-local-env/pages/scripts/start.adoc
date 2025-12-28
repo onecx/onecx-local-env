@@ -1,7 +1,7 @@
-= Start local OneCX
-:idprefix:
-:idseparator: -
+include::partial$_attributes.adoc[]
 :imagesdir: ../../images
+
+= Start local OneCX
 
 The *start-onecx.sh* script is used to start the OneCX Local Environment. By default, it will start a minimal set of services and import initial mock data on startup. Data imports will not overwrite any custom data that may already exist in the environment and can be skipped using the appropriate flag. The script can be run from the root directory of the *onecx-local-env* repository:
 
@@ -18,6 +18,7 @@ image::scripts/script_start-onecx.sh.png[]
 The script can be executed at any time. Docker checks the configuration of the services and restarts them if there are changes. Without changes, running services are not affected, and only missing services are started. Existing data that was imported or added by the user remains unchanged. 
 ====
 
+[#available-flags]
 == Available Flags
 The script accepts several optional flags to customize its behavior. Some flags can be combined. The flags are:
 

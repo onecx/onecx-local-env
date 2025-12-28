@@ -1,5 +1,6 @@
-:idprefix:
-:idseparator: -
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
 :imagesdir: ../images
 
 == Additional Started Services
@@ -36,8 +37,7 @@ image::screenshot_successful-pgadmin.png[]
 === Traefik
 Traefik is required for routing within Docker Compose networks as well as to and from networks outside this network.
 
-xref:documentation:onecx-local-env:page$/scripts/toggle-mfes.adoc#routing-and-prioritize[Use Traefik for routing Microfrontends]
-
+* xref:onecx-local-env:scripts/toggle-mfes.adoc#routing-and-prioritize[Use Traefik for routing Microfrontends]
 * http://traefik:8082/dashboard/[]
 
 .Traefik Dashboard

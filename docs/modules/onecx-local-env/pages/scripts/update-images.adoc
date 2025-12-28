@@ -1,7 +1,7 @@
-= Update local Docker images
-:idprefix:
-:idseparator: -
+include::partial$_attributes.adoc[]
 :imagesdir: ../../images
+
+= Update local Docker images
 
 To run a local OneCX instance, Docker images with the latest version are downloaded and used. Over time, these images become outdated, meaning that even if a newer version is available, the old version is still being used locally. Check versions with script xref:./check-images.adoc[check-images.sh].
 
