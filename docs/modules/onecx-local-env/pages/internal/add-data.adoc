@@ -1,7 +1,7 @@
-= OneCX Data
-:idprefix:
-:idseparator: -
+include::partial$_attributes.adoc[]
 :imagesdir: ../../images
+
+= OneCX Data
 
 parking place
 

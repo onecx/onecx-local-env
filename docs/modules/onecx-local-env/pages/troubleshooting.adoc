@@ -1,8 +1,9 @@
-= Troubleshooting Common Errors
-:idprefix:
-:idseparator: -
-:icons: font
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
 :imagesdir: ../images
+
+= Troubleshooting Common Errors
 
 This page provides information for how to troubleshoot common problems and errors.
 

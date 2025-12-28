@@ -1,7 +1,9 @@
-= OneCX Local Environment
-:idprefix:
-:idseparator: -
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
 :imagesdir: ../images
+
+= OneCX Local Environment
 
 *onecx-local-env* is the local development environment for OneCX. It is based on Docker/Docker Compose, and enables developers to quickly run a local instance for development and testing purposes.
 
@@ -9,15 +11,15 @@
 
 
 == Get and Run OneCX
-. xref:./setup.adoc[Setting up]: Details on how to get and install OneCX locally
-
-. xref:./run-onecx.adoc[Run OneCX]: How to start and access OneCX
-
-
-include::partial$scripts.adoc[]
+[horizontal]
+xref:./setup.adoc[Setting up]::     Details on how to get and install OneCX locally
+xref:./run-onecx.adoc[Run OneCX]::  How to start and access OneCX
 
 
-== Utilities
+include::./scripts.adoc[leveloffset=+1]
+
+
+== Additional Utilities
 
 In addition to the OneCX Core products, further services will be launched.
 
@@ -38,21 +40,17 @@ In addition to the OneCX Core products, further services will be launched.
 |===
 
 
-== Applications
+== OneCX Applications
+The OneCX Platform is a modular system which provides a lot of standard services:
 
-These applications are available within the OneCX Local Environment:
+.Core Applications
+[%collapsible]
+====
+include::documentation:onecx-docs-apps:partial$core-app-table.adoc[]
+====
 
-* xref:documentation:onecx-announcement:index.adoc[Announcement]
-* xref:documentation:onecx-bookmark:index.adoc[Bookmark]
-* xref:documentation:onecx-data-orchestrator:index.adoc[Data Orchestrator]
-* xref:documentation:onecx-help:index.adoc[Help]
-* xref:documentation:onecx-iam:index.adoc[IAM]
-* xref:documentation:onecx-parameter:index.adoc[Parameter]
-* xref:documentation:onecx-permission:index.adoc[Permission]
-* xref:documentation:onecx-product-store:index.adoc[Product Store]
-* xref:documentation:onecx-shell:index.adoc[Shell]
-* xref:documentation:onecx-tenant:index.adoc[Tenant]
-* xref:documentation:onecx-theme:index.adoc[Theme]
-* xref:documentation:onecx-user-profile:index.adoc[User Profile]
-* xref:documentation:onecx-welcome:index.adoc[Welcome]
-* xref:documentation:onecx-workspace:index.adoc[Workspace]
+.Feature Applications
+[%collapsible]
+====
+include::documentation:onecx-docs-apps:partial$feature-app-table.adoc[]
+====

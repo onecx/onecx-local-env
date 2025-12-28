@@ -1,8 +1,7 @@
-= Networking in OneCX Local Environment
-
-:idprefix:
-:idseparator: -
+include::partial$_attributes.adoc[]
 :imagesdir: ../../images
+
+= Networking in OneCX Local Environment
 
 // :different_ports: xref:documentation:onecx-docs-start/enable_hot_reload.adoc#note-different-ports
 

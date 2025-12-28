@@ -1,7 +1,7 @@
-= OneCX Data
-:idprefix:
-:idseparator: -
+include::partial$_attributes.adoc[]
 :imagesdir: ../../images
+
+= OneCX Data
 
 The OneCX Local Environment contains data required for initial xref:../scripts/start.adoc[startup]. This data is usually automatically xref:../scripts/import.adoc[imported] after the services have started.
 

@@ -1,7 +1,9 @@
-= Check local Docker images
-:idprefix:
-:idseparator: -
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
 :imagesdir: ../../images
+
+= Check local Docker images
 
 The *check-images.sh* script is used to list local Docker images with version information. It can be run from the root directory of the *onecx-local-env* repository.
 

@@ -1,6 +1,6 @@
-= Utilities
-:idprefix:
-:idseparator: -
+include::partial$_attributes.adoc[]
 :imagesdir: ../../images
+
+= Utilities
 
 include::../utilities.adoc[]

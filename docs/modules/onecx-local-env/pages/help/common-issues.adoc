@@ -1,7 +1,7 @@
-=  Common Issues
-:idprefix:
-:idseparator: -
+include::partial$_attributes.adoc[]
 :imagesdir: ../../images
+
+=  Common Issues
 
 This page lists common issues and respective solutions when using OneCX Local Environment.
 

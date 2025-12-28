@@ -1,9 +1,7 @@
-= Import OneCX Data
-:idprefix:
-:idseparator: -
+include::partial$_attributes.adoc[]
 :imagesdir: ../../images
-:source-highlighter: highlight.js
 
+= Import OneCX Data
 
 To operate a local OneCX, some services require initial data, e.g., the theme, the admin workspace, permissions, etc.
 

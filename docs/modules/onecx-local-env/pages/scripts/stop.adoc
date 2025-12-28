@@ -1,7 +1,7 @@
-= Stop local OneCX
-:idprefix:
-:idseparator: -
+include::partial$_attributes.adoc[]
 :imagesdir: ../../images
+
+= Stop local OneCX
 
 The *stop-onecx.sh* script is used to stop the OneCX Local Environment. It can be run from the root directory of the *onecx-local-env* repository. Here the command for stopping the essential services without removing data:
 

@@ -1,0 +1,30 @@
+[source,yaml,highlight=9]
+----
+####################################################
+# Integrate a local running Microfrontend into OneCX
+####################################################
+# Microfrontend: "my-app""
+http:
+  routers:
+    local_my-app:
+      # path prefix as used for MFE registration in product store
+      rule: "Host(`local-proxy`) && PathPrefix(`/mfe/my-app/`)"
+      service: local_my-app
+      # higher prio than calculated based on rule length (traefik standard)
+      priority: 323
+      middlewares:
+        - strip_my-app
+
+  # Remove the used mfe path so that it maps directly to localhost:port
+  middlewares:
+    strip_my-app:
+      stripPrefix:
+        prefixes:
+          - "/mfe/my-app"
+
+  services:
+    local_my-app:
+      loadBalancer:
+        servers:
+        - url: "http://host.docker.internal:6021/"   # Angular project started outside Docker with this port
+----
