@@ -104,50 +104,7 @@ macOS:::   `/etc/hosts`
 .Click here to view entries to be added to the *hosts* file
 [%collapsible]
 ====
-[source,text]
-----
-# OneCX - utilities
-127.0.0.1 traefik
-127.0.0.1 postgresdb
-127.0.0.1 pgadmin
-127.0.0.1 keycloak-app
-
-# OneCX - local services
-127.0.0.1 local-proxy
-127.0.0.1 sonar
-
-# OneCX - product services
-127.0.0.1 onecx-announcement-svc
-127.0.0.1 onecx-announcement-bff
-127.0.0.1 onecx-bookmark-svc
-127.0.0.1 onecx-bookmark-bff
-127.0.0.1 onecx-document-svc
-127.0.0.1 onecx-document-bff
-127.0.0.1 onecx-help-svc
-127.0.0.1 onecx-help-bff
-127.0.0.1 onecx-iam-bff
-127.0.0.1 onecx-iam-svc
-127.0.0.1 onecx-parameter-svc
-127.0.0.1 onecx-parameter-bff
-127.0.0.1 onecx-permission-svc
-127.0.0.1 onecx-permission-bff
-127.0.0.1 onecx-product-store-svc
-127.0.0.1 onecx-product-store-bff
-127.0.0.1 onecx-search-config-svc
-127.0.0.1 onecx-search-config-bff
-127.0.0.1 onecx-shell-bff
-127.0.0.1 onecx-tenant-svc
-127.0.0.1 onecx-tenant-bff
-127.0.0.1 onecx-theme-svc
-127.0.0.1 onecx-theme-bff
-127.0.0.1 onecx-welcome-svc
-127.0.0.1 onecx-welcome-bff
-127.0.0.1 onecx-workspace-svc
-127.0.0.1 onecx-workspace-bff
-127.0.0.1 onecx-user-profile-avatar-svc
-127.0.0.1 onecx-user-profile-svc
-127.0.0.1 onecx-user-profile-bff
-----
+include::./hosts-entries.adoc[]
 ====
 
 == Next Step
