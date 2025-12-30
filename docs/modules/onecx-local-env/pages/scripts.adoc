@@ -3,7 +3,7 @@ include::partial$_attributes.adoc[]
 endif::[]
 :imagesdir: ../images
 
-= Scripts for Easier Handling
+= Scripts for more Ease
 
 Since OneCX runs in a Docker Compose environment, most settings can be managed directly through Docker and Docker Compose.
 However, for a more convenient approach and taking into account specific OneCX features, various shell scripts are available.

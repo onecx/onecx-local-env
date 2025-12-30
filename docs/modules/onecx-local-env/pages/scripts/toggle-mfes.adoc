@@ -144,7 +144,9 @@ image::scripts/script_toggle-mfes.sh_cleanup.png[width=500]
 
 [CAUTION]
 ====
-Microfrontends integrated using the methods described above take precedence over those running in Docker Compose. If the microfrontends started with Docker Compose are needed again, the locally integrated microfrontends must first be deintegrated using the `-d` option. (A failover mechanism is not implemented due to different need of path stripping.)
+Microfrontends integrated using the methods described above take precedence over those running in Docker Compose. If the microfrontends started with Docker Compose are needed again, the locally integrated microfrontends must first be deintegrated using the `-d` option.
+
+A failover mechanism is not implemented due to differing path reductions.
 ====
 
 

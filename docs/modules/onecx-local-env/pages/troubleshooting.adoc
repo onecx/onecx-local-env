@@ -8,10 +8,10 @@ endif::[]
 This page provides information for how to troubleshoot common problems and errors.
 
 
-== Starting with Status Code "000" on Imports
+== Status Code "000" on Imports
 The issue occurs when the script xref:scripts/import.adoc[`import-onecx.sh`] is executed (importing OneCX data)
 
-.Status code 000 on initial imports
+.Status code 000 on Imports
 image::issues/status-code-000-import-onecx.sh.png[]
 
 .Solution
@@ -25,7 +25,6 @@ The problem occurs when some services cannot be started successfully even after 
 image::issues/incomplete-onecx-start.png[]
 
 .Solution icon:lightbulb-o[yellow]
-[source,bash]
 * Start again
 
 
@@ -36,7 +35,6 @@ The problem occurs sometimes after succesful starting the services
 image::issues/missing-menu-on-start.png[]
 
 .Solution icon:lightbulb-o[yellow]
-[source,bash]
 * Remove Browser Cache & Cookies
 * Refresh browser
 
@@ -48,7 +46,6 @@ The problem occurs sometimes after succesful starting the services
 image::issues/bad-gateway-on-mfe-start.png[]
 
 .Solution icon:lightbulb-o[yellow]
-[source,bash]
 * Start again
 * Refresh browser
 

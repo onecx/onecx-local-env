@@ -1,7 +1,9 @@
+ifdef::env-site[]
 include::partial$_attributes.adoc[]
+endif::[]
 :imagesdir: ../../images
 
-= OneCX Data
+= Add extra Data in OneCX Local Environment
 
 parking place
 

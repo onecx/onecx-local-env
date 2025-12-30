@@ -1,7 +1,9 @@
+ifdef::env-site[]
 include::partial$_attributes.adoc[]
+endif::[]
 :imagesdir: ../../images
 
-= OneCX Data
+= Initial Data in OneCX Local Environment
 
 The OneCX Local Environment contains data required for initial xref:../scripts/start.adoc[startup]. This data is usually automatically xref:../scripts/import.adoc[imported] after the services have started.
 
@@ -56,5 +58,5 @@ It starts several scripts that import data for the different services. All data 
 The import scripts are using *node.js* for reading the data, split them in batches and call the respective service APIs to import the data.
 Each script is responsible for importing a specific type of data, e.g., workspaces, themes, permissions, etc.
 
-.Data Organization
+.Organization of Initial Data
 image::onecx-data-structure.png[OneCX Data Structure,alt="OneCX Data Structure",width="300"]

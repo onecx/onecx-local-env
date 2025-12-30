@@ -861,8 +861,8 @@ services:
       keycloak-app:
         condition: service_healthy
     labels:
-      - "traefik.http.services.onecx-user-profile-svc.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-user-profile-svc.rule=Host(`onecx-user-profile-avatar-svc`)"
+      - "traefik.http.services.onecx-user-profile-avatar-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-user-profile-avatar-svc.rule=Host(`onecx-user-profile-avatar-svc`)"
     networks:
       - onecx
     profiles:

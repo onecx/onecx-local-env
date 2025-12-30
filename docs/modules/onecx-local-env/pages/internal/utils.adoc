@@ -1,6 +1,8 @@
+ifdef::env-site[]
 include::partial$_attributes.adoc[]
+endif::[]
 :imagesdir: ../../images
 
-= Utilities
+= Utilities used in OneCX Local Environment
 
 include::../utilities.adoc[]

@@ -1,64 +1,66 @@
+ifdef::env-site[]
 include::partial$_attributes.adoc[]
+endif::[]
 :imagesdir: ../../images
 
 = Networking in OneCX Local Environment
 
-// :different_ports: xref:documentation:onecx-docs-start/enable_hot_reload.adoc#note-different-ports
+:different_ports: xref:documentation:onecx-docs-start/enable_hot_reload.adoc#note-different-ports
 
-This document explains how networking is configured and managed in the OneCX local development environment.
+This document explains how networking is configured and managed in the OneCX Local Environment.
 
 == Overview
 
-The OneCX local environment uses a sophisticated networking setup that combines:
+The OneCX Local Environment uses a sophisticated networking setup that combines:
+[horizontal]
+Traefik::                  Central reverse proxy and API gateway
+Docker Compose network::   Service-to-service communication  
+Host file configuration::  Domain name resolution
+Service discovery::        Docker labels
 
-* **Traefik** as the central reverse proxy and API gateway
-* **Docker Compose networks** for service-to-service communication  
-* **Host file configuration** for domain name resolution
-* **Service discovery** through Docker labels
-* **Environment-based configuration** for flexible deployment
 
-== Architecture Components
+== Network Actors and Components
 
-=== Traefik Reverse Proxy
+=== Traefik
 
 Traefik serves as the central entry point for all HTTP traffic in the OneCX environment. It acts as:
 
-* **Reverse Proxy**: Routes incoming requests to appropriate backend services
-* **Load Balancer**: Distributes traffic across service instances
-* **Service Discovery**: Automatically detects new services through Docker labels
-* **API Gateway**: Provides a single entry point for all microservices
+[horizontal,labelwidth=20]
+Reverse Proxy::        Routes incoming requests to appropriate backend services
+Load Balancer::        Distributes traffic across service instances
+Service Discovery::    Automatically detects new services through Docker labels
+API Gateway::          Provides a single entry point for all microservices
 
-==== Traefik Configuration
+Configuration::        The Traefik configuration is split across multiple files: +
+* `init-data/traefik/base/traefik-conf.yml` +
+  Main configuration
+* `init-data/traefik/base/traefik-services.yml` +
+  Static service definitions for local development
+* `versions/<version>/docker-compose.<version>.yaml` +
+  OneCX service registrations
 
-The Traefik configuration is split across multiple files:
-
-* `init-data/traefik/traefik-conf.yml`: Main Traefik configuration
-* `init-data/traefik/traefik-services.yml`: Static service definitions
-* Docker labels in `docker-compose.v<version>.yaml`: Dynamic service registration
-
-==== Key Traefik Settings
-
-.traefik-conf.yml
+Traefik Settings::     `traefik-conf.yml`
+The 
 [source,yaml]
 ----
 entryPoints:
   web:
     address: ":80"  # HTTP entry point
-
 providers:
   docker:
-    endpoint: unix:///var/run/docker.sock  # Docker socket for service discovery
+    endpoint: unix:///var/run/docker.sock
   file:
-    filename: /etc/traefik/services.yml    # Static service definitions
+    directory: /etc/traefik/active
+    watch: true
 ----
 
 === Service Discovery and Routing
 
-==== Traefik Labels
+Traefik Labels::
 
 Services register themselves with Traefik using Docker labels:
 
-.General Traefik Label Patterns
+.Traefik Label Patterns
 [source,yaml]
 ----
 labels:
