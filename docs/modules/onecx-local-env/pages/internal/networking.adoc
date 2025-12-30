@@ -6,21 +6,26 @@ endif::[]
 = Networking in OneCX Local Environment
 
 :different_ports: xref:documentation:onecx-docs-start/enable_hot_reload.adoc#note-different-ports
+:ole_setup: xref:onecx-local-env:setup.adoc
 
 This document explains how networking is configured and managed in the OneCX Local Environment.
+
+[NOTE]
+====
+To isolate the local OneCX environment from the host system and other Docker environments, Docker uses the project name *onecx-local-env*. This project name serves as a prefix for all created Docker resources (containers, networks, volumes), ensuring seamless communication between all services while minimizing disruptions and conflicts.
+====
 
 == Overview
 
 The OneCX Local Environment uses a sophisticated networking setup that combines:
-[horizontal]
-Traefik::                  Central reverse proxy and API gateway
-Docker Compose network::   Service-to-service communication  
-Host file configuration::  Domain name resolution
-Service discovery::        Docker labels
+[horizontal,labelwidth=30]
+Traefik::                       Central reverse proxy and API gateway
+Service Discovery and Routing:: Docker labels
+Docker Compose Network::        Service-to-service communication  
+Host file Configuration::       Domain name resolution
 
 
 == Network Actors and Components
-
 === Traefik
 
 Traefik serves as the central entry point for all HTTP traffic in the OneCX environment. It acts as:
@@ -40,7 +45,6 @@ Configuration::        The Traefik configuration is split across multiple files:
   OneCX service registrations
 
 Traefik Settings::     `traefik-conf.yml`
-The 
 [source,yaml]
 ----
 entryPoints:
@@ -54,226 +58,209 @@ providers:
     watch: true
 ----
 
-=== Service Discovery and Routing
+Pls. aware the locations of Traefik configuration files are mapped as follows:
+----
+init-data/traefik/base/traefik-conf.yml  => /etc/traefik/traefik.yml
+init-data/traefik/active                 => /etc/traefik/active
+----
+
+=== Service Discovery
 
 Traefik Labels::
 
 Services register themselves with Traefik using Docker labels:
 
-.Traefik Label Patterns
+.Traefik Label Patterns: SVC and BFF
 [source,yaml]
 ----
 labels:
-  # Define the service port (required for all services)
-  - "traefik.http.services.<service-name>.loadbalancer.server.port=<port>"
-
-  # Backend services (BFF/SVC) and Infrastructure services - simple host-based routing
+  - "traefik.http.services.<service-name>.loadbalancer.server.port=8080"
   - "traefik.http.routers.<service-name>.rule=Host(`<service-name>`)"
-  
-  # Frontend applications - path-based routing through local-proxy
-  - "traefik.http.routers.<ui-service>.rule=Host(`local-proxy`)&&PathPrefix(`/<app-path>/`)"
 ----
 
-==== Routing Rules
+.Traefik Label Patterns: UI
+[source,yaml]
+----
+labels:
+  - "traefik.http.services.<ui-service-name>.loadbalancer.server.port=8080"
+  - "traefik.http.routers.<ui-service-name>.rule=Host(`local-proxy`) && PathPrefix(`/<app-path>/`)"
+----
+
+
+=== Service Routing Rules
 
 Different routing patterns are used for different service types:
 
 * Backend Services (BFF/SVC) and Infrastructure Services:
-
-[source]
+[source,yaml]
 ----
 Host(`service-name`)
 ----
 
 * Frontend Applications (UI):
-
-[source]
+[source,yaml]
 ----
-Host(`local-proxy`)&&PathPrefix(`/app-path/`)
-----
-
-=== Host File Configuration
-
-For proper domain resolution in development, the following entries should be added to your local hosts file (`/etc/hosts` on Linux/macOS, `C:\Windows\System32\drivers\etc\hosts` on Windows):
-
-[source]
-----
-# OneCX Local Environment
-127.0.0.1 local-proxy
-127.0.0.1 keycloak-app
-127.0.0.1 postgresdb
-127.0.0.1 pgadmin
-127.0.0.1 onecx-shell-bff
-127.0.0.1 onecx-theme-svc
-127.0.0.1 onecx-theme-bff
-127.0.0.1 onecx-workspace-svc
-127.0.0.1 onecx-workspace-bff
-127.0.0.1 onecx-permission-svc
-127.0.0.1 onecx-permission-bff
-127.0.0.1 onecx-product-store-svc
-127.0.0.1 onecx-product-store-bff
-127.0.0.1 onecx-user-profile-svc
-127.0.0.1 onecx-user-profile-bff
-# Add other OneCX services as needed
+Host(`local-proxy`) && PathPrefix(`/app-path/`)
 ----
 
 === Port Mapping Strategy
 
-==== External Ports (Host → Container)
-
+External Ports (Host → Container)::
 Key external ports exposed to the host:
-
++
 [cols="2,2,3"]
 |===
-|Service |Host Port |Purpose
+| Service | Host Port | Purpose
 
-|Traefik HTTP
-|80
-|Main HTTP entry point
+| Traefik HTTP
+| 80
+| Main HTTP entry point
 
-|Traefik Dashboard
-|8082
-|Web UI for Traefik management
+| Traefik Dashboard
+| 8082
+| Web UI for Traefik management
 
-|Keycloak
-|8080
-|Identity and access management
+| Keycloak
+| 8080
+| Identity and access management
 
-|PostgreSQL
-|5432
-|Database direct access
+| PostgreSQL
+| 5432
+| Database direct access
 |===
 
-==== Internal Ports (Container → Container)
+//
+Internal Ports (Container → Container):: Services communicate internally using standard ports: +
 
-Services communicate internally using standard ports:
+[horizontal,indentSize=4]
+Web Services::          Port 8080 (Quarkus default)
+PostgreSQL::            Port 5432
+Frontend Applications:: Port 8080 (Nginx)
 
-* **Web Services**: Port 8080 (Quarkus default)
-* **PostgreSQL**: Port 5432
-* **Frontend Applications**: Port 8080 (Nginx)
 
-=== Docker Compose Networks
+=== Docker Compose Network
+Here only the v2 edition is described. The v1 edition is similar but uses the `example` network.
 
-==== Default Network
+Central configuration of the Docker Compose network is defined in `versions/v2/docker-compose.yaml`
 
-All services are connected to the `default` (docker-compose.v2.yaml) or `example` (docker-compose.v1.yaml) Docker Compose network, which enables:
+.Network Configuration in Docker Compose
+image::onecx-network-in-docker-compose.png[width=300]
 
-* **Service-to-Service Communication**: Services can communicate using container names as hostnames
-* **Automatic DNS Resolution**: Docker provides built-in DNS for container name resolution
-* **Network Isolation**: Traffic is isolated from the host network and other Docker networks
+The network alias used by the services is *onecx*. On project level the network is named *onecx-local-env_onecx*. This is also the name visible when executing `docker network ls`. See hint at the top of this document about the project name.
 
-==== Network Communication Patterns
 
-Services communicate using these patterns:
+Network Features::
+[horizontal]
+Service-to-Service Communication:: Services can communicate using container names as hostnames
+Automatic DNS Resolution::         Docker provides built-in DNS for container name resolution
+Network Isolation::                Traffic is isolated from the host network and other Docker networks
+Network Communication Patterns::   Services communicate using these patterns
 
 [cols="2,3,3"]
 |===
-|Communication Type |Example |URL Pattern
+| Communication Type | Example | URL Pattern
 
-|Frontend to BFF
-|Shell UI → Shell BFF
-|`http://onecx-shell-bff:8080`
+| Frontend to BFF
+| Shell UI → Shell BFF
+| `http://onecx-shell-bff:8080`
 
-|BFF to Service  
-|Shell BFF → Theme Service
-|`http://onecx-theme-svc:8080`
+| BFF to Service  
+| Shell BFF → Theme Service
+| `http://onecx-theme-svc:8080`
 
-|Service to Database
-|Theme Service → PostgreSQL
-|`jdbc:postgresql://postgresdb:5432/onecx_theme`
+| Service to Database
+| Theme Service → PostgreSQL
+| `jdbc:postgresql://postgresdb:5432/onecx_theme`
 
-|Service to Keycloak
-|Any Service → Keycloak
-|`http://keycloak-app:8080`
+| Service to Keycloak
+| Any Service → Keycloak
+| `http://keycloak-app:8080`
 |===
+
+
+=== Host File Configuration
+Check the {ole_setup}#hosts[hosts entries section] for detailed instructions.
+
 
 === Environment Configuration
 
-==== Common Environment Variables
+Within the Docker Compose files, several environment variables are defined to manage settings for services:
 
-Key networking-related shared environment variables in `common.env`:
+.Environment Variables Settings in Docker Compose
+[%collapsible]
+====
+include::./env-settings.adoc[]
+====
 
-.common.env
-[source,env]
+.Environment Variables Settings
+The source of the used environment variables is the `.env` file located in the version folder, e.g., `versions/v2/.env`, here the link:https://raw.githubusercontent.com/onecx/onecx-local-env/refs/heads/main/versions/v2/.env[link to GitHub source file].
+
+.Use Environment Variable Set for SVC with `multi-tenancy` awareness
+[%collapsible]
+====
+[source,yaml]
 ----
-KC_REALM=onecx
-QUARKUS_OIDC_AUTH_SERVER_URL=http://keycloak-app:8080/realms/${KC_REALM}
+  onecx-announcement-svc:
+    ...
+    environment:
+      <<: *svc_multi_tenancy
+      ...
 ----
+====
 
-==== Service-Specific Configuration
-
-* BFF Environment (`bff.env`):
-** Currently empty - BFF services inherit their networking configuration from `common.env`.
-
-* Service Environment (`svc.env`):
-
-[source,env]
+.Use Environment Variable Set for SVC with `single-tenancy` awareness
+[%collapsible]
+====
+[source,yaml]
 ----
-TKIT_DATAIMPORT_ENABLED=true
-ONECX_TENANT_CACHE_ENABLED=false
+  onecx-iam-svc:
+    ...
+    environment:
+      <<: *svc_single_tenancy
+      ...
 ----
+====
 
-NOTE: Database connection URLs and authentication endpoints are typically configured directly in the `docker-compose.v2.yaml` file within each service's `environment` section, using internal Docker network hostnames like `postgresdb:5432` and `keycloak-app:8080`.
 
 == Access Patterns
-
 === External Access (Browser → Services)
 
-==== OneCX Shell (Main Entry Point)
-* **Shell Admin Interface**: `http://local-proxy/onecx-shell/admin`
-  - Default credentials: username `onecx`, password `onecx`
-  - All OneCX applications are accessed through the Shell workspace navigation
+OneCX Shell:: Main Entry Point
+[horizontal]
+Shell Admin Interface:: `http://local-proxy/onecx-shell/admin`
+  * Default credentials: username `onecx`, password `onecx`
+  * All OneCX applications are accessed through the Shell workspace navigation
 
-==== Application Access Through Shell
-Applications are accessed via the Shell workspace navigation. For example:
+==== Application Access
+Applications are accessed via the Shell and workspace navigation. For example: +
 
-* **Workspace Management**: `http://local-proxy/onecx-shell/admin/workspace`
-* The workspace UI is served from: `http://local-proxy/mfe/workspace/`
-* Where the path can be found in the path prefix:
-** `"traefik.http.routers.<ui-service>.rule=Host(\`local-proxy\`)&&PathPrefix(\`/mfe/**workspace**/\`)"`
+[horizontal]
+Workspace Management::  `http://local-proxy/onecx-shell/admin/workspace`
+Workspace UI::          `http://local-proxy/mfe/workspace/`
+Traefik Routing Rule::  `traefik.http.routers.<ui-service>.rule=Host(\`local-proxy\`) && PathPrefix(\`/mfe/*workspace*/\`)`
+
 
 ==== Infrastructure Services
-* **Keycloak**: `http://keycloak-app:8080` or `http://localhost:8080`
-* **PgAdmin**: `http://pgadmin`
-* **Traefik Dashboard**: `http://localhost:8082`
+See also the collection of utility services documented in xref:../utilities.adoc[Utilities].
+
+[horizontal]
+Keycloak::            `http://keycloak-app:8080` or `http://localhost:8080`
+PgAdmin::             `http://pgadmin`
+Traefik Dashboard::   `http://localhost:8082`
+
 
 === Internal Communication
-
 Services communicate internally using container names:
 
-* BFF calls services: `http://service-name:8080`
-* Services call databases: `jdbc:postgresql://postgresdb:5432/db_name`
-* All services authenticate via: `http://keycloak-app:8080`
+[horizontal]
+BFF calls services::            `http://<service-name>:8080`
+Services call databases::       `jdbc:postgresql://postgresdb:5432/db_name`
+All services authenticate via:: `http://keycloak-app:8080`
 
-== Development Workflow
 
-=== Local Development Integration
+== Development Support
+The xref:../extend/extend.adoc[Extend OneCX] documentation describes how local running services are integrated into the OneCX Local Environment.
 
-The networking setup supports local development through:
-
-**Host Integration**:
-[source,yaml]
-----
-extra_hosts:
-  - "host.docker.internal:host-gateway"
-----
-
-**Static Service Definitions** (`traefik-services.yml`):
-[source,yaml]
-----
-http:
-  services:
-    local_bff:
-      loadBalancer:
-        servers:
-          - url: "http://host.docker.internal:8585/"
-    local_mfe:
-      loadBalancer:
-        servers:
-          - url: "http://host.docker.internal:4200/"
-----
-
-NOTE: With this configuration, the local MFE/UI must run on port 4200 and the respective BFF must run on port 8585. Refer to this {different_ports}[different ports note section] for more details on changing to different ports.
 
 == Security Considerations
 

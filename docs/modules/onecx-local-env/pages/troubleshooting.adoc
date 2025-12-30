@@ -1,6 +1,7 @@
 ifdef::env-site[]
 include::partial$_attributes.adoc[]
 endif::[]
+:page-hide-next:
 :imagesdir: ../images
 
 = Troubleshooting Common Errors
@@ -74,7 +75,7 @@ The issue occurs if the repository is updated with `git pull` (get latest versio
 image::issues/untracked-files-on-pull.sh.png[]
 
 .The directory init_data/traefik/active was created by root
-image::issues/traefik-active_created-by-root.sh.png[width=250]
+image::issues/traefik-active_created-by-root.sh.png[width=400]
 
 .Solution icon:lightbulb-o[yellow]
 * Remove the active directory of Traefik manually by execution of
