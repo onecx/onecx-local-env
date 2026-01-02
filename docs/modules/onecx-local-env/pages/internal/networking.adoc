@@ -193,7 +193,7 @@ include::./env-settings.adoc[]
 ====
 
 .Environment Variables Settings
-The source of the used environment variables is the `.env` file located in the version folder, e.g., `versions/v2/.env`, here the link:https://raw.githubusercontent.com/onecx/onecx-local-env/refs/heads/main/versions/v2/.env[link to GitHub source file].
+The source of the used environment variables is the `.env` file located in the version folder, e.g. `versions/v2/.env`, here the link:https://raw.githubusercontent.com/onecx/onecx-local-env/refs/heads/main/versions/v2/.env[link to GitHub source file].
 
 .Use Environment Variable Set for SVC with `multi-tenancy` awareness
 [%collapsible]

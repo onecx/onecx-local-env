@@ -3,7 +3,7 @@ include::partial$_attributes.adoc[]
 
 = Import OneCX Data
 
-To operate a local OneCX, some services require initial data, e.g., the theme, the admin workspace, permissions, etc.
+To operate a local OneCX, some services require initial data, e.g. the theme, the admin workspace, permissions, etc.
 
 The *import-onecx.sh* script is used to import data needed by the OneCX services. It can be run from the root directory of the *onecx-local-env* repository. Here the command for importing the data for the essential services:
 
