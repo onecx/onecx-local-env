@@ -26,5 +26,5 @@ http:
     local_my-app:
       loadBalancer:
         servers:
-        - url: "http://host.docker.internal:6021/"   # Angular project started outside Docker with this port
+        - url: "http://host.docker.internal:6021/"   # Microfrontend started outside Docker with this port
 ----

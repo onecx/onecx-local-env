@@ -3,21 +3,25 @@ include::partial$_attributes.adoc[]
 endif::[]
 :imagesdir: ../../images
 
-= Extending the default Environment
+:onecx_shell_link:  xref:documentation:onecx-docs-overview:architecture/shell.adoc[OneCX Shell]
+:ole_traefik_link:  xref:../utilities.adoc#traefik[Traefik]
+:ole_network_link:  xref:../internal/networking.adoc#[OneCX Network]
 
-OneCX functions as a collection of microservices and microfrontends. The OneCX Shell orchestrates the microfrontends for a unified user interface. This concept allows for the easy integration of other services that are launched outside the OneCX network.
+= Extending the OneCX default Environment
+
+OneCX functions as a collection of microservices and microfrontends. The {onecx_shell_link} orchestrates the microfrontends for a unified user interface. This concept allows for the easy integration of other services that are launched outside the {ole_network_link}.
 
 There are several ways to expand the OneCX local environment
 
 
 == Integrate a local running Microfrontend
 
-If a microfrontend has been started separately, integration can be easily accomplished through routing and path rewriting by xref:../utilities.adoc#traefik[Traefik].
+If a microfrontend has been started separately, integration can be easily accomplished through routing and path rewriting by {ole_traefik_link}.
 
 Follow the instructions xref:./local-mfe.adoc[Integrate a local Microfrontend] to use your microfrontend directly in OneCX.
 
 [TIP]
-This is the recommended procedure for integrating a *locally running microfrontend*. Please use this method.
+This is the recommended procedure for integrating a *locally running microfrontend*.
 
 
 == Integrate Microservice Images
@@ -27,4 +31,5 @@ To integrate Docker images into OneCX, you need a separate docker.compose file t
 Follow the instructions in xref:./local-images.adoc[Integrate Microservice Images] to integrate your images into OneCX.
 
 [TIP]
-This is the recommended approach for *integrating additional microservices*. For integrating locally running microfrontends, use the method described above.
+This is the recommended approach for *integrating additional microservices*. +
+For integrating locally running microfrontends, use the method described above.

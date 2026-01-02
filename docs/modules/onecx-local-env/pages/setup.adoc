@@ -45,10 +45,11 @@ At this point, users should have verified that their operating system is support
 
 [IMPORTANT]
 ====
-If you are using Windows and WSL, you should install and use your *entire development environment* in WSL. This includes cloning Git repositories and installing tools like Docker, Git, and jq. Development environments like Visual Studio Code also need to be connected to WSL, and their extensions/plugins installed in WSL.
+If you are using Windows and WSL, you should install and use your *entire development environment* in WSL. This includes cloning Git repositories and installing tools like Docker, Git, and jq. +
+Connect your development environment, such as Visual Studio Code, to WSL and install its extensions/plugins in WSL as well.
 
-[.text-danger]#Avoid any access to your WSL files from Windows, i.e. via mount paths like `/mnt/c/...`. +
-This can lead to file permission issues and unexpected behavior when running scripts and Docker containers.#
+[.text-danger]#Avoid working on your WSL files from Windows, i.e. via mount paths like `/mnt/c/...`.# +
+This can lead to file permission issues and unexpected behavior when running scripts and Docker containers.
 ====
 
 
@@ -87,7 +88,6 @@ git clone https://github.com/onecx/onecx-local-env.git
 At this point, the *onecx-local-env* repository should be cloned and all necessary scripts should have execute permissions.
 To verify:
 
-* Run `ls -l` in the root, `onecx-data`, and `versions/*` directories.
 * Confirm all *.sh* scripts have execute permissions (indicated by an *x* in the permission string).
 * If any scripts are missing execute permissions, run `chmod +x <file name>`.
 ====
