@@ -9,43 +9,4 @@ If you need to extend this environment with your own containers or import additi
 
 Please under no circumstances use the root `docker-compose.yaml` file or the root `imports` folder for your own extensions, as these files can change between versions and may break your setup.
 
-== Adding and running new microfrontend (MFE)
-
-In order to run the MFE all corresponding BFFs and all corresponding backend services (MS) need to run also.
-
-=== Locally build docker image of the MFE
-
-After a local docker image of the MFE is created, add it to the docker-compose and start it as any other service.
-
-=== Locally start in dev mode using `npm start`
-
-In order to use traefik and locally started MFE you need to adapt the npm start script located in package.json by adding `--host 0.0.0.0 --disable-host-check`
-
-If it runs on the standard port _4200_ you don't need to do anything special as this is already configured for the local_mfe service under `./init-data/traefik/traefik-services.yml`
-Only update the traefik config in `docker-compose.yaml`
-
-_EXAMPLE_ for onecx-tenant-ui (its already part of the docker-compose in the part of onecx-tenant-bff)
-
-[source,yaml]
-----
-      - "traefik.http.routers.local_mfe.entrypoints=web"
-      - "traefik.http.routers.local_mfe.rule=Host(`local-proxy`)&&PathPrefix(`/mfe/tenant/`)"
-      - "traefik.http.routers.local_mfe.service=local_mfe@file"
-----
-
-In addition, the local proxy configuration of the MFE needs to be updated like this:
-
-[source,javascript]
-----
-const PROXY_CONFIG = {
-  '/mfe/tenant': {
-    target: 'http://localhost:4200/',
-    secure: false,
-    pathRewrite: {
-      '^.*/mfe/tenant': '',
-    },
-    changeOrigin: true,
-    logLevel: 'debug',
-    bypass: bypassFn,
-  }
-----
+...to be continued ...

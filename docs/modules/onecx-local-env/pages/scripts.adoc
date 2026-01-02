@@ -12,7 +12,7 @@ However, for a more convenient approach and taking into account specific OneCX f
 Each script has the *-h* flag to explain how to use.
 
 .Available Scripts 
-[.stripes-even,cols="20,~"]
+[.stripes-even,cols="30,~"]
 |===
 | xref:./scripts/start.adoc[start-onecx.sh]
 | Start the local environment including import of inital neccessary data

@@ -39,7 +39,7 @@ Enables secure mode, which enforces authentication/authorization and taken into 
 +
 [CAUTION]
 ====
-When used, the services are started in such a way that they always require authentication AND taken into account the tenant ID, i.e., during import and login on UI!
+When used, the services are started in such a way that they always require authentication AND taken into account the tenant ID, i.e. during import and login on UI!
 
 Consequently, the login takes place in the correct tenant.
 ====

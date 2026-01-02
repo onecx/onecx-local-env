@@ -3,16 +3,20 @@ include::partial$_attributes.adoc[]
 endif::[]
 :imagesdir: ../images
 
-:docker_install_url: link:https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository[instructions to install Docker]
+:docker_install_url:         link:https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository[instructions to install Docker]
 :docker_compose_install_url: link:https://docs.docker.com/compose/install/[instructions to install Docker Compose]
-:git_install_url: link:https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[instructions to install git]
-:nodejs_install_url: link:https://nodejs.org/en/download/[instructions to install node.js]
-:jq_install_url: link:https://stedolan.github.io/jq/download/[instructions to install jq]
+:git_install_url:            link:https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[instructions to install git]
+:nodejs_install_url:         link:https://nodejs.org/en/download/[instructions to install node.js]
+:jq_install_url:             link:https://stedolan.github.io/jq/download/[instructions to install jq]
+:wsl_install_url:            link:https://learn.microsoft.com/en-us/windows/wsl/install[instructions to install WSL]
+:onecx_docs_setup_ref:       xref:documentation:onecx-docs-dev:docs/docs_setup.adoc[OneCX Docs: Local Setup]
 
 
 = Set up a OneCX Local Environment
 
 This guide provides instructions for setting up and installing *onecx-local-env*, the local development environment for OneCX. Once setup is done the environment can be started, see xref:./run-onecx.adoc[Run OneCX].
+
+If you want to setup a development environment for writing OneCX documentation, please refer to the {onecx_docs_setup_ref} guide instead.
 
 == Prerequisites
 === Operating Systems
@@ -30,7 +34,7 @@ wsl -l -v
 ----
 This command lists all installed WSL distributions along with their version numbers. To run *onecx-local-env*, at least one distribution must be installed and its version *must be 2*.
 +
-In case of errors, no output, or no WSL2 distributions listed, WSL2 is either not installed or not properly configured. Official guidance on installing and configuring WSL2 can be found here: https://learn.microsoft.com/en-us/windows/wsl/install
+In case of errors, no output, or no WSL2 distributions listed, WSL2 is either not installed or not properly configured. Official guidance on installing and configuring WSL2 can be found here: {wsl_install_url}
 
 
 [NOTE]
@@ -43,7 +47,8 @@ At this point, users should have verified that their operating system is support
 ====
 If you are using Windows and WSL, you should install and use your *entire development environment* in WSL. This includes cloning Git repositories and installing tools like Docker, Git, and jq. Development environments like Visual Studio Code also need to be connected to WSL, and their extensions/plugins installed in WSL.
 
-*Avoid any access to your WSL files from Windows, i.e., via mount paths like `/mnt/c/...`*
+[.text-danger]#Avoid any access to your WSL files from Windows, i.e. via mount paths like `/mnt/c/...`. +
+This can lead to file permission issues and unexpected behavior when running scripts and Docker containers.#
 ====
 
 

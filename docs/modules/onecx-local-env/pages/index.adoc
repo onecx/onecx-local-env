@@ -11,7 +11,7 @@ endif::[]
 
 
 == Get and Run OneCX
-[horizontal]
+[horizontal,labelwidth=25]
 xref:./setup.adoc[Setting up]::     Details on how to get and install OneCX locally
 xref:./run-onecx.adoc[Run OneCX]::  How to start and access OneCX
 
@@ -24,7 +24,7 @@ include::./scripts.adoc[leveloffset=+1]
 In addition to the OneCX Core products, further services will be launched.
 
 .Available Utilities 
-[.stripes-even,cols="20,~"]
+[.stripes-even,cols="25,~"]
 |===
 | xref:./utilities.adoc#keycloak[Keycloak]
 | The IAM service used by OneCX
