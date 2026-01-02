@@ -1,4 +1,6 @@
+ifdef::env-site[]
 include::partial$_attributes.adoc[]
+endif::[]
 :imagesdir: ../../images
 
 = Stop local OneCX

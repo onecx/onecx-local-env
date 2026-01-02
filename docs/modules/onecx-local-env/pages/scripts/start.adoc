@@ -1,4 +1,6 @@
+ifdef::env-site[]
 include::partial$_attributes.adoc[]
+endif::[]
 :imagesdir: ../../images
 
 = Start local OneCX
@@ -37,7 +39,7 @@ The profile to use when starting the environment. The supported profiles are:
 -s::
 Enables secure mode, which enforces authentication/authorization and taken into account the tenant ID of the user. (Default: disabled)
 +
-[CAUTION]
+[NOTE]
 ====
 When used, the services are started in such a way that they always require authentication AND taken into account the tenant ID, i.e. during import and login on UI!
 

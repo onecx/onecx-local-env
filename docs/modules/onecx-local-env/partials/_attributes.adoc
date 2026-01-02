@@ -3,4 +3,3 @@
 :page-pagination:
 :icons: font
 :source-highlighter: highlight.js
-:page-toclevels: 2

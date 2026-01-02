@@ -15,8 +15,19 @@ The issue occurs when the script xref:scripts/import.adoc[`import-onecx.sh`] is 
 .Status code 000 on Imports
 image::issues/status-code-000-import-onecx.sh.png[]
 
-.Solution
+.Solution icon:lightbulb-o[yellow]
 * Check if the hosts files is up-to-date. See xref:setup.adoc#hosts[Setup hosts] instructions.
+
+
+== Status Code "401" on Starting
+The problem occurs after logging into OneCX, although the start and import itself were successful.
+
+.Status code 401 on Starting
+image::issues/status-code-401-start-onecx.sh.png[]
+
+.Solution icon:lightbulb-o[yellow]
+* Stop the services with cleanup (remove volumes)
+* Start again
 
 
 == Failed Services on Start up
@@ -51,10 +62,12 @@ image::issues/bad-gateway-on-mfe-start.png[]
 * Refresh browser
 
 
-== Error response from daemon: Failed to set up container networking
-The problem occurs when during start up there are collisions between Docker networks.
+== Failed to set up Networking
+The problem occurs when during start up there are collisions between Docker networks. +
+`Error response from daemon: failed to set up container networking`
 
-.Message: Failed to set up networking
+
+.Message: Failed to set up container networking
 image::issues/docker-deamon_failed-to-setup-container-networking.png[]
 
 .Solution icon:lightbulb-o[yellow]
@@ -68,7 +81,7 @@ docker network prune
 * Start again
 
 
-== Cannot successful pull the latest version onecx-local-env
+== Cannot successful pull
 The issue occurs if the repository is updated with `git pull` (get latest version of onecx-local-env)
 
 .Message: Untracked local files on pulling

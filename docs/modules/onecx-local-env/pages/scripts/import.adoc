@@ -1,4 +1,6 @@
+ifdef::env-site[]
 include::partial$_attributes.adoc[]
+endif::[]
 :imagesdir: ../../images
 
 = Import OneCX Data
@@ -15,6 +17,11 @@ The *import-onecx.sh* script is used to import data needed by the OneCX services
 .Successful import
 image::scripts/script_import-onecx.sh.png[]
 
+[NOTE]
+====
+The imports are executed *without overwriting data* that already exists in the services. +
+This allows to re-run the import script multiple times without losing any data that has been created or modified after the initial import.
+====
 
 == Available Flags
 The script accepts several optional flags to customize its behavior. Some flags can be combined. The flags are:
@@ -36,7 +43,7 @@ Displays help information about the script and its available flags. If used then
 -s::
 Secure authentication enabled, default not enabled (value is inherited from xref:./start.adoc[start-onecx.sh])
 +
-[CAUTION]
+[NOTE]
 ====
 Once Docker services have been started with the security option enabled, all subsequent actions require an authenticated user. For example, an import operation must then be started with the *-s* option to succeed.
 ====
