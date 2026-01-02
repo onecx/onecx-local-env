@@ -11,8 +11,10 @@ However, for a more convenient approach and taking into account specific OneCX f
 [TIP]
 Each script has the *-h* flag to explain how to use.
 
+The following table gives an overview of the available scripts in *onecx-local-env* root directory. +
+
 .Available Scripts 
-[.stripes-even,cols="30,~"]
+[.stripes-even,cols="25,~"]
 |===
 | xref:./scripts/start.adoc[start-onecx.sh]
 | Start the local environment including import of inital neccessary data
@@ -21,7 +23,7 @@ Each script has the *-h* flag to explain how to use.
 | Stop the local environment
 
 | xref:./scripts/import.adoc[import-onecx.sh]
-| Import data
+| Import data into the local environment
 
 | xref:./scripts/toggle-mfes.adoc[toggle-mfes.sh]
 | Integrate local running microfrontends directly into OneCX
@@ -30,6 +32,6 @@ Each script has the *-h* flag to explain how to use.
 | List local images with state and version
 
 | xref:./scripts/update-images.adoc[update-images.sh]
-| Update local images
+| Update local images to the latest available versions
 |===
 

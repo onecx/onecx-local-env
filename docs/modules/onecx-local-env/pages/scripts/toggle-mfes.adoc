@@ -111,7 +111,7 @@ The integration of the shell requires a special path mapping. Hereby the path is
 .Successful integrated OneCX Shell
 image::scripts/script_toggle-mfes.sh_activate-shell.png[]
 
-[HINT]
+[NOTE]
 Because OneCX Shell is a microfrontend with a special role in OneCX it have to be started with a specific command:
 
 [source,bash]

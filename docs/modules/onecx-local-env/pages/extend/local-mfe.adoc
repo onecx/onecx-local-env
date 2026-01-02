@@ -3,9 +3,11 @@ include::partial$_attributes.adoc[]
 endif::[]
 :imagesdir: ../../images
 
+:toggle_shell_link:  xref:../scripts/toggle-mfes.adoc#integrate-onecx-shell[Integrate OneCX Shell]
+
 = Integrate a local Microfrontend
 
-This approach enables hot-reloading of your local micro-frontend: changes you make there are automatically visible in OneCX after the rebuild. The best way for fast frontend development.
+This approach enables *hot-reloading* of your locally running micro-frontend: changes you make there are automatically visible in OneCX after the rebuild. The best way for fast frontend development.
 
 == Start the local Microfrontend
 
@@ -52,6 +54,9 @@ image::screenshot_successful-activate-local-mfe.png[]
 include::./my-app_6021.adoc[]
 ====
 
-[HINT]
+[NOTE]
+====
 If the microfrontend requires its own backend functionality, then these backend services must also be started and presumably integrated into OneCX. The *./toggle-mfes.sh* script does not check this.
 
+The method described here is for all microfrontends except the OneCX Shell. The OneCX Shell has a special role in OneCX and must be started with a specific command. See {toggle_shell_link} for details.
+====
