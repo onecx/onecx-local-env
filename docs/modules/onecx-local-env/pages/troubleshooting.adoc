@@ -4,6 +4,7 @@ endif::[]
 :page-hide-next:
 :imagesdir: ../images
 
+
 :ole_prerequisites: xref:./setup.adoc#prerequisites[prerequisites]
 
 = Troubleshooting Common Errors
@@ -32,9 +33,11 @@ Docker is not perfect and sometimes issues may arise that are related to Docker 
 
 * Port Conflicts: Check for any port conflicts with other applications running on your system.
 
+* Network Issues: Docker networking can sometimes be problematic. Cleanup Docker networks if you encounter networking issues.
+
 === Cleanup Docker Resources
 If you encounter persistent issues, it may be helpful to clean up Docker resources used by OneCX Local Environment. +
-You can remove unused Docker resources with the following commands:
+Remove unused Docker resources with the following commands:
 
 [source,bash]
 ----
@@ -43,7 +46,7 @@ docker volume prune
 docker network prune
 ----
 
-[CAUTION]
+[WARNING]
 ====
 Be cautious when using these commands, as they will remove all unused Docker resources, which may affect other Docker containers and applications on your system.
 ====
@@ -55,7 +58,7 @@ In case OneCX is already running, you can stop it with cleanup of volumes by exe
 ----
 This will remove all volumes used by OneCX Local Environment, which can help resolve issues related to corrupted or inconsistent data.
 
-[CAUTION]
+[WARNING]
 ====
 Please note that this will delete all data stored in the volumes, so use this option with caution.
 ====
@@ -63,7 +66,7 @@ Please note that this will delete all data stored in the volumes, so use this op
 Now you can cleanup any remaining Docker resources as described above and start OneCX again.
 
 
-== Specific Issues and Solutions
+== Specific Issues
 
 === Status Code "000" on Imports
 The issue occurs when the script xref:scripts/import.adoc[`import-onecx.sh`] is executed (importing OneCX data)
@@ -71,8 +74,8 @@ The issue occurs when the script xref:scripts/import.adoc[`import-onecx.sh`] is 
 .Status code 000 on Imports
 image::issues/status-code-000-import-onecx.sh.png[]
 
-.Solution icon:lightbulb-o[yellow]
-* Check if the hosts files is up-to-date. See xref:setup.adoc#hosts[Setup hosts] instructions.
+.Solution icon:lightbulb[role=yellow]
+* Check if the hosts file is up-to-date. See xref:setup.adoc#hosts[Setup hosts] instructions.
 
 
 === Status Code "401" on Starting
@@ -81,8 +84,9 @@ The problem occurs after logging into OneCX, although the start and import itsel
 .Status code 401 on Starting
 image::issues/status-code-401-start-onecx.sh.png[]
 
-.Solution icon:lightbulb-o[yellow]
+.Solution icon:lightbulb[role=yellow]
 * Stop the services with cleanup (remove volumes)
+* Cleanup Docker resources as described above
 * Start again
 
 
@@ -92,7 +96,7 @@ The problem occurs when some services cannot be started successfully even after 
 .Message: Failed Services on Start up
 image::issues/incomplete-onecx-start.png[]
 
-.Solution icon:lightbulb-o[yellow]
+.Solution icon:lightbulb[role=yellow]
 * Start again
 
 
@@ -102,7 +106,7 @@ The problem occurs sometimes after succesful starting the services
 .Message: Missing Menu in Browser
 image::issues/missing-menu-on-start.png[]
 
-.Solution icon:lightbulb-o[yellow]
+.Solution icon:lightbulb[role=yellow]
 * Remove Browser Cache & Cookies
 * Refresh browser
 
@@ -113,7 +117,7 @@ The problem occurs sometimes after succesful starting the services
 .Message: Bad gateway in Browser
 image::issues/bad-gateway-on-mfe-start.png[]
 
-.Solution icon:lightbulb-o[yellow]
+.Solution icon:lightbulb[role=yellow]
 * Start again
 * Refresh browser
 
@@ -126,7 +130,7 @@ The problem occurs when during start up there are collisions between Docker netw
 .Message: Failed to set up container networking
 image::issues/docker-deamon_failed-to-setup-container-networking.png[]
 
-.Solution icon:lightbulb-o[yellow]
+.Solution icon:lightbulb[role=yellow]
 * Remove all Docker networks with
 +
 [source,bash]
@@ -146,7 +150,7 @@ image::issues/untracked-files-on-pull.sh.png[]
 .The directory init_data/traefik/active was created by root
 image::issues/traefik-active_created-by-root.sh.png[width=400]
 
-.Solution icon:lightbulb-o[yellow]
+.Solution icon:lightbulb[role=yellow]
 * Remove the active directory of Traefik manually by execution of
 ** `sudo rm -rf init_data/traefik/active`
 * Reset the local repo (all other changes will be lost)
