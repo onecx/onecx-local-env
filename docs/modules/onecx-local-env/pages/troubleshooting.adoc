@@ -46,7 +46,7 @@ docker volume prune
 docker network prune
 ----
 
-[WARNING]
+[CAUTION]
 ====
 Be cautious when using these commands, as they will remove all unused Docker resources, which may affect other Docker containers and applications on your system.
 ====
@@ -74,7 +74,7 @@ The issue occurs when the script xref:scripts/import.adoc[`import-onecx.sh`] is 
 .Status code 000 on Imports
 image::issues/status-code-000-import-onecx.sh.png[]
 
-.Solution icon:lightbulb[role=yellow]
+.Solution icon:lightbulb[set=fas,role=yellow]
 * Check if the hosts file is up-to-date. See xref:setup.adoc#hosts[Setup hosts] instructions.
 
 
