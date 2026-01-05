@@ -5,8 +5,112 @@ endif::[]
 
 = Integrate Docker Images
 
-If you need to extend this environment with your own containers or import additional data, please utilize preferred version folder and its `docker-compose` and `imports` files and follow the guidelines from the respective version-specific documentation.
+If you need to extend this environment with your own containers or import additional data, please taken the following guidelines into account.
+Some adjustments to the standard procedure are necessary to ensure compatibility with the OneCX Local Environment setup.
 
+Steps to integrate your own Docker images:
+
+. Build and tag your Docker images according to your versioning strategy.
+. Push your images to your Docker registry if necessary.
+. Create an environment file (e.g. `env-hello-world`) to define any required environment variables for your service.
+. Create a Docker Compose override file (e.g. `docker-compose-hello-world.yaml`) to define your service, including image references, environment variables, and health checks.
+. Place your environment file and Docker Compose override file in the root of the OneCX Local Environment directory.
+. When starting the OneCX Local Environment, specify your environment file using the `--env-file` option with Docker Compose.
+. Ensure that your Docker Compose override file is included in the main `docker-compose.yaml` file.
+
+[WARNING]
+====
 Please under no circumstances use the root `docker-compose.yaml` file or the root `imports` folder for your own extensions, as these files can change between versions and may break your setup.
+====
 
-...to be continued ...
+In the following example, we will integrate a simple "Hello World" service consisting of a backend-for-frontend (BFF) and a UI component.
+
+== Prerequisites
+
+=== Create Database and User
+Before starting your service, create (if not yet done) the required database and user in the Postgres container.
+
+You can do this by connecting to the Postgres container and executing the necessary SQL commands. Here are the steps:
+
+. Connect to the Postgres container
++
+[source, bash]
+----
+docker exec -it postgresdb psql -U postgres
+----
+
+. Create the database and user
++
+[source, sql]
+----
+CREATE DATABASE onecx_hello_world;
+CREATE USER onecx_hello_world WITH ENCRYPTED PASSWORD 'onecx_hello_world';
+GRANT ALL PRIVILEGES ON DATABASE onecx_hello_world TO onecx_hello_world;
+----
++
+. Exit the *psql* shell
++
+[source, bash]
+----
+\q
+----
+
+. Exit the container
++
+[source, bash]
+----
+exit
+----
+
+. Verify the database and user creation
++
+[source, bash]
+----
+docker exec -it postgresdb psql -U postgres -c "\l"
+docker exec -it postgresdb psql -U postgres -c "\du"
+----
++
+.Database Verification
+image::extend/db-creation_hello-world.png[]
++
+.User/Role Verification
+image::extend/role-creation_hello-world.png[]
+
+
+=== Prepare Environment Settings
+Create an environment file (e.g. `env-hello-world`) in the root of the OneCX Local Environment directory to define the necessary environment variables for your Hello World service.
+
+.Environment File: env-hello-world => using Docker Repo
+[source, bash]
+----
+ONECX_HELLOWORLD_SVC=${DOCKER_REPO}/onecx-hello-world-svc:main-native
+ONECX_HELLOWORLD_BFF=${DOCKER_REPO}/onecx-hello-world-bff:main-native
+ONECX_HELLOWORLD_UI=${DOCKER_REPO}/onecx-hello-world-ui:main
+----
+
+.Environment File: env-hello-world => using local images
+[source, bash]
+----
+ONECX_HELLOWORLD_SVC=onecx-hello-world-svc:latest
+ONECX_HELLOWORLD_BFF=onecx-hello-world-bff:latest
+ONECX_HELLOWORLD_UI=onecx-hello-world-ui:latest
+----
+
+
+Ensure that the environment variables for your Hello World service are correctly set in the `env-hello-world` file. Specifically, verify that the database connection details match the database and user you just created.
+[source, bash]
+----
+QUARKUS_DATASOURCE_USERNAME=onecx_hello_world
+QUARKUS_DATASOURCE_PASSWORD=onecx_hello_world
+QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://postgresdb:5432/onecx_hello_world?sslmode=disable
+----
+
+
+== Start Hello World
+With the database and user created, you can now start the Hello World service using Docker Compose. This command will launch the Hello World BFF, which will connect to the Postgres database you just set up.
+
+
+SVC => DB creation
+
+docker compose --env-file versions/v2/.env --env-file env-hello-world up -d onecx-hello-world-bff
+
