@@ -27,6 +27,14 @@ In the following example, we will integrate a simple "Hello World" service consi
 
 == Prerequisites
 
+=== Add entries in hosts file
+To access your Hello World service via the local proxy, add the following entries to your system's hosts file:
+[source, bash]
+----
+127.0.0.1   onecx-hello-world-svc
+127.0.0.1   onecx-hello-world-bff
+----
+
 === Create Database and User
 Before starting your service, create (if not yet done) the required database and user in the Postgres container.
 

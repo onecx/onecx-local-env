@@ -266,7 +266,7 @@ The xref:../extend/extend.adoc[Extend OneCX] documentation describes how local r
 
 === Authentication Flow
 
-1. Browser → Traefik (local-proxy) → Frontend Application
+1. Browser → Traefik (local-proxy) → Frontend
 2. Frontend → Traefik → BFF Service
 3. BFF → Keycloak (authentication)
 4. BFF → Backend Services (with token)
