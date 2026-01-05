@@ -229,12 +229,15 @@ The source of the used environment variables is the `.env` file located in the v
 The following access patterns illustrate how different components of the OneCX Local Environment can be accessed.
 
 OneCX Shell::    Main Entry Point
-Shell UI::       `http://local-proxy/onecx-shell/admin` +
+Shell UI::
+  `http://local-proxy/onecx-shell/admin` +
   All OneCX applications are accessed through the Shell workspace navigation
-Workspace Management UI::    `http://local-proxy/onecx-shell/admin/workspace`
-Workspace Microfrontend::    `http://local-proxy/mfe/workspace/`
+Workspace Management UI::
+  `http://local-proxy/onecx-shell/admin/workspace`
+Workspace Microfrontend::
+  `http://local-proxy/mfe/workspace/`
 Traefik Routing Rule::  
-  `traefik.http.routers.<ui-service>.rule=Host(local-proxy) && PathPrefix(/mfe/*workspace*/)`
+  `traefik.http.routers.onecx-workspace-ui.rule=Host(local-proxy) && PathPrefix(/mfe/*workspace*/)`
 
 See also the collection of utility services documented in xref:../utilities.adoc[Utilities].
 
