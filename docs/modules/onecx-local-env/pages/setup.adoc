@@ -3,6 +3,7 @@ include::partial$_attributes.adoc[]
 endif::[]
 :imagesdir: ../images
 
+// External references
 :docker_install_url:         link:https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository[instructions to install Docker]
 :docker_compose_install_url: link:https://docs.docker.com/compose/install/[Instructions to install Docker Compose]
 :git_install_url:            link:https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[Instructions to install git]
@@ -13,7 +14,7 @@ endif::[]
 
 = Set up a OneCX Local Environment
 
-This guide provides instructions for setting up and installing *onecx-local-env*, the local development environment for OneCX. Once setup is done the environment can be started, see xref:./run-onecx.adoc[Run OneCX].
+This guide provides instructions for setting up and installing *onecx-local-env*, the local development environment for OneCX. Once setup is done the environment can be started, see {ole_run_onecx}.
 
 If you want to setup a development environment for writing OneCX documentation, please refer to the {onecx_docs_setup_ref} guide instead.
 
@@ -112,5 +113,5 @@ include::./_hosts-entries.adoc[]
 ====
 
 == Next Step
-After completing the steps outlined in this guide, *onecx-local-env* is now ready to run OneCX locally. Check the instructions on how to start, access, and stop the local environment in the xref:./run-onecx.adoc[Run OneCX] guide.
+After completing the steps outlined in this guide, *onecx-local-env* is now ready to run OneCX locally. Check the instructions on how to start, access, and stop the local environment in the {ole_run_onecx} guide.
 
