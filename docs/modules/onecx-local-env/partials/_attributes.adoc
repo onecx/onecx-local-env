@@ -1,5 +1,8 @@
 :idprefix:
 :idseparator: -
 :page-pagination:
-:icons: font
-:source-highlighter: highlight.js
+
+// Local references
+:ole_run_onecx:              xref:./run-onecx.adoc[Run OneCX]
+// Other module references
+:onecx_docs_setup_ref:       xref:documentation:onecx-docs-dev:docs/docs_setup.adoc[OneCX Docs: Setting up]

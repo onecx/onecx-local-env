@@ -3,18 +3,18 @@ include::partial$_attributes.adoc[]
 endif::[]
 :imagesdir: ../images
 
+// External references
 :docker_install_url:         link:https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository[instructions to install Docker]
-:docker_compose_install_url: link:https://docs.docker.com/compose/install/[instructions to install Docker Compose]
-:git_install_url:            link:https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[instructions to install git]
-:nodejs_install_url:         link:https://nodejs.org/en/download/[instructions to install node.js]
-:jq_install_url:             link:https://stedolan.github.io/jq/download/[instructions to install jq]
-:wsl_install_url:            link:https://learn.microsoft.com/en-us/windows/wsl/install[instructions to install WSL]
-:onecx_docs_setup_ref:       xref:documentation:onecx-docs-dev:docs/docs_setup.adoc[OneCX Docs: Local Setup]
+:docker_compose_install_url: link:https://docs.docker.com/compose/install/[Instructions to install Docker Compose]
+:git_install_url:            link:https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[Instructions to install git]
+:nodejs_install_url:         link:https://nodejs.org/en/download/[Instructions to install node.js]
+:jq_install_url:             link:https://stedolan.github.io/jq/download/[Instructions to install jq]
+:wsl_install_url:            link:https://learn.microsoft.com/en-us/windows/wsl/install[Instructions to install WSL]
 
 
 = Set up a OneCX Local Environment
 
-This guide provides instructions for setting up and installing *onecx-local-env*, the local development environment for OneCX. Once setup is done the environment can be started, see xref:./run-onecx.adoc[Run OneCX].
+This guide provides instructions for setting up and installing *onecx-local-env*, the local development environment for OneCX. Once setup is done the environment can be started, see {ole_run_onecx}.
 
 If you want to setup a development environment for writing OneCX documentation, please refer to the {onecx_docs_setup_ref} guide instead.
 
@@ -48,7 +48,7 @@ At this point, users should have verified that their operating system is support
 If you are using Windows and WSL, you should install and use your *entire development environment* in WSL. This includes cloning Git repositories and installing tools like Docker, Git, and jq. +
 Connect your development environment, such as Visual Studio Code, to WSL and install its extensions/plugins in WSL as well.
 
-[.text-important]#Avoid working on your WSL files from Windows, i.e. via mount paths like `/mnt/c/...`.# +
+[red]#Avoid working on your WSL files from Windows, i.e. via mount paths like `/mnt/c/...`.# +
 This can lead to file permission issues and unexpected behavior when running scripts and Docker containers.
 ====
 
@@ -109,9 +109,9 @@ macOS:::   `/etc/hosts`
 .Click here to view entries to be added to the *hosts* file
 [%collapsible]
 ====
-include::./hosts-entries.adoc[]
+include::./_hosts-entries.adoc[]
 ====
 
 == Next Step
-After completing the steps outlined in this guide, *onecx-local-env* is now ready to run OneCX locally. Check the instructions on how to start, access, and stop the local environment in the xref:./run-onecx.adoc[Run OneCX] guide.
+After completing the steps outlined in this guide, *onecx-local-env* is now ready to run OneCX locally. Check the instructions on how to start, access, and stop the local environment in the {ole_run_onecx} guide.
 
