@@ -134,7 +134,7 @@ elif [ -f "$ENV_FILE" ]; then
       enable_security
     fi
 fi
-export ONECX_SECURITY_AUTH_ENABLED=$SECURITY
+export OLE_SECURITY_AUTH_ENABLED=$SECURITY
 
 
 #################################################################

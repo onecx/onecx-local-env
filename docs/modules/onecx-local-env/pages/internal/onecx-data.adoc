@@ -1,0 +1,62 @@
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
+:imagesdir: ../../images
+
+= Initial Data in OneCX Local Environment
+
+The OneCX Local Environment contains data required for initial xref:../scripts/start.adoc[startup]. This data is usually automatically xref:../scripts/import.adoc[imported] after the services have started.
+
+This is an overview of the data and how its organized.
+
+
+.OneCX Initial Data
+[.stripes-even,cols="20,~,~"]
+|===
+| Data Type | Managed by | Description
+
+| Assignments
+| xref:documentation:onecx-permission:page$index.adoc[Permission Management]
+| Relationship between roles and permissions
+
+| Bookmarks
+| xref:documentation:onecx-bookmark:page$index.adoc[Bookmark Management]
+| Bookmarks for quick access to frequently used items
+
+| Parameters
+| xref:documentation:onecx-parameter:page$index.adoc[Parameter Management]
+| Used by some applications
+
+| Permissions
+| xref:documentation:onecx-permission:page$index.adoc[Permission Management]
+| Declared and used in applications.
+
+| Products (Applications)
+| xref:documentation:onecx-product-store:page$index.adoc[Application Store]
+| Application data (components, slots etc.)
+
+| Tenants
+| xref:documentation:onecx-tenant:page$index.adoc[Tenant Management]
+| Represents a customer or organizational unit using OneCX
+
+| Themes
+| xref:documentation:onecx-theme:page$index.adoc[Theme Management]
+| Customizing the look and feel of OneCX for a tenant
+
+| Workspaces
+| xref:documentation:onecx-workspace:page$index.adoc[Workspace Management]
+| Customizing the working areas for users
+|===
+
+
+== How the Data are organized and imported
+The directory *onecx-data* in the *onecx-local-env* repository contains all data files and scripts needed to import data into the OneCX Local Environment.
+
+The xref:../scripts/import.adoc[import-onecx.sh] script is used to import data needed by the OneCX services. It can be run from the root directory of the *onecx-local-env* repository.
+It starts several scripts that import data for the different services. All data files are in JSON format and usually related to a tenant or an application.
+
+The import scripts are using *node.js* and *jq* for reading the data, split them in batches and call the respective service APIs to import the data.
+Each script is responsible for importing a specific type of data, e.g. workspaces, themes, permissions, etc.
+
+.Organization of Initial Data
+image::onecx-data-structure.png[OneCX Data Structure,alt="OneCX Data Structure",width="300"]

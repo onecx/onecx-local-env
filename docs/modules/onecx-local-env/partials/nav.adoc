@@ -1,13 +1,12 @@
 // This menu tree is included in main menu of parent project https://github.com/onecx/docs
 * xref:onecx-local-env:index.adoc[Local Environment]
-** xref:onecx-local-env:index.adoc[Overview]
-** xref:onecx-local-env:getting-started.adoc[Getting Started]
-** xref:onecx-local-env:setup.adoc[Setup]
+** xref:onecx-local-env:setup.adoc[Setting up]
+** xref:onecx-local-env:run-onecx.adoc[Run OneCX]
 ** xref:onecx-local-env:extend/extend.adoc[Extend OneCX]
-*** xref:onecx-local-env:extend/local-mfe.adoc[Local Microfrontend]
-*** xref:onecx-local-env:extend/local-images.adoc[Local Images]
+*** xref:onecx-local-env:extend/local-mfe.adoc[Integrate Microfrontend]
+*** xref:onecx-local-env:extend/local-images.adoc[Integrate Images]
 
-** Scripts
+** xref:onecx-local-env:scripts.adoc[Scripts]
 *** xref:onecx-local-env:scripts/start.adoc[start-onecx.sh]
 *** xref:onecx-local-env:scripts/stop.adoc[stop-onecx.sh]
 *** xref:onecx-local-env:scripts/import.adoc[import-onecx.sh]
@@ -15,18 +14,19 @@
 *** xref:onecx-local-env:scripts/check-images.adoc[check-images.sh]
 *** xref:onecx-local-env:scripts/update-images.adoc[update-images.sh]
 
-** Advanced
-*** Versions
-**** v2 (latest)
-***** xref:onecx-local-env:versions/v2/v2.adoc[v2 (latest)]
-***** xref:onecx-local-env:versions/v2/migrate.adoc[Migration Guide]
-**** xref:onecx-local-env:versions/v1/v1.adoc[v1]
-*** xref:onecx-local-env:advanced/default-database.adoc[Default Databases]
-*** xref:onecx-local-env:advanced/imports.adoc[Default Data & Imports]
-*** xref:onecx-local-env:advanced/networking.adoc[Networking in OneCX]
-*** xref:onecx-local-env:advanced/custom-certificates.adoc[Custom SSL Certificates in OneCX]
+** Internal
+*** xref:onecx-local-env:internal/utils.adoc[Utilities]
+*** xref:onecx-local-env:internal/onecx-data.adoc[Default Data]
+*** xref:onecx-local-env:internal/networking.adoc[Networking]
 
 ** xref:onecx-local-env:troubleshooting.adoc[Troubleshooting]
+
+** Outdated
+*** xref:onecx-local-env:versions/v2.adoc[v2 (latest)]
+*** xref:onecx-local-env:versions/migrate.adoc[v2 Migration]
+*** xref:onecx-local-env:versions/v1.adoc[v1]
+
+
 //** Get Help
 //*** xref:onecx-local-env:help/faq.adoc[FAQ]
 //*** xref:onecx-local-env:help/common-issues.adoc[Common Issues]

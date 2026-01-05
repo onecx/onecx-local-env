@@ -1,9 +1,11 @@
-= Import OneCX Data
-:idprefix:
-:idseparator: -
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
 :imagesdir: ../../images
 
-To operate a local OneCX, some services require initial data, e.g., the theme, the admin workspace, permissions, etc.
+= Import OneCX Data
+
+To operate a local OneCX, some services require initial data, e.g. the theme, the admin workspace, permissions, etc.
 
 The *import-onecx.sh* script is used to import data needed by the OneCX services. It can be run from the root directory of the *onecx-local-env* repository. Here the command for importing the data for the essential services:
 
@@ -15,6 +17,11 @@ The *import-onecx.sh* script is used to import data needed by the OneCX services
 .Successful import
 image::scripts/script_import-onecx.sh.png[]
 
+[NOTE]
+====
+The imports are executed *without overwriting data* that already exists in the services. +
+This allows to re-run the import script multiple times without losing any data that has been created or modified after the initial import.
+====
 
 == Available Flags
 The script accepts several optional flags to customize its behavior. Some flags can be combined. The flags are:
@@ -36,7 +43,7 @@ Displays help information about the script and its available flags. If used then
 -s::
 Secure authentication enabled, default not enabled (value is inherited from xref:./start.adoc[start-onecx.sh])
 +
-[CAUTION]
+[NOTE]
 ====
 Once Docker services have been started with the security option enabled, all subsequent actions require an authenticated user. For example, an import operation must then be started with the *-s* option to succeed.
 ====
@@ -59,44 +66,47 @@ When used, Docker does not check whether services require authentication. Please
 
 == Examples
 
-Import ALL data, tenant "default"::
+=== Import ALL data
 Import all available OneCX data as:
+
 * Non-tenant specific data
 * Tenant data for *default* tenant
+
 Before the import, a check is performed to ensure that all required services are already running. Any missing services are started.
-+
+
 [source,bash]
 ----
 ./import-onecx.sh -d all
 ----
 
 
-Import specific data, skip check::
-Only workspace data is imported. If the data are tenant-specific data then the default tenant is used (use flag *-t* for a different tenant)
-Running services are not checked beforehand. If a required service is not running, the import will fail.
-+
+=== Import specific data, skip check
+Only workspace data is imported. If the data are tenant-specific data then the default tenant is used (use flag *-t* for a different tenant).
+
+With *-x* running services are not checked beforehand. If a required service is not running, corresponding imports will fail.
+
 [source,bash]
 ----
 ./import-onecx.sh -d workspace -x
 ----
 
 
-Import base data, tenant `t1`::
+=== Import Tenant data
 Import essential OneCX data as:
 * Non-tenant specific data
 * Tenant data for *t1* tenant
-+
+
 To import tenant-specific data, services with secure authentication enabled must be running. Without the *-x* flag, Docker restarts the services with the security option enabled. A corresponding user exists for each tenant. The import is performed using this authorized user.
-+
+
 [source,bash]
 ----
 ./import-onecx.sh -t t1
 ----
-+
+
 .Successful import of *t1* data via authenticated user *onecx_t1_admin*
 image::scripts/script_import-onecx.sh_tenant.png[]
 
-+
+
 [TIP]
 ====
 If you want only import tenant-specific data but do not working afterwards with secure authentication then execute the xref:./start.adoc[start-onecx.sh] script *without* *-s* option again. This reset the security option on running services.

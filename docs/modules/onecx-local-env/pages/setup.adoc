@@ -1,30 +1,41 @@
-= Set up OneCX Local Environment
-:idprefix:
-:idseparator: -
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
 :imagesdir: ../images
 
-This guide provides instructions for setting up and installing *onecx-local-env*, the local development environment for OneCX. It covers prerequisites, installation steps and initial configuration required to get *onecx-local-env* up and running on your local machine.
-Once setup is done the environment can be started, see xref:./getting-started.adoc[Getting Started].
+// External references
+:docker_install_url:         link:https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository[instructions to install Docker]
+:docker_compose_install_url: link:https://docs.docker.com/compose/install/[Instructions to install Docker Compose]
+:git_install_url:            link:https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[Instructions to install git]
+:nodejs_install_url:         link:https://nodejs.org/en/download/[Instructions to install node.js]
+:jq_install_url:             link:https://stedolan.github.io/jq/download/[Instructions to install jq]
+:wsl_install_url:            link:https://learn.microsoft.com/en-us/windows/wsl/install[Instructions to install WSL]
+
+
+= Set up a OneCX Local Environment
+
+This guide provides instructions for setting up and installing *onecx-local-env*, the local development environment for OneCX. Once setup is done the environment can be started, see {ole_run_onecx}.
+
+If you want to setup a development environment for writing OneCX documentation, please refer to the {onecx_docs_setup_ref} guide instead.
 
 == Prerequisites
-=== Supported Operating Systems
-*onecx-local-env* fully supports Linux, MacOS and Windows 10/11 via WSL2.
+=== Operating Systems
+*onecx-local-env* fully supports Linux, macOS and Windows 10/11 via WSL2.
 
-==== Linux & MacOS
-Linux and MacOS are natively supported operating systems for *onecx-local-env* and do not require any operating-system-specific adjustments. Users of these operating systems can safely proceed to the next section of this guide.
+Linux & macOS::
+Linux and macOS are natively supported operating systems for *onecx-local-env* and do not require any operating-system-specific adjustments. Users of these operating systems can safely proceed to the next section of this guide.
 
-==== Windows
-To run *onecx-local-env* on Windows, Windows Subsystem for Linux version 2 (WSL2) must be installed and configured on the system.
-
-To verify if WSL2 is currently installed, users can open PowerShell or Command Prompt and run the following command:
+Windows::
+To run *onecx-local-env* on Windows, Windows Subsystem for Linux version 2 (WSL2) must be installed and configured on the system. To check if WSL2 is currently installed, open PowerShell or a command prompt and run the following command:
++
 [source,powershell]
 ----
 wsl -l -v
 ----
+This command lists all installed WSL distributions along with their version numbers. To run *onecx-local-env*, at least one distribution must be installed and its version *must be 2*.
++
+In case of errors, no output, or no WSL2 distributions listed, WSL2 is either not installed or not properly configured. Official guidance on installing and configuring WSL2 can be found here: {wsl_install_url}
 
-This command lists all installed WSL distributions along with their version numbers. To run *onecx-local-env*, at least one distribution must be installed and its version must be 2.
-
-In case of errors, no output, or no WSL2 distributions listed, WSL2 is either not installed or not properly configured. Official guidance on installing and configuring WSL2 can be found here: https://learn.microsoft.com/en-us/windows/wsl/install
 
 [NOTE]
 .Checkpoint
@@ -34,62 +45,41 @@ At this point, users should have verified that their operating system is support
 
 [IMPORTANT]
 ====
-If you are using Windows and WSL, you should install and use your entire development environment in WSL. This includes cloning Git repositories and installing tools like Docker, Git, and jq. Development environments like Visual Studio Code also need to be connected to WSL, and their extensions/plugins installed in WSL.
+If you are using Windows and WSL, you should install and use your *entire development environment* in WSL. This includes cloning Git repositories and installing tools like Docker, Git, and jq. +
+Connect your development environment, such as Visual Studio Code, to WSL and install its extensions/plugins in WSL as well.
 
-Avoid any access to your files from Windows, i.e., via mount paths like `/mnt/c/...`
+[red]#Avoid working on your WSL files from Windows, i.e. via mount paths like `/mnt/c/...`.# +
+This can lead to file permission issues and unexpected behavior when running scripts and Docker containers.
 ====
 
 
-=== Docker & Docker Compose
+=== Programs
+*onecx-local-env* requires the direct installation of some programs on the operating system.
 
-*onecx-local-env* requires both Docker and Docker Compose to be installed directly on the operating system for Linux and MacOS users, or inside WSL2 for Windows users.
-
+Docker & Docker Compose::
+To ensure that all used features work correctly, it is recommended to use *Docker Compose* version *v2.20.0* or higher. When using older versions, some functions may not work as expected.
++
 The functionality of *onecx-local-env* has been tested with the following versions:
++
+[horizontal]
+Docker:::         *28.1.1*  => {docker_install_url}
+Docker Compose::: *2.35.1*  => {docker_compose_install_url}
 
-- Docker version *28.1.1*
-- Docker Compose version *v2.35.1*
+[horizontal]
+git::
+Various actions such as cloning the *onecx-local-env* repository and following the installation instructions => {git_install_url}
+node.js::
+Working on local microfrontends and import OneCX data => {nodejs_install_url}
+jq::
+Import OneCX data => {jq_install_url}
 
-To ensure that all used features work correctly, it is recommended to use Docker Compose version *v2.20.0* or higher. If any other versions are used, some features may not work as expected. In case of issues that aren't clearly related to the local environment itself, a version upgrade of Docker and/or Docker Compose should be considered as a troubleshooting step.
 
-[NOTE]
-.Checkpoint
-====
-By now, a supported version of Docker and Docker Compose should be installed on the user's system. 
-To verify:
-
-* Run `docker --version` to check the installed Docker version.
-* Run `docker compose version` to check the installed Docker Compose version.
-====
-
-=== Git
-To clone the *onecx-local-env* repository and proceed with the installation instructions, Git must be installed on the local machine or inside WSL2 for Windows users.
-
-=== node.js
-To working on local microfrontends and import OneCX data, *node.js* must be installed inside WSL2.
-
-=== jq
-To import OneCX data, *jq* must be installed inside WSL2.
-
-== Installation Steps
-
+== OneCX Installation
 === Cloning the repository
 Before starting the installation, the *onecx-local-env* repository needs to be cloned into a folder on the local machine/inside WSL2. This can be done using the following command:
 [source,bash]
 ----
 git clone https://github.com/onecx/onecx-local-env.git
-----
-
-=== Ensuring script executability
-
-After cloning the repository, it is important to ensure that all provided shell scripts are executable. This includes the main lifecycle scripts located in the root directory, as well as any scripts located in the `onecx-data` and `versions/*` directories.
-
-To verify that the scripts are executable, the command `ls -l` can be run in the respective directories. Executable scripts will have an *x* in their permission string, for example:
-- e.g. `-rwxr-xr-x import-onecx.sh`
-
-If any of the scripts are not executable, the following command can be used to add execute permissions:
-[source,bash]
-----
-chmod +x <file name>
 ----
 
 [NOTE]
@@ -98,96 +88,30 @@ chmod +x <file name>
 At this point, the *onecx-local-env* repository should be cloned and all necessary scripts should have execute permissions.
 To verify:
 
-* Run `ls -l` in the root, `onecx-data`, and `versions/*` directories.
 * Confirm all *.sh* scripts have execute permissions (indicated by an *x* in the permission string).
 * If any scripts are missing execute permissions, run `chmod +x <file name>`.
 ====
 
-=== Modifying the hosts file
-In order to expose multiple services on the same local port, OneCX Local Environment uses the Traefik reverse proxy. Traefik will be available via the host's port 80, and route requests to the appropriate services based on the requested hostname.
 
-To ensure that all relevant hostnames are correctly routed to the local machine and resolved by the Traefik proxy, the system *hosts* file needs to be modified to include entries for all OneCX services.
+=== Changing the hosts file
+In order to expose multiple services on the same local port, OneCX Local Environment uses the Traefik reverse proxy. Traefik routes requests to the appropriate services based on the requested hostname.
 
-==== Hosts file locations
-* Windows: `c:\Windows\System32\drivers\etc\hosts`
-* Linux: `/etc/hosts`
-* macOS: `/etc/hosts`
-
-==== Editing the hosts file
-After identifying the relevant file location, the *hosts* file can be edited using any text editor of choice. It is important to note that editing the *hosts* file will require administrator privileges on most systems. It's therefore important to edit the file with elevated permissions (e.g. by running `sudo nano /etc/hosts` on Linux/MacOS or opening Notepad as Administrator on Windows).
+To ensure that all relevant hostnames used by OneCX are correctly routed to the local machine, the system *hosts* file needs to be modified to include entries for all OneCX services.
 
 [#hosts]
-The following entries need to be added to the end of the *hosts* file:
+Hosts file locations::
++
+[horizontal]
+Windows::: `c:\Windows\System32\drivers\etc\hosts`
+Linux:::   `/etc/hosts`
+macOS:::   `/etc/hosts`
 
-.Click here to view hosts entries
+.Click here to view entries to be added to the *hosts* file
 [%collapsible]
 ====
-[source:text]
-----
-# OneCX - base
-127.0.0.1 traefik
-127.0.0.1 postgresdb
-127.0.0.1 pgadmin
-127.0.0.1 keycloak-app
-127.0.0.1 keycloak-app2
-
-# OneCX - local services
-127.0.0.1 local-proxy
-127.0.0.1 sonar
-
-# OneCX - products
-127.0.0.1 onecx-announcement-svc
-127.0.0.1 onecx-announcement-bff
-127.0.0.1 onecx-announcement-ui
-127.0.0.1 onecx-bookmark-svc
-127.0.0.1 onecx-bookmark-bff
-127.0.0.1 onecx-document-svc
-127.0.0.1 onecx-document-bff
-127.0.0.1 onecx-help-svc
-127.0.0.1 onecx-help-bff
-127.0.0.1 onecx-iam-bff
-127.0.0.1 onecx-iam-svc
-127.0.0.1 onecx-parameter-svc
-127.0.0.1 onecx-parameter-bff
-127.0.0.1 onecx-permission-svc
-127.0.0.1 onecx-permission-bff
-127.0.0.1 onecx-product-store-svc
-127.0.0.1 onecx-product-store-bff
-127.0.0.1 onecx-search-config-svc
-127.0.0.1 onecx-search-config-bff
-127.0.0.1 onecx-shell-bff
-127.0.0.1 onecx-tenant-svc
-127.0.0.1 onecx-tenant-bff
-127.0.0.1 onecx-theme-svc
-127.0.0.1 onecx-theme-bff
-127.0.0.1 onecx-welcome-svc
-127.0.0.1 onecx-welcome-bff
-127.0.0.1 onecx-workspace-svc
-127.0.0.1 onecx-workspace-bff
-127.0.0.1 onecx-user-profile-avatar-svc
-127.0.0.1 onecx-user-profile-svc
-127.0.0.1 onecx-user-profile-bff
-----
-====
-
-Windows users should ensure that the entries are automatically synced to WSL2 by following these steps:
-
-* Restart WSL2 after modifying the Windows *hosts* file.
-* Open the WSL2 terminal and run `cat /etc/hosts` to verify that the entries were added.
-
-If the entries are not present in the WSL2 *hosts* file, they need to be added manually by following the instructions for Linux/MacOS above.
-
-[NOTE]
-.Checkpoint
-====
-At this point, all necessary entries should be added to the system *hosts* file.
-To verify:
-
-* Confirm the listed OneCX hostnames are added to your system *hosts* file.
-* If using Windows with WSL2, restart WSL2 and check `/etc/hosts` inside WSL2 to ensure entries were synced from Windows.
-* If entries are missing in WSL2, add them manually by following the *Linux* instructions above.
+include::./_hosts-entries.adoc[]
 ====
 
 == Next Step
-After completing the steps outlined in this guide, *onecx-local-env* is now set up and ready to run a local OneCX environment. Instructions on how to start, access, and stop the local environment can be found in the xref:./getting-started.adoc[Getting Started] guide.
+After completing the steps outlined in this guide, *onecx-local-env* is now ready to run OneCX locally. Check the instructions on how to start, access, and stop the local environment in the {ole_run_onecx} guide.
 

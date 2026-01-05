@@ -1,6 +1,6 @@
-= Frequently Asked Questions
-:idprefix:
-:idseparator: -
+include::partial$_attributes.adoc[]
 :imagesdir: ../../images
+
+= Frequently Asked Questions
 
 ...coming soon

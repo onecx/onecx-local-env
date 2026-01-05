@@ -1,0 +1,24 @@
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
+:imagesdir: ../../images
+
+= Add extra Data in OneCX Local Environment
+
+parking place
+
+
+[#adding-new-files]
+== Adding New Files - Guidelines here?
+
+To add new files to the `imports` directory, follow these guidelines:
+
+1. **Naming Conventions** - use consistent naming patterns based on the type of data being imported. The patterns are listed in the <<convention-and-file-list, Convention and file list>> section.
+
+2. **File Structure** - JSON files should adhere to the existing structure that is compliant with the respective service's API.
+
+3. **Script Updates** - If adding a new type of data, add new import script that includes new files and uses the appropriate service. Make sure to define the structure of the JSON files.
+
+4. **Testing** - Test the import process by running the relevant script and verifying the data in the environment.
+
+By adhering to these conventions, you can ensure consistency and maintainability in the OneCX Local Environment.

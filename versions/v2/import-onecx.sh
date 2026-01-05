@@ -71,7 +71,7 @@ if [ -f "$ENV_FILE" ]; then
   kc_realm=$(grep "^KC_REALM=" "$ENV_FILE" | cut -d '=' -f2)
   kc_apm_client_id=$(grep "^KC_CLIENT_ID=" "$ENV_FILE" | cut -d '=' -f2)
   kc_auth_client_id=$(grep "^ONECX_OIDC_CLIENT_CLIENT_ID=" "$ENV_FILE" | cut -d '=' -f2)
-  kc_auth_client_secret=$(grep "^ONECX_OIDC_CLIENT_SECRET=" "$ENV_FILE" | cut -d '=' -f2)
+  kc_auth_client_secret=$(grep "^ONECX_OIDC_CLIENT_S_E_C_R_E_T=" "$ENV_FILE" | cut -d '=' -f2)
 fi
 # Missing?
 if [ -z "$kc_realm" ]; then
@@ -84,7 +84,7 @@ elif [ -z "$kc_auth_client_id" ]; then
   printf "${RED}Could not read 'ONECX_OIDC_CLIENT_CLIENT_ID' from "$ENV_FILE"${NC}\n"
   exit 1
 elif [ -z "$kc_auth_client_secret" ]; then
-  printf "${RED}Could not read 'ONECX_OIDC_CLIENT_SECRET' from "$ENV_FILE"${NC}\n"
+  printf "${RED}Could not read 'ONECX_OIDC_CLIENT_S_E_C_R_E_T' from "$ENV_FILE"${NC}\n"
   exit 1
 fi
 

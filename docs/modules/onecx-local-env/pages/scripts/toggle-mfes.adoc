@@ -1,7 +1,9 @@
-= Integrate Microfrontends into OneCX
-:idprefix:
-:idseparator: -
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
 :imagesdir: ../../images
+
+= Integrate Microfrontends into OneCX
 
 The script *toggle-mfes.sh* integrates (activates) a locally running microfrontend into the OneCX environment, allowing it to interact with other microfrontends. This process is also reversible. 
 
@@ -9,9 +11,9 @@ How it works::
 The script creates a small configuration file in Traefik, tailored to the local microfrontend. Traefik then forwards requests from the Docker network to the external local microfrontend.
 The script can be run from the root directory of the *onecx-local-env* repository.
 +
-The Traefik configuration files are stored in `init-data/traefik/active/`. Traefik immediately detects any changes there.
+The Traefik configuration files are stored in `init-data/traefik/active/`. Traefik immediately detects any changes there, no extra restart is necessary.
 
-Here is the command to list the currently integrated microfrontends.:
+Here is the command to list the currently integrated microfrontends:
 
 [source,bash]
 ----
@@ -19,11 +21,13 @@ Here is the command to list the currently integrated microfrontends.:
 ----
 
 .List of integrated Microfrontends
-image::scripts/script_toggle-mfes.sh_list.png[]
+image::scripts/script_toggle-mfes.sh_list.png[width=500]
 
 
 == Precondition
 Before a microfrontend can be successfully integrated into OneCX, it must be started.
+
+In the following examples, 6021 is used as the port where the microfrontend is running locally. Adjust the port as needed.
 
 Start Angular *ng* Microfrontend on port 6021::
 +
@@ -51,7 +55,7 @@ The *remoteEntry.js* should be loaded - the content is displayed. The *./toggle-
 
 
 == Available Flags
-The script accepts several optional flags to customize its behavior. *All options may only be used separately!*
+The script accepts multiple flags to customize its behavior; one of each is required. *All options may only be used separately!*
 
 The flags are:
 
@@ -71,63 +75,94 @@ If the microfrontend is one of OneCX Core products and no port is specified then
 
 == Examples
 
-Integrate my App with specific path::
+=== Integrate my App with specific path
 The local microfrontend `my-app` runs on `http://localhost:4200` (standard Angular).
-+
+
 `/my-app-path` is the path under which the microfrontend is accessible within OneCX.
-+
+
 [source,bash]
 ----
 ./toggle-mfes.sh  -a my-app::/my-app-path
 ----
-+
+
 .Successful integrated "my-app"
 image::scripts/script_toggle-mfes.sh_activate-my-app.png[]
 
 
-Integrate several Apps::
+=== Integrate several Apps
 Integrate *workspace* on standard port *5025* AND *user-profile* on port *5027*. Since no path is specified, the default path is used: */mfe/<name-of-microfrontend>*
-+
+
 [source,bash]
 ----
 ./toggle-mfes.sh  -a workspace user-profile:5027
 ----
-+
+
 .Successful integrated Microfrontends
 image::scripts/script_toggle-mfes.sh_activate.png[]
 
 
-Integrate OneCX Shell::
+=== Integrate OneCX Shell
 The integration of the shell requires a special path mapping. Hereby the path is not completely stripped. Define the strip path to be used at the end. 
-+
+
 [source,bash]
 ----
 ./toggle-mfes.sh  -a shell::/onecx-shell/:/
 ----
-+
 .Successful integrated OneCX Shell
 image::scripts/script_toggle-mfes.sh_activate-shell.png[]
 
+[NOTE]
+Because OneCX Shell is a microfrontend with a special role in OneCX it have to be started with a specific command:
 
-Deintegrate my App::
+[source,bash]
+----
+npm run start:local-env
+----
+
+=== Deintegrate my App
 The *-d* option allows you to undo an integration. The same rule applies to the port: if the port is not *4200*, it must be specified.
-+
+
 [source,bash]
 ----
 ./toggle-mfes.sh  -d my-app:12345
 ----
-+
+
 .Successful deintegration
 image::scripts/script_toggle-mfes.sh_deactivate.png[]
 
 
-Deintegrate ALL Apps::
+=== Deintegrate ALL Apps
 The Traefik configurations are being cleaned up: All specific configuration files for the Microfrontend integration are being deleted.
-+
+
 [source,bash]
 ----
 ./toggle-mfes.sh  -c
 ----
 
 .Reset all Microfrontend configurations in Traefik
-image::scripts/script_toggle-mfes.sh_cleanup.png[]
+image::scripts/script_toggle-mfes.sh_cleanup.png[width=500]
+
+[CAUTION]
+====
+Microfrontends integrated using the methods described above take precedence over those running in Docker Compose. If the microfrontends started with Docker Compose are needed again, the locally integrated microfrontends must first be deintegrated using the `-d` option.
+
+A failover mechanism is not implemented due to differing path reductions.
+====
+
+
+[#routing-and-prioritize]
+== Routing & Priorities
+
+As described earlier, Traefik is responsible for routing. Each route is assigned a *priority*, which Traefik derives by default from the length of the rule: the longer the rule, the higher the priority. To avoid routing collisions, the *local microfrontends are configured with a significantly higher priority*.
+
+This means you can run multiple microfrontends with the same routing rule in parallel and still control which microfrontend is used in OneCX. This is very useful if you want to use locally running microfrontends without having to stop the corresponding service in Docker Compose.
+
+The Traefik configuration generated when integrating a microfrontend (see above) sets a significantly higher priority for this route, so that the local microfrontend is used preferentially.
+
+
+=== Example: Prioritize local Microfrontend
+In this example, the OneCX Workspace microfrontend is running both in Docker Compose (Service: *onecx-workspace-ui*) and locally (Service: *local_workspace*). The local instance is used preferentially because it has a *higher* priority (*323*) than the Docker Compose instance (*52*).
+
+
+.Example routing for OneCX Workspace microservices
+image::scripts/script_toggle-mfes.sh_priotize-routes.png[]

@@ -1,7 +1,7 @@
-= v2 Edition
+= Version - v2
 :idprefix:
 :idseparator: -
-:imagesdir: ../../../images
+:imagesdir: ../../images
 
 [NOTE]
 .Disclaimer
@@ -11,13 +11,13 @@ This page was created for an older version of OneCX Local Environment and may no
 
 [quote]
 ____
-This document only contains information specific to v2 of the OneCX Local Environment. Please make sure to also read the xref:../getting-started.adoc[Getting started guide] for general information and instructions that apply to all versions.
+This document only contains information specific to v2 of the OneCX Local Environment. Please make sure to also read the xref:../run-onecx.adoc[Getting started guide] for general information and instructions that apply to all versions.
 ____
 
 
 v2 is the current latest version of the local development environment for OneCX.
 
-If you are currently using xref:../v1/v1.adoc[OneCX Local Environment v1] and want to migrate to v2, please refer to the xref:./migrate.adoc[Migrate to v2] guide for detailed migration instructions.
+If you are currently using xref:./v1.adoc[v1] and want to migrate to v2, please refer to the xref:./migrate.adoc[Migrate to v2] guide for detailed migration instructions.
 
 == Overview
 
@@ -190,4 +190,4 @@ Additionally, some services (`traefik`, `postgresdb`, `pgadmin` and `keycloak-ap
 
 == Troubleshooting
 
-If you encounter any issues while using OneCX Local Environment v2, please refer to the xref:documentation:local-env:faq/common-issues.adoc[Troubleshooting - Common Issues] page for potential solutions and workarounds.
+If you encounter any issues while using OneCX Local Environment v2, please refer to the xref:../help/common-issues.adoc[Troubleshooting - Common Issues] page for potential solutions and workarounds.

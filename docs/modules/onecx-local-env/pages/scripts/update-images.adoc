@@ -1,9 +1,11 @@
-= Update local Docker images
-:idprefix:
-:idseparator: -
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
 :imagesdir: ../../images
 
-To run a local OneCX instance, Docker images with the latest version are downloaded. Over time, these images become outdated, meaning that even if a newer version is available, the old version is still being used locally.
+= Update local Docker images
+
+To run a local OneCX instance, Docker images with the latest version are downloaded and used. Over time, these images become outdated, meaning that even if a newer version is available, the old version is still being used locally. Check versions with script xref:./check-images.adoc[check-images.sh].
 
 The *update-images.sh* script is used to renew local Docker images. It can be run from the root directory of the *onecx-local-env* repository.
 
@@ -11,7 +13,7 @@ Here is the command to display the available flags:
 
 [source,bash]
 ----
-./update-images.sh
+./update-images.sh -h
 ----
 
 [TIP]
@@ -19,9 +21,18 @@ Here is the command to display the available flags:
 To get an overview of the Docker images and their versions on your local machine, run the Docker command `*docker image ls*`. If images with the tag *<none>* are displayed, you can run the script with the parameter `*-c*` to clean them up.
 ====
 
+[TIP]
+====
+After successfully updating the images, it is recommended to clean up outdated Docker resources using the command
+[source,bash]
+----
+docker system prune
+----
+====
+
 
 == Available Flags
-The script accepts several optional flags to customize its behavior. The available flags are:
+The script accepts several optional flags to customize its behavior. Some flags can be combined. The available flags are:
 
 -c::
 Cleaned up orphaned images (e.g. if they have *<none>* in their name)
@@ -37,26 +48,26 @@ Name filter, update images which have <text> into image name
 
 == Examples
 
-Update all Images with `ui` in name::
+=== Update UI Images
 The Docker which have *ui* in image name are pulled from remote registry.
-+
+
 [source,bash]
 ----
 ./update-images.sh  -n ui
 ----
 
-Cleanup only::
+=== Cleanup only
 Started without any name filter will remove all orphaned images. No additional confirmation is required.
-+
+
 .Excerpt from the list of orphaned images
 image::scripts/script_check-images.sh_none-images.png[]
-+
+
 [source,bash]
 ----
 ./update-images.sh  -c
 ----
-+
+
 The deletion is only possible if the image is not in use. If so then stop the appropriate container first and try again.
-+
+
 .Image deletion failed
 image::scripts/script_check-images.sh_rm-image-failed.png[]
