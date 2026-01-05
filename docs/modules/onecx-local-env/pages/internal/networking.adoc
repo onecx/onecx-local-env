@@ -243,12 +243,13 @@ See also the collection of utility services documented in xref:../utilities.adoc
 
 
 === Microservice Communication
-Services communicate internally using container names:
+Services within the OneCX Local Environment communicate using standard internal URLs based on container names and ports.
 
 [horizontal, labwidth=40]
-BFF calls services::                 `http://<service-name>:8080`
-Services access database service::   `jdbc:postgresql://postgresdb:5432/db_name`
-Services authenticate via::          `http://keycloak-app:8080`
+Frontend calls BFF::       `http://local-proxy/mfe/<service-name>/bff/<bff-resource>`
+BFF calls Service::        `http://<service-name>:8080/<svc-resource>`
+Service access database::  `jdbc:postgresql://postgresdb:5432/db_name`
+Service authenticate via:: `http://keycloak-app:8080`
 
 
 == Development Support
