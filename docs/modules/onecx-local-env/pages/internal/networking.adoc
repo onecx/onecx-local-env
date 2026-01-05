@@ -198,7 +198,7 @@ include::./env-settings.adoc[]
 .Environment Variables Settings
 The source of the used environment variables is the `.env` file located in the version folder, e.g. `versions/v2/.env`, here the link:https://raw.githubusercontent.com/onecx/onecx-local-env/refs/heads/main/versions/v2/.env[link to GitHub source file].
 
-.Use Environment Variable Set for SVC with `multi-tenancy` awareness
+.Use Environment Variable Set for services with `multi-tenancy` awareness
 [%collapsible]
 ====
 [source,yaml]
@@ -211,7 +211,7 @@ The source of the used environment variables is the `.env` file located in the v
 ----
 ====
 
-.Use Environment Variable Set for SVC with `single-tenancy` awareness
+.Use Environment Variable Set for services with `single-tenancy` awareness
 [%collapsible]
 ====
 [source,yaml]
@@ -226,39 +226,26 @@ The source of the used environment variables is the `.env` file located in the v
 
 
 == Access Patterns
-=== External Access (Browser → Services)
+The following access patterns illustrate how different components of the OneCX Local Environment can be accessed.
 
-OneCX Shell:: Main Entry Point
-[horizontal]
-Shell Admin Interface:: `http://local-proxy/onecx-shell/admin`
-  * Default credentials: username `onecx`, password `onecx`
-  * All OneCX applications are accessed through the Shell workspace navigation
+OneCX Shell::    Main Entry Point
+Shell UI::       `http://local-proxy/onecx-shell/admin` +
+  All OneCX applications are accessed through the Shell workspace navigation
+Workspace Management UI::    `http://local-proxy/onecx-shell/admin/workspace`
+Workspace Microfrontend::    `http://local-proxy/mfe/workspace/`
+Traefik Routing Rule::  
+  `traefik.http.routers.<ui-service>.rule=Host(local-proxy) && PathPrefix(/mfe/*workspace*/)`
 
-==== Application Access
-Applications are accessed via the Shell and workspace navigation. For example: +
-
-[horizontal]
-Workspace Management::  `http://local-proxy/onecx-shell/admin/workspace`
-Workspace UI::          `http://local-proxy/mfe/workspace/`
-Traefik Routing Rule::  `traefik.http.routers.<ui-service>.rule=Host(\`local-proxy\`) && PathPrefix(\`/mfe/*workspace*/\`)`
-
-
-==== Infrastructure Services
 See also the collection of utility services documented in xref:../utilities.adoc[Utilities].
 
-[horizontal]
-Keycloak::            `http://keycloak-app:8080` or `http://localhost:8080`
-PgAdmin::             `http://pgadmin`
-Traefik Dashboard::   `http://localhost:8082`
 
-
-=== Internal Communication
+=== Microservice Communication
 Services communicate internally using container names:
 
-[horizontal]
-BFF calls services::            `http://<service-name>:8080`
-Services call databases::       `jdbc:postgresql://postgresdb:5432/db_name`
-All services authenticate via:: `http://keycloak-app:8080`
+[horizontal, labwidth=40]
+BFF calls services::                 `http://<service-name>:8080`
+Services access database service::   `jdbc:postgresql://postgresdb:5432/db_name`
+Services authenticate via::          `http://keycloak-app:8080`
 
 
 == Development Support
@@ -271,7 +258,7 @@ The xref:../extend/extend.adoc[Extend OneCX] documentation describes how local r
 
 * Services are isolated within the Docker network
 * Only necessary ports are exposed to the host
-* Database is not directly accessible from outside (except via mapped port 5432)
+* Database is not directly accessible from outside (only via port 5432)
 
 === Authentication Flow
 
