@@ -10,22 +10,25 @@ endif::[]
 
 This document explains how networking is configured and managed in the OneCX Local Environment.
 
-[NOTE]
-====
+== Docker Resource Names
 To isolate the local OneCX environment from the host system and other Docker environments, Docker uses the project name *onecx-local-env*. This project name serves as a prefix for all created Docker resources (containers, networks, volumes), ensuring seamless communication between all services while minimizing disruptions and conflicts.
-====
 
-== Overview
+The following Docker resource names and prefixes are used in the OneCX Local Environment:
 
-The OneCX Local Environment uses a sophisticated networking setup that combines:
-[horizontal,labelwidth=30]
-Traefik::                       Central reverse proxy and API gateway
-Service Discovery and Routing:: Docker labels
-Docker Compose Network::        Service-to-service communication  
-Host file Configuration::       Domain name resolution
+[horizontal]
+Project Name::      `onecx-local-env`
+Network Name::      `onecx-local-env_onecx`
+Container Prefix::  `onecx-local-env_`
 
 
 == Network Actors and Components
+The OneCX Local Environment uses a sophisticated networking setup that combines:
+
+* Traefik
+* Service Discovery and Routing
+* Docker Compose Network
+* Host file Configuration
+
 === Traefik
 
 Traefik serves as the central entry point for all HTTP traffic in the OneCX environment. It acts as:
@@ -91,13 +94,13 @@ labels:
 
 Different routing patterns are used for different service types:
 
-* Backend Services (BFF/SVC) and Infrastructure Services:
+.Backend Services (BFF/SVC) and Infrastructure Services
 [source,yaml]
 ----
 Host(`service-name`)
 ----
 
-* Frontend Applications (UI):
+.Frontend Applications (UI)
 [source,yaml]
 ----
 Host(`local-proxy`) && PathPrefix(`/app-path/`)
@@ -146,7 +149,7 @@ Central configuration of the Docker Compose network is defined in `versions/v2/d
 .Network Configuration in Docker Compose
 image::onecx-network-in-docker-compose.png[width=300]
 
-The network alias used by the services is *onecx*. On project level the network is named *onecx-local-env_onecx*. This is also the name visible when executing `docker network ls`. See hint at the top of this document about the project name.
+The network alias used by the services is *onecx*. On project level the network is named *onecx-local-env_onecx*. This is also the name visible when executing `docker network ls`. See section at the top of this document about the Docker resource names.
 
 
 Network Features::

@@ -1,5 +1,5 @@
 :idprefix:
 :idseparator: -
 :page-pagination:
-:icons: font
-:source-highlighter: highlight.js
+
+:onecx_docs_setup_ref:       xref:documentation:onecx-docs-dev:docs/docs_setup.adoc[Setting up]

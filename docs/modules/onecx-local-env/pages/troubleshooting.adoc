@@ -1,13 +1,13 @@
 ifdef::env-site[]
 include::partial$_attributes.adoc[]
 endif::[]
-:page-hide-next:
 :imagesdir: ../images
-
 
 :ole_prerequisites: xref:./setup.adoc#prerequisites[prerequisites]
 
 = Troubleshooting Common Errors
+:page-hide-next:
+
 
 This page provides information for how to troubleshoot common problems and errors.
 
@@ -152,6 +152,14 @@ image::issues/traefik-active_created-by-root.sh.png[width=400]
 
 .Solution icon:lightbulb[role=yellow]
 * Remove the active directory of Traefik manually by execution of
-** `sudo rm -rf init_data/traefik/active`
++
+[source,bash]
+----
+sudo rm -rf init_data/traefik/active
+----
 * Reset the local repo (all other changes will be lost)
-** `git reset --hard origin/main`
++
+[source,bash]
+----
+git reset --hard origin/main
+----

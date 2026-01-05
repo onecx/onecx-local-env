@@ -1,6 +1,7 @@
 ifdef::env-site[]
 include::partial$_attributes.adoc[]
 endif::[]
+:page-hide-prev:
 :imagesdir: ../images
 
 = OneCX Local Environment

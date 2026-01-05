@@ -10,7 +10,7 @@ The OneCX Local Environment contains data required for initial xref:../scripts/s
 This is an overview of the data and how its organized.
 
 
-.OneCX Default Data
+.OneCX Initial Data
 [.stripes-even,cols="20,~,~"]
 |===
 | Data Type | Managed by | Description
@@ -55,7 +55,7 @@ The directory *onecx-data* in the *onecx-local-env* repository contains all data
 The xref:../scripts/import.adoc[import-onecx.sh] script is used to import data needed by the OneCX services. It can be run from the root directory of the *onecx-local-env* repository.
 It starts several scripts that import data for the different services. All data files are in JSON format and usually related to a tenant or an application.
 
-The import scripts are using *node.js* for reading the data, split them in batches and call the respective service APIs to import the data.
+The import scripts are using *node.js* and *jq* for reading the data, split them in batches and call the respective service APIs to import the data.
 Each script is responsible for importing a specific type of data, e.g. workspaces, themes, permissions, etc.
 
 .Organization of Initial Data
