@@ -24,6 +24,7 @@
 *** xref:onecx-local-env:advanced/default-database.adoc[Default Databases]
 *** xref:onecx-local-env:advanced/imports.adoc[Default Data & Imports]
 *** xref:onecx-local-env:advanced/networking.adoc[Networking in OneCX]
+*** xref:onecx-local-env:advanced/custom-certificates.adoc[Custom SSL Certificates in OneCX]
 
 ** xref:onecx-local-env:troubleshooting.adoc[Troubleshooting]
 //** Get Help
