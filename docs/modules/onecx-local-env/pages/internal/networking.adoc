@@ -10,6 +10,7 @@ endif::[]
 
 This document explains how networking is configured and managed in the OneCX Local Environment.
 
+[#docker-resource-names]
 == Docker Resource Names
 To isolate the local OneCX environment from the host system and other Docker environments, Docker uses the project name *onecx-local-env*. This project name serves as a prefix for all created Docker resources (containers, networks, volumes), ensuring seamless communication between all services while minimizing disruptions and conflicts.
 
@@ -28,6 +29,7 @@ The OneCX Local Environment uses a sophisticated networking setup that combines:
 * Service Discovery and Routing
 * Docker Compose Network
 * Host file Configuration
+* Environment Configuration
 
 === Traefik
 
@@ -44,7 +46,7 @@ Configuration::        The Traefik configuration is split across multiple files:
   Main configuration
 * `init-data/traefik/base/traefik-services.yml` +
   Static service definitions for local development
-* `versions/<version>/docker-compose.<version>.yaml` +
+* `versions/<version>/compose.yaml` +
   OneCX service registrations
 
 Traefik Settings::     `traefik-conf.yml`
@@ -144,12 +146,12 @@ Frontend Applications:: Port 8080 (Nginx)
 === Docker Compose Network
 Here only the v2 edition is described. The v1 edition is similar but uses the `example` network.
 
-Central configuration of the Docker Compose network is defined in `versions/v2/docker-compose.yaml`
+Central configuration of the Docker Compose network is defined in `versions/v2/compose.yaml`
 
 .Network Configuration in Docker Compose
 image::onecx-network-in-docker-compose.png[width=300]
 
-The network alias used by the services is *onecx*. On project level the network is named *onecx-local-env_onecx*. This is also the name visible when executing `docker network ls`. See section at the top of this document about the Docker resource names.
+The network alias used by the services is *onecx*. On project level the network is named *onecx-local-env_onecx*. This is also the name visible when executing `docker network ls`. See section at the top of this document about the xref:#docker-resource-names[Docker resource names].
 
 
 Network Features::
@@ -187,18 +189,41 @@ Check the {ole_setup}#hosts[hosts entries section] for detailed instructions.
 
 === Environment Configuration
 
-Within the Docker Compose files, several environment variables are defined to manage settings for services:
+Within the Docker Compose files (`compose.yaml`), several environment variables are used to manage settings for services:
 
-.Environment Variables Settings in Docker Compose
+The source of the environment variables is located in the version folder: `versions/v2/.env`. +
+Here the link:https://raw.githubusercontent.com/onecx/onecx-local-env/refs/heads/main/versions/v2/.env[Link to GitHub source file].
+
+.Environment variables used in Docker Compose
 [%collapsible]
 ====
-include::./env-settings.adoc[]
+link:https://raw.githubusercontent.com/onecx/onecx-local-env/refs/heads/main/versions/v2/.env[Link to GitHub source file]
+
+include::./_onecx-env.adoc[]
 ====
 
-.Environment Variables Settings
-The source of the used environment variables is the `.env` file located in the version folder, e.g. `versions/v2/.env`, here the link:https://raw.githubusercontent.com/onecx/onecx-local-env/refs/heads/main/versions/v2/.env[link to GitHub source file].
+.Environment variable sets defined in Docker Compose
+[%collapsible]
+====
+link:https://raw.githubusercontent.com/onecx/onecx-local-env/refs/heads/main/versions/v2/docker-compose.yaml[Link to GitHub source file]
 
-.Use Environment Variable Set for services with `multi-tenancy` awareness
+include::./_onecx-env-sets.adoc[]
+====
+
+.Environment variable set use for BFF services
+[%collapsible]
+====
+[source,yaml]
+----
+  onecx-announcement-bff:
+    ...
+    environment:
+      <<: *bff_environment
+      ...
+----
+====
+
+.Environment variable set use for services with `multi-tenancy` awareness
 [%collapsible]
 ====
 [source,yaml]
@@ -211,7 +236,7 @@ The source of the used environment variables is the `.env` file located in the v
 ----
 ====
 
-.Use Environment Variable Set for services with `single-tenancy` awareness
+.Environment variable set use for services with `single-tenancy` awareness
 [%collapsible]
 ====
 [source,yaml]
@@ -231,11 +256,15 @@ The following access patterns illustrate how different components of the OneCX L
 OneCX Shell::    Main Entry Point
 Shell UI::
   `http://local-proxy/onecx-shell/admin` +
-  All OneCX applications are accessed through the Shell workspace navigation
-Workspace Management UI::
+  All OneCX application UIs are accessed through the Shell workspace navigation
+Workspace Management UI via Shell::
   `http://local-proxy/onecx-shell/admin/workspace`
 Workspace Microfrontend::
   `http://local-proxy/mfe/workspace/`
+Workspace BFF::
+  `http://local-proxy/mfe/workspace/bff/`
+Workspace Service::
+  `http://onecx-workspace-svc:8080/`
 Traefik Routing Rule::  
   `traefik.http.routers.onecx-workspace-ui.rule=Host(local-proxy) && PathPrefix(/mfe/*workspace*/)`
 
@@ -246,7 +275,7 @@ See also the collection of utility services documented in xref:../utilities.adoc
 Services within the OneCX Local Environment communicate using standard internal URLs based on container names and ports.
 
 [horizontal, labwidth=40]
-Frontend calls BFF::       `http://local-proxy/mfe/<service-name>/bff/<bff-resource>`
+Frontend calls BFF::       `http://local-proxy/mfe/<app-path>/bff/<bff-resource>`
 BFF calls Service::        `http://<service-name>:8080/<svc-resource>`
 Service access database::  `jdbc:postgresql://postgresdb:5432/db_name`
 Service authenticate via:: `http://keycloak-app:8080`
