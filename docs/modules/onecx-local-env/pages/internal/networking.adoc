@@ -275,7 +275,7 @@ See also the collection of utility services documented in xref:../utilities.adoc
 Services within the OneCX Local Environment communicate using standard internal URLs based on container names and ports.
 
 [horizontal, labwidth=40]
-Frontend calls BFF::       `http://local-proxy/mfe/<service-name>/bff/<bff-resource>`
+Frontend calls BFF::       `http://local-proxy/mfe/<app-path>/bff/<bff-resource>`
 BFF calls Service::        `http://<service-name>:8080/<svc-resource>`
 Service access database::  `jdbc:postgresql://postgresdb:5432/db_name`
 Service authenticate via:: `http://keycloak-app:8080`
