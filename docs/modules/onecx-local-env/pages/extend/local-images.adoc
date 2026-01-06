@@ -6,24 +6,16 @@ endif::[]
 = Integrate Docker Images
 
 If you need to extend this environment with your own containers or import additional data, please taken the following guidelines into account.
-Some adjustments to the standard procedure are necessary to ensure compatibility with the OneCX Local Environment setup.
 
-Steps to integrate your own Docker images:
+The following sections describe the necessary steps to integrate your own Docker images into the OneCX Local Environment. We will use a simple "*Hello World*" service as an example, consisting of a backend-for-frontend (BFF) and a UI component.
 
-. Build and tag your Docker images according to your versioning strategy.
-. Push your images to your Docker registry if necessary.
-. Create an environment file (e.g. `env-hello-world`) to define any required environment variables for your service.
-. Create a Docker Compose override file (e.g. `docker-compose-hello-world.yaml`) to define your service, including image references, environment variables, and health checks.
-. Place your environment file and Docker Compose override file in the root of the OneCX Local Environment directory.
-. When starting the OneCX Local Environment, specify your environment file using the `--env-file` option with Docker Compose.
-. Ensure that your Docker Compose override file is included in the main `docker-compose.yaml` file.
+Overview of the steps to integrate your own Docker images::
+* Prepare hosts file entries to access your services via the local proxy.
+* Create the required database and user in the Postgres container.
+* Prepare your Docker images for the services you want to add.
+* Prepare a Docker Compose file to define your services.
+* Starting your services
 
-[WARNING]
-====
-Please under no circumstances use the root `docker-compose.yaml` file or the root `imports` folder for your own extensions, as these files can change between versions and may break your setup.
-====
-
-In the following example, we will integrate a simple "Hello World" service consisting of a backend-for-frontend (BFF) and a UI component.
 
 == Prerequisites
 
@@ -85,41 +77,71 @@ image::extend/db-creation_hello-world.png[]
 .User/Role Verification
 image::extend/role-creation_hello-world.png[]
 
+=== Prepare Docker Images
+* Build and tag your Docker images according to your versioning strategy. You can either use a local registry or build them locally for direct use. +
+* Push your images to your Docker registry if necessary.
+
+
+=== Prepare Docker Compose File
+
+* Create the file (e.g. `hello-world.compose.yaml`), define your services with image references and tags, environment variables and health checks. +
+* Ensure that your file uses the same Compose project name as defined in the OneCX environment file to maintain network and volume consistency.
++
+.Compose Project Name
+[source,yaml]
+----
+name: onecx-local-env
+----
+
+* Add the OneCX Compose file that you want to use as the basis for inheriting existing service definitions and configurations. The easiest way is to use the file in the root directory of your local OneCX environment (compose.yaml). +
+Alternatively, you can reference the version-specific Docker Compose file (e.g., `versions/v2/compose.yaml`).
++
+.Include OneCX Local Environment Compose file
+[source,yaml]
+----
+include:
+  - compose.yaml
+----
+
+* Place the file in the root of the OneCX Local Environment directory.
+
+.Here is an example of a Docker Compose file for the Hello World service
+[%collapsible]
+====
+include::./_onecx-hello-world.adoc[]
+====
+
 
 === Prepare Environment Settings
-Create an environment file (e.g. `env-hello-world`) in the root of the OneCX Local Environment directory to define the necessary environment variables for your Hello World service.
+To keep the example simple, all necessary environment variables are either taken from the base Compose project (OneCX Local Environment) or defined directly in the Compose file (e.g. username, password).
 
-.Environment File: env-hello-world => using Docker Repo
+If you need to define additional environment variables (e.g. for image tags or database connection details), you can do so in a separate environment file. +
+If so then this file must be specified when starting the OneCX Local Environment using the `--env-file` option with Docker Compose.
+
+
+=== Start Services
+
+Before starting your services one word how the services are organized:
+* The UI service (`onecx-hello-world-ui`) connects to the BFF service (`onecx-hello-world-bff`).
+* The BFF service connects to the backend service (`onecx-hello-world-svc`).
+* The backend service connects to the Postgres database.
+
+These conectivity are reflected by the 'depends on' settings in the Docker Compose file. Therefore it is sufficient to start only the UI service, which will automatically start the BFF and backend services as well.
+
+.Start Hello World Services
 [source, bash]
 ----
-ONECX_HELLOWORLD_SVC=${DOCKER_REPO}/onecx-hello-world-svc:main-native
-ONECX_HELLOWORLD_BFF=${DOCKER_REPO}/onecx-hello-world-bff:main-native
-ONECX_HELLOWORLD_UI=${DOCKER_REPO}/onecx-hello-world-ui:main
+docker compose --env-file ./versions/v2/.env -f hello-world.compose.yaml up -d onecx-hello-world-ui
 ----
 
-.Environment File: env-hello-world => using local images
+.Start Hello World Services with extra env file
 [source, bash]
 ----
-ONECX_HELLOWORLD_SVC=onecx-hello-world-svc:latest
-ONECX_HELLOWORLD_BFF=onecx-hello-world-bff:latest
-ONECX_HELLOWORLD_UI=onecx-hello-world-ui:latest
+docker compose --env-file ./versions/v2/.env --env-file ./hello-world.env -f hello-world.compose.yaml up -d onecx-hello-world-ui
 ----
 
-
-Ensure that the environment variables for your Hello World service are correctly set in the `env-hello-world` file. Specifically, verify that the database connection details match the database and user you just created.
+. Verify that the services are running
 [source, bash]
 ----
-QUARKUS_DATASOURCE_USERNAME=onecx_hello_world
-QUARKUS_DATASOURCE_PASSWORD=onecx_hello_world
-QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://postgresdb:5432/onecx_hello_world?sslmode=disable
+docker compose ps
 ----
-
-
-== Start Hello World
-With the database and user created, you can now start the Hello World service using Docker Compose. This command will launch the Hello World BFF, which will connect to the Postgres database you just set up.
-
-
-SVC => DB creation
-
-docker compose --env-file versions/v2/.env --env-file env-hello-world up -d onecx-hello-world-bff
-
