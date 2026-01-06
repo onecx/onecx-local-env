@@ -94,8 +94,3 @@ CREATE USER onecx_workspace WITH ENCRYPTED PASSWORD 'onecx_workspace';
 CREATE DATABASE onecx_workspace with owner onecx_workspace;
 GRANT ALL PRIVILEGES ON DATABASE onecx_workspace TO onecx_workspace;
 GRANT ALL PRIVILEGES ON SCHEMA public TO onecx_workspace;
-
-CREATE USER onecx_hello_world WITH ENCRYPTED PASSWORD 'onecx_hello_world';
-CREATE DATABASE onecx_hello_world with owner onecx_hello_world;
-GRANT ALL PRIVILEGES ON DATABASE onecx_hello_world TO onecx_hello_world;
-GRANT ALL PRIVILEGES ON SCHEMA public TO onecx_hello_world;
