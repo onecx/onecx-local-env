@@ -1,0 +1,27 @@
+.Excerpt from `versions/v2/.env`
+[source,yaml]
+----
+########################################
+############## GENERAL #################
+########################################
+COMPOSE_PROJECT_NAME=onecx-local-env
+COMPOSE_CONVERT_WINDOWS_PATHS=1
+JSON_LOGGER_ENABLED=false
+
+########################################
+############# BASE Services ############
+########################################
+TRAEFIK=traefik:3.6.1
+POSTGRES=docker.io/library/postgres:15.5
+PGADMIN=dpage/pgadmin4:latest
+KEYCLOAK=quay.io/keycloak/keycloak:26.2.0
+
+########################################
+########## OneCX Variables #############
+########################################
+KC_REALM=onecx
+KC_APP_NAME=keycloak-app
+KC_URL=http://${KC_APP_NAME}
+KC_CLIENT_ID=onecx-shell-ui-client    # Client ID set in shell environment
+...
+----

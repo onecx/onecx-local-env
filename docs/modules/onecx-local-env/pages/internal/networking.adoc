@@ -44,7 +44,7 @@ Configuration::        The Traefik configuration is split across multiple files:
   Main configuration
 * `init-data/traefik/base/traefik-services.yml` +
   Static service definitions for local development
-* `versions/<version>/docker-compose.<version>.yaml` +
+* `versions/<version>/compose.yaml` +
   OneCX service registrations
 
 Traefik Settings::     `traefik-conf.yml`
@@ -144,7 +144,7 @@ Frontend Applications:: Port 8080 (Nginx)
 === Docker Compose Network
 Here only the v2 edition is described. The v1 edition is similar but uses the `example` network.
 
-Central configuration of the Docker Compose network is defined in `versions/v2/docker-compose.yaml`
+Central configuration of the Docker Compose network is defined in `versions/v2/compose.yaml`
 
 .Network Configuration in Docker Compose
 image::onecx-network-in-docker-compose.png[width=300]
@@ -187,16 +187,39 @@ Check the {ole_setup}#hosts[hosts entries section] for detailed instructions.
 
 === Environment Configuration
 
-Within the Docker Compose files, several environment variables are defined to manage settings for services:
+Within the Docker Compose files (`compose.yaml`), several environment variables are used to manage settings for services:
 
-.Environment Variables Settings in Docker Compose
+.Environment Variables used by OneCX Services in Docker Compose
 [%collapsible]
 ====
-include::./env-settings.adoc[]
+link:https://raw.githubusercontent.com/onecx/onecx-local-env/refs/heads/main/versions/v2/.env[Link to GitHub source file]
+
+include::./_onecx-env.adoc[]
 ====
 
-.Environment Variables Settings
+.Environment Variable Sets in Docker Compose
+[%collapsible]
+====
+link:https://raw.githubusercontent.com/onecx/onecx-local-env/refs/heads/main/versions/v2/docker-compose.yaml[Link to GitHub source file]
+
+include::./_onecx-env-sets.adoc[]
+====
+
+Environment Variables Settings - Source::
 The source of the used environment variables is the `.env` file located in the version folder, e.g. `versions/v2/.env`, here the link:https://raw.githubusercontent.com/onecx/onecx-local-env/refs/heads/main/versions/v2/.env[link to GitHub source file].
+
+.Use Environment Variable Set for BFF services
+[%collapsible]
+====
+[source,yaml]
+----
+  onecx-announcement-bff:
+    ...
+    environment:
+      <<: *bff_environment
+      ...
+----
+====
 
 .Use Environment Variable Set for services with `multi-tenancy` awareness
 [%collapsible]
