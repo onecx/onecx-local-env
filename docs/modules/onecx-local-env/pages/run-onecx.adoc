@@ -32,6 +32,7 @@ The *start-onecx.sh* script accepts optional flags to customize its behavior. A 
 ====
 
 
+[#accessing-onecx]
 == Accessing OneCX
 
 After starting the local environment, OneCX can be accessed in a web browser by navigating to http://local-proxy/onecx-shell/admin[http://local-proxy/onecx-shell/admin].

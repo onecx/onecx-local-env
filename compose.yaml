@@ -5,4 +5,4 @@
 name: onecx-local-env
 
 include:
-  - ./versions/v2/docker-compose.yaml
+  - ./versions/v2/compose.yaml

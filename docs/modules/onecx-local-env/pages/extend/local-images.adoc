@@ -5,8 +5,126 @@ endif::[]
 
 = Integrate Docker Images
 
-If you need to extend this environment with your own containers or import additional data, please utilize preferred version folder and its `docker-compose` and `imports` files and follow the guidelines from the respective version-specific documentation.
+If you need to extend this environment with your own containers or import additional data, please taken the following guidelines into account.
 
-Please under no circumstances use the root `docker-compose.yaml` file or the root `imports` folder for your own extensions, as these files can change between versions and may break your setup.
+The following sections describe the necessary steps to integrate your own Docker images into the OneCX Local Environment. We will use a simple *Hello World* application as an example, consisting of a backend service, a backend-for-frontend (BFF) and a UI component.
 
-...to be continued ...
+Steps to integrate your own Docker images::
+* Prepare hosts file entries to access your services via the local proxy.
+* Create the required database and user in the Postgres container.
+* Prepare your Docker images for the services you want to add.
+* Prepare a Docker Compose file to define your services.
+* Starting your services
+
+
+== Add entries in hosts file
+To access your *Hello World* service via the local proxy, add the following entries to your system's hosts file:
+[source, text]
+----
+127.0.0.1   onecx-hello-world-svc
+127.0.0.1   onecx-hello-world-bff
+----
+
+== Create Database and User
+Before starting your service, create the necessary database and user in the PostgreSQL container (if they haven't already been created). +
+You can do this either by connecting to the PostgreSQL container and executing the required SQL commands, or by using an SQL script, which is preferable for reproducibility.
+
+. Prepare SQL script
++
+[source, sql]
+----
+CREATE USER onecx_hello_world WITH ENCRYPTED PASSWORD 'onecx_hello_world';
+CREATE DATABASE onecx_hello_world with owner onecx_hello_world;
+GRANT ALL PRIVILEGES ON DATABASE onecx_hello_world TO onecx_hello_world;
+GRANT ALL PRIVILEGES ON SCHEMA public TO onecx_hello_world;
+----
++
+As example the script is saved as `hello-world.sql` in the root of the OneCX Local Environment directory.
+
+. Execute the SQL script
++
+[source, bash]
+----
+docker exec -i postgresdb psql -U postgres -d postgres < ./hello-world.sql
+----
+
+. Verify the database and user creation
++
+[source, bash]
+----
+docker exec -it postgresdb psql -U postgres -c "\l"
+docker exec -it postgresdb psql -U postgres -c "\du"
+----
++
+.Database Verification
+image::extend/db-creation_hello-world.png[]
++
+.User/Role Verification
+image::extend/role-creation_hello-world.png[]
+
+
+== Prepare Docker Images
+* Build and tag your Docker images according to your versioning strategy. You can either use a local registry or build them locally for direct use. +
+* Push your images to your Docker registry if necessary.
+
+
+== Prepare Docker Compose File
+
+* Create the file (e.g. `hello-world.compose.yaml`), define your services with image references and tags, environment variables and health checks. +
+* Ensure that your file uses the same Compose project name as defined in the OneCX environment file to maintain network and volume consistency.
++
+.Compose Project Name
+[source,yaml]
+----
+name: onecx-local-env
+----
+
+* Add the OneCX Compose file that you want to use as the basis for inheriting existing service definitions and configurations. The easiest way is to use the file in the root directory of your local OneCX environment (compose.yaml). +
+Alternatively, you can reference the version-specific Docker Compose file (e.g. `versions/v2/compose.yaml`).
++
+.Include OneCX Local Environment root compose file
+[source,yaml]
+----
+include:
+  - compose.yaml
+----
+
+* Place the file in the root of the OneCX Local Environment directory.
+
+.Here is an example of a Docker Compose file for the *Hello World* services
+[%collapsible]
+====
+include::./_onecx-hello-world.adoc[]
+====
+
+
+== Prepare Environment Settings
+To keep the example simple, all necessary environment variables are either taken from the base Compose project (OneCX Local Environment) or defined directly in the Compose file (e.g. username, password).
+
+If you need to define additional environment variables (e.g. for image tags or database connection details), you can do so in a separate environment file. +
+If so then this file must be specified when starting the OneCX Local Environment using the `--env-file` option with Docker Compose.
+
+
+== Start Services
+
+The relationship of the *Hello World* services to each other is defined wih the "depends on" settings in the Docker Compose file. Therefore, it is sufficient to start only the UI service, which will automatically start the backend services as well.
+
+.Start *Hello World* Services
+[source, bash]
+----
+docker compose --env-file ./versions/v2/.env -f hello-world.compose.yaml up -d onecx-hello-world-ui
+----
+
+Or if you have defined additional environment variables in a separate file (e.g. `hello-world.env`), you can start the services as follows:
+
+.Start *Hello World* Services with extra env file
+[source, bash]
+----
+docker compose --env-file ./versions/v2/.env --env-file ./hello-world.env -f hello-world.compose.yaml up -d onecx-hello-world-ui
+----
+
+.Verify that the services are running
+[source, bash]
+----
+./list-containers.sh
+----

@@ -3,7 +3,8 @@ include::partial$_attributes.adoc[]
 endif::[]
 :imagesdir: ../../images
 
-:toggle_shell_link:  xref:../scripts/toggle-mfes.adoc#integrate-onecx-shell[Integrate OneCX Shell]
+:toggle_shell_link:     xref:../scripts/toggle-mfes.adoc#integrate-onecx-shell[Integrate OneCX Shell]
+:integrate_images_link: xref:./local-images.adoc[Integrate Local Docker Images]
 
 = Integrate a local Microfrontend
 
@@ -42,7 +43,7 @@ This step is done with the script *toggle-mfes.sh*. It creates a configuration f
 Command for integrating the local app running on http://localhost:6021::
 [source,bash]
 ----
-  ./toggle-mfes.sh -a my-app:6021
+./toggle-mfes.sh -a my-app:6021
 ----
 
 .Successful Integration
@@ -51,12 +52,12 @@ image::screenshot_successful-activate-local-mfe.png[]
 .Traefik Configuration located in `init_data/traefik/active`
 [%collapsible%closed]
 ====
-include::./my-app_6021.adoc[]
+include::./_my-app_6021.adoc[]
 ====
 
 [NOTE]
 ====
-If the microfrontend requires its own backend functionality, then these backend services must also be started and presumably integrated into OneCX. The *./toggle-mfes.sh* script does not check this.
+If the microfrontend requires its own backend functionality, then these backend services must also be started and presumably integrated into OneCX. The *./toggle-mfes.sh* script does not check this. See {integrate_images_link} for details on how to integrate additional backend services.
 
 The method described here is for all microfrontends except the OneCX Shell. The OneCX Shell has a special role in OneCX and must be started with a specific command. See {toggle_shell_link} for details.
 ====

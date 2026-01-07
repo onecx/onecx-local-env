@@ -21,6 +21,9 @@ networks:
 ########################################
 ####### ENVIRONMENT PRESETS ############
 ########################################
+# Define common environment variable sets for services
+# Requires corresponding variables to be defined in .env file
+#
 x-bff-variables: &bff_environment
   ONECX_PERMISSIONS_ENABLED: ${ONECX_PERMISSIONS_ENABLED}
   ONECX_PERMISSIONS_CACHE_ENABLED: ${ONECX_PERMISSIONS_CACHE_ENABLED}
@@ -45,10 +48,10 @@ x-svc-variables: &svc_single_tenancy
   
 x-svc-multi_tenancy: &svc_multi_tenancy
   <<: *svc_single_tenancy
+  QUARKUS_REST_CLIENT_ONECX_TENANT_URL: ${ONECX_REST_CLIENT_ONECX_TENANT_URL}
   ONECX_TENANT_CACHE_ENABLED: ${ONECX_TENANT_CACHE_ENABLED}
   TKIT_RS_CONTEXT_TENANT_ID_ENABLED: ${ONECX_RS_CONTEXT_TENANT_ID_ENABLED}
   TKIT_RS_CONTEXT_TENANT_ID_MOCK_ENABLED: ${ONECX_RS_CONTEXT_TENANT_ID_MOCK_ENABLED}
-  QUARKUS_REST_CLIENT_ONECX_TENANT_URL: "http://onecx-tenant-svc:8080"
 
 services:
   ########################################
