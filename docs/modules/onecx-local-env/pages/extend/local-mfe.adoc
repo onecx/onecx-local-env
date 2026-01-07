@@ -4,7 +4,7 @@ endif::[]
 :imagesdir: ../../images
 
 :toggle_shell_link:     xref:../scripts/toggle-mfes.adoc#integrate-onecx-shell[Integrate OneCX Shell]
-:integrate_images_link: xref:./local_images.adoc[Integrate Local Docker Images]
+:integrate_images_link: xref:./local-images.adoc[Integrate Local Docker Images]
 
 = Integrate a local Microfrontend
 
