@@ -29,7 +29,7 @@ To access your *Hello World* service via the local proxy, add the following entr
 Before starting your service, create the necessary database and user in the PostgreSQL container (if they haven't already been created). +
 You can do this either by connecting to the PostgreSQL container and executing the required SQL commands, or by using an SQL script, which is preferable for reproducibility.
 
-. Prepare SQL script with content
+. Prepare SQL script
 +
 [source, sql]
 ----
@@ -41,7 +41,7 @@ GRANT ALL PRIVILEGES ON SCHEMA public TO onecx_hello_world;
 +
 As example the script is saved as `hello-world.sql` in the root of the OneCX Local Environment directory.
 
-. Execute the SQL script in Postgres container
+. Execute the SQL script
 +
 [source, bash]
 ----
