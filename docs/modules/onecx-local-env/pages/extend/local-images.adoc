@@ -7,7 +7,7 @@ endif::[]
 
 If you need to extend this environment with your own containers or import additional data, please taken the following guidelines into account.
 
-The following sections describe the necessary steps to integrate your own Docker images into the OneCX Local Environment. We will use a simple "*Hello World*" application as an example, consisting of a backend service, a backend-for-frontend (BFF) and a UI component.
+The following sections describe the necessary steps to integrate your own Docker images into the OneCX Local Environment. We will use a simple *Hello World* application as an example, consisting of a backend service, a backend-for-frontend (BFF) and a UI component.
 
 Steps to integrate your own Docker images::
 * Prepare hosts file entries to access your services via the local proxy.
@@ -107,14 +107,9 @@ If so then this file must be specified when starting the OneCX Local Environment
 
 == Start Services
 
-Before start the services, a word about the organization of the services:
-* The UI service (`onecx-hello-world-ui`) connects to the BFF service (`onecx-hello-world-bff`).
-* The BFF service connects to the backend service (`onecx-hello-world-svc`).
-* The backend service connects to the Postgres database.
+The relationship of the *Hello World* services to each other is defined wih the "depends on" settings in the Docker Compose file. Therefore, it is sufficient to start only the UI service, which will automatically start the backend services as well.
 
-These connections are defined by the "depends on" settings in the Docker Compose file. Therefore, it is sufficient to start only the UI service, which will automatically start the backend services as well.
-
-.Start Hello World Services
+.Start *Hello World* Services
 [source, bash]
 ----
 docker compose --env-file ./versions/v2/.env -f hello-world.compose.yaml up -d onecx-hello-world-ui
@@ -122,7 +117,7 @@ docker compose --env-file ./versions/v2/.env -f hello-world.compose.yaml up -d o
 
 Or if you have defined additional environment variables in a separate file (e.g. `hello-world.env`), you can start the services as follows:
 
-.Start Hello World Services with extra env file
+.Start *Hello World* Services with extra env file
 [source, bash]
 ----
 docker compose --env-file ./versions/v2/.env --env-file ./hello-world.env -f hello-world.compose.yaml up -d onecx-hello-world-ui
