@@ -5,4 +5,4 @@
 // Local references
 :ole_run_onecx:              xref:./run-onecx.adoc[Run OneCX]
 // Other module references
-:onecx_docs_setup_ref:       xref:documentation:onecx-docs-dev:docs/docs_setup.adoc[OneCX Docs: Setting up]
+:onecx_docs_setup_ref:       xref:documentation:onecx-docs-doc:setup.adoc[OneCX Docs: Setting up]
