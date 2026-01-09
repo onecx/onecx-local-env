@@ -1,0 +1,6 @@
+{
+  "version": "xxx",
+  "name": "onecx-chat-bff",
+  "description": "OneCX Chat Backend For Frontend",
+  "type": "bff"
+}

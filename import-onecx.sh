@@ -69,7 +69,7 @@ while getopts ":hd:svt:e:x" opt; do
     d ) if [[ "$OPTARG" == -* ]]; then
           printf "${RED}  Missing paramter for option -d${NC}\n"
           usage
-        elif [[ ! "$OPTARG" =~ ^(all|base|assignment|bookmark|parameter|permission|mfe|ms|product|slot|tenant|theme|welcome|workspace)$ ]]; then
+        elif [[ ! "$OPTARG" =~ ^(all|base|assignment|bookmark|parameter|permission|mfe|ms|product|slot|tenant|theme|welcome|workspace|ai)$ ]]; then
           printf "${RED}  Unknown data type: $OPTARG${NC}\n"
           usage
         else

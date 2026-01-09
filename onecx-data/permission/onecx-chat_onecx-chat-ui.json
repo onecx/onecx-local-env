@@ -1,0 +1,37 @@
+{
+  "name": "onecx-chat-ui",
+  "permissions": [
+    {
+      "resource": "CHAT",
+      "action": "CREATE"
+    },
+    {
+      "resource": "CHAT",
+      "action": "DELETE"
+    },
+    {
+      "resource": "CHAT",
+      "action": "EDIT"
+    },
+    {
+      "resource": "CHAT",
+      "action": "SEARCH"
+    },
+    {
+      "resource": "CHAT",
+      "action": "VIEW"
+    },
+    {
+      "resource": "CHAT",
+      "action": "SAVE"
+    },
+    {
+      "resource": "CHAT",
+      "action": "EXPORT"
+    },
+    {
+      "resource": "CHAT",
+      "action": "IMPORT"
+    }
+  ]
+}

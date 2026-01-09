@@ -1,0 +1,14 @@
+{
+  "name": "onecx-chat-bff",
+  "permissions": [
+    { "resource": "chat", "action": "read" },
+    { "resource": "chat", "action": "write" },
+    { "resource": "chat", "action": "delete" },
+    { "resource": "message", "action": "read" },
+    { "resource": "message", "action": "write" },
+    { "resource": "message", "action": "delete" },
+    { "resource": "participant", "action": "read" },
+    { "resource": "participant", "action": "write" },
+    { "resource": "participant", "action": "delete" }
+  ]
+}
