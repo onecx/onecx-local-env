@@ -68,7 +68,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock # Traefik can listen to the Docker events
       - ../../init-data/traefik/base/traefik-conf.yml:/etc/traefik/traefik.yml
       - ../../init-data/traefik/active:/etc/traefik/active # location of activated local Microfrontends
-      - ./logs/traefik:/var/log/traefik
+      - ./logs:/var/log/traefik
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
