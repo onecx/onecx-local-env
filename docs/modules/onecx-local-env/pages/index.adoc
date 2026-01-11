@@ -47,11 +47,11 @@ The OneCX Platform is a modular system which provides a lot of standard services
 .Core Applications
 [%collapsible]
 ====
-include::documentation:onecx-docs-apps:partial$core-app-table.adoc[]
+include::documentation:onecx-docs-apps:page$_core-app-table.adoc[]
 ====
 
 .Feature Applications
 [%collapsible]
 ====
-include::documentation:onecx-docs-apps:partial$feature-app-table.adoc[]
+include::documentation:onecx-docs-apps:page$_feature-app-table.adoc[]
 ====
