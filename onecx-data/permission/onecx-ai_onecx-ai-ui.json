@@ -1,0 +1,181 @@
+{
+  "name": "onecx-ai-ui",
+  "permissions": [
+    {
+      "resource": "AI_KNOWLEDGE_DOCUMENT",
+      "action": "CREATE"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_DOCUMENT",
+      "action": "EDIT"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_DOCUMENT",
+      "action": "DELETE"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_DOCUMENT",
+      "action": "SAVE"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_DOCUMENT",
+      "action": "IMPORT"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_DOCUMENT",
+      "action": "EXPORT"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_DOCUMENT",
+      "action": "VIEW"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_DOCUMENT",
+      "action": "SEARCH"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_VECTOR_DB",
+      "action": "CREATE"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_VECTOR_DB",
+      "action": "EDIT"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_VECTOR_DB",
+      "action": "DELETE"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_VECTOR_DB",
+      "action": "SAVE"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_VECTOR_DB",
+      "action": "IMPORT"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_VECTOR_DB",
+      "action": "EXPORT"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_VECTOR_DB",
+      "action": "VIEW"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_VECTOR_DB",
+      "action": "SEARCH"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_VECTOR_DB",
+      "action": "BACK"
+    },
+    {
+      "resource": "AI_PROVIDER",
+      "action": "CREATE"
+    },
+    {
+      "resource": "AI_PROVIDER",
+      "action": "EDIT"
+    },
+    {
+      "resource": "AI_PROVIDER",
+      "action": "DELETE"
+    },
+    {
+      "resource": "AI_PROVIDER",
+      "action": "SAVE"
+    },
+    {
+      "resource": "AI_PROVIDER",
+      "action": "IMPORT"
+    },
+    {
+      "resource": "AI_PROVIDER",
+      "action": "EXPORT"
+    },
+    {
+      "resource": "AI_PROVIDER",
+      "action": "VIEW"
+    },
+    {
+      "resource": "AI_PROVIDER",
+      "action": "SEARCH"
+    },
+    {
+      "resource": "AI_PROVIDER",
+      "action": "CHANGE_API_KEY"
+    },
+    {
+      "resource": "AI_CONTEXT",
+      "action": "CREATE"
+    },
+    {
+      "resource": "AI_CONTEXT",
+      "action": "EDIT"
+    },
+    {
+      "resource": "AI_CONTEXT",
+      "action": "DELETE"
+    },
+    {
+      "resource": "AI_CONTEXT",
+      "action": "SAVE"
+    },
+    {
+      "resource": "AI_CONTEXT",
+      "action": "IMPORT"
+    },
+    {
+      "resource": "AI_CONTEXT",
+      "action": "EXPORT"
+    },
+    {
+      "resource": "AI_CONTEXT",
+      "action": "VIEW"
+    },
+    {
+      "resource": "AI_CONTEXT",
+      "action": "SEARCH"
+    },
+    {
+      "resource": "AI_CONTEXT",
+      "action": "BACK"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_BASE",
+      "action": "CREATE"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_BASE",
+      "action": "EDIT"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_BASE",
+      "action": "DELETE"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_BASE",
+      "action": "SAVE"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_BASE",
+      "action": "IMPORT"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_BASE",
+      "action": "EXPORT"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_BASE",
+      "action": "VIEW"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_BASE",
+      "action": "SEARCH"
+    },
+    {
+      "resource": "AI_KNOWLEDGE_BASE",
+      "action": "BACK"
+    }
+  ]
+}

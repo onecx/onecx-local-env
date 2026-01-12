@@ -26,6 +26,16 @@
       ],
       "products": [
         {
+          "productName": "onecx-ai",
+          "baseUrl": "/ai",
+          "microfrontends": [
+            {
+              "appId": "onecx-ai-ui",
+              "basePath": "/"
+            }
+          ]
+        },
+        {
           "productName": "onecx-announcement",
           "baseUrl": "/announcement",
           "microfrontends": [

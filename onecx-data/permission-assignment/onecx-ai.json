@@ -1,0 +1,86 @@
+{
+  "id": "onecx-local-env_import-permission-assignments_onecx-ai",
+  "assignments": {
+    "onecx-ai": {
+      "onecx-ai-ui": {
+        "onecx-admin": {
+          "AI_KNOWLEDGE_DOCUMENT": [
+            "CREATE",
+            "EDIT",
+            "DELETE",
+            "SAVE",
+            "IMPORT",
+            "EXPORT",
+            "VIEW",
+            "SEARCH"
+          ],
+          "AI_KNOWLEDGE_VECTOR_DB": [
+            "CREATE",
+            "EDIT",
+            "DELETE",
+            "SAVE",
+            "IMPORT",
+            "EXPORT",
+            "VIEW",
+            "SEARCH",
+            "BACK"
+          ],
+          "AI_PROVIDER": [
+            "CREATE",
+            "EDIT",
+            "DELETE",
+            "SAVE",
+            "IMPORT",
+            "EXPORT",
+            "VIEW",
+            "SEARCH",
+            "CHANGE_API_KEY"
+          ],
+          "AI_CONTEXT": [
+            "CREATE",
+            "EDIT",
+            "DELETE",
+            "SAVE",
+            "IMPORT",
+            "EXPORT",
+            "VIEW",
+            "SEARCH",
+            "BACK"
+          ],
+          "AI_KNOWLEDGE_BASE": [
+            "CREATE",
+            "EDIT",
+            "DELETE",
+            "SAVE",
+            "IMPORT",
+            "EXPORT",
+            "VIEW",
+            "SEARCH",
+            "BACK"
+          ]
+        },
+        "onecx-user": {
+          "AI_KNOWLEDGE_DOCUMENT": ["VIEW", "SEARCH"],
+          "AI_KNOWLEDGE_VECTOR_DB": ["VIEW", "SEARCH"],
+          "AI_PROVIDER": ["VIEW", "SEARCH"],
+          "AI_CONTEXT": ["VIEW", "SEARCH"],
+          "AI_KNOWLEDGE_BASE": ["VIEW", "SEARCH"]
+        }
+      },
+      "onecx-ai-bff": {
+        "onecx-admin": {
+          "AIKnowledgeDocument": ["read", "write", "delete"],
+          "AIKnowledgeVectorDb": ["read", "write", "delete"],
+          "AIProvider": ["read", "write", "delete"],
+          "aiContext": ["read", "write", "delete"]
+        },
+        "onecx-user": {
+          "AIKnowledgeDocument": ["read"],
+          "AIKnowledgeVectorDb": ["read"],
+          "AIProvider": ["read"],
+          "aiContext": ["read"]
+        }
+      }
+    }
+  }
+}

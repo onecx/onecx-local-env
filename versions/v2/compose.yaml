@@ -276,6 +276,48 @@ services:
       - all
       - data-import
 
+  onecx-ai-bff:
+    image: ${ONECX_AI_BFF}
+    container_name: onecx-ai-bff
+    environment:
+      <<: *bff_environment
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-ai"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-ai-svc:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-ai-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-ai-bff.rule=Host(`onecx-ai-bff`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+
+  onecx-ai-ui:
+    image: ${ONECX_AI_UI}
+    container_name: onecx-ai-ui
+    environment:
+      BFF_URL: http://onecx-ai-bff:8080/
+      APP_BASE_HREF: /mfe/ai/
+      APP_ID: onecx-ai-ui
+      PRODUCT_NAME: "onecx-ai"
+    depends_on:
+      onecx-ai-bff:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-ai-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-ai-ui.rule=Host(`local-proxy`) && PathPrefix(`/mfe/ai/`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+
+
   ########## ONECX BOOKMARK
   onecx-bookmark-svc:
     image: ${ONECX_BOOKMARK_SVC}

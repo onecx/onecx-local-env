@@ -1,0 +1,17 @@
+{
+  "name": "onecx-ai-bff",
+  "permissions": [
+    { "resource": "AIKnowledgeDocument", "action": "read" },
+    { "resource": "AIKnowledgeDocument", "action": "write" },
+    { "resource": "AIKnowledgeDocument", "action": "delete" },
+    { "resource": "AIKnowledgeVectorDb", "action": "read" },
+    { "resource": "AIKnowledgeVectorDb", "action": "write" },
+    { "resource": "AIKnowledgeVectorDb", "action": "delete" },
+    { "resource": "AIProvider", "action": "read" },
+    { "resource": "AIProvider", "action": "write" },
+    { "resource": "AIProvider", "action": "delete" },
+    { "resource": "aiContext", "action": "read" },
+    { "resource": "aiContext", "action": "write" },
+    { "resource": "aiContext", "action": "delete" }
+  ]
+}
