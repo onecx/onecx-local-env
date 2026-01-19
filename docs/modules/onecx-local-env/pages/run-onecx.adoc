@@ -69,3 +69,29 @@ The `stop-onecx.sh` script accepts optional flags to customize its behavior. A l
 `./stop-onecx.sh -h`
 ====
 
+
+== Start OneCX Services
+
+The script `xref:./scripts/start.adoc[start-onecx.sh]` allows you to start OneCX services using predefined profiles. Alternatively, you can of course start the services directly with Docker Compose. Due to the service dependencies defined in the Docker Compose file, it is sufficient to start only the top-level services; this will automatically start the dependent services as well.
+
+.Example: Start all OneCX Theme Services
+[source, bash]
+----
+docker compose up -d onecx-theme-ui
+----
+
+== Stop OneCX Services
+
+Since the service dependencies defined in the Docker Compose file only work in one direction, you may also need to take care of the dependent services when stopping services.
+
+.Example: Stop OneCX Theme UI Service only
+[source, bash]
+----
+docker compose down onecx-theme-ui
+----
+
+.Example: Stop all OneCX Theme Services
+[source, bash]
+----
+docker compose down onecx-theme-svc onecx-theme-bff onecx-theme-ui
+----
