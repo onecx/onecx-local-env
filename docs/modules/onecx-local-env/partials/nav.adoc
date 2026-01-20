@@ -18,7 +18,7 @@
 *** xref:onecx-local-env:internal/utils.adoc[Utilities]
 *** xref:onecx-local-env:internal/onecx-data.adoc[Default Data]
 *** xref:onecx-local-env:internal/networking.adoc[Networking]
-*** xref:onecx-local-env:advanced/custom-certificates.adoc[Custom SSL Certificates in OneCX]
+*** xref:onecx-local-env:internal/custom-certificates.adoc[Custom SSL Certificates in OneCX]
 
 ** xref:onecx-local-env:troubleshooting.adoc[Troubleshooting]
 
