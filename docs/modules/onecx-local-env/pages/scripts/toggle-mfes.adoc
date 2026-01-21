@@ -5,7 +5,7 @@ endif::[]
 
 = Integrate Microfrontends into OneCX
 
-The script *toggle-mfes.sh* integrates (activates) a locally running microfrontend into the OneCX environment, allowing it to interact with other microfrontends. This process is also reversible. 
+The script *toggle-mfes.sh* integrates a locally running microfrontend into the OneCX environment, allowing it to interact with other microfrontends. This process is also reversible. 
 
 How it works::
 The script creates a small configuration file in Traefik, tailored to the local microfrontend. Traefik then forwards requests from the Docker network to the external local microfrontend.
@@ -13,8 +13,7 @@ The script can be run from the root directory of the *onecx-local-env* repositor
 +
 The Traefik configuration files are stored in `init-data/traefik/active/`. Traefik immediately detects any changes there, no extra restart is necessary.
 
-Here is the command to list the currently integrated microfrontends:
-
+.Command to list the currently integrated microfrontends:
 [source,bash]
 ----
 ./toggle-mfes.sh  -l
@@ -25,19 +24,15 @@ image::scripts/script_toggle-mfes.sh_list.png[width=500]
 
 
 == Precondition
-Before a microfrontend can be successfully integrated into OneCX, it must be started.
+Before a microfrontend can be successfully integrated into OneCX, it must be started. It is recommended to start the microfrontend in the following way. In the following examples, 6021 is used as the port where the microfrontend is running locally. Adjust the port as needed.
 
-In the following examples, 6021 is used as the port where the microfrontend is running locally. Adjust the port as needed.
-
-Start Angular *ng* Microfrontend on port 6021::
-+
+.Start Angular *ng* Microfrontend on port 6021
 [source,bash]
 ----
 npm run start -- --port 6021 --host 0.0.0.0 --disable-host-check --public-host=http://localhost:6021
 ----
 
-Start Angular *nx* Microfrontend on port 6021::
-+
+.Start Angular *nx* Microfrontend on port 6021
 [source,bash]
 ----
 npm run start -- --port=6021 --host 0.0.0.0 --disableHostCheck --publicHost=http://localhost:6021
@@ -47,6 +42,7 @@ npm run start -- --port=6021 --host 0.0.0.0 --disableHostCheck --publicHost=http
 .Checkpoint
 ====
 Please check the microfrontend is up and running by accessing the *public host URL* in Browser.
+[source,text]
 ----
 http://localhost:6021/remoteEntry.js
 ----
@@ -55,18 +51,25 @@ The *remoteEntry.js* should be loaded - the content is displayed. The *./toggle-
 
 
 == Available Flags
-The script accepts multiple flags to customize its behavior; one of each is required. *All options may only be used separately!*
+The script accepts multiple flags to customize its behavior; one of each is required. +
+*All options may only be used separately!*
 
 The flags are:
 
--a::
-Enable one or more local microfrontends. In addition to the microfrontend name, you can optionally specify a port and path. The default port is *4200*.
-+
+-a <app-name>[:<app-port>[:<app-path>]]::
+Integrate one or more local microfrontends (app-name). In addition to the microfrontend name, you can optionally specify a port (app-port) and path (app-path). The default port is *4200*. See example section below. +
 If the microfrontend is one of OneCX Core products and no port is specified then predefined ports are used.
 
 -c:: Cleanup, remove all existing configurations
 
--d:: Deactivate one or more local Microfrontends
+-d <app-name>[:<app-port>]::
+Deintegrate one or more local Microfrontends. See example section below.
++
+[IMPORTANT]
+====
+. During deintegration, the same port must be specified as was specified during integration.
+. Deintegrate your microfrontend before stopping it, otherwise Traefik will continue to route requests to a non-existing service. There is no failover mechanism. See xref:#routing-and-prioritize[section below] for details.
+====
 
 -h:: Display this help and exit
 
@@ -76,10 +79,10 @@ If the microfrontend is one of OneCX Core products and no port is specified then
 == Examples
 
 === Integrate my App with specific path
-The local microfrontend `my-app` runs on `http://localhost:4200` (standard Angular).
-
+The local microfrontend *my-app* runs on `http://localhost:4200` (standard Angular). +
 `/my-app-path` is the path under which the microfrontend is accessible within OneCX.
 
+.Integrate *my-app* on standard port *4200* (not extra specified) with specific path */my-app-path*
 [source,bash]
 ----
 ./toggle-mfes.sh  -a my-app::/my-app-path
@@ -90,8 +93,10 @@ image::scripts/script_toggle-mfes.sh_activate-my-app.png[]
 
 
 === Integrate several Apps
-Integrate *workspace* on standard port *5025* AND *user-profile* on port *5027*. Since no path is specified, the default path is used: */mfe/<name-of-microfrontend>*
+Integrate *workspace* on standard port *5025* AND *user-profile* on port *5027*. +
+Since no path is specified, the default paths are used, e.g. */mfe/workspace*
 
+.Integrate *workspace* and *user-profile* with specific ports
 [source,bash]
 ----
 ./toggle-mfes.sh  -a workspace user-profile:5027
@@ -104,24 +109,34 @@ image::scripts/script_toggle-mfes.sh_activate.png[]
 === Integrate OneCX Shell
 The integration of the shell requires a special path mapping. Hereby the path is not completely stripped. Define the strip path to be used at the end. 
 
+.Integrate OneCX Shell with specific path mapping
 [source,bash]
 ----
 ./toggle-mfes.sh  -a shell::/onecx-shell/:/
 ----
+
 .Successful integrated OneCX Shell
 image::scripts/script_toggle-mfes.sh_activate-shell.png[]
 
 [NOTE]
-Because OneCX Shell is a microfrontend with a special role in OneCX it have to be started with a specific command:
+Because OneCX Shell is a microfrontend with a special role in OneCX it have to be started with a specific command as well.
 
+.Start Shell on default port 4200
 [source,bash]
 ----
 npm run start:local-env
 ----
 
+.Start Shell on a specific port (for example 5000)
+[source,bash]
+----
+npm run start:local-env -- --port=5000 --public-host=http://localhost:5000
+----
+
 === Deintegrate my App
 The *-d* option allows you to undo an integration. The same rule applies to the port: if the port is not *4200*, it must be specified.
 
+.Deintegrate *my-app* running on port *12345*
 [source,bash]
 ----
 ./toggle-mfes.sh  -d my-app:12345
@@ -144,8 +159,7 @@ image::scripts/script_toggle-mfes.sh_cleanup.png[width=500]
 
 [CAUTION]
 ====
-Microfrontends integrated using the methods described above take precedence over those running in Docker Compose. If the microfrontends started with Docker Compose are needed again, the locally integrated microfrontends must first be deintegrated using the `-d` option.
-
+*Microfrontends integrated* using the methods described above *take priority* over those run via Docker Compose. If the microfrontends started with Docker Compose are needed again, the locally integrated microfrontends must first be deintegrated using the *-d* option.
 A failover mechanism is not implemented due to differing path reductions.
 ====
 

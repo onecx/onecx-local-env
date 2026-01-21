@@ -48,7 +48,7 @@ At this point, users should have verified that their operating system is support
 If you are using Windows and WSL, you should install and use your *entire development environment* in WSL. This includes cloning Git repositories and installing tools like Docker, Git, and jq. +
 Connect your development environment, such as Visual Studio Code, to WSL and install its extensions/plugins in WSL as well.
 
-[red]#Avoid working on your WSL files from Windows, i.e. via mount paths like `/mnt/c/...`.# +
+[text-important]#Avoid working on your WSL files from Windows, i.e. via mount paths like `/mnt/c/...`.# +
 This can lead to file permission issues and unexpected behavior when running scripts and Docker containers.
 ====
 

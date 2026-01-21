@@ -1,0 +1,25 @@
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
+:imagesdir: ../../images
+
+:toggle_shell_link:     xref:../scripts/toggle-mfes.adoc#integrate-onecx-shell[Integrate OneCX Shell]
+:integrate_images_link: xref:./local-images.adoc[Integrate Local Docker Images]
+
+= Tipps for Advanced Usage
+
+This section provides some additional tips and tricks for advanced usage of the OneCX Local Environment.
+
+== Rerun Database Initialization Script
+
+If you need to run the database initialization scripts again (e.g. after adding a new database), you can do so with the following commands, executed from the root of the OneCX Local Environment directory:
+
+[source, bash]
+----
+docker cp ./init-data/postgres/create-databases.sql postgresdb:/docker-entrypoint-initdb.d/
+docker exec -u postgres postgresdb psql postgres postgres -f /docker-entrypoint-initdb.d/create-databases.sql >init-db.log 2>&1
+----
+This will copy the current version of the `init-data/postgres/create-databases.sql` script to the PostgreSQL container and execute it, creating any missing databases as defined in the script.
+
+The 2nd command creates a log file `init-db.log` in the current directory, which contains the output of the script execution. +
+You can check this log file for any errors or messages related to the database initialization.

@@ -99,7 +99,7 @@ include::./_onecx-hello-world.adoc[]
 
 
 == Prepare Environment Settings
-To keep the example simple, all necessary environment variables are either taken from the base Compose project (OneCX Local Environment) or defined directly in the Compose file (e.g. username, password).
+To keep the example simple, all necessary environment variables are either taken from the base Compose project (OneCX Local Environment) or defined directly in the Compose file (e.g. database username/password for backend services).
 
 If you need to define additional environment variables (e.g. for image tags or database connection details), you can do so in a separate environment file. +
 If so then this file must be specified when starting the OneCX Local Environment using the `--env-file` option with Docker Compose.
