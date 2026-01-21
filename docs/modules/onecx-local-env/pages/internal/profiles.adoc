@@ -5,15 +5,14 @@ endif::[]
 
 = Docker Compose Profiles in OneCX Local Environment
 
-{docker_compose_profiles_link} allow you to define different sets of services and configurations that can be activated or deactivated based on your development or testing needs. +
-This concept is particularly useful in the OneCX Local Environment, where you might want to run only a subset of services for specific scenarios.
+{docker_compose_profiles_link} allow you to define different sets of services and configurations. This is particularly useful, where you might want to run only a subset of services for specific scenarios.
 
-The concept of Docker Compose Profiles is limited. While it works well for starting subsets of services, it doesn't work in the same way for stopping those subsets.
+However, this concept has its limitations. While it is well suited for starting subsets of services, it is not equally suitable for terminating these subsets.
   
 
 == Used Compose Profiles
 
-In OneCX Local Environment, the following Docker Compose profiles are defined:
+The OneCX local environment uses the following Docker Compose profiles, which are defined in the *compose.yml* file of version 2.
 
 base::
 The *base* profile includes the essential services required to run the OneCX Local Environment.
@@ -26,11 +25,6 @@ Excepted are services that may require additional resources or are not commonly 
 +
 This profile is ideal for comprehensive testing or development scenarios where you need access to all common features and services provided by OneCX.
 
-ai::
-The *ai* profile includes services related to AI functionalities within the OneCX Local Environment. +
-Activate this profile when you want to test or develop AI-related features.
-+
-.The services in this profile...
-
-* depend on the *base* profile, so ensure that the base services are running.
-* require an App Key for AI services to function correctly. During import, you will be prompted to provide this key.
+data-import::
+The *data-import* profile is a specific one that includes services required for importing data into the OneCX Local Environment. +
+This profile is useful when you need to set up or refresh the environment with specific datasets without starting all services.

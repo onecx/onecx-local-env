@@ -2,6 +2,7 @@
 * xref:onecx-local-env:index.adoc[Local Environment]
 ** xref:onecx-local-env:setup.adoc[Setting up]
 ** xref:onecx-local-env:run-onecx.adoc[Run OneCX]
+** xref:onecx-local-env:ai-chat.adoc[AI Chat]
 
 ** xref:onecx-local-env:extend/extend.adoc[Extend OneCX]
 *** xref:onecx-local-env:extend/local-mfe.adoc[Integrate Microfrontend]

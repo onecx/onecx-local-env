@@ -51,6 +51,7 @@ Skips the import of initial data after starting the services. (Default: import d
 
 == Examples
 
+[#start-essential-services]
 === Start essential Services
 The Docker services *essential* for OneCX are started. The necessary Docker volumes are created and required data are imported. Technically, these services are labelled with the *base* profile in the Docker Compose file used.
 
@@ -65,6 +66,7 @@ There is no security context defined, so authentication/authorization on service
 ----
 
 
+[#start-all-services]
 === Start ALL Services
 *All* Docker services for OneCX are started. The necessary Docker volumes are created and required data are imported. Technically, the relevant services are marked with the *all* profile in the Docker Compose file used.
 
@@ -74,6 +76,7 @@ There is no security context defined, so authentication/authorization on service
 ----
 
 
+[#start-with-security]
 === Start with Security, skipping Import
 The Docker services *essential* for OneCX are started with enabled secure authentication and also the tenant id is taken into account. This is the main precondition for tenant-compliant logins.
 
