@@ -52,7 +52,7 @@ Skips the import of initial data after starting the services. (Default: import d
 == Examples
 
 === Start essential Services
-The Docker services *essential* for OneCX are started. The necessary Docker volumes are created and required data are imported. Technically, these services are labelled with the *base* profile in the docker-compose file used.
+The Docker services *essential* for OneCX are started. The necessary Docker volumes are created and required data are imported. Technically, these services are labelled with the *base* profile in the Docker Compose file used.
 
 There is no security context defined, so authentication/authorization on services is disabled.
 
@@ -66,7 +66,7 @@ There is no security context defined, so authentication/authorization on service
 
 
 === Start ALL Services
-*All* Docker services for OneCX are started. The necessary Docker volumes are created and required data are imported. Technically, the relevant services are marked with the *all* profile in the docker-compose file used.
+*All* Docker services for OneCX are started. The necessary Docker volumes are created and required data are imported. Technically, the relevant services are marked with the *all* profile in the Docker Compose file used.
 
 [source,bash]
 ----

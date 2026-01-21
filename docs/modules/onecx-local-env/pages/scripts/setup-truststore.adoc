@@ -1,0 +1,17 @@
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
+:imagesdir: ../../images
+
+= Setup Java Truststore with Custom Certificates
+
+The *setup-truststore.sh* script is used to create or update a Java Truststore containing custom certificates needed by Java applications running inside Docker containers in the OneCX Local Environment.
+
+There are no parameters required. The script can be run from the root directory of the *onecx-local-env* repository:
+
+[source,bash]
+----
+./setup-truststore.sh
+----
+
+Instructions for preparing the Java Truststore with your certificates can be found under xref:../internal/custom-certificates.adoc[Custom Certificates].

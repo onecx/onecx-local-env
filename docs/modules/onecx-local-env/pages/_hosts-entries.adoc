@@ -11,10 +11,14 @@
 127.0.0.1 sonar
 
 # OneCX - product services
-127.0.0.1 onecx-announcement-svc
+127.0.0.1 onecx-ai-bff
+127.0.0.1 onecx-ai-svc
 127.0.0.1 onecx-announcement-bff
+127.0.0.1 onecx-announcement-svc
 127.0.0.1 onecx-bookmark-svc
 127.0.0.1 onecx-bookmark-bff
+127.0.0.1 onecx-chat-bff
+127.0.0.1 onecx-chat-svc
 127.0.0.1 onecx-document-svc
 127.0.0.1 onecx-document-bff
 127.0.0.1 onecx-help-svc

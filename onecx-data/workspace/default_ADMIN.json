@@ -26,6 +26,16 @@
       ],
       "products": [
         {
+          "productName": "onecx-ai",
+          "baseUrl": "/ai",
+          "microfrontends": [
+            {
+              "appId": "onecx-ai-ui",
+              "basePath": "/"
+            }
+          ]
+        },
+        {
           "productName": "onecx-announcement",
           "baseUrl": "/announcement",
           "microfrontends": [
@@ -41,6 +51,16 @@
           "microfrontends": [
             {
               "appId": "onecx-bookmark-ui",
+              "basePath": "/"
+            }
+          ]
+        },
+        {
+          "productName": "onecx-chat",
+          "baseUrl": "/chat",
+          "microfrontends": [
+            {
+              "appId": "onecx-chat-ui",
               "basePath": "/"
             }
           ]
@@ -411,6 +431,11 @@
           "name": "onecx-shell-header.end",
           "components": [
             {
+              "productName": "onecx-chat",
+              "appId": "onecx-chat-ui",
+              "name": "./OneCXChatPanelComponent"
+            },
+            {
               "productName": "onecx-help",
               "appId": "onecx-help-ui",
               "name": "./OneCXHelpItemEditorComponent"
@@ -523,10 +548,7 @@
           "external": false,
           "target": "_self",
           "i18n": {},
-          "roles": [
-            "onecx-admin",
-            "onecx-user"
-          ],
+          "roles": ["onecx-admin", "onecx-user"],
           "children": [
             {
               "key": "UPM_PERSONAL_INFO",
@@ -538,10 +560,7 @@
               "external": false,
               "target": "_self",
               "i18n": {},
-              "roles": [
-                "onecx-admin",
-                "onecx-user"
-              ],
+              "roles": ["onecx-admin", "onecx-user"],
               "children": []
             },
             {
@@ -557,10 +576,7 @@
                 "de": "Einstellungen",
                 "en": "Settings"
               },
-              "roles": [
-                "onecx-admin",
-                "onecx-user"
-              ],
+              "roles": ["onecx-admin", "onecx-user"],
               "children": []
             },
             {
@@ -576,10 +592,7 @@
                 "de": "Berechtigungen",
                 "en": "Permissions"
               },
-              "roles": [
-                "onecx-admin",
-                "onecx-user"
-              ],
+              "roles": ["onecx-admin", "onecx-user"],
               "children": []
             },
             {
@@ -595,10 +608,7 @@
                 "de": "Lesezeichen",
                 "en": "Bookmarks"
               },
-              "roles": [
-                "onecx-admin",
-                "onecx-user"
-              ],
+              "roles": ["onecx-admin", "onecx-user"],
               "children": []
             },
             {
@@ -613,10 +623,7 @@
               "i18n": {
                 "de": "Passwort ändern"
               },
-              "roles": [
-                "onecx-admin",
-                "onecx-user"
-              ],
+              "roles": ["onecx-admin", "onecx-user"],
               "children": []
             }
           ]
@@ -629,10 +636,7 @@
           "external": false,
           "target": "_self",
           "i18n": {},
-          "roles": [
-            "onecx-admin",
-            "onecx-user"
-          ],
+          "roles": ["onecx-admin", "onecx-user"],
           "children": [
             {
               "key": "PFM_CONTACT",
@@ -643,10 +647,7 @@
               "external": false,
               "target": "_self",
               "i18n": {},
-              "roles": [
-                "onecx-admin",
-                "onecx-user"
-              ],
+              "roles": ["onecx-admin", "onecx-user"],
               "children": []
             },
             {
@@ -658,10 +659,7 @@
               "external": false,
               "target": "_self",
               "i18n": {},
-              "roles": [
-                "onecx-admin",
-                "onecx-user"
-              ],
+              "roles": ["onecx-admin", "onecx-user"],
               "children": []
             }
           ]
@@ -675,10 +673,7 @@
           "external": false,
           "target": "_self",
           "i18n": {},
-          "roles": [
-            "onecx-admin",
-            "onecx-user"
-          ],
+          "roles": ["onecx-admin", "onecx-user"],
           "children": [
             {
               "key": "PMM_PRODUCT_STORE",
@@ -690,10 +685,7 @@
               "external": false,
               "target": "_self",
               "i18n": {},
-              "roles": [
-                "onecx-admin",
-                "onecx-user"
-              ],
+              "roles": ["onecx-admin", "onecx-user"],
               "children": []
             },
             {
@@ -709,10 +701,7 @@
                 "de": "Startseite",
                 "en": "Start page"
               },
-              "roles": [
-                "onecx-admin",
-                "onecx-user"
-              ],
+              "roles": ["onecx-admin", "onecx-user"],
               "children": []
             },
             {
@@ -724,10 +713,7 @@
               "external": false,
               "target": "_self",
               "i18n": {},
-              "roles": [
-                "onecx-admin",
-                "onecx-user"
-              ],
+              "roles": ["onecx-admin", "onecx-user"],
               "children": [
                 {
                   "key": "PMM_WM_WORKSPACES",
@@ -739,10 +725,7 @@
                   "external": false,
                   "target": "_self",
                   "i18n": {},
-                  "roles": [
-                    "onecx-admin",
-                    "onecx-user"
-                  ],
+                  "roles": ["onecx-admin", "onecx-user"],
                   "children": []
                 },
                 {
@@ -755,10 +738,7 @@
                   "external": false,
                   "target": "_self",
                   "i18n": {},
-                  "roles": [
-                    "onecx-admin",
-                    "onecx-user"
-                  ],
+                  "roles": ["onecx-admin", "onecx-user"],
                   "children": []
                 },
                 {
@@ -774,10 +754,7 @@
                     "de": "Mandanten",
                     "en": "Tenants"
                   },
-                  "roles": [
-                    "onecx-admin",
-                    "onecx-user"
-                  ],
+                  "roles": ["onecx-admin", "onecx-user"],
                   "children": []
                 }
               ]
@@ -791,10 +768,7 @@
               "external": false,
               "target": "_self",
               "i18n": {},
-              "roles": [
-                "onecx-admin",
-                "onecx-user"
-              ],
+              "roles": ["onecx-admin", "onecx-user"],
               "children": [
                 {
                   "key": "PMM_UR_PERMISSIONS",
@@ -806,10 +780,7 @@
                   "external": false,
                   "target": "_self",
                   "i18n": {},
-                  "roles": [
-                    "onecx-admin",
-                    "onecx-user"
-                  ],
+                  "roles": ["onecx-admin", "onecx-user"],
                   "children": []
                 },
                 {
@@ -822,10 +793,7 @@
                   "external": false,
                   "target": "_self",
                   "i18n": {},
-                  "roles": [
-                    "onecx-admin",
-                    "onecx-user"
-                  ],
+                  "roles": ["onecx-admin", "onecx-user"],
                   "children": []
                 },
                 {
@@ -838,10 +806,7 @@
                   "external": false,
                   "target": "_self",
                   "i18n": {},
-                  "roles": [
-                    "onecx-admin",
-                    "onecx-user"
-                  ],
+                  "roles": ["onecx-admin", "onecx-user"],
                   "children": []
                 }
               ]
@@ -855,10 +820,7 @@
               "external": false,
               "target": "_self",
               "i18n": {},
-              "roles": [
-                "onecx-admin",
-                "onecx-user"
-              ],
+              "roles": ["onecx-admin", "onecx-user"],
               "children": [
                 {
                   "key": "PMM_MISC_WELCOME",
@@ -870,10 +832,7 @@
                   "external": false,
                   "target": "_self",
                   "i18n": {},
-                  "roles": [
-                    "onecx-admin",
-                    "onecx-user"
-                  ],
+                  "roles": ["onecx-admin", "onecx-user"],
                   "children": []
                 },
                 {
@@ -889,10 +848,7 @@
                     "de": "Ankündigungen",
                     "en": "Announcements"
                   },
-                  "roles": [
-                    "onecx-admin",
-                    "onecx-user"
-                  ],
+                  "roles": ["onecx-admin", "onecx-user"],
                   "children": []
                 },
                 {
@@ -908,10 +864,7 @@
                     "de": "Hilfeartikel",
                     "en": "Help Items"
                   },
-                  "roles": [
-                    "onecx-admin",
-                    "onecx-user"
-                  ],
+                  "roles": ["onecx-admin", "onecx-user"],
                   "children": []
                 },
                 {
@@ -924,10 +877,7 @@
                   "external": false,
                   "target": "_self",
                   "i18n": {},
-                  "roles": [
-                    "onecx-admin",
-                    "onecx-user"
-                  ],
+                  "roles": ["onecx-admin", "onecx-user"],
                   "children": []
                 },
                 {
@@ -940,10 +890,7 @@
                   "external": false,
                   "target": "_self",
                   "i18n": {},
-                  "roles": [
-                    "onecx-admin",
-                    "onecx-user"
-                  ],
+                  "roles": ["onecx-admin", "onecx-user"],
                   "children": []
                 },
                 {
@@ -973,10 +920,7 @@
               "external": false,
               "target": "_self",
               "i18n": {},
-              "roles": [
-                "onecx-admin",
-                "onecx-user"
-              ],
+              "roles": ["onecx-admin", "onecx-user"],
               "children": [
                 {
                   "key": "PDT_KEYCLOAK_DEF",
@@ -988,10 +932,7 @@
                   "external": true,
                   "target": "_blank",
                   "i18n": {},
-                  "roles": [
-                    "onecx-admin",
-                    "onecx-user"
-                  ],
+                  "roles": ["onecx-admin", "onecx-user"],
                   "children": []
                 },
                 {
@@ -1004,10 +945,7 @@
                   "external": true,
                   "target": "_blank",
                   "i18n": {},
-                  "roles": [
-                    "onecx-admin",
-                    "onecx-user"
-                  ],
+                  "roles": ["onecx-admin", "onecx-user"],
                   "children": []
                 }
               ]
@@ -1021,10 +959,7 @@
               "external": false,
               "target": "_self",
               "i18n": {},
-              "roles": [
-                "onecx-admin",
-                "onecx-user"
-              ],
+              "roles": ["onecx-admin", "onecx-user"],
               "children": [
                 {
                   "key": "PMM_APPS_PROCESS_LOG",
@@ -1036,10 +971,7 @@
                   "external": false,
                   "target": "_self",
                   "i18n": {},
-                  "roles": [
-                    "onecx-admin",
-                    "onecx-user"
-                  ],
+                  "roles": ["onecx-admin", "onecx-user"],
                   "children": []
                 }
               ]

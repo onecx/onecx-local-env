@@ -17,6 +17,12 @@ GRANT ALL PRIVILEGES ON SCHEMA public TO keycloak_public;
 -- -- ####################
 -- -- ###### ONECX #######
 
+-- -- onecx_ai
+CREATE USER onecx_ai WITH ENCRYPTED PASSWORD 'onecx_ai';
+CREATE DATABASE onecx_ai with owner onecx_ai;
+GRANT ALL PRIVILEGES ON DATABASE onecx_ai TO onecx_ai;
+GRANT ALL PRIVILEGES ON SCHEMA public TO onecx_ai;
+
 -- -- onecx_announcement
 CREATE USER onecx_announcement WITH ENCRYPTED PASSWORD 'onecx_announcement';
 CREATE DATABASE onecx_announcement with owner onecx_announcement;
@@ -28,6 +34,12 @@ CREATE USER onecx_bookmark WITH ENCRYPTED PASSWORD 'onecx_bookmark';
 CREATE DATABASE onecx_bookmark with owner onecx_bookmark;
 GRANT ALL PRIVILEGES ON DATABASE onecx_bookmark TO onecx_bookmark;
 GRANT ALL PRIVILEGES ON SCHEMA public TO onecx_bookmark;
+
+-- -- onecx_chat
+CREATE USER onecx_chat WITH ENCRYPTED PASSWORD 'onecx_chat';
+CREATE DATABASE onecx_chat with owner onecx_chat;
+GRANT ALL PRIVILEGES ON DATABASE onecx_chat TO onecx_chat;
+GRANT ALL PRIVILEGES ON SCHEMA public TO onecx_chat;
 
 -- -- onecx_help
 CREATE USER onecx_help WITH ENCRYPTED PASSWORD 'onecx_help';

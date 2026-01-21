@@ -21,7 +21,7 @@ usage () {
   Usage: $0  [-hsx] [-e <edition>] [-p <profile>]
     -e  Edition, one of [ 'v1', 'v2'], default: 'v2'
     -h  Display this help and exit
-    -p  Profile, one of [ 'all', 'base' ], default: 'base'
+    -p  Profile, one of [ 'all', 'base', 'ai' ], default: 'base'
     -s  Secure authentication enabled, default: not enabled
     -x  Skip imports
   Examples:
@@ -76,8 +76,8 @@ while getopts ":he:p:sx" opt; do
     p ) if [[ "$OPTARG" == -* ]]; then
           printf "${RED}  Missing paramter for option -p${NC}\n"
           usage
-        elif [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
-          printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base' ]${NC}\n"
+        elif [[ "$OPTARG" != "all" && "$OPTARG" != "base" && "$OPTARG" != "ai" ]]; then
+          printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base', 'ai' ]${NC}\n"
           usage
         else
           PROFILE=$OPTARG
@@ -122,7 +122,7 @@ fi
 
 # Using 'docker compose' (v2). If using older docker, change to 'docker-compose'
 ONECX_SECURITY_AUTH_ENABLED=${SECURITY}  ONECX_RS_CONTEXT_TENANT_ID_ENABLED=${SECURITY_TENANT_ID_ENABLED}  \
-    docker compose --profile $PROFILE  up -d
+    docker compose -f versions/$EDITION/compose.yaml --profile $PROFILE  up -d
 
 # Check running shell bff
 shell_is_healthy=`docker inspect --format='{{.State.Health.Status}}'  onecx-shell-bff`

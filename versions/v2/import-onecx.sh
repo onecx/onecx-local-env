@@ -26,7 +26,7 @@ export OLE_HEADER_CT_JSON="Content-Type: application/json"
 ## Check and set import type
 IMPORT_TYPE="base"
 
-if [[ -n "$4" && "$4" =~ ^(all|base|bookmark|assignment|parameter|permission|mfe|ms|product|slot|tenant|theme|welcome|workspace)$ ]]; then
+if [[ -n "$4" && "$4" =~ ^(all|base|ai|bookmark|assignment|parameter|permission|mfe|ms|product|slot|tenant|theme|welcome|workspace)$ ]]; then
   IMPORT_TYPE=$4
 fi
 
@@ -200,6 +200,12 @@ fi
 if [[ "$IMPORT_TYPE" =~ ^(all|bookmark)$ ]]; then
   cd bookmark
   bash ./import-bookmarks.sh "$1" "$2"
+  cd ..
+fi
+
+if [[ "$IMPORT_TYPE" =~ ^(ai)$ ]]; then
+  cd ai
+  bash ./import-ai-data.sh "$1" "$2"
   cd ..
 fi
 

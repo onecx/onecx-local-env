@@ -205,7 +205,7 @@ include::./_onecx-env.adoc[]
 .Environment variable sets defined in Docker Compose
 [%collapsible]
 ====
-link:https://raw.githubusercontent.com/onecx/onecx-local-env/refs/heads/main/versions/v2/docker-compose.yaml[Link to GitHub source file]
+link:https://raw.githubusercontent.com/onecx/onecx-local-env/refs/heads/main/versions/v2/compose.yaml[Link to GitHub source file]
 
 include::./_onecx-env-sets.adoc[]
 ====
