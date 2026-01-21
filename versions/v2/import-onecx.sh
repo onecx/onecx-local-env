@@ -203,7 +203,7 @@ if [[ "$IMPORT_TYPE" =~ ^(all|bookmark)$ ]]; then
   cd ..
 fi
 
-if [[ "$IMPORT_TYPE" =~ ^(all|ai)$ ]]; then
+if [[ "$IMPORT_TYPE" =~ ^(ai)$ ]]; then
   cd ai
   bash ./import-ai-data.sh "$1" "$2"
   cd ..

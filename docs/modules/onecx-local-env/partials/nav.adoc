@@ -16,10 +16,11 @@
 *** xref:onecx-local-env:scripts/setup-truststore.adoc[setup-truststore.sh]
 
 ** Internal
-*** xref:onecx-local-env:internal/utils.adoc[Utilities]
-*** xref:onecx-local-env:internal/onecx-data.adoc[Default Data]
+*** xref:onecx-local-env:internal/onecx-data.adoc[Initial Data]
 *** xref:onecx-local-env:internal/networking.adoc[Networking]
+*** xref:onecx-local-env:internal/profiles.adoc[Compose Profiles]
 *** xref:onecx-local-env:internal/custom-certificates.adoc[Custom Certificates]
+*** xref:onecx-local-env:internal/utils.adoc[Utilities]
 
 ** xref:onecx-local-env:troubleshooting.adoc[Troubleshooting]
 

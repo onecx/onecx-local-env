@@ -22,7 +22,7 @@ usage () {
     -c  Cleanup, remove volumes
     -e  Edition, one of [ 'v1', 'v2'], default: 'v2'
     -h  Display this help and exit
-    -p  Profile, one of [ 'all', 'base' ], default: 'base'
+    -p  Profile, one of [ 'all', 'base', 'ai' ], default: 'base'
   Examples:
     $0              => Standard OneCX setup is stoppend, existing data remains
     $0  -p all -c   => Complete OneCX setup is stopped and all data are removed
@@ -66,8 +66,8 @@ while getopts ":ce:hp:" opt; do
     p ) if [[ "$OPTARG" == -* ]]; then
           printf "${RED}  Missing paramter for option -p${NC}\n"
           usage
-        elif [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
-          printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base' ]${NC}\n"
+        elif [[ "$OPTARG" != "all" && "$OPTARG" != "base" && "$OPTARG" != "ai" ]]; then
+          printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base', 'ai' ]${NC}\n"
           usage
         else
           PROFILE=$OPTARG
@@ -98,7 +98,7 @@ number_of_services=$(($number_of_services -1))
 if [[ $number_of_services == 0 ]]; then
   printf "${CYAN}No running services${NC}\n"
 else
-  docker compose  -f versions/$EDITION/docker-compose.yaml  --profile $PROFILE  down
+  docker compose  -f versions/$EDITION/compose.yaml  --profile $PROFILE  down
 fi
 
 
@@ -127,6 +127,8 @@ if [[ ($number_of_services == 0) && ($CLEANUP == "true") ]]; then
     docker compose down --volumes --remove-orphans              2> /dev/null
     docker volume rm -f ${OLE_DOCKER_COMPOSE_PROJECT}_postgres  2> /dev/null
     docker volume rm -f ${OLE_DOCKER_COMPOSE_PROJECT}_pgadmin   2> /dev/null
+    docker volume rm -f ${OLE_DOCKER_COMPOSE_PROJECT}_traefik   2> /dev/null
+    docker volume rm -f ${OLE_DOCKER_COMPOSE_PROJECT}_ai        2> /dev/null
   fi
 fi
 

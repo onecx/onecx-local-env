@@ -101,7 +101,7 @@ image::scripts/script_setup-truststore.sh_content.png[]
 
 Update your Docker Compose file to mount the truststore and configure Java to use it on the relevant services.
 
-.Docker Compose Snippet
+.Docker Compose Snippet to Mount Truststore (note the password used)
 [source,yaml]
 ----
 services:
@@ -118,4 +118,4 @@ services:
 
 === Step 4: Restart and Verify
 
-. Verify the SSL/TLS connection works by triggering an HTTPS call and confirming no `PKIX path building failed` or any other TLS/SSL error appears.
+Verify the SSL/TLS connection works by triggering an HTTPS call and confirming no `PKIX path building failed` or any other TLS/SSL error appears.

@@ -4,10 +4,14 @@
 name: onecx-local-env
 volumes:
   ai:
-    name: onecx-local-env_onecx-ai-svc
+    name: onecx-local-env_ai
     labels:
-      - "onecx-local-env.volume=onecx-ai-svc"
+      - "onecx-local-env.volume=ai"
       - "com.docker.compose.volume=onecx-ai-svc"
+  traefik:
+    name: onecx-local-env_traefik
+    labels:
+      - "onecx-local-env.volume=traefik"
   postgres:
     name: onecx-local-env_postgres
     labels:
@@ -70,6 +74,7 @@ services:
       - "80:80" # The HTTP port
       - "8082:8080" # The Web UI (enabled by --api)
     volumes:
+      - traefik:/etc/traefik
       - /var/run/docker.sock:/var/run/docker.sock # Traefik can listen to the Docker events
       - ../../init-data/traefik/base/traefik-conf.yml:/etc/traefik/traefik.yml
       - ../../init-data/traefik/active:/etc/traefik/active # location of activated local Microfrontends
@@ -79,6 +84,7 @@ services:
     networks:
       - onecx
     profiles:
+      - ai
       - all
       - base
       - data-import
@@ -108,6 +114,7 @@ services:
     networks:
       - onecx
     profiles:
+      - ai
       - all
       - base
       - data-import
@@ -150,6 +157,7 @@ services:
     networks:
       - onecx
     profiles:
+      - ai
       - all
       - base
       - data-import
@@ -260,10 +268,10 @@ services:
       QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresdb:5432/onecx_ai?sslmode=disable 
       JAVA_TOOL_OPTIONS: >-
         -Djavax.net.ssl.trustStore=/opt/certs/truststore.jks
-        -Djavax.net.ssl.trustStorePassword=changeit
+        -Djavax.net.ssl.trustStorePassword=trustjava
         -Djavax.net.ssl.trustStoreType=JKS
     volumes:
-      - ai:/var/lib/ai
+      - ai:/opt/certs
       - ../../certs/truststore.jks:/opt/certs/truststore.jks:ro
     healthcheck:
       test: curl --head -fsS http://localhost:8080/q/health
@@ -279,8 +287,7 @@ services:
     networks:
       - onecx
     profiles:
-      - all
-      - data-import
+      - ai
 
   onecx-ai-bff:
     image: ${ONECX_AI_BFF}
@@ -302,7 +309,7 @@ services:
     networks:
       - onecx
     profiles:
-      - all
+      - ai
 
   onecx-ai-ui:
     image: ${ONECX_AI_UI}
@@ -312,6 +319,11 @@ services:
       APP_BASE_HREF: /mfe/ai/
       APP_ID: onecx-ai-ui
       PRODUCT_NAME: "onecx-ai"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "-G", "http://localhost:8080"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     depends_on:
       onecx-ai-bff:
         condition: service_healthy
@@ -321,7 +333,7 @@ services:
     networks:
       - onecx
     profiles:
-      - all
+      - ai
 
 
   ########## ONECX BOOKMARK
@@ -414,7 +426,7 @@ services:
     networks:
       - onecx
     profiles:
-      - all
+      - ai
 
   onecx-chat-bff:
     image: ${ONECX_CHAT_BFF}
@@ -436,7 +448,7 @@ services:
     networks:
       - onecx
     profiles:
-      - all
+      - ai
 
   onecx-chat-ui:
     image: ${ONECX_CHAT_UI}
@@ -454,7 +466,7 @@ services:
     networks:
       - onecx
     profiles:
-      - all
+      - ai
 
   ########## ONECX HELP
   onecx-help-svc:
@@ -1259,8 +1271,6 @@ services:
     image: alpine:3
     container_name: waiting-on-profile-data-import
     depends_on:
-      onecx-ai-svc:
-        condition: service_healthy
       onecx-bookmark-svc:
         condition: service_healthy
       onecx-parameter-svc:
@@ -1280,7 +1290,6 @@ services:
     networks:
       - onecx
     profiles:
-      - all
       - data-import
 
   waiting-on-profile-all:
