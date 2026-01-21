@@ -7,8 +7,7 @@ endif::[]
 
 The *check-images.sh* script is used to list local Docker images with version information. It can be run from the root directory of the *onecx-local-env* repository.
 
-Here is the command to list all Docker images (without any filter).
-
+.Command to list all Docker images (without any filter).
 [source,bash]
 ----
 ./check-images.sh

@@ -1244,7 +1244,12 @@ services:
       - all
       - base
 
-  ########## DUMMY service to ensure all depended services are running
+########################################
+#########   DUMMY service   ############
+########################################
+# Ensure all depended services are running
+
+  # Used to ensure that the essential services are running
   waiting-on-profile-base:
     image: alpine:3
     container_name: waiting-on-profile-base
@@ -1264,7 +1269,7 @@ services:
     profiles:
       - base
 
-  # internal used to ensure that all services used by imports are running
+  # Internal used to ensure that all services used by imports are running
   waiting-on-profile-data-import:
     image: alpine:3
     container_name: waiting-on-profile-data-import
@@ -1290,6 +1295,7 @@ services:
     profiles:
       - data-import
 
+  # Used to ensure that all services are running
   waiting-on-profile-all:
     image: alpine:3
     container_name: waiting-on-profile-all

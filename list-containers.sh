@@ -33,6 +33,7 @@ usage_short () {
   Usage: $0  [-hu] [-n <text>]
 USAGE
 }
+
 confirm() {
   read -p "$1 (y/N): " answer
   case "$answer" in

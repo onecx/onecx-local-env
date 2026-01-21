@@ -16,6 +16,7 @@
 *** xref:onecx-local-env:scripts/toggle-mfes.adoc[toggle-mfes.sh]
 *** xref:onecx-local-env:scripts/check-images.adoc[check-images.sh]
 *** xref:onecx-local-env:scripts/update-images.adoc[update-images.sh]
+*** xref:onecx-local-env:scripts/list-containers.adoc[list-containers.sh]
 *** xref:onecx-local-env:scripts/setup-truststore.adoc[setup-truststore.sh]
 
 ** Internal

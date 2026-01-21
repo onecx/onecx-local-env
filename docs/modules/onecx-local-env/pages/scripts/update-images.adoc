@@ -9,8 +9,7 @@ To run a local OneCX instance, Docker images with the latest version are downloa
 
 The *update-images.sh* script is used to renew local Docker images. It can be run from the root directory of the *onecx-local-env* repository.
 
-Here is the command to display the available flags:
-
+.Command to display the available flags:
 [source,bash]
 ----
 ./update-images.sh -h
@@ -32,7 +31,9 @@ docker system prune
 
 
 == Available Flags
-The script accepts several optional flags to customize its behavior. Some flags can be combined. The available flags are:
+The script accepts several optional flags to customize its behavior. Some flags can be combined.
+
+The available flags are:
 
 -c::
 Cleaned up orphaned images (e.g. if they have *<none>* in their name)
