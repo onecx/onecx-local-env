@@ -1,0 +1,53 @@
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
+:imagesdir: ../../images
+
+= List Docker Containers
+
+The *list-containers.sh* script provides an overview of running Docker containers used in the OneCX Local Environment. +
+It displays the container ID, service name, image name, and current status of each container.
+The script can be executed from the root directory of the *onecx-local-env* repository.
+
+.Command to display the available flags
+[source,bash]
+----
+./list-containers.sh -h
+----
+
+
+== Available Flags
+The script accepts several optional flags to customize its behavior. +
+*All options may only be used separately!*
+
+The available flags are:
+
+-h::
+Displays help information about the script and its available flags.
+
+-n <text>::
+Name filter, show only containers which have <text> into container name
+
+-u::
+Show only unhealthy containers
+
+
+== Examples
+
+[#list-containers-name-filter]
+=== List containers with name filter
+The Docker which have *theme* in container name are shown.
+
+[source,bash]
+----
+./list-containers.sh  -n theme
+----
+
+[#list-unhealthy-containers]
+=== List unhealthy containers
+The Docker which have *unhealthy* status are shown.
+
+[source,bash]
+----
+./list-containers.sh  -u
+----

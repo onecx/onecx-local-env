@@ -74,7 +74,7 @@ services:
       - "80:80" # The HTTP port
       - "8082:8080" # The Web UI (enabled by --api)
     volumes:
-      - traefik:/etc/traefik
+      - traefik:/etc/traefik/data
       - /var/run/docker.sock:/var/run/docker.sock # Traefik can listen to the Docker events
       - ../../init-data/traefik/base/traefik-conf.yml:/etc/traefik/traefik.yml
       - ../../init-data/traefik/active:/etc/traefik/active # location of activated local Microfrontends
@@ -84,7 +84,6 @@ services:
     networks:
       - onecx
     profiles:
-      - ai
       - all
       - base
       - data-import
@@ -114,7 +113,6 @@ services:
     networks:
       - onecx
     profiles:
-      - ai
       - all
       - base
       - data-import
@@ -157,7 +155,6 @@ services:
     networks:
       - onecx
     profiles:
-      - ai
       - all
       - base
       - data-import
@@ -191,6 +188,85 @@ services:
   ########################################
   ########### OneCX Products #############
   ########################################
+
+  ########## ONECX AI
+  onecx-ai-svc:
+    image: ${ONECX_AI_SVC}
+    container_name: onecx-ai-svc
+    environment:
+      <<: *svc_multi_tenancy
+      QUARKUS_DATASOURCE_USERNAME: onecx_ai
+      QUARKUS_DATASOURCE_PASSWORD: onecx_ai
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresdb:5432/onecx_ai?sslmode=disable 
+      JAVA_TOOL_OPTIONS: >-
+        -Djavax.net.ssl.trustStore=/opt/certs/truststore.jks
+        -Djavax.net.ssl.trustStorePassword=trustjava
+        -Djavax.net.ssl.trustStoreType=JKS
+    volumes:
+      - ai:/opt/certs
+      - ../../certs/truststore.jks:/opt/certs/truststore.jks:ro
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-ai-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-ai-svc.rule=Host(`onecx-ai-svc`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+
+  onecx-ai-bff:
+    image: ${ONECX_AI_BFF}
+    container_name: onecx-ai-bff
+    environment:
+      <<: *bff_environment
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-ai"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-ai-svc:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-ai-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-ai-bff.rule=Host(`onecx-ai-bff`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+
+  onecx-ai-ui:
+    image: ${ONECX_AI_UI}
+    container_name: onecx-ai-ui
+    environment:
+      BFF_URL: http://onecx-ai-bff:8080/
+      APP_BASE_HREF: /mfe/ai/
+      APP_ID: onecx-ai-ui
+      PRODUCT_NAME: "onecx-ai"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "-G", "http://localhost:8080"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-ai-bff:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-ai-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-ai-ui.rule=Host(`local-proxy`) && PathPrefix(`/mfe/ai/`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+
 
   ########## ONECX ANNOUNCEMENT
   onecx-announcement-svc:
@@ -256,84 +332,6 @@ services:
       - onecx
     profiles:
       - all
-
-  ########## ONECX AI
-  onecx-ai-svc:
-    image: ${ONECX_AI_SVC}
-    container_name: onecx-ai-svc
-    environment:
-      <<: *svc_multi_tenancy
-      QUARKUS_DATASOURCE_USERNAME: onecx_ai
-      QUARKUS_DATASOURCE_PASSWORD: onecx_ai
-      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresdb:5432/onecx_ai?sslmode=disable 
-      JAVA_TOOL_OPTIONS: >-
-        -Djavax.net.ssl.trustStore=/opt/certs/truststore.jks
-        -Djavax.net.ssl.trustStorePassword=trustjava
-        -Djavax.net.ssl.trustStoreType=JKS
-    volumes:
-      - ai:/opt/certs
-      - ../../certs/truststore.jks:/opt/certs/truststore.jks:ro
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      keycloak-app:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-ai-svc.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-ai-svc.rule=Host(`onecx-ai-svc`)"
-    networks:
-      - onecx
-    profiles:
-      - ai
-
-  onecx-ai-bff:
-    image: ${ONECX_AI_BFF}
-    container_name: onecx-ai-bff
-    environment:
-      <<: *bff_environment
-      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-ai"
-    healthcheck:
-      test: curl --head -fsS http://localhost:8080/q/health
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      onecx-ai-svc:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-ai-bff.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-ai-bff.rule=Host(`onecx-ai-bff`)"
-    networks:
-      - onecx
-    profiles:
-      - ai
-
-  onecx-ai-ui:
-    image: ${ONECX_AI_UI}
-    container_name: onecx-ai-ui
-    environment:
-      BFF_URL: http://onecx-ai-bff:8080/
-      APP_BASE_HREF: /mfe/ai/
-      APP_ID: onecx-ai-ui
-      PRODUCT_NAME: "onecx-ai"
-    healthcheck:
-      test: ["CMD", "curl", "--fail", "-G", "http://localhost:8080"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      onecx-ai-bff:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-ai-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-ai-ui.rule=Host(`local-proxy`) && PathPrefix(`/mfe/ai/`)"
-    networks:
-      - onecx
-    profiles:
-      - ai
 
 
   ########## ONECX BOOKMARK
@@ -426,7 +424,7 @@ services:
     networks:
       - onecx
     profiles:
-      - ai
+      - all
 
   onecx-chat-bff:
     image: ${ONECX_CHAT_BFF}
@@ -448,7 +446,7 @@ services:
     networks:
       - onecx
     profiles:
-      - ai
+      - all
 
   onecx-chat-ui:
     image: ${ONECX_CHAT_UI}
@@ -466,7 +464,7 @@ services:
     networks:
       - onecx
     profiles:
-      - ai
+      - all
 
   ########## ONECX HELP
   onecx-help-svc:
@@ -1246,7 +1244,12 @@ services:
       - all
       - base
 
-  ########## DUMMY service to ensure all depended services are running
+########################################
+#########   DUMMY service   ############
+########################################
+# Ensure all depended services are running
+
+  # Used to ensure that the essential services are running
   waiting-on-profile-base:
     image: alpine:3
     container_name: waiting-on-profile-base
@@ -1266,7 +1269,7 @@ services:
     profiles:
       - base
 
-  # internal used to ensure that all services used by imports are running
+  # Internal used to ensure that all services used by imports are running
   waiting-on-profile-data-import:
     image: alpine:3
     container_name: waiting-on-profile-data-import
@@ -1292,6 +1295,7 @@ services:
     profiles:
       - data-import
 
+  # Used to ensure that all services are running
   waiting-on-profile-all:
     image: alpine:3
     container_name: waiting-on-profile-all

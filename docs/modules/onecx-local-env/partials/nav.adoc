@@ -2,6 +2,7 @@
 * xref:onecx-local-env:index.adoc[Local Environment]
 ** xref:onecx-local-env:setup.adoc[Setting up]
 ** xref:onecx-local-env:run-onecx.adoc[Run OneCX]
+** xref:onecx-local-env:ai-chat.adoc[AI Chat]
 
 ** xref:onecx-local-env:extend/extend.adoc[Extend OneCX]
 *** xref:onecx-local-env:extend/local-mfe.adoc[Integrate Microfrontend]
@@ -15,6 +16,7 @@
 *** xref:onecx-local-env:scripts/toggle-mfes.adoc[toggle-mfes.sh]
 *** xref:onecx-local-env:scripts/check-images.adoc[check-images.sh]
 *** xref:onecx-local-env:scripts/update-images.adoc[update-images.sh]
+*** xref:onecx-local-env:scripts/list-containers.adoc[list-containers.sh]
 *** xref:onecx-local-env:scripts/setup-truststore.adoc[setup-truststore.sh]
 
 ** Internal

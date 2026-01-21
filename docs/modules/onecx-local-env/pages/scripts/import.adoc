@@ -7,8 +7,9 @@ endif::[]
 
 To operate a local OneCX, some services require initial data, e.g. the theme, the admin workspace, permissions, etc.
 
-The *import-onecx.sh* script is used to import data needed by the OneCX services. It can be run from the root directory of the *onecx-local-env* repository. Here the command for importing the data for the essential services:
+The *import-onecx.sh* script is used to import data needed by the OneCX services. It can be run from the root directory of the *onecx-local-env* repository.
 
+.Command for importing the data for the essential services:
 [source,bash]
 ----
 ./import-onecx.sh
@@ -30,7 +31,7 @@ The script accepts several optional flags to customize its behavior. Some flags 
 Specify a set of data to be imported (all, base) or a specific data type like workspace, theme etc.
   * base (Default).
   * all
-  * one of [ bookmark, assignment, parameter, permission, mfe, ms, product, slot, tenant theme, welcome, workspace]
+  * one of [ ai, bookmark, assignment, parameter, permission, mfe, ms, product, slot, tenant theme, welcome, workspace]
 
 -e::
 The edition of OneCX. This must match the edition that was used to start the environment. Supported editions are:
@@ -66,6 +67,7 @@ When used, Docker does not check whether services require authentication. Please
 
 == Examples
 
+[#import-all-data]
 === Import ALL data
 Import all available OneCX data as:
 
@@ -79,7 +81,7 @@ Before the import, a check is performed to ensure that all required services are
 ./import-onecx.sh -d all
 ----
 
-
+[#import-specific-data]
 === Import specific data, skip check
 Only workspace data is imported. If the data are tenant-specific data then the default tenant is used (use flag *-t* for a different tenant).
 
@@ -91,6 +93,7 @@ With *-x* running services are not checked beforehand. If a required service is 
 ----
 
 
+[#import-tenant-data]
 === Import Tenant data
 Import essential OneCX data as:
 * Non-tenant specific data

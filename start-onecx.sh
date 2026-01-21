@@ -21,7 +21,7 @@ usage () {
   Usage: $0  [-hsx] [-e <edition>] [-p <profile>]
     -e  Edition, one of [ 'v1', 'v2'], default: 'v2'
     -h  Display this help and exit
-    -p  Profile, one of [ 'all', 'base', 'ai' ], default: 'base'
+    -p  Profile, one of [ 'all', 'base' ], default: 'base'
     -s  Secure authentication enabled, default: not enabled
     -x  Skip imports
   Examples:
@@ -76,8 +76,8 @@ while getopts ":he:p:sx" opt; do
     p ) if [[ "$OPTARG" == -* ]]; then
           printf "${RED}  Missing paramter for option -p${NC}\n"
           usage
-        elif [[ "$OPTARG" != "all" && "$OPTARG" != "base" && "$OPTARG" != "ai" ]]; then
-          printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base', 'ai' ]${NC}\n"
+        elif [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
+          printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base' ]${NC}\n"
           usage
         else
           PROFILE=$OPTARG

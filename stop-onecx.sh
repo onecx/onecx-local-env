@@ -22,7 +22,7 @@ usage () {
     -c  Cleanup, remove volumes
     -e  Edition, one of [ 'v1', 'v2'], default: 'v2'
     -h  Display this help and exit
-    -p  Profile, one of [ 'all', 'base', 'ai' ], default: 'base'
+    -p  Profile, one of [ 'all', 'base' ], default: 'base'
   Examples:
     $0              => Standard OneCX setup is stoppend, existing data remains
     $0  -p all -c   => Complete OneCX setup is stopped and all data are removed
@@ -66,8 +66,8 @@ while getopts ":ce:hp:" opt; do
     p ) if [[ "$OPTARG" == -* ]]; then
           printf "${RED}  Missing paramter for option -p${NC}\n"
           usage
-        elif [[ "$OPTARG" != "all" && "$OPTARG" != "base" && "$OPTARG" != "ai" ]]; then
-          printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base', 'ai' ]${NC}\n"
+        elif [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
+          printf "${RED}  Inacceptable Docker profile, should be one of [ 'all', 'base' ]${NC}\n"
           usage
         else
           PROFILE=$OPTARG
