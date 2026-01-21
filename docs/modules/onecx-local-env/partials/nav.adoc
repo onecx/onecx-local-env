@@ -13,12 +13,13 @@
 *** xref:onecx-local-env:scripts/toggle-mfes.adoc[toggle-mfes.sh]
 *** xref:onecx-local-env:scripts/check-images.adoc[check-images.sh]
 *** xref:onecx-local-env:scripts/update-images.adoc[update-images.sh]
+*** xref:onecx-local-env:scripts/setup-truststore.adoc[setup-truststore.sh]
 
 ** Internal
 *** xref:onecx-local-env:internal/utils.adoc[Utilities]
 *** xref:onecx-local-env:internal/onecx-data.adoc[Default Data]
 *** xref:onecx-local-env:internal/networking.adoc[Networking]
-*** xref:onecx-local-env:internal/custom-certificates.adoc[Custom SSL Certificates in OneCX]
+*** xref:onecx-local-env:internal/custom-certificates.adoc[Custom Certificates]
 
 ** xref:onecx-local-env:troubleshooting.adoc[Troubleshooting]
 

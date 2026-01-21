@@ -1,10 +1,17 @@
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
+:imagesdir: ../../images
 
 = Adding Custom Certificates for Java Applications in Docker
 
-== Why You Might Need Custom Certificates
+The use of custom certificates solves issues with Java applications running inside Docker containers that need to communicate over HTTPS with services using non-standard or self-signed certificates.
+
+== Why is this about?
 
 When running Java applications inside Docker containers, HTTPS connections often fail with errors like:
 
+.Excerpt from Docker logs of the affected Java service
 [source,text]
 ----
 PKIX path building failed: unable to find valid certification path to requested target
@@ -12,79 +19,89 @@ PKIX path building failed: unable to find valid certification path to requested 
 
 === Common Use Cases
 
-* **Corporate TLS Interception**: Tools like Zscaler or internal proxies re-sign certificates with a corporate CA.
-* **Self-Signed Certificates**: Internal services using self-signed certs.
-* **Private PKI**: Enterprise environments with custom root or intermediate CAs.
+Corporate TLS Interception:: Tools like Zscaler or internal proxies re-sign certificates with a corporate CA.
+Self-Signed Certificates:: Internal services using self-signed certs.
+Private PKI:: Enterprise environments with custom root or intermediate CAs.
 
-=== Problems If Not Fixed
+=== Problems that arise
 
 * Outbound HTTPS calls fail (e.g., REST APIs, OAuth, external services).
 * Java throws any TLS/SSL exception e.g.  `SunCertPathBuilderException`.
 
-== How to Add Custom Certificates
 
-=== Step 1: Export the Certificate
+== Add Custom Certificates
 
-You need the **root CA** (and sometimes intermediate CA) that signs the server certificate.
+To resolve these issues, you need to add the required certificate to a Java Truststore used by your Java applications running inside Docker containers.
 
-==== Option A: From Browser
+=== Get the Certificate
 
-. Open the HTTPS site in Chrome/Edge/Firefox
-. Click the padlock icon → *Certificate* → *Details*
-. Export the **root** and **intermediate** certificates as Base-64 encoded `.crt` files
+Identify and export the necessary certificate from the target HTTPS service. +
+Open the HTTPS website (where the error occurs) in your browser (here exemplarily Chrome).
 
-==== Option B: From Windows Certificate Manager
+Click the icon left on URL, then::
 
-. Run `certmgr.msc`
-. Navigate to:
-  ** *Trusted Root Certification Authorities* → export the root CA
-  ** *Intermediate Certification Authorities* → export the issuing CA
-. Save as `.crt` files (Base-64 encoded)
+. Click on *Connection is secure*
+. Click on *Certificate is valid*
+. Navigate to *Details* tab
+  .. Select the certificate with the target URL in *Certificate Hierarchy*
+  .. Click on *Export* and save as Base-64 encoded `.crt` file.
 
-==== Placement
+[NOTE]
+====
+Alternatively, you can 
 
-Place the exported files in the certs folder inside of onecx-local-env:
+* export the certificate using command line tools like `openssl` or `curl` or
+* use system-specific certificate management tools to export root and intermediate CAs.
+====
 
-[source]
+
+.Place the exported files in the *certs* folder inside of *onecx-local-env*
+[source, text]
 ----
 certs/
-├── YourCertificate.crt
-└── YourCertificate2.crt
+  ├── YourCertificate.crt
+  └── YourCertificate2.crt
 ----
 
 === Step 2: Create a Java Truststore
 
 Use the provided setup script to create or update a truststore with all your certificates.
-
 The script automatically imports all `.crt` and `.pem` files from the specified directory.
+In some cases, you will prompt to enter the root password for cleanup of existing entries.
 
+.Setup Truststore with password "trustjava"
 [source,bash]
 ----
 ./setup-truststore.sh
 ----
 
-This generates:
-
+.Result: Truststore location
 [source]
 ----
 certs/truststore.jks
 ----
 
-==== Verify the Truststore Contents
+=== Verify the Truststore Contents
 
-To list all imported certificates, step inside the certs directory and run:
+Optionally, you can check the contents of the truststore by listing all the certificates it contains using the following command:
 
+.Verify Truststore Contents
 [source,bash]
 ----
-keytool -list -keystore truststore.jks -storepass changeit
+keytool -list -keystore ./certs/truststore.jks -storepass trustjava
 ----
 
 Expected output showing all imported certificates with their aliases.
 
+.Example Output with certificate for ollama.one-cx.org
+image::scripts/script_setup-truststore.sh_content.png[]
+
+
 === Step 3: Mount Truststore in Docker Compose
 
-Update your `docker-compose.yml` to mount the truststore and configure Java to use it.
+Update your Docker Compose file to mount the truststore and configure Java to use it on the relevant services.
 
+.Docker Compose Snippet
 [source,yaml]
 ----
 services:
@@ -95,7 +112,7 @@ services:
     environment:
       JAVA_TOOL_OPTIONS: >-
         -Djavax.net.ssl.trustStore=/opt/certs/truststore.jks
-        -Djavax.net.ssl.trustStorePassword=changeit
+        -Djavax.net.ssl.trustStorePassword=trustjava
         -Djavax.net.ssl.trustStoreType=JKS
 ----
 

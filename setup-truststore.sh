@@ -1,35 +1,52 @@
 #!/bin/bash
+#
+# Setup Java Truststore with custom certificates
+#
+# For macOS Bash compatibility:
+#   * Use printf instead of echo -e
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
+
 set -euo pipefail
 
-CERT_DIR=${1:-certs}                     # directory containing PEM certs (default: ./certs)
-OUT_DIR=${2:-certs}                      # output dir for truststore (default: ./certs)
-STORE_PASS=${3:-changeit}                # truststore password (default: changeit)
+CERT_DIR=./certs               # Directory containing PEM certs
+STORE_PASS="trustjava"         # Password for the Java Truststore
+TRUSTSTORE_PATH="$CERT_DIR/truststore.jks"
 
+printf "${CYAN}Setup Java Truststore with custom certificates in ${GREEN}$CERT_DIR${NC}\n"
+
+# Check if directory exists
 if [[ ! -d "$CERT_DIR" ]]; then
-  echo "❌ Certificate directory '$CERT_DIR' not found. Provide the path, e.g.:"
-  echo "   ./setup-truststore.sh /path/to/certs"
+  printf "  ❌ Certificate directory '$CERT_DIR' not found. Please create and store your certificates there.\n"
   exit 1
 fi
 
 # Check if there are any certificates
 cert_count=$(find "$CERT_DIR" -maxdepth 1 -type f \( -name "*.crt" -o -name "*.pem" \) | wc -l)
 if [[ $cert_count -eq 0 ]]; then
-  echo "❌ No certificate files (*.crt or *.pem) found in '$CERT_DIR'"
+  printf "  ❌ No certificate files (*.crt or *.pem) found in '$CERT_DIR'\n"
   exit 1
 fi
 
-mkdir -p "$OUT_DIR"
 
-TRUSTSTORE_PATH="$OUT_DIR/truststore.jks"
-
-# Create new truststore or remove existing one
+# Cleanup: removing existing Truststore (as file)
 if [[ -f "$TRUSTSTORE_PATH" ]]; then
-  echo "ℹ️ Removing existing truststore at $TRUSTSTORE_PATH"
+  printf "  ℹ️ Removing existing truststore at $TRUSTSTORE_PATH\n"
   rm -f "$TRUSTSTORE_PATH"
 fi
 
-echo "✅ Creating truststore at $TRUSTSTORE_PATH"
+# Cleanup: removing existing Truststore (as directory, in case of misconfiguration)
+if [[ -d "$TRUSTSTORE_PATH" ]]; then
+  printf "  ℹ️ Removing existing truststore at $TRUSTSTORE_PATH\n"
+  sudo rm -rf "$TRUSTSTORE_PATH"
+fi
 
+
+printf "  ✅ Creating truststore at ${GREEN}$TRUSTSTORE_PATH${NC} and import certificates\n"
 # Import all certificates
 while IFS= read -r cert_file; do
   filename=$(basename "$cert_file")

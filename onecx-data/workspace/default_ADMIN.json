@@ -311,6 +311,11 @@
           "name": "onecx-shell-header.end",
           "components": [
             {
+              "productName": "onecx-chat",
+              "appId": "onecx-chat-ui",
+              "name": "./OneCXChatPanelComponent"
+            },
+            {
               "productName": "onecx-help",
               "appId": "onecx-help-ui",
               "name": "./OneCXHelpItemEditorComponent"
@@ -329,11 +334,6 @@
               "productName": "onecx-workspace",
               "appId": "onecx-workspace-ui",
               "name": "./OneCXUserAvatarMenuComponent"
-            },
-            {
-              "productName": "onecx-chat",
-              "appId": "onecx-chat-ui",
-              "name": "./OneCXChatPanelComponent"
             }
           ]
         },

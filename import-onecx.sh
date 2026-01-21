@@ -17,7 +17,7 @@ printf "${CYAN}Import data for OneCX Local Environment${NC}\n"
 usage () {
   cat <<USAGE
   Usage: $0  [-hsv] [-d <import data type>] [-t <tenant>] [-e <edition>]
-    -d  Data type, one of [ all, base, bookmark, assignment, parameter, permission, mfe, ms, product, slot, tenant theme, welcome, workspace], base is default
+    -d  Data type, one of [ all, base, ai, bookmark, assignment, parameter, permission, mfe, ms, product, slot, tenant theme, welcome, workspace], base is default
     -e  Edition, one of [ 'v1', 'v2' ], default: 'v2'
     -h  Display this help and exit
     -s  Secure authentication enabled, default: not enabled (value is inherited from start-onecx.sh)
@@ -69,7 +69,7 @@ while getopts ":hd:svt:e:x" opt; do
     d ) if [[ "$OPTARG" == -* ]]; then
           printf "${RED}  Missing paramter for option -d${NC}\n"
           usage
-        elif [[ ! "$OPTARG" =~ ^(all|base|assignment|bookmark|parameter|permission|mfe|ms|product|slot|tenant|theme|welcome|workspace|ai)$ ]]; then
+        elif [[ ! "$OPTARG" =~ ^(all|base|ai|assignment|bookmark|parameter|permission|mfe|ms|product|slot|tenant|theme|welcome|workspace|ai)$ ]]; then
           printf "${RED}  Unknown data type: $OPTARG${NC}\n"
           usage
         else
