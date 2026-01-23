@@ -37,7 +37,7 @@ APIKEY_MSG=""
 APIKEY_SOURCE=""
 if [[ -z "$SKIP_MSG" ]]; then
   if [[ -f "$api_key_file" ]]; then
-    apiKey=$(cat "$api_key_file" | tr -d '[:space:]')
+    apiKey=$(cat "$api_key_file" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
     if [[ -n "$apiKey" ]]; then
       APIKEY_SOURCE="file"
     else
