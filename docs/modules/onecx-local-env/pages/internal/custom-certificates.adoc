@@ -33,7 +33,7 @@ Private PKI:: Enterprise environments with custom root or intermediate CAs.
 
 To resolve these issues, you need to add the required certificate to a Java Truststore used by your Java applications running inside Docker containers.
 
-=== Get the Certificate
+=== 1. Get the Certificate
 
 Identify and export the necessary certificate from the target HTTPS service. +
 Open the HTTPS website (where the error occurs) in your browser (here exemplarily Chrome).
@@ -63,7 +63,7 @@ certs/
   └── YourCertificate2.crt
 ----
 
-=== Step 2: Create a Java Truststore
+=== 2. Create a Java Truststore
 
 Use the provided setup script to create or update a truststore with all your certificates.
 The script automatically imports all `.crt` and `.pem` files from the specified directory.
@@ -81,7 +81,7 @@ In some cases, you will prompt to enter the root password for cleanup of existin
 certs/truststore.jks
 ----
 
-=== Verify the Truststore Contents
+=== 3. Verify the Truststore Contents
 
 Optionally, you can check the contents of the truststore by listing all the certificates it contains using the following command:
 
@@ -97,7 +97,7 @@ Expected output showing all imported certificates with their aliases.
 image::scripts/script_setup-truststore.sh_content.png[]
 
 
-=== Step 3: Mount Truststore in Docker Compose
+=== 4. Use Truststore in AI Service
 
 Update your Docker Compose file to mount the truststore and configure Java to use it on the relevant services.
 
@@ -116,6 +116,6 @@ services:
         -Djavax.net.ssl.trustStoreType=JKS
 ----
 
-=== Step 4: Restart and Verify
+=== 5. Restart and Verify
 
 Verify the SSL/TLS connection works by triggering an HTTPS call and confirming no `PKIX path building failed` or any other TLS/SSL error appears.

@@ -1,0 +1,79 @@
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
+:imagesdir: ../images
+
+= Use AI in OneCX Local Environment
+
+The OneCX Local Environment supports AI Chat functionalities, allowing users to interact with AI-powered features for enhanced user experiences. +
+This document provides an overview of how to enable and use AI Chat.
+
+== Prerequisites
+Before using AI Chat, ensure you have the following prerequisites in place:
+
+Environment Set up::
+A working OneCX Local Environment set up. +
+If you haven't done this yet, follow the instructions in the xref:./setup.adoc[Setting up] documentation.
+
+AI Provider Credentials::
+To access the Ollama AI service, you need a valid certificate. Follow the instructions in the documentation xref:./internal/custom-certificates.adoc[Custom Certificates].
+
+API Key::
+This key is required to access AI functionalities within OneCX. You can obtain an API Key from your AI service provider. +
+At the moment, only this AI provider is used: `ollama.one-cx.org`.
+
+Start Environment::
+A started OneCX Local Environment with the *all* profile enabled. +
+Refer to the xref:./scripts/start.adoc#start-all-services[Start OneCX with all profile] documentation for instructions on starting the environment with the appropriate profile.
+
+
+== Set up AI Functionalities
+To prepare the AI Functionalities, follow these steps:
+
+. Prepare trust store for Ollama +
+  Set up the trust store with the necessary certificates for secure communication with the Ollama AI service:
++
+[source,bash]
+----
+./setup-truststore.sh
+----
+
+. Start OneCX with *all* profile +
+  During the startup process, the necessary AI services will be started.
++
+[source,bash]
+----
+./start-onecx.sh -p all
+----
+
+. Import AI data using the following script. You will be prompted to enter your *API Key* (see TIP below):
++
+[source,bash]
+----
+./import-onecx.sh -x -d ai
+----
++
+.Import AI data
+image::scripts/script_import-onecx.sh_ai.png[Import AI Data]
+
+. Verify that the AI services are running correctly by checking the logs of the relevant Docker containers.
+
+[TIP]
+====
+Due to the API Key being sensitive information, it is not stored in the OneCX Local Environment by default. +
+You can provide the API Key in a file named *api_key* within the root directory of the `onecx-local-env`. It is automatically read in during the AI ​​data import process (step 2 above)..
+====
+
+
+== Using AI Chat
+Once AI Functionalities are prepared, you can start using AI Chat within your OneCX applications. +
+
+Click on the *Open AI Chat* button in the top bar to open the AI Chat panel.
+
+.Open AI Chat
+image::ai/onecx-ai_topbar-action.png[Open AI Chat]
+
+You can then start interacting with the AI by typing your queries or messages in the chat panel.
+
+.First AI Contact
+image::ai/onecx-ai_chat-panel-hallo.png[First AI Contact]
