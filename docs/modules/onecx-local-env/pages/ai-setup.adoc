@@ -15,8 +15,8 @@ Environment Set up::
 A working OneCX Local Environment set up. +
 If you haven't done this yet, follow the instructions in the xref:./setup.adoc[Setting up] documentation.
 
-AI Provider Credentials::
-To access the Ollama AI service, you need a valid certificate. Follow the instructions in the documentation xref:./internal/custom-certificates.adoc[Custom Certificates].
+AI Provider Credentials (optional)::
+Depends on your IT landscape, you need a valid certificate for the AI service. Follow the instructions in the documentation xref:./internal/custom-certificates.adoc[Custom Certificates].
 
 API Key::
 This key is required to access AI functionalities within OneCX. You can obtain an API Key from your AI service provider. +
@@ -30,8 +30,8 @@ Refer to the xref:./scripts/start.adoc#start-all-services[Start OneCX with all p
 == Set up AI Functionalities
 To prepare the AI Functionalities, follow these steps:
 
-. Prepare trust store for Ollama +
-  Set up the trust store with the necessary certificates for secure communication with the Ollama AI service:
+. Prepare trust store +
+  Set up the trust store with the necessary certificates for secure communication with the AI service:
 +
 [source,bash]
 ----
