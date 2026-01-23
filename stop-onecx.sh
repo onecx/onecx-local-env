@@ -111,7 +111,7 @@ if [[ $number_of_services != 0 ]]; then
     cannot_remove_text=" ...cannot remove volumes and network - use 'all' profile to remove all services"
   fi
   printf "${CYAN}Remaining running services: $number_of_services${NC}$cannot_remove_text\n"
-  ./list-containers.sh
+  ./list-containers.sh -n onecx
 fi
 
 

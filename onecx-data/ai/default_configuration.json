@@ -3,7 +3,7 @@
   "llmSystemMessage": "system message",
   "llmProvider": {
     "name": "ollama",
-    "description": "Ollama LLM service",
+    "description": "OneCX Ollama LLM service",
     "llmUrl": "https://ollama.one-cx.org",
     "modelName": "llama2",
     "modelVersion": "latest",

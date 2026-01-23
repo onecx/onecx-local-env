@@ -138,10 +138,11 @@ if [[ $shell_is_healthy == "healthy" && $IMPORT == "yes" ]]; then
   else
     printf "${RED}Error: import-onecx.sh not found.${NC}\n"
   fi
-else
-  # Stop profile helper service, ignoring any error message
-  docker compose down waiting-on-profile-$PROFILE > /dev/null 2>&1
 fi
+
+#################################################################
+## remove profile helper service, ignoring any error message
+ocker compose down waiting-on-profile-$PROFILE > /dev/null 2>&1
 
 
 #################################################################

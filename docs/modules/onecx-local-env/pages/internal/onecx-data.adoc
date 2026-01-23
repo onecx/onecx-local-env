@@ -46,6 +46,10 @@ This is an overview of the data and how its organized.
 | Workspaces
 | xref:documentation:onecx-workspace:page$index.adoc[Workspace Management]
 | Customizing the working areas for users
+
+| AI Chat
+| xref:documentation:onecx-workspace:page$index.adoc[Workspace Management]
+| Configuration and data for AI Chat functionalities
 |===
 
 
