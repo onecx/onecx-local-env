@@ -92,7 +92,7 @@ elif [ "$SHOW_UNHEALTHY" = true ]; then
   printf "%s\n" "$header"
   printf "%s\n" "$cmd" | grep -i unhealthy
 else
-  confirm "No name filter specified. Do you want to list all containers?"
+  confirm "  No name filter specified. Do you want to list all containers?"
   printf "%s\n" "$header"
   printf "%s\n" "$cmd"
 fi

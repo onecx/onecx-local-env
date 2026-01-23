@@ -144,7 +144,7 @@ if [[ "$CHECKING_SERVICES" == "true" ]]; then
   # Using 'docker compose' (v2). If using older docker, change to 'docker-compose'
   # Docker services are restartet only if some setting was different (e.g. security)
   ONECX_SECURITY_AUTH_ENABLED=${SECURITY}  ONECX_RS_CONTEXT_TENANT_ID_ENABLED=${SECURITY_TENANT_ID_ENABLED}  \
-    docker compose --profile $PROFILE  up -d  > /dev/null 2>&1
+    docker compose --profile $PROFILE  up -d  >/dev/null 2>&1
 fi
   
 #################################################################
@@ -161,8 +161,6 @@ chmod +x "$IMPORT_SCRIPT"
 
 #################################################################
 ## remove profile helper service, ignoring any error message
-if [ -n $PROFILE ]; then
-  docker compose down  waiting-on-profile-$PROFILE  > /dev/null 2>&1
-fi
+docker compose down  waiting-on-profile-$PROFILE  >/dev/null 2>&1
 
 printf "\n"
