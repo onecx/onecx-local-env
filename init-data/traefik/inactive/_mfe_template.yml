@@ -6,7 +6,7 @@ http:
   routers:
     local_{{MFE_NAME}}:
       # path prefix as used for MFE registration in product store
-      rule: "Host(`local-proxy`) && PathPrefix(`{{MFE_PATH}}`)"
+      rule: "Host(`proxy.localhost`) && PathPrefix(`{{MFE_PATH}}`)"
       service: local_{{MFE_NAME}}
       # higher prio than calculated based on rule length (traefik standard)
       priority: 323
