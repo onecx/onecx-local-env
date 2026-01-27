@@ -47,7 +47,13 @@ Command for integrating the local app running on http://localhost:6021::
 ----
 
 .Successful Integration
-image::screenshot_successful-activate-local-mfe.png[]
+image::extend/activate_my-app_6021.png[]
+
+.Access the local Microfrontend in Browser
+[source,text]
+----
+http://local-proxy/mfe/my-app/remoteEntry.js
+----
 
 .Traefik Configuration located in `init_data/traefik/active`
 [%collapsible%closed]
