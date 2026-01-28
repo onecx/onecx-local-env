@@ -88,7 +88,7 @@ labels:
 ----
 labels:
   - "traefik.http.services.<ui-service-name>.loadbalancer.server.port=8080"
-  - "traefik.http.routers.<ui-service-name>.rule=Host(`local-proxy`) && PathPrefix(`/<app-path>/`)"
+  - "traefik.http.routers.<ui-service-name>.rule=Host(`proxy.localhost`) && PathPrefix(`/<app-path>/`)"
 ----
 
 
@@ -105,7 +105,7 @@ Host(`service-name`)
 .Frontend Applications (UI)
 [source,yaml]
 ----
-Host(`local-proxy`) && PathPrefix(`/app-path/`)
+Host(`proxy.localhost`) && PathPrefix(`/app-path/`)
 ----
 
 === Port Mapping Strategy
@@ -255,18 +255,18 @@ The following access patterns illustrate how different components of the OneCX L
 
 OneCX Shell::    Main Entry Point
 Shell UI::
-  `http://local-proxy/onecx-shell/admin` +
+  `http://proxy.localhost/onecx-shell/admin` +
   All OneCX application UIs are accessed through the Shell workspace navigation
 Workspace Management UI via Shell::
-  `http://local-proxy/onecx-shell/admin/workspace`
+  `http://proxy.localhost/onecx-shell/admin/workspace`
 Workspace Microfrontend::
-  `http://local-proxy/mfe/workspace/`
+  `http://proxy.localhost/mfe/workspace/`
 Workspace BFF::
-  `http://local-proxy/mfe/workspace/bff/`
+  `http://proxy.localhost/mfe/workspace/bff/`
 Workspace Service::
   `http://onecx-workspace-svc:8080/`
 Traefik Routing Rule::  
-  `traefik.http.routers.onecx-workspace-ui.rule=Host(local-proxy) && PathPrefix(/mfe/*workspace*/)`
+  `traefik.http.routers.onecx-workspace-ui.rule=Host(proxy.localhost) && PathPrefix(/mfe/*workspace*/)`
 
 See also the collection of utility services documented in xref:../utilities.adoc[Utilities].
 
@@ -275,7 +275,7 @@ See also the collection of utility services documented in xref:../utilities.adoc
 Services within the OneCX Local Environment communicate using standard internal URLs based on container names and ports.
 
 [horizontal, labwidth=40]
-Frontend calls BFF::       `http://local-proxy/mfe/<app-path>/bff/<bff-resource>`
+Frontend calls BFF::       `http://proxy.localhost/mfe/<app-path>/bff/<bff-resource>`
 BFF calls Service::        `http://<service-name>:8080/<svc-resource>`
 Service access database::  `jdbc:postgresql://postgresdb:5432/db_name`
 Service authenticate via:: `http://keycloak-app:8080`
@@ -295,7 +295,7 @@ The xref:../extend/extend.adoc[Extend OneCX] documentation describes how local r
 
 === Authentication Flow
 
-1. Browser → Traefik (local-proxy) → Frontend
+1. Browser → Traefik (proxy.localhost) → Frontend
 2. Frontend → Traefik → BFF Service
 3. BFF → Keycloak (authentication)
 4. BFF → Backend Services (with token)
