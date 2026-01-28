@@ -351,6 +351,16 @@
           "name": "onecx-shell-header.end",
           "components": [
             {
+              "productName": "onecx-user-profile",
+              "appId": "onecx-user-profile-ui",
+              "name": "./OneCXUsernameComponent"
+            },
+            {
+              "productName": "onecx-user-profile",
+              "appId": "onecx-user-profile-ui",
+              "name": "./OneCXLanguageSwitchComponent"
+            },
+            {
               "productName": "onecx-chat",
               "appId": "onecx-chat-ui",
               "name": "./OneCXChatPanelComponent"
