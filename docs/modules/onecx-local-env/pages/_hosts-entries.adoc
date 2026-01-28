@@ -7,7 +7,6 @@
 127.0.0.1 keycloak-app
 
 # OneCX - local services
-127.0.0.1 local-proxy
 127.0.0.1 sonar
 
 # OneCX - product services

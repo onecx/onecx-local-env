@@ -146,6 +146,6 @@ fi
 
 #################################################################
 ## End of starting
-printf "To use OneCX, navigate to http://local-proxy/onecx-shell/admin/\n"
+printf "To use OneCX, navigate to http://proxy.localhost/onecx-shell/admin/\n"
 
 printf "\n"
