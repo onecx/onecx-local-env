@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Workspace Vertical Menu",
+  "appName": "OneCX Workspace UI",
   "description": "Displaying the vertical menu",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/workspace/",

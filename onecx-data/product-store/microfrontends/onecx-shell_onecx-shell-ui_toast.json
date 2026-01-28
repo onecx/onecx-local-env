@@ -1,7 +1,7 @@
 {
   "appVersion": "xxx",
-  "appName": "onecx-shell-ui",
-  "description": "onecx-shell-ui",
+  "appName": "OneCX Shell UI",
+  "description": "OneCX Shell UI Toast",
   "remoteBaseUrl": "/onecx-shell/",
   "remoteEntry": "/onecx-shell/remoteEntry.js",
   "note": "Imported MFE",

@@ -1,17 +1,17 @@
 {
   "name": "onecx-ai-bff",
   "permissions": [
-    { "resource": "ai-knowledge-document", "action": "read" },
-    { "resource": "ai-knowledge-document", "action": "write" },
-    { "resource": "ai-knowledge-document", "action": "delete" },
-    { "resource": "ai-knowledge-vector-db", "action": "read" },
-    { "resource": "ai-knowledge-vector-db", "action": "write" },
-    { "resource": "ai-knowledge-vector-db", "action": "delete" },
-    { "resource": "ai-provider", "action": "read" },
-    { "resource": "ai-provider", "action": "write" },
-    { "resource": "ai-provider", "action": "delete" },
-    { "resource": "ai-context", "action": "read" },
-    { "resource": "ai-context", "action": "write" },
-    { "resource": "ai-context", "action": "delete" }
+    { "resource": "ai-knowledge-document", "action": "read", "description": "Permission to read AI knowledge documents" },
+    { "resource": "ai-knowledge-document", "action": "write", "description": "Permission to write AI knowledge documents" },
+    { "resource": "ai-knowledge-document", "action": "delete", "description": "Permission to delete AI knowledge documents" },
+    { "resource": "ai-knowledge-vector-db", "action": "read", "description": "Permission to read AI knowledge vector databases" },
+    { "resource": "ai-knowledge-vector-db", "action": "write", "description": "Permission to write AI knowledge vector databases" },
+    { "resource": "ai-knowledge-vector-db", "action": "delete", "description": "Permission to delete AI knowledge vector databases" },
+    { "resource": "ai-provider", "action": "read", "description": "Permission to read AI providers" },
+    { "resource": "ai-provider", "action": "write", "description": "Permission to write AI providers" },
+    { "resource": "ai-provider", "action": "delete", "description": "Permission to delete AI providers" },
+    { "resource": "ai-context", "action": "read", "description": "Permission to read AI contexts" },
+    { "resource": "ai-context", "action": "write", "description": "Permission to write AI contexts" },
+    { "resource": "ai-context", "action": "delete", "description": "Permission to delete AI contexts" }
   ]
 }

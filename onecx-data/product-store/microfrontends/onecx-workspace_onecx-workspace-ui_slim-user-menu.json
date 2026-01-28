@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Workspace User Menu Slim",
+  "appName": "OneCX Workspace UI",
   "description": "Displaying the user menu in slim mode",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/workspace/",

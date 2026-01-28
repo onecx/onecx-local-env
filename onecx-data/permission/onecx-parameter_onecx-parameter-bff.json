@@ -1,8 +1,8 @@
 {
     "name": "onecx-parameter-bff",
     "permissions": [
-        { "resource": "parameter", "action": "delete" },
-        { "resource": "parameter", "action": "read" },
-        { "resource": "parameter", "action": "write" }
+        { "resource": "parameter", "action": "delete", "description": "Permission to delete parameters" },
+        { "resource": "parameter", "action": "read", "description": "Permission to read parameters" },
+        { "resource": "parameter", "action": "write", "description": "Permission to write parameters" }
     ]
 }

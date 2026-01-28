@@ -1,8 +1,8 @@
 {
     "name": "onecx-tenant-bff",
     "permissions": [
-        {"resource": "tenant", "action": "delete"},
-        {"resource": "tenant", "action": "read"},
-        {"resource": "tenant", "action": "write"}
+        {"resource": "tenant", "action": "delete", "description": "Permission to delete tenants"},
+        {"resource": "tenant", "action": "read", "description": "Permission to read tenants"},
+        {"resource": "tenant", "action": "write", "description": "Permission to write tenants"}
     ]
 }

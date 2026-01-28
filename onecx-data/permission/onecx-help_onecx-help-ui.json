@@ -3,31 +3,38 @@
   "permissions": [
     {
       "resource": "HELP",
-      "action": "CREATE"
+      "action": "CREATE",
+      "description": "Permission to create help articles"
     },
     {
       "resource": "HELP",
-      "action": "DELETE"
+      "action": "DELETE",
+      "description": "Permission to delete help articles"
     },
     {
       "resource": "HELP",
-      "action": "EDIT"
+      "action": "EDIT",
+      "description": "Permission to edit help articles"
     },
     {
       "resource": "HELP",
-      "action": "SEARCH"
+      "action": "SEARCH",
+      "description": "Permission to search help articles"
     },
     {
       "resource": "HELP",
-      "action": "VIEW"
+      "action": "VIEW",
+      "description": "Permission to view a help article"
     },
     {
       "resource": "HELP",
-      "action": "EXPORT"
+      "action": "EXPORT",
+      "description": "Permission to export help articles"
     },
     {
       "resource": "HELP",
-      "action": "IMPORT"
+      "action": "IMPORT",
+      "description": "Permission to import help articles"
     }
   ]
 }

@@ -3,35 +3,38 @@
   "permissions": [
     {
       "resource": "CHAT",
-      "action": "CREATE"
+      "action": "CREATE",
+      "description": "Permission to create chats"
     },
     {
       "resource": "CHAT",
-      "action": "DELETE"
+      "action": "DELETE",
+      "description": "Permission to delete chats"
     },
     {
       "resource": "CHAT",
-      "action": "EDIT"
+      "action": "EDIT",
+      "description": "Permission to edit chats"
     },
     {
       "resource": "CHAT",
-      "action": "SEARCH"
+      "action": "SEARCH",
+      "description": "Permission to search chats"
     },
     {
       "resource": "CHAT",
-      "action": "VIEW"
+      "action": "VIEW",
+      "description": "Permission to view chats"
     },
     {
       "resource": "CHAT",
-      "action": "SAVE"
+      "action": "EXPORT",
+      "description": "Permission to export chats"
     },
     {
       "resource": "CHAT",
-      "action": "EXPORT"
-    },
-    {
-      "resource": "CHAT",
-      "action": "IMPORT"
+      "action": "IMPORT",
+      "description": "Permission to import chats"
     }
   ]
 }

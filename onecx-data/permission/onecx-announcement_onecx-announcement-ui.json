@@ -3,23 +3,28 @@
   "permissions": [
     {
       "resource": "ANNOUNCEMENT",
-      "action": "CREATE"
+      "action": "CREATE",
+      "description": "Permission to create announcements"
     },
     {
       "resource": "ANNOUNCEMENT",
-      "action": "DELETE"
+      "action": "DELETE",
+      "description": "Permission to delete announcements"
     },
     {
       "resource": "ANNOUNCEMENT",
-      "action": "EDIT"
+      "action": "EDIT",
+      "description": "Permission to edit announcements"
     },
     {
       "resource": "ANNOUNCEMENT",
-      "action": "SEARCH"
+      "action": "SEARCH",
+      "description": "Permission to search announcements"
     },
     {
       "resource": "ANNOUNCEMENT",
-      "action": "VIEW"
+      "action": "VIEW",
+      "description": "Permission to view an announcement"
     }
   ]
 }

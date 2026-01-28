@@ -1,14 +1,14 @@
 {
   "name": "onecx-chat-bff",
   "permissions": [
-    { "resource": "chat", "action": "read" },
-    { "resource": "chat", "action": "write" },
-    { "resource": "chat", "action": "delete" },
-    { "resource": "message", "action": "read" },
-    { "resource": "message", "action": "write" },
-    { "resource": "message", "action": "delete" },
-    { "resource": "participant", "action": "read" },
-    { "resource": "participant", "action": "write" },
-    { "resource": "participant", "action": "delete" }
+    { "resource": "chat", "action": "read", "description": "Permission to read chats" },
+    { "resource": "chat", "action": "write", "description": "Permission to write chats" },
+    { "resource": "chat", "action": "delete", "description": "Permission to delete chats" },
+    { "resource": "message", "action": "read", "description": "Permission to read messages" },
+    { "resource": "message", "action": "write", "description": "Permission to write messages" },
+    { "resource": "message", "action": "delete", "description": "Permission to delete messages" },
+    { "resource": "participant", "action": "read", "description": "Permission to read participants" },
+    { "resource": "participant", "action": "write", "description": "Permission to write participants" },
+    { "resource": "participant", "action": "delete", "description": "Permission to delete participants" }
   ]
 }

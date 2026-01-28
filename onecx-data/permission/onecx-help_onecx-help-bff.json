@@ -1,8 +1,8 @@
 {
   "name": "onecx-help-bff",
   "permissions": [
-    { "resource": "help", "action": "read" },
-    { "resource": "help", "action": "write" },
-    { "resource": "help", "action": "delete" }
+    { "resource": "help", "action": "read", "description": "Permission to read help articles" },
+    { "resource": "help", "action": "write", "description": "Permission to write help articles" },
+    { "resource": "help", "action": "delete", "description": "Permission to delete help articles" }
   ]
 }

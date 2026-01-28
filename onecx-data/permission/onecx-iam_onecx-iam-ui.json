@@ -1,15 +1,15 @@
 {
     "name": "onecx-iam-ui",
     "permissions": [
-        { "resource": "PERMISSION", "action": "VIEW" },
-        { "resource": "ROLE", "action": "CREATE" },
-        { "resource": "ROLE", "action": "DELETE" },
-        { "resource": "ROLE", "action": "EDIT" },
-        { "resource": "ROLE", "action": "SEARCH" },
-        { "resource": "USER", "action": "CREATE" },
-        { "resource": "USER", "action": "DELETE" },
-        { "resource": "USER", "action": "EDIT" },
-        { "resource": "USER", "action": "SEARCH" },
-        { "resource": "USER", "action": "VIEW" }
+        { "resource": "PERMISSION", "action": "VIEW", "description": "Permission to view permissions" },
+        { "resource": "ROLE", "action": "CREATE", "description": "Permission to create roles" },
+        { "resource": "ROLE", "action": "DELETE", "description": "Permission to delete roles" },
+        { "resource": "ROLE", "action": "EDIT", "description": "Permission to edit roles" },
+        { "resource": "ROLE", "action": "SEARCH", "description": "Permission to search roles" },
+        { "resource": "USER", "action": "CREATE", "description": "Permission to create users" },
+        { "resource": "USER", "action": "DELETE", "description": "Permission to delete users" },
+        { "resource": "USER", "action": "EDIT", "description": "Permission to edit users" },
+        { "resource": "USER", "action": "SEARCH", "description": "Permission to search users" },
+        { "resource": "USER", "action": "VIEW", "description": "Permission to view users" }
     ]
 }

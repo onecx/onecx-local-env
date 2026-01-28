@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX User Avatar",
+  "appName": "OneCX User Profile UI",
   "description": "User avatar image component",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/user-profile/",

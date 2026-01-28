@@ -3,179 +3,198 @@
   "permissions": [
     {
       "resource": "AI_KNOWLEDGE_DOCUMENT",
-      "action": "CREATE"
+      "action": "CREATE",
+      "description": "Permission to create AI knowledge documents"
     },
     {
       "resource": "AI_KNOWLEDGE_DOCUMENT",
-      "action": "EDIT"
+      "action": "EDIT",
+      "description": "Permission to edit AI knowledge documents"
     },
     {
       "resource": "AI_KNOWLEDGE_DOCUMENT",
-      "action": "DELETE"
+      "action": "DELETE",
+      "description": "Permission to delete AI knowledge documents"
     },
     {
       "resource": "AI_KNOWLEDGE_DOCUMENT",
-      "action": "SAVE"
+      "action": "IMPORT",
+      "description": "Permission to import AI knowledge documents"
     },
     {
       "resource": "AI_KNOWLEDGE_DOCUMENT",
-      "action": "IMPORT"
+      "action": "EXPORT",
+      "description": "Permission to export AI knowledge documents"
     },
     {
       "resource": "AI_KNOWLEDGE_DOCUMENT",
-      "action": "EXPORT"
+      "action": "VIEW",
+      "description": "Permission to view AI knowledge documents"
     },
     {
       "resource": "AI_KNOWLEDGE_DOCUMENT",
-      "action": "VIEW"
-    },
-    {
-      "resource": "AI_KNOWLEDGE_DOCUMENT",
-      "action": "SEARCH"
+      "action": "SEARCH",
+      "description": "Permission to search AI knowledge documents"
     },
     {
       "resource": "AI_KNOWLEDGE_VECTOR_DB",
-      "action": "CREATE"
+      "action": "CREATE",
+      "description": "Permission to create AI knowledge vector databases"
     },
     {
       "resource": "AI_KNOWLEDGE_VECTOR_DB",
-      "action": "EDIT"
+      "action": "EDIT",
+      "description": "Permission to edit AI knowledge vector databases"
     },
     {
       "resource": "AI_KNOWLEDGE_VECTOR_DB",
-      "action": "DELETE"
+      "action": "DELETE",
+      "description": "Permission to delete AI knowledge vector databases"
     },
     {
       "resource": "AI_KNOWLEDGE_VECTOR_DB",
-      "action": "SAVE"
+      "action": "IMPORT",
+      "description": "Permission to import AI knowledge vector databases"
     },
     {
       "resource": "AI_KNOWLEDGE_VECTOR_DB",
-      "action": "IMPORT"
+      "action": "EXPORT",
+      "description": "Permission to export AI knowledge vector databases"
     },
     {
       "resource": "AI_KNOWLEDGE_VECTOR_DB",
-      "action": "EXPORT"
+      "action": "VIEW",
+      "description": "Permission to view AI knowledge vector databases"
     },
     {
       "resource": "AI_KNOWLEDGE_VECTOR_DB",
-      "action": "VIEW"
+      "action": "SEARCH",
+      "description": "Permission to search AI knowledge vector databases"
     },
     {
       "resource": "AI_KNOWLEDGE_VECTOR_DB",
-      "action": "SEARCH"
-    },
-    {
-      "resource": "AI_KNOWLEDGE_VECTOR_DB",
-      "action": "BACK"
+      "action": "BACK",
+      "description": "Permission to go back from AI knowledge vector database view"
     },
     {
       "resource": "AI_PROVIDER",
-      "action": "CREATE"
+      "action": "CREATE",
+      "description": "Permission to create AI providers"
     },
     {
       "resource": "AI_PROVIDER",
-      "action": "EDIT"
+      "action": "EDIT",
+      "description": "Permission to edit AI providers"
     },
     {
       "resource": "AI_PROVIDER",
-      "action": "DELETE"
+      "action": "DELETE",
+      "description": "Permission to delete AI providers"
     },
     {
       "resource": "AI_PROVIDER",
-      "action": "SAVE"
+      "action": "IMPORT",
+      "description": "Permission to import AI providers"
     },
     {
       "resource": "AI_PROVIDER",
-      "action": "IMPORT"
+      "action": "EXPORT",
+      "description": "Permission to export AI providers"
     },
     {
       "resource": "AI_PROVIDER",
-      "action": "EXPORT"
+      "action": "VIEW",
+      "description": "Permission to view AI providers"
     },
     {
       "resource": "AI_PROVIDER",
-      "action": "VIEW"
+      "action": "SEARCH",
+      "description": "Permission to search AI providers"
     },
     {
       "resource": "AI_PROVIDER",
-      "action": "SEARCH"
-    },
-    {
-      "resource": "AI_PROVIDER",
-      "action": "CHANGE_API_KEY"
+      "action": "CHANGE_API_KEY",
+      "description": "Permission to change AI provider API keys"
     },
     {
       "resource": "AI_CONTEXT",
-      "action": "CREATE"
+      "action": "CREATE",
+      "description": "Permission to create AI contexts"
     },
     {
       "resource": "AI_CONTEXT",
-      "action": "EDIT"
+      "action": "EDIT",
+      "description": "Permission to edit AI contexts"
     },
     {
       "resource": "AI_CONTEXT",
-      "action": "DELETE"
+      "action": "DELETE",
+      "description": "Permission to delete AI contexts"
     },
     {
       "resource": "AI_CONTEXT",
-      "action": "SAVE"
+      "action": "IMPORT",
+      "description": "Permission to import AI contexts"
     },
     {
       "resource": "AI_CONTEXT",
-      "action": "IMPORT"
+      "action": "EXPORT",
+      "description": "Permission to export AI contexts"
     },
     {
       "resource": "AI_CONTEXT",
-      "action": "EXPORT"
+      "action": "VIEW",
+      "description": "Permission to view AI contexts"
     },
     {
       "resource": "AI_CONTEXT",
-      "action": "VIEW"
+      "action": "SEARCH",
+      "description": "Permission to search AI contexts"
     },
     {
       "resource": "AI_CONTEXT",
-      "action": "SEARCH"
-    },
-    {
-      "resource": "AI_CONTEXT",
-      "action": "BACK"
+      "action": "BACK",
+      "description": "Permission to go back from AI context view"
     },
     {
       "resource": "AI_KNOWLEDGE_BASE",
-      "action": "CREATE"
+      "action": "CREATE",
+      "description": "Permission to create AI knowledge bases"
     },
     {
       "resource": "AI_KNOWLEDGE_BASE",
-      "action": "EDIT"
+      "action": "EDIT",
+      "description": "Permission to edit AI knowledge bases"
     },
     {
       "resource": "AI_KNOWLEDGE_BASE",
-      "action": "DELETE"
+      "action": "DELETE",
+      "description": "Permission to delete AI knowledge bases"
     },
     {
       "resource": "AI_KNOWLEDGE_BASE",
-      "action": "SAVE"
+      "action": "IMPORT",
+      "description": "Permission to import AI knowledge bases"
     },
     {
       "resource": "AI_KNOWLEDGE_BASE",
-      "action": "IMPORT"
+      "action": "EXPORT",
+      "description": "Permission to export AI knowledge bases"
     },
     {
       "resource": "AI_KNOWLEDGE_BASE",
-      "action": "EXPORT"
+      "action": "VIEW",
+      "description": "Permission to view AI knowledge bases"
     },
     {
       "resource": "AI_KNOWLEDGE_BASE",
-      "action": "VIEW"
+      "action": "SEARCH",
+      "description": "Permission to search AI knowledge bases"
     },
     {
       "resource": "AI_KNOWLEDGE_BASE",
-      "action": "SEARCH"
-    },
-    {
-      "resource": "AI_KNOWLEDGE_BASE",
-      "action": "BACK"
+      "action": "BACK",
+      "description": "Permission to go back from AI knowledge base view"
     }
   ]
 }

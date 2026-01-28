@@ -1,16 +1,19 @@
 {
     "name": "onecx-permission-ui",
     "permissions": [
-        {"resource": "APP", "action": "EDIT"},
-        {"resource": "APP", "action": "SEARCH"},
-        {"resource": "APP", "action": "VIEW"},
-        {"resource": "IAM_ROLE", "action": "VIEW"},
-        {"resource": "PERMISSION", "action": "CREATE"},
-        {"resource": "PERMISSION", "action": "DELETE"},
-        {"resource": "PERMISSION", "action": "EDIT"},
-        {"resource": "PERMISSION", "action": "GRANT"},
-        {"resource": "ROLE", "action": "CREATE"},
-        {"resource": "ROLE", "action": "DELETE"},
-        {"resource": "ROLE", "action": "EDIT"}
+        {"resource": "APP", "action": "EDIT", "description": "Permission to edit apps"},
+        {"resource": "APP", "action": "SEARCH", "description": "Permission to search apps"},
+        {"resource": "APP", "action": "VIEW", "description": "Permission to view apps"},
+        {"resource": "IAM_ROLE", "action": "VIEW", "description": "Permission to view IAM roles"},
+        {"resource": "PERMISSION", "action": "CREATE", "description": "Permission to create permissions"},
+        {"resource": "PERMISSION", "action": "DELETE", "description": "Permission to delete permissions"},
+        {"resource": "PERMISSION", "action": "EDIT", "description": "Permission to edit permissions"},
+        {"resource": "PERMISSION", "action": "GRANT", "description": "Permission to grant permissions"},
+        {"resource": "ROLE", "action": "CREATE", "description": "Permission to create roles"},
+        {"resource": "ROLE", "action": "DELETE", "description": "Permission to delete roles"},
+        {"resource": "ROLE", "action": "EDIT", "description": "Permission to edit roles"},
+        {"resource": "ROLE", "action": "SEARCH", "description": "Permission to search roles"},
+        {"resource": "ROLE", "action": "VIEW", "description": "Permission to view roles"},
+        {"resource": "USER_ROLE", "action": "VIEW", "description": "Permission to view user roles"}
     ]
 }

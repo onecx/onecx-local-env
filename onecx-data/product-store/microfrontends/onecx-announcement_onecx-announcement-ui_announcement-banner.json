@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Announcement Banner",
+  "appName": "OneCX Announcement UI",
   "description": "Display active announcements as banner (carousel)",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/announcement/",

@@ -4,7 +4,7 @@
     "onecx-chat": {
       "onecx-chat-ui": {
         "onecx-admin": {
-          "CHAT": [ "CREATE", "DELETE", "EDIT", "SEARCH", "VIEW", "EXPORT", "IMPORT", "SAVE" ]
+          "CHAT": [ "CREATE", "DELETE", "EDIT", "SEARCH", "VIEW", "EXPORT", "IMPORT" ]
         },
         "onecx-user": {
           "CHAT": [ "SEARCH", "VIEW" ]

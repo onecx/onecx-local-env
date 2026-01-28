@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Workspace Version Info",
+  "appName": "OneCX Workspace UI",
   "description": "Display version information of shell and current application",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/workspace/",

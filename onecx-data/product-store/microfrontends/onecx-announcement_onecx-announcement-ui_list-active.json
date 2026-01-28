@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Announcement List Active",
+  "appName": "OneCX Announcement UI",
   "description": "List active announcements",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/announcement/",

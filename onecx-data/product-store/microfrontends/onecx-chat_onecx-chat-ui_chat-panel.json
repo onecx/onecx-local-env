@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Chat",
+  "appName": "OneCX Chat UI",
   "description": "OneCX Chat Panel",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/chat/",
