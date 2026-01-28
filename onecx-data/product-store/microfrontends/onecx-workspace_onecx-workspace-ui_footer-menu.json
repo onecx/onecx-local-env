@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Workspace Footer Menu",
+  "appName": "OneCX Workspace UI",
   "description": "Creates the footer menu of the workspace (if configured)",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/workspace/",

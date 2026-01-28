@@ -1,11 +1,11 @@
 {
     "name": "onecx-user-profile-bff",
     "permissions": [
-        {"resource": "userProfile", "action": "delete"},
-        {"resource": "userProfile", "action": "read"},
-        {"resource": "userProfile", "action": "write"},
-        {"resource": "userProfile", "action": "adminRead"},
-        {"resource": "userProfile", "action": "adminWrite"},
-        {"resource": "userProfile", "action": "adminDelete"}
+        {"resource": "userProfile", "action": "delete", "description": "Permission to delete user profiles"},
+        {"resource": "userProfile", "action": "read", "description": "Permission to read user profiles"},
+        {"resource": "userProfile", "action": "write", "description": "Permission to write user profiles"},
+        {"resource": "userProfile", "action": "adminRead", "description": "Permission to admin read user profiles"},
+        {"resource": "userProfile", "action": "adminWrite", "description": "Permission to admin write user profiles"},
+        {"resource": "userProfile", "action": "adminDelete", "description": "Permission to admin delete user profiles"}
     ]
 }

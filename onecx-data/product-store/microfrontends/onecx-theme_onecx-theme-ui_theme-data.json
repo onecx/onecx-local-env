@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Theme Data",
+  "appName": "OneCX Theme UI",
   "description": "Provide theme data like themes, theme, logo for given theme name(s)",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/theme/",

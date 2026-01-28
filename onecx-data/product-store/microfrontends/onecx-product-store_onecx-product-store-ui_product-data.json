@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Product Data",
+  "appName": "OneCX Product Store UI",
   "description": "Provide Product Data",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/product-store/",

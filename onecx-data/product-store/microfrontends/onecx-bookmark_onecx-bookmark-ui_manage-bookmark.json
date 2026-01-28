@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Bookmark Creation & Deletion",
+  "appName": "OneCX Bookmark UI",
   "description": "Create and Delete User Bookmarks",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/bookmark/",

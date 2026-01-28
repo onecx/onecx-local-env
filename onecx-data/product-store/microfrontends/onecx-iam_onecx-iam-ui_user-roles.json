@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX IAM User Roles",
+  "appName": "OneCX IAM UI",
   "description": "Provide IAM user roles",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/iam/",

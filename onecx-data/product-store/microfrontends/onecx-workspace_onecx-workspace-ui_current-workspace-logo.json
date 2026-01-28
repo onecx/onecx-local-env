@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Workspace Logo",
+  "appName": "OneCX Workspace UI",
   "description": "Display the logo of the current workspace. Use imageStyleClass as slot input parameter to adjust the image style.",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/workspace/",

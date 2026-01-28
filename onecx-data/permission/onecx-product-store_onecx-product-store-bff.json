@@ -1,19 +1,19 @@
 {
     "name": "onecx-product-store-bff",
     "permissions": [
-        { "resource": "image", "action": "read" },
-        { "resource": "image", "action": "write" },
-        { "resource": "microfrontend", "action": "delete" },
-        { "resource": "microfrontend", "action": "read" },
-        { "resource": "microfrontend", "action": "write" },
-        { "resource": "microservice", "action": "delete" },
-        { "resource": "microservice", "action": "read" },
-        { "resource": "microservice", "action": "write" },
-        { "resource": "product", "action": "delete" },
-        { "resource": "product", "action": "read" },
-        { "resource": "product", "action": "write" },
-        { "resource": "slot", "action": "delete" },
-        { "resource": "slot", "action": "read" },
-        { "resource": "slot", "action": "write" }
+        { "resource": "image", "action": "read", "description": "Permission to read images" },
+        { "resource": "image", "action": "write", "description": "Permission to write images" },
+        { "resource": "microfrontend", "action": "delete", "description": "Permission to delete microfrontends" },
+        { "resource": "microfrontend", "action": "read", "description": "Permission to read microfrontends" },
+        { "resource": "microfrontend", "action": "write", "description": "Permission to write microfrontends" },
+        { "resource": "microservice", "action": "delete", "description": "Permission to delete microservices" },
+        { "resource": "microservice", "action": "read", "description": "Permission to read microservices" },
+        { "resource": "microservice", "action": "write", "description": "Permission to write microservices" },
+        { "resource": "product", "action": "delete", "description": "Permission to delete products" },
+        { "resource": "product", "action": "read", "description": "Permission to read products" },
+        { "resource": "product", "action": "write", "description": "Permission to write products" },
+        { "resource": "slot", "action": "delete", "description": "Permission to delete slots" },
+        { "resource": "slot", "action": "read", "description": "Permission to read slots" },
+        { "resource": "slot", "action": "write", "description": "Permission to write slots" }
     ]
 }

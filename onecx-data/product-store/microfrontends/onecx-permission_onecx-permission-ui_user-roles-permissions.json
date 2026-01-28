@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Permission Roles & Permissions",
+  "appName": "OneCX Permission UI",
   "description": "Show current user's roles and permissions",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/permission/",

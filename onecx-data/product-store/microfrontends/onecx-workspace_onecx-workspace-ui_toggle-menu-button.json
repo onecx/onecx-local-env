@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Workspace Toggle Menu",
+  "appName": "OneCX Workspace UI",
   "description": "Toggle visibility of vertical menu",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/workspace/",

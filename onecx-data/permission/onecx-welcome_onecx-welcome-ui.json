@@ -1,8 +1,9 @@
 {
     "name": "onecx-welcome-ui",
     "permissions": [
-        { "resource": "IMAGE", "action": "DELETE" },
-        { "resource": "IMAGE", "action": "EDIT" },
-        { "resource": "IMAGE", "action": "VIEW" }
+        { "resource": "IMAGE", "action": "DELETE", "description": "Permission to delete images" },
+        { "resource": "IMAGE", "action": "CREATE", "description": "Permission to create images" },
+        { "resource": "IMAGE", "action": "EDIT", "description": "Permission to edit images" },
+        { "resource": "IMAGE", "action": "VIEW", "description": "Permission to view images" }
     ]
 }

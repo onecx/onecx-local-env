@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Workspace Horizontal Menu",
+  "appName": "OneCX Workspace UI",
   "description": "Creates the main menu in horizontal orientation, displayed only if screen dimension is greather then mobile breakpoint (767px)",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/workspace/",

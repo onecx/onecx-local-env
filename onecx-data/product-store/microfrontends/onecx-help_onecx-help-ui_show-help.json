@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Help Item Viewing",
+  "appName": "OneCX Help UI",
   "description": "Show help item",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/help/",

@@ -1,21 +1,22 @@
 {
   "name": "onecx-product-store-ui",
   "permissions": [
-    { "resource": "APP", "action": "CREATE" },
-    { "resource": "APP", "action": "DELETE" },
-    { "resource": "APP", "action": "EDIT" },
-    { "resource": "APP", "action": "SEARCH" },
-    { "resource": "APP", "action": "VIEW" },
-    { "resource": "ENDPOINT", "action": "SEARCH" },
-    { "resource": "PRODUCT", "action": "CREATE" },
-    { "resource": "PRODUCT", "action": "DELETE" },
-    { "resource": "PRODUCT", "action": "EDIT" },
-    { "resource": "PRODUCT", "action": "SEARCH" },
-    { "resource": "PRODUCT", "action": "VIEW" },
-    { "resource": "SLOT", "action": "CREATE" },
-    { "resource": "SLOT", "action": "DELETE" },
-    { "resource": "SLOT", "action": "EDIT" },
-    { "resource": "SLOT", "action": "SEARCH" },
-    { "resource": "SLOT", "action": "VIEW" }
+    { "resource": "APP", "action": "CREATE", "description": "Permission to create apps" },
+    { "resource": "APP", "action": "DELETE", "description": "Permission to delete apps" },
+    { "resource": "APP", "action": "EDIT", "description": "Permission to edit apps" },
+    { "resource": "APP", "action": "SEARCH", "description": "Permission to search apps" },
+    { "resource": "APP", "action": "VIEW", "description": "Permission to view apps" },
+    { "resource": "ENDPOINT", "action": "SEARCH", "description": "Permission to search endpoints" },
+    { "resource": "ENDPOINT", "action": "VIEW", "description": "Permission to view endpoints" },
+    { "resource": "PRODUCT", "action": "CREATE", "description": "Permission to create products" },
+    { "resource": "PRODUCT", "action": "DELETE", "description": "Permission to delete products" },
+    { "resource": "PRODUCT", "action": "EDIT", "description": "Permission to edit products" },
+    { "resource": "PRODUCT", "action": "SEARCH", "description": "Permission to search products" },
+    { "resource": "PRODUCT", "action": "VIEW", "description": "Permission to view products" },
+    { "resource": "SLOT", "action": "CREATE", "description": "Permission to create slots" },
+    { "resource": "SLOT", "action": "DELETE", "description": "Permission to delete slots" },
+    { "resource": "SLOT", "action": "EDIT", "description": "Permission to edit slots" },
+    { "resource": "SLOT", "action": "SEARCH", "description": "Permission to search slots" },
+    { "resource": "SLOT", "action": "VIEW", "description": "Permission to view slots" }
   ]
 }

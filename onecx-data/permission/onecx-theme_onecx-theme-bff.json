@@ -1,8 +1,8 @@
 {
     "name": "onecx-theme-bff",
     "permissions": [
-        { "resource": "themes", "action": "delete" },
-        { "resource": "themes", "action": "read" },
-        { "resource": "themes", "action": "write" }
+        { "resource": "themes", "action": "delete", "description": "Permission to delete themes" },
+        { "resource": "themes", "action": "read", "description": "Permission to read themes" },
+        { "resource": "themes", "action": "write", "description": "Permission to write themes" }
     ]
 }

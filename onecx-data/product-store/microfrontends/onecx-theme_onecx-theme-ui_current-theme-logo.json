@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Current Theme Logo",
+  "appName": "OneCX Theme UI",
   "description": "Display the logo of the current theme. Use imageStyleClass as slot input parameter to adjust the image style.",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/theme/",

@@ -1,15 +1,18 @@
 {
     "name": "onecx-iam-bff",
     "permissions": [
-        { "resource": "password", "action": "write" },
-        { "resource": "provider", "action": "admin-read" },
-        { "resource": "provider", "action": "read" },
-        { "resource": "role", "action": "admin-read" },
-        { "resource": "role", "action": "admin-write" },
-        { "resource": "role", "action": "read" },
-        { "resource": "user", "action": "admin-read" },
-        { "resource": "user", "action": "admin-write" },
-        { "resource": "user", "action": "read" },
-        { "resource": "user", "action": "write" }
+        { "resource": "password", "action": "write", "description": "Permission to write passwords" },
+        { "resource": "permission", "action": "admin-read", "description": "Permission to read permissions as admin" },
+        { "resource": "permission", "action": "read", "description": "Permission to read permissions" },
+        { "resource": "provider", "action": "admin-write", "description": "Permission to write providers" },
+        { "resource": "provider", "action": "admin-read", "description": "Permission to read providers as admin" },
+        { "resource": "provider", "action": "read", "description": "Permission to read providers" },
+        { "resource": "role", "action": "admin-read", "description": "Permission to read roles as admin" },
+        { "resource": "role", "action": "admin-write", "description": "Permission to write roles as admin" },
+        { "resource": "role", "action": "read", "description": "Permission to read roles" },
+        { "resource": "user", "action": "admin-read", "description": "Permission to read users as admin" },
+        { "resource": "user", "action": "admin-write", "description": "Permission to write users as admin" },
+        { "resource": "user", "action": "read", "description": "Permission to read users" },
+        { "resource": "user", "action": "write", "description": "Permission to write users" }
     ]
 }

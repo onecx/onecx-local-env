@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Search Config column group selection",
+  "appName": "OneCX Search Config UI",
   "description": "Column group selection",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/search-config/",

@@ -1,8 +1,8 @@
 {
     "name": "onecx-welcome-bff",
     "permissions": [
-        {"resource": "image", "action": "delete"},
-        {"resource": "image", "action": "read"},
-        {"resource": "image", "action": "write"}
+        {"resource": "image", "action": "delete", "description": "Permission to delete images"},
+        {"resource": "image", "action": "read", "description": "Permission to read images"},
+        {"resource": "image", "action": "write", "description": "Permission to write images"}
     ]
 }

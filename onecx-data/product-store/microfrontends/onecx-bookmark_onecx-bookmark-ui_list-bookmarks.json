@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Bookmark Lists",
+  "appName": "OneCX Bookmark UI",
   "description": "Show active user and workspace bookmarks",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/bookmark/",

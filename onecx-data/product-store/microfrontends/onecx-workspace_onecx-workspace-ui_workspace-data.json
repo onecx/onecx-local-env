@@ -1,6 +1,6 @@
 {
   "appVersion": "xxx",
-  "appName": "OneCX Workspace Data",
+  "appName": "OneCX Workspace UI",
   "description": "Provide workspace data like workspaces, workspace, logo",
   "contact": "onecx@1000kit.org",
   "remoteBaseUrl": "/mfe/workspace/",

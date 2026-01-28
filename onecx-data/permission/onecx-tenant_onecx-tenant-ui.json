@@ -1,11 +1,11 @@
 {
     "name": "onecx-tenant-ui",
     "permissions": [
-        { "resource": "TENANT", "action": "CREATE" },
-        { "resource": "TENANT", "action": "DELETE" },
-        { "resource": "TENANT", "action": "EDIT" },
-        { "resource": "TENANT", "action": "SEARCH" },
-        { "resource": "TENANT", "action": "VIEW" },
-        { "resource": "SEARCHCONFIG", "action": "VIEW" }
+        { "resource": "TENANT", "action": "CREATE", "description": "Permission to create tenants" },
+        { "resource": "TENANT", "action": "DELETE", "description": "Permission to delete tenants" },
+        { "resource": "TENANT", "action": "EDIT", "description": "Permission to edit tenants" },
+        { "resource": "TENANT", "action": "SEARCH", "description": "Permission to search tenants" },
+        { "resource": "TENANT", "action": "VIEW", "description": "Permission to view tenants" },
+        { "resource": "SEARCHCONFIG", "action": "VIEW", "description": "Permission to view search configurations" }
     ]
 }

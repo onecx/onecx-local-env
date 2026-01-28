@@ -1,11 +1,12 @@
 {
     "name": "onecx-parameter-ui",
     "permissions": [
-        {"resource": "PARAMETER", "action": "DELETE"},
-        {"resource": "PARAMETER", "action": "EDIT"},
-        {"resource": "PARAMETER", "action": "SEARCH"},
-        {"resource": "PARAMETER", "action": "VIEW"},
-        {"resource": "USAGE", "action": "SEARCH"},
-        {"resource": "USAGE", "action": "VIEW"}
+        {"resource": "PARAMETER", "action": "DELETE", "description": "Permission to delete parameters"},
+        {"resource": "PARAMETER", "action": "CREATE", "description": "Permission to create parameters"},
+        {"resource": "PARAMETER", "action": "EDIT", "description": "Permission to edit parameters"},
+        {"resource": "PARAMETER", "action": "SEARCH", "description": "Permission to search parameters"},
+        {"resource": "PARAMETER", "action": "VIEW", "description": "Permission to view parameters"},
+        {"resource": "USAGE", "action": "SEARCH", "description": "Permission to search usage"},
+        {"resource": "USAGE", "action": "VIEW", "description": "Permission to view usage"}
     ]
 }
