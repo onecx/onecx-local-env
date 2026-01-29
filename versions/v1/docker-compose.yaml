@@ -15,7 +15,7 @@ services:
       - ../../init-data/traefik/traefik-services.yml:/etc/traefik/services.yml
         #labels:
         #- "traefik.http.routers.local_mfe.entrypoints=web"
-        #- "traefik.http.routers.local_mfe.rule=Host(`proxy.localhost`)&&PathPrefix(`/mfe/onecx-theme-ui`)"
+        #- "traefik.http.routers.local_mfe.rule=Host(`onecx.localhost`)&&PathPrefix(`/mfe/onecx-theme-ui`)"
         #- "traefik.http.routers.local_mfe.service=local_mfe@file"
         ## Locally running BFF has to be started with port 8585
         #- "traefik.http.routers.local_bff.entrypoints=web"
@@ -138,7 +138,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-shell-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-shell-ui.rule=Host(`proxy.localhost`)&&PathPrefix(`/onecx-shell/`)"
+      - "traefik.http.routers.onecx-shell-ui.rule=Host(`onecx.localhost`)&&PathPrefix(`/onecx-shell/`)"
     env_file:
       - common.env
     networks:
@@ -240,7 +240,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-theme-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-theme-ui.rule=Host(`proxy.localhost`)&&PathPrefix(`/mfe/theme/`)"
+      - "traefik.http.routers.onecx-theme-ui.rule=Host(`onecx.localhost`)&&PathPrefix(`/mfe/theme/`)"
     networks:
       - example
     profiles:
@@ -306,7 +306,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-workspace-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-workspace-ui.rule=Host(`proxy.localhost`)&&PathPrefix(`/mfe/workspace/`)"
+      - "traefik.http.routers.onecx-workspace-ui.rule=Host(`onecx.localhost`)&&PathPrefix(`/mfe/workspace/`)"
     networks:
       - example
 
@@ -374,7 +374,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-permission-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-permission-ui.rule=Host(`proxy.localhost`)&&PathPrefix(`/mfe/permission/`)"
+      - "traefik.http.routers.onecx-permission-ui.rule=Host(`onecx.localhost`)&&PathPrefix(`/mfe/permission/`)"
     networks:
       - example
     profiles:
@@ -441,7 +441,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-product-store-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-product-store-ui.rule=Host(`proxy.localhost`)&&PathPrefix(`/mfe/product-store/`)"
+      - "traefik.http.routers.onecx-product-store-ui.rule=Host(`onecx.localhost`)&&PathPrefix(`/mfe/product-store/`)"
     networks:
       - example
     profiles:
@@ -508,7 +508,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-user-profile-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-user-profile-ui.rule=Host(`proxy.localhost`)&&PathPrefix(`/mfe/user-profile/`)"
+      - "traefik.http.routers.onecx-user-profile-ui.rule=Host(`onecx.localhost`)&&PathPrefix(`/mfe/user-profile/`)"
     networks:
       - example
     profiles:
@@ -578,7 +578,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-iam-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-iam-ui.rule=Host(`proxy.localhost`)&&PathPrefix(`/mfe/iam/`)"
+      - "traefik.http.routers.onecx-iam-ui.rule=Host(`onecx.localhost`)&&PathPrefix(`/mfe/iam/`)"
     networks:
       - example
     profiles:
@@ -626,7 +626,7 @@ services:
       - "traefik.http.services.onecx-tenant-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-tenant-bff.rule=Host(`onecx-tenant-bff`)"
       #- "traefik.http.routers.local_mfe.entrypoints=web"
-      #- "traefik.http.routers.local_mfe.rule=Host(`proxy.localhost`)&&PathPrefix(`/mfe/tenant/`)"
+      #- "traefik.http.routers.local_mfe.rule=Host(`onecx.localhost`)&&PathPrefix(`/mfe/tenant/`)"
       #- "traefik.http.routers.local_mfe.service=local_mfe@file"
     env_file:
       - common.env
@@ -648,7 +648,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-tenant-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-tenant-ui.rule=Host(`proxy.localhost`)&&PathPrefix(`/mfe/tenant/`)"
+      - "traefik.http.routers.onecx-tenant-ui.rule=Host(`onecx.localhost`)&&PathPrefix(`/mfe/tenant/`)"
     networks:
       - example
     profiles:
@@ -696,7 +696,7 @@ services:
       - "traefik.http.services.onecx-welcome-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-welcome-bff.rule=Host(`onecx-welcome-bff`)"
       # - "traefik.http.routers.local_mfe.entrypoints=web"
-      # - "traefik.http.routers.local_mfe.rule=Host(`proxy.localhost`)&&PathPrefix(`/mfe/welcome/`)"
+      # - "traefik.http.routers.local_mfe.rule=Host(`onecx.localhost`)&&PathPrefix(`/mfe/welcome/`)"
       # - "traefik.http.routers.local_mfe.service=local_mfe@file"
     env_file:
       - common.env
@@ -718,7 +718,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-welcome-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-welcome-ui.rule=Host(`proxy.localhost`)&&PathPrefix(`/mfe/welcome/`)"
+      - "traefik.http.routers.onecx-welcome-ui.rule=Host(`onecx.localhost`)&&PathPrefix(`/mfe/welcome/`)"
     networks:
       - example
     profiles:
@@ -788,7 +788,7 @@ services:
         condition: service_healthy
     labels:
       - traefik.http.services.onecx-help-ui.loadbalancer.server.port=8080
-      - traefik.http.routers.onecx-help-ui.rule=Host(`proxy.localhost`)&&PathPrefix(`/mfe/help/`)
+      - traefik.http.routers.onecx-help-ui.rule=Host(`onecx.localhost`)&&PathPrefix(`/mfe/help/`)
     networks:
       - example
     profiles:
@@ -861,7 +861,7 @@ services:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-parameter-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-parameter-ui.rule=Host(`proxy.localhost`)&&PathPrefix(`/mfe/parameter/`)"
+      - "traefik.http.routers.onecx-parameter-ui.rule=Host(`onecx.localhost`)&&PathPrefix(`/mfe/parameter/`)"
     networks:
       - example
     profiles:

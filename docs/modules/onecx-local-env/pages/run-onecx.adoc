@@ -35,7 +35,7 @@ The *start-onecx.sh* script accepts optional flags to customize its behavior. A 
 [#accessing-onecx]
 == Accessing OneCX
 
-After starting the local environment, OneCX can be accessed in a web browser by navigating to http://proxy.localhost/onecx-shell/admin[http://proxy.localhost/onecx-shell/admin].
+After starting the local environment, OneCX can be accessed in a web browser by navigating to http://onecx.localhost/onecx-shell/admin[http://onecx.localhost/onecx-shell/admin].
 
 The default login credentials for the admin user are:
 

@@ -6,7 +6,7 @@ http:
   routers:
     local_local_mfe_router:
       # path prefix as used for MFE registration in product store
-      rule: "Host(`proxy.localhost`) && PathPrefix(`/mfe/local/`)"
+      rule: "Host(`onecx.localhost`) && PathPrefix(`/mfe/local/`)"
       service: local_mfe
       middlewares:
         - local_mfe
