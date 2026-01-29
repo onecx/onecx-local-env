@@ -52,7 +52,7 @@ image::extend/activate_my-app_6021.png[]
 .Check if the locally running app can be accessed via the integration path.
 [source,text]
 ----
-http://proxy.localhost/mfe/my-app/remoteEntry.js
+http://onecx.localhost/mfe/my-app/remoteEntry.js
 ----
 
 .Traefik Configuration located in `init_data/traefik/active`
