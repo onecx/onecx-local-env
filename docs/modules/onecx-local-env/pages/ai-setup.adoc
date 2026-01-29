@@ -15,12 +15,18 @@ Environment Set up::
 A working OneCX Local Environment set up. +
 If you haven't done this yet, follow the instructions in the xref:./setup.adoc[Setting up] documentation.
 
-AI Provider Credentials (optional)::
+AI Provider SSL Certificate (optional)::
 Depends on your IT landscape, you need a valid certificate for the AI service. Follow the instructions in the documentation xref:./internal/custom-certificates.adoc[Custom Certificates].
 
-API Key::
+Provider API Key::
 This key is required to access AI functionalities within OneCX. You can obtain an API Key from your AI service provider. +
 At the moment, only this AI provider is used: `ollama.one-cx.org`.
+
+MCP Server SSL Certificate (optional)::
+Depends on your IT landscape, you need a valid certificate for the MCP Server. Follow the instructions in the documentation xref:./internal/custom-certificates.adoc[Custom Certificates].
+
+MCP Server API Key (optional)::
+This key is optional to access MCP Server functionalities within OneCX. Per default only the OneCX Documentation MCP Server is configured which is useable without an API Key: `onecx-docs-ai-dev.dev.one-cx.org/mcp`.
 
 Start Environment::
 A started OneCX Local Environment with the *all* profile enabled. +

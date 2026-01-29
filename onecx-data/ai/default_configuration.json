@@ -1,13 +1,7 @@
 {
-  "name": "default",
-  "llmSystemMessage": "system message",
-  "llmProvider": {
-    "name": "ollama",
-    "description": "OneCX Ollama LLM service",
-    "llmUrl": "https://ollama.one-cx.org",
-    "modelName": "llama2",
-    "modelVersion": "latest",
-    "appId": "v1",
-    "apiKey": "replace"
-  }
+  "name": "Default OneCX AI Configuration",
+  "modificationCount": 0,
+  "description": "Default OneCX AI Configuration",
+  "llmProvider": {},
+  "mcpServers": []
 }

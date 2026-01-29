@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Import AI Data (Knowledgebase, Providers, Contexts) from files
+# Import AI Data (Providers, MCP Servers, Configurations) from files
 #
 # $1 => tenant
 # $2 => verbose   (true|false)
@@ -19,14 +19,18 @@ api_key_file="../../api-key"
 
 #################################################################
 # files witch have tenant as prefix
-kb_file="${1}_knowledgebase.json"
-context_file="${1}_configuration.json"
+provider_file="${1}_provider.json"
+mcp_server_file="${1}_mcp-server.json"
+configuration_file="${1}_configuration.json"
 
 SKIP_MSG=""
-if [[ ! -f "$kb_file" ]]; then
-  SKIP_MSG="==> ${RED} skipping${NC}: Knowledgebase file not found for tenant ${GREEN}${1}${NC}"
+if [[ ! -f "$provider_file" ]]; then
+  SKIP_MSG="==> ${RED} skipping${NC}: Provider file not found for tenant ${GREEN}${1}${NC}"
 fi
-if [[ ! -f "$context_file" ]]; then
+if [[ ! -f "$mcp_server_file" ]]; then
+  SKIP_MSG="==> ${RED} skipping${NC}: MCP Server file not found for tenant ${GREEN}${1}${NC}"
+fi
+if [[ ! -f "$configuration_file" ]]; then
   SKIP_MSG="==> ${RED} skipping${NC}: Configuration file not found for tenant ${GREEN}${1}${NC}"
 fi
 
@@ -72,70 +76,106 @@ printf "${CYAN}${OLE_LINE_PREFIX}API Key read from: ${GREEN}${APIKEY_SOURCE}${NC
 
 
 #################################################################
-# Step 1: Import Knowledgebase and capture its ID
-printf "${CYAN}${OLE_LINE_PREFIX}Importing Knowledgebase${NC}\n"
-url="http://onecx-ai-svc/internal/ai/ai-knowledgebases"
+# Step 1: Import Provider and capture its response
+printf "${CYAN}${OLE_LINE_PREFIX}Importing Provider${NC}\n"
+url="http://onecx-ai-svc/internal/providers"
 response_output=$(mktemp)
 status_output=$(mktemp)
-if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then
-  curl $params -H "$OLE_HEADER_CT_JSON" -H "$OLE_HEADER_AUTH_TOKEN" -H "$OLE_HEADER_APM_TOKEN" -d @"$kb_file" -w "%{http_code}" -o "$response_output" "$url" > "$status_output" 2>&1
+
+# Prepare provider file with API Key
+provider_temp=$(mktemp)
+if command -v jq &> /dev/null; then
+  jq ".apiKey = \"$apiKey\"" "$provider_file" > "$provider_temp"
 else
-  curl $params -H "$OLE_HEADER_CT_JSON" -d @"$kb_file" -w "%{http_code}" -o "$response_output" "$url" > "$status_output" 2>&1
+  printf "${RED}${OLE_LINE_PREFIX}jq not found, cannot update Provider with API Key${NC}\n"
+  exit 1
+fi
+
+if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then
+  curl $params -H "$OLE_HEADER_CT_JSON" -H "$OLE_HEADER_AUTH_TOKEN" -H "$OLE_HEADER_APM_TOKEN" -d @"$provider_temp" -w "%{http_code}" -o "$response_output" "$url" > "$status_output" 2>&1
+else
+  curl $params -H "$OLE_HEADER_CT_JSON" -d @"$provider_temp" -w "%{http_code}" -o "$response_output" "$url" > "$status_output" 2>&1
 fi
 status_code=$(cat "$status_output")
-response_body=$(cat "$response_output")
-kbId=$(echo "$response_body" | jq -r '.id // empty')
+provider_response=$(cat "$response_output")
+providerId=$(echo "$provider_response" | jq -r '.id // empty')
 
 if [[ "$status_code" =~ (200|201)$ ]]; then
   if [[ $2 == "true" ]]; then
-    printf "${GREEN}${OLE_LINE_PREFIX}Knowledgebase imported, status: %s, ID: %s${NC}\n" "$status_code" "$kbId"
+    printf "${GREEN}${OLE_LINE_PREFIX}Provider imported, status: %s, ID: %s${NC}\n" "$status_code" "$providerId"
   fi
 else
-  printf "${RED}${OLE_LINE_PREFIX}Failed to import Knowledgebase, status: %s${NC}\n" "$status_code"
+  printf "${RED}${OLE_LINE_PREFIX}Failed to import Provider, status: %s${NC}\n" "$status_code"
+  rm -f "$response_output" "$status_output" "$provider_temp"
+  exit 1
+fi
+rm -f "$provider_temp" "$response_output" "$status_output"
+
+
+#################################################################
+# Step 2: Import MCP Server and capture its response
+printf "${CYAN}${OLE_LINE_PREFIX}Importing MCP Server${NC}\n"
+url="http://onecx-ai-svc/internal/mcpServer"
+response_output=$(mktemp)
+status_output=$(mktemp)
+if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then
+  curl $params -H "$OLE_HEADER_CT_JSON" -H "$OLE_HEADER_AUTH_TOKEN" -H "$OLE_HEADER_APM_TOKEN" -d @"$mcp_server_file" -w "%{http_code}" -o "$response_output" "$url" > "$status_output" 2>&1
+else
+  curl $params -H "$OLE_HEADER_CT_JSON" -d @"$mcp_server_file" -w "%{http_code}" -o "$response_output" "$url" > "$status_output" 2>&1
+fi
+status_code=$(cat "$status_output")
+mcp_response=$(cat "$response_output")
+mcpServerId=$(echo "$mcp_response" | jq -r '.id // empty')
+
+if [[ "$status_code" =~ (200|201)$ ]]; then
+  if [[ $2 == "true" ]]; then
+    printf "${GREEN}${OLE_LINE_PREFIX}MCP Server imported, status: %s, ID: %s${NC}\n" "$status_code" "$mcpServerId"
+  fi
+else
+  printf "${RED}${OLE_LINE_PREFIX}Failed to import MCP Server, status: %s${NC}\n" "$status_code"
   rm -f "$response_output" "$status_output"
   exit 1
 fi
 rm -f "$response_output" "$status_output"
-# rm -f "$response_output" "$status_output"
 
 
 #################################################################
-# Step 2: Update Context with API Key and import it
-printf "${CYAN}${OLE_LINE_PREFIX}Preparing Context with API Key${NC}\n"
+# Step 3: Prepare Configuration with Provider and MCP Server responses
+printf "${CYAN}${OLE_LINE_PREFIX}Preparing Configuration with imported Provider and MCP Server${NC}\n"
+configuration_temp=$(mktemp)
 if command -v jq &> /dev/null; then
-  context_temp=$(mktemp)
-  jq ".llmProvider.apiKey = \"$apiKey\"" "$context_file" > "$context_temp"
+  jq ".llmProvider = $provider_response | .mcpServers = [$mcp_response]" "$configuration_file" > "$configuration_temp"
   if [[ $2 == "true" ]]; then
-    printf "${GREEN}${OLE_LINE_PREFIX}Context prepared with API Key${NC}\n"
+    printf "${GREEN}${OLE_LINE_PREFIX}Configuration prepared with Provider and MCP Server${NC}\n"
   fi
 else
-  printf "${RED}${OLE_LINE_PREFIX}jq not found, cannot update Context with API Key${NC}\n"
+  printf "${RED}${OLE_LINE_PREFIX}jq not found, cannot update Configuration${NC}\n"
   exit 1
 fi
 
 #################################################################
-# Step 3: Import Context (using temporary file)
-printf "${CYAN}${OLE_LINE_PREFIX}Importing Context${NC}\n"
-url="http://onecx-ai-svc/internal/ai/ai-knowledgebases/${kbId}/ai-contexts"
+# Step 4: Import Configuration
+printf "${CYAN}${OLE_LINE_PREFIX}Importing Configuration${NC}\n"
+url="http://onecx-ai-svc/internal/configurations"
 response_output=$(mktemp)
 status_output=$(mktemp)
 if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then
-  curl $params -H "$OLE_HEADER_CT_JSON" -H "$OLE_HEADER_AUTH_TOKEN" -H "$OLE_HEADER_APM_TOKEN" -d @"$context_temp" -w "%{http_code}" -o "$response_output" "$url" > "$status_output" 2>&1
+  curl $params -H "$OLE_HEADER_CT_JSON" -H "$OLE_HEADER_AUTH_TOKEN" -H "$OLE_HEADER_APM_TOKEN" -d @"$configuration_temp" -w "%{http_code}" -o "$response_output" "$url" > "$status_output" 2>&1
 else
-  curl $params -H "$OLE_HEADER_CT_JSON" -d @"$context_temp" -w "%{http_code}" -o "$response_output" "$url" > "$status_output" 2>&1
+  curl $params -H "$OLE_HEADER_CT_JSON" -d @"$configuration_temp" -w "%{http_code}" -o "$response_output" "$url" > "$status_output" 2>&1
 fi
 status_code=$(cat "$status_output")
 
 if [[ "$status_code" =~ (200|201)$ ]]; then
   if [[ $2 == "true" ]]; then
-    printf "${GREEN}${OLE_LINE_PREFIX}Context imported, status: %s${NC}\n" "$status_code"
+    printf "${GREEN}${OLE_LINE_PREFIX}Configuration imported, status: %s${NC}\n" "$status_code"
   fi
 else
-  printf "${RED}${OLE_LINE_PREFIX}Failed to import Context, status: %s${NC}\n" "$status_code"
-  rm -f "$response_output" "$status_output" "$context_temp"
+  printf "${RED}${OLE_LINE_PREFIX}Failed to import Configuration, status: %s${NC}\n" "$status_code"
+  rm -f "$response_output" "$status_output" "$configuration_temp"
   exit 1
 fi
-rm -f "$response_output" "$status_output" "$context_temp"
+rm -f "$response_output" "$status_output" "$configuration_temp"
 
 if [[ $2 == "true" ]]; then
   printf "${GREEN}${OLE_LINE_PREFIX}All AI data imported successfully${NC}\n"

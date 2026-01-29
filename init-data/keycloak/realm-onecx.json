@@ -881,6 +881,9 @@
         "profile",
         "email",
         "Organization_ID",
+        "ocx-ai:read",
+        "ocx-ai:write",
+        "ocx-ai:delete",
         "ocx-an:read",
         "ocx-an:write",
         "ocx-an:delete",
@@ -1209,7 +1212,7 @@
       "protocol": "openid-connect",
       "attributes": {}
     },
-        {
+    {
       "id": "ocx-chat:read",
       "name": "ocx-chat:read",
       "description": "created by initial import",
