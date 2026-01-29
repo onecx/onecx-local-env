@@ -192,11 +192,12 @@ services:
       <<: *svc_multi_tenancy
       QUARKUS_DATASOURCE_USERNAME: onecx_ai
       QUARKUS_DATASOURCE_PASSWORD: onecx_ai
-      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresdb:5432/onecx_ai?sslmode=disable 
-      JAVA_TOOL_OPTIONS: >-
-        -Djavax.net.ssl.trustStore=/opt/certs/truststore.jks
-        -Djavax.net.ssl.trustStorePassword=trustjava
-        -Djavax.net.ssl.trustStoreType=JKS
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresdb:5432/onecx_ai?sslmode=disable
+    entrypoint: ["/work/application"]
+    command:
+    - "-Djavax.net.ssl.trustStore=/opt/certs/truststore.jks"
+    - "-Djavax.net.ssl.trustStorePassword=trustjava"
+    - "-Djavax.net.ssl.trustStoreType=JKS"
     volumes:
       - ../../certs/truststore.jks:/opt/certs/truststore.jks:ro
     healthcheck:
