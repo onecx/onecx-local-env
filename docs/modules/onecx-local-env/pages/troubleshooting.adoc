@@ -75,7 +75,13 @@ The issue occurs when the script xref:scripts/import.adoc[`import-onecx.sh`] is 
 image::issues/status-code-000-import-onecx.sh.png[]
 
 .Solution icon:lightbulb[set=fas,role=yellow]
-* Check if the hosts file is up-to-date. See xref:setup.adoc#hosts[Setup hosts] instructions.
+* Check if the hosts file is up-to-date. See xref:setup.adoc#hosts[Setup hosts] instructions. Add missing entries if necessary.
+* Restart import with
++
+[source,bash]
+----
+./import-onecx.sh -x
+----
 
 
 === Status Code "401" on Starting
