@@ -101,7 +101,6 @@ image::scripts/script_setup-truststore.sh_content.png[]
 
 Update your Docker Compose file to mount the truststore and configure Java to use it on the relevant services.
 
-==== Docker Compose Snippets to Mount Truststore (note the password used)
 .For Default JVM Applications
 [source,yaml]
 ----
