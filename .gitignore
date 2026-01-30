@@ -6,3 +6,4 @@ init-data/traefik/active/*
 # misc
 .vscode
 *.log
+api_key*
