@@ -1,0 +1,8 @@
+{
+  "name": "Default OneCX Ollama Provider",
+  "description": "Default OneCX Ollama LLM Provider",
+  "llmUrl": "https://ollama.one-cx.org",
+  "modelName": "ministral-3:8b",
+  "apiKey": "replace",
+  "type": "OLLAMA"
+}

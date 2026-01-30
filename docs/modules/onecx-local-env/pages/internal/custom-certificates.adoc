@@ -101,7 +101,7 @@ image::scripts/script_setup-truststore.sh_content.png[]
 
 Update your Docker Compose file to mount the truststore and configure Java to use it on the relevant services.
 
-.Docker Compose Snippet to Mount Truststore (note the password used)
+.For Default JVM Applications
 [source,yaml]
 ----
 services:
@@ -115,6 +115,22 @@ services:
         -Djavax.net.ssl.trustStorePassword=trustjava
         -Djavax.net.ssl.trustStoreType=JKS
 ----
+
+.For GraalVM Native Image Applications
+[source,yaml]
+----
+services:
+  onecx-ai-svc:
+    image: ${ONECX_AI_SVC}
+    volumes:
+      - ./certs/truststore.jks:/opt/certs/truststore.jks:ro
+    entrypoint: ["/work/application"]
+    command:
+    - "-Djavax.net.ssl.trustStore=/opt/certs/truststore.jks"
+    - "-Djavax.net.ssl.trustStorePassword=trustjava"
+    - "-Djavax.net.ssl.trustStoreType=JKS"
+----
+
 
 === 5. Restart and Verify
 
