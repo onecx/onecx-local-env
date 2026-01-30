@@ -21,7 +21,7 @@ Follow the instructions in the documentation xref:./internal/custom-certificates
 
 Provider API Key::
 This key is required to access AI functionalities within OneCX. You can obtain an API Key from your AI service provider. +
-Per default, only this AI provider is used: `*ollama.one-cx.org*`.
+Per default, only this AI provider is used: link:https://ollama.one-cx.org[ollama.one-cx.org].
 
 MCP Server SSL Certificate (optional)::
 Depends on your IT landscape, you need a valid certificate for the MCP Server. +
@@ -29,7 +29,7 @@ Follow the instructions in the documentation xref:./internal/custom-certificates
 
 MCP Server API Key (optional)::
 This key is optional to access MCP Server functionalities within OneCX. +
-Per default, only this MCP Server is configured: `*onecx-docs-ai-dev.dev.one-cx.org/mcp*`. +
+Per default, only this MCP Server is configured: link:https://onecx-docs-ai-dev.dev.one-cx.org/mcp[onecx-docs-ai-dev.dev.one-cx.org/mcp]. +
 This is the  OneCX Documentation MCP Server, whereby no API Key is required for this server.
 
 Start Environment::
