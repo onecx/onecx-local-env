@@ -27,7 +27,7 @@ https://www.pgadmin.org/[pgAdmin] is a popular, open-source administration and d
 This service is optional, as it is not strictly necessary for OneCX to function. For a better user experience, use a native client directly on your computer.
 
 * http://pgadmin/[]
-* Username: *admin*
+* Username: *user@1000kit.org*
 * Password: *admin*
 
 .pgAdmin running on localhost

@@ -54,6 +54,7 @@ Alternatively, you can
 * use system-specific certificate management tools to export root and intermediate CAs.
 ====
 
+Use the steps above to export all necessary certificates (root and intermediate CAs) that are required to establish a valid trust chain to the target HTTPS service.
 
 .Place the exported files in the *certs* folder inside of *onecx-local-env*
 [source, text]
