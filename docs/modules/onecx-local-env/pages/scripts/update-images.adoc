@@ -35,6 +35,10 @@ The script accepts several optional flags to customize its behavior. Some flags 
 
 The available flags are:
 
+-a::
+Update all images, ignoring name filter (if option *-n* is also used). +
+If used in combination with *-c* then all orphaned images and stopped containers are removed.
+
 -c::
 Cleaned up orphaned images (e.g. if they have *<none>* in their name)
 +
@@ -72,3 +76,11 @@ The deletion is only possible if the image is not in use. If so then stop the ap
 
 .Image deletion failed
 image::scripts/script_check-images.sh_rm-image-failed.png[]
+
+=== Update all images and cleanup
+With option *-a* all images are updated, ignoring name filter. With option *-c* all orphaned images are removed. No additional confirmation is required.
+
+[source,bash]
+----
+./update-images.sh  -a -c
+----

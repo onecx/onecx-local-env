@@ -22,6 +22,10 @@ The script accepts several optional flags to customize its behavior. +
 
 The available flags are:
 
+-a::
+List all containers, including those that are not part of the OneCX Local Environment. +
+If used in combination with *-n* then the name filter is ignored.
+
 -h::
 Displays help information about the script and its available flags.
 

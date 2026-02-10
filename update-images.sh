@@ -6,64 +6,69 @@
 #   * Use printf instead of echo -e
 #   * Replaced @(...) with Regex =~ ^(...)
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-CYAN='\033[0;36m'
-NC='\033[0m' # No Color
+set -euo pipefail
 
-printf "${CYAN}Update local Docker images${NC}\n"
+readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
+readonly CYAN='\033[0;36m'
+readonly YELLOW='\033[0;33m'
+readonly NC='\033[0m' # No Color
+
+printf '%b\n' "${CYAN}Update local Docker images${NC}"
 
 
 #################################################################
 ## Usage
 usage () {
   cat <<USAGE
-  Usage: $0  [-ch] [-n <text>]
-    -c  Cleanup, remove orphan images
+  Usage: $0  [-ach] [-n <text>]
+    -a  Update all images
+    -c  Cleanup, remove orphan images and stopped containers
     -h  Display this usage information, ignoring other parameters
     -n  Name filter, update images which have <text> into image name
   Examples:
-    $0               => If no name filter is specified, additional confirmation is required
-    $0  -n onecx     => Check and retrieve new images if "onecx" is included in the image name
-    $0  -n ui        => Check and retrieve new images if "ui" is included in the image name
-    $0  -c           => Remove orphaned images and images whose name contains <none>
+    $0  -a -n onecx -c  => Update all images, ignoring name filter, then remove all orphan images
+    $0  -n onecx        => Check and retrieve new images if "onecx" is included in the image name
+    $0  -n ui -c        => Update images and removing orphan images matching name filter
+    $0  -c              => Remove orphaned images and images whose name contains <none>
 USAGE
   exit 0
 }
-usage_short () {
-  cat <<USAGE
-  Usage: $0  [-ch] [-n <text>]
-USAGE
-}
 
-confirm() {
-  read -p "$1 (y/N): " answer
-  case "$answer" in
-    [yY]* ) ;;
-    * ) printf "${GREEN}  Execution aborted${NC}\n"
-        exit 1
-        ;;
-  esac
+## Count lines in a string, return 0 if the string is empty
+count_lines () {
+  local input="$1"
+  if [[ -z "$input" ]]; then
+    echo 0
+  else
+    printf '%s\n' "$input" | wc -l | tr -d '[:space:]'
+  fi
 }
 
 #################################################################
 ## Defaults
 CLEANUP=false
 CLEANUP_ONLY=false
+ALL_IMAGES=false
 NAME_FILTER=""
 
 
 #################################################################
 ## Check options and parameter
-while getopts ":hcn:" opt; do
+if [[ "${1:-}" == "--help" ]]; then
+  usage
+fi
+while getopts ":achn:" opt; do
   case "$opt" in
-    : ) printf "${RED}  Missing paramter for option -${OPTARG}${NC}\n"
+    : ) printf '  %b\n' "${RED}Missing parameter for option -${OPTARG}${NC}"
         usage
+        ;;
+    a ) ALL_IMAGES=true
         ;;
     c ) CLEANUP=true
         ;;
     n ) if [[ "$OPTARG" == -* ]]; then
-          printf "${RED}  Missing paramter for option -n${NC}\n"
+          printf '  %b\n' "${RED}Missing parameter for option -n${NC}"
           usage
         else
           NAME_FILTER=$OPTARG
@@ -71,71 +76,100 @@ while getopts ":hcn:" opt; do
         ;;
     h ) usage
         ;;
-   \? ) printf "${RED}  Unknown shorthand option: ${GREEN}-${OPTARG}${NC}\n"
+   \? ) printf '  %b\n' "${RED}Unknown shorthand option: ${GREEN}-${OPTARG}${NC}"
         usage
         ;;
   esac
 done
+shift $((OPTIND - 1))
 
-usage_short
+
+#################################################################
+## Check Docker availability
+if ! command -v docker &> /dev/null; then
+  printf '  %b\n' "${RED}Docker is not installed or not in PATH${NC}"
+  exit 1
+elif ! docker info &> /dev/null; then
+  printf '  %b\n' "${RED}Docker daemon is not running or user has no permission to access it${NC}"
+  exit 1
+fi
 
 
 #################################################################
 ## Collect images
-if [ -n "$NAME_FILTER" ]; then
-  IMAGES=$(docker images --format "{{.Repository}}:{{.Tag}}:{{.ID}}" | grep -E "$NAME_FILTER" || true)
+number_of_images=0
+if [[ -n "$NAME_FILTER" && "$ALL_IMAGES" == "false" ]]; then
+  IMAGES=$(docker images --format "{{.Repository}}\t{{.Tag}}\t{{.ID}}" | grep -iF -- "$NAME_FILTER" || true)
 else
-  IMAGES=$(docker images --format "{{.Repository}}:{{.Tag}}:{{.ID}}")
+  IMAGES=$(docker images --format "{{.Repository}}\t{{.Tag}}\t{{.ID}}")
 fi
 ## Check images
-if [ -z "$IMAGES" ]; then
-  printf "  No images matched your filter ${GREEN}$NAME_FILTER${NC}.\n"
+if [[ -z "$IMAGES" ]]; then
+  printf '  %b\n' "${YELLOW}No images matched your filter ${GREEN}$NAME_FILTER${NC}"
   exit 0
 fi
 ## Count images
-number_of_images=$(echo "$IMAGES" | wc -l)
+if [[ -n "$IMAGES" ]]; then
+  number_of_images=$(count_lines "$IMAGES")
+fi
 
-
-# Confirmation in case no name filter was provided ... only if -c is not used exclusively
-if [ -z "$NAME_FILTER" ]; then
+# In case no name filter was provided
+if [[ -z "$NAME_FILTER" ]]; then
   if [[ "$CLEANUP" == "true" ]]; then
     CLEANUP_ONLY=true
-  else
-    confirm "  No filter specified. ${number_of_images} images could be affected. Do you really want to continue?"
+  elif [[ "$ALL_IMAGES" == "false" ]]; then
+    printf '  %b\n' "${YELLOW}No name filter provided (with option -n), use -a to update all images.${NC}"
+    exit 1
   fi
 fi
 
 
 #################################################################
 # Process images
-printf "${CYAN}Process ${number_of_images} images${NC}\n"
+if [[ "$ALL_IMAGES" == "true" ]]; then
+  printf '  %b\n' "${CYAN}Process ${GREEN}all ${CYAN}images${NC}, cleanup: ${GREEN}${CLEANUP}${NC}"
+else
+  printf '  %b\n' "${CYAN}Process ${GREEN}${number_of_images} ${CYAN}images${NC}, cleanup: ${GREEN}${CLEANUP}${NC}"
+fi
 
 # PULL
+PULL_FAILURES=0
 if [[ "$CLEANUP_ONLY" == "false" ]]; then
-  while IFS= read -r IMAGE; do
-    [[ -z "$IMAGE" ]] && continue
-    IFS=:
-    set $IMAGE   # split by IFS separator to $1...$n
-    if [[ ! "$2" =~ "<none>" ]]; then
-      printf "  * ${GREEN}$1:$2${NC}\n"
-      docker pull "$1:$2" || printf "    ${RED}Failed to pull $1:$2${NC}\n"
-    fi
-  done <<< "$IMAGES"
+  if [[ "$ALL_IMAGES" == "true" ]]; then
+    echo "$IMAGES" | awk -F'\t' '$2 != "<none>" {print $1":"$2}' | \
+      xargs -P 4 -I {} sh -c 'docker pull "$1" || printf "    * $1" ' _ {}
+  else
+    current=0
+    while IFS=$'\t' read -r repo tag id; do
+      [[ -z "$repo" ]] && continue
+      ((current++)) || true
+      if [[ "$tag" != "<none>" ]]; then
+        printf '    * [%d] %b\n' "$current" "${GREEN}$repo:$tag${NC}"
+        docker pull "$repo:$tag" || { printf '    %b\n' "${RED}Failed to pull $repo:$tag${NC}"; ((PULL_FAILURES++)); }
+      fi
+    done <<< "$IMAGES"
+  fi
 fi
 
 # CLEAN
-if [[ $CLEANUP == "true" ]]; then
-  while IFS= read -r IMAGE; do
-    [[ -z "$IMAGE" ]] && continue
-    IFS=:
-    set $IMAGE   # split by IFS separator to $1...$n
-    if [[ "$2" =~ "<none>" ]]; then
-      ORPHAN_TEXT="  * ${GREEN}$1:$2:$3  orphan${NC}"
-      printf "$ORPHAN_TEXT  remove\n"
-      docker image rm "$3" || printf "${RED}    Failed to remove${NC}\n"
+if [[ "$CLEANUP" == "true" ]]; then
+  printf '  %b\n' "${CYAN}Cleanup${NC}"
+  if [[ "$ALL_IMAGES" == "true" ]]; then
+    docker image prune -f || printf '  %b\n' "${RED}Failed to prune images${NC}"
+    docker container prune -f || printf '  %b\n' "${RED}Failed to prune containers${NC}"
+  fi
+  while IFS=$'\t' read -r repo tag id; do
+    [[ -z "$repo" ]] && continue
+    if [[ "$tag" == "<none>" ]]; then
+      printf '    * %b\n' "${GREEN}$repo:$tag:$id  orphan${NC} remove"
+      docker image rm -f "$id" || printf '    %b\n' "${RED}Failed to remove${NC}"
     fi
   done <<< "$IMAGES"
 fi
 
+if [[ $PULL_FAILURES -gt 0 ]]; then
+  printf '  %b\n' "${YELLOW}Finished with ${RED}${PULL_FAILURES}${NC} pull failures${NC}"
+  exit 1
+fi
 
 printf "\n"
