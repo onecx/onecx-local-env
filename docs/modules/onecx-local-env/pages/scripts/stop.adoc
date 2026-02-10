@@ -17,6 +17,8 @@ The script accepts several optional flags to customize its behavior. Some flags 
 
 -c::
 Cleans up all volumes associated with the OneCX Local Environment when stopping the services. This will remove all data stored in the volumes, so use this flag with caution. (Default: disabled)
++
+Deletion only occurs if the service shutdown was completely successful, meaning no services are still running. This prevents data loss in case of problems during shutdown. This is the case, for example, if *all* OneCX services have been started, but only the *base* profile is stopped.
 
 -e::
 The edition of OneCX to stop. This must match the edition that was used to start the environment. Supported editions are:
@@ -40,6 +42,10 @@ The Docker services *essential* for OneCX will be terminated, including the dele
 ----
 ./stop-onecx.sh -c
 ----
+
+.Successful stopping
+image::scripts/script_stop-onecx.sh_cleanup.png[]
+
 
 === Stop ALL and Cleanup
 *All* Docker services for OneCX will be terminated, including the deletion of all data. Technically, this involves deleting the Docker volumes used by OneCX.

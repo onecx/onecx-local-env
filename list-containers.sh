@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # List of Docker containers, sorted alphabetically by the image names used.
 #
@@ -11,13 +11,21 @@ set -euo pipefail
 readonly RED='\033[0;31m'
 readonly GREEN='\033[0;32m'
 readonly CYAN='\033[0;36m'
+readonly YELLOW='\033[0;33m'
 readonly NC='\033[0m' # No Color
 
-printf "${CYAN}List of Docker containers${NC}\n"
+printf '%b\n' "${CYAN}List of Docker containers${NC}"
+
+#################################################################
+## Script directory detection, change to it to ensure relative path works
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
 
 #################################################################
 ## Usage
 usage () {
+  local exit_code=${1:-0}
   cat <<USAGE
   Usage: $0  [-ahu] [-n <text>]
     -a  List all containers
@@ -28,7 +36,7 @@ usage () {
     $0  -n theme     => List containers which have "theme" in the container name
     $0  -u           => List unhealthy containers
 USAGE
-  exit 0
+  exit "$exit_code"
 }
 
 ## Count lines in a string, return 0 if the string is empty
@@ -52,28 +60,28 @@ LIST_ALL=false
 #################################################################
 ## Check options and parameter
 if [[ "${1:-}" == "--help" ]]; then
-  usage
+  usage 0
 fi
 while getopts ":ahun:" opt; do
   case "$opt" in
-    : ) printf "${RED}  Missing parameter for option -${OPTARG}${NC}\n"
-        usage
+    : ) printf '%b\n' "${RED}  Missing parameter for option -${OPTARG}${NC}"
+        usage 1
         ;;
     a ) LIST_ALL=true
         ;;
-    h ) usage
+    h ) usage 0
         ;;
     n ) if [[ "$OPTARG" == -* ]]; then
-          printf "${RED}  Missing parameter for option -n${NC}\n"
-          usage
+          printf '%b\n' "${RED}  Missing parameter for option -n${NC}"
+          usage 1
         else
           NAME_FILTER=$OPTARG
         fi
         ;;
     u ) SHOW_UNHEALTHY=true
         ;;
-   \? ) printf "${RED}  Unknown shorthand option: ${GREEN}-${OPTARG}${NC}\n"
-        usage
+   \? ) printf '%b\n' "${RED}  Unknown shorthand option: ${GREEN}-${OPTARG}${NC}"
+        usage 1
         ;;
   esac
 done
@@ -83,10 +91,10 @@ shift $((OPTIND - 1))
 #################################################################
 ## Check Docker availability
 if ! command -v docker &> /dev/null; then
-  printf "${RED}Docker is not installed or not in PATH${NC}\n"
+  printf '%b\n' "${RED}Docker is not installed or not in PATH${NC}"
   exit 1
 elif ! docker info &> /dev/null; then
-  printf "${RED}Docker daemon is not running or user has no permission to access it${NC}\n"
+  printf '%b\n' "${RED}Docker daemon is not running or user has no permission to access it${NC}"
   exit 1
 fi
 
@@ -101,7 +109,7 @@ if [[ -n "$output" ]]; then
   all_containers=$(printf '%s\n' "$output" | tail -n +2 | sort -k2)
 fi
 count=$(count_lines "$all_containers")
-printf "${GREEN}  %d containers exist in total${NC}\n" "$count"
+printf '  %b\n' "${GREEN}$count containers exist in total${NC}"
 
 
 # Filter containers
@@ -114,12 +122,12 @@ if [[ "$count" -gt 0 ]]; then
   elif [[ "$SHOW_UNHEALTHY" = true ]]; then
     filtered_containers=$(printf '%s\n' "$all_containers" | grep -iE -- "$UNHEALTHY_FILTER") || true
   elif [[ "$LIST_ALL" = false ]]; then
-    printf "${RED}  Missing name filter. Execution aborted${NC}\n"
+    printf '%b\n' "${RED}  Missing name filter. Execution aborted${NC}"
     exit 1
   fi
   count=$(count_lines "$filtered_containers")
   if [[ "$count" -eq 0 ]]; then
-    printf "${GREEN}  No matching containers found${NC}\n"
+    printf '%b\n' "${GREEN}  No matching containers found${NC}"
   else
     printf '%s\n' "$header"
     printf '%s\n' "$filtered_containers"
@@ -127,4 +135,3 @@ if [[ "$count" -gt 0 ]]; then
 fi
 
 printf '\n'
-exit 0

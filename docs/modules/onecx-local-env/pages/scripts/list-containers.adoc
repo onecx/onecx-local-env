@@ -47,6 +47,9 @@ The Docker which have *theme* in container name are shown.
 ./list-containers.sh  -n theme
 ----
 
+.Theme Containers
+image::scripts/script_list-containers.sh_name-filter.png[]
+
 [#list-unhealthy-containers]
 === List unhealthy containers
 The Docker which have *unhealthy* status are shown.
@@ -55,3 +58,6 @@ The Docker which have *unhealthy* status are shown.
 ----
 ./list-containers.sh  -u
 ----
+
+.No unhealthy Containers
+image::scripts/script_list-containers.sh_unhealthy-nothing.png[]

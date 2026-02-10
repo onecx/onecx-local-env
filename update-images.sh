@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Update local Docker images
 #
@@ -16,10 +16,16 @@ readonly NC='\033[0m' # No Color
 
 printf '%b\n' "${CYAN}Update local Docker images${NC}"
 
+#################################################################
+## Script directory detection, change to it to ensure relative path works
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
 
 #################################################################
 ## Usage
 usage () {
+  local exit_code=${1:-0}
   cat <<USAGE
   Usage: $0  [-ach] [-n <text>]
     -a  Update all images
@@ -32,7 +38,7 @@ usage () {
     $0  -n ui -c        => Update images and removing orphan images matching name filter
     $0  -c              => Remove orphaned images and images whose name contains <none>
 USAGE
-  exit 0
+  exit "$exit_code"
 }
 
 ## Count lines in a string, return 0 if the string is empty
@@ -56,12 +62,12 @@ NAME_FILTER=""
 #################################################################
 ## Check options and parameter
 if [[ "${1:-}" == "--help" ]]; then
-  usage
+  usage 0
 fi
 while getopts ":achn:" opt; do
   case "$opt" in
     : ) printf '  %b\n' "${RED}Missing parameter for option -${OPTARG}${NC}"
-        usage
+        usage 1
         ;;
     a ) ALL_IMAGES=true
         ;;
@@ -69,15 +75,15 @@ while getopts ":achn:" opt; do
         ;;
     n ) if [[ "$OPTARG" == -* ]]; then
           printf '  %b\n' "${RED}Missing parameter for option -n${NC}"
-          usage
+          usage 1
         else
           NAME_FILTER=$OPTARG
         fi
         ;;
-    h ) usage
+    h ) usage 0
         ;;
    \? ) printf '  %b\n' "${RED}Unknown shorthand option: ${GREEN}-${OPTARG}${NC}"
-        usage
+        usage 1
         ;;
   esac
 done
