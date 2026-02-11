@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Start OneCX Local Environment with options
+# Starting OneCX Local Environment with options
 #
 # For macOS Bash compatibility:
 #   * Use printf instead of echo -e

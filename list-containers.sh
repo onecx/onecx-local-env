@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# List of Docker containers, sorted alphabetically by the image names used.
+# Listing of Docker containers, sorted alphabetically by the image names used.
 #
 # For macOS Bash compatibility:
 #   * Use printf instead of echo -e
@@ -14,7 +14,7 @@ readonly CYAN='\033[0;36m'
 readonly YELLOW='\033[0;33m'
 readonly NC='\033[0m' # No Color
 
-printf '%b\n' "${CYAN}List of Docker containers${NC}"
+printf '%b\n' "${CYAN}Listing Docker containers${NC}"
 
 #################################################################
 ## Script directory detection, change to it to ensure relative path works

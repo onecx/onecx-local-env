@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Update local Docker images
+# Updating local Docker images
 #
 # For macOS Bash compatibility:
 #   * Use printf instead of echo -e
@@ -14,7 +14,7 @@ readonly CYAN='\033[0;36m'
 readonly YELLOW='\033[0;33m'
 readonly NC='\033[0m' # No Color
 
-printf '%b\n' "${CYAN}Update local Docker images${NC}"
+printf '%b\n' "${CYAN}Updating local Docker images${NC}"
 
 #################################################################
 ## Script directory detection, change to it to ensure relative path works
@@ -119,12 +119,14 @@ if [[ -n "$IMAGES" ]]; then
   number_of_images=$(count_lines "$IMAGES")
 fi
 
+
+#################################################################
 # In case no name filter was provided
 if [[ -z "$NAME_FILTER" ]]; then
   if [[ "$CLEANUP" == "true" ]]; then
     CLEANUP_ONLY=true
   elif [[ "$ALL_IMAGES" == "false" ]]; then
-    printf '  %b\n' "${YELLOW}No name filter provided (with option -n), use -a to update all images.${NC}"
+    printf '  %b\n' "${YELLOW}Missing options: use -n for name filter, -a to update all images, -c to cleanup or -h for help.${NC}"
     exit 1
   fi
 fi
@@ -167,12 +169,13 @@ if [[ "$CLEANUP" == "true" ]]; then
   while IFS=$'\t' read -r repo tag id; do
     [[ -z "$repo" ]] && continue
     if [[ "$tag" == "<none>" ]]; then
-      printf '    * %b\n' "${GREEN}$repo:$tag:$id  orphan${NC} remove"
-      docker image rm -f "$id" || printf '    %b\n' "${RED}Failed to remove${NC}"
+      printf '    * %b\n' "${CYAN}orphan: ${GREEN}$repo:$tag:$id${NC}"
+      docker image rm -f "$id" || printf '     %b\n' "${RED}Failed to remove${NC}"
     fi
   done <<< "$IMAGES"
 fi
 
+# Summary with exit code 1 if there were pull failures
 if [[ $PULL_FAILURES -gt 0 ]]; then
   printf '  %b\n' "${YELLOW}Finished with ${RED}${PULL_FAILURES}${NC} pull failures${NC}"
   exit 1

@@ -43,7 +43,7 @@ The Docker services *essential* for OneCX will be terminated, including the dele
 ./stop-onecx.sh -c
 ----
 
-.Successful stopping
+.Successful stopping with cleanup
 image::scripts/script_stop-onecx.sh_cleanup.png[]
 
 

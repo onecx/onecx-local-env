@@ -20,33 +20,36 @@ The Traefik configuration files are stored in `init-data/traefik/active/`. Traef
 ----
 
 .List of integrated Microfrontends
-image::scripts/script_toggle-mfes.sh_list.png[width=500]
+image::scripts/script_toggle-mfes.sh_list.png[width=550]
+
+.Empty List - No Integrated Microfrontends
+image::scripts/script_toggle-mfes.sh_list-empty.png[]
 
 
 == Precondition
-Before a microfrontend can be successfully integrated into OneCX, it must be started. It is recommended to start the microfrontend in the following way. In the following examples, 6021 is used as the port where the microfrontend is running locally. Adjust the port as needed.
+Before a microfrontend can be successfully integrated into OneCX, it must be started. It is recommended to start the microfrontend in the following way. In the following examples, *6021* is used as the port where the microfrontend is running locally. Adjust the port as needed.
 
-.Start Angular *ng* Microfrontend on port 6021
+.Start Angular **ng** Microfrontend on port 6021
 [source,bash]
 ----
 npm run start -- --port 6021 --host 0.0.0.0 --disable-host-check --public-host=http://localhost:6021
 ----
 
-.Start Angular *nx* Microfrontend on port 6021
+.Start Angular **nx** Microfrontend on port 6021
 [source,bash]
 ----
 npm run start -- --port=6021 --host 0.0.0.0 --disableHostCheck --publicHost=http://localhost:6021
 ----
 
 [NOTE]
-.Checkpoint
 ====
 Please check the microfrontend is up and running by accessing the *public host URL* in Browser.
 [source,text]
 ----
 http://localhost:6021/remoteEntry.js
 ----
-The *remoteEntry.js* should be loaded - the content is displayed. The *./toggle-mfes.sh* script does not check this.
+The *remoteEntry.js* should be loaded - the content is displayed. +
+The *./toggle-mfes.sh* script does not check this!
 ====
 
 
@@ -155,7 +158,7 @@ The Traefik configurations are being cleaned up: All specific configuration file
 ----
 
 .Reset all Microfrontend configurations in Traefik
-image::scripts/script_toggle-mfes.sh_cleanup.png[width=500]
+image::scripts/script_toggle-mfes.sh_cleanup.png[]
 
 [CAUTION]
 ====

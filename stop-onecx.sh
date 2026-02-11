@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Stop OneCX Local Environment with options
+# Stopping OneCX Local Environment with options
 #
 # For macOS Bash compatibility:
 #   * Use printf instead of echo -e

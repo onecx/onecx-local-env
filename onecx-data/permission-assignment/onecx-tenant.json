@@ -12,7 +12,7 @@
       },
       "onecx-tenant-ui": {
         "onecx-admin": {
-          "TENANT": ["CREATE", "DELETE", "EDIT", "SEARCH", "VIEW"],
+          "TENANT": ["CREATE", "DELETE", "EDIT", "SEARCH", "VIEW", "ADMIN_EDIT", "ADMIN_CREATE"],
           "SEARCHCONFIG": ["VIEW"]
         },
         "onecx-user": {

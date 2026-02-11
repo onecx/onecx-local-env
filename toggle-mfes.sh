@@ -1,17 +1,25 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
-# Activate/Deactivate local running Microfrontends into OneCX Local Enviroment
+# Integrating local running Microfrontends into OneCX Local Environment
 #
 # For macOS Bash compatibility:
 #   * Use printf instead of echo -e
 #   * Replaced @(...) with Regex =~ ^(...)
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-CYAN='\033[0;36m'
-NC='\033[0m' # No Color
+set -euo pipefail
 
-printf "${CYAN}Integrate Local Microfrontends into OneCX Local Enviroment${NC}\n"
+readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
+readonly CYAN='\033[0;36m'
+readonly YELLOW='\033[0;33m'
+readonly NC='\033[0m' # No Color
+
+printf '%b\n' "${CYAN}Integrate Local Microfrontends into OneCX Local Environment${NC}"
+
+#################################################################
+## Script directory detection, change to it to ensure relative path works
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
 
 
 #################################################################
@@ -21,21 +29,23 @@ TRAEFIK_ACTIVE_DIR="./init-data/traefik/active"
 TRAEFIK_LOCAL_DIR="./init-data/traefik/inactive"
 MFE_TEMPLATE_NAME="_mfe_template.yml"
 MFE_TEMPLATE_PATH="$TRAEFIK_LOCAL_DIR/$MFE_TEMPLATE_NAME"
+MFE_COUNT=0
 MFES=()
 MODE=""
-LINE_PREFIX="  * "
-onecx_products="announcement|help|parameter|permission|product-store|tenant|theme|shell|user-profile|welcome|workspace"
-declare -A onecx_products_predefined_ports=(\
+LINE_PREFIX="   * "
+onecx_products="announcement|bookmark|help|iam|parameter|permission|product-store|tenant|theme|shell|user-profile|welcome|workspace"
+declare -A onecx_products_predefined_ports=( \
   ["announcement"]="5024" ["bookmark"]="5031" ["help"]="5023" ["iam"]="5029" \
-  ["permission"]="5026" ["product-store"]="5021" \
+  ["parameter"]="5030" ["permission"]="5026" ["product-store"]="5021" \
   ["shell"]="5000" ["tenant"]="5022" ["theme"]="5020" \
   ["user-profile"]="5027" ["welcome"]="5028" ["workspace"]="5025")
 
 #################################################################
 ## Usage
 usage () {
-  printf \
-"  Usage: $0  [-chl]  [-a <mfe1:port1:path1> [<mfe2:port2:path2> ...]]  [-d <mfe1:port1> [<mfe2:port2> ...]]
+  local exit_code=${1:-0}
+  printf '  %b\n' \
+  "Usage: $0  [-chl]  [-a <mfe1:port1:path1> [<mfe2:port2:path2> ...]]  [-d <mfe1:port1> [<mfe2:port2> ...]]
         ${CYAN}All options may only be used separately!${NC}
     -a  Activate one or more local Microfrontends, port is optional, default is 4200
         If the mfe is one of OneCX Core products and no port is specified then predefined ports are used.
@@ -49,13 +59,8 @@ usage () {
     $0  -a my-app:4567:/my-app-path        => Enable my-app with port 4567 and path /my-app-path
     $0  -l                                 => List all local microfrontends that are enabled
     $0  -c                                 => Remove all local microfrontends that are enabled
-\n"
-  exit 0
-}
-usage_short () {
-  printf \
-"  Usage: $0  [-chl]  [-a <mfe1:port1:path1> [<mfe2:port2:path2> ...]]  [-d <mfe1:port1> [<mfe2:port2> ...]]
-\n"
+"
+  exit "$exit_code"
 }
 
 
@@ -71,18 +76,18 @@ activate_mfe() {
   local dstf="$TRAEFIK_ACTIVE_DIR/${dst}.yml"
   local mfe_path="/mfe/${name}" # onecx standard path
 
-  if [ -f "$dstf" ]; then
-    printf "${LINE_PREFIX}$dst  ${GREEN}already activated${NC}\n"
+  if [[ -f "$dstf" ]]; then
+    printf '%b\n' "${LINE_PREFIX}$dst  ${YELLOW}already activated${NC}"
     return
   fi
-  if [ ! -f "$template" ]; then
-    printf " ⚠️ ${RED}template '${template}' not found${NC}\n"
-    return
+  if [[ ! -f "$template" ]]; then
+    printf ' %b\n' "⚠️ ${RED}template '${template}' not found${NC}"
+    exit 1
   fi
-  if [ -n "$path" ]; then
+  if [[ -n "$path" ]]; then
     mfe_path="$path"
   fi
-  if [ -z "$strippath" ]; then # no strip path = normal case: same path
+  if [[ -z "$strippath" ]]; then # no strip path = normal case: same path
     strippath="$mfe_path"
   fi
   if [[ ${mfe_path: -1} != "/" ]]; then  # add slash if not already present
@@ -96,7 +101,7 @@ activate_mfe() {
     -e "s|{{MFE_PATH}}|${mfe_path}|g" \
     -e "s|{{MFE_STRIPPATH}}|${strippath}|g" \
     "$template" > "$dstf"
-  printf "${LINE_PREFIX}${dst}\t✔\t\tmapping: ${mfe_path} => localhost:${port}\n"
+  printf '%b\t%-10b%s\n' "${LINE_PREFIX}${GREEN}${dst}${NC}" "✔" "mapping: ${mfe_path} => localhost:${port}"
 }
 
 #################################################################
@@ -109,30 +114,60 @@ deactivate_mfe() {
 
   if [[ -f "$dst1" ]]; then
     rm "$dst1"
-    printf "${LINE_PREFIX}${name}\t✔\n"
+    printf '%b%-20b %s\n' "${LINE_PREFIX}" "${GREEN}${name}${NC}" "✔"
   elif [[ -f "$dst2" ]]; then
     rm "$dst2"
-    printf "${LINE_PREFIX}${name}:${port}\t✔\n"
+    printf '%b%-20b %s\n' "${LINE_PREFIX}" "${GREEN}${name}:${port}${NC}" "✔"
   else
-    printf "${LINE_PREFIX}${name}\t⚠️ ${RED}not activated${NC}\n"
+    printf '%b%-20b %b\n' "${LINE_PREFIX}" "${name}" "⚠️ ${RED}not activated${NC}"
+
   fi
+}
+
+#################################################################
+## Count integrated Microfrontends, returns count
+count_mfes() {
+  find "$TRAEFIK_ACTIVE_DIR" -name "*.yml" -type f 2>/dev/null | wc -l | tr -d '[:space:]' || echo 0
 }
 
 #################################################################
 ## Disable all Microfrontends
 clean_all() {
-  printf " 🧹 Cleaning all local Microfrontend activations\n"
-  find ${TRAEFIK_ACTIVE_DIR}/*.yml -type f -exec rm {} \; 2> /dev/null
-  printf "    All local Microfrontends deactivated\n"
+  list_all
+  if [[ "$MFE_COUNT" -eq 0 ]]; then
+    printf '     %b\n' "${YELLOW}Nothing to clean${NC}"
+    return 0
+  fi
+  printf '  %b\n' "🧹 Cleaning ${GREEN}$MFE_COUNT${NC} local Microfrontend activation(s)"
+  find "$TRAEFIK_ACTIVE_DIR" -name "*.yml" -type f -delete 2>/dev/null
+  printf '     %b\n' "${CYAN}All local Microfrontends deactivated${NC}"
+}
+
+#################################################################
+## List all Microfrontends
+list_all() {
+  local name mfe_files
+  MFE_COUNT=$(count_mfes)
+  if [[ "$MFE_COUNT" -eq 0 ]]; then
+    printf '  %b\n' "❌ No integrated Microfrontends found in ${TRAEFIK_ACTIVE_DIR}"
+  else
+    printf '  %b\n' "✔  Traefik configurations located in ${TRAEFIK_ACTIVE_DIR}"
+    mfe_files=$(find "$TRAEFIK_ACTIVE_DIR" -name "*.yml" -type f 2>/dev/null)
+    while read -r mfe; do
+      [[ -z "$mfe" ]] && continue
+      name=$(basename "$mfe" .yml)
+      printf '%b\n' "${LINE_PREFIX}${GREEN}${name}${NC}"
+    done <<< "$mfe_files"
+  fi
 }
 
 
 #################################################################
 ## Check options and parameter
 while [[ "$#" -gt 0 ]]; do
-  if [[ "$MODE" != "" ]]; then
-    printf "${RED}  More than one option used. Pls. use only one.${NC}\n"
-    usage
+  if [[ -n "$MODE" ]]; then
+    printf '  %b\n' "${RED}Multiple options have been used. Please choose only one.${NC}"
+    usage 1
   fi
   case "$1" in
     -a) MODE="activate"
@@ -153,49 +188,44 @@ while [[ "$#" -gt 0 ]]; do
         done
         ;;
     -h|--help)
-        usage
-        exit 0
+        usage 0
         ;;
     -l) MODE="list"
         shift
         ;;
-     *) printf "${RED}  Unknown shorthand option: ${GREEN}$1${NC}\n"
-        usage
-        exit 1
+    * ) printf '  %b\n' "${RED}Unknown shorthand option: ${GREEN}$1${NC}"
+        usage 1
         ;;
   esac
 done
 
+if [[ -z "$MODE" ]]; then
+  usage 0
+fi
 
 #################################################################
 ## Execute: activate/create/deactivate
 if [[ "$MODE" == "activate" || "$MODE" == "deactivate" ]]; then
   if [[ ${#MFES[@]} -eq 0 ]]; then
-    printf "${RED}  No Microfrontends specified for ${MODE}${NC}\n"
-    usage
-    exit 1
+    printf '  %b\n' "${RED}No Microfrontends specified for ${MODE}${NC}"
+    usage 1
   fi
   ###
   if [[ "$MODE" == "activate" ]]; then
-    printf " ➕ Activate local Microfrontends\n"
+    printf '  %b\n' "➕ Integrate local Microfrontends"
   else
-    printf " ➖ Deactivate local Microfrontends\n"
-    printf "    Check Traefik configurations in ${TRAEFIK_ACTIVE_DIR}\n"
+    printf '  %b\n' "➖ Deintegrate local Microfrontends"
+    printf '  %b\n' "   ${CYAN}Check Traefik configurations in ${GREEN}${TRAEFIK_ACTIVE_DIR}${NC}"
   fi
   ###
   for mfe in "${MFES[@]}"; do
-    IFS=:
-    set $mfe   # split by IFS separator to $1...$n
-    name=$1
-    port=$2
-    path=$3
-    strippath=$4
-    if [[ -z $port ]]; then  # no port
-      if [[ "$name" =~ ^($onecx_products) ]]; then
+    IFS=: read -r name port path strippath <<< "$mfe"
+    if [[ -z "$port" ]]; then  # no port
+      if [[ "$name" =~ ^($onecx_products)$ ]]; then
         port="${onecx_products_predefined_ports[$name]}"  # get predefined port
       fi
-      if [[ -z $port ]]; then  # no port => use Angular default
-        port=${ANGULAR_DEFAULT_PORT}
+      if [[ -z "$port" ]]; then  # no port => use Angular default
+        port="${ANGULAR_DEFAULT_PORT}"
       fi
     fi
     if [[ "$MODE" == "activate" ]]; then
@@ -204,35 +234,14 @@ if [[ "$MODE" == "activate" || "$MODE" == "deactivate" ]]; then
       deactivate_mfe "$name" "$port"
     fi
   done
-  printf "\n"
-  exit 0
 fi
+
 
 #################################################################
-## Execute: cleaning
-if [[ "$MODE" == "clean" ]]; then
-  clean_all
-  exit 0
-fi
+## Execute: clean/list
+case "$MODE" in
+  clean) clean_all ;;
+  list) list_all ;;
+esac
 
-#################################################################
-## List: all integrated local Microfrontends
-if [[ "$MODE" == "list" ]]; then
-  mfe_files=`ls $TRAEFIK_ACTIVE_DIR/*.yml  2>/dev/null`
-  if [[ $mfe_files == "" ]]; then
-    printf " ❌ no active Microfrontends\n"
-    exit 0
-  fi
-  ###
-  printf " ✔  Traefik configurations located in ${TRAEFIK_ACTIVE_DIR}\n"
-  for mfe in $mfe_files; do
-    IFS=/
-    set $mfe
-    name=`echo $5 | cut -d '.' -f 1`
-    printf "${LINE_PREFIX}${name}\n"
-  done
-  exit 0
-fi
-
-
-usage
+printf '\n'

@@ -6,6 +6,8 @@
         { "resource": "TENANT", "action": "EDIT", "description": "Permission to edit tenants" },
         { "resource": "TENANT", "action": "SEARCH", "description": "Permission to search tenants" },
         { "resource": "TENANT", "action": "VIEW", "description": "Permission to view tenants" },
+        { "resource": "TENANT", "action": "ADMIN_EDIT", "description": "Permission to edit tenants (ADMIN action)" },
+        { "resource": "TENANT", "action": "ADMIN_CREATE", "description": "Permission to create tenants (ADMIN action)" },
         { "resource": "SEARCHCONFIG", "action": "VIEW", "description": "Permission to view search configurations" }
     ]
 }
