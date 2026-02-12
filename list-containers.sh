@@ -26,16 +26,16 @@ cd "$SCRIPT_DIR"
 ## Usage
 usage () {
   local exit_code=${1:-0}
-  cat <<USAGE
-  Usage: $0  [-ahu] [-n <text>]
+  printf '  %b\n' \
+  "Usage: $0  [-ahu] [-n <text>]
     -a  List all containers
     -h  Display this usage information, ignoring other parameters
     -n  Name filter, list containers which have <text> into container name
     -u  Show unhealthy containers
   Examples:
-    $0  -n theme     => List containers which have "theme" in the container name
+    $0  -n theme     => List containers which have 'theme' in the container name
     $0  -u           => List unhealthy containers
-USAGE
+  "
   exit "$exit_code"
 }
 
@@ -43,7 +43,7 @@ USAGE
 count_lines () {
   local input="$1"
   if [[ -z "$input" ]]; then
-    echo 0
+    printf '%s' "0"
   else
     printf '%s\n' "$input" | wc -l | tr -d '[:space:]'
   fi
@@ -91,13 +91,17 @@ shift $((OPTIND - 1))
 #################################################################
 ## Check Docker availability
 if ! command -v docker &> /dev/null; then
-  printf '%b\n' "${RED}Docker is not installed or not in PATH${NC}"
+  printf '  %b\n' "${RED}Docker is not installed or not in PATH${NC}"
   exit 1
 elif ! docker info &> /dev/null; then
-  printf '%b\n' "${RED}Docker daemon is not running or user has no permission to access it${NC}"
+  printf '  %b\n' "${RED}Docker daemon is not running or user has no permission to access it${NC}"
   exit 1
 fi
 
+if [[ ! -f "compose.yaml" ]]; then
+  printf '  %b\n' "${YELLOW}No compose.yaml found in current directory${NC}"
+  exit 0
+fi
 
 #################################################################
 ## Get all running Docker Compose containers
@@ -115,20 +119,25 @@ printf '  %b\n' "${GREEN}$count containers exist in total${NC}"
 # Filter containers
 if [[ "$count" -gt 0 ]]; then
   filtered_containers="$all_containers"
-  if [[ -n "$NAME_FILTER" && "$SHOW_UNHEALTHY" = true ]]; then
-    filtered_containers=$(printf '%s\n' "$all_containers" | grep -iF -- "$NAME_FILTER" | grep -iE -- "$UNHEALTHY_FILTER") || true
-  elif [[ -n "$NAME_FILTER" ]]; then
-    filtered_containers=$(printf '%s\n' "$all_containers" | grep -iF -- "$NAME_FILTER") || true
-  elif [[ "$SHOW_UNHEALTHY" = true ]]; then
-    filtered_containers=$(printf '%s\n' "$all_containers" | grep -iE -- "$UNHEALTHY_FILTER") || true
-  elif [[ "$LIST_ALL" = false ]]; then
-    printf '%b\n' "${RED}  Missing name filter. Execution aborted${NC}"
-    exit 1
+  if [[ "$LIST_ALL" = false ]]; then
+    if [[ -n "$NAME_FILTER" ]]; then
+      printf '  %b\n' "=> Name filter: ${GREEN}${NAME_FILTER}${NC}"
+      filtered_containers=$(printf '%s\n' "$filtered_containers" | grep -iF -- "$NAME_FILTER" || true) 
+    fi
+    if [[ "$SHOW_UNHEALTHY" = true ]]; then
+      printf '  %b\n' "=> Unhealthy filter: ${GREEN}${UNHEALTHY_FILTER}${NC}"
+      filtered_containers=$(printf '%s\n' "$filtered_containers" | grep -iE -- "$UNHEALTHY_FILTER" || true)
+    fi
+    if [[ -z "$NAME_FILTER" && "$SHOW_UNHEALTHY" = false ]]; then
+      printf '  %b\n' "${RED}Missing name filter. Use -a option to list all containers or -n to specify a name filter.${NC}"
+      exit 1
+    fi
   fi
   count=$(count_lines "$filtered_containers")
   if [[ "$count" -eq 0 ]]; then
-    printf '%b\n' "${GREEN}  No matching containers found${NC}"
+    printf '  %b\n' "${YELLOW}No matching containers found${NC}"
   else
+    printf '  %b\n' "${GREEN}$count containers found${NC}"
     printf '%s\n' "$header"
     printf '%s\n' "$filtered_containers"
   fi

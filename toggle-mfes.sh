@@ -127,7 +127,7 @@ deactivate_mfe() {
 #################################################################
 ## Count integrated Microfrontends, returns count
 count_mfes() {
-  find "$TRAEFIK_ACTIVE_DIR" -name "*.yml" -type f 2>/dev/null | wc -l | tr -d '[:space:]' || echo 0
+  find "$TRAEFIK_ACTIVE_DIR" -name "*.yml" -type f 2>/dev/null | wc -l | tr -d '[:space:]' || printf '%s' "0"
 }
 
 #################################################################

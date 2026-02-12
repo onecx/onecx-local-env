@@ -24,8 +24,8 @@ The imports are executed *without overwriting data* that already exists in the s
 This allows to re-run the import script multiple times without losing any data that has been created or modified after the initial import.
 ====
 
-== Available Flags
-The script accepts several optional flags to customize its behavior. Some flags can be combined. The flags are:
+== Available Options
+The script accepts several optional options to customize its behavior. Some options can be combined. The options are:
 
 -d::
 Specify a set of data to be imported (all, base) or a specific data type like workspace, theme etc.
@@ -39,7 +39,7 @@ The edition of OneCX. This must match the edition that was used to start the env
   * v1
 
 -h::
-Displays help information about the script and its available flags. If used then all other options are ignored.
+Displays help information about the script and its available options. If used then all other options are ignored.
 
 -s::
 Secure authentication enabled, default not enabled (value is inherited from xref:./start.adoc[start-onecx.sh])

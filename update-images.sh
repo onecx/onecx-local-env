@@ -26,8 +26,8 @@ cd "$SCRIPT_DIR"
 ## Usage
 usage () {
   local exit_code=${1:-0}
-  cat <<USAGE
-  Usage: $0  [-ach] [-n <text>]
+  printf '  %b\n' \
+  "Usage: $0  [-ach] [-n <text>]
     -a  Update all images
     -c  Cleanup, remove orphan images and stopped containers
     -h  Display this usage information, ignoring other parameters
@@ -37,7 +37,7 @@ usage () {
     $0  -n onecx        => Check and retrieve new images if "onecx" is included in the image name
     $0  -n ui -c        => Update images and removing orphan images matching name filter
     $0  -c              => Remove orphaned images and images whose name contains <none>
-USAGE
+  "
   exit "$exit_code"
 }
 
@@ -45,7 +45,7 @@ USAGE
 count_lines () {
   local input="$1"
   if [[ -z "$input" ]]; then
-    echo 0
+    printf '%s' "0"
   else
     printf '%s\n' "$input" | wc -l | tr -d '[:space:]'
   fi
@@ -91,12 +91,16 @@ shift $((OPTIND - 1))
 
 
 #################################################################
-## Check Docker availability
+## Check Docker availability and version
 if ! command -v docker &> /dev/null; then
   printf '  %b\n' "${RED}Docker is not installed or not in PATH${NC}"
   exit 1
 elif ! docker info &> /dev/null; then
   printf '  %b\n' "${RED}Docker daemon is not running or user has no permission to access it${NC}"
+  exit 1
+fi
+if ! docker compose version &> /dev/null; then
+  printf '  %b\n' "${RED}Docker Compose v2 is required${NC}"
   exit 1
 fi
 
@@ -144,8 +148,8 @@ fi
 PULL_FAILURES=0
 if [[ "$CLEANUP_ONLY" == "false" ]]; then
   if [[ "$ALL_IMAGES" == "true" ]]; then
-    echo "$IMAGES" | awk -F'\t' '$2 != "<none>" {print $1":"$2}' | \
-      xargs -P 4 -I {} sh -c 'docker pull "$1" || printf "    * $1" ' _ {}
+    printf '%s\n' "$IMAGES" | awk -F'\t' '$2 != "<none>" {print $1":"$2}' | \
+      xargs -P 4 -I {} sh -c 'docker pull "$1" 2>/dev/null || printf "    * Failed: %s\n" "$1" >&2' _ {}
   else
     current=0
     while IFS=$'\t' read -r repo tag id; do
@@ -153,7 +157,7 @@ if [[ "$CLEANUP_ONLY" == "false" ]]; then
       ((current++)) || true
       if [[ "$tag" != "<none>" ]]; then
         printf '    * [%d] %b\n' "$current" "${GREEN}$repo:$tag${NC}"
-        docker pull "$repo:$tag" || { printf '    %b\n' "${RED}Failed to pull $repo:$tag${NC}"; ((PULL_FAILURES++)); }
+        docker pull "$repo:$tag" || { printf '    %b\n' "${RED}Failed to pull $repo:$tag${NC}"; ((PULL_FAILURES++)) || true; }
       fi
     done <<< "$IMAGES"
   fi
@@ -181,4 +185,4 @@ if [[ $PULL_FAILURES -gt 0 ]]; then
   exit 1
 fi
 
-printf "\n"
+printf '\n'

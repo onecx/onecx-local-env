@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Import Tenants from file
 #
@@ -6,28 +6,31 @@
 # $2 => verbose   (true|false)
 #
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-CYAN='\033[0;36m'
-NC='\033[0m' # No Color
+set -euo pipefail
 
-echo -e "$OLE_LINE_PREFIX${CYAN}Importing Tenants ${NC}"
+readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
+readonly CYAN='\033[0;36m'
+readonly YELLOW='\033[0;33m'
+readonly NC='\033[0m' # No Color
 
-for entry in "."/*.json
+printf '%b\n' "$OLE_LINE_PREFIX${CYAN}Importing Tenants via ExIm${NC}"
+
+for entry in ./*.json
 do
   url="http://onecx-tenant-svc/exim/v1/tenants/operator"
   params="--write-out %{http_code} --silent --output /dev/null -X POST"
-  if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then
-    status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -H "$OLE_HEADER_AUTH_TOKEN"  -H "$OLE_HEADER_APM_TOKEN"  -d @$entry  $url`
+  if [[ "$OLE_SECURITY_AUTH_ENABLED" == "true" ]]; then
+    status_code=$(curl $params -H "$OLE_HEADER_CT_JSON" -H "$OLE_HEADER_AUTH_TOKEN" -H "$OLE_HEADER_APM_TOKEN" -d "@$entry" "$url")
   else
-    status_code=`curl  $params  -H "$OLE_HEADER_CT_JSON"  -d @$entry  $url`
+    status_code=$(curl $params -H "$OLE_HEADER_CT_JSON" -d "@$entry" "$url")
   fi
 
   if [[ "$status_code" =~ (200|201)$  ]]; then
-    if [[ $2 == "true" ]]; then
-      echo -e "    import: exim, status: ${GREEN}$status_code ${NC}"
+    if [[ "${2:-}" == "true" ]]; then
+      printf '    %b\n' "status: ${GREEN}$status_code ${NC}"
     fi
   else
-    echo -e "${RED}    import: exim, status: $status_code${NC}"
+    printf '    %b\n' "${RED}status: $status_code${NC}"
   fi 
 done
