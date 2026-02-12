@@ -4,7 +4,7 @@
     "onecx-bookmark": {
       "onecx-bookmark-ui": {
         "onecx-admin": {
-          "BOOKMARK": [ "CREATE", "DELETE", "EDIT", "SEARCH", "VIEW", "ADMIN_EDIT", "ADMIN_DELETE", "IMPORT", "EXPORT", "CONFIGURE", "OVERVIEW" ]
+          "BOOKMARK": [ "CREATE", "DELETE", "EDIT", "SEARCH", "VIEW", "IMPORT", "EXPORT", "OVERVIEW", "CONFIGURE", "ADMIN_EDIT", "ADMIN_DELETE" ]
         },
         "onecx-user": {
           "BOOKMARK": [ "CREATE", "DELETE", "EDIT", "SEARCH", "VIEW", "IMPORT", "EXPORT", "OVERVIEW" ]

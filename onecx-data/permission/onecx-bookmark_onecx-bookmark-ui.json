@@ -18,6 +18,11 @@
     },
     {
       "resource": "BOOKMARK",
+      "action": "SEARCH",
+      "description": "Permission to search bookmarks"
+    },
+    {
+      "resource": "BOOKMARK",
       "action": "OVERVIEW",
       "description": "Permission to see bookmarks in overview dialog"
     },

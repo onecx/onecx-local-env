@@ -42,15 +42,16 @@ The edition of OneCX. This must match the edition that was used to start the env
 Displays help information about the script and its available options. If used then all other options are ignored.
 
 -s::
-Secure authentication enabled, default not enabled (value is inherited from xref:./start.adoc[start-onecx.sh])
+Secure authentication enabled, default not enabled (value is inherited from xref:./start.adoc[start-onecx.sh]). Automatically set on tenant-specific imports.
 +
 [NOTE]
 ====
 Once Docker services have been started with the security option enabled, all subsequent actions require an authenticated user. For example, an import operation must then be started with the *-s* option to succeed.
 ====
 
--t:: 
-Define the tenant for tenant-specific imports (e.g. workspace, theme). In consequence of using a tenant different than default *the security option is set* and an appropriate user is used to execute the import. The user is authorized, the tokens are getted and then the import is executed with the tokens as request header. Therefore the security option is enabled.
+-t::
+Define the tenant for tenant-specific imports (e.g., workspace and theme data). When using a tenant other than the default tenant, *the security option is enabled*, and a suitable user is used for the import. The user is authorized, the tokens are retrieved, and the import is then executed using the tokens in the request header. This is why the security option is enabled for this process. +
+Tenants (corresponding to the tenant data imports):
   * default (default)
   * t1
   * t2
@@ -103,10 +104,10 @@ To import tenant-specific data, services with secure authentication enabled must
 
 [source,bash]
 ----
-./import-onecx.sh -t t1
+./import-onecx.sh -t t1 -x
 ----
 
-.Successful import of *t1* data via authenticated user *onecx_t1_admin*
+.Successful import of *t1* data with authenticated user *onecx_t1_admin*
 image::scripts/script_import-onecx.sh_tenant.png[]
 
 

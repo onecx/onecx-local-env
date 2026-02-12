@@ -166,13 +166,8 @@ if [[ -n "${OLE_SECURITY_AUTH_ENABLED:-}" ]]; then
     enable_security
   fi
   #
-  # If this script was executed directly, check the security settings.:
-elif [[ -f "$ENV_FILE" ]]; then
-    OLE_SECURITY_AUTH_ENABLED=$(grep "^ONECX_SECURITY_AUTH_ENABLED=" "$ENV_FILE" | cut -d '=' -f2 )
-    # env file enabling or -s
-    if [[ "$OLE_SECURITY_AUTH_ENABLED" == "true" ]]; then
-      enable_security
-    fi
+elif grep -q "^ONECX_SECURITY_AUTH_ENABLED=true" "$ENV_FILE" 2>/dev/null; then
+  enable_security
 fi
 export OLE_SECURITY_AUTH_ENABLED=$SECURITY
 
@@ -194,7 +189,6 @@ if [[ ! -f "$IMPORT_SCRIPT" ]]; then
   printf '  %b\n' "${RED}Error: Script not found at $IMPORT_SCRIPT${NC}"
   exit 1
 fi
-
 chmod +x "$IMPORT_SCRIPT"
 "$IMPORT_SCRIPT"  "$TENANT"  "$VERBOSE"  "$SECURITY"  "$IMPORT_TYPE"
 
