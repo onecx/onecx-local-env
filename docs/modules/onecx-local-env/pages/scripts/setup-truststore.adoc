@@ -7,7 +7,7 @@ endif::[]
 
 The *setup-truststore.sh* script is used to create or update a Java Truststore containing custom certificates needed by Java applications running inside Docker containers in the OneCX Local Environment.
 
-There are no parameters required. The script can be run from the root directory of the *onecx-local-env* repository:
+The script can be run from the root directory of the *onecx-local-env* repository:
 
 [source,bash]
 ----
@@ -15,3 +15,30 @@ There are no parameters required. The script can be run from the root directory 
 ----
 
 Instructions for preparing the Java Truststore with your certificates can be found under xref:../internal/custom-certificates.adoc[Custom Certificates].
+
+== Available Options
+The script accepts several optional options to customize its behavior. Some options can be combined. The options are:
+
+-d <directory>::
+Certificate directory, default: './certs'
+
+-h::
+Displays help information about the script and its available options. If used then all other options are ignored.
+
+-p <password>::
+Truststore password, length > 5, default: 'trustjava'
+
+
+== Examples
+
+[#create-truststore-default]
+=== Create truststore with default settings
+A Java Truststore is created at the default location with the default password. The script looks for certificates in the default directory `./certs` and imports all found certificates into the truststore.
+
+[source,bash]
+----
+./setup-truststore.sh
+----
+
+.Creating truststore with default settings
+image::scripts/script_setup-truststore.sh_default.png[]
