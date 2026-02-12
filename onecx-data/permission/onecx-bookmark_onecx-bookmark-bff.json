@@ -1,0 +1,8 @@
+{
+  "name": "onecx-bookmark-bff",
+  "permissions": [
+    { "resource": "bookmark", "action": "read", "description": "Permission to read bookmarks" },
+    { "resource": "bookmark", "action": "write", "description": "Permission to write bookmarks" },
+    { "resource": "bookmark", "action": "delete", "description": "Permission to delete bookmarks" }
+  ]
+}

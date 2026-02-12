@@ -1,0 +1,55 @@
+{
+  "name": "onecx-bookmark-ui",
+  "permissions": [
+    {
+      "resource": "BOOKMARK",
+      "action": "CREATE",
+      "description": "Permission to create bookmarks"
+    },
+    {
+      "resource": "BOOKMARK",
+      "action": "DELETE",
+      "description": "Permission to delete bookmarks"
+    },
+    {
+      "resource": "BOOKMARK",
+      "action": "EDIT",
+      "description": "Permission to edit bookmarks"
+    },
+    {
+      "resource": "BOOKMARK",
+      "action": "OVERVIEW",
+      "description": "Permission to see bookmarks in overview dialog"
+    },
+    {
+      "resource": "BOOKMARK",
+      "action": "CONFIGURE",
+      "description": "Permission to see bookmark configuration dialog"
+    },
+    {
+      "resource": "BOOKMARK",
+      "action": "ADMIN_EDIT",
+      "description": "Permission for admin users to edit workspace bookmarks"
+    },
+    {
+      "resource": "BOOKMARK",
+      "action": "ADMIN_DELETE",
+      "description": "Permission for admin users to delete workspace bookmarks"
+    },
+    {
+      "resource": "BOOKMARK",
+      "action": "IMPORT",
+      "description": "Import bookmarks"
+    },
+    {
+      "resource": "BOOKMARK",
+      "action": "EXPORT",
+      "description": "Export bookmarks"
+    },
+    {
+      "resource": "BOOKMARK",
+      "action": "VIEW",
+      "description": "Permission to view bookmarks"
+    }
+  ]
+}

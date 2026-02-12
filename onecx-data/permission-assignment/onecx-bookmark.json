@@ -1,0 +1,23 @@
+{
+  "id": "onecx-local-env_import-permission-assignments_onecx-bookmark",
+  "assignments": {
+    "onecx-bookmark": {
+      "onecx-bookmark-ui": {
+        "onecx-admin": {
+          "BOOKMARK": [ "CREATE", "DELETE", "EDIT", "SEARCH", "VIEW", "ADMIN_EDIT", "ADMIN_DELETE", "IMPORT", "EXPORT", "CONFIGURE", "OVERVIEW" ]
+        },
+        "onecx-user": {
+          "BOOKMARK": [ "CREATE", "DELETE", "EDIT", "SEARCH", "VIEW", "IMPORT", "EXPORT", "OVERVIEW" ]
+        }
+      },
+      "onecx-bookmark-bff": {
+        "onecx-admin": {
+          "bookmark": ["read", "write", "delete"]
+        },
+        "onecx-user": {
+          "bookmark": ["read", "write", "delete"]
+        }
+      }
+    }
+  }
+}
