@@ -53,11 +53,11 @@ The *./toggle-mfes.sh* script does not check this!
 ====
 
 
-== Available Flags
-The script accepts multiple flags to customize its behavior; one of each is required. +
+== Available Options
+The script accepts multiple options to customize its behavior; one of each is required. +
 *All options may only be used separately!*
 
-The flags are:
+The options are:
 
 -a <app-name>[:<app-port>[:<app-path>]]::
 Integrate one or more local microfrontends (app-name). In addition to the microfrontend name, you can optionally specify a port (app-port) and path (app-path). The default port is *4200*. See example section below. +

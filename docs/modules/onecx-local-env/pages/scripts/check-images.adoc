@@ -23,14 +23,14 @@ The local Docker images can easily be updated using the script xref:./update-ima
 ====
 
 
-== Available Flags
-The script accepts several optional flags to customize its behavior. The available flags are:
+== Available Options
+The script accepts several optional options to customize its behavior. Some options can be combined. The options are:
 
 -f::
 Image filter, see https://docs.docker.com/reference/cli/docker/image/ls/#filter
 
 -h::
-Displays help information about the script and its available flags. If used then all other options are ignored.
+Displays help information about the script and its available options. If used then all other options are ignored.
 
 -n <text>::
 Name filter, find images which have <text> into image name
@@ -50,13 +50,22 @@ image::scripts/script_check-images.sh_filter-onecx.png[]
 
 
 === List images marked as dangling
-Candidates for deletion
 
+List images marked as dangling, which means they are not tagged and not referenced by any container. This happens if there is a newer version of an image built or pulled. Such images can be removed without affecting any running container.
+
+.List candidates for deletion
 [source,bash]
 ----
 ./check-images.sh   -f "dangling=true"
 ----
 
+The -f option can be combined with the -n option to filter for dangling images with a specific name pattern.
+
+.List outdated backend service images
+[source,bash]
+----
+./check-images.sh   -f "dangling=true" -n svc
+----
 
 == Understanding the Listing
 
@@ -65,7 +74,7 @@ When building OneCX images, the version is set in the label *samo.project.versio
 
 
 === Outdated Images
-Over time, local Docker images become outdated. Especially after updates, images with the tag "<none>" may be listed.
+Over time, local Docker images become outdated. Especially after updates, images with the tag `*<none>*` may be listed.
 
 .List of outdated Docker images
 image::scripts/script_check-images.sh_none-images.png[]

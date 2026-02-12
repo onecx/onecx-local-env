@@ -40,9 +40,9 @@ do
 
   if [[ "$status_code" =~ (200|201)$  ]]; then
     if [[ $2 == "true" ]]; then
-      echo -e "    import: exim, status: ${GREEN}$status_code${NC}, theme: $theme"
+      echo -e "    import type: exim, status: ${GREEN}$status_code${NC}, theme: $theme"
     fi
   else
-    echo -e "${RED}    import: exim, status: $status_code, theme: $theme ${NC}"
+    echo -e "${RED}    import type: exim, status: $status_code, theme: $theme ${NC}"
   fi
 done

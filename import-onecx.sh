@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Start Imports of OneCX Data with options
 #
@@ -6,17 +6,28 @@
 #   * Use printf instead of echo -e
 #   * Replaced @(...) with Regex =~ ^(...)
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-CYAN='\033[0;36m'
-NC='\033[0m' # No Color
+set -euo pipefail
 
-printf "${CYAN}Import data for OneCX Local Environment${NC}\n"
+readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
+readonly CYAN='\033[0;36m'
+readonly YELLOW='\033[0;33m'
+readonly NC='\033[0;00m' # No Color
+
+printf '%b\n' "${CYAN}Import data for OneCX Local Environment${NC}"
 
 #################################################################
+## Script directory detection, change to it to ensure relative path works
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
+
+#################################################################
+## Usage
 usage () {
-  cat <<USAGE
-  Usage: $0  [-hsv] [-d <import data type>] [-t <tenant>] [-e <edition>]
+  local exit_code=${1:-0}
+  printf '  %b\n' \
+  "Usage: $0  [-hsv] [-d <import data type>] [-t <tenant>] [-e <edition>]
     -d  Data type, one of [ all, base, ai, bookmark, assignment, parameter, permission, mfe, ms, product, slot, tenant theme, welcome, workspace], base is default
     -e  Edition, one of [ 'v1', 'v2' ], default: 'v2'
     -h  Display this help and exit
@@ -27,16 +38,12 @@ usage () {
   Examples:
     $0                    => Import OneCX data used by standard setup (same as "-d base"), default tenant
     $0  -d all -s         => Import all OneCX data, services are running with security context (restarted if req.)
-    $0  -d workspace -x   => Import only Worspace data, default tenant, no check for Docker services
+    $0  -d workspace -x   => Import only Workspace data, default tenant, no check for Docker services
     $0  -t t1             => Import all tenant independent OneCX data and for tenant 't1'
-USAGE
-  exit 0
+  "
+  exit "$exit_code"
 }
-usage_short () {
-  cat <<USAGE
-  Usage: $0  [-hsv] [-d <import data type>] [-t <tenant>] [-e <edition>]
-USAGE
-}
+
 #################################################################
 ## Enable secure authentication
 enable_security () {
@@ -61,17 +68,20 @@ CHECKING_SERVICES=true  # check running Docker services before import
 
 #################################################################
 # check parameter
+if [[ "${1:-}" == "--help" ]]; then
+  usage 0
+fi
 while getopts ":hd:svt:e:x" opt; do
   case "$opt" in
-    : ) printf "${RED}  Missing paramter for option -${OPTARG}${NC}\n"
-        usage
+    : ) printf '  %b\n' "${RED}Missing parameter for option -${OPTARG}${NC}"
+        usage 1
         ;;
     d ) if [[ "$OPTARG" == -* ]]; then
-          printf "${RED}  Missing paramter for option -d${NC}\n"
-          usage
+          printf '  %b\n' "${RED}Missing parameter for option -d${NC}"
+          usage 1
         elif [[ ! "$OPTARG" =~ ^(all|base|ai|assignment|bookmark|parameter|permission|mfe|ms|product|slot|tenant|theme|welcome|workspace)$ ]]; then
-          printf "${RED}  Unknown data type: $OPTARG${NC}\n"
-          usage
+          printf '  %b\n' "${RED}Unknown data type: $OPTARG${NC}"
+          usage 1
         else
           IMPORT_TYPE=$OPTARG
         fi
@@ -81,11 +91,11 @@ while getopts ":hd:svt:e:x" opt; do
         fi
         ;;
     e ) if [[ "$OPTARG" == -* ]]; then
-          printf "${RED}  Missing paramter for option -e${NC}\n"
-          usage
+          printf '  %b\n' "${RED}Missing parameter for option -e${NC}"
+          usage 1
         elif [[ "$OPTARG" != "v1" && "$OPTARG" != "v2" ]]; then
-          printf "${RED}  Unknown Edition, should be one of [ 'v1', 'v2' ]${NC}\n"
-          usage
+          printf '  %b\n' "${RED}Unknown Edition, should be one of [ 'v1', 'v2' ]${NC}"
+          usage 1
         else
           EDITION=$OPTARG
         fi
@@ -95,11 +105,11 @@ while getopts ":hd:svt:e:x" opt; do
     s ) enable_security
         ;;
     t ) if [[ "$OPTARG" == -* ]]; then
-          printf "${RED}  Missing paramter for option -t${NC}\n"
-          usage
+          printf '  %b\n' "${RED}Missing parameter for option -t${NC}"
+          usage 1
         elif [[ ! "$OPTARG" =~ ^(default|t1|t2)$ ]]; then
-          printf "${RED}  Unknown tenant${NC}\n"
-          usage
+          printf '  %b\n' "${RED}Unknown tenant${NC}"
+          usage 1
         else
           enable_security
           TENANT=$OPTARG
@@ -107,30 +117,60 @@ while getopts ":hd:svt:e:x" opt; do
         ;;
     x ) CHECKING_SERVICES=false
         ;;
-? | h ) usage
+    h ) usage 0
         ;;
-   \? ) printf "${RED}  unknown shorthand option: ${GREEN}-${OPTARG}${NC}\n" >&2
-        usage
+   \? ) printf '  %b\n' "${RED}unknown shorthand option: ${GREEN}-${OPTARG}${NC}" >&2
+        usage 1
         ;;
   esac
 done
+shift $((OPTIND - 1))
+
+
+#################################################################
+## Check Docker availability
+if ! command -v docker &> /dev/null; then
+  printf '  %b\n' "${RED}Docker is not installed or not in PATH${NC}"
+  exit 1
+elif ! docker info &> /dev/null; then
+  printf '  %b\n' "${RED}Docker daemon is not running or user has no permission to access it${NC}"
+  exit 1
+fi
+if ! docker compose version &> /dev/null; then
+  printf '  %b\n' "${RED}Docker Compose v2 is required${NC}"
+  exit 1
+fi
+
+## Check File availability
+if [[ ! -f "compose.yaml" ]]; then
+  printf '  %b\n' "${YELLOW}No compose.yaml found in current directory${NC}"
+  exit 0
+fi
+ENV_FILE="versions/$EDITION/.env"
+if [[ ! -f "$ENV_FILE" ]]; then
+  printf '  %b\n' "${YELLOW}Warning: $ENV_FILE not found${NC}"
+  exit 0
+fi
+if [[ ! -f "versions/$EDITION/compose.yaml" ]]; then
+  printf '  %b\n' "${YELLOW}No compose.yaml found for edition $EDITION${NC}"
+  exit 0
+fi
 
 
 #################################################################
 ## Secure Authentication enabled?
-ENV_FILE="versions/$EDITION/.env"
 
 # Check option set by start script
-if [ -n $OLE_SECURITY_AUTH_ENABLED ]; then
-  if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then
+if [[ -n "${OLE_SECURITY_AUTH_ENABLED:-}" ]]; then
+  if [[ "$OLE_SECURITY_AUTH_ENABLED" == "true" ]]; then
     enable_security
   fi
   #
   # If this script was executed directly, check the security settings.:
-elif [ -f "$ENV_FILE" ]; then
+elif [[ -f "$ENV_FILE" ]]; then
     OLE_SECURITY_AUTH_ENABLED=$(grep "^ONECX_SECURITY_AUTH_ENABLED=" "$ENV_FILE" | cut -d '=' -f2 )
     # env file enabling or -s
-    if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then
+    if [[ "$OLE_SECURITY_AUTH_ENABLED" == "true" ]]; then
       enable_security
     fi
 fi
@@ -139,28 +179,28 @@ export OLE_SECURITY_AUTH_ENABLED=$SECURITY
 
 #################################################################
 if [[ "$CHECKING_SERVICES" == "true" ]]; then
-  printf "  Ensure that all services used by imports are running with secure authentication: ${GREEN}$SECURITY_AUTH_USED${NC}   (skip with -x option)\n"
+  printf '  %b\n' "Ensure that all services used by imports are running with secure authentication: ${GREEN}$SECURITY_AUTH_USED${NC}   (skip with -x option)"
   
   # Using 'docker compose' (v2). If using older docker, change to 'docker-compose'
   # Docker services are restartet only if some setting was different (e.g. security)
   ONECX_SECURITY_AUTH_ENABLED=${SECURITY}  ONECX_RS_CONTEXT_TENANT_ID_ENABLED=${SECURITY_TENANT_ID_ENABLED}  \
-    docker compose --profile $PROFILE  up -d  >/dev/null 2>&1
+    docker compose --profile "$PROFILE"  up -d  >/dev/null 2>&1
 fi
   
 #################################################################
 # Import
 IMPORT_SCRIPT="./versions/$EDITION/import-onecx.sh"
-if [ ! -f "$IMPORT_SCRIPT" ]; then
-  printf "${RED}Error: Script not found at $IMPORT_SCRIPT${NC}\n"
+if [[ ! -f "$IMPORT_SCRIPT" ]]; then
+  printf '  %b\n' "${RED}Error: Script not found at $IMPORT_SCRIPT${NC}"
   exit 1
 fi
 
 chmod +x "$IMPORT_SCRIPT"
-"$IMPORT_SCRIPT"  $TENANT  $VERBOSE  $SECURITY  $IMPORT_TYPE
+"$IMPORT_SCRIPT"  "$TENANT"  "$VERBOSE"  "$SECURITY"  "$IMPORT_TYPE"
 
 
 #################################################################
 ## remove profile helper service, ignoring any error message
-docker compose down  waiting-on-profile-$PROFILE  >/dev/null 2>&1
+docker compose down waiting-on-profile-"$PROFILE"  >/dev/null 2>&1 || true
 
-printf "\n"
+printf '\n'

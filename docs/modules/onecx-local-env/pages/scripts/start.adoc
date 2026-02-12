@@ -5,7 +5,7 @@ endif::[]
 
 = Start local OneCX
 
-The *start-onecx.sh* script is used to start the OneCX Local Environment. By default, it will start a minimal set of services and import initial mock data on startup. Data imports will not overwrite any custom data that may already exist in the environment and can be skipped using the appropriate flag. The script can be run from the root directory of the *onecx-local-env* repository:
+The *start-onecx.sh* script is used to start the OneCX Local Environment. By default, it will start a minimal set of services and import initial mock data on startup. Data imports will not overwrite any custom data that may already exist in the environment and can be skipped using the appropriate option. The script can be run from the root directory of the *onecx-local-env* repository:
 
 [source,bash]
 ----
@@ -20,16 +20,16 @@ image::scripts/script_start-onecx.sh.png[]
 The script can be executed at any time. Docker checks the configuration of the services and restarts them if there are changes. Without changes, running services are not affected, and only missing services are started. Existing data that was imported or added by the user remains unchanged. 
 ====
 
-[#available-flags]
-== Available Flags
-The script accepts several optional flags to customize its behavior. Some flags can be combined. The flags are:
+[#available-options]
+== Available Options
+The script accepts several optional options to customize its behavior. Some options can be combined. The options are:
 
 -e::
 The edition of OneCX to start. Supported editions are:
   * `v2`: Starts the current version of OneCX Local Environment (Default).
   * `v1`: Starts the legacy version of OneCX Local Environment (Not recommended for new setups).
 
--h:: Displays help information about the script and its available flags.
+-h:: Displays help information about the script and its available options.
 
 -p <profile-name>::
 The profile to use when starting the environment. The supported profiles are:
@@ -89,7 +89,7 @@ The necessary Docker volumes are created but no data are imported.
 
 [TIP]
 ====
-If data needs to be imported in a tenant-specific manner, then use the script xref:./import.adoc[import-onecx.sh] with the appropriate flags after starting the services.
+If data needs to be imported in a tenant-specific manner, then use the script xref:./import.adoc[import-onecx.sh] with the appropriate options after starting the services.
 ====
 
 

@@ -26,8 +26,8 @@ cd "$SCRIPT_DIR"
 ## Usage
 usage () {
   local exit_code=${1:-0}
-  cat <<USAGE
-  Usage: $0  [-hsx] [-e <edition>] [-p <profile>]
+  printf '  %b\n' \
+  "Usage: $0  [-hsx] [-e <edition>] [-p <profile>]
     -e  Edition, one of [ 'v1', 'v2'], default: 'v2'
     -h  Display this help and exit
     -p  Profile, one of [ 'all', 'base' ], default: 'base'
@@ -38,7 +38,7 @@ usage () {
     $0  -s          => Standard OneCX setup is started with security
     $0  -p all      => Complete OneCX setup is started and initialized
     $0  -p all -x   => Complete OneCX setup is started only (no imports)
-USAGE
+  "
   exit "$exit_code"
 }
 
@@ -62,6 +62,9 @@ SECURITY_TENANT_ID_ENABLED=false
 
 #################################################################
 ## Check options and parameter
+if [[ "${1:-}" == "--help" ]]; then
+  usage 0
+fi
 while getopts ":he:p:sx" opt; do
   case "$opt" in
     : ) printf '  %b\n' "${RED}Missing parameter for option -${OPTARG}${NC}"
@@ -100,16 +103,39 @@ while getopts ":he:p:sx" opt; do
 done
 shift $((OPTIND - 1))
 
+
+#################################################################
+## Check Docker availability and version
+if ! command -v docker &> /dev/null; then
+  printf '  %b\n' "${RED}Docker is not installed or not in PATH${NC}"
+  exit 1
+elif ! docker info &> /dev/null; then
+  printf '  %b\n' "${RED}Docker daemon is not running or user has no permission to access it${NC}"
+  exit 1
+fi
+if ! docker compose version &> /dev/null; then
+  printf '  %b\n' "${RED}Docker Compose v2 is required${NC}"
+  exit 1
+fi
+
+## File availability
 ENV_FILE="versions/$EDITION/.env"
+if [[ ! -f "$ENV_FILE" ]]; then
+  printf '  %b\n' "${YELLOW}Warning: $ENV_FILE not found${NC}"
+  exit 0
+fi
+if [[ ! -f "versions/$EDITION/compose.yaml" ]]; then
+  printf '  %b\n' "${YELLOW}No compose.yaml found for edition $EDITION${NC}"
+  exit 0
+fi
 
 
 #################################################################
 ## Secure Authentication enabled?
-if [[ $SECURITY == "false" ]]; then
-  # read preset
-  if [ -f "$ENV_FILE" ]; then
-    security_enabled=$(grep "^ONECX_SECURITY_AUTH_ENABLED=" "$ENV_FILE" | cut -d '=' -f2 || echo "")
-    if [[ $security_enabled == "true" ]]; then
+if [[ "$SECURITY" == "false" ]]; then
+  # read preset in env file
+  if [[ -f "$ENV_FILE" ]]; then
+    if grep -q "^ONECX_SECURITY_AUTH_ENABLED=true" "$ENV_FILE" 2>/dev/null; then
       enable_security
     fi
   fi
@@ -137,9 +163,9 @@ shell_is_healthy=$(docker inspect --format='{{.State.Health.Status}}' onecx-shel
 
 #################################################################
 ## Import profile data
-if [[ $shell_is_healthy == "healthy" && $IMPORT == "yes" ]]; then
+if [[ "$shell_is_healthy" == "healthy" && "$IMPORT" == "yes" ]]; then
   # Ensure script is executable
-  if [ -f "./import-onecx.sh" ]; then
+  if [[ -f "./import-onecx.sh" ]]; then
     chmod +x ./import-onecx.sh
     if ! ./import-onecx.sh -d "$PROFILE"; then
       printf '  %b\n' "${YELLOW}Warning: Import failed${NC}"
@@ -147,7 +173,7 @@ if [[ $shell_is_healthy == "healthy" && $IMPORT == "yes" ]]; then
   else
     printf '  %b\n' "${RED}Error: import-onecx.sh not found.${NC}"
   fi
-elif [[ $IMPORT == "yes" ]]; then
+elif [[ "$IMPORT" == "yes" ]]; then
   printf '  %b\n' "${YELLOW}Warning: onecx-shell-bff not healthy (status: $shell_is_healthy), skipping import${NC}"
 fi
 

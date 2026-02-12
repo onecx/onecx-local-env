@@ -9,31 +9,31 @@ The *list-containers.sh* script provides an overview of running Docker container
 It displays the container ID, service name, image name, and current status of each container.
 The script can be executed from the root directory of the *onecx-local-env* repository.
 
-.Command to display the available flags
+.Command to display the available options
 [source,bash]
 ----
 ./list-containers.sh -h
 ----
 
 
-== Available Flags
-The script accepts several optional flags to customize its behavior. +
-*All options may only be used separately!*
-
-The available flags are:
+== Available Options
+The script accepts several optional options to customize its behavior. +
+The available options are:
 
 -a::
 List all containers, including those that are not part of the OneCX Local Environment. +
-If used in combination with *-n* then the name filter is ignored.
+Other options are ignored.
 
 -h::
-Displays help information about the script and its available flags.
+Displays help information about the script and its available options.
 
 -n <text>::
-Name filter, show only containers which have <text> into container name
+Name filter, show only containers which have <text> into container name. +
+If used in combination with *-u* then only unhealthy containers matching the name filter are shown.
 
 -u::
-Show only unhealthy containers
+Show only unhealthy containers. +
+Can be used in combination with *-n* option.
 
 
 == Examples
@@ -51,12 +51,12 @@ The Docker which have *theme* in container name are shown.
 image::scripts/script_list-containers.sh_name-filter.png[]
 
 [#list-unhealthy-containers]
-=== List unhealthy containers
-The Docker which have *unhealthy* status are shown.
+=== List unhealthy containers with name filter
+The Docker which have *theme* in container name and *unhealthy* status are shown.
 
 [source,bash]
 ----
-./list-containers.sh  -u
+./list-containers.sh  -n theme -u
 ----
 
 .No unhealthy Containers

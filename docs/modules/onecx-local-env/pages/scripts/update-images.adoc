@@ -9,7 +9,7 @@ To run a local OneCX instance, Docker images with the latest version are downloa
 
 The *update-images.sh* script is used to renew local Docker images and removing orphaned images. It can be run from the root directory of the *onecx-local-env* repository.
 
-.Command to display the available flags:
+.Command to display the available options:
 [source,bash]
 ----
 ./update-images.sh -h
@@ -22,10 +22,10 @@ Run the script with the parameter `*-c*` to clean up orphaned images - can be do
 ====
 
 
-== Available Flags
-The script accepts several optional flags to customize its behavior. Some flags can be combined.
+== Available Options
+The script accepts several optional options to customize its behavior. Some options can be combined.
 
-The available flags are:
+The available options are:
 
 -a::
 Update all images, ignoring name filter (if option *-n* is also used). +
@@ -37,7 +37,7 @@ Can be used in combination with *-a* (all images are affected) or with *-n* (onl
 Basically, the deletion is only possible if the image is not in use. If so then stop the appropriate container first and try again.
 
 -h::
-Displays help information about the script and its available flags. If used then all other options are ignored.
+Displays help information about the script and its available options. If used then all other options are ignored.
 
 -n <text>::
 Name filter, update images which have <text> into image name

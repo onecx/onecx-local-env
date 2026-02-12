@@ -26,8 +26,8 @@ cd "$SCRIPT_DIR"
 ## Usage
 usage () {
   local exit_code=${1:-0}
-  cat <<USAGE
-  Usage: $0  [-ch] [-e <edition>] [-p <profile>]
+  printf '  %b\n' \
+  "Usage: $0  [-ch] [-e <edition>] [-p <profile>]
     -c  Cleanup, remove volumes
     -e  Edition, one of [ 'v1', 'v2'], default: 'v2'
     -h  Display this help and exit
@@ -35,7 +35,7 @@ usage () {
   Examples:
     $0              => Standard OneCX setup is stopped, existing data remains
     $0  -p all -c   => Complete OneCX setup is stopped and all data are removed
-USAGE
+  "
   exit "$exit_code"
 }
 
@@ -43,7 +43,7 @@ USAGE
 count_lines () {
   local input="$1"
   if [[ -z "$input" ]]; then
-    echo 0
+    printf '%s' "0"
   else
     printf '%s\n' "$input" | wc -l | tr -d '[:space:]'
   fi
@@ -60,6 +60,9 @@ PROFILE=base
 
 #################################################################
 ## Check options and parameter
+if [[ "${1:-}" == "--help" ]]; then
+  usage 0
+fi
 while getopts ":ce:hp:" opt; do
   case "$opt" in
     : ) printf '  %b\n' "${RED}Missing parameter for option -${OPTARG}${NC}"
@@ -94,6 +97,28 @@ while getopts ":ce:hp:" opt; do
         ;;
   esac
 done
+shift $((OPTIND - 1))
+
+
+#################################################################
+## Check Docker availability and version
+if ! command -v docker &> /dev/null; then
+  printf '  %b\n' "${RED}Docker is not installed or not in PATH${NC}"
+  exit 1
+elif ! docker info &> /dev/null; then
+  printf '  %b\n' "${RED}Docker daemon is not running or user has no permission to access it${NC}"
+  exit 1
+fi
+if ! docker compose version &> /dev/null; then
+  printf '  %b\n' "${RED}Docker Compose v2 is required${NC}"
+  exit 1
+fi
+
+## File availability
+if [[ ! -f "versions/$EDITION/compose.yaml" ]]; then
+  printf '  %b\n' "${YELLOW}No compose.yaml found for edition $EDITION${NC}"
+  exit 0
+fi
 
 
 #################################################################
@@ -105,7 +130,7 @@ printf '  %b\n' "edition: ${GREEN}$EDITION${NC}, profile: ${GREEN}$PROFILE${NC},
 ## Check and Downing the profile
 number_of_services=$(count_lines "$(docker compose -f "versions/$EDITION/compose.yaml" ps)")
 ((number_of_services--)) || true  # Decrement in place
-if [[ $number_of_services == 0 ]]; then
+if [[ $number_of_services -eq 0 ]]; then
   printf '  %b\n' "${CYAN}No running OneCX services${NC}"
 else
   printf '  %b\n' "${GREEN}$number_of_services ${CYAN}OneCX services running in total${NC}"
@@ -113,15 +138,15 @@ else
   ## Check project after downing: remaining services?
   number_of_services=$(count_lines "$(docker compose -f "versions/$EDITION/compose.yaml" ps)")
   ((number_of_services--)) || true  # Decrement in place
-  if [[ $number_of_services == 0 ]]; then
+  if [[ "$number_of_services" -eq 0 ]]; then
     printf '  %b\n' "${GREEN}OneCX stopped successfully${NC}"
   else
     cannot_remove_text=""
-    if [[ $CLEANUP == "true" ]]; then
+    if [[ "$CLEANUP" == "true" ]]; then
       cannot_remove_text=" ...cannot remove OneCX volumes and network - use 'all' profile to remove all services"
     fi
     printf '  %b\n' "${YELLOW}Remaining running services: $number_of_services${NC}$cannot_remove_text"
-    if [ -f "./list-containers.sh" ]; then
+    if [[ -f "./list-containers.sh" ]]; then
       ./list-containers.sh -n onecx
     fi
   fi
@@ -130,10 +155,10 @@ fi
 
 #################################################################
 ## Cleanup volumes of project 'onecx-local-env'?
-if [[ $number_of_services == 0 && $CLEANUP == "true" ]]; then
+if [[ "$number_of_services" -eq 0 && "$CLEANUP" == "true" ]]; then
   number_of_volumes=$(count_lines "$(docker volume ls --filter "label=${OLE_DOCKER_COMPOSE_PROJECT}.volume")")
   ((number_of_volumes--)) || true  # Decrement in place
-  if [[ $number_of_volumes == 0 ]]; then
+  if [[ "$number_of_volumes" -eq 0 ]]; then
     printf '  %b\n' "${CYAN}No OneCX volumes exist${NC}"
   else
     printf '  %b\n' "${CYAN}Remove OneCX volumes and orphans${NC}"
@@ -144,7 +169,7 @@ if [[ $number_of_services == 0 && $CLEANUP == "true" ]]; then
   fi
   number_of_volumes=$(count_lines "$(docker volume ls --filter "label=${OLE_DOCKER_COMPOSE_PROJECT}.volume")")
   ((number_of_volumes--)) || true  # Decrement in place
-  if [[ $number_of_volumes == 0 ]]; then
+  if [[ "$number_of_volumes" -eq 0 ]]; then
     printf '  %b\n' "${GREEN}OneCX volumes removed${NC}"
   fi
 fi
