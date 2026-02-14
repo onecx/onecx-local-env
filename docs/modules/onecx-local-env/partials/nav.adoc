@@ -7,6 +7,9 @@
 *** xref:onecx-local-env:extend/local-mfe.adoc[Integrate Microfrontend]
 *** xref:onecx-local-env:extend/local-images.adoc[Integrate Images]
 *** xref:onecx-local-env:extend/advanced.adoc[Advanced Usage]
+ifdef::env-site[]
+include::documentation:onecx-local-env-cli:partial$nav.adoc[]
+endif::[]
 
 ** xref:onecx-local-env:ai-setup.adoc[Use AI]
 
@@ -30,8 +33,7 @@
 ** xref:onecx-local-env:troubleshooting.adoc[Troubleshooting]
 
 ** Outdated
-*** xref:onecx-local-env:versions/v2.adoc[v2 (latest)]
-*** xref:onecx-local-env:versions/migrate.adoc[v2 Migration]
+*** xref:onecx-local-env:versions/migrate.adoc[Migrate to v2]
 *** xref:onecx-local-env:versions/v1.adoc[v1]
 
 
