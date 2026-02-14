@@ -96,11 +96,7 @@ With *-x* running services are not checked beforehand. If a required service is 
 
 [#import-tenant-data]
 === Import Tenant data
-Import essential OneCX data as:
-* Non-tenant specific data
-* Tenant data for *t1* tenant
-
-To import tenant-specific data, services with secure authentication enabled must be running. Without the *-x* flag, Docker restarts the services with the security option enabled. A corresponding user exists for each tenant. The import is performed using this authorized user.
+Import OneCX data for a specific tenant, e.g. *t1*. In general, not all data types are tenant-specific. The tenant-specific data types include, for example, workspace and theme data. When importing tenant-specific data, the security option is enabled, and the import is performed using an authorized user.
 
 [source,bash]
 ----

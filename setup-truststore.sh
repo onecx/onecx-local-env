@@ -88,7 +88,7 @@ TRUSTSTORE_PATH="$CERT_DIR/truststore.jks"
 
 printf '  %b\t%b\n'   "=> Certificate directory:" "${GREEN}${CERT_DIR}${NC}"
 printf '  %b\t\t%b\n' "=> Truststore path:" "${GREEN}${TRUSTSTORE_PATH}${NC}"
-printf '  %b\t%b\n'   "=> Truststore password:" "${GREEN}${STORE_PASS}${NC} (length: ${#STORE_PASS})"
+printf '  %b\t%b\n'   "=> Truststore password:" "${GREEN}${STORE_PASS:0:5}...${NC} (length: ${#STORE_PASS})"
 
 
 #################################################################
