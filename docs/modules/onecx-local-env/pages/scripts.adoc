@@ -34,6 +34,9 @@ The following table gives an overview of the available scripts in *onecx-local-e
 | xref:./scripts/update-images.adoc[update-images.sh]
 | Update local images to the latest available versions
 
+| xref:./scripts/list-containers.adoc[list-containers.sh]
+| List all running containers with details and filter options
+
 | xref:./scripts/setup-truststore.adoc[setup-truststore.sh]
 | Create or update Java Truststore with custom certificates
 |===

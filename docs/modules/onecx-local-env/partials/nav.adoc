@@ -23,7 +23,7 @@ endif::[]
 *** xref:onecx-local-env:scripts/list-containers.adoc[list-containers.sh]
 *** xref:onecx-local-env:scripts/setup-truststore.adoc[setup-truststore.sh]
 
-** Internal
+** xref:onecx-local-env:internal.adoc[Internal]
 *** xref:onecx-local-env:internal/onecx-data.adoc[Initial Data]
 *** xref:onecx-local-env:internal/networking.adoc[Networking]
 *** xref:onecx-local-env:internal/profiles.adoc[Compose Profiles]
