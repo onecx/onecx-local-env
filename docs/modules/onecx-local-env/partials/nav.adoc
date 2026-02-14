@@ -33,10 +33,5 @@ endif::[]
 ** xref:onecx-local-env:troubleshooting.adoc[Troubleshooting]
 
 ** Outdated
-*** xref:onecx-local-env:versions/migrate.adoc[Migrate to v2]
 *** xref:onecx-local-env:versions/v1.adoc[v1]
-
-
-//** Get Help
-//*** xref:onecx-local-env:help/faq.adoc[FAQ]
-//*** xref:onecx-local-env:help/common-issues.adoc[Common Issues]
+*** xref:onecx-local-env:versions/migrate.adoc[Migrate to v2]
