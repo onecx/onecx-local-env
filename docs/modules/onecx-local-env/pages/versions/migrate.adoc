@@ -6,75 +6,103 @@
 [NOTE]
 .Disclaimer
 ====
-This page was created for an older version of OneCX Local Environment and may not reflect the current state of the project. It will be updated in the near future.
+This page was created for an older version of OneCX Local Environment and may not reflect the current state of the project. It is kept for historical reference and to provide information for users who are still using v1, but it might contain outdated information.
 ====
 
-This guide highlights the key differences between OneCX Local Environment xref:./v1.adoc[v1] and xref:./v2.adoc[v2], and explains how you can adapt your setup to ensure that it seamlessly works with xref:./v2.adoc[v2].
+This guide highlights the key differences between OneCX Local Environment xref:./v1.adoc[v1] and the current version, and explains how you can adapt your setup.
+
+== General Changes
+The v2 edition of OneCX Local Environment includes several improvements and new features compared to v1. Some of the most significant changes include:
+
+- *Docker Compose project name*: The project name used in Docker Compose has been changed from `<current-directory>` to *onecx-local-env*. This affects the naming of networks, volumes and other Docker resources created by the compose file.
+- *Network rename*: The default network used by the services has been renamed from *example* to *onecx*.
+- *Service startup behavior*: In v1, some core services started automatically when running `docker compose up -d`, while additional services could be started using the two existing profiles: `all` and `parameters`. In v2, the system is fully profile-based, meaning that nothing starts by default when you run `docker compose up -d`. You must explicitly specify at least one profile to start the services. This allows for more fine-grained control over which services run.
+- *Script improvements*: All shell scripts have been improved to provide more functionality and better error handling. For example, the import script now includes options to specify which data to import, the edition of OneCX, secure authentication, tenant-specific imports, verbosity and skipping container checks. This allows for more flexibility and customization when importing data.
+- *Reorganized ENV files*: All environment variables are now located within the standard `./.env` file in the root of the version directory, instead of being scattered across different files.
+- *Security improvements*: Security can be optionally enabled on startup and during import. Security is now enabled by default for tenant-specific imports, and the import script automatically handles authentication and token retrieval for these imports. This means that once Docker services have been started with the security option enabled, all subsequent actions require an authenticated user. For example, an import operation must then be started with the `-s` option to succeed. This enhances the security of the environment and ensures that only authorized users can perform certain actions.
+
 
 == Network Rename
 
-In xref:./v1.adoc[v1], the network that all services connected to was named `example`.  
-In xref:./v2.adoc[v2], this network is now named `default`.
+v1::
+In xref:./v1.adoc[v1], the network that all services connected to was named *example*.
+v2::
+In current version, the services use the *onecx* network within the compose file. +
+However, when the compose file is executed, Docker creates a network with the name format `<project_name>_default`.
+With *onecx* the complete network name is *onecx-local-env_onecx*. + 
 
-If you have any custom services that need to attach to the same network as OneCX, make sure they connect to `default` from now on.
 
+== Service Startup
 
-== Service Startup Behavior
-
-In xref:./v1.adoc[v1]:
-
+v1::
 - Some core services started automatically when running: `docker compose up -d`
 
 - Additional services could be started using the two existing profiles: `all` and `parameters`.
 - This approach gave developers very little control over which apps were started, making it hard to, for example, run only a small subset of apps and one OneCX product.
 
-In xref:./v2.adoc[v2]:
-
-- The system is **fully profile-based**.
-- **Nothing** starts by default when you run: `docker compose up -d`
-- You must explicitly specify at least one profile, for example:
-
-```bash
+v2::
+* The system supports the compose profiles *all* and *base* (which includes all core services). +
+  ** *Nothing* starts by default when you run: `docker compose up -d`
+  ** You must explicitly specify at least one profile, for example:
++
+.Starting core services via compose profile `base`:
+[source,bash]
+----
 docker compose --profile base up -d
-```
-- Profiles allow fine-grained control over which services run.
-- For details on available profiles, see xref:./v2.adoc[the v2 documentation].
+----
 
-== Data Import Script Improvements
+[TIP]
+====
+It is recommended to use the xref:../scripts/start.adoc[Start Script] for starting the environment, which handles profile selection and other options in a more user-friendly way. +
+For details how to start OneCX in general see xref:../run-onecx.adoc[Running Onecx].
+====
 
-In xref:./v1.adoc[v1]:
+== Data Import
 
+v1::
 - The data import script had the sole purpose of sending data to services to trigger the import.
 - This caused issues if containers were not running, unhealthy, or still starting up.
 
-In xref:./v2.adoc[v2]:
-
-- The import script now:
+v2::
+- The import script now provides options to manage container states during the import process. By default, the script now:
   * Starts all required services.
   * Waits for them to become healthy and operational.
   * Imports the data.
-  * Spins down the started services afterward.
 
-This improves reliability for most developers.  
-However, if you use the script inside another script that needs containers to remain running after import, you can disable container management by running the script using:
+- If you want to manage container states manually, you can use the `-x` option to skip checking running Docker services. This ensures the script does not start or stop any containers, allowing you to manage them manually.
 
-```bash
-SKIP_CONTAINER_MANAGEMENT=true ./import-onecx.sh
-```
 
-This ensures the script does not start or stop any containers, allowing you to manage them manually. *Please be aware that in this mode, it's your responsibility to ensure that all required containers (Traefik, Postgres, Keycloak and all OneCX SVCs) are running and healthy before executing the script.*
+== ENV Files and Variables
 
-== Moved ENV Files
-Before the creation of xref:./v2.adoc[v2], all environment variable files were located in the root directory of the project. To allow for better organization and scoped environment variables per version, all environment variable files are now located in the directory of the version they belong to (e.g. `./versions/v2/` for v2). As of right now, `./versions/v1/` and `./versions/v2/` contain identical `.env`, `bff.env` and `svc.env` files, but this may change in the future (e.g. if different image tags have to be used for different versions). If you or any of your scripts reference these files, please update the paths accordingly.
+v1::
+Environment variables were located in multiple files in the root directory of the project, such as `.env`, `common.env`, `svc.env` and `bff.env`. This made it difficult to keep track of which variables were used for which version and services.
+
+v2::
+All common project-related environment variables are now located in the standard compose environment file. This allows for better organization and scoped environment variables per edition. +
+Within the compose file of the edition, only the specific environment variables for each service are defined, either directly or via the *env_file* directive. +
+At the beginning of the compose file (compose.yaml) are sections that define specific sets of variables for use in BFF or SVC services, with or without multi-tenancy:
++
+* *bff_environment* => environment variables for BFF services without multi-tenancy
+* *svc_single_tenancy* => environment variables for SVC services without multi-tenancy
+* *svc_multi_tenancy* => environment variables for SVC services with multi-tenancy
++
+This allows for better organization and easier management of environment variables, as well as clearer visibility of which variables are used for which services and editions. Use these variable when possible instead of defining new ones to ensure consistency across the compose file and services.
+
+.Example of using environment variables in the compose file:
+[source,yaml]
+----
+services:
+  onecx-example-svc:
+    image: example-image:latest
+    container_name: onecx-example-svc
+    environment:
+      <<: *svc_multi_tenancy
+----
 
 [NOTE]
-.Checkpoint
 ====
-After reading all sections of this document you should be able to make all necessary adjustments to migrate from v1 to v2 of the OneCX Local Environment.
-To recap, the main necessary adjustments are:
+After reading all sections of this document you should be able to make all necessary adjustments to migrate from v1 to v2 of the OneCX Local Environment. +
+Please make familiar with the current state of the OneCX Local Environment before proceeding. 
 
-* Change any custom services that connect to the `example` network to connect to the `default` network instead.
-* Change any scripts or commands that start services to use profiles instead of relying on default behavior.
-* Adjust import scripts if you need to manage container states manually.
-* Update paths to any `.env`, `bff.env` or `svc.env` files to point to the new locations in the respective version directory.
+There are also functionality *to extend the environment* with custom services, see xref:../extend/extend.adoc[Extend OneCX] for more details.
 ====
