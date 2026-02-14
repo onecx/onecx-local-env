@@ -25,7 +25,7 @@ The v2 edition of OneCX Local Environment includes several improvements and new 
 == Network Rename
 
 v1::
-In xref:./v1.adoc[v1], the network that all services connected to was named *example*.
+The network that all services connected to was named *example*.
 v2::
 In current version, the services use the *onecx* network within the compose file. +
 However, when the compose file is executed, Docker creates a network with the name format `<project_name>_default`.
@@ -41,9 +41,9 @@ v1::
 - This approach gave developers very little control over which apps were started, making it hard to, for example, run only a small subset of apps and one OneCX product.
 
 v2::
-* The system supports the compose profiles *all* and *base* (which includes all core services). +
-  ** *Nothing* starts by default when you run: `docker compose up -d`
-  ** You must explicitly specify at least one profile, for example:
+The system supports the compose profiles *all* and *base* (which includes all core services). +
+  * *Nothing* starts by default when you run: `docker compose up -d`
+  * You must explicitly specify at least one profile, for example:
 +
 .Starting core services via compose profile `base`:
 [source,bash]
@@ -60,16 +60,21 @@ For details how to start OneCX in general see xref:../run-onecx.adoc[Running One
 == Data Import
 
 v1::
-- The data import script had the sole purpose of sending data to services to trigger the import.
-- This caused issues if containers were not running, unhealthy, or still starting up.
+The data import script had the sole purpose of sending data to services to trigger the import. +
+This caused issues if containers were not running, unhealthy, or still starting up.
 
 v2::
-- The import script now provides options to manage container states during the import process. By default, the script now:
+The import script now provides options to manage container states during the import process. By default, the script now:
+
   * Starts all required services.
   * Waits for them to become healthy and operational.
   * Imports the data.
-
-- If you want to manage container states manually, you can use the `-x` option to skip checking running Docker services. This ensures the script does not start or stop any containers, allowing you to manage them manually.
+//
++
+If you want to manage container states manually, you can use the *-x* option to skip checking running Docker services. This ensures the script does not start or stop any containers, allowing you to manage them manually.
++
+Optionally you can also specify which data to import *-d*, enable secure authentication *-s*, specify tenant *-t* for tenant-specific imports, and enable verbose output for more details during the import process. +
+See xref:../scripts/import.adoc[Import OneCX Data] for more details on the available options and how to use the import script.
 
 
 == ENV Files and Variables
@@ -82,9 +87,9 @@ All common project-related environment variables are now located in the standard
 Within the compose file of the edition, only the specific environment variables for each service are defined, either directly or via the *env_file* directive. +
 At the beginning of the compose file (compose.yaml) are sections that define specific sets of variables for use in BFF or SVC services, with or without multi-tenancy:
 +
-* *bff_environment* => environment variables for BFF services without multi-tenancy
-* *svc_single_tenancy* => environment variables for SVC services without multi-tenancy
-* *svc_multi_tenancy* => environment variables for SVC services with multi-tenancy
+* *bff_environment* => environment variables for BFF services
+* *svc_single_tenancy* => environment variables for SVC services *without* multi-tenancy
+* *svc_multi_tenancy* => environment variables for SVC services with *multi-tenancy*
 +
 This allows for better organization and easier management of environment variables, as well as clearer visibility of which variables are used for which services and editions. Use these variable when possible instead of defining new ones to ensure consistency across the compose file and services.
 
