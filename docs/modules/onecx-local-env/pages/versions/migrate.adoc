@@ -73,7 +73,7 @@ The import script now provides options to manage container states during the imp
 +
 If you want to manage container states manually, you can use the *-x* option to skip checking running Docker services. This ensures the script does not start or stop any containers, allowing you to manage them manually.
 +
-Optionally you can also specify which data to import *-d*, enable secure authentication *-s*, specify tenant *-t* for tenant-specific imports, and enable verbose output for more details during the import process. +
+Optionally you can also specify which data to import (*-d*), enable secure authentication (*-s*), specify tenant (*-t*) for tenant-specific imports, and enable verbose output (*-v*) for more details during the import process. +
 See xref:../scripts/import.adoc[Import OneCX Data] for more details on the available options and how to use the import script.
 
 
