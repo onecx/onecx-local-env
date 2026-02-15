@@ -9,8 +9,9 @@ This section provides internal details about the OneCX Local Environment. +
 This information is intended for users who want to understand the inner workings of the local environment or need to troubleshoot specific issues.
 
 .The following pages cover some internal aspects of the OneCX Local Environment:
-* xref:./internal/onecx-data.adoc[Initial Data]
-* xref:./internal/networking.adoc[Networking]
-* xref:./internal/profiles.adoc[Compose Profiles]
-* xref:./internal/custom-certificates.adoc[Custom Certificates]
-* xref:./internal/utils.adoc[Utilities]
+* xref:./internal/onecx-data.adoc[Loading initial Data]
+* xref:./internal/networking.adoc[Networking: Actors & Components]
+* xref:./internal/profiles.adoc[Docker Compose Profiles]
+* xref:./internal/custom-certificates.adoc[Adding Custom Certificates]
+* xref:./internal/utils.adoc[Additional Utilities used]
+* xref:documentation:onecx-local-env-cli:index.adoc[Command Line Interface]

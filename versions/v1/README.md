@@ -1,6 +1,6 @@
 # OneCX Local Environment v1
 
-This folder contains the source code for edition v1 of `onecx-local-env`.
+This folder contains the source code for edition v1 of `onecx-local-env` which is outdated.
 
 For more information on the specifics of edition v1, please refer to the [v1 documentation](https://onecx.github.io/docs/documentation/current/onecx-local-env/versions/v1.html).
 

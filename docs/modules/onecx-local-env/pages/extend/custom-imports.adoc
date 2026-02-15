@@ -1,0 +1,16 @@
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
+:imagesdir: ../../images
+
+:integrate_images_link: xref:./local-images.adoc[Integrate Local Docker Images]
+
+= Import Custom Data
+
+The *import-onecx.sh* script can also be used to import custom data into the OneCX services. This allows you to extend the initial data with your own data, e.g. for testing or development purposes.
+
+== Prepare Custom Data
+To prepare custom data for import, you need to create a JSON file that contains the data you want to import. The structure of the JSON file should match the structure of the data in the OneCX services. You can use the exported data from the services as a reference for the structure.
+Once you have created the JSON file with your custom data, you can place it in a directory of your choice. For example, you can create a directory called *custom-data* in the root of the *onecx-local-env* repository and place your JSON file there.
+
+to be continued...
