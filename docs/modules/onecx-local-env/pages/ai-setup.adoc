@@ -71,7 +71,7 @@ image::scripts/script_import-onecx.sh_ai.png[Import AI Data]
 [TIP]
 ====
 Due to the API Key being sensitive information, it is not stored in the OneCX Local Environment by default. +
-You can provide the API Key in a file named *api_key* within the root directory of the `onecx-local-env`. It is automatically read in during the AI ​​data import process (step 2 above)..
+You can provide the API Key in a file named *api-key* within the root directory of the `onecx-local-env`. It is automatically read in during the AI data import process (step 2 above)..
 ====
 
 
