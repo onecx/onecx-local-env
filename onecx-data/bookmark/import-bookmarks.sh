@@ -34,7 +34,8 @@ do
   filename=$(printf '%s' "$filename" | cut -d '.' -f 1)
   workspace=$(printf '%s' "$filename" | cut -d '_' -f 2)
   
-  url="http://onecx-bookmark-svc/exim/v1/bookmark/$workspace/import?importMode=OVERWRITE&scopes=PRIVATE&scopes=PUBLIC"
+  # OVERWRITE: overwrites existing PRIVATE bookmarks only, PUBLIC bookmarks are not affected, if they exist.
+  url="http://onecx-bookmark-bff/bookmarks/$workspace/import?importMode=APPEND&scopes=PRIVATE&scopes=PUBLIC"
   params="--write-out %{http_code} --silent --output /dev/null -X POST"
   if [[ "$OLE_SECURITY_AUTH_ENABLED" == "true" ]]; then
     status_code=$(curl $params -H "$OLE_HEADER_CT_JSON" -H "$OLE_HEADER_AUTH_TOKEN" -H "$OLE_HEADER_APM_TOKEN" -d "@$entry" "$url")

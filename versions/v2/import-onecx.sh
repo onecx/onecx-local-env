@@ -143,17 +143,17 @@ if [[ "${OLE_SECURITY_AUTH_ENABLED}" == "true" ]]; then
   kc_token_url="${kc_base_url}/realms/${kc_realm}/protocol/openid-connect/token"
   printf '  %b\n' "${CYAN}Fetching tokens (APM, AUTH) from Keycloak (realm: ${kc_realm}, user: ${KC_USER})${NC}"
 
-  ## Get APM token for user: User info, roles, scope: Organization_ID
-  curl_params=(--silent -d "username=${KC_USER}" -d "password=${KC_PWD}" -d "grant_type=password" -d "client_id=${kc_apm_client_id}")
+  ## Get APM (ID) token for user: User info, roles, scope: Organization_ID
+  curl_params=(--silent -d "username=${KC_USER}" -d "password=${KC_PWD}" -d "grant_type=password" -d "scope=openid" -d "client_id=${kc_apm_client_id}")
   # Capture token, handle potential curl errors cleanly
   TOKEN_RES=$(curl "${curl_params[@]}" "$kc_token_url")
-  access_token=$(printf '%s' "${TOKEN_RES}" | jq -r '.access_token // empty')
-  if [[ -z "$access_token" ]]; then
+  id_token=$(printf '%s' "${TOKEN_RES}" | jq -r '.id_token // empty')
+  if [[ -z "$id_token" ]]; then
     printf '  %b\n' "${RED}Failed to fetch APM token${NC}"
     exit 1
   fi
-  printf '  %-9s%s%b\n' "==> APM" "token: " "${GREEN}${access_token:0:5}..${access_token:350:5}...${NC}"
-  export OLE_HEADER_APM_TOKEN="apm-principal-token: ${access_token}"
+  printf '  %-9s%s%b\n' "==> APM" "token: " "${GREEN}${id_token:0:5}..${id_token:350:5}...${NC}  (KC client id: ${kc_apm_client_id})"
+  export OLE_HEADER_APM_TOKEN="apm-principal-token: ${id_token}"
 
   ## Get AUTH (Bearer, access) token: scopes for SVCs
   curl_params=(--silent -d "client_secret=${kc_auth_client_secret}" -d "grant_type=client_credentials" -d "client_id=${kc_auth_client_id}")
@@ -164,7 +164,7 @@ if [[ "${OLE_SECURITY_AUTH_ENABLED}" == "true" ]]; then
     printf '  %b\n' "${RED}Failed to fetch AUTH token${NC}"
     exit 1
   fi
-  printf '  %-9s%s%b\n' "==> AUTH" "token: " "${GREEN}${access_token:0:5}..${access_token:350:5}...${NC}"
+  printf '  %-9s%s%b\n' "==> AUTH" "token: " "${GREEN}${access_token:0:5}..${access_token:350:5}...${NC}  (KC client id: ${kc_auth_client_id})"
   export OLE_HEADER_AUTH_TOKEN="Authorization: Bearer ${access_token}"
 fi
 
