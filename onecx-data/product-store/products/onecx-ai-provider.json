@@ -3,7 +3,7 @@
   "description": "Manage AI providers",
   "imageUrl": "",
   "iconName": "ai",
-  "displayName": "OneCX AI",
+  "displayName": "OneCX AI Provider",
   "basePath": "/ai",
   "provider": "OneCX Team",
   "classifications": ["Tool"],

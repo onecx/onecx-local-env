@@ -1,0 +1,6 @@
+{
+  "version": "xxx",
+  "name": "onecx-ai-provider-svc",
+  "description": "OneCX AI Provider Backend Service",
+  "type": "svc"
+}

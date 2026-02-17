@@ -1,0 +1,50 @@
+{
+  "name": "onecx-ai-provider-bff",
+  "permissions": [
+    {
+      "resource": "configuration",
+      "action": "read",
+      "description": "Permission to read AI configuration"
+    },
+    {
+      "resource": "configuration",
+      "action": "write",
+      "description": "Permission to write AI configuration"
+    },
+    {
+      "resource": "configuration",
+      "action": "delete",
+      "description": "Permission to delete AI configuration"
+    },
+    {
+      "resource": "provider",
+      "action": "read",
+      "description": "Permission to read AI providers"
+    },
+    {
+      "resource": "provider",
+      "action": "write",
+      "description": "Permission to write AI providers"
+    },
+    {
+      "resource": "provider",
+      "action": "delete",
+      "description": "Permission to delete AI providers"
+    },
+    {
+      "resource": "mcpServer",
+      "action": "read",
+      "description": "Permission to read MCP Server"
+    },
+    {
+      "resource": "mcpServer",
+      "action": "write",
+      "description": "Permission to write MCP Server"
+    },
+    {
+      "resource": "mcpServer",
+      "action": "delete",
+      "description": "Permission to delete MCP Server"
+    }
+  ]
+}

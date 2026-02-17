@@ -10,8 +10,8 @@
 127.0.0.1 sonar
 
 # OneCX - product services
-127.0.0.1 onecx-ai-bff
-127.0.0.1 onecx-ai-svc
+127.0.0.1 onecx-ai-provider-bff
+127.0.0.1 onecx-ai-provider-svc
 127.0.0.1 onecx-announcement-bff
 127.0.0.1 onecx-announcement-svc
 127.0.0.1 onecx-bookmark-svc
