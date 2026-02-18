@@ -1,0 +1,61 @@
+{
+  "id": "onecx-local-env_import-permission-assignments_onecx-ai-provider",
+  "assignments": {
+    "onecx-ai-provider": {
+      "onecx-ai-provider-ui": {
+        "onecx-admin": {
+          "PROVIDER": [
+            "CREATE",
+            "EDIT",
+            "DELETE",
+            "SAVE",
+            "IMPORT",
+            "EXPORT",
+            "VIEW",
+            "SEARCH",
+            "CHANGE_API_KEY"
+          ],
+          "CONFIGURATION": [
+            "CREATE",
+            "EDIT",
+            "DELETE",
+            "SAVE",
+            "IMPORT",
+            "EXPORT",
+            "VIEW",
+            "SEARCH",
+            "BACK"
+          ],
+          "MCPSERVER": [
+            "CREATE",
+            "EDIT",
+            "DELETE",
+            "SAVE",
+            "IMPORT",
+            "EXPORT",
+            "VIEW",
+            "SEARCH",
+            "BACK"
+          ]
+        },
+        "onecx-user": {
+          "PROVIDER": ["VIEW", "SEARCH"],
+          "CONFIGURATION": ["VIEW", "SEARCH"],
+          "MCPSERVER": ["VIEW", "SEARCH"]
+        }
+      },
+      "onecx-ai-provider-bff": {
+        "onecx-admin": {
+          "configuration": ["read", "write", "delete"],
+          "mcpServer": ["read", "write", "delete"],
+          "provider": ["read", "write", "delete"]
+        },
+        "onecx-user": {
+          "configuration": ["read"],
+          "mcpServer": ["read"],
+          "provider": ["read"]
+        }
+      }
+    }
+  }
+}

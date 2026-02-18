@@ -1,0 +1,140 @@
+{
+  "name": "onecx-ai-provider-ui",
+  "permissions": [
+    {
+      "resource": "PROVIDER",
+      "action": "CREATE",
+      "description": "Create Provider"
+    },
+    {
+      "resource": "PROVIDER",
+      "action": "EDIT",
+      "description": "Edit Provider"
+    },
+    {
+      "resource": "PROVIDER",
+      "action": "DELETE",
+      "description": "Delete Provider"
+    },
+    {
+      "resource": "PROVIDER",
+      "action": "SAVE",
+      "description": "Update and save Provider"
+    },
+    {
+      "resource": "PROVIDER",
+      "action": "IMPORT",
+      "description": "Import Provider"
+    },
+    {
+      "resource": "PROVIDER",
+      "action": "EXPORT",
+      "description": "Export Provider"
+    },
+    {
+      "resource": "PROVIDER",
+      "action": "VIEW",
+      "description": "View mode for Provider"
+    },
+    {
+      "resource": "PROVIDER",
+      "action": "SEARCH",
+      "description": "Search Provider"
+    },
+    {
+      "resource": "PROVIDER",
+      "action": "CHANGE_API_KEY",
+      "description": "Change ApiKey Provider"
+    },
+    {
+      "resource": "CONFIGURATION",
+      "action": "CREATE",
+      "description": "Create configuration"
+    },
+    {
+      "resource": "CONFIGURATION",
+      "action": "EDIT",
+      "description": "Edit configuration"
+    },
+    {
+      "resource": "CONFIGURATION",
+      "action": "DELETE",
+      "description": "Delete configuration"
+    },
+    {
+      "resource": "CONFIGURATION",
+      "action": "SAVE",
+      "description": "Update and save configuration"
+    },
+    {
+      "resource": "CONFIGURATION",
+      "action": "IMPORT",
+      "description": "Import configuration"
+    },
+    {
+      "resource": "CONFIGURATION",
+      "action": "EXPORT",
+      "description": "Export configuration"
+    },
+    {
+      "resource": "CONFIGURATION",
+      "action": "VIEW",
+      "description": "View mode for configuration"
+    },
+    {
+      "resource": "CONFIGURATION",
+      "action": "SEARCH",
+      "description": "Search configuration"
+    },
+    {
+      "resource": "CONFIGURATION",
+      "action": "BACK",
+      "description": "Back to configuration"
+    },
+    {
+      "resource": "MCPSERVER",
+      "action": "CREATE",
+      "description": "Create mcpserver"
+    },
+    {
+      "resource": "MCPSERVER",
+      "action": "EDIT",
+      "description": "Edit mcpserver"
+    },
+    {
+      "resource": "MCPSERVER",
+      "action": "DELETE",
+      "description": "Delete mcpserver"
+    },
+    {
+      "resource": "MCPSERVER",
+      "action": "SAVE",
+      "description": "Update and save mcpserver"
+    },
+    {
+      "resource": "MCPSERVER",
+      "action": "IMPORT",
+      "description": "Import mcpserver"
+    },
+    {
+      "resource": "MCPSERVER",
+      "action": "EXPORT",
+      "description": "Export mcpserver"
+    },
+    {
+      "resource": "MCPSERVER",
+      "action": "VIEW",
+      "description": "View mode for mcpserver"
+    },
+    {
+      "resource": "MCPSERVER",
+      "action": "SEARCH",
+      "description": "Search mcpserver"
+    },
+    {
+      "resource": "MCPSERVER",
+      "action": "BACK",
+      "description": "Navigate back in details of mcpserver"
+    }
+  ]
+}

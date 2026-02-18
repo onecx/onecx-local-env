@@ -106,8 +106,8 @@ Update your Docker Compose file to mount the truststore and configure Java to us
 [source,yaml]
 ----
 services:
-  onecx-ai-svc:
-    image: ${ONECX_AI_SVC}
+  onecx-ai-provider-svc:
+    image: ${ONECX_AI_PROVIDER_SVC}
     volumes:
       - ./certs/truststore.jks:/opt/certs/truststore.jks:ro
     environment:
@@ -121,8 +121,8 @@ services:
 [source,yaml]
 ----
 services:
-  onecx-ai-svc:
-    image: ${ONECX_AI_SVC}
+  onecx-ai-provider-svc:
+    image: ${ONECX_AI_PROVIDER_SVC}
     volumes:
       - ./certs/truststore.jks:/opt/certs/truststore.jks:ro
     entrypoint: ["/work/application"]

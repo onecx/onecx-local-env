@@ -26,11 +26,11 @@
       ],
       "products": [
         {
-          "productName": "onecx-ai",
+          "productName": "onecx-ai-provider",
           "baseUrl": "/ai",
           "microfrontends": [
             {
-              "appId": "onecx-ai-ui",
+              "appId": "onecx-ai-provider-ui",
               "basePath": "/"
             }
           ]
@@ -833,10 +833,20 @@
                   "external": false,
                   "target": "_self",
                   "i18n": {},
-                  "roles": [
-                    "onecx-admin",
-                    "onecx-user"
-                  ],
+                  "roles": ["onecx-admin", "onecx-user"],
+                  "children": []
+                },
+                {
+                  "key": "PMM_MISC_AI",
+                  "name": "AI Provider",
+                  "url": "/ai-provider",
+                  "disabled": false,
+                  "position": 6,
+                  "badge": "sitemap",
+                  "external": false,
+                  "target": "_self",
+                  "i18n": {},
+                  "roles": ["onecx-admin", "onecx-user"],
                   "children": []
                 }
               ]

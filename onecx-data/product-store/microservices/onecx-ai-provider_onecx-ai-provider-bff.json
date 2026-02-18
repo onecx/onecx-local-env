@@ -1,0 +1,6 @@
+{
+  "version": "xxx",
+  "name": "onecx-ai-provider-bff",
+  "description": "OneCX AI Provider Backend For Frontend",
+  "type": "bff"
+}

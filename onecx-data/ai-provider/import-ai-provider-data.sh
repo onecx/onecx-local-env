@@ -78,7 +78,7 @@ printf "${CYAN}${OLE_LINE_PREFIX}API Key read from: ${GREEN}${APIKEY_SOURCE}${NC
 #################################################################
 # Step 1: Import Provider and capture its response
 printf "${CYAN}${OLE_LINE_PREFIX}Importing Provider${NC}\n"
-url="http://onecx-ai-svc/internal/providers"
+url="http://onecx-ai-provider-svc/internal/providers"
 response_output=$(mktemp)
 status_output=$(mktemp)
 
@@ -115,7 +115,7 @@ rm -f "$provider_temp" "$response_output" "$status_output"
 #################################################################
 # Step 2: Import MCP Server and capture its response
 printf "${CYAN}${OLE_LINE_PREFIX}Importing MCP Server${NC}\n"
-url="http://onecx-ai-svc/internal/mcpServer"
+url="http://onecx-ai-provider-svc/internal/mcpServer"
 response_output=$(mktemp)
 status_output=$(mktemp)
 if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then
@@ -156,7 +156,7 @@ fi
 #################################################################
 # Step 4: Import Configuration
 printf "${CYAN}${OLE_LINE_PREFIX}Importing Configuration${NC}\n"
-url="http://onecx-ai-svc/internal/configurations"
+url="http://onecx-ai-provider-svc/internal/configurations"
 response_output=$(mktemp)
 status_output=$(mktemp)
 if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then

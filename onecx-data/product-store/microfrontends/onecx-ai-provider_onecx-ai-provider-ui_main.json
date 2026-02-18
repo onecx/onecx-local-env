@@ -1,0 +1,16 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX AI Provider UI",
+  "description": "OneCX AI Provider",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/ai-provider/",
+  "remoteEntry": "/mfe/ai-provider/remoteEntry.js",
+  "note": "Imported MFE",
+  "exposedModule": "./OnecxAiUiProviderModule",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-ai-provider-ui",
+  "tagName": "onecx-ai-provider-ui-webcomponent",
+  "type": "MODULE",
+  "deprecated": false,
+  "undeployed": false
+}

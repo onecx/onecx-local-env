@@ -184,15 +184,15 @@ services:
   ########### OneCX Products #############
   ########################################
 
-  ########## ONECX AI
-  onecx-ai-svc:
-    image: ${ONECX_AI_SVC}
-    container_name: onecx-ai-svc
+  ########## ONECX AI Provider
+  onecx-ai-provider-svc:
+    image: ${ONECX_AI_PROVIDER_SVC}
+    container_name: onecx-ai-provider-svc
     environment:
       <<: *svc_multi_tenancy
-      QUARKUS_DATASOURCE_USERNAME: onecx_ai
-      QUARKUS_DATASOURCE_PASSWORD: onecx_ai
-      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresdb:5432/onecx_ai?sslmode=disable
+      QUARKUS_DATASOURCE_USERNAME: onecx_ai_provider
+      QUARKUS_DATASOURCE_PASSWORD: onecx_ai_provider
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresdb:5432/onecx_ai_provider?sslmode=disable
     entrypoint: ["/work/application"]
     command:
     - "-Djavax.net.ssl.trustStore=/opt/certs/truststore.jks"
@@ -209,54 +209,53 @@ services:
       keycloak-app:
         condition: service_healthy
     labels:
-      - "traefik.http.services.onecx-ai-svc.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-ai-svc.rule=Host(`onecx-ai-svc`)"
+      - "traefik.http.services.onecx-ai-provider-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-ai-provider-svc.rule=Host(`onecx-ai-provider-svc`)"
     networks:
       - onecx
     profiles:
       - all
 
-  onecx-ai-bff:
-    image: ${ONECX_AI_BFF}
-    container_name: onecx-ai-bff
+  onecx-ai-provider-bff:
+    image: ${ONECX_AI_PROVIDER_BFF}
+    container_name: onecx-ai-provider-bff
     environment:
       <<: *bff_environment
-      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-ai"
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-ai-provider"
     healthcheck:
       test: curl --head -fsS http://localhost:8080/q/health
       interval: 10s
       timeout: 5s
       retries: 3
     depends_on:
-      onecx-ai-svc:
+      onecx-ai-provider-svc:
         condition: service_healthy
     labels:
-      - "traefik.http.services.onecx-ai-bff.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-ai-bff.rule=Host(`onecx-ai-bff`)"
+      - "traefik.http.services.onecx-ai-provider-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-ai-provider-bff.rule=Host(`onecx-ai-provider-bff`)"
     networks:
       - onecx
     profiles:
       - all
 
-  onecx-ai-ui:
-    image: ${ONECX_AI_UI}
-    container_name: onecx-ai-ui
+  onecx-ai-provider-ui:
+    image: ${ONECX_AI_PROVIDER_UI}
+    container_name: onecx-ai-provider-ui
     environment:
-      BFF_URL: http://onecx-ai-bff:8080/
-      APP_BASE_HREF: /mfe/ai/
-      APP_ID: onecx-ai-ui
-      PRODUCT_NAME: "onecx-ai"
+      APP_BASE_HREF: /mfe/ai-provider/
+      APP_ID: onecx-ai-provider-ui
+      PRODUCT_NAME: "onecx-ai-provider"
     healthcheck:
       test: ["CMD", "curl", "--fail", "-G", "http://localhost:8080"]
       interval: 10s
       timeout: 5s
       retries: 3
     depends_on:
-      onecx-ai-bff:
+      onecx-ai-provider-bff:
         condition: service_healthy
     labels:
-      - "traefik.http.services.onecx-ai-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-ai-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/ai/`)"
+      - "traefik.http.services.onecx-ai-provider-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-ai-provider-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/ai-provider/`)"
     networks:
       - onecx
     profiles:
