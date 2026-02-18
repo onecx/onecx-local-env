@@ -56,11 +56,12 @@ To prepare the AI Functionalities, follow these steps:
 ./start-onecx.sh -p all
 ----
 
-. Import AI data using the following script. You will be prompted to enter your *API Key* (see TIP below):
+. Import AI data using the following script with options, *-s* is mandatory. +
+You will be prompted to enter your *API Key* (see TIP below):
 +
 [source,bash]
 ----
-./import-onecx.sh -x -d ai
+./import-onecx.sh -d ai -x -s
 ----
 +
 .Import AI data
