@@ -1171,6 +1171,27 @@
       ]
     },
     {
+      "id": "ocx-ai:read",
+      "name": "ocx-ai:read",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-ai:write",
+      "name": "ocx-ai:write",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-ai:delete",
+      "name": "ocx-ai:delete",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
       "id": "ocx-an:read",
       "name": "ocx-an:read",
       "description": "created by initial import",
