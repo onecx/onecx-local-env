@@ -86,7 +86,7 @@ while getopts ":hd:svt:e:x" opt; do
           IMPORT_TYPE=$OPTARG
         fi
         # use data-import profile to ensure running services
-        if [[ "$OPTARG" =~ ^(all|bookmark|welcome)$ ]]; then
+        if [[ "$OPTARG" =~ ^(all|ai|bookmark|welcome)$ ]]; then
           PROFILE=data-import
         fi
         ;;
