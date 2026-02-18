@@ -4,13 +4,29 @@ endif::[]
 :imagesdir: ../../images
 
 :integrate_images_link: xref:./local-images.adoc[Integrate Local Docker Images]
+:cli_link: xref:documentation:onecx-local-env-cli:index.adoc[Command Line Interface for OneCX Local Environment]
 
 = Import Custom Data
 
-The *import-onecx.sh* script can also be used to import custom data into the OneCX services. This allows you to extend the initial data with your own data, e.g. for testing or development purposes.
+When integrating your own (customer-specific) microservices into the local OneCX environment, you need to import the corresponding data so that the microservices can be used in the environment.
+This concerns at least the following data:
 
-== Prepare Custom Data
-To prepare custom data for import, you need to create a JSON file that contains the data you want to import. The structure of the JSON file should match the structure of the data in the OneCX services. You can use the exported data from the services as a reference for the structure.
+* Product and application data to make the microservices available in the environment
+* Menu entries to make the microservices accessible in the OneCX UI
+* Permissions and role assignments to control access to the microservices (UI and BFF)
+
+Additionally, you may need to provide Docker Compose files to run the microservices in the local environment.
+
+
+== Tools for Importing Custom Data
+The {cli_link} provides commands to import product and application data, menu entries, and permissions/role assignments. These commands can be used to import the necessary data for your custom microservices into the local OneCX environment. See the documentation for *onecx-local-env-cli* for details on how to use these commands.
+
+
+
+== Prepare Custom Data manually
+To prepare custom data for import, you need to create a JSON file that contains the data you want to import. The structure of the JSON file should match the structure of the data in the OneCX services. You can use the exported data from the services as a reference for the structure. +
 Once you have created the JSON file with your custom data, you can place it in a directory of your choice. For example, you can create a directory called *custom-data* in the root of the *onecx-local-env* repository and place your JSON file there.
+
+The *import-onecx.sh* script can also be used to import custom data into the OneCX services. This allows you to extend the initial data with your own data, e.g. for testing or development purposes.
 
 to be continued...
