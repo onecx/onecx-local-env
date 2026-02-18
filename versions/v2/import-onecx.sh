@@ -239,7 +239,7 @@ if [[ "$IMPORT_TYPE" =~ ^(all|bookmark)$ ]]; then
 fi
 
 if [[ "$IMPORT_TYPE" =~ ^(ai)$ ]]; then
-  pushd ai > /dev/null
-  bash ./import-ai-data.sh "${1:-}" "${2:-}"
+  pushd ai-provider > /dev/null
+  bash ./import-ai-provider-data.sh "${1:-}" "${2:-}"
   popd > /dev/null
 fi
