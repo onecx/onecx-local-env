@@ -1,0 +1,138 @@
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
+:imagesdir: ../../images
+
+:module_federation_webpack_link: xref:documentation:onecx-docs-overview:module-federation/webpack.adoc[Module Federation with Webpack]
+
+:module_federation_webpack_config_example_link: xref:documentation:onecx-docs-overview:module-federation/webpack.adoc#important-elements-of-webpack-configuration[Important Elements of Webpack Configuration]
+
+:module_federation_bootstrap_link: xref:documentation:onecx-docs-overview:module-federation/bootstrapping.adoc#module-bootstrapping-and-configuration[Bootstrap Application]
+
+:module_federation_app_types_link: xref:documentation:onecx-docs-overview:module-federation/microfrontend-content-loading.adoc[Microfrontend Content Loading]
+
+:achitecture_microfrontends_link: xref:documentation:onecx-docs-overview:architecture/microservices.adoc[Microservices and Microfrontends]
+
+= Add the App to the product store
+You can find out more about applications here: xref:documentation:onecx-docs-overview:architecture/index.adoc#applications[Applications]
+
+== Add the application to the product store
+
+* Choose application store on the left side pannel of the OneCX shell.
+
+* Click three dots in the top right corner of the application store and select `Add Application` from the dropdown menu.
+
+.Locate the "Add Application" button
+image::extend/application_store.png[Find the "Add Application" button in the top right corner of the application store]
+
+* Fill in the form with the following details:
+
+.Required Application Details (example)
+[.stripes-even,cols="25,~"]
+|===
+| Field | Value / Notes
+
+| Name
+| Unique name of the application used as identifier
+
+| Version
+| Application version (e.g. `1.0.0`)
+
+| Display Name
+| Name of the application displayed in the UI
+
+| Base Path
+| Base path for the application (e.g. `/my-app`) 
+|===
+
+* Click `Save` to add the application to the product store.
+
+.Example application details
+image::extend/example_application_parameters.png[Example of filled application details form]
+
+== Add a UI component for the application
+
+* Return to the `Application Store` and click the `Apps` button in the top right corner to change the view.
+
+.Apps button in the application store
+image::extend/change_to_apps_tab.png[Find the "Apps" button in the top right corner of the application store]
+
+* Click three dots in the top right corner of the application store and select `Create UI Component` from the dropdown menu.
+
+.Locate the "Create UI Component" button
+image::extend/create_ui_component_pick.png[Find the "Create UI Component" button in the top right corner of the application store]
+
+* Fill in the `management details` with the following information:
+
+[NOTE]
+====
+let's use {module_federation_webpack_config_example_link} as a reference for `webpack.config.js` values and {module_federation_bootstrap_link} for `module.ts` bootstrapping details
+====
+
+.Required Management Details (example)
+[.stripes-even,cols="25,~"]
+|===
+| Field | Value / Notes
+
+| App ID
+| Unique name of the app used as identifier (module name in `webpack.config.js` config). `example-ui` in the {module_federation_webpack_config_example_link} example.
+
+| App Name
+| Name of the application displayed in the UI
+
+| Application Name
+| Name of the application in the product store (e.g. `example` in previous step)
+
+| Version
+| Application version (e.g. `1.0.0`)
+
+|===
+
+.Example management details
+image::extend/create_ui_component_management_details.png[Example of filled management details form]
+
+* Click `Remote Module` tab in the top of the card 
+* Fill in the `Remote Module` details with the following information:
+
+.Remote Module Details (example)
+[.stripes-even,cols="25,~"]
+|===
+| Field | Value / Notes 
+
+| Type
+| Type of the module federation application. In this example, it is `Module`. See {module_federation_app_types_link} for more details.
+
+| Technology
+| Technology used for the application. In this example, it is `WebComponent (Module)`. See {module_federation_app_types_link} for more details. For webpack module applications created with Angular under version 13, choose `WebComponent (Script)` technology.
+
+| Exposed Module
+| The name of the exposed module in the `webpack.config.js` file (e.g. `./ExampleApp` in the {module_federation_webpack_config_example_link} example).
+
+| Remote Entry
+| The URL to the `remoteEntry.js` file of the application, where `app-name` depends on local app integration with `./toggle-mfe.sh` script. See xref:./local-mfe.adoc[Local MFE Integration]. The URL should start from `/mfe/`  (e.g. `/mfe/app-name/remoteEntry.js`).
+
+| Remote Base URL
+| The base URL for the remote module, where `app-name` depends on local app integration. The URL should start from `/mfe/` (e.g. `/mfe/app-name/`).
+
+| Remote Name (Optional)
+| The `uniqueName` of the remote module as defined in the `webpack.config.js` file. This is optional and only needed if the remote module has a specific name or for `WebComponent (Script)` technology. In this example, it is `example-ui` as defined in the `webpack.config.js` file of the {module_federation_webpack_config_example_link} example.
+
+| Tag Name (Optional)
+| The name of the custom element tag added in `ngDoBootstrap` method of the `module.ts` file. In this example, it is `example-webcomponent` as defined in the `ngDoBootstrap` method of the `module.ts` file in the {module_federation_bootstrap_link} example.
+
+|===
+
+.Example remote module details
+image::extend/create_ui_component_remote_module.png[Example of filled remote module details form]
+
+* Click `Save` to add the UI component for the application.
+
+* Check that the UI component is added to the application created in the previous step. You can click on the application in the application store and click the `Components` tab to see the list of UI components added for the application. 
+
+.Successfully added UI component
+image::extend/successfuly_added_ui_component.png[Example of the UI component added to the application]
+
+[NOTE]
+====
+If you do not see the added UI component in the list, make sure to check that the `Application Name` in the management details of the UI component matches the `Name` field value of the application.
+====
