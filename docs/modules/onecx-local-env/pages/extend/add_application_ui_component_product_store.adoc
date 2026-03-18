@@ -30,19 +30,23 @@ image::extend/application_store.png[Find the "Add Application" button in the top
 .Required Application Details (example)
 [.stripes-even,cols="25,~"]
 |===
-| Field | Value / Notes
+| Field | Example Value | Notes
 
 | Name
+| example
 | Unique name of the application used as identifier
 
 | Version
-| Application version (e.g. `1.0.0`)
+| xxx
+| Application version
 
 | Display Name
+| example
 | Name of the application displayed in the UI
 
 | Base Path
-| Base path for the application (e.g. `/my-app`) 
+| /my-app
+| Base path for the application
 |===
 
 * Click `Save` to add the application to the product store.
@@ -72,19 +76,23 @@ let's use {module_federation_webpack_config_example_link} as a reference for `we
 .Required Management Details (example)
 [.stripes-even,cols="25,~"]
 |===
-| Field | Value / Notes
+| Field | Example Value | Notes
 
 | App ID
-| Unique name of the app used as identifier (module name in `webpack.config.js` config). `example-ui` in the {module_federation_webpack_config_example_link} example.
+| example-ui from the {module_federation_webpack_config_example_link} example
+| Unique name of the app used as identifier (module name in `webpack.config.js` config).
 
 | App Name
+| example-ui
 | Name of the application displayed in the UI
 
 | Application Name
-| Name of the application in the product store (e.g. `example` in previous step)
+| example
+| Name of the application in the product store to which the UI component will be added.
 
 | Version
-| Application version (e.g. `1.0.0`)
+| xxx
+| Application version
 
 |===
 
@@ -97,28 +105,35 @@ image::extend/create_ui_component_management_details.png[Example of filled manag
 .Remote Module Details (example)
 [.stripes-even,cols="25,~"]
 |===
-| Field | Value / Notes 
+| Field | Example Value | Notes 
 
 | Type
-| Type of the module federation application. In this example, it is `Module`. See {module_federation_app_types_link} for more details.
+| Module. See {module_federation_app_types_link} for more details.
+| Type of the module federation application. 
 
 | Technology
-| Technology used for the application. In this example, it is `WebComponent (Module)`. See {module_federation_app_types_link} for more details. For webpack module applications created with Angular under version 13, choose `WebComponent (Script)` technology.
+| WebComponent (Module). See {module_federation_app_types_link} for more details (for webpack module applications created with Angular under version 13, choose `WebComponent (Script)` technology).
+| Technology used for the application. 
 
 | Exposed Module
-| The name of the exposed module in the `webpack.config.js` file (e.g. `./ExampleApp` in the {module_federation_webpack_config_example_link} example).
+| ./ExampleApp from the {module_federation_webpack_config_example_link} example
+| The name of the exposed module in the `webpack.config.js` file
 
 | Remote Entry
-| The URL to the `remoteEntry.js` file of the application, where `app-name` depends on local app integration with `./toggle-mfe.sh` script. See xref:./local-mfe.adoc[Local MFE Integration]. The URL should start from `/mfe/`  (e.g. `/mfe/app-name/remoteEntry.js`).
+| /mfe/example/remoteEntry.js. 
+| The URL to the `remoteEntry.js` file of the application, where `app-name` depends on local app integration with `./toggle-mfe.sh` script. See xref:./local-mfe.adoc[Local MFE Integration]. The URL should start from `/mfe/`.
 
 | Remote Base URL
-| The base URL for the remote module, where `app-name` depends on local app integration. The URL should start from `/mfe/` (e.g. `/mfe/app-name/`).
+| /mfe/example/
+| The base URL for the remote module, where `app-name` depends on local app integration. The URL should start from `/mfe/`.
 
 | Remote Name (Optional)
-| The `uniqueName` of the remote module as defined in the `webpack.config.js` file. This is optional and only needed if the remote module has a specific name or for `WebComponent (Script)` technology. In this example, it is `example-ui` as defined in the `webpack.config.js` file of the {module_federation_webpack_config_example_link} example.
+| example-ui from the {module_federation_webpack_config_example_link} example.
+| The `uniqueName` of the remote module as defined in the `webpack.config.js` file. This is optional and only needed if the remote module has a specific name or for `WebComponent (Script)` technology.
 
 | Tag Name (Optional)
-| The name of the custom element tag added in `ngDoBootstrap` method of the `module.ts` file. In this example, it is `example-webcomponent` as defined in the `ngDoBootstrap` method of the `module.ts` file in the {module_federation_bootstrap_link} example.
+| example-webcomponent from the {module_federation_bootstrap_link} example.
+| The name of the custom element tag added in `ngDoBootstrap` method of the `module.ts` file.
 
 |===
 

@@ -58,19 +58,23 @@ image::extend/permission_add_icon.png[Click the "+" icon to create a new permiss
 .Required Permission Details (example)
 [.stripes-even,cols="25,~"]
 |===
-| Field | Value / Notes
+| Field | Example Value | Notes
 
 | Application Name
-| Name of the application in `Application Store` for which you want to create the permission (e.g. `example`)
+| example
+| Name of the application in `Application Store` for which you want to create the permission
 
 | App ID
-| Application module name defined in the webpack module federation configuration (e.g. `example-ui`)
+| example-ui
+| Application module name defined in the webpack module federation configuration
 
 | Resource
-| Unique name of the resource that comes before the `#` symbol (e.g. `TEST`)
+| TEST
+| Unique name of the resource that comes before the `#` symbol.
 
 | Action
-| Unique name of the action that comes after the `#` symbol (e.g. `SEARCH`)
+| SEARCH
+| Unique name of the action that comes after the `#` symbol.
 
 |===
 

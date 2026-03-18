@@ -7,12 +7,16 @@ endif::[]
 
 :module_federation_webpack_link: xref:documentation:onecx-docs-overview:module-federation/webpack.adoc[Module Federation with Webpack]
 
+:local-env-cli_link: xref:documentation:onecx-docs-start:first-app/app_setup_cli.adoc[local-env-cli]
+
 
 = Use Webpack Module App in OneCX shell
 
 When you have created a custom application and want to run it in the OneCX local environment, you need to add the application to the OneCX shell. This involves adding the application to the product store, adding the application to the workspace, and assigning permissions and roles for accessing the application.
 
 This guide is created for webpack module apps. To see all supported types of microservices, see the {achitecture_microfrontends_link} documentation.
+
+Alternatively you can use `local-env-cli` to add your application to the OneCX local environment. See {local-env-cli_link} for more details.
 
 == Prerequisites
 
