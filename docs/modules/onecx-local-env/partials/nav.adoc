@@ -5,6 +5,7 @@
 
 ** xref:onecx-local-env:extend/extend.adoc[Extend OneCX]
 *** xref:onecx-local-env:extend/local-mfe.adoc[Integrate Microfrontend]
+*** xref:onecx-local-env:extend/run_module_app_onecx.adoc[Use App in OneCX Shell]
 *** xref:onecx-local-env:extend/local-images.adoc[Integrate Images]
 *** xref:onecx-local-env:extend/custom-imports.adoc[Import Custom Data]
 *** xref:onecx-local-env:extend/advanced.adoc[Advanced Usage]

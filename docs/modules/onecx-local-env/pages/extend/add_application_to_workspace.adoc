@@ -1,0 +1,38 @@
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
+:imagesdir: ../../images
+:workspace_link: xref:documentation:onecx-workspace:index.adoc[OneCX Workspace]
+
+= Add the application to the workspace
+
+* In Onecx shell on the left side panel, choose `Workspace`, then choose `Workspaces` subitem. 
+
+* Click on the workspace you want to add the application to (e.g. `Onecx Admin`). See {workspace_link} documentation for more details on workspaces.
+
+.Navigate to the workspace
+image::extend/workspace_left_panel.png[Select the workspace to which you want to add the application]
+
+* Click `Applications` tab in the workspace view, your application should be visible in the list of available applications.
+
+.Applications tab in the workspace
+image::extend/workspaces_applications.png[Find the "Applications" tab in the workspace view]
+
+* Click on the application you want to add to the workspace, then click `>` button in the middle of the view.
+
+.Add the application to the workspace
+image::extend/workspace_add_app.png[Select the application and click ">" button to add it to the workspace]
+
+* You can access the application in the workspace now by entering the following link:
+
+[source,bash]
+----
+onecx.localhost/onecx-shell/{workspace-base-url}/{application-base-path}
+----
+
+Where `{workspace-base-url}` is the base URL of the workspace (e.g. `admin`) and `{application-base-path}` is the base path of the application defined in the product store (e.g. `my-app`).
+
+[NOTE]
+====
+Make sure to replace `{workspace-base-url}` and `{application-base-path}` with the actual values for your workspace and application.
+====

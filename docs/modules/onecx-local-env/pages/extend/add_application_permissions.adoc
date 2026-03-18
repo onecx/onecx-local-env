@@ -1,0 +1,93 @@
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
+:imagesdir: ../../images
+
+:permissions_link: xref:documentation:onecx-permission:index.adoc[Permissions and Roles]
+:start_script_link: xref:documentation:onecx-local-env:scripts/start.adoc[Start OneCX Local Environment]
+
+= Assign permissions and roles (Optional)
+
+After adding the application to the workspace, you may want to assign permissions and roles for accessing the application. Permissions are set by using the following component in the application HTML:
+
+[source,html]
+----
+<ocx-portal-page permission="TEST#SEARCH">
+    <!-- Application page content goes here -->
+</ocx-portal-page>
+----
+
+If you see the following warning when you enter the page of your application, it means that you need to assign the permissions:
+
+.Permission missing warning
+image::extend/permission_missing_page.png[Example of permission missing warning]
+
+This guide will show how to add `TEST#SEARCH` permission to the application and assign it to a role. See the {permissions_link} documentation for details on how the permissions work in OneCX.
+
+== Create a permission
+
+* In Onecx shell, choose `Users and Permissions` from the left side panel, then choose `Roles and Permissions` subitem.
+
+* Find the required workspace (e.g. `Onecx Admin`) and click on it. (This can also be done for applications)
+
+.Navigate to the workspace or application for which you want to create the permission
+image::extend/permission_enter_workspace.png[Select the workspace or application for which you want to create the permission]
+
+[NOTE]
+====
+If the permissions page doesnt load make sure you have started the onecx local environment with all services by running
+[source,bash]
+----
+./start-onecx.sh -p all
+----
+See {start_script_link} for more details.
+====
+
+* Click `settings` icon, next to `Permissions` title.
+
+.Click the settings icon to manage permissions
+image::extend/permission_settings_icon.png[Click the settings icon to manage permissions]
+
+* Click `+` icon, next to `Permissions` title, to create a new permission.
+
+.Click the "+" icon to create a new permission
+image::extend/permission_add_icon.png[Click the "+" icon to create a new permission]
+
+* Fill in the form with the following details:
+
+.Required Permission Details (example)
+[.stripes-even,cols="25,~"]
+|===
+| Field | Example Value | Notes
+
+| Application Name
+| example
+| Name of the application in `Application Store` for which you want to create the permission
+
+| App ID
+| example-ui
+| Application module name defined in the webpack module federation configuration
+
+| Resource
+| TEST
+| Unique name of the resource that comes before the `#` symbol.
+
+| Action
+| SEARCH
+| Unique name of the action that comes after the `#` symbol.
+
+|===
+
+.Example permission details
+image::extend/permission_filled_permission.png[Example of filled permission details form]
+
+* Click `Save` to create the permission.
+
+== Assign the permission to a role
+
+* Locate the permission you just created in the list of permissions.
+
+* Click on the circle to make it filled, which means that the permission is assigned to the selected role.
+
+.Assign the permission to the role
+image::extend/permission_select.png[Click the circle to assign the permission to the role]
