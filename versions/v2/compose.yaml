@@ -180,6 +180,79 @@ services:
       - all
       - base
 
+# RustFS main service
+  rustfs:
+    security_opt:
+      - "no-new-privileges:true"
+    image: ${RUSTFS}
+    container_name: rustfs-server
+    build:
+      context: .
+      dockerfile: Dockerfile.source
+      args:
+        TARGETPLATFORM: linux/amd64
+    user: root
+    ports:
+      - "9000:9000" # S3 API port
+      - "9001:9001" # Console port
+    environment:
+      - RUSTFS_VOLUMES=/data/rustfs{0..3} # Define 4 storage volumes
+      - RUSTFS_ADDRESS=0.0.0.0:9000
+      - RUSTFS_CONSOLE_ADDRESS=0.0.0.0:9001
+      - RUSTFS_CONSOLE_ENABLE=true
+      - RUSTFS_CORS_ALLOWED_ORIGINS=*
+      - RUSTFS_CONSOLE_CORS_ALLOWED_ORIGINS=*
+      - RUSTFS_ACCESS_KEY=rustfsadmin
+      - RUSTFS_SECRET_KEY=rustfsadmin
+      - RUSTFS_OBS_LOGGER_LEVEL=info
+      - RUSTFS_TLS_PATH=/opt/tls
+      - RUSTFS_OBS_ENDPOINT=http://otel-collector:4318
+      - RUSTFS_REGION=eu-central-1
+    volumes:
+      - ./storage/data/pro:/data
+      - ./storage/logs:/app/logs
+      - ./storage/data/certs/:/opt/tls # TLS configuration, you should create tls directory and put your tls files in it and then specify the path here
+    labels:
+      - "traefik.http.services.rustfs.loadbalancer.server.port=9000"
+      - "traefik.http.routers.rustfs.rule=Host(`rustfs`)"
+      - "traefik.http.routers.rustfs.entrypoints=web"
+      - "traefik.http.routers.rustfs.service=rustfs"
+      - "traefik.http.services.rustfs-console.loadbalancer.server.port=9001"
+      - "traefik.http.routers.rustfs-console.rule=Host(`rustfs-console`)"
+      - "traefik.http.routers.rustfs-console.entrypoints=web"
+      - "traefik.http.routers.rustfs-console.service=rustfs-console"
+    networks:
+      - onecx
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "sh", "-c",
+          "curl -f http://127.0.0.1:9000/health && curl -f http://127.0.0.1:9001/rustfs/console/health"
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Init container to create default S3 buckets in RustFS if they don't exist yet
+  rustfs-init:
+    image: minio/mc:latest
+    container_name: rustfs-init
+    depends_on:
+      rustfs:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+        mc alias set rustfs http://rustfs:9000 rustfsadmin rustfsadmin &&
+        mc mb --ignore-existing rustfs/onecx
+      "
+    networks:
+      - onecx
+    profiles:
+      - all
+      
   ########################################
   ########### OneCX Products #############
   ########################################
@@ -455,6 +528,37 @@ services:
     labels:
       - "traefik.http.services.onecx-chat-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-chat-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/chat/`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+
+  ########## ONECX FILE STORAGE
+  onecx-file-storage-svc:
+    image: ${ONECX_FILE_STORAGE_SVC}
+    container_name: onecx-file-storage-svc
+    environment:
+      <<: *svc_single_tenancy
+      QUARKUS_S3_PATH_STYLE_ACCESS: true
+      ONECX_FILE_STORAGE_S3_CLIENT_ACCESS_KEY_ID: rustfsadmin
+      ONECX_FILE_STORAGE_S3_CLIENT_SECRET_ACCESS_KEY: rustfsadmin
+      ONECX_FILE_STORAGE_S3_CLIENT_ENDPOINT: http://rustfs:9000
+      ONECX_FILE_STORAGE_S3_CLIENT_REGION: eu-central-1
+      TKIT_RS_CONTEXT_TENANT_ID_ENABLED: true
+      TKIT_RS_CONTEXT_TENANT_ID_MOCK_ENABLED: true
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      rustfs-init:
+        condition: service_completed_successfully
+      keycloak-app:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-file-storage-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-file-storage-svc.rule=Host(`onecx-file-storage-svc`)"
     networks:
       - onecx
     profiles:
