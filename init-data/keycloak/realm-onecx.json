@@ -893,6 +893,9 @@
         "ocx-chat:read",
         "ocx-chat:write",
         "ocx-chat:delete",
+        "ocx-fs:read",
+        "ocx-fs:write",
+        "ocx-fs:delete",
         "ocx-hp:read",
         "ocx-hp:write",
         "ocx-hp:delete",
@@ -1250,6 +1253,27 @@
     {
       "id": "ocx-chat:delete",
       "name": "ocx-chat:delete",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-fs:read",
+      "name": "ocx-fs:read",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-fs:delete",
+      "name": "ocx-fs:delete",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-fs:write",
+      "name": "ocx-fs:write",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}

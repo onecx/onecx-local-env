@@ -5,7 +5,8 @@
 127.0.0.1 postgresdb
 127.0.0.1 pgadmin
 127.0.0.1 keycloak-app
-
+127.0.0.1 rustfs
+127.0.0.1 rustfs-console
 # OneCX - local services
 127.0.0.1 sonar
 
@@ -20,6 +21,7 @@
 127.0.0.1 onecx-chat-svc
 127.0.0.1 onecx-document-svc
 127.0.0.1 onecx-document-bff
+127.0.0.1 onecx-file-storage-svc
 127.0.0.1 onecx-help-svc
 127.0.0.1 onecx-help-bff
 127.0.0.1 onecx-iam-bff
