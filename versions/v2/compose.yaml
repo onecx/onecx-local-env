@@ -193,11 +193,10 @@ services:
         TARGETPLATFORM: linux/amd64
     user: root
     ports:
-      - "9000:9000" # S3 API port
       - "9001:9001" # Console port
     environment:
       - RUSTFS_VOLUMES=/data/rustfs{0..3} # Define 4 storage volumes
-      - RUSTFS_ADDRESS=0.0.0.0:9000
+      - RUSTFS_ADDRESS=0.0.0.0:80
       - RUSTFS_CONSOLE_ADDRESS=0.0.0.0:9001
       - RUSTFS_CONSOLE_ENABLE=true
       - RUSTFS_CORS_ALLOWED_ORIGINS=*
@@ -213,7 +212,7 @@ services:
       - ./storage/logs:/app/logs
       - ./storage/data/certs/:/opt/tls # TLS configuration, you should create tls directory and put your tls files in it and then specify the path here
     labels:
-      - "traefik.http.services.rustfs.loadbalancer.server.port=9000"
+      - "traefik.http.services.rustfs.loadbalancer.server.port=80"
       - "traefik.http.routers.rustfs.rule=Host(`rustfs`)"
       - "traefik.http.routers.rustfs.entrypoints=web"
       - "traefik.http.routers.rustfs.service=rustfs"
@@ -229,7 +228,7 @@ services:
         [
           "CMD",
           "sh", "-c",
-          "curl -f http://127.0.0.1:9000/health && curl -f http://127.0.0.1:9001/rustfs/console/health"
+          "curl -f http://127.0.0.1:80/health && curl -f http://127.0.0.1:9001/rustfs/console/health"
         ]
       interval: 30s
       timeout: 10s
@@ -245,7 +244,7 @@ services:
         condition: service_healthy
     entrypoint: >
       /bin/sh -c "
-        mc alias set rustfs http://rustfs:9000 rustfsadmin rustfsadmin &&
+        mc alias set rustfs http://rustfs rustfsadmin rustfsadmin &&
         mc mb --ignore-existing rustfs/onecx
       "
     networks:
@@ -542,7 +541,7 @@ services:
       QUARKUS_S3_PATH_STYLE_ACCESS: true
       ONECX_FILE_STORAGE_S3_CLIENT_ACCESS_KEY_ID: rustfsadmin
       ONECX_FILE_STORAGE_S3_CLIENT_SECRET_ACCESS_KEY: rustfsadmin
-      ONECX_FILE_STORAGE_S3_CLIENT_ENDPOINT: http://rustfs:9000
+      ONECX_FILE_STORAGE_S3_CLIENT_ENDPOINT: http://rustfs
       ONECX_FILE_STORAGE_S3_CLIENT_REGION: eu-central-1
       TKIT_RS_CONTEXT_TENANT_ID_ENABLED: true
       TKIT_RS_CONTEXT_TENANT_ID_MOCK_ENABLED: true
