@@ -20,7 +20,7 @@ After adding the application to the workspace, you may want to assign permission
 If you see the following warning when you enter the page of your application, it means that you need to assign the permissions:
 
 .Permission missing warning
-image::extend/permission_missing_page.png[Example of permission missing warning]
+image::extend/add_application_manually/permission_missing_page.png[Example of permission missing warning]
 
 This guide will show how to add `TEST#SEARCH` permission to the application and assign it to a role. See the {permissions_link} documentation for details on how the permissions work in OneCX.
 
@@ -31,7 +31,7 @@ This guide will show how to add `TEST#SEARCH` permission to the application and 
 * Find the required workspace (e.g. `Onecx Admin`) and click on it. (This can also be done for applications)
 
 .Navigate to the workspace or application for which you want to create the permission
-image::extend/permission_enter_workspace.png[Select the workspace or application for which you want to create the permission]
+image::extend/add_application_manually/permission_enter_workspace.png[Select the workspace or application for which you want to create the permission]
 
 [NOTE]
 ====
@@ -46,17 +46,17 @@ See {start_script_link} for more details.
 * Click `settings` icon, next to `Permissions` title.
 
 .Click the settings icon to manage permissions
-image::extend/permission_settings_icon.png[Click the settings icon to manage permissions]
+image::extend/add_application_manually/permission_settings_icon.png[Click the settings icon to manage permissions]
 
 * Click `+` icon, next to `Permissions` title, to create a new permission.
 
 .Click the "+" icon to create a new permission
-image::extend/permission_add_icon.png[Click the "+" icon to create a new permission]
+image::extend/add_application_manually/permission_add_icon.png[Click the "+" icon to create a new permission]
 
 * Fill in the form with the following details:
 
 .Required Permission Details (example)
-[.stripes-even,cols="25,~"]
+[.stripes-even,cols="25,~,~"]
 |===
 | Field | Example Value | Notes
 
@@ -79,7 +79,7 @@ image::extend/permission_add_icon.png[Click the "+" icon to create a new permiss
 |===
 
 .Example permission details
-image::extend/permission_filled_permission.png[Example of filled permission details form]
+image::extend/add_application_manually/permission_filled_permission.png[Example of filled permission details form]
 
 * Click `Save` to create the permission.
 
@@ -90,4 +90,4 @@ image::extend/permission_filled_permission.png[Example of filled permission deta
 * Click on the circle to make it filled, which means that the permission is assigned to the selected role.
 
 .Assign the permission to the role
-image::extend/permission_select.png[Click the circle to assign the permission to the role]
+image::extend/add_application_manually/permission_select.png[Click the circle to assign the permission to the role]
