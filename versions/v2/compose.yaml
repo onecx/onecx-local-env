@@ -1342,6 +1342,84 @@ services:
       - all
       - base
 
+#NOTIFICATION SVC
+  onecx-notification-svc:
+    image: ${ONECX_NOTIFICATION_SVC}
+    container_name: oonecx-notification-svc
+    user: root
+    environment:
+      <<: *svc_single_tenancy
+      QUARKUS_DATASOURCE_USERNAME: onecx_notification
+      QUARKUS_DATASOURCE_PASSWORD: onecx_notification
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_notification?sslmode=disable"
+      QUARKUS_REST_CLIENT_ONECX_NOTIFICATION_BFF_URL: "http://onecx-notification-bff-2:8080"
+      TKIT_SECURITY_AUTH_ENABLED: "false"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-notification-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-notification-svc.rule=Host(`onecx-notification-svc`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+#NOTIFICATION BFF
+  onecx-notification-bff:
+    image: ${ONECX_NOTIFICATION_BFF}
+    container_name: onecx-notification-bff
+    environment:
+      QUARKUS_OIDC_AUTH_SERVER_URL: ${ONECX_AUTH_SERVER_URL}
+      TKIT_SECURITY_AUTH_ENABLED: "false"
+      ONECX_PERMISSIONS_ENABLED: "false"
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-notification"
+      QUARKUS_VERTX_CLUSTER_CLUSTERED: "true"
+      JAVA_TOOL_OPTIONS: "-Dhazelcast.config=/deployments/hazelcast-compose.xml"
+    volumes:
+      - ./src/main/resources/hazelcast-compose.xml:/deployments/hazelcast-compose.xml:ro
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    labels:
+      - "traefik.http.services.onecx-notification-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-notification-bff.rule=Host(`onecx-notification-bff`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+      
+  onecx-notification-bff-2:
+    image: ${ONECX_NOTIFICATION_BFF}
+    container_name: onecx-notification-bff-2
+    environment:
+      QUARKUS_OIDC_AUTH_SERVER_URL: ${ONECX_AUTH_SERVER_URL}
+      TKIT_SECURITY_AUTH_ENABLED: "false"
+      ONECX_PERMISSIONS_ENABLED: "false"
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-notification"
+      QUARKUS_VERTX_CLUSTER_CLUSTERED: "true"
+      JAVA_TOOL_OPTIONS: "-Dhazelcast.config=/deployments/hazelcast-compose.xml"
+    volumes:
+      - ./src/main/resources/hazelcast-compose.xml:/deployments/hazelcast-compose.xml:ro
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    labels:
+      - "traefik.http.services.onecx-notification-bff-2.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-notification-bff-2.rule=Host(`onecx-notification-bff-2`)"
+    networks:
+      - onecx
+    profiles:
+      - all
+
 ########################################
 #########   DUMMY service   ############
 ########################################
