@@ -10,9 +10,9 @@ endif::[]
 :local-env-cli_link: xref:documentation:onecx-docs-start:first-app/app_setup_cli.adoc[local-env-cli]
 
 
-= Use Webpack Module App in OneCX shell
+= Add Webpack App UI Manually to OneCX
 
-When you have created a custom application and want to run it in the OneCX local environment, you need to add the application to the OneCX shell. This involves adding the application to the product store, adding the application to the workspace, and assigning permissions and roles for accessing the application.
+When you have created a custom application and want to run it in the OneCX local environment, you need to add the application to the OneCX. This involves adding the application to the product store, adding the application to the workspace, and assigning permissions and roles for accessing the application.
 
 This guide is created for webpack module apps. To see all supported types of microservices, see the {achitecture_microfrontends_link} documentation.
 
@@ -24,7 +24,7 @@ Before you can add your custom application to the OneCX, you need to have the fo
 
 * Your app needs to have webpack module federation implemented. See the {module_federation_webpack_link} documentation for details on how to implement webpack module federation in your application. 
 
-* You have to add xref:./local-mfe.adoc[custom micro frontends] to the OneCX local environment with `./toggle-mfe` script.
+* You have to add xref:onecx-local-env:extend/local-mfe.adoc[custom micro frontends] to the OneCX local environment with `./toggle-mfe` script.
 
 == Guide Steps
 
@@ -33,3 +33,8 @@ Before you can add your custom application to the OneCX, you need to have the fo
 . xref:./add_application_to_workspace.adoc[Add the application to the workspace]
 
 . xref:./add_application_permissions.adoc[Assign permissions and roles (Optional)]
+
+[NOTE]
+====
+Like all manual changes in the local environment, manually created applications will be lost when the Postgres volume is deleted (e.g. by running `./stop-onecx.sh -c`).
+====

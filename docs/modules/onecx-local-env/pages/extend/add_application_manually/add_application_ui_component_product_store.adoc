@@ -18,17 +18,17 @@ You can find out more about applications here: xref:documentation:onecx-docs-ove
 
 == Add the application to the product store
 
-* Choose application store on the left side pannel of the OneCX shell.
+* Choose application store on the left side pannel of the OneCX.
 
 * Click three dots in the top right corner of the application store and select `Add Application` from the dropdown menu.
 
 .Locate the "Add Application" button
-image::extend/application_store.png[Find the "Add Application" button in the top right corner of the application store]
+image::extend/add_application_manually/application_store.png[Find the "Add Application" button in the top right corner of the application store]
 
 * Fill in the form with the following details:
 
 .Required Application Details (example)
-[.stripes-even,cols="25,~"]
+[.stripes-even,cols="25,~,~"]
 |===
 | Field | Example Value | Notes
 
@@ -52,19 +52,19 @@ image::extend/application_store.png[Find the "Add Application" button in the top
 * Click `Save` to add the application to the product store.
 
 .Example application details
-image::extend/example_application_parameters.png[Example of filled application details form]
+image::extend/add_application_manually/example_application_parameters.png[Example of filled application details form]
 
 == Add a UI component for the application
 
 * Return to the `Application Store` and click the `Apps` button in the top right corner to change the view.
 
 .Apps button in the application store
-image::extend/change_to_apps_tab.png[Find the "Apps" button in the top right corner of the application store]
+image::extend/add_application_manually/change_to_apps_tab.png[Find the "Apps" button in the top right corner of the application store]
 
 * Click three dots in the top right corner of the application store and select `Create UI Component` from the dropdown menu.
 
 .Locate the "Create UI Component" button
-image::extend/create_ui_component_pick.png[Find the "Create UI Component" button in the top right corner of the application store]
+image::extend/add_application_manually/create_ui_component_pick.png[Find the "Create UI Component" button in the top right corner of the application store]
 
 * Fill in the `management details` with the following information:
 
@@ -74,7 +74,7 @@ let's use {module_federation_webpack_config_example_link} as a reference for `we
 ====
 
 .Required Management Details (example)
-[.stripes-even,cols="25,~"]
+[.stripes-even,cols="25,~,~"]
 |===
 | Field | Example Value | Notes
 
@@ -97,13 +97,13 @@ let's use {module_federation_webpack_config_example_link} as a reference for `we
 |===
 
 .Example management details
-image::extend/create_ui_component_management_details.png[Example of filled management details form]
+image::extend/add_application_manually/create_ui_component_management_details.png[Example of filled management details form]
 
 * Click `Remote Module` tab in the top of the card 
 * Fill in the `Remote Module` details with the following information:
 
 .Remote Module Details (example)
-[.stripes-even,cols="25,~"]
+[.stripes-even,cols="25,~,~"]
 |===
 | Field | Example Value | Notes 
 
@@ -121,7 +121,7 @@ image::extend/create_ui_component_management_details.png[Example of filled manag
 
 | Remote Entry
 | /mfe/example/remoteEntry.js. 
-| The URL to the `remoteEntry.js` file of the application, where `app-name` depends on local app integration with `./toggle-mfe.sh` script. See xref:./local-mfe.adoc[Local MFE Integration]. The URL should start from `/mfe/`.
+| The URL to the `remoteEntry.js` file of the application, where `app-name` depends on local app integration with `./toggle-mfe.sh` script. See xref:onecx-local-env:extend/local-mfe.adoc[Local MFE Integration]. The URL should start from `/mfe/`.
 
 | Remote Base URL
 | /mfe/example/
@@ -138,14 +138,14 @@ image::extend/create_ui_component_management_details.png[Example of filled manag
 |===
 
 .Example remote module details
-image::extend/create_ui_component_remote_module.png[Example of filled remote module details form]
+image::extend/add_application_manually/create_ui_component_remote_module.png[Example of filled remote module details form]
 
 * Click `Save` to add the UI component for the application.
 
 * Check that the UI component is added to the application created in the previous step. You can click on the application in the application store and click the `Components` tab to see the list of UI components added for the application. 
 
 .Successfully added UI component
-image::extend/successfuly_added_ui_component.png[Example of the UI component added to the application]
+image::extend/add_application_manually/successfuly_added_ui_component.png[Example of the UI component added to the application]
 
 [NOTE]
 ====
