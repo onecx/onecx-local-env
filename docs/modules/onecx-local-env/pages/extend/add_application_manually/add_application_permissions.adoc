@@ -26,7 +26,7 @@ This guide will show how to add `TEST#SEARCH` permission to the application and 
 
 == Create a permission
 
-* In Onecx shell, choose `Users and Permissions` from the left side panel, then choose `Roles and Permissions` subitem.
+* In OneCX, choose `Users and Permissions` from the left side panel, then choose `Roles and Permissions` subitem.
 
 * Find the required workspace (e.g. `Onecx Admin`) and click on it. (This can also be done for applications)
 

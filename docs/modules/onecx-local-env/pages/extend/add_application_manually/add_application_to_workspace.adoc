@@ -6,7 +6,7 @@ endif::[]
 
 = Add the application to the workspace
 
-* In Onecx shell on the left side panel, choose `Workspace`, then choose `Workspaces` subitem. 
+* In OneCX on the left side panel, choose `Workspace`, then choose `Workspaces` subitem. 
 
 * Click on the workspace you want to add the application to (e.g. `Onecx Admin`). See {workspace_link} documentation for more details on workspaces.
 

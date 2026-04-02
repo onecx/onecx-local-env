@@ -18,7 +18,7 @@ You can find out more about applications here: xref:documentation:onecx-docs-ove
 
 == Add the application to the product store
 
-* Choose application store on the left side pannel of the OneCX shell.
+* Choose application store on the left side pannel of the OneCX.
 
 * Click three dots in the top right corner of the application store and select `Add Application` from the dropdown menu.
 
