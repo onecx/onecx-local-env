@@ -26,6 +26,9 @@
 127.0.0.1 onecx-help-bff
 127.0.0.1 onecx-iam-bff
 127.0.0.1 onecx-iam-svc
+127.0.0.1 onecx-notification-svc
+127.0.0.1 onecx-notification-bff
+127.0.0.1 onecx-notification-bff-2
 127.0.0.1 onecx-parameter-svc
 127.0.0.1 onecx-parameter-bff
 127.0.0.1 onecx-permission-svc

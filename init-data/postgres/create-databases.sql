@@ -47,6 +47,12 @@ CREATE DATABASE onecx_help with owner onecx_help;
 GRANT ALL PRIVILEGES ON DATABASE onecx_help TO onecx_help;
 GRANT ALL PRIVILEGES ON SCHEMA public TO onecx_help;
 
+-- -- onecx_notification
+CREATE USER onecx_notification WITH ENCRYPTED PASSWORD 'onecx_notification';
+CREATE DATABASE onecx_notification with owner onecx_notification;
+GRANT ALL PRIVILEGES ON DATABASE onecx_notification TO onecx_notification;
+GRANT ALL PRIVILEGES ON SCHEMA public TO onecx_notification;
+
 -- -- onecx_parameter
 CREATE USER onecx_parameter WITH ENCRYPTED PASSWORD 'onecx_parameter';
 CREATE DATABASE onecx_parameter with owner onecx_parameter;
