@@ -12,7 +12,7 @@ endif::[]
 
 = Add Webpack App UI Manually to OneCX
 
-When you have created a custom application and want to run it in the OneCX local environment, you need to add the application to the OneCX shell. This involves adding the application to the product store, adding the application to the workspace, and assigning permissions and roles for accessing the application.
+When you have created a custom application and want to run it in the OneCX local environment, you need to add the application to the OneCX. This involves adding the application to the product store, adding the application to the workspace, and assigning permissions and roles for accessing the application.
 
 This guide is created for webpack module apps. To see all supported types of microservices, see the {achitecture_microfrontends_link} documentation.
 
@@ -36,5 +36,5 @@ Before you can add your custom application to the OneCX, you need to have the fo
 
 [NOTE]
 ====
-Custom applications are not persisted. If you reset the database or remove the containers, you will need to add them again.
+Like all manual changes in the local environment, manually created applications will be lost when the Postgres volume is deleted (e.g. by running `./stop-onecx.sh -c`).
 ====
