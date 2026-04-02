@@ -899,6 +899,7 @@
         "ocx-hp:read",
         "ocx-hp:write",
         "ocx-hp:delete",
+        "ocx-no:write",
         "ocx-pa:read",
         "ocx-pa:write",
         "ocx-pa:delete",
@@ -1295,6 +1296,13 @@
     {
       "id": "ocx-hp:delete",
       "name": "ocx-hp:delete",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
+      "id": "ocx-no:write",
+      "name": "ocx-no:write",
       "description": "created by initial import",
       "protocol": "openid-connect",
       "attributes": {}
