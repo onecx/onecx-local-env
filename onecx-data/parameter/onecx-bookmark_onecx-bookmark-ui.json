@@ -1,0 +1,10 @@
+{
+  "parameters": [
+    {
+      "name": "max-image-size",
+      "displayName": "Maximum Image Size",
+      "description": "Limit the maximum size of uploaded images",
+      "value": 100000
+    }
+  ]
+}

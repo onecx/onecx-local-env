@@ -12,10 +12,12 @@
       },
       "onecx-parameter-ui": {
         "onecx-admin": {
-          "PARAMETER": ["DELETE", "EDIT", "SEARCH", "VIEW"]
+          "PARAMETER": ["CREATE", "DELETE", "EDIT", "SEARCH", "VIEW"],
+          "USAGE": ["SEARCH", "VIEW"]
         },
         "onecx-user": {
-          "PARAMETER": ["SEARCH", "VIEW"]
+          "PARAMETER": ["SEARCH", "VIEW"],
+          "USAGE": ["SEARCH", "VIEW"]
         }
       }
     }
