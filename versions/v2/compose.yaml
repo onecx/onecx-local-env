@@ -640,6 +640,16 @@ services:
       QUARKUS_KEYCLOAK_ADMIN_CLIENT_REALM: master
       QUARKUS_KEYCLOAK_ADMIN_CLIENT_USERNAME: admin
       QUARKUS_KEYCLOAK_ADMIN_CLIENT_PASSWORD: admin
+      # Default Keycloak configuration for OneCX IAM, used for initial realm and client setup
+      ONECX_IAM_KEYCLOAKS_DEFAULT_CLIENT: admin-cli
+      ONECX_IAM_KEYCLOAKS_DEFAULT_DESCRIPTION: default keylcoak for OneCX
+      ONECX_IAM_KEYCLOAKS_DEFAULT_DISPLAY_NAME: Default Keycloak
+      ONECX_IAM_KEYCLOAKS_DEFAULT_ISSUERHOST: http://${KC_APP_NAME}
+      ONECX_IAM_KEYCLOAKS_DEFAULT_SECRET: " "
+      ONECX_IAM_KEYCLOAKS_DEFAULT_USERNAME: admin
+      ONECX_IAM_KEYCLOAKS_DEFAULT_PASSWORD: admin
+      ONECX_IAM_KEYCLOAKS_DEFAULT_REALM: master
+      ONECX_IAM_KEYCLOAKS_DEFAULT_URL: http://${KC_APP_NAME}:8080
     healthcheck:
       test: curl --head -fsS http://localhost:8080/q/health
       interval: 10s
