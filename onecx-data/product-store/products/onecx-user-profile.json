@@ -1,7 +1,7 @@
 {
   "version": "xxx",
   "description": "Manage User Settings",
-  "imageUrl": "",
+  "imageUrl": null,
   "iconName": "user",
   "displayName": "OneCX User Profile",
   "basePath": "/user",

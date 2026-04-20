@@ -1,7 +1,7 @@
 {
   "version": "xxx",
   "description": "Manage the content of the Workspace Start page",
-  "imageUrl": "",
+  "imageUrl": null,
   "iconName": "home",
   "displayName": "OneCX Welcome",
   "basePath": "/welcome",

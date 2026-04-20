@@ -1,7 +1,7 @@
 {
   "version": "xxx",
   "description": "OneCX Parameter",
-  "imageUrl": "",
+  "imageUrl": null,
   "iconName": "sliders-h",
   "displayName": "OneCX Parameter",
   "basePath": "/parameter",

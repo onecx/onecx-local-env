@@ -1,7 +1,7 @@
 {
   "version": "xxx",
   "description": "Manage Help Items",
-  "imageUrl": "",
+  "imageUrl": null,
   "iconName": "question-circle",
   "displayName": "OneCX Help",
   "basePath": "/help",

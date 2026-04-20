@@ -1,7 +1,7 @@
 {
   "version": "xxx",
   "description": "Manage User and Workspace Bookmarks",
-  "imageUrl": "",
+  "imageUrl": null,
   "iconName": "bookmark",
   "displayName": "OneCX Bookmark",
   "basePath": "/bookmark",

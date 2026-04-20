@@ -1,7 +1,7 @@
 {
   "version": "xxx",
   "description": "Display Tenants",
-  "imageUrl": "",
+  "imageUrl": null,
   "iconName": "building-columns",
   "displayName": "OneCX Tenant",
   "basePath": "/tenant",

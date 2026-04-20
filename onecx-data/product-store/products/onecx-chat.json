@@ -1,7 +1,7 @@
 {
   "version": "xxx",
   "description": "Chat with AI and users",
-  "imageUrl": "",
+  "imageUrl": null,
   "iconName": "chat",
   "displayName": "OneCX Chat",
   "basePath": "/chat",

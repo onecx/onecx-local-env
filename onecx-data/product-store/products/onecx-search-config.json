@@ -1,7 +1,7 @@
 {
   "version": "xxx",
   "description": "Manage Search Configurations",
-  "imageUrl": "",
+  "imageUrl": null,
   "iconName": "search-plus",
   "displayName": "OneCX Search Config",
   "basePath": "/search-config",

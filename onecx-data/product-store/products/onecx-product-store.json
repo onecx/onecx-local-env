@@ -1,7 +1,7 @@
 {
   "version": "xxx",
   "description": "Store Products and Applications",
-  "imageUrl": "",
+  "imageUrl": null,
   "iconName": "shop",
   "displayName": "OneCX Product Store",
   "basePath": "/products",

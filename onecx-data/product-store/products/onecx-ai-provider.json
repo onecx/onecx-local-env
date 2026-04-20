@@ -1,7 +1,7 @@
 {
   "version": "xxx",
   "description": "Manage AI providers",
-  "imageUrl": "",
+  "imageUrl": null,
   "iconName": "ai",
   "displayName": "OneCX AI Provider",
   "basePath": "/ai",

@@ -1,7 +1,7 @@
 {
   "version": "xxx",
   "description": "OneCX Workspace",
-  "imageUrl": "",
+  "imageUrl": null,
   "iconName": "desktop",
   "displayName": "OneCX Workspace",
   "basePath": "/workspace",

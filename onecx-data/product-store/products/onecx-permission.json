@@ -1,7 +1,7 @@
 {
   "version": "xxx",
   "description": "OneCX Permission",
-  "imageUrl": "",
+  "imageUrl": null,
   "iconName": "cog",
   "displayName": "OneCX Permission",
   "basePath": "/permission",
