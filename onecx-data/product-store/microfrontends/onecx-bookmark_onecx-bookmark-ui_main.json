@@ -12,5 +12,11 @@
   "tagName": "ocx-bookmark-component",
   "type": "MODULE",
   "deprecated": false,
-  "undeployed": false
+  "undeployed": false,
+  "endpoints": [
+    {
+      "name": "bookmark-configure",
+      "path": "/configure"
+    }
+  ]
 }
