@@ -697,7 +697,9 @@
               "badge": "users",
               "external": false,
               "target": "_self",
-              "i18n": {},
+              "i18n": {
+                "de": "Benutzer & Berechtigungen"
+              },
               "roles": ["onecx-admin", "onecx-user"],
               "children": [
                 {
@@ -709,7 +711,9 @@
                   "badge": "lock",
                   "external": false,
                   "target": "_self",
-                  "i18n": {},
+                  "i18n": {
+                    "de": "Rollen & Berechtigungen"
+                  },
                   "roles": ["onecx-admin", "onecx-user"],
                   "children": []
                 },
@@ -722,7 +726,9 @@
                   "badge": "users",
                   "external": false,
                   "target": "_self",
-                  "i18n": {},
+                  "i18n": {
+                    "de": "IAM Benutzer & Rollen"
+                  },
                   "roles": ["onecx-admin", "onecx-user"],
                   "children": []
                 },
@@ -735,7 +741,9 @@
                   "badge": "users",
                   "external": false,
                   "target": "_self",
-                  "i18n": {},
+                  "i18n": {
+                    "de": "Benutzerprofile"
+                  },
                   "roles": ["onecx-admin", "onecx-user"],
                   "children": []
                 }
@@ -859,7 +867,10 @@
               "badge": "code",
               "external": false,
               "target": "_self",
-              "i18n": {},
+              "i18n": {
+                "de": "Entwicklerwerkzeuge",
+                "en": "Developer Tools"
+              },
               "roles": ["onecx-admin", "onecx-user"],
               "children": [
                 {

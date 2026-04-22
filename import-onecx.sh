@@ -27,7 +27,7 @@ cd "$SCRIPT_DIR"
 usage () {
   local exit_code=${1:-0}
   printf '  %b\n' \
-  "Usage: $0  [-hsv] [-d <import data type>] [-t <tenant>] [-e <edition>]
+  "Usage: $0  [-hsvx] [-d <import data type>] [-t <tenant>] [-e <edition>]
     -d  Data type, one of [ all, base, ai, bookmark, assignment, parameter, permission, mfe, ms, product, slot, tenant theme, welcome, workspace], base is default
     -e  Edition, one of [ 'v1', 'v2' ], default: 'v2'
     -h  Display this help and exit
