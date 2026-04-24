@@ -23,6 +23,7 @@ services:
         #- "traefik.http.routers.local_bff.service=local_bff@file"
     extra_hosts:
       - "host.docker.internal:host-gateway"
+      - "onecx.localhost:127.0.0.1" # Needed to avoid Bad Gateway.
     networks:
       - example
 

@@ -1,7 +1,7 @@
-# NOTE : conf in this file are not cumulative and cancel any option passed to traefik at launch with command in docker compose file
-global:
-  checkNewVersion: false
-
+.Excerpt from `init_data/traefik/base/traefik-conf.yaml`
+[source,yaml]
+----
+...
 api:
   # http://traefik:8082/dashboard/
   dashboard: true
@@ -18,15 +18,5 @@ providers:
     # read all local microfrontend configurations automatically
     directory: /etc/traefik/active
     watch: true
-
-entryPoints:
-  web:
-    address: ":80"
-
-#log:
-#  level: "DEBUG"
-#  filePath: "/var/log/traefik/traefik.log"
-#accessLog:
-#  filePath: "/var/log/traefik/access.log"
-#  bufferingSize: 0
-
+...
+----
