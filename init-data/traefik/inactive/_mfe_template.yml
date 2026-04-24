@@ -1,7 +1,7 @@
 ####################################################
 # Integrate a local running Microfrontend into OneCX
 ####################################################
-# Microfrontend: "{{MFE_NAME}}""
+# Microfrontend: "{{MFE_NAME}}"
 http:
   routers:
     local_{{MFE_NAME}}:
@@ -10,6 +10,8 @@ http:
       service: local_{{MFE_NAME}}
       # higher prio than calculated based on rule length (traefik standard)
       priority: 323
+      entryPoints:
+        - web
       middlewares:
         - strip_{{MFE_NAME}}
 
@@ -24,4 +26,4 @@ http:
     local_{{MFE_NAME}}:
       loadBalancer:
         servers:
-        - url: "http://host.docker.internal:{{MFE_PORT}}/"   # Angular project started outside Docker with this port
+        - url: "http://onecx.localhost:{{MFE_PORT}}/"   # Angular project started outside Docker with this port

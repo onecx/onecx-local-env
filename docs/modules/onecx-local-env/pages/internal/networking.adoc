@@ -41,7 +41,8 @@ Load Balancer::        Distributes traffic across service instances
 Service Discovery::    Automatically detects new services through Docker labels
 API Gateway::          Provides a single entry point for all microservices
 
-Configuration::        The Traefik configuration is split across multiple files: +
+The Traefik configuration is split across multiple files:
+
 * `init-data/traefik/base/traefik-conf.yml` +
   Main configuration
 * `init-data/traefik/base/traefik-services.yml` +
@@ -49,19 +50,12 @@ Configuration::        The Traefik configuration is split across multiple files:
 * `versions/<version>/compose.yaml` +
   OneCX service registrations
 
-Traefik Settings::     `traefik-conf.yml`
-[source,yaml]
-----
-entryPoints:
-  web:
-    address: ":80"  # HTTP entry point
-providers:
-  docker:
-    endpoint: unix:///var/run/docker.sock
-  file:
-    directory: /etc/traefik/active
-    watch: true
-----
+
+.Traefik configuration in `traefik-conf.yml`
+[%collapsible]
+====
+include::_onecx-traefik-conf.adoc[]
+====
 
 Pls. aware the locations of Traefik configuration files are mapped as follows:
 ----
@@ -81,6 +75,7 @@ Services register themselves with Traefik using Docker labels:
 labels:
   - "traefik.http.services.<service-name>.loadbalancer.server.port=8080"
   - "traefik.http.routers.<service-name>.rule=Host(`<service-name>`)"
+  - "traefik.http.routers.<service-name>.entrypoints=web"
 ----
 
 .Traefik Label Patterns: UI
@@ -89,6 +84,7 @@ labels:
 labels:
   - "traefik.http.services.<ui-service-name>.loadbalancer.server.port=8080"
   - "traefik.http.routers.<ui-service-name>.rule=Host(`onecx.localhost`) && PathPrefix(`/<app-path>/`)"
+  - "traefik.http.routers.<ui-service-name>.entrypoints=web"
 ----
 
 

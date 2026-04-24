@@ -4,3 +4,5 @@ http:
       loadBalancer:
         servers:
         - url: "http://host.docker.internal:8585/"
+  extra_hosts:
+    - onecx.localhost:127.0.0.1 # Needed to avoid Bad Gateway.

@@ -67,14 +67,14 @@ usage () {
 #################################################################
 ## Activate/Integrate a Microfrontend with name and port using template
 activate_mfe() {
-  local name="$1"
+  local name="$1-ui"
   local port="$2"
   local path="$3"
   local strippath="$4"
   local template="$MFE_TEMPLATE_PATH"
-  local dst="${name}_${port}"
+  local dst="${1}_${port}"
   local dstf="$TRAEFIK_ACTIVE_DIR/${dst}.yml"
-  local mfe_path="/mfe/${name}" # onecx standard path
+  local mfe_path="/mfe/${1}" # onecx standard path
 
   if [[ -f "$dstf" ]]; then
     printf '%b\n' "${LINE_PREFIX}$dst  ${YELLOW}already activated${NC}"

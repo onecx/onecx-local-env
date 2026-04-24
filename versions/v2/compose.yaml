@@ -65,18 +65,19 @@ services:
   traefik:
     image: ${TRAEFIK}
     container_name: traefik
-    command: --api.insecure=true --providers.docker=true #Enables the web UI and tells Træfik to listen to docker
+    command: --api.insecure=true --providers.docker=true   # Enables the web UI and tells Træfik to listen to docker
     ports:
       - "80:80" # The HTTP port
       - "8082:8080" # The Web UI (enabled by --api)
     volumes:
       - traefik:/etc/traefik/data
-      - /var/run/docker.sock:/var/run/docker.sock # Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock   # Traefik can listen to the Docker events
       - ../../init-data/traefik/base/traefik-conf.yml:/etc/traefik/traefik.yml
-      - ../../init-data/traefik/active:/etc/traefik/active # location of activated local Microfrontends
+      - ../../init-data/traefik/active:/etc/traefik/active   # location of activated local Microfrontends
       - ./logs:/var/log/traefik
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - host.docker.internal:host-gateway
+      - onecx.localhost:host-gateway
     networks:
       - onecx
     profiles:
@@ -106,6 +107,7 @@ services:
     labels:
       - "traefik.http.services.postgresdb.loadbalancer.server.port=5432"
       - "traefik.http.routers.postgresdb.rule=Host(`postgresdb`)"
+      - "traefik.http.routers.postgresdb.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -146,8 +148,9 @@ services:
       postgresdb:
         condition: service_healthy
     labels:
-      - "traefik.http.services.keycloak-intranet.loadbalancer.server.port=8080"
-      - "traefik.http.routers.keycloak-intranet.rule=Host(`${KC_APP_NAME}`)"
+      - "traefik.http.services.keycloak-app.loadbalancer.server.port=8080"
+      - "traefik.http.routers.keycloak-app.rule=Host(`${KC_APP_NAME}`)"
+      - "traefik.http.routers.keycloak-app.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -175,6 +178,7 @@ services:
     labels:
       - "traefik.http.services.pgadmin.loadbalancer.server.port=80"
       - "traefik.http.routers.pgadmin.rule=Host(`pgadmin`)"
+      - "traefik.http.routers.pgadmin.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -284,6 +288,7 @@ services:
     labels:
       - "traefik.http.services.onecx-ai-provider-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-ai-provider-svc.rule=Host(`onecx-ai-provider-svc`)"
+      - "traefik.http.routers.onecx-ai-provider-svc.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -306,6 +311,7 @@ services:
     labels:
       - "traefik.http.services.onecx-ai-provider-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-ai-provider-bff.rule=Host(`onecx-ai-provider-bff`)"
+      - "traefik.http.routers.onecx-ai-provider-bff.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -329,6 +335,7 @@ services:
     labels:
       - "traefik.http.services.onecx-ai-provider-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-ai-provider-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/ai-provider/`)"
+      - "traefik.http.routers.onecx-ai-provider-ui.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -355,6 +362,7 @@ services:
     labels:
       - "traefik.http.services.onecx-announcement-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-announcement-svc.rule=Host(`onecx-announcement-svc`)"
+      - "traefik.http.routers.onecx-announcement-svc.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -377,6 +385,7 @@ services:
     labels:
       - "traefik.http.services.onecx-announcement-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-announcement-bff.rule=Host(`onecx-announcement-bff`)"
+      - "traefik.http.routers.onecx-announcement-bff.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -395,6 +404,7 @@ services:
     labels:
       - "traefik.http.services.onecx-announcement-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-announcement-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/announcement/`)"
+      - "traefik.http.routers.onecx-announcement-ui.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -421,6 +431,7 @@ services:
     labels:
       - "traefik.http.services.onecx-bookmark-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-bookmark-svc.rule=Host(`onecx-bookmark-svc`)"
+      - "traefik.http.routers.onecx-bookmark-svc.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -444,6 +455,7 @@ services:
     labels:
       - "traefik.http.services.onecx-bookmark-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-bookmark-bff.rule=Host(`onecx-bookmark-bff`)"
+      - "traefik.http.routers.onecx-bookmark-bff.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -462,6 +474,7 @@ services:
     labels:
       - "traefik.http.services.onecx-bookmark-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-bookmark-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/bookmark/`)"
+      - "traefik.http.routers.onecx-bookmark-ui.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -488,6 +501,7 @@ services:
     labels:
       - "traefik.http.services.onecx-chat-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-chat-svc.rule=Host(`onecx-chat-svc`)"
+      - "traefik.http.routers.onecx-chat-svc.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -510,6 +524,7 @@ services:
     labels:
       - "traefik.http.services.onecx-chat-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-chat-bff.rule=Host(`onecx-chat-bff`)"
+      - "traefik.http.routers.onecx-chat-bff.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -528,6 +543,7 @@ services:
     labels:
       - "traefik.http.services.onecx-chat-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-chat-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/chat/`)"
+      - "traefik.http.routers.onecx-chat-ui.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -559,6 +575,7 @@ services:
     labels:
       - "traefik.http.services.onecx-file-storage-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-file-storage-svc.rule=Host(`onecx-file-storage-svc`)"
+      - "traefik.http.routers.onecx-file-storage-svc.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -584,8 +601,9 @@ services:
       keycloak-app:
         condition: service_healthy
     labels:
-      - "traefik.http.services.onecx-help-svc.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-help-svc.rule=Host(`onecx-help-svc`)"
+      - traefik.http.services.onecx-help-svc.loadbalancer.server.port=8080
+      - traefik.http.routers.onecx-help-svc.rule=Host(`onecx-help-svc`)
+      - traefik.http.routers.onecx-help-svc.entrypoints=web
     networks:
       - onecx
     profiles:
@@ -606,8 +624,9 @@ services:
       onecx-help-svc:
         condition: service_healthy
     labels:
-      - "traefik.http.services.onecx-help-bff.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-help-bff.rule=Host(`onecx-help-bff`)"
+      - traefik.http.services.onecx-help-bff.loadbalancer.server.port=8080
+      - traefik.http.routers.onecx-help-bff.rule=Host(`onecx-help-bff`)
+      - traefik.http.routers.onecx-help-bff.entrypoints=web
     networks:
       - onecx
     profiles:
@@ -624,8 +643,9 @@ services:
       onecx-help-bff:
         condition: service_healthy
     labels:
-      - "traefik.http.services.onecx-help-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-help-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/help/`)"
+      - traefik.http.services.onecx-help-ui.loadbalancer.server.port=8080
+      - traefik.http.routers.onecx-help-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/help/`)
+      - traefik.http.routers.onecx-help-ui.entrypoints=web
     networks:
       - onecx
     profiles:
@@ -664,6 +684,7 @@ services:
     labels:
       - "traefik.http.services.onecx-iam-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-iam-svc.rule=Host(`onecx-iam-svc`)"
+      - "traefik.http.routers.onecx-iam-svc.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -686,6 +707,7 @@ services:
     labels:
       - "traefik.http.services.onecx-iam-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-iam-bff.rule=Host(`onecx-iam-bff`)"
+      - "traefik.http.routers.onecx-iam-bff.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -704,6 +726,7 @@ services:
     labels:
       - "traefik.http.services.onecx-iam-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-iam-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/iam/`)"
+      - "traefik.http.routers.onecx-iam-ui.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -729,6 +752,7 @@ services:
     labels:
       - "traefik.http.services.onecx-parameter-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-parameter-svc.rule=Host(`onecx-parameter-svc`)"
+      - "traefik.http.routers.onecx-parameter-svc.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -753,6 +777,7 @@ services:
     labels:
       - "traefik.http.services.onecx-parameter-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-parameter-bff.rule=Host(`onecx-parameter-bff`)"
+      - "traefik.http.routers.onecx-parameter-bff.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -771,6 +796,7 @@ services:
     labels:
       - "traefik.http.services.onecx-parameter-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-parameter-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/parameter/`)"
+      - "traefik.http.routers.onecx-parameter-ui.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -797,6 +823,7 @@ services:
     labels:
       - "traefik.http.services.onecx-permission-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-permission-svc.rule=Host(`onecx-permission-svc`)"
+      - "traefik.http.routers.onecx-permission-svc.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -821,6 +848,7 @@ services:
     labels:
       - "traefik.http.services.onecx-permission-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-permission-bff.rule=Host(`onecx-permission-bff`)"
+      - "traefik.http.routers.onecx-permission-bff.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -839,6 +867,7 @@ services:
     labels:
       - "traefik.http.services.onecx-permission-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-permission-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/permission/`)"
+      - "traefik.http.routers.onecx-permission-ui.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -864,6 +893,7 @@ services:
     labels:
       - "traefik.http.services.onecx-product-store-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-product-store-svc.rule=Host(`onecx-product-store-svc`)"
+      - "traefik.http.routers.onecx-product-store-svc.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -888,6 +918,7 @@ services:
     labels:
       - "traefik.http.services.onecx-product-store-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-product-store-bff.rule=Host(`onecx-product-store-bff`)"
+      - "traefik.http.routers.onecx-product-store-bff.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -906,6 +937,7 @@ services:
     labels:
       - "traefik.http.services.onecx-product-store-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-product-store-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/product-store/`)"
+      - "traefik.http.routers.onecx-product-store-ui.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -943,6 +975,7 @@ services:
     labels:
       - "traefik.http.services.onecx-shell-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-shell-bff.rule=Host(`onecx-shell-bff`)"
+      - "traefik.http.routers.onecx-shell-bff.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -971,6 +1004,7 @@ services:
     labels:
       - "traefik.http.services.onecx-shell-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-shell-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/onecx-shell/`)"
+      - "traefik.http.routers.onecx-shell-ui.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -997,6 +1031,7 @@ services:
     labels:
       - "traefik.http.services.onecx-tenant-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-tenant-svc.rule=Host(`onecx-tenant-svc`)"
+      - "traefik.http.routers.onecx-tenant-svc.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -1021,6 +1056,7 @@ services:
     labels:
       - "traefik.http.services.onecx-tenant-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-tenant-bff.rule=Host(`onecx-tenant-bff`)"
+      - "traefik.http.routers.onecx-tenant-bff.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -1039,6 +1075,7 @@ services:
     labels:
       - "traefik.http.services.onecx-tenant-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-tenant-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/tenant/`)"
+      - "traefik.http.routers.onecx-tenant-ui.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -1064,6 +1101,7 @@ services:
     labels:
       - "traefik.http.services.onecx-theme-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-theme-svc.rule=Host(`onecx-theme-svc`)"
+      - "traefik.http.routers.onecx-theme-svc.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -1088,6 +1126,7 @@ services:
     labels:
       - "traefik.http.services.onecx-theme-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-theme-bff.rule=Host(`onecx-theme-bff`)"
+      - "traefik.http.routers.onecx-theme-bff.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -1106,6 +1145,7 @@ services:
     labels:
       - "traefik.http.services.onecx-theme-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-theme-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/theme/`)"
+      - "traefik.http.routers.onecx-theme-ui.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -1131,6 +1171,7 @@ services:
     labels:
       - "traefik.http.services.onecx-user-profile-avatar-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-user-profile-avatar-svc.rule=Host(`onecx-user-profile-avatar-svc`)"
+      - "traefik.http.routers.onecx-user-profile-avatar-svc.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -1156,6 +1197,7 @@ services:
     labels:
       - "traefik.http.services.onecx-user-profile-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-user-profile-svc.rule=Host(`onecx-user-profile-svc`)"
+      - "traefik.http.routers.onecx-user-profile-svc.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -1181,6 +1223,7 @@ services:
     labels:
       - "traefik.http.services.onecx-user-profile-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-user-profile-bff.rule=Host(`onecx-user-profile-bff`)"
+      - "traefik.http.routers.onecx-user-profile-bff.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -1205,6 +1248,7 @@ services:
     labels:
       - "traefik.http.services.onecx-user-profile-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-user-profile-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/user-profile/`)"
+      - "traefik.http.routers.onecx-user-profile-ui.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -1232,6 +1276,7 @@ services:
     labels:
       - "traefik.http.services.onecx-welcome-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-welcome-svc.rule=Host(`onecx-welcome-svc`)"
+      - "traefik.http.routers.onecx-welcome-svc.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -1255,6 +1300,7 @@ services:
     labels:
       - "traefik.http.services.onecx-welcome-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-welcome-bff.rule=Host(`onecx-welcome-bff`)"
+      - "traefik.http.routers.onecx-welcome-bff.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -1273,6 +1319,7 @@ services:
     labels:
       - "traefik.http.services.onecx-welcome-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-welcome-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/welcome/`)"
+      - "traefik.http.routers.onecx-welcome-ui.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -1299,6 +1346,7 @@ services:
     labels:
       - "traefik.http.services.onecx-workspace-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-workspace-svc.rule=Host(`onecx-workspace-svc`)"
+      - "traefik.http.routers.onecx-workspace-svc.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -1323,6 +1371,7 @@ services:
     labels:
       - "traefik.http.services.onecx-workspace-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-workspace-bff.rule=Host(`onecx-workspace-bff`)"
+      - "traefik.http.routers.onecx-workspace-bff.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -1347,6 +1396,7 @@ services:
     labels:
       - "traefik.http.services.onecx-workspace-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-workspace-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/workspace/`)"
+      - "traefik.http.routers.onecx-workspace-ui.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -1376,6 +1426,7 @@ services:
     labels:
       - "traefik.http.services.onecx-notification-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-notification-svc.rule=Host(`onecx-notification-svc`)"
+      - "traefik.http.routers.onecx-notification-svc.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -1401,6 +1452,7 @@ services:
     labels:
       - "traefik.http.services.onecx-notification-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-notification-bff.rule=Host(`onecx-notification-bff`)"
+      - "traefik.http.routers.onecx-notification-bff.entrypoints=web"
     networks:
       - onecx
     profiles:
@@ -1426,6 +1478,7 @@ services:
     labels:
       - "traefik.http.services.onecx-notification-bff-2.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-notification-bff-2.rule=Host(`onecx-notification-bff-2`)"
+      - "traefik.http.routers.onecx-notification-bff-2.entrypoints=web"
     networks:
       - onecx
     profiles:
