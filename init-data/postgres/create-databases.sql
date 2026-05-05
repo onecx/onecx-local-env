@@ -41,6 +41,12 @@ CREATE DATABASE onecx_chat with owner onecx_chat;
 GRANT ALL PRIVILEGES ON DATABASE onecx_chat TO onecx_chat;
 GRANT ALL PRIVILEGES ON SCHEMA public TO onecx_chat;
 
+-- -- onecx_document
+CREATE USER onecx_document WITH ENCRYPTED PASSWORD 'onecx_document';
+CREATE DATABASE onecx_document with owner onecx_document;
+GRANT ALL PRIVILEGES ON DATABASE onecx_document TO onecx_document;
+GRANT ALL PRIVILEGES ON SCHEMA public TO onecx_document;
+
 -- -- onecx_help
 CREATE USER onecx_help WITH ENCRYPTED PASSWORD 'onecx_help';
 CREATE DATABASE onecx_help with owner onecx_help;

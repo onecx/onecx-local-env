@@ -185,7 +185,7 @@ services:
       - all
       - base
 
-# RustFS main service
+  # RustFS main service
   rustfs:
     security_opt:
       - "no-new-privileges:true"
@@ -212,6 +212,7 @@ services:
       - RUSTFS_TLS_PATH=/opt/tls
       - RUSTFS_OBS_ENDPOINT=http://otel-collector:4318
       - RUSTFS_REGION=eu-central-1
+      - RUSTFS_UNSAFE_BYPASS_DISK_CHECK=true
     volumes:
       - ./storage/data/pro:/data
       - ./storage/logs:/app/logs
@@ -544,6 +545,76 @@ services:
       - "traefik.http.services.onecx-chat-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-chat-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/chat/`)"
       - "traefik.http.routers.onecx-chat-ui.entrypoints=web"
+    networks:
+      - onecx
+    profiles:
+      - all
+
+  ########## ONECX DOCUMENT
+  onecx-document-svc:
+    image: ${ONECX_DOCUMENT_SVC}
+    container_name: onecx-document-svc
+    environment:
+      <<: *svc_multi_tenancy
+      QUARKUS_DATASOURCE_USERNAME: onecx_document
+      QUARKUS_DATASOURCE_PASSWORD: onecx_document
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_document?sslmode=disable"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-document-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-document-svc.rule=Host(`onecx-document-svc`)"
+      - "traefik.http.routers.onecx-document-svc.entrypoints=web"
+    networks:
+      - onecx
+    profiles:
+      - all
+
+  onecx-document-bff:
+    image: ${ONECX_DOCUMENT_BFF}
+    container_name: onecx-document-bff
+    environment:
+      <<: *bff_environment
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-document"
+    healthcheck:
+      test: curl --head -fsS http://localhost:8080/q/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-document-svc:
+        condition: service_healthy
+      onecx-file-storage-svc:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-document-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-document-bff.rule=Host(`onecx-document-bff`)"
+      - "traefik.http.routers.onecx-document-bff.entrypoints=web"
+    networks:
+      - onecx
+    profiles:
+      - all
+
+  onecx-document-ui:
+    image: ${ONECX_DOCUMENT_UI}
+    container_name: onecx-document-ui
+    environment:
+      APP_BASE_HREF: "/mfe/document/"
+      APP_ID: "onecx-document-ui"
+      PRODUCT_NAME: "onecx-document"
+    depends_on:
+      onecx-document-bff:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-document-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-document-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/document/`)"
+      - "traefik.http.routers.onecx-document-ui.entrypoints=web"
     networks:
       - onecx
     profiles:

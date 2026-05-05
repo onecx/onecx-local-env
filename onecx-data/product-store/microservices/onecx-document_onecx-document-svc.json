@@ -1,0 +1,6 @@
+{
+  "version": "xxx",
+  "name": "onecx-document-svc",
+  "description": "OneCX Document Backend Service",
+  "type": "svc"
+}

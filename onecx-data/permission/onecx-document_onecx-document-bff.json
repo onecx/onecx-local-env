@@ -1,0 +1,20 @@
+{
+  "name": "onecx-document-bff",
+  "permissions": [
+    {
+      "resource": "document",
+      "action": "delete",
+      "description": "Permission to delete documents"
+    },
+    {
+      "resource": "document",
+      "action": "read",
+      "description": "Permission to read documents"
+    },
+    {
+      "resource": "document",
+      "action": "write",
+      "description": "Permission to write documents"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "version": "xxx",
+  "name": "onecx-document-bff",
+  "description": "OneCX Document Backend For Frontend",
+  "type": "bff"
+}

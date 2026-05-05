@@ -76,6 +76,16 @@
           ]
         },
         {
+          "productName": "onecx-document",
+          "baseUrl": "/document",
+          "microfrontends": [
+            {
+              "appId": "onecx-document-ui",
+              "basePath": "/"
+            }
+          ]
+        },
+        {
           "productName": "onecx-help",
           "baseUrl": "/help",
           "microfrontends": [
@@ -832,11 +842,38 @@
                   "children": []
                 },
                 {
+                  "key": "PMM_MISC_DOC",
+                  "name": "Document",
+                  "url": "/document",
+                  "disabled": false,
+                  "position": 6,
+                  "badge": "file",
+                  "external": false,
+                  "target": "_self",
+                  "i18n": {},
+                  "roles": ["onecx-admin", "onecx-user"],
+                  "children": [
+                    {
+                      "key": "PMM_MISC_DOC_TYPES",
+                      "name": "Document Types",
+                      "url": "/document-types",
+                      "disabled": false,
+                      "position": 1,
+                      "badge": "file",
+                      "external": false,
+                      "target": "_self",
+                      "i18n": {},
+                      "roles": ["onecx-admin", "onecx-user"],
+                      "children": []
+                    }
+                  ]
+                },
+                {
                   "key": "PMM_MISC_HW",
                   "name": "Hello World",
                   "url": "/hello-world",
                   "disabled": false,
-                  "position": 6,
+                  "position": 7,
                   "badge": "help",
                   "external": false,
                   "target": "_self",
@@ -849,7 +886,7 @@
                   "name": "AI Provider",
                   "url": "/ai-provider",
                   "disabled": false,
-                  "position": 6,
+                  "position": 8,
                   "badge": "sitemap",
                   "external": false,
                   "target": "_self",

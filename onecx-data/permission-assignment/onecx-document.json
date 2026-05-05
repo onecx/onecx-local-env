@@ -1,0 +1,23 @@
+{
+  "id": "onecx-local-env_import-permission-assignments_onecx-document",
+  "assignments": {
+    "onecx-document": {
+      "onecx-document-bff": {
+        "onecx-admin": {
+          "document": ["read", "write", "delete"]
+        },
+        "onecx-user": {
+          "document": ["read"]
+        }
+      },
+      "onecx-document-ui": {
+        "onecx-admin": {
+          "DOCUMENT": ["READ", "WRITE", "DELETE"]
+        },
+        "onecx-user": {
+          "DOCUMENT": ["READ"]
+        }
+      }
+    }
+  }
+}

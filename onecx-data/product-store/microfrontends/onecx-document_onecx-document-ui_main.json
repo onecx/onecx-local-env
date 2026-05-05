@@ -1,0 +1,16 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX Document UI",
+  "description": "OneCX Document UI",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/document/",
+  "remoteEntry": "/mfe/document/remoteEntry.js",
+  "note": "Import via MF operator",
+  "exposedModule": "./OnecxDocumentUiModule",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-document-ui",
+  "tagName": "onecx-document-ui-webcomponent",
+  "type": "MODULE",
+  "deprecated": false,
+  "undeployed": false
+}

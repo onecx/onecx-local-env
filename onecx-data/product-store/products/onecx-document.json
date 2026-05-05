@@ -1,0 +1,12 @@
+{
+  "version": "xxx",
+  "description": "Manage Workspace Documents",
+  "imageUrl": null,
+  "iconName": "palette",
+  "displayName": "OneCX Document",
+  "basePath": "/document",
+  "provider": "OneCX Team",
+  "classifications": ["Administration"],
+  "multitenancy": true,
+  "undeployed": false
+}
