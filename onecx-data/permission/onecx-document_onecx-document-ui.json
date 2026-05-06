@@ -3,8 +3,13 @@
   "permissions": [
     {
       "resource": "DOCUMENT",
-      "action": "WRITE",
+      "action": "CREATE",
       "description": "Permission to create documents"
+    },
+    {
+      "resource": "DOCUMENT",
+      "action": "EDIT",
+      "description": "Permission to edit documents"
     },
     {
       "resource": "DOCUMENT",
@@ -13,8 +18,13 @@
     },
     {
       "resource": "DOCUMENT",
-      "action": "READ",
+      "action": "VIEW",
       "description": "Permission to view documents"
+    },
+    {
+      "resource": "DOCUMENT",
+      "action": "SEARCH",
+      "description": "Permission to search documents"
     }
   ]
 }

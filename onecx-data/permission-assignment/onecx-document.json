@@ -12,10 +12,10 @@
       },
       "onecx-document-ui": {
         "onecx-admin": {
-          "DOCUMENT": ["READ", "WRITE", "DELETE"]
+          "DOCUMENT": ["CREATE", "EDIT", "DELETE", "VIEW", "SEARCH"]
         },
         "onecx-user": {
-          "DOCUMENT": ["READ"]
+          "DOCUMENT": ["VIEW", "SEARCH"]
         }
       }
     }
