@@ -1475,6 +1475,31 @@ services:
       - all
       - base
 
+  onecx-notification-ui:
+    image: ${ONECX_NOTIFICATION_UI}
+    container_name: onecx-notification-ui
+    environment:
+      APP_BASE_HREF: "/mfe/notification/"
+      APP_ID: "onecx-notification-ui"
+      PRODUCT_NAME: "onecx-notification"
+      BFF_URL: "http://onecx-notification-bff:8080"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "-G", "http://localhost:8080"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-notification-bff:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-notification-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-notification-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/notification/`)"
+      - "traefik.http.routers.onecx-notification-ui.entrypoints=web"
+    networks:
+      - onecx
+    profiles:
+      - all
+      - base
 #NOTIFICATION SVC
   onecx-notification-svc:
     image: ${ONECX_NOTIFICATION_SVC}

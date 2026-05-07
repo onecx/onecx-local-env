@@ -1,0 +1,6 @@
+{
+  "version": "xxx",
+  "name": "onecx-notification-svc",
+  "description": "OneCX Notification Backend Service",
+  "type": "svc"
+}

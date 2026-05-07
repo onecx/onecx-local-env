@@ -1,0 +1,6 @@
+{
+  "version": "xxx",
+  "name": "onecx-notification-bff",
+  "description": "OneCX Notification Backend For Frontend",
+  "type": "bff"
+}

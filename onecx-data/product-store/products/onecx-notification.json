@@ -1,0 +1,14 @@
+{
+  "version": "xxx",
+  "description": "Manage notifications",
+  "imageUrl": null,
+  "iconName": "notifications",
+  "displayName": "OneCX Notification",
+  "basePath": "/notification",
+  "provider": "OneCX Team",
+  "classifications": [
+    "Administration"
+  ],
+  "multitenancy": true,
+  "undeployed": false
+}

@@ -1,0 +1,16 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX Notification UI",
+  "description": "OneCX Notification UI",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/notification/",
+  "remoteEntry": "/mfe/notification/remoteEntry.js",
+  "note": "Import via MF operator",
+  "exposedModule": "./OneCXNotificationModule",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-notification",
+  "tagName": "ocx-notification-component",
+  "type": "MODULE",
+  "deprecated": false,
+  "undeployed": false
+}
