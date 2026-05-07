@@ -1499,7 +1499,7 @@ services:
       - onecx
     profiles:
       - all
-      - base
+      
 #NOTIFICATION SVC
   onecx-notification-svc:
     image: ${ONECX_NOTIFICATION_SVC}
