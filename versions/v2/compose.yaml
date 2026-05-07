@@ -1482,7 +1482,6 @@ services:
       APP_BASE_HREF: "/mfe/notification/"
       APP_ID: "onecx-notification-ui"
       PRODUCT_NAME: "onecx-notification"
-      BFF_URL: "http://onecx-notification-bff:8080"
     healthcheck:
       test: ["CMD", "curl", "--fail", "-G", "http://localhost:8080"]
       interval: 10s
@@ -1503,7 +1502,7 @@ services:
 #NOTIFICATION SVC
   onecx-notification-svc:
     image: ${ONECX_NOTIFICATION_SVC}
-    container_name: oonecx-notification-svc
+    container_name: onecx-notification-svc
     user: root
     environment:
       <<: *svc_single_tenancy
