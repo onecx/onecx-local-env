@@ -33,7 +33,7 @@ export OLE_EDITION OLE_LINE_PREFIX OLE_HEADER_CT_JSON
 ## Check and set import type
 IMPORT_TYPE="base"
 
-if [[ -n "${4:-}" && "${4:-}" =~ ^(all|base|ai|bookmark|assignment|parameter|permission|mfe|ms|product|slot|tenant|theme|welcome|workspace)$ ]]; then
+if [[ -n "${4:-}" && "${4:-}" =~ ^(all|base|ai|bookmark|assignment|parameter|permission|mfe|ms|product|slot|tenant|theme|welcome|workspace|menu)$ ]]; then
   IMPORT_TYPE="${4}"
 fi
 
@@ -223,6 +223,12 @@ fi
 if [[ "$IMPORT_TYPE" =~ ^(all|base|workspace)$ ]]; then
   pushd workspace > /dev/null
   bash ./import-workspaces.sh "${1:-}" "${2:-}"
+  popd > /dev/null
+fi
+
+if [[ "$IMPORT_TYPE" =~ ^(all|base|menu)$ ]]; then
+  pushd workspace > /dev/null
+  bash ./import-menu.sh "${1:-}" "${2:-}"
   popd > /dev/null
 fi
 
