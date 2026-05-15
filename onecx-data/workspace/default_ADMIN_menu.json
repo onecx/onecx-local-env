@@ -1,0 +1,494 @@
+{
+  "id": "onecx-local-env_import-menu_ADMIN",
+  "created": "2025-10-20T11:09:39.79186Z",
+  "menu": {
+    "menuItems": [
+      {
+        "key": "USER_PROFILE_MENU",
+        "name": "User Profile Menu",
+        "disabled": false,
+        "position": 1,
+        "badge": "folder",
+        "external": false,
+        "target": "_self",
+        "i18n": {},
+        "roles": ["onecx-admin", "onecx-user"],
+        "children": [
+          {
+            "key": "UPM_PERSONAL_INFO",
+            "name": "Personal Info",
+            "url": "/user",
+            "disabled": false,
+            "position": 0,
+            "badge": "user",
+            "external": false,
+            "target": "_self",
+            "i18n": {},
+            "roles": ["onecx-admin", "onecx-user"],
+            "children": []
+          },
+          {
+            "key": "UPM_ACCOUNT_SETTINGS",
+            "name": "Account Settings",
+            "url": "/user/account",
+            "disabled": false,
+            "position": 1,
+            "badge": "cog",
+            "external": false,
+            "target": "_self",
+            "i18n": {
+              "de": "Einstellungen",
+              "en": "Settings"
+            },
+            "roles": ["onecx-admin", "onecx-user"],
+            "children": []
+          },
+          {
+            "key": "UPM_PERMISSIONS",
+            "name": "My Permissions",
+            "url": "/user/roles",
+            "disabled": false,
+            "position": 2,
+            "badge": "lock",
+            "external": false,
+            "target": "_self",
+            "i18n": {
+              "de": "Berechtigungen",
+              "en": "Permissions"
+            },
+            "roles": ["onecx-admin", "onecx-user"],
+            "children": []
+          },
+          {
+            "key": "UPM_BOOKMARKS",
+            "name": "My Bookmarks",
+            "url": "/bookmark",
+            "disabled": false,
+            "position": 2,
+            "badge": "bookmark",
+            "external": false,
+            "target": "_self",
+            "i18n": {
+              "de": "Lesezeichen",
+              "en": "Bookmarks"
+            },
+            "roles": ["onecx-admin", "onecx-user"],
+            "children": []
+          },
+          {
+            "key": "UPM_CHANGE_PASSWORD",
+            "name": "Change Password",
+            "url": "/user/account/change-password",
+            "disabled": false,
+            "position": 3,
+            "badge": "key",
+            "external": false,
+            "target": "_self",
+            "i18n": {
+              "de": "Passwort ändern"
+            },
+            "roles": ["onecx-admin", "onecx-user"],
+            "children": []
+          }
+        ]
+      },
+      {
+        "key": "PORTAL_FOOTER_MENU",
+        "name": "Footer Menu",
+        "disabled": false,
+        "position": 3,
+        "external": false,
+        "target": "_self",
+        "i18n": {},
+        "roles": ["onecx-admin", "onecx-user"],
+        "children": [
+          {
+            "key": "PFM_CONTACT",
+            "name": "Contact",
+            "url": "/contact",
+            "disabled": false,
+            "position": 0,
+            "external": false,
+            "target": "_self",
+            "i18n": {},
+            "roles": ["onecx-admin", "onecx-user"],
+            "children": []
+          },
+          {
+            "key": "PFM_IMPRINT",
+            "name": "Impressum",
+            "url": "/imprint",
+            "disabled": false,
+            "position": 1,
+            "external": false,
+            "target": "_self",
+            "i18n": {},
+            "roles": ["onecx-admin", "onecx-user"],
+            "children": []
+          }
+        ]
+      },
+      {
+        "key": "PORTAL_MAIN_MENU",
+        "name": "Main Menu",
+        "disabled": false,
+        "position": 0,
+        "badge": "folder",
+        "external": false,
+        "target": "_self",
+        "i18n": {},
+        "roles": ["onecx-admin", "onecx-user"],
+        "children": [
+          {
+            "key": "PMM_PRODUCT_STORE",
+            "name": "Application Store",
+            "url": "/application",
+            "disabled": false,
+            "position": 0,
+            "badge": "cog",
+            "external": false,
+            "target": "_self",
+            "i18n": {},
+            "roles": ["onecx-admin", "onecx-user"],
+            "children": []
+          },
+          {
+            "key": "PMM_WELCOME",
+            "name": "Welcome Page",
+            "url": "/welcome",
+            "disabled": false,
+            "position": 1,
+            "badge": "home",
+            "external": false,
+            "target": "_self",
+            "i18n": {
+              "de": "Startseite",
+              "en": "Start page"
+            },
+            "roles": ["onecx-admin", "onecx-user"],
+            "children": []
+          },
+          {
+            "key": "PMM_WORKSPACE_MGMT",
+            "name": "Workspace",
+            "disabled": false,
+            "position": 2,
+            "badge": "folder",
+            "external": false,
+            "target": "_self",
+            "i18n": {},
+            "roles": ["onecx-admin", "onecx-user"],
+            "children": [
+              {
+                "key": "PMM_WM_WORKSPACES",
+                "name": "Workspaces",
+                "url": "/workspace",
+                "disabled": false,
+                "position": 0,
+                "badge": "ellipsis-h",
+                "external": false,
+                "target": "_self",
+                "i18n": {},
+                "roles": ["onecx-admin", "onecx-user"],
+                "children": []
+              },
+              {
+                "key": "PMM_WM_THEMES",
+                "name": "Themes",
+                "url": "/theme",
+                "disabled": false,
+                "position": 1,
+                "badge": "palette",
+                "external": false,
+                "target": "_self",
+                "i18n": {},
+                "roles": ["onecx-admin", "onecx-user"],
+                "children": []
+              },
+              {
+                "key": "PMM_WM_TENANTS",
+                "name": "Tenants",
+                "url": "/tenant",
+                "disabled": false,
+                "position": 2,
+                "badge": "android",
+                "external": false,
+                "target": "_self",
+                "i18n": {
+                  "de": "Mandanten",
+                  "en": "Tenants"
+                },
+                "roles": ["onecx-admin", "onecx-user"],
+                "children": []
+              }
+            ]
+          },
+          {
+            "key": "PMM_USERS_AND_ROLES",
+            "name": "Users & Permissions",
+            "disabled": false,
+            "position": 3,
+            "badge": "users",
+            "external": false,
+            "target": "_self",
+            "i18n": {
+              "de": "Benutzer & Berechtigungen"
+            },
+            "roles": ["onecx-admin", "onecx-user"],
+            "children": [
+              {
+                "key": "PMM_UR_PERMISSIONS",
+                "name": "Roles & Permissions",
+                "url": "/permission",
+                "disabled": false,
+                "position": 1,
+                "badge": "lock",
+                "external": false,
+                "target": "_self",
+                "i18n": {
+                  "de": "Rollen & Berechtigungen"
+                },
+                "roles": ["onecx-admin", "onecx-user"],
+                "children": []
+              },
+              {
+                "key": "PMM_UR_IAM_USERS_ROLES",
+                "name": "IAM Users & Roles",
+                "url": "/iam",
+                "disabled": false,
+                "position": 2,
+                "badge": "users",
+                "external": false,
+                "target": "_self",
+                "i18n": {
+                  "de": "IAM Benutzer & Rollen"
+                },
+                "roles": ["onecx-admin", "onecx-user"],
+                "children": []
+              },
+              {
+                "key": "PMM_UR_USER_PROFILES",
+                "name": "OneCX User Profiles",
+                "url": "/user/search",
+                "disabled": false,
+                "position": 3,
+                "badge": "users",
+                "external": false,
+                "target": "_self",
+                "i18n": {
+                  "de": "Benutzerprofile"
+                },
+                "roles": ["onecx-admin", "onecx-user"],
+                "children": []
+              }
+            ]
+          },
+          {
+            "key": "PMM_MISC",
+            "name": "Miscellanea",
+            "disabled": false,
+            "position": 4,
+            "badge": "map",
+            "external": false,
+            "target": "_self",
+            "i18n": {},
+            "roles": ["onecx-admin", "onecx-user"],
+            "children": [
+              {
+                "key": "PMM_MISC_WELCOME",
+                "name": "Welcome Page",
+                "url": "/welcome",
+                "disabled": false,
+                "position": 1,
+                "badge": "home",
+                "external": false,
+                "target": "_self",
+                "i18n": {},
+                "roles": ["onecx-admin", "onecx-user"],
+                "children": []
+              },
+              {
+                "key": "PMM_MISC_ANN",
+                "name": "Announcements",
+                "url": "/announcement",
+                "disabled": false,
+                "position": 2,
+                "badge": "calendar-plus",
+                "external": false,
+                "target": "_self",
+                "i18n": {
+                  "de": "Ankündigungen",
+                  "en": "Announcements"
+                },
+                "roles": ["onecx-admin", "onecx-user"],
+                "children": []
+              },
+              {
+                "key": "PMM_MISC_HELP",
+                "name": "Help Items",
+                "url": "/help",
+                "disabled": false,
+                "position": 3,
+                "badge": "question-circle",
+                "external": false,
+                "target": "_self",
+                "i18n": {
+                  "de": "Hilfeartikel",
+                  "en": "Help Items"
+                },
+                "roles": ["onecx-admin", "onecx-user"],
+                "children": []
+              },
+              {
+                "key": "PMM_MISC_PARAM",
+                "name": "Parameter",
+                "url": "/parameter",
+                "disabled": false,
+                "position": 4,
+                "badge": "database",
+                "external": false,
+                "target": "_self",
+                "i18n": {},
+                "roles": ["onecx-admin", "onecx-user"],
+                "children": []
+              },
+              {
+                "key": "PMM_MISC_DO",
+                "name": "Data Orchestrator",
+                "url": "/data",
+                "disabled": false,
+                "position": 5,
+                "badge": "cog",
+                "external": false,
+                "target": "_self",
+                "i18n": {},
+                "roles": ["onecx-admin", "onecx-user"],
+                "children": []
+              },
+              {
+                "key": "PMM_MISC_DOC",
+                "name": "Document",
+                "url": "/document",
+                "disabled": false,
+                "position": 6,
+                "badge": "file",
+                "external": false,
+                "target": "_self",
+                "i18n": {},
+                "roles": ["onecx-admin", "onecx-user"],
+                "children": []
+              },
+              {
+                "key": "PMM_MISC_HW",
+                "name": "Hello World",
+                "url": "/hello-world",
+                "disabled": false,
+                "position": 7,
+                "badge": "globe",
+                "external": false,
+                "target": "_self",
+                "i18n": {},
+                "roles": ["onecx-admin", "onecx-user"],
+                "children": []
+              },
+              {
+                "key": "PMM_MISC_BOOKSTORE",
+                "name": "Bookstore",
+                "url": "/bookstore",
+                "disabled": false,
+                "position": 7,
+                "badge": "book",
+                "external": false,
+                "target": "_self",
+                "i18n": {},
+                "roles": ["onecx-admin", "onecx-user"],
+                "children": []
+              },
+              {
+                "key": "PMM_MISC_AI",
+                "name": "AI Provider",
+                "url": "/ai-provider",
+                "disabled": false,
+                "position": 8,
+                "badge": "sitemap",
+                "external": false,
+                "target": "_self",
+                "i18n": {},
+                "roles": ["onecx-admin", "onecx-user"],
+                "children": []
+              }
+            ]
+          },
+          {
+            "key": "PMM_DEVELOPER_TOOLS",
+            "name": "Developer Tools",
+            "disabled": false,
+            "position": 5,
+            "badge": "code",
+            "external": false,
+            "target": "_self",
+            "i18n": {
+              "de": "Entwicklerwerkzeuge",
+              "en": "Developer Tools"
+            },
+            "roles": ["onecx-admin", "onecx-user"],
+            "children": [
+              {
+                "key": "PDT_KEYCLOAK_DEF",
+                "name": "Keycloak default",
+                "url": "http://keycloak-app",
+                "disabled": false,
+                "position": 1,
+                "badge": "user-edit",
+                "external": true,
+                "target": "_blank",
+                "i18n": {},
+                "roles": ["onecx-admin", "onecx-user"],
+                "children": []
+              },
+              {
+                "key": "PDT_STORYBOOK",
+                "name": "Storybook",
+                "url": "https://master--62dfd0cfe549629f83343eb1.chromatic.com/",
+                "disabled": false,
+                "position": 2,
+                "badge": "book",
+                "external": true,
+                "target": "_blank",
+                "i18n": {},
+                "roles": ["onecx-admin", "onecx-user"],
+                "children": []
+              }
+            ]
+          },
+          {
+            "key": "PMM_APPS",
+            "name": "Other Apps",
+            "disabled": true,
+            "position": 6,
+            "badge": "ellipsis-h",
+            "external": false,
+            "target": "_self",
+            "i18n": {},
+            "roles": ["onecx-admin", "onecx-user"],
+            "children": [
+              {
+                "key": "PMM_APPS_PROCESS_LOG",
+                "name": "Process Log",
+                "url": "/processlog",
+                "disabled": true,
+                "position": 1,
+                "badge": "cog",
+                "external": false,
+                "target": "_self",
+                "i18n": {},
+                "roles": ["onecx-admin", "onecx-user"],
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

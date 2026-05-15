@@ -870,7 +870,7 @@
                   "url": "/hello-world",
                   "disabled": false,
                   "position": 7,
-                  "badge": "help",
+                  "badge": "globe",
                   "external": false,
                   "target": "_self",
                   "i18n": {},

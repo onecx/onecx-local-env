@@ -3,28 +3,28 @@
 ####################################################
 # Integrate a local running Microfrontend into OneCX
 ####################################################
-# Microfrontend: "my-app""
+# Microfrontend: "my-app-ui"
 http:
   routers:
     local_my-app:
       # path prefix as used for MFE registration in product store
       rule: "Host(`onecx.localhost`) && PathPrefix(`/mfe/my-app/`)"
-      service: local_my-app
+      service: local_my-app-ui
       # higher prio than calculated based on rule length (traefik standard)
       priority: 323
       middlewares:
-        - strip_my-app
+        - strip_my-app-ui
 
   # Remove the used mfe path so that it maps directly to localhost:port
   middlewares:
-    strip_my-app:
+    strip_my-app-ui:
       stripPrefix:
         prefixes:
           - "/mfe/my-app"
 
   services:
-    local_my-app:
+    local_my-app-ui:
       loadBalancer:
         servers:
-        - url: "http://host.docker.internal:6021/"   # Microfrontend started outside Docker with this port
+        - url: "http://onecx.localhost:6021/"   # Microfrontend started outside Docker with this port
 ----

@@ -33,12 +33,13 @@ MFE_COUNT=0
 MFES=()
 MODE=""
 LINE_PREFIX="   * "
-onecx_products="announcement|bookmark|help|iam|parameter|permission|product-store|tenant|theme|shell|user-profile|welcome|workspace"
+onecx_products="announcement|bookmark|help|iam|parameter|permission|product-store|tenant|theme|shell|user-profile|welcome|workspace|bookstore"
 declare -A onecx_products_predefined_ports=( \
   ["announcement"]="5024" ["bookmark"]="5031" ["help"]="5023" ["iam"]="5029" \
   ["parameter"]="5030" ["permission"]="5026" ["product-store"]="5021" \
   ["shell"]="5000" ["tenant"]="5022" ["theme"]="5020" \
-  ["user-profile"]="5027" ["welcome"]="5028" ["workspace"]="5025")
+  ["user-profile"]="5027" ["welcome"]="5028" ["workspace"]="5025" \
+  ["bookstore"]="6023" )
 
 #################################################################
 ## Usage
@@ -54,11 +55,11 @@ usage () {
     -h  Display this help and exit
     -l  List of currently integrated local microfrontends
   Examples:
-    $0  -a workspace  user-profile:12345   => Enable workspace on standard port and user-profile with port 12345
-    $0  -a my-app::/my-app-path            => Enable my-app with port 4200 and path /my-app-path
-    $0  -a my-app:4567:/my-app-path        => Enable my-app with port 4567 and path /my-app-path
-    $0  -l                                 => List all local microfrontends that are enabled
-    $0  -c                                 => Remove all local microfrontends that are enabled
+    $0  -a workspace  user-profile:12345   => Integrate workspace on standard port and user-profile with port 12345
+    $0  -a my-app::/my-app-path            => Integrate my-app with port 4200 and path /my-app-path
+    $0  -a my-app:4567:/my-app-path        => Integrate my-app with port 4567 and path /my-app-path
+    $0  -l                                 => List all local microfrontends that are integrated
+    $0  -c                                 => Remove all local microfrontends that are integrated
 "
   exit "$exit_code"
 }
@@ -119,8 +120,12 @@ deactivate_mfe() {
     rm "$dst2"
     printf '%b%-20b %s\n' "${LINE_PREFIX}" "${GREEN}${name}:${port}${NC}" "✔"
   else
-    printf '%b%-20b %b\n' "${LINE_PREFIX}" "${name}" "⚠️ ${RED}not activated${NC}"
-
+    files=$(ls $TRAEFIK_ACTIVE_DIR/${name}_*.yml 2>/dev/null) || true
+    specify_port=""
+    if [[ -n "$files" ]]; then
+      specify_port=" => Integrated with port?"
+    fi
+    printf '%b%-20b %b\n' "${LINE_PREFIX}" "${name}" "⚠️ ${RED}not integrated${NC} $specify_port"
   fi
 }
 
