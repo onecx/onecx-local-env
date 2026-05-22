@@ -182,9 +182,6 @@ services:
       - "traefik.http.routers.pgadmin.entrypoints=web"
     networks:
       - onecx
-    profiles:
-      - all
-      - base
 
   # RustFS main service
   rustfs:
@@ -241,6 +238,8 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+    profiles:
+      - all
 
   # Init container to create default S3 buckets in RustFS if they don't exist yet
   rustfs-init:
@@ -1475,31 +1474,7 @@ services:
       - all
       - base
 
-  onecx-notification-ui:
-    image: ${ONECX_NOTIFICATION_UI}
-    container_name: onecx-notification-ui
-    environment:
-      APP_BASE_HREF: "/mfe/notification/"
-      APP_ID: "onecx-notification-ui"
-      PRODUCT_NAME: "onecx-notification"
-    healthcheck:
-      test: ["CMD", "curl", "--fail", "-G", "http://localhost:8080"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      onecx-notification-bff:
-        condition: service_healthy
-    labels:
-      - "traefik.http.services.onecx-notification-ui.loadbalancer.server.port=8080"
-      - "traefik.http.routers.onecx-notification-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/notification/`)"
-      - "traefik.http.routers.onecx-notification-ui.entrypoints=web"
-    networks:
-      - onecx
-    profiles:
-      - all
-      
-#NOTIFICATION SVC
+  ########## ONECX NOTIFICATION
   onecx-notification-svc:
     image: ${ONECX_NOTIFICATION_SVC}
     container_name: onecx-notification-svc
@@ -1527,7 +1502,7 @@ services:
       - onecx
     profiles:
       - all
-#NOTIFICATION BFF
+
   onecx-notification-bff:
     image: ${ONECX_NOTIFICATION_BFF}
     container_name: onecx-notification-bff
@@ -1580,6 +1555,30 @@ services:
     profiles:
       - all
 
+  onecx-notification-ui:
+    image: ${ONECX_NOTIFICATION_UI}
+    container_name: onecx-notification-ui
+    environment:
+      APP_BASE_HREF: "/mfe/notification/"
+      APP_ID: "onecx-notification-ui"
+      PRODUCT_NAME: "onecx-notification"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "-G", "http://localhost:8080"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-notification-bff:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-notification-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-notification-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/notification/`)"
+      - "traefik.http.routers.onecx-notification-ui.entrypoints=web"
+    networks:
+      - onecx
+    profiles:
+      - all
+      
 ########################################
 #########   DUMMY service   ############
 ########################################
