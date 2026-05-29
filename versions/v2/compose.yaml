@@ -49,7 +49,7 @@ x-svc-variables: &svc_single_tenancy
   QUARKUS_DATASOURCE_JDBC_IDLE_REMOVAL_INTERVAL: ${ONECX_DATASOURCE_JDBC_IDLE_REMOVAL_INTERVAL}
   TKIT_LOG_JSON_ENABLED: ${JSON_LOGGER_ENABLED}
   TKIT_SECURITY_AUTH_ENABLED: ${ONECX_SECURITY_AUTH_ENABLED}
-  
+
 x-svc-multi_tenancy: &svc_multi_tenancy
   <<: *svc_single_tenancy
   QUARKUS_REST_CLIENT_ONECX_TENANT_URL: ${ONECX_REST_CLIENT_ONECX_TENANT_URL}
@@ -65,15 +65,15 @@ services:
   traefik:
     image: ${TRAEFIK}
     container_name: traefik
-    command: --api.insecure=true --providers.docker=true   # Enables the web UI and tells Træfik to listen to docker
+    command: --api.insecure=true --providers.docker=true # Enables the web UI and tells Træfik to listen to docker
     ports:
       - "80:80" # The HTTP port
       - "8082:8080" # The Web UI (enabled by --api)
     volumes:
       - traefik:/etc/traefik/data
-      - /var/run/docker.sock:/var/run/docker.sock   # Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock # Traefik can listen to the Docker events
       - ../../init-data/traefik/base/traefik-conf.yml:/etc/traefik/traefik.yml
-      - ../../init-data/traefik/active:/etc/traefik/active   # location of activated local Microfrontends
+      - ../../init-data/traefik/active:/etc/traefik/active # location of activated local Microfrontends
       - ./logs:/var/log/traefik
     extra_hosts:
       - host.docker.internal:host-gateway
@@ -182,6 +182,8 @@ services:
       - "traefik.http.routers.pgadmin.entrypoints=web"
     networks:
       - onecx
+    profiles:
+      - all
 
   # RustFS main service
   rustfs:
@@ -231,8 +233,9 @@ services:
       test:
         [
           "CMD",
-          "sh", "-c",
-          "curl -f http://127.0.0.1:80/health && curl -f http://127.0.0.1:9001/rustfs/console/health"
+          "sh",
+          "-c",
+          "curl -f http://127.0.0.1:80/health && curl -f http://127.0.0.1:9001/rustfs/console/health",
         ]
       interval: 30s
       timeout: 10s
@@ -257,7 +260,7 @@ services:
       - onecx
     profiles:
       - all
-      
+
   ########################################
   ########### OneCX Products #############
   ########################################
@@ -273,13 +276,17 @@ services:
       QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresdb:5432/onecx_ai_provider?sslmode=disable
     entrypoint: ["/work/application"]
     command:
-    - "-Djavax.net.ssl.trustStore=/opt/certs/truststore.jks"
-    - "-Djavax.net.ssl.trustStorePassword=trustjava"
-    - "-Djavax.net.ssl.trustStoreType=JKS"
+      - "-Djavax.net.ssl.trustStore=/opt/certs/truststore.jks"
+      - "-Djavax.net.ssl.trustStorePassword=trustjava"
+      - "-Djavax.net.ssl.trustStoreType=JKS"
     volumes:
       - ../../certs/truststore.jks:/opt/certs/truststore.jks:ro
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -302,7 +309,11 @@ services:
       <<: *bff_environment
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-ai-provider"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -342,7 +353,6 @@ services:
     profiles:
       - all
 
-
   ########## ONECX ANNOUNCEMENT
   onecx-announcement-svc:
     image: ${ONECX_ANNOUNCEMENT_SVC}
@@ -353,7 +363,11 @@ services:
       QUARKUS_DATASOURCE_PASSWORD: onecx_announcement
       QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresdb:5432/onecx_announcement?sslmode=disable
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -376,7 +390,11 @@ services:
       <<: *bff_environment
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-announcement"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -411,7 +429,6 @@ services:
     profiles:
       - all
 
-
   ########## ONECX BOOKMARK
   onecx-bookmark-svc:
     image: ${ONECX_BOOKMARK_SVC}
@@ -421,8 +438,16 @@ services:
       QUARKUS_DATASOURCE_USERNAME: onecx_bookmark
       QUARKUS_DATASOURCE_PASSWORD: onecx_bookmark
       QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresdb:5432/onecx_bookmark?sslmode=disable
+      # 60 seconds = 1 minute, adjust as needed for how often you want the cache to update
+      ONECX_PARAMETERS_CACHE_UPDATE_SCHEDULE: 60000
+      ONECX_PARAMETERS_HISTORY_UPDATE_SCHEDULE: 60000
+      ONECX_PARAMETERS_CACHE_ENABLED: true
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -446,7 +471,11 @@ services:
       <<: *bff_environment
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-bookmark"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -481,7 +510,6 @@ services:
     profiles:
       - all
 
-
   ########## ONECX CHAT
   onecx-chat-svc:
     image: ${ONECX_CHAT_SVC}
@@ -492,7 +520,11 @@ services:
       QUARKUS_DATASOURCE_PASSWORD: onecx_chat
       QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresdb:5432/onecx_chat?sslmode=disable
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -515,7 +547,11 @@ services:
       <<: *bff_environment
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-chat"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -560,7 +596,11 @@ services:
       QUARKUS_DATASOURCE_PASSWORD: onecx_document
       QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_document?sslmode=disable"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -583,7 +623,11 @@ services:
       <<: *bff_environment
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-document"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -634,7 +678,11 @@ services:
       TKIT_RS_CONTEXT_TENANT_ID_ENABLED: true
       TKIT_RS_CONTEXT_TENANT_ID_MOCK_ENABLED: true
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -662,7 +710,11 @@ services:
       QUARKUS_DATASOURCE_PASSWORD: onecx_help
       QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgresdb:5432/onecx_help?sslmode=disable
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -687,7 +739,11 @@ services:
       <<: *bff_environment
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-help"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -743,7 +799,11 @@ services:
       ONECX_IAM_KEYCLOAKS_DEFAULT_REALM: master
       ONECX_IAM_KEYCLOAKS_DEFAULT_URL: http://${KC_APP_NAME}:8080
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -768,7 +828,11 @@ services:
       <<: *bff_environment
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-iam"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -813,7 +877,11 @@ services:
       QUARKUS_DATASOURCE_PASSWORD: onecx_parameter
       QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_parameter?sslmode=disable"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -838,7 +906,11 @@ services:
       <<: *bff_environment
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-parameter"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -884,7 +956,11 @@ services:
       QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_permission?sslmode=disable"
       ONECX_PERMISSION_TOKEN_VERIFIED: false
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -909,7 +985,11 @@ services:
       <<: *bff_environment
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-permission"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -954,7 +1034,11 @@ services:
       QUARKUS_DATASOURCE_PASSWORD: onecx_product_store
       QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_product_store?sslmode=disable"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -979,7 +1063,11 @@ services:
       <<: *bff_environment
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-product-store"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -1023,7 +1111,11 @@ services:
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-shell"
       QUARKUS_LOG_LEVEL: DEBUG
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -1092,7 +1184,11 @@ services:
       QUARKUS_DATASOURCE_PASSWORD: onecx_tenant
       QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_tenant?sslmode=disable"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -1117,7 +1213,11 @@ services:
       <<: *bff_environment
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-tenant"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -1162,7 +1262,11 @@ services:
       QUARKUS_DATASOURCE_PASSWORD: onecx_theme
       QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_theme?sslmode=disable"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -1187,7 +1291,11 @@ services:
       <<: *bff_environment
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-theme"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -1232,7 +1340,11 @@ services:
       QUARKUS_DATASOURCE_PASSWORD: onecx_user_profile_avatar
       QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_user_profile_avatar?sslmode=disable"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -1258,7 +1370,11 @@ services:
       QUARKUS_DATASOURCE_PASSWORD: onecx_user_profile
       QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_user_profile?sslmode=disable"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -1282,7 +1398,11 @@ services:
       <<: *bff_environment
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-user-profile"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -1336,7 +1456,11 @@ services:
       QUARKUS_DATASOURCE_PASSWORD: onecx_welcome
       QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_welcome?sslmode=disable"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -1361,7 +1485,11 @@ services:
       <<: *bff_environment
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-welcome"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -1407,7 +1535,11 @@ services:
       QUARKUS_DATASOURCE_PASSWORD: onecx_workspace
       QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_workspace?sslmode=disable"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -1432,7 +1564,11 @@ services:
       <<: *bff_environment
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-workspace"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -1487,7 +1623,11 @@ services:
       QUARKUS_REST_CLIENT_ONECX_NOTIFICATION_BFF_URL: "http://onecx-notification-bff-2:8080"
       TKIT_SECURITY_AUTH_ENABLED: "false"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -1516,7 +1656,11 @@ services:
     volumes:
       - ./src/main/resources/hazelcast-compose.xml:/deployments/hazelcast-compose.xml:ro
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -1528,7 +1672,7 @@ services:
       - onecx
     profiles:
       - all
-      
+
   onecx-notification-bff-2:
     image: ${ONECX_NOTIFICATION_BFF}
     container_name: onecx-notification-bff-2
@@ -1542,7 +1686,11 @@ services:
     volumes:
       - ./src/main/resources/hazelcast-compose.xml:/deployments/hazelcast-compose.xml:ro
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'"]
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -1578,11 +1726,11 @@ services:
       - onecx
     profiles:
       - all
-      
-########################################
-#########   DUMMY service   ############
-########################################
-# Ensure all depended services are running
+
+  ########################################
+  #########   DUMMY service   ############
+  ########################################
+  # Ensure all depended services are running
 
   # Used to ensure that the essential services are running
   waiting-on-profile-base:
