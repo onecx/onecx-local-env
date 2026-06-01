@@ -922,7 +922,7 @@
                 {
                   "key": "PDT_STORYBOOK",
                   "name": "Storybook",
-                  "url": "https://master--62dfd0cfe549629f83343eb1.chromatic.com/",
+                  "url": "https://main--65f7f64d4506c9f2dfe59383.chromatic.com",
                   "disabled": false,
                   "position": 2,
                   "badge": "book",
