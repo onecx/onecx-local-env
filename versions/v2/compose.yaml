@@ -1737,8 +1737,6 @@ services:
     image: alpine:3
     container_name: waiting-on-profile-base
     depends_on:
-      pgadmin:
-        condition: service_healthy
       onecx-parameter-svc:
         condition: service_healthy
       onecx-shell-ui:
