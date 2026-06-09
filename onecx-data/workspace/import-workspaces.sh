@@ -23,7 +23,7 @@ if [[ -z "$tenant_files" ]]; then
   SKIP_MSG=" ==>${RED} skipping${NC}: no tenant files found for workspace import"
 fi
 
-printf '%b\n' "$OLE_LINE_PREFIX${CYAN}Importing Workspaces via ExIm${NC}\t$SKIP_MSG"
+printf '%b\n' "$OLE_LINE_PREFIX${CYAN}Importing Workspaces via ExIm (operator => remove + create)${NC}\t$SKIP_MSG"
 
 
 #################################################################
@@ -34,7 +34,7 @@ do
   filename=$(printf '%s' "$filename" | cut -d '.' -f 1)
   workspace=$(printf '%s' "$filename" | cut -d '_' -f 2)
   
-  url="http://onecx-workspace-svc/exim/v1/workspace/import"
+  url="http://onecx-workspace-svc/exim/v1/workspace/operator"
   params="--write-out %{http_code} --silent --output /dev/null -X POST"
   if [[ "$OLE_SECURITY_AUTH_ENABLED" == "true" ]]; then
     status_code=$(curl $params -H "$OLE_HEADER_CT_JSON" -H "$OLE_HEADER_AUTH_TOKEN" -H "$OLE_HEADER_APM_TOKEN" -d "@$entry" "$url")
