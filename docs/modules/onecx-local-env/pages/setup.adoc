@@ -118,6 +118,13 @@ macOS:::   `/etc/hosts`
 include::./_hosts-entries.adoc[]
 ====
 
+[IMPORTANT]
+====
+If you are using Windows with WSL, ensure that changes to the Windows Hosts file are correctly propagated to WSL. By default, and unless disabled via the `generateHosts` option (see link:https://learn.microsoft.com/en-us/windows/wsl/wsl-config#network-settings[WSL network settings]), WSL automatically generates its Hosts file based on the contents of the Windows Hosts file.
+
+If this does not happen, or if automatic Hosts file generation has been disabled, you can manually update the WSL Hosts file by modifying the Linux Hosts file at the path described above.
+====
+
 == Next Step
 After completing the steps outlined in this guide, *onecx-local-env* is now ready to run OneCX locally. Check the instructions on how to start, access, and stop the local environment in the {ole_run_onecx} guide.
 
