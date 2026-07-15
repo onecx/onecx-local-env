@@ -391,14 +391,14 @@
               "name": "./OneCXHelpItemEditorComponent"
             },
             {
-              "productName": "onecx-bookmark",
-              "appId": "onecx-bookmark-ui",
-              "name": "./OneCXManageBookmarkComponent"
-            },
-            {
               "productName": "onecx-help",
               "appId": "onecx-help-ui",
               "name": "./OneCXShowHelpComponent"
+            },
+            {
+              "productName": "onecx-bookmark",
+              "appId": "onecx-bookmark-ui",
+              "name": "./OneCXManageBookmarkComponent"
             },
             {
               "productName": "onecx-workspace",

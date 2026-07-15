@@ -23,10 +23,12 @@
           "APP": ["EDIT", "SEARCH", "VIEW"],
           "IAM_ROLE": ["VIEW"],
           "PERMISSION": ["GRANT", "CREATE", "DELETE", "EDIT"],
-          "ROLE": ["CREATE", "DELETE", "EDIT"]
+          "ROLE": ["CREATE", "DELETE", "EDIT", "VIEW"]
         },
         "onecx-user": {
-          "APP": ["VIEW"]
+          "APP": ["VIEW"],
+          "IAM_ROLE": ["VIEW"],
+          "ROLE": ["VIEW"]
         }
       }
     }
