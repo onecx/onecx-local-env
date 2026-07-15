@@ -213,6 +213,16 @@
           ]
         },
         {
+          "name": "onecx-chat-panel",
+          "components": [
+            {
+              "productName": "onecx-chat",
+              "appId": "onecx-chat-ui",
+              "name": "./OneCXChatPanelComponent"
+            }
+          ]
+        },
+        {
           "name": "onecx-column-group-selection",
           "components": [
             {
