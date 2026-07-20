@@ -9,7 +9,7 @@
   "exposedModule": "./OneCXBookmarkListComponent",
   "technology": "WEBCOMPONENTMODULE",
   "remoteName": "onecx-bookmark",
-  "tagName": "ocx-show-bookmark-component",
+  "tagName": "ocx-bookmark-list-component",
   "type": "COMPONENT",
   "deprecated": false,
   "undeployed": false
