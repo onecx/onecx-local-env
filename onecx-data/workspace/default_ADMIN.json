@@ -867,7 +867,7 @@
                   "url": "/document",
                   "disabled": false,
                   "position": 6,
-                  "badge": "file",
+                  "badge": "file-pdf",
                   "external": false,
                   "target": "_self",
                   "i18n": {},

@@ -2,7 +2,7 @@
   "version": "xxx",
   "description": "Manage Workspace Documents",
   "imageUrl": null,
-  "iconName": "palette",
+  "iconName": "file-pdf",
   "displayName": "OneCX Document",
   "basePath": "/document",
   "provider": "OneCX Team",
