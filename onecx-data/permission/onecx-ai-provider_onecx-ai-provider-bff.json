@@ -17,6 +17,51 @@
       "description": "Permission to delete AI configuration"
     },
     {
+      "resource": "agent",
+      "action": "read",
+      "description": "Permission to read AI agents"
+    },
+    {
+      "resource": "agent",
+      "action": "write",
+      "description": "Permission to write AI agents"
+    },
+    {
+      "resource": "agent",
+      "action": "delete",
+      "description": "Permission to delete AI agents"
+    },
+    {
+      "resource": "scaffold",
+      "action": "read",
+      "description": "Permission to read AI scaffolds"
+    },
+    {
+      "resource": "scaffold",
+      "action": "write",
+      "description": "Permission to write AI scaffolds"
+    },
+    {
+      "resource": "scaffold",
+      "action": "delete",
+      "description": "Permission to delete AI scaffolds"
+    },
+    {
+      "resource": "skill",
+      "action": "read",
+      "description": "Permission to read AI skills"
+    },
+    {
+      "resource": "skill",
+      "action": "write",
+      "description": "Permission to write AI skills"
+    },
+    {
+      "resource": "skill",
+      "action": "delete",
+      "description": "Permission to delete AI skills"
+    },
+    {
       "resource": "provider",
       "action": "read",
       "description": "Permission to read AI providers"

@@ -4,17 +4,6 @@
     "onecx-ai-provider": {
       "onecx-ai-provider-ui": {
         "onecx-admin": {
-          "PROVIDER": [
-            "CREATE",
-            "EDIT",
-            "DELETE",
-            "SAVE",
-            "IMPORT",
-            "EXPORT",
-            "VIEW",
-            "SEARCH",
-            "CHANGE_API_KEY"
-          ],
           "CONFIGURATION": [
             "CREATE",
             "EDIT",
@@ -25,6 +14,50 @@
             "VIEW",
             "SEARCH",
             "BACK"
+          ],
+          "AGENT": [
+            "CREATE",
+            "EDIT",
+            "DELETE",
+            "SAVE",
+            "IMPORT",
+            "EXPORT",
+            "VIEW",
+            "SEARCH",
+            "BACK"
+          ],
+          "SCAFFOLD": [
+            "CREATE",
+            "EDIT",
+            "DELETE",
+            "SAVE",
+            "IMPORT",
+            "EXPORT",
+            "VIEW",
+            "SEARCH",
+            "BACK"
+          ],
+          "SKILL": [
+            "CREATE",
+            "EDIT",
+            "DELETE",
+            "SAVE",
+            "IMPORT",
+            "EXPORT",
+            "VIEW",
+            "SEARCH",
+            "BACK"
+          ],
+          "PROVIDER": [
+            "CREATE",
+            "EDIT",
+            "DELETE",
+            "SAVE",
+            "IMPORT",
+            "EXPORT",
+            "VIEW",
+            "SEARCH",
+            "CHANGE_API_KEY"
           ],
           "MCPSERVER": [
             "CREATE",
@@ -39,21 +72,30 @@
           ]
         },
         "onecx-user": {
-          "PROVIDER": ["VIEW", "SEARCH"],
           "CONFIGURATION": ["VIEW", "SEARCH"],
+          "AGENT": ["VIEW", "SEARCH"],
+          "SCAFFOLD": ["VIEW", "SEARCH"],
+          "SKILL": ["VIEW", "SEARCH"],
+          "PROVIDER": ["VIEW", "SEARCH"],
           "MCPSERVER": ["VIEW", "SEARCH"]
         }
       },
       "onecx-ai-provider-bff": {
         "onecx-admin": {
           "configuration": ["read", "write", "delete"],
-          "mcpServer": ["read", "write", "delete"],
-          "provider": ["read", "write", "delete"]
+          "agent": ["read", "write", "delete"],
+          "scaffold": ["read", "write", "delete"],
+          "skill": ["read", "write", "delete"],
+          "provider": ["read", "write", "delete"],
+          "mcpServer": ["read", "write", "delete"]
         },
         "onecx-user": {
           "configuration": ["read"],
-          "mcpServer": ["read"],
-          "provider": ["read"]
+          "agent": ["read"],
+          "scaffold": ["read"],
+          "skill": ["read"],
+          "provider": ["read"],
+          "mcpServer": ["read"]
         }
       }
     }

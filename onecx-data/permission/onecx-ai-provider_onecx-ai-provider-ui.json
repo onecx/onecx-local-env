@@ -2,6 +2,151 @@
   "name": "onecx-ai-provider-ui",
   "permissions": [
     {
+      "resource": "CONFIGURATION",
+      "action": "CREATE",
+      "description": "Create configuration"
+    },
+    {
+      "resource": "CONFIGURATION",
+      "action": "EDIT",
+      "description": "Edit configuration"
+    },
+    {
+      "resource": "CONFIGURATION",
+      "action": "DELETE",
+      "description": "Delete configuration"
+    },
+    {
+      "resource": "CONFIGURATION",
+      "action": "SAVE",
+      "description": "Update and save configuration"
+    },
+    {
+      "resource": "CONFIGURATION",
+      "action": "IMPORT",
+      "description": "Import configuration"
+    },
+    {
+      "resource": "AGENT",
+      "action": "CREATE",
+      "description": "Create Agent"
+    },
+    {
+      "resource": "AGENT",
+      "action": "EDIT",
+      "description": "Edit Agent"
+    },
+    {
+      "resource": "AGENT",
+      "action": "DELETE",
+      "description": "Delete Agent"
+    },
+    {
+      "resource": "AGENT",
+      "action": "SAVE",
+      "description": "Update and save Agent"
+    },
+    {
+      "resource": "AGENT",
+      "action": "IMPORT",
+      "description": "Import Agent"
+    },
+    {
+      "resource": "AGENT",
+      "action": "EXPORT",
+      "description": "Export Agent"
+    },
+    {
+      "resource": "AGENT",
+      "action": "VIEW",
+      "description": "View mode for Agent"
+    },
+    {
+      "resource": "AGENT",
+      "action": "SEARCH",
+      "description": "Search Agent"
+    },
+    {
+      "resource": "SCAFFOLD",
+      "action": "CREATE",
+      "description": "Create Scaffold"
+    },
+    {
+      "resource": "SCAFFOLD",
+      "action": "EDIT",
+      "description": "Edit Scaffold"
+    },
+    {
+      "resource": "SCAFFOLD",
+      "action": "DELETE",
+      "description": "Delete Scaffold"
+    },
+    {
+      "resource": "SCAFFOLD",
+      "action": "SAVE",
+      "description": "Update and save Scaffold"
+    },
+    {
+      "resource": "SCAFFOLD",
+      "action": "IMPORT",
+      "description": "Import Scaffold"
+    },
+    {
+      "resource": "SCAFFOLD",
+      "action": "EXPORT",
+      "description": "Export Scaffold"
+    },
+    {
+      "resource": "SCAFFOLD",
+      "action": "VIEW",
+      "description": "View mode for Scaffold"
+    },
+    {
+      "resource": "SCAFFOLD",
+      "action": "SEARCH",
+      "description": "Search Scaffold"
+    },
+    {
+      "resource": "SKILL",
+      "action": "CREATE",
+      "description": "Create Skill"
+    },
+    {
+      "resource": "SKILL",
+      "action": "EDIT",
+      "description": "Edit Skill"
+    },
+    {
+      "resource": "SKILL",
+      "action": "DELETE",
+      "description": "Delete Skill"
+    },
+    {
+      "resource": "SKILL",
+      "action": "SAVE",
+      "description": "Update and save Skill"
+    },
+    {
+      "resource": "SKILL",
+      "action": "IMPORT",
+      "description": "Import Skill"
+    },
+    {
+      "resource": "SKILL",
+      "action": "EXPORT",
+      "description": "Export Skill"
+    },
+    {
+      "resource": "SKILL",
+      "action": "VIEW",
+      "description": "View mode for Skill"
+    },
+    {
+      "resource": "SKILL",
+      "action": "SEARCH",
+      "description": "Search Skill"
+    },
+    {
       "resource": "PROVIDER",
       "action": "CREATE",
       "description": "Create Provider"
@@ -45,51 +190,6 @@
       "resource": "PROVIDER",
       "action": "CHANGE_API_KEY",
       "description": "Change ApiKey Provider"
-    },
-    {
-      "resource": "CONFIGURATION",
-      "action": "CREATE",
-      "description": "Create configuration"
-    },
-    {
-      "resource": "CONFIGURATION",
-      "action": "EDIT",
-      "description": "Edit configuration"
-    },
-    {
-      "resource": "CONFIGURATION",
-      "action": "DELETE",
-      "description": "Delete configuration"
-    },
-    {
-      "resource": "CONFIGURATION",
-      "action": "SAVE",
-      "description": "Update and save configuration"
-    },
-    {
-      "resource": "CONFIGURATION",
-      "action": "IMPORT",
-      "description": "Import configuration"
-    },
-    {
-      "resource": "CONFIGURATION",
-      "action": "EXPORT",
-      "description": "Export configuration"
-    },
-    {
-      "resource": "CONFIGURATION",
-      "action": "VIEW",
-      "description": "View mode for configuration"
-    },
-    {
-      "resource": "CONFIGURATION",
-      "action": "SEARCH",
-      "description": "Search configuration"
-    },
-    {
-      "resource": "CONFIGURATION",
-      "action": "BACK",
-      "description": "Back to configuration"
     },
     {
       "resource": "MCPSERVER",
