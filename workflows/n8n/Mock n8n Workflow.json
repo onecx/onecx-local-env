@@ -1,0 +1,322 @@
+{
+  "name": "Mock n8n Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1104,
+        96
+      ],
+      "id": "7ff1fabd-e055-4464-a984-172aa9d82f15",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "resume": "webhook",
+        "httpMethod": "POST",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -656,
+        96
+      ],
+      "id": "3bdbdae7-0bd3-472f-9133-e9261f860158",
+      "name": "Wait",
+      "webhookId": "fcb847cf-5142-4f27-8103-5ac551fcb6a8"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:5678/webhook-test/90c571b3-f47f-4e72-be86-f4a434223539",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"title\": \"string\",\n  \"description\": \"string\",\n  \"providerType\": \"CAMUNDA\",\n  \"providerTaskId\": \"string\",\n  \"providerURL\": \"{{ $execution.resumeUrl }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        -880,
+        96
+      ],
+      "id": "39e09e0f-eb7b-453a-8654-22bc55414c91",
+      "name": "Mock svc extarnal v1 API REST call"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "a56186a9-fb24-42f8-bea1-374810fa9c29",
+              "leftValue": "={{ $json.body }}",
+              "rightValue": "",
+              "operator": {
+                "type": "object",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "286a76c7-9d60-4189-a028-4b6dfbd8daec",
+              "leftValue": "={{ $json.body.cutomInput }}",
+              "rightValue": "",
+              "operator": {
+                "type": "object",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -224,
+        96
+      ],
+      "id": "e3c56531-231a-4262-b92a-9b533c457884",
+      "name": "Custom Input?"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e1e43ac4-dcbe-486a-a5f6-818851b7fe49",
+              "name": "body.cutomInput",
+              "value": "={{ $json.body.cutomInput }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "953f08d7-b38e-40b4-81ae-07afd6ee0489",
+      "name": "Extract cutom input"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "body",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "ab5335c2-de09-4698-8a73-bc851faf5db7",
+      "name": "Display keys and values"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3873c85d-7775-42b6-becc-81363267926e",
+              "name": "body",
+              "value": "={{ $json.body }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        0,
+        176
+      ],
+      "id": "c746dc4f-06b9-4ae2-9396-1a3142286da7",
+      "name": "Extract body"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "body",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        224,
+        176
+      ],
+      "id": "cf84e0df-d7f9-4ca9-a1df-2a48e14c5c6d",
+      "name": "Display empty body"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "36ebbb65-1212-4841-8224-d03322c181d8",
+              "leftValue": "={{ $json.body.accepted }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -480,
+        96
+      ],
+      "id": "24067e30-7962-4b05-8881-543e5df2741a",
+      "name": "Accepted?"
+    },
+    {
+      "parameters": {
+        "errorMessage": "Task Declined!"
+      },
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        288
+      ],
+      "id": "606a0708-2d63-412d-8e7c-f1374f68e887",
+      "name": "Stop and Error"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Mock svc extarnal v1 API REST call",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Accepted?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mock svc extarnal v1 API REST call": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Custom Input?": {
+      "main": [
+        [
+          {
+            "node": "Extract cutom input",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extract body",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract cutom input": {
+      "main": [
+        [
+          {
+            "node": "Display keys and values",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract body": {
+      "main": [
+        [
+          {
+            "node": "Display empty body",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Accepted?": {
+      "main": [
+        [
+          {
+            "node": "Custom Input?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "ec4d5dcc-3ef5-45f1-bf85-061ab81817ce",
+  "meta": {
+    "instanceId": "2b64087759155b997ffad267b38666921c80e69a61fd7b0adbbed1e8665a531a"
+  },
+  "nodeGroups": [],
+  "id": "FPOfOUjJrMZurmht",
+  "tags": []
+}

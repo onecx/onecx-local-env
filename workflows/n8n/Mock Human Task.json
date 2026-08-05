@@ -1,0 +1,100 @@
+{
+  "name": "Mock Human Task",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "90c571b3-f47f-4e72-be86-f4a434223539",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "2535d2b9-18cb-4d23-aa7f-471a34c318c0",
+      "name": "Mock svc external v1 API REST call",
+      "webhookId": "90c571b3-f47f-4e72-be86-f4a434223539"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2cf523c2-e1df-4a9c-b46c-39be50e7b03d",
+              "name": "body.providerURL",
+              "value": "={{ $json.body.providerURL }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "a02f88ef-df2a-44fa-b286-bb966c1ff33a",
+      "name": "Mock Create OCX task"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.body.providerURL }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"accepted\": true,\n  \"cutomInput\": {\n    \"key1\": \"val1\",\n    \"k2\": \"value2\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        448,
+        0
+      ],
+      "id": "ae8adab0-af2e-4480-8de7-7649652a3cbe",
+      "name": "Mock Adapter call to provider"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Mock svc external v1 API REST call": {
+      "main": [
+        [
+          {
+            "node": "Mock Create OCX task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mock Create OCX task": {
+      "main": [
+        [
+          {
+            "node": "Mock Adapter call to provider",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "84130694-9c08-402a-bcb2-df0ace8692ec",
+  "meta": {
+    "instanceId": "2b64087759155b997ffad267b38666921c80e69a61fd7b0adbbed1e8665a531a"
+  },
+  "nodeGroups": [],
+  "id": "JbpA6mYZnt9swDdG",
+  "tags": []
+}
