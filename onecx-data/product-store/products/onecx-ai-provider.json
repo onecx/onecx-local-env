@@ -4,7 +4,7 @@
   "imageUrl": null,
   "iconName": "ai",
   "displayName": "OneCX AI Provider",
-  "basePath": "/ai",
+  "basePath": "/ai-provider",
   "provider": "OneCX Team",
   "classifications": ["Tool"],
   "multitenancy": true,

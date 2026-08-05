@@ -6,7 +6,7 @@
   "remoteBaseUrl": "/mfe/ai-provider/",
   "remoteEntry": "/mfe/ai-provider/remoteEntry.js",
   "note": "Imported MFE",
-  "exposedModule": "./OnecxAiUiProviderModule",
+  "exposedModule": "./OneCXAiProviderModule",
   "technology": "WEBCOMPONENTMODULE",
   "remoteName": "onecx-ai-provider-ui",
   "tagName": "onecx-ai-provider-ui-webcomponent",
