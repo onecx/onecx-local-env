@@ -166,6 +166,7 @@ if [[ "$number_of_services" -eq 0 && "$CLEANUP" == "true" ]]; then
     docker volume rm -f "${OLE_DOCKER_COMPOSE_PROJECT}_postgres" 2> /dev/null || true
     docker volume rm -f "${OLE_DOCKER_COMPOSE_PROJECT}_pgadmin"  2> /dev/null || true
     docker volume rm -f "${OLE_DOCKER_COMPOSE_PROJECT}_traefik"  2> /dev/null || true
+    docker volume rm -f "${OLE_DOCKER_COMPOSE_PROJECT}_n8n"  2> /dev/null || true
   fi
   number_of_volumes=$(count_lines "$(docker volume ls --filter "label=${OLE_DOCKER_COMPOSE_PROJECT}.volume")")
   ((number_of_volumes--)) || true  # Decrement in place
