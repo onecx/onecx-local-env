@@ -18,6 +18,11 @@ volumes:
       - "com.docker.compose.project=onecx-local-env"
       - "com.docker.compose.description=Postgres database administration"
       - "com.docker.compose.volume=pgAdmin"
+  n8n:
+    name: onecx-local-env_n8n
+    labels:
+      - "onecx-local-env.volume=n8n"
+
 networks:
   onecx:
     name: onecx-local-env_onecx
@@ -267,6 +272,33 @@ services:
       - all
       - ht
 
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: n8n
+    environment:
+      GENERIC_TIMEZONE: "Europe/Warsaw"
+      TZ: "Europe/Warsaw"
+      N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
+      N8N_RUNNERS_ENABLED: true
+      QUEUE_HEALTH_CHECK_ACTIVE: true
+    volumes:
+      - n8n:/home/node/.n8n
+    ports:
+      - "5678:5678"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:5678/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    labels:
+      - "traefik.http.services.n8n.loadbalancer.server.port=5678"
+      - "traefik.http.routers.n8n.rule=Host(`n8n`)"
+      - "traefik.http.routers.n8n.entrypoints=web"
+    networks:
+      - onecx
+    profiles:
+      - ht
 
   ########################################
   ########### OneCX Products #############
