@@ -82,6 +82,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - base
       - data-import
 
@@ -113,6 +114,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - base
       - data-import
 
@@ -156,6 +158,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - base
       - data-import
 
@@ -184,6 +187,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   # RustFS main service
   rustfs:
@@ -243,6 +247,7 @@ services:
       start_period: 40s
     profiles:
       - all
+      - ht
 
   # Init container to create default S3 buckets in RustFS if they don't exist yet
   rustfs-init:
@@ -260,6 +265,8 @@ services:
       - onecx
     profiles:
       - all
+      - ht
+
 
   ########################################
   ########### OneCX Products #############
@@ -301,6 +308,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-ai-provider-bff:
     image: ${ONECX_AI_PROVIDER_BFF}
@@ -328,6 +336,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-ai-provider-ui:
     image: ${ONECX_AI_PROVIDER_UI}
@@ -352,6 +361,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   ########## ONECX ANNOUNCEMENT
   onecx-announcement-svc:
@@ -382,6 +392,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-announcement-bff:
     image: ${ONECX_ANNOUNCEMENT_BFF}
@@ -409,6 +420,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-announcement-ui:
     image: ${ONECX_ANNOUNCEMENT_UI}
@@ -428,6 +440,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   ########## ONECX BOOKMARK
   onecx-bookmark-svc:
@@ -462,6 +475,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - data-import
 
   onecx-bookmark-bff:
@@ -490,6 +504,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-bookmark-ui:
     image: ${ONECX_BOOKMARK_UI}
@@ -509,6 +524,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   ########## ONECX CHAT
   onecx-chat-svc:
@@ -539,6 +555,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-chat-bff:
     image: ${ONECX_CHAT_BFF}
@@ -566,6 +583,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-chat-ui:
     image: ${ONECX_CHAT_UI}
@@ -585,6 +603,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   ########## ONECX DOCUMENT
   onecx-document-svc:
@@ -615,6 +634,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-document-bff:
     image: ${ONECX_DOCUMENT_BFF}
@@ -644,6 +664,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-document-ui:
     image: ${ONECX_DOCUMENT_UI}
@@ -663,6 +684,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   ########## ONECX FILE STORAGE
   onecx-file-storage-svc:
@@ -699,6 +721,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   ########## ONECX HELP
   onecx-help-svc:
@@ -731,6 +754,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-help-bff:
     image: ${ONECX_HELP_BFF}
@@ -758,6 +782,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-help-ui:
     image: ${ONECX_HELP_UI}
@@ -777,6 +802,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   ########## ONECX IAM
   onecx-iam-svc:
@@ -820,6 +846,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-iam-bff:
     image: ${ONECX_IAM_BFF}
@@ -847,6 +874,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-iam-ui:
     image: ${ONECX_IAM_UI}
@@ -866,6 +894,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   ########## ONECX PARAMETER
   onecx-parameter-svc:
@@ -896,6 +925,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - base
       - data-import
 
@@ -925,6 +955,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-parameter-ui:
     image: ${ONECX_PARAMETER_UI}
@@ -944,6 +975,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   ########## ONECX PERMISSION
   onecx-permission-svc:
@@ -975,6 +1007,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - base
       - data-import
 
@@ -1004,6 +1037,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-permission-ui:
     image: ${ONECX_PERMISSION_UI}
@@ -1023,6 +1057,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   ########## ONECX PRODUCT-STORE
   onecx-product-store-svc:
@@ -1053,6 +1088,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - base
       - data-import
 
@@ -1082,6 +1118,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-product-store-ui:
     image: ${ONECX_PRODUCT_STORE_UI}
@@ -1101,6 +1138,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   ########## ONECX SHELL
   onecx-shell-bff:
@@ -1143,6 +1181,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - base
 
   onecx-shell-ui:
@@ -1172,6 +1211,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - base
 
   ########## ONECX TENANT
@@ -1203,6 +1243,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - base
       - data-import
 
@@ -1232,6 +1273,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-tenant-ui:
     image: ${ONECX_TENANT_UI}
@@ -1251,6 +1293,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   ########## ONECX THEME
   onecx-theme-svc:
@@ -1281,6 +1324,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - base
       - data-import
 
@@ -1310,6 +1354,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-theme-ui:
     image: ${ONECX_THEME_UI}
@@ -1329,6 +1374,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   ########## ONECX USER-PROFILE
   onecx-user-profile-avatar-svc:
@@ -1359,6 +1405,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - base
 
   onecx-user-profile-svc:
@@ -1389,6 +1436,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - base
 
   onecx-user-profile-bff:
@@ -1419,6 +1467,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - base
 
   onecx-user-profile-ui:
@@ -1444,6 +1493,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - base
 
   ########## ONECX WELCOME
@@ -1476,6 +1526,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - data-import
 
   onecx-welcome-bff:
@@ -1504,6 +1555,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-welcome-ui:
     image: ${ONECX_WELCOME_UI}
@@ -1523,6 +1575,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   ########## ONECX WORKSPACE
   onecx-workspace-svc:
@@ -1554,6 +1607,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - base
       - data-import
 
@@ -1583,6 +1637,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - base
 
   onecx-workspace-ui:
@@ -1608,6 +1663,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
       - base
 
   ########## ONECX NOTIFICATION
@@ -1642,6 +1698,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-notification-bff:
     image: ${ONECX_NOTIFICATION_BFF}
@@ -1672,6 +1729,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-notification-bff-2:
     image: ${ONECX_NOTIFICATION_BFF}
@@ -1702,6 +1760,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   onecx-notification-ui:
     image: ${ONECX_NOTIFICATION_UI}
@@ -1726,6 +1785,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   ########################################
   #########   DUMMY service   ############
@@ -1794,4 +1854,27 @@ services:
     networks:
       - onecx
     profiles:
-      - all
+      - ht
+
+  waiting-on-profile-ht:
+    image: alpine:3
+    container_name: waiting-on-profile-ht
+    depends_on:
+      pgadmin:
+        condition: service_healthy
+      onecx-parameter-svc:
+        condition: service_healthy
+      onecx-shell-ui:
+        condition: service_healthy
+      onecx-user-profile-ui:
+        condition: service_healthy
+      onecx-workspace-ui:
+        condition: service_healthy
+      n8n:
+        condition: service_healthy
+      # camunda:
+      #   condition: service_healthy
+    networks:
+      - onecx
+    profiles:
+      - ht

@@ -33,7 +33,7 @@ export OLE_EDITION OLE_LINE_PREFIX OLE_HEADER_CT_JSON
 ## Check and set import type
 IMPORT_TYPE="base"
 
-if [[ -n "${4:-}" && "${4:-}" =~ ^(all|base|ai|bookmark|assignment|parameter|permission|mfe|ms|product|slot|tenant|theme|welcome|workspace|menu)$ ]]; then
+if [[ -n "${4:-}" && "${4:-}" =~ ^(all|base|ai|bookmark|assignment|parameter|permission|mfe|ms|product|slot|tenant|theme|welcome|workspace|menu|ht)$ ]]; then
   IMPORT_TYPE="${4}"
 fi
 
@@ -173,72 +173,72 @@ fi
 ## IMPORT OneCX data
 cd "$import_start_dir/onecx-data" || exit 1
 
-if [[ "$IMPORT_TYPE" =~ ^(all|base|slot|product|ms|mfe)$ ]]; then
+if [[ "$IMPORT_TYPE" =~ ^(all|base|slot|product|ms|mfe|ht)$ ]]; then
   pushd product-store > /dev/null
-  if [[ "$IMPORT_TYPE" =~ ^(all|base|product)$ ]]; then
+  if [[ "$IMPORT_TYPE" =~ ^(all|base|product|ht)$ ]]; then
     bash ./import-products.sh "${1:-}" "${2:-}"
   fi
-  if [[ "$IMPORT_TYPE" =~ ^(all|base|mfe)$ ]]; then
+  if [[ "$IMPORT_TYPE" =~ ^(all|base|mfe|ht)$ ]]; then
     bash ./import-microfrontends.sh "${1:-}" "${2:-}"
   fi
-  if [[ "$IMPORT_TYPE" =~ ^(all|base|ms)$ ]]; then
+  if [[ "$IMPORT_TYPE" =~ ^(all|base|ms|ht)$ ]]; then
     bash ./import-microservices.sh "${1:-}" "${2:-}"
   fi
-  if [[ "$IMPORT_TYPE" =~ ^(all|base|slot)$ ]]; then
+  if [[ "$IMPORT_TYPE" =~ ^(all|base|slot|ht)$ ]]; then
     bash ./import-slots.sh "${1:-}" "${2:-}"
   fi
   popd > /dev/null
 fi
 
-if [[ "$IMPORT_TYPE" =~ ^(all|base|parameter)$ ]]; then
+if [[ "$IMPORT_TYPE" =~ ^(all|base|parameter|ht)$ ]]; then
   pushd parameter > /dev/null
   bash ./import-parameters.sh "${1:-}" "${2:-}"
   popd > /dev/null
 fi
 
-if [[ "$IMPORT_TYPE" =~ ^(all|base|permission)$ ]]; then
+if [[ "$IMPORT_TYPE" =~ ^(all|base|permission|ht)$ ]]; then
   pushd permission > /dev/null
   bash ./import-permissions.sh "${1:-}" "${2:-}"
   popd > /dev/null
 fi
 
-if [[ "$IMPORT_TYPE" =~ ^(all|base|assignment)$ ]]; then
+if [[ "$IMPORT_TYPE" =~ ^(all|base|assignment|ht)$ ]]; then
   pushd permission-assignment > /dev/null
   bash ./import-assignments.sh "${1:-}" "${2:-}"
   popd > /dev/null
 fi
 
-if [[ "$IMPORT_TYPE" =~ ^(all|base|tenant)$ ]]; then
+if [[ "$IMPORT_TYPE" =~ ^(all|base|tenant|ht)$ ]]; then
   pushd tenant > /dev/null
   bash ./import-tenants.sh "${1:-}" "${2:-}"
   popd > /dev/null
 fi
 
-if [[ "$IMPORT_TYPE" =~ ^(all|base|theme)$ ]]; then
+if [[ "$IMPORT_TYPE" =~ ^(all|base|theme|ht)$ ]]; then
   pushd theme > /dev/null
   bash ./import-themes.sh "${1:-}" "${2:-}"
   popd > /dev/null
 fi
 
-if [[ "$IMPORT_TYPE" =~ ^(all|base|workspace)$ ]]; then
+if [[ "$IMPORT_TYPE" =~ ^(all|base|workspace|ht)$ ]]; then
   pushd workspace > /dev/null
   bash ./import-workspaces.sh "${1:-}" "${2:-}"
   popd > /dev/null
 fi
 
-if [[ "$IMPORT_TYPE" =~ ^(all|base|menu)$ ]]; then
+if [[ "$IMPORT_TYPE" =~ ^(all|base|menu|ht)$ ]]; then
   pushd workspace > /dev/null
   bash ./import-menu.sh "${1:-}" "${2:-}"
   popd > /dev/null
 fi
 
-if [[ "$IMPORT_TYPE" =~ ^(all|welcome)$ ]]; then
+if [[ "$IMPORT_TYPE" =~ ^(all|welcome|ht)$ ]]; then
   pushd welcome > /dev/null
   bash ./import-welcome-images.sh "${1:-}" "${2:-}"
   popd > /dev/null
 fi
 
-if [[ "$IMPORT_TYPE" =~ ^(all|bookmark)$ ]]; then
+if [[ "$IMPORT_TYPE" =~ ^(all|bookmark|ht)$ ]]; then
   pushd bookmark > /dev/null
   bash ./import-bookmarks.sh "${1:-}" "${2:-}"
   popd > /dev/null

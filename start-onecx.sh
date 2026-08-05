@@ -83,8 +83,8 @@ while getopts ":he:p:sx" opt; do
     p ) if [[ "$OPTARG" == -* ]]; then
           printf '  %b\n' "${RED}Missing parameter for option -p${NC}"
           usage 1
-        elif [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
-          printf '  %b\n' "${RED}Unacceptable Docker profile, should be one of [ 'all', 'base' ]${NC}"
+        elif [[ "$OPTARG" != "all" && "$OPTARG" != "base" && "$OPTARG" != "ht" ]]; then
+          printf '  %b\n' "${RED}Unacceptable Docker profile, should be one of [ 'all', 'base', 'ht' ]${NC}"
           usage 1
         else
           PROFILE=$OPTARG
