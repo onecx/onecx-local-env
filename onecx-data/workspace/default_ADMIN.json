@@ -27,7 +27,7 @@
       "products": [
         {
           "productName": "onecx-ai-provider",
-          "baseUrl": "/ai",
+          "baseUrl": "/ai-provider",
           "microfrontends": [
             {
               "appId": "onecx-ai-provider-ui",
