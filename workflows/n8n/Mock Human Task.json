@@ -19,34 +19,11 @@
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "2cf523c2-e1df-4a9c-b46c-39be50e7b03d",
-              "name": "body.providerURL",
-              "value": "={{ $json.body.providerURL }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.5,
-      "position": [
-        224,
-        0
-      ],
-      "id": "f769cb64-302d-4c00-80d6-a4e595d5b757",
-      "name": "Mock Create OCX task"
-    },
-    {
-      "parameters": {
         "method": "POST",
         "url": "={{ $json.body.providerURL }}",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "{\n  \"accepted\": true,\n  \"cutomInput\": {\n    \"key1\": \"val1\",\n    \"k2\": \"value2\"\n  }\n}",
+        "jsonBody": "{\n  \"accepted\": true,\n  \"customInput\": {\n    \"key1\": \"val1\",\n    \"k2\": \"value2\"\n  }\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -71,6 +48,29 @@
       "id": "a26f6f40-9dac-481c-8fd8-d58ae7ffd800",
       "name": "Wait 1s",
       "webhookId": "d01b0083-57f0-43e3-b1da-3dd47a3897f4"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2cf523c2-e1df-4a9c-b46c-39be50e7b03d",
+              "name": "body.providerURL",
+              "value": "={{ $json.body.providerURL }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "f769cb64-302d-4c00-80d6-a4e595d5b757",
+      "name": "Mock Create OCX task"
     }
   ],
   "pinData": {},
@@ -80,17 +80,6 @@
         [
           {
             "node": "Mock Create OCX task",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Mock Create OCX task": {
-      "main": [
-        [
-          {
-            "node": "Wait 1s",
             "type": "main",
             "index": 0
           }
@@ -107,6 +96,17 @@
           }
         ]
       ]
+    },
+    "Mock Create OCX task": {
+      "main": [
+        [
+          {
+            "node": "Wait 1s",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -115,7 +115,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "f24ac327-c0f4-4ae9-ada1-6c7065413ef8",
+  "versionId": "7692d2fb-36af-4d53-a63e-86f8336df49c",
   "meta": {
     "instanceId": "b6da709e0f8526c4bcf3f8b1095c9e85f668b5bb5ad701e6d75b5d00877a4442"
   },

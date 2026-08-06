@@ -9,42 +9,8 @@
         -1104,
         96
       ],
-      "id": "7ff1fabd-e055-4464-a984-172aa9d82f15",
+      "id": "cbf8b624-5795-4fda-b93e-dc1e5dc2312c",
       "name": "When clicking ‘Execute workflow’"
-    },
-    {
-      "parameters": {
-        "resume": "webhook",
-        "httpMethod": "POST",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        -656,
-        96
-      ],
-      "id": "3bdbdae7-0bd3-472f-9133-e9261f860158",
-      "name": "Wait",
-      "webhookId": "fcb847cf-5142-4f27-8103-5ac551fcb6a8"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://localhost:5678/webhook-test/90c571b3-f47f-4e72-be86-f4a434223539",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"title\": \"string\",\n  \"description\": \"string\",\n  \"providerType\": \"CAMUNDA\",\n  \"providerTaskId\": \"string\",\n  \"providerURL\": \"{{ $execution.resumeUrl }}\"\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.5,
-      "position": [
-        -880,
-        96
-      ],
-      "id": "39e09e0f-eb7b-453a-8654-22bc55414c91",
-      "name": "Mock svc extarnal v1 API REST call"
     },
     {
       "parameters": {
@@ -68,7 +34,7 @@
             },
             {
               "id": "286a76c7-9d60-4189-a028-4b6dfbd8daec",
-              "leftValue": "={{ $json.body.cutomInput }}",
+              "leftValue": "={{ $json.body.customInput }}",
               "rightValue": "",
               "operator": {
                 "type": "object",
@@ -87,31 +53,8 @@
         -224,
         96
       ],
-      "id": "e3c56531-231a-4262-b92a-9b533c457884",
+      "id": "34aac047-0c85-45bd-8568-f21bdf4b40ee",
       "name": "Custom Input?"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "e1e43ac4-dcbe-486a-a5f6-818851b7fe49",
-              "name": "body.cutomInput",
-              "value": "={{ $json.body.cutomInput }}",
-              "type": "object"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.5,
-      "position": [
-        0,
-        0
-      ],
-      "id": "953f08d7-b38e-40b4-81ae-07afd6ee0489",
-      "name": "Extract cutom input"
     },
     {
       "parameters": {
@@ -124,7 +67,7 @@
         224,
         0
       ],
-      "id": "ab5335c2-de09-4698-8a73-bc851faf5db7",
+      "id": "11a72dd5-8307-4dea-b4b1-a1aa001438a5",
       "name": "Display keys and values"
     },
     {
@@ -147,22 +90,8 @@
         0,
         176
       ],
-      "id": "c746dc4f-06b9-4ae2-9396-1a3142286da7",
+      "id": "efa1fb1b-f02c-4860-8fb1-377a3585e5d9",
       "name": "Extract body"
-    },
-    {
-      "parameters": {
-        "fieldToSplitOut": "body",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.splitOut",
-      "typeVersion": 1,
-      "position": [
-        224,
-        176
-      ],
-      "id": "cf84e0df-d7f9-4ca9-a1df-2a48e14c5c6d",
-      "name": "Display empty body"
     },
     {
       "parameters": {
@@ -195,7 +124,7 @@
         -480,
         96
       ],
-      "id": "24067e30-7962-4b05-8881-543e5df2741a",
+      "id": "e43fccb6-d17e-4061-a157-1a3f325fbd75",
       "name": "Accepted?"
     },
     {
@@ -208,8 +137,65 @@
         -224,
         288
       ],
-      "id": "606a0708-2d63-412d-8e7c-f1374f68e887",
+      "id": "91f97e89-12d0-4bbc-a743-9e07aa003445",
       "name": "Stop and Error"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:5678/webhook-test/90c571b3-f47f-4e72-be86-f4a434223539",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"title\": \"string\",\n  \"description\": \"string\",\n  \"providerType\": \"N8N\",\n  \"providerTaskId\": \"string\",\n  \"providerURL\": \"{{ $execution.resumeUrl }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        -880,
+        96
+      ],
+      "id": "409b07f2-0b9a-4d5e-8f14-5de143eab8c5",
+      "name": "Mock svc external v1 API REST call"
+    },
+    {
+      "parameters": {
+        "resume": "webhook",
+        "httpMethod": "POST",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -656,
+        96
+      ],
+      "id": "458d9d63-47ca-425a-8625-fedb18bff499",
+      "name": "Wait for POST from adapter",
+      "webhookId": "fcb847cf-5142-4f27-8103-5ac551fcb6a8"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e1e43ac4-dcbe-486a-a5f6-818851b7fe49",
+              "name": "body.cutomInput",
+              "value": "={{ $json.body.customInput }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "93a6de8a-183d-4bea-a8a6-216f30b54d48",
+      "name": "Extract custom input"
     }
   ],
   "pinData": {},
@@ -218,29 +204,7 @@
       "main": [
         [
           {
-            "node": "Mock svc extarnal v1 API REST call",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wait": {
-      "main": [
-        [
-          {
-            "node": "Accepted?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Mock svc extarnal v1 API REST call": {
-      "main": [
-        [
-          {
-            "node": "Wait",
+            "node": "Mock svc external v1 API REST call",
             "type": "main",
             "index": 0
           }
@@ -251,7 +215,7 @@
       "main": [
         [
           {
-            "node": "Extract cutom input",
+            "node": "Extract custom input",
             "type": "main",
             "index": 0
           }
@@ -265,26 +229,9 @@
         ]
       ]
     },
-    "Extract cutom input": {
-      "main": [
-        [
-          {
-            "node": "Display keys and values",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Extract body": {
       "main": [
-        [
-          {
-            "node": "Display empty body",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Accepted?": {
@@ -304,6 +251,39 @@
           }
         ]
       ]
+    },
+    "Mock svc external v1 API REST call": {
+      "main": [
+        [
+          {
+            "node": "Wait for POST from adapter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for POST from adapter": {
+      "main": [
+        [
+          {
+            "node": "Accepted?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract custom input": {
+      "main": [
+        [
+          {
+            "node": "Display keys and values",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -312,11 +292,11 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "ec4d5dcc-3ef5-45f1-bf85-061ab81817ce",
+  "versionId": "3e798477-75bb-497f-8ee3-2dbb263a4c12",
   "meta": {
-    "instanceId": "2b64087759155b997ffad267b38666921c80e69a61fd7b0adbbed1e8665a531a"
+    "instanceId": "b6da709e0f8526c4bcf3f8b1095c9e85f668b5bb5ad701e6d75b5d00877a4442"
   },
   "nodeGroups": [],
-  "id": "FPOfOUjJrMZurmht",
+  "id": "XYsUsDVY4xXGJfoH",
   "tags": []
 }
