@@ -1227,6 +1227,7 @@ services:
       KEYCLOAK_URL: ${KC_URL}
       KEYCLOAK_REALM: ${KC_REALM}
       KEYCLOAK_CLIENT_ID: ${KC_CLIENT_ID}
+      SOURCE_MAPS_ACCESS_RULE: "allow all;"
     healthcheck:
       test: ["CMD", "curl", "--fail", "-G", "http://localhost:8080"]
       interval: 10s
