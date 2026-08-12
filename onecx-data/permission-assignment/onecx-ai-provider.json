@@ -61,21 +61,27 @@
           ]
         },
         "onecx-user": {
-          "PROVIDER": ["VIEW", "SEARCH"],
           "AGENT": ["VIEW", "SEARCH"],
+          "SKILL": ["VIEW", "SEARCH"],
+          "PROVIDER": ["VIEW", "SEARCH"],
+          "SCAFFOLD": ["VIEW", "SEARCH"],
           "TOOL": ["VIEW", "SEARCH"]
         }
       },
       "onecx-ai-provider-bff": {
         "onecx-admin": {
           "agent": ["read", "write", "delete"],
-          "tool": ["read", "write", "delete"],
-          "provider": ["read", "write", "delete"]
+          "scaffold": ["read", "write", "delete"],
+          "skill": ["read", "write", "delete"],
+          "provider": ["read", "write", "delete"],
+          "tool": ["read", "write", "delete"]
         },
         "onecx-user": {
           "agent": ["read"],
-          "tool": ["read"],
-          "provider": ["read"]
+          "scaffold": ["read"],
+          "skill": ["read"],
+          "provider": ["read"],
+          "tool": ["read"]
         }
       }
     }
