@@ -293,6 +293,8 @@ services:
     depends_on:
       keycloak-app:
         condition: service_healthy
+      onecx-ai-provider-runtime:
+        condition: service_healthy
     labels:
       - "traefik.http.services.onecx-ai-provider-svc.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-ai-provider-svc.rule=Host(`onecx-ai-provider-svc`)"
@@ -348,6 +350,39 @@ services:
       - "traefik.http.services.onecx-ai-provider-ui.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-ai-provider-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/ai-provider/`)"
       - "traefik.http.routers.onecx-ai-provider-ui.entrypoints=web"
+    networks:
+      - onecx
+    profiles:
+      - all
+
+  onecx-ai-provider-runtime:
+    image: ${ONECX_AI_PROVIDER_RUNTIME}
+    container_name: onecx-ai-provider-runtime
+    environment:
+      <<: *svc_single_tenancy
+    entrypoint: ["/work/application"]
+    command:
+      - "-Djavax.net.ssl.trustStore=/opt/certs/truststore.jks"
+      - "-Djavax.net.ssl.trustStorePassword=trustjava"
+      - "-Djavax.net.ssl.trustStoreType=JKS"
+    volumes:
+      - ../../certs/truststore.jks:/opt/certs/truststore.jks:ro
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-ai-provider-runtime.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-ai-provider-runtime.rule=Host(`onecx-ai-provider-runtime`)"
+      - "traefik.http.routers.onecx-ai-provider-runtime.entrypoints=web"
     networks:
       - onecx
     profiles:
