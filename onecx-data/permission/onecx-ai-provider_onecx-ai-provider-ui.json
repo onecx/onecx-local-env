@@ -2,6 +2,141 @@
   "name": "onecx-ai-provider-ui",
   "permissions": [
     {
+      "resource": "AGENT",
+      "action": "CREATE",
+      "description": "Create Agent"
+    },
+    {
+      "resource": "AGENT",
+      "action": "EDIT",
+      "description": "Edit Agent"
+    },
+    {
+      "resource": "AGENT",
+      "action": "DELETE",
+      "description": "Delete Agent"
+    },
+    {
+      "resource": "AGENT",
+      "action": "SAVE",
+      "description": "Update and save Agent"
+    },
+    {
+      "resource": "AGENT",
+      "action": "IMPORT",
+      "description": "Import Agent"
+    },
+    {
+      "resource": "AGENT",
+      "action": "EXPORT",
+      "description": "Export Agent"
+    },
+    {
+      "resource": "AGENT",
+      "action": "VIEW",
+      "description": "View mode for Agent"
+    },
+    {
+      "resource": "AGENT",
+      "action": "SEARCH",
+      "description": "Search Agent"
+    },
+    {
+      "resource": "AGENT",
+      "action": "BACK",
+      "description": "Navigate back in details of Agent"
+    },
+    {
+      "resource": "SCAFFOLD",
+      "action": "CREATE",
+      "description": "Create Scaffold"
+    },
+    {
+      "resource": "SCAFFOLD",
+      "action": "EDIT",
+      "description": "Edit Scaffold"
+    },
+    {
+      "resource": "SCAFFOLD",
+      "action": "DELETE",
+      "description": "Delete Scaffold"
+    },
+    {
+      "resource": "SCAFFOLD",
+      "action": "SAVE",
+      "description": "Update and save Scaffold"
+    },
+    {
+      "resource": "SCAFFOLD",
+      "action": "IMPORT",
+      "description": "Import Scaffold"
+    },
+    {
+      "resource": "SCAFFOLD",
+      "action": "EXPORT",
+      "description": "Export Scaffold"
+    },
+    {
+      "resource": "SCAFFOLD",
+      "action": "VIEW",
+      "description": "View mode for Scaffold"
+    },
+    {
+      "resource": "SCAFFOLD",
+      "action": "SEARCH",
+      "description": "Search Scaffold"
+    },
+    {
+      "resource": "SCAFFOLD",
+      "action": "BACK",
+      "description": "Navigate back in details of Scaffold"
+    },
+    {
+      "resource": "SKILL",
+      "action": "CREATE",
+      "description": "Create Skill"
+    },
+    {
+      "resource": "SKILL",
+      "action": "EDIT",
+      "description": "Edit Skill"
+    },
+    {
+      "resource": "SKILL",
+      "action": "DELETE",
+      "description": "Delete Skill"
+    },
+    {
+      "resource": "SKILL",
+      "action": "SAVE",
+      "description": "Update and save Skill"
+    },
+    {
+      "resource": "SKILL",
+      "action": "IMPORT",
+      "description": "Import Skill"
+    },
+    {
+      "resource": "SKILL",
+      "action": "EXPORT",
+      "description": "Export Skill"
+    },
+    {
+      "resource": "SKILL",
+      "action": "VIEW",
+      "description": "View mode for Skill"
+    },
+    {
+      "resource": "SKILL",
+      "action": "SEARCH",
+      "description": "Search Skill"
+    },
+    {
+      "resource": "SKILL",
+      "action": "BACK",
+      "description": "Navigate back in details of Skill"
+    },
+    {
       "resource": "PROVIDER",
       "action": "CREATE",
       "description": "Create Provider"
@@ -47,94 +182,49 @@
       "description": "Change ApiKey Provider"
     },
     {
-      "resource": "CONFIGURATION",
+      "resource": "TOOL",
       "action": "CREATE",
-      "description": "Create configuration"
+      "description": "Create tool"
     },
     {
-      "resource": "CONFIGURATION",
+      "resource": "TOOL",
       "action": "EDIT",
-      "description": "Edit configuration"
+      "description": "Edit tool"
     },
     {
-      "resource": "CONFIGURATION",
+      "resource": "TOOL",
       "action": "DELETE",
-      "description": "Delete configuration"
+      "description": "Delete tool"
     },
     {
-      "resource": "CONFIGURATION",
+      "resource": "TOOL",
       "action": "SAVE",
-      "description": "Update and save configuration"
+      "description": "Update and save tool"
     },
     {
-      "resource": "CONFIGURATION",
+      "resource": "TOOL",
       "action": "IMPORT",
-      "description": "Import configuration"
+      "description": "Import tool"
     },
     {
-      "resource": "CONFIGURATION",
+      "resource": "TOOL",
       "action": "EXPORT",
-      "description": "Export configuration"
+      "description": "Export tool"
     },
     {
-      "resource": "CONFIGURATION",
+      "resource": "TOOL",
       "action": "VIEW",
-      "description": "View mode for configuration"
+      "description": "View mode for tool"
     },
     {
-      "resource": "CONFIGURATION",
+      "resource": "TOOL",
       "action": "SEARCH",
-      "description": "Search configuration"
+      "description": "Search tool"
     },
     {
-      "resource": "CONFIGURATION",
+      "resource": "TOOL",
       "action": "BACK",
-      "description": "Back to configuration"
-    },
-    {
-      "resource": "MCPSERVER",
-      "action": "CREATE",
-      "description": "Create mcpserver"
-    },
-    {
-      "resource": "MCPSERVER",
-      "action": "EDIT",
-      "description": "Edit mcpserver"
-    },
-    {
-      "resource": "MCPSERVER",
-      "action": "DELETE",
-      "description": "Delete mcpserver"
-    },
-    {
-      "resource": "MCPSERVER",
-      "action": "SAVE",
-      "description": "Update and save mcpserver"
-    },
-    {
-      "resource": "MCPSERVER",
-      "action": "IMPORT",
-      "description": "Import mcpserver"
-    },
-    {
-      "resource": "MCPSERVER",
-      "action": "EXPORT",
-      "description": "Export mcpserver"
-    },
-    {
-      "resource": "MCPSERVER",
-      "action": "VIEW",
-      "description": "View mode for mcpserver"
-    },
-    {
-      "resource": "MCPSERVER",
-      "action": "SEARCH",
-      "description": "Search mcpserver"
-    },
-    {
-      "resource": "MCPSERVER",
-      "action": "BACK",
-      "description": "Navigate back in details of mcpserver"
+      "description": "Navigate back in details of tool"
     }
   ]
 }

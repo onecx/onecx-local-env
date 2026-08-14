@@ -2,19 +2,49 @@
   "name": "onecx-ai-provider-bff",
   "permissions": [
     {
-      "resource": "configuration",
+      "resource": "agent",
       "action": "read",
-      "description": "Permission to read AI configuration"
+      "description": "Permission to read AI agents"
     },
     {
-      "resource": "configuration",
+      "resource": "agent",
       "action": "write",
-      "description": "Permission to write AI configuration"
+      "description": "Permission to write AI agents"
     },
     {
-      "resource": "configuration",
+      "resource": "agent",
       "action": "delete",
-      "description": "Permission to delete AI configuration"
+      "description": "Permission to delete AI agents"
+    },
+    {
+      "resource": "scaffold",
+      "action": "read",
+      "description": "Permission to read AI scaffolds"
+    },
+    {
+      "resource": "scaffold",
+      "action": "write",
+      "description": "Permission to write AI scaffolds"
+    },
+    {
+      "resource": "scaffold",
+      "action": "delete",
+      "description": "Permission to delete AI scaffolds"
+    },
+    {
+      "resource": "skill",
+      "action": "read",
+      "description": "Permission to read AI skills"
+    },
+    {
+      "resource": "skill",
+      "action": "write",
+      "description": "Permission to write AI skills"
+    },
+    {
+      "resource": "skill",
+      "action": "delete",
+      "description": "Permission to delete AI skills"
     },
     {
       "resource": "provider",
@@ -32,19 +62,19 @@
       "description": "Permission to delete AI providers"
     },
     {
-      "resource": "mcpServer",
+      "resource": "tool",
       "action": "read",
-      "description": "Permission to read MCP Server"
+      "description": "Permission to read AI tools"
     },
     {
-      "resource": "mcpServer",
+      "resource": "tool",
       "action": "write",
-      "description": "Permission to write MCP Server"
+      "description": "Permission to write AI tools"
     },
     {
-      "resource": "mcpServer",
+      "resource": "tool",
       "action": "delete",
-      "description": "Permission to delete MCP Server"
+      "description": "Permission to delete AI tools"
     }
   ]
 }
