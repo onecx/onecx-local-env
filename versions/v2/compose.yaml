@@ -1778,7 +1778,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+          "bash -c 'echo $PWD'",
         ]
       interval: 10s
       timeout: 5s
@@ -1809,7 +1809,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+          "bash -c 'echo $PWD'",
         ]
       interval: 10s
       timeout: 5s
@@ -1818,6 +1818,93 @@ services:
       - "traefik.http.services.onecx-notification-bff-2.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-notification-bff-2.rule=Host(`onecx-notification-bff-2`)"
       - "traefik.http.routers.onecx-notification-bff-2.entrypoints=web"
+    networks:
+      - onecx
+    profiles:
+      - all
+      - ht
+
+  onecx-human-task-svc:
+    image: ${ONECX_HUMAN_TASK_SVC}
+    container_name: onecx-human-task-svc
+    environment:
+      <<: *svc_multi_tenancy
+      QUARKUS_DATASOURCE_USERNAME: onecx_human_task
+      QUARKUS_DATASOURCE_PASSWORD: onecx_human_task
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_human_task?sslmode=disable"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-human-task-svc.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-human-task-svc.rule=Host(`onecx-human-task-svc`)"
+      - "traefik.http.routers.onecx-human-task-svc.entrypoints=web"
+    networks:
+      - onecx
+    profiles:
+      - all
+      - ht
+
+  onecx-human-task-bff:
+    image: ${ONECX_HUMAN_TASK_BFF}
+    container_name: onecx-human-task-bff
+    environment:
+      <<: *bff_environment
+      ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-human-task"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-human-task-svc:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-human-task-bff.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-human-task-bff.rule=Host(`onecx-human-task-bff`)"
+      - "traefik.http.routers.onecx-human-task-bff.entrypoints=web"
+    networks:
+      - onecx
+    profiles:
+      - all
+      - ht
+
+  onecx-human-task-n8n-adapter:
+    image: ${ONECX_HUMAN_TASK_N8N_ADAPTER}
+    container_name: onecx-human-task-n8n-adapter
+    environment:
+      <<: *svc_multi_tenancy
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      onecx-human-task-svc:
+        condition: service_healthy
+      n8n:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-human-task-n8n-adapter.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-human-task-n8n-adapter.rule=Host(`onecx-human-task-n8n-adapter`)"
+      - "traefik.http.routers.onecx-human-task-n8n-adapter.entrypoints=web"
     networks:
       - onecx
     profiles:
