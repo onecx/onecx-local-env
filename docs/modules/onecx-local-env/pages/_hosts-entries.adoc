@@ -11,6 +11,7 @@
 127.0.0.1 sonar
 
 # OneCX - product services
+127.0.0.1 onecx-ai-provider-runtime
 127.0.0.1 onecx-ai-provider-bff
 127.0.0.1 onecx-ai-provider-svc
 127.0.0.1 onecx-announcement-bff

@@ -884,6 +884,8 @@
         "ocx-ai:read",
         "ocx-ai:write",
         "ocx-ai:delete",
+        "ocx-agent:read",
+        "ocx-agent:write",
         "ocx-an:read",
         "ocx-an:write",
         "ocx-an:delete",
