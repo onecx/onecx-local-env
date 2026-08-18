@@ -106,6 +106,16 @@
           ]
         },
         {
+          "productName": "onecx-notification",
+          "baseUrl": "/notification",
+          "microfrontends": [
+            {
+              "appId": "onecx-notification-ui",
+              "basePath": "/"
+            }
+          ]
+        },
+        {
           "productName": "onecx-parameter",
           "baseUrl": "/parameter",
           "microfrontends": [

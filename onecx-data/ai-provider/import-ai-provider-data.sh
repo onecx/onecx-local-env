@@ -15,6 +15,7 @@ NC='\033[0m' # No Color
 OLE_LINE_PREFIX="    - "
 
 params="--write-out %{http_code} --silent -X POST"
+ai_config_file="../../ai-config"
 api_key_file="../../api-key"
 
 #################################################################
@@ -40,43 +41,103 @@ fi
 
 
 #################################################################
-# Read API Key from file or prompt user
-APIKEY_MSG=""
-APIKEY_SOURCE=""
+# Read config from ai-config file or fall back to legacy api-key file
+CONFIG_SOURCE=""
+apiKey=""
+llmUrl=""
+providerType=""
+modelIdentifier=""
+
 if [[ -z "$SKIP_MSG" ]]; then
-  if [[ -f "$api_key_file" ]]; then
+  if [[ -f "$ai_config_file" ]]; then
+    while IFS='=' read -r key value || [[ -n "$key" ]]; do
+      # Strip leading/trailing whitespace and skip comments/empty lines
+      key=$(echo "$key" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+      value=$(echo "$value" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+      [[ -z "$key" || "$key" == \#* ]] && continue
+      case "$key" in
+        apiKey)           apiKey="$value" ;;
+        llmUrl)           llmUrl="$value" ;;
+        type)             providerType="$value" ;;
+        modelIdentifier)  modelIdentifier="$value" ;;
+      esac
+    done < "$ai_config_file"
+    CONFIG_SOURCE="ai-config file"
+  elif [[ -f "$api_key_file" ]]; then
+    # Legacy: read API key from api-key file
     apiKey=$(cat "$api_key_file" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
     if [[ -n "$apiKey" ]]; then
-      APIKEY_SOURCE="file"
+      CONFIG_SOURCE="api-key file (legacy)"
     else
       printf "${YELLOW}  API Key file is empty${NC}\n"
     fi
-  else
-    APIKEY_MSG="==> API Key file not found"
   fi
 fi
 
 #################################################################
 # Check and go ahead or skip
-printf "${CYAN}  * Importing AI data${NC}\t${SKIP_MSG}${APIKEY_MSG}\n"
+printf "${CYAN}  * Importing AI data${NC}\t${SKIP_MSG}\n"
 
 if [[ ! -z "$SKIP_MSG" ]]; then
   exit 0
 fi
 
 #################################################################
-# Prompt user for API Key
+# Prompt user for missing values
+
+# Provider Type
+if [[ -z "$providerType" ]]; then
+  printf "    Select the AI Provider type by entering a number between 1-3:\n"
+  printf "      1) ANTHROPIC\n"
+  printf "      2) OPENAI\n"
+  printf "      3) OLLAMA\n"
+  read -p "    > " type_choice
+  case "$type_choice" in
+    1) providerType="ANTHROPIC" ;;
+    2) providerType="OPENAI" ;;
+    3) providerType="OLLAMA" ;;
+    *) printf "${RED}${OLE_LINE_PREFIX}Invalid selection. Skipping import.${NC}\n"; exit 0 ;;
+  esac
+  CONFIG_SOURCE="${CONFIG_SOURCE:+${CONFIG_SOURCE}, }user input"
+fi
+
+# LLM URL
+if [[ -z "$llmUrl" ]]; then
+  printf "    Enter the LLM URL for the AI Provider (or leave empty to skip the import):\n"
+  read -p "    > " llmUrl
+  CONFIG_SOURCE="${CONFIG_SOURCE:+${CONFIG_SOURCE}, }user input"
+fi
+
+if [[ -z "$llmUrl" ]]; then
+  printf "${YELLOW}${OLE_LINE_PREFIX}Skipping import ==> no LLM URL provided${NC}\n"
+  exit 0
+fi
+
+# Model Identifier
+if [[ -z "$modelIdentifier" ]]; then
+  printf "    Enter the Model Identifier (or leave empty to skip the import):\n"
+  read -p "    > " modelIdentifier
+  CONFIG_SOURCE="${CONFIG_SOURCE:+${CONFIG_SOURCE}, }user input"
+fi
+
+if [[ -z "$modelIdentifier" ]]; then
+  printf "${YELLOW}${OLE_LINE_PREFIX}Skipping import ==> no Model Identifier provided${NC}\n"
+  exit 0
+fi
+
+# API Key
 if [[ -z "$apiKey" ]]; then
   printf "    Enter the API Key for the AI Provider (or leave empty to skip the import):\n"
   read -p "    > " apiKey
-  APIKEY_SOURCE="user input"
+  CONFIG_SOURCE="${CONFIG_SOURCE:+${CONFIG_SOURCE}, }user input"
 fi
 
 if [[ -z "$apiKey" ]]; then
   printf "${YELLOW}${OLE_LINE_PREFIX}Skipping import ==> no API Key provided${NC}\n"
   exit 0
 fi
-printf "${CYAN}${OLE_LINE_PREFIX}API Key read from: ${GREEN}${APIKEY_SOURCE}${NC}\n"
+
+printf "${CYAN}${OLE_LINE_PREFIX}Config read from: ${GREEN}${CONFIG_SOURCE}${NC}\n"
 
 
 #################################################################
@@ -86,12 +147,12 @@ url="http://onecx-ai-provider-svc/internal/providers"
 response_output=$(mktemp)
 status_output=$(mktemp)
 
-# Prepare provider file with API Key
+# Prepare provider file with API Key, LLM URL, and type
 provider_temp=$(mktemp)
 if command -v jq &> /dev/null; then
-  jq ".apiKey = \"$apiKey\"" "$provider_file" > "$provider_temp"
+  jq ".apiKey = \"$apiKey\" | .llmUrl = \"$llmUrl\" | .type = \"$providerType\"" "$provider_file" > "$provider_temp"
 else
-  printf "${RED}${OLE_LINE_PREFIX}jq not found, cannot update Provider with API Key${NC}\n"
+  printf "${RED}${OLE_LINE_PREFIX}jq not found, cannot update Provider with config values${NC}\n"
   exit 1
 fi
 
@@ -124,7 +185,7 @@ response_output=$(mktemp)
 status_output=$(mktemp)
 
 model_temp=$(mktemp)
-jq ".provider = $provider_response" "$model_file" > "$model_temp"
+jq ".provider = $provider_response | .modelIdentifier = \"$modelIdentifier\"" "$model_file" > "$model_temp"
 
 if [[ $OLE_SECURITY_AUTH_ENABLED == "true" ]]; then
   curl $params -H "$OLE_HEADER_CT_JSON" -H "$OLE_HEADER_AUTH_TOKEN" -H "$OLE_HEADER_APM_TOKEN" -d @"$model_temp" -w "%{http_code}" -o "$response_output" "$url" > "$status_output" 2>&1

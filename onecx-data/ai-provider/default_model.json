@@ -1,5 +1,5 @@
 {
-  "name": "Default OneCX Ollama Model",
-  "modelIdentifier": "ministral-3:8b",
+  "name": "Imported Model",
+  "modelIdentifier": "replace",
   "communicationMode": "SYNC"
 }
