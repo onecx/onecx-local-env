@@ -209,14 +209,12 @@ services:
       - RUSTFS_ACCESS_KEY=rustfsadmin
       - RUSTFS_SECRET_KEY=rustfsadmin
       - RUSTFS_OBS_LOGGER_LEVEL=info
-      - RUSTFS_TLS_PATH=/opt/tls
       - RUSTFS_OBS_ENDPOINT=http://otel-collector:4318
       - RUSTFS_REGION=eu-central-1
       - RUSTFS_UNSAFE_BYPASS_DISK_CHECK=true
     volumes:
       - ./storage/data/pro:/data
       - ./storage/logs:/app/logs
-      - ./storage/data/certs/:/opt/tls # TLS configuration, you should create tls directory and put your tls files in it and then specify the path here
     labels:
       - "traefik.http.services.rustfs.loadbalancer.server.port=80"
       - "traefik.http.routers.rustfs.rule=Host(`rustfs`)"
@@ -678,8 +676,8 @@ services:
     image: ${ONECX_DOCUMENT_UI}
     container_name: onecx-document-ui
     environment:
-      APP_BASE_HREF: "/mfe/document/"
-      APP_ID: "onecx-document-ui"
+      APP_BASE_HREF: /mfe/document/
+      APP_ID: onecx-document-ui
       PRODUCT_NAME: "onecx-document"
     depends_on:
       onecx-document-bff:

@@ -1,8 +1,8 @@
 {
-  "name": "Default OneCX Ollama Provider",
-  "description": "Default OneCX Ollama LLM Provider",
-  "llmUrl": "https://ollama.one-cx.org",
+  "name": "Imported Provider",
+  "description": "Imported OneCX Provider",
+  "llmUrl": "replace",
   "authMode": "API_KEY",
   "apiKey": "replace",
-  "type": "OLLAMA"
+  "type": "ANTHROPIC|OPENAI|OLLAMA"
 }

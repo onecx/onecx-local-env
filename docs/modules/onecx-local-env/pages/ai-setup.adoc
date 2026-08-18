@@ -71,8 +71,21 @@ image::scripts/script_import-onecx.sh_ai.png[Import AI Data]
 
 [TIP]
 ====
-Due to the API Key being sensitive information, it is not stored in the OneCX Local Environment by default. +
-You can provide the API Key in a file named *api-key* within the root directory of the `onecx-local-env`. It is automatically read in during the AI data import process (step 2 above)..
+To avoid entering values interactively on every import, you can provide a file named *ai-config* within the root directory of `onecx-local-env`. +
+It uses a simple `key=value` format and supports the following properties:
+
+[source,properties]
+----
+apiKey=your-api-key
+llmUrl=https://your-llm-url
+type=ANTHROPIC
+modelIdentifier=your-model-id
+----
+
+Valid values for `type` are: `ANTHROPIC`, `OPENAI`, `OLLAMA`. +
+Any value not present in the file will be prompted interactively. +
+
+NOTE: The legacy *api-key* file (containing only the API Key) is still supported for backwards compatibility, but *ai-config* is preferred.
 ====
 
 
