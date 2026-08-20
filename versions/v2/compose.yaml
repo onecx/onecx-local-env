@@ -1681,6 +1681,7 @@ services:
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-notification"
       QUARKUS_VERTX_CLUSTER_CLUSTERED: "true"
       JAVA_TOOL_OPTIONS: "-Dhazelcast.config=/deployments/hazelcast-compose.xml"
+      ONECX_NOTIFICATION_TOKEN_VERIFIED: "false"
     volumes:
       - ./src/main/resources/hazelcast-compose.xml:/deployments/hazelcast-compose.xml:ro
     healthcheck:
@@ -1711,6 +1712,7 @@ services:
       ONECX_PERMISSIONS_PRODUCT_NAME: "onecx-notification"
       QUARKUS_VERTX_CLUSTER_CLUSTERED: "true"
       JAVA_TOOL_OPTIONS: "-Dhazelcast.config=/deployments/hazelcast-compose.xml"
+      ONECX_NOTIFICATION_TOKEN_VERIFIED: "false"
     volumes:
       - ./src/main/resources/hazelcast-compose.xml:/deployments/hazelcast-compose.xml:ro
     healthcheck:
