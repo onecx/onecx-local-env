@@ -1,0 +1,16 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX Human Task UI",
+  "description": "OneCX Human Task",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/human-task/",
+  "remoteEntry": "/mfe/human-task/remoteEntry.js",
+  "note": "Imported MFE",
+  "exposedModule": "./OneCXHumanTaskModule",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-human-task",
+  "tagName": "ocx-human-task-component",
+  "type": "MODULE",
+  "deprecated": false,
+  "undeployed": false
+}

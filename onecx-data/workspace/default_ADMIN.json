@@ -36,6 +36,16 @@
           ]
         },
         {
+          "productName": "onecx-human-task",
+          "baseUrl": "/human-task",
+          "microfrontends": [
+            {
+              "appId": "onecx-human-task-ui",
+              "basePath": "/"
+            }
+          ]
+        },
+        {
           "productName": "onecx-announcement",
           "baseUrl": "/announcement",
           "microfrontends": [

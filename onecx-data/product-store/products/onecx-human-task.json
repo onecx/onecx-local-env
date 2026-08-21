@@ -1,0 +1,12 @@
+{
+  "version": "xxx",
+  "description": "Manage human tasks",
+  "imageUrl": null,
+  "iconName": "task",
+  "displayName": "OneCX Human Task",
+  "basePath": "/human-task",
+  "provider": "OneCX Team",
+  "classifications": ["Tool"],
+  "multitenancy": true,
+  "undeployed": false
+}

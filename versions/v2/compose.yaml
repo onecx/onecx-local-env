@@ -1880,6 +1880,31 @@ services:
       - all
       - ht
 
+  onecx-human-task-ui:
+    image: ${ONECX_HUMAN_TASK_UI}
+    container_name: onecx-human-task-ui
+    environment:
+      APP_BASE_HREF: "/mfe/human-task/"
+      APP_ID: "onecx-human-task-ui"
+      PRODUCT_NAME: "onecx-human-task"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "-G", "http://localhost:8080"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+       onecx-human-task-bff:
+         condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-human-task-ui.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-human-task-ui.rule=Host(`onecx.localhost`) && PathPrefix(`/mfe/human-task/`)"
+      - "traefik.http.routers.onecx-human-task-ui.entrypoints=web"
+    networks:
+      - onecx
+    profiles:
+      - all
+      - ht
+
   onecx-human-task-n8n-adapter:
     image: ${ONECX_HUMAN_TASK_N8N_ADAPTER}
     container_name: onecx-human-task-n8n-adapter

@@ -1,0 +1,20 @@
+{
+  "name": "onecx-human-task-ui",
+  "permissions": [
+    {
+      "resource": "TASK",
+      "action": "SEARCH",
+      "description": "Permission to search tasks"
+    },
+    {
+      "resource": "TASK",
+      "action": "VIEW",
+      "description": "Permission to view tasks"
+    },
+    {
+      "resource": "TASK",
+      "action": "DELETE",
+      "description": "Permission to delete tasks"
+    }
+  ]
+}
