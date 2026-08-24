@@ -1,15 +1,15 @@
 {
-  "name": "Mock n8n Workflow",
+  "name": "Example n8n Workflow",
   "nodes": [
     {
       "parameters": {},
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -1104,
-        96
+        -1296,
+        -32
       ],
-      "id": "cbf8b624-5795-4fda-b93e-dc1e5dc2312c",
+      "id": "cb50cce5-ecf2-49f0-a1fe-c8aedfa60792",
       "name": "When clicking ‘Execute workflow’"
     },
     {
@@ -51,9 +51,9 @@
       "typeVersion": 2.3,
       "position": [
         -224,
-        96
+        -32
       ],
-      "id": "34aac047-0c85-45bd-8568-f21bdf4b40ee",
+      "id": "4d7d48d5-675a-447e-8378-fbe7b08d31ee",
       "name": "Custom Input?"
     },
     {
@@ -65,9 +65,9 @@
       "typeVersion": 1,
       "position": [
         224,
-        0
+        -128
       ],
-      "id": "11a72dd5-8307-4dea-b4b1-a1aa001438a5",
+      "id": "8d264038-c70f-4c61-b0a1-79203528379e",
       "name": "Display keys and values"
     },
     {
@@ -88,9 +88,9 @@
       "typeVersion": 3.5,
       "position": [
         0,
-        176
+        48
       ],
-      "id": "efa1fb1b-f02c-4860-8fb1-377a3585e5d9",
+      "id": "1ac9ba6b-58fe-481f-834e-c6e31d03e0ad",
       "name": "Extract body"
     },
     {
@@ -122,9 +122,9 @@
       "typeVersion": 2.3,
       "position": [
         -480,
-        96
+        -32
       ],
-      "id": "e43fccb6-d17e-4061-a157-1a3f325fbd75",
+      "id": "cbe5f3aa-e221-4145-92d1-62d1fa3ed2c8",
       "name": "Accepted?"
     },
     {
@@ -135,9 +135,9 @@
       "typeVersion": 1,
       "position": [
         -224,
-        288
+        160
       ],
-      "id": "91f97e89-12d0-4bbc-a743-9e07aa003445",
+      "id": "a95c8369-58df-499d-81eb-3748ef6d952e",
       "name": "Stop and Error"
     },
     {
@@ -152,11 +152,12 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        -880,
-        96
+        -1104,
+        -32
       ],
-      "id": "409b07f2-0b9a-4d5e-8f14-5de143eab8c5",
-      "name": "Mock svc external v1 API REST call"
+      "id": "b99fbb13-6134-47a0-b8d1-0bea31aebb50",
+      "name": "Mock svc external v1 API REST call",
+      "disabled": true
     },
     {
       "parameters": {
@@ -168,9 +169,9 @@
       "typeVersion": 1.1,
       "position": [
         -656,
-        96
+        -32
       ],
-      "id": "458d9d63-47ca-425a-8625-fedb18bff499",
+      "id": "74ac0c75-5752-4c83-ba51-f2b7a4d91989",
       "name": "Wait for POST from adapter",
       "webhookId": "fcb847cf-5142-4f27-8103-5ac551fcb6a8"
     },
@@ -192,10 +193,44 @@
       "typeVersion": 3.5,
       "position": [
         0,
-        0
+        -128
       ],
-      "id": "93a6de8a-183d-4bea-a8a6-216f30b54d48",
+      "id": "9ff9e111-7864-4869-af56-a1feb7011414",
       "name": "Extract custom input"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://onecx-human-task-svc:8080/v1/tasks",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"title\": \"My Title\",\n  \"description\": \"My Description\",\n  \"providerType\": \"N8N\",\n  \"providerTaskId\": \"custom-n8n-id-123\",\n  \"providerURL\": \"{{ $execution.resumeUrl }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        -896,
+        -32
+      ],
+      "id": "10e7a53a-7a3a-4a97-a86d-1ba70cb55fb9",
+      "name": "REAL svc external v1 API REST call",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "content": "## Make sure that no more than one of these REST calls is activated.\n- Use none for testing with curl\n- Use MOCK with the mock n8n workflow \n- Use REAL for e2e testing in OneCX local env",
+        "height": 176,
+        "width": 432
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1168,
+        -224
+      ],
+      "typeVersion": 1,
+      "id": "79a85082-42de-44c2-a902-cbbf509a4963",
+      "name": "Sticky Note"
     }
   ],
   "pinData": {},
@@ -229,11 +264,6 @@
         ]
       ]
     },
-    "Extract body": {
-      "main": [
-        []
-      ]
-    },
     "Accepted?": {
       "main": [
         [
@@ -256,7 +286,7 @@
       "main": [
         [
           {
-            "node": "Wait for POST from adapter",
+            "node": "REAL svc external v1 API REST call",
             "type": "main",
             "index": 0
           }
@@ -284,6 +314,17 @@
           }
         ]
       ]
+    },
+    "REAL svc external v1 API REST call": {
+      "main": [
+        [
+          {
+            "node": "Wait for POST from adapter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -292,11 +333,11 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "3e798477-75bb-497f-8ee3-2dbb263a4c12",
+  "versionId": "7738a180-7e40-459b-b497-82bc623a1b36",
   "meta": {
-    "instanceId": "b6da709e0f8526c4bcf3f8b1095c9e85f668b5bb5ad701e6d75b5d00877a4442"
+    "instanceId": "ce22a68e57b1f0208e25778a15de92a69c7e85c6f18d34e8c1e50c7ef145a4de"
   },
   "nodeGroups": [],
-  "id": "XYsUsDVY4xXGJfoH",
+  "id": "uVTpIEfY0775wNTj",
   "tags": []
 }
