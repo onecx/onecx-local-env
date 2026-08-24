@@ -148,12 +148,7 @@
         {
           "productName": "onecx-search-config",
           "baseUrl": "/search-config",
-          "microfrontends": [
-            {
-              "appId": "onecx-search-config-ui",
-              "basePath": "/"
-            }
-          ]
+          "microfrontends": []
         },
         {
           "productName": "onecx-shell",
