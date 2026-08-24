@@ -279,6 +279,7 @@ services:
       N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
       N8N_RUNNERS_ENABLED: true
       QUEUE_HEALTH_CHECK_ACTIVE: true
+      WEBHOOK_URL: "http://n8n:5678"
     volumes:
       - n8n:/home/node/.n8n
     ports:
@@ -1830,6 +1831,7 @@ services:
       QUARKUS_DATASOURCE_USERNAME: onecx_human_task
       QUARKUS_DATASOURCE_PASSWORD: onecx_human_task
       QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgresdb:5432/onecx_human_task?sslmode=disable"
+      ADAPTER_URLS_N8N: "http://onecx-human-task-n8n-adapter:8080"
     healthcheck:
       test:
         [
@@ -1910,6 +1912,7 @@ services:
     container_name: onecx-human-task-n8n-adapter
     environment:
       <<: *svc_multi_tenancy
+      N8N_URL: "http://n8n:5678"
     healthcheck:
       test:
         [
