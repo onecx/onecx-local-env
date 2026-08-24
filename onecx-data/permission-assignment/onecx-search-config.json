@@ -1,0 +1,15 @@
+{
+  "id": "onecx-local-env_import-permission-assignments_onecx-search-config",
+  "assignments": {
+    "onecx-search-config": {
+      "onecx-search-config-ui": {
+        "onecx-admin": {
+          "SEARCHCONFIG": ["CREATE", "DELETE", "EDIT", "VIEW"]
+        },
+        "onecx-user": {
+          "SEARCHCONFIG": ["CREATE", "DELETE", "EDIT", "VIEW"]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+    "name": "onecx-search-config-ui",
+    "permissions": [
+        { "resource": "SEARCHCONFIG", "action": "CREATE", "description": "Permission to create search configurations" },
+        { "resource": "SEARCHCONFIG", "action": "DELETE", "description": "Permission to delete search configurations" },
+        { "resource": "SEARCHCONFIG", "action": "EDIT", "description": "Permission to edit search configurations" },
+        { "resource": "SEARCHCONFIG", "action": "VIEW", "description": "Permission to view search configurations" }
+    ]
+}
