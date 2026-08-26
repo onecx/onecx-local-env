@@ -422,6 +422,7 @@ services:
       - onecx
     profiles:
       - all
+      - ht
 
   ########## ONECX ANNOUNCEMENT
   onecx-announcement-svc:
@@ -1924,8 +1925,6 @@ services:
       retries: 3
     depends_on:
       onecx-human-task-svc:
-        condition: service_healthy
-      n8n:
         condition: service_healthy
     labels:
       - "traefik.http.services.onecx-human-task-n8n-adapter.loadbalancer.server.port=8080"
