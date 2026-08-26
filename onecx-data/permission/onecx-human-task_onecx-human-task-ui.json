@@ -3,6 +3,11 @@
   "permissions": [
     {
       "resource": "TASK",
+      "action": "CREATE",
+      "description": "Permission to create tasks"
+    },
+    {
+      "resource": "TASK",
       "action": "SEARCH",
       "description": "Permission to search tasks"
     },

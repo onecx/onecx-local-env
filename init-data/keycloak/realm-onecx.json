@@ -1351,6 +1351,13 @@
       "attributes": {}
     },
     {
+      "id": "ocx-ht:all",
+      "name": "ocx-ht:all",
+      "description": "created by initial import",
+      "protocol": "openid-connect",
+      "attributes": {}
+    },
+    {
       "id": "ocx-no:write",
       "name": "ocx-no:write",
       "description": "created by initial import",
