@@ -4,7 +4,7 @@
     "onecx-human-task": {
       "onecx-human-task-ui": {
         "onecx-admin": {
-          "TASK": [ "CREATE", "DELETE", "EDIT", "SEARCH" ]
+          "TASK": [ "CREATE", "DELETE", "EDIT", "SEARCH", "VIEW" ]
         },
         "onecx-user": {
           "TASK": [ "SEARCH", "VIEW" ]

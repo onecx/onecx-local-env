@@ -6,10 +6,10 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -1296,
-        -32
+        -224,
+        192
       ],
-      "id": "cb50cce5-ecf2-49f0-a1fe-c8aedfa60792",
+      "id": "d9305e92-dfc7-4892-98eb-666dcc2046ad",
       "name": "When clicking ‘Execute workflow’"
     },
     {
@@ -50,10 +50,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -224,
-        -32
+        944,
+        192
       ],
-      "id": "4d7d48d5-675a-447e-8378-fbe7b08d31ee",
+      "id": "b90536e3-b4a8-4429-9b94-11dfd9558e49",
       "name": "Custom Input?"
     },
     {
@@ -64,10 +64,10 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        224,
-        -128
+        1392,
+        96
       ],
-      "id": "8d264038-c70f-4c61-b0a1-79203528379e",
+      "id": "1da9c710-60a1-4cfb-af89-d669d5257512",
       "name": "Display keys and values"
     },
     {
@@ -87,10 +87,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        0,
-        48
+        1168,
+        272
       ],
-      "id": "1ac9ba6b-58fe-481f-834e-c6e31d03e0ad",
+      "id": "16ee62c9-45b4-4ac9-b9d3-49aaba7ec9e1",
       "name": "Extract body"
     },
     {
@@ -121,10 +121,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -480,
-        -32
+        688,
+        192
       ],
-      "id": "cbe5f3aa-e221-4145-92d1-62d1fa3ed2c8",
+      "id": "2c1ad24b-50c7-4c83-a549-813167ffd052",
       "name": "Accepted?"
     },
     {
@@ -134,10 +134,10 @@
       "type": "n8n-nodes-base.stopAndError",
       "typeVersion": 1,
       "position": [
-        -224,
-        160
+        944,
+        384
       ],
-      "id": "a95c8369-58df-499d-81eb-3748ef6d952e",
+      "id": "7885ccca-da85-423a-b82c-660f4f420d5a",
       "name": "Stop and Error"
     },
     {
@@ -152,10 +152,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        -1104,
-        -32
+        -32,
+        192
       ],
-      "id": "b99fbb13-6134-47a0-b8d1-0bea31aebb50",
+      "id": "ecc9bb48-0f8b-4298-a88f-b985814a781d",
       "name": "Mock svc external v1 API REST call",
       "disabled": true
     },
@@ -168,10 +168,10 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        -656,
-        -32
+        512,
+        192
       ],
-      "id": "74ac0c75-5752-4c83-ba51-f2b7a4d91989",
+      "id": "4553e485-cbad-40e3-a10a-eb7927c83689",
       "name": "Wait for POST from adapter",
       "webhookId": "fcb847cf-5142-4f27-8103-5ac551fcb6a8"
     },
@@ -192,16 +192,29 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        0,
-        -128
+        1168,
+        96
       ],
-      "id": "9ff9e111-7864-4869-af56-a1feb7011414",
+      "id": "1d84fb6c-3345-4d0f-b80a-9005d31af190",
       "name": "Extract custom input"
     },
     {
       "parameters": {
         "method": "POST",
         "url": "http://onecx-human-task-svc:8080/v1/tasks",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $json.access_token }}"
+            },
+            {
+              "name": "apm-principal-token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJRVHhueUlUdGZaSGpVYUdPOXdaa3R1cTFuRmV2Z0U5VjhZZEtZMU1WNkxrIn0.eyJleHAiOjE3ODc3NDY5MDIsImlhdCI6MTc4Nzc0NjYwMiwiYXV0aF90aW1lIjoxNzg3NzQ1Mjg1LCJqdGkiOiJlYTcwOThhNy1mYTdiLTRhOTItODQyYS1mMjg0MzhlMDdjMzciLCJpc3MiOiJodHRwOi8va2V5Y2xvYWstYXBwLmxvY2FsaG9zdDo4MDgwL3JlYWxtcy9vbmVjeCIsImF1ZCI6Im9uZWN4LXNoZWxsLXVpLWNsaWVudCIsInN1YiI6ImY5OTRiMDMxLTgzMTYtNDdmZS04ZWJmLWM3NjgwM2IwNzFkNiIsInR5cCI6IklEIiwiYXpwIjoib25lY3gtc2hlbGwtdWktY2xpZW50Iiwic2lkIjoiYjZjMzFhYjEtNWM0MS00NzE0LWJmMzYtODAzMDFmY2UzOWQ4IiwiYXRfaGFzaCI6InJUV3M3ZzBPR2RkbEhhaEpqUHpwNXciLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6Ik9uZUNYIEFkbWluIiwicHJlZmVycmVkX3VzZXJuYW1lIjoib25lY3giLCJnaXZlbl9uYW1lIjoiT25lQ1giLCJmYW1pbHlfbmFtZSI6IkFkbWluIiwiZW1haWwiOiJvbmVjeF9hZG1pbkAxMDAwa2l0Lm9yZyJ9.SuOnLPwMtQHX-j_1pexeyXMyz-PeOsVO7oHkRhsnIWdj_APc9FuvkDMWKDt_ez9LraBQujfA7GDlG_9vqRctzWRIkKaPxgO_aUqGnHeWiwe0xhjT9B9zuCXErRU0m1UEe1_zPCL4bj-QseIzjXIXXqdQYNLabZOIh4soAQyCgUdzzXmC6kV28lHJ09rVE1N_6IJrKv2uisqFRsfdYrx-NDmIgqj7mJoHX40K3XjUcpUX_Gz_bHd_PpKE5MZ52mkVxdg7s1pRIDmgI2K7usweN7slR4OgOMmPP2LyytL42lqoJmNumNY_hT0zNuxd1TwcHVozVgox3fUbJMdAcFGJzw"
+            }
+          ]
+        },
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "={\n  \"title\": \"My Title\",\n  \"description\": \"My Description\",\n  \"providerType\": \"N8N\",\n  \"providerTaskId\": \"custom-n8n-id-123\",\n  \"providerURL\": \"{{ $execution.resumeUrl }}\"\n}",
@@ -210,10 +223,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        -896,
-        -32
+        320,
+        192
       ],
-      "id": "10e7a53a-7a3a-4a97-a86d-1ba70cb55fb9",
+      "id": "daa86c0c-cbef-4610-99f6-49c20bd6e61d",
       "name": "REAL svc external v1 API REST call",
       "alwaysOutputData": false
     },
@@ -225,12 +238,45 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -1168,
-        -224
+        0,
+        0
       ],
       "typeVersion": 1,
-      "id": "79a85082-42de-44c2-a902-cbbf509a4963",
+      "id": "e030cdae-8d50-4772-bb05-634ec3f2b611",
       "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://keycloak-app.localhost:8080/realms/onecx/protocol/openid-connect/token",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "grant_type",
+              "value": "client_credentials"
+            },
+            {
+              "name": "client_id",
+              "value": "n8n-client"
+            },
+            {
+              "name": "client_secret",
+              "value": "uMwvloB6RgIVm9wU6GcaDRqyfMYvMOas"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        144,
+        192
+      ],
+      "id": "4f757af9-bc70-4d22-83fc-9343bf029bd4",
+      "name": "HTTP Request"
     }
   ],
   "pinData": {},
@@ -286,7 +332,7 @@
       "main": [
         [
           {
-            "node": "REAL svc external v1 API REST call",
+            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -325,19 +371,29 @@
           }
         ]
       ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "REAL svc external v1 API REST call",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1",
-    "binaryMode": "separate",
-    "availableInMCP": false
+    "binaryMode": "separate"
   },
-  "versionId": "7738a180-7e40-459b-b497-82bc623a1b36",
+  "versionId": "e36f9d76-5aa4-4123-8895-8427d1dfb4e6",
   "meta": {
-    "instanceId": "ce22a68e57b1f0208e25778a15de92a69c7e85c6f18d34e8c1e50c7ef145a4de"
+    "instanceId": "fbcf02ae0185889d6f73cb105827b4901aa9222a0ed06ae705df44188686f6f5"
   },
   "nodeGroups": [],
-  "id": "uVTpIEfY0775wNTj",
+  "id": "DGBYZX1uXUVJsVJo",
   "tags": []
 }
