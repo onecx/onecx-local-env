@@ -1,0 +1,8 @@
+{
+    "name": "onecx-search-config-bff",
+    "permissions": [
+        { "resource": "searchconfig", "action": "read", "description": "Permission to read search configurations" },
+        { "resource": "searchconfig", "action": "write", "description": "Permission to create or update search configurations" },
+        { "resource": "searchconfig", "action": "delete", "description": "Permission to delete search configurations" }    
+    ]
+}
