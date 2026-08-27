@@ -1693,6 +1693,9 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
+    depends_on:
+      onecx-notification-svc:
+        condition: service_healthy
     labels:
       - "traefik.http.services.onecx-notification-bff.loadbalancer.server.port=8080"
       - "traefik.http.routers.onecx-notification-bff.rule=Host(`onecx-notification-bff`)"

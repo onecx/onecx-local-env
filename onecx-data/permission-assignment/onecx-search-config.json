@@ -4,10 +4,18 @@
     "onecx-search-config": {
       "onecx-search-config-ui": {
         "onecx-admin": {
-          "SEARCHCONFIG": ["CREATE", "DELETE", "EDIT", "VIEW"]
+          "SEARCHCONFIG": ["CREATE", "DELETE", "EDIT", "USE", "VIEW"]
         },
         "onecx-user": {
-          "SEARCHCONFIG": ["CREATE", "DELETE", "EDIT", "VIEW"]
+          "SEARCHCONFIG": ["CREATE", "DELETE", "EDIT", "USE", "VIEW"]
+        }
+      },
+      "onecx-search-config-bff": {
+        "onecx-admin": {
+          "searchconfig": ["read", "write", "delete"]
+        },
+        "onecx-user": {
+          "searchconfig": ["read", "write", "delete"]
         }
       }
     }
