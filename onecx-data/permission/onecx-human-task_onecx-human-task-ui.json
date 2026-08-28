@@ -8,6 +8,11 @@
     },
     {
       "resource": "TASK",
+      "action": "EDIT",
+      "description": "Permission to edit tasks"
+    },
+    {
+      "resource": "TASK",
       "action": "SEARCH",
       "description": "Permission to search tasks"
     },
