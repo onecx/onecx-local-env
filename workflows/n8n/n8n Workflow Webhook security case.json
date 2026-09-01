@@ -1,0 +1,538 @@
+{
+  "name": "Example n8n Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        192
+      ],
+      "id": "a2642cf4-d457-45f7-95a2-38da6d0b2f98",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "a56186a9-fb24-42f8-bea1-374810fa9c29",
+              "leftValue": "={{ $json.body }}",
+              "rightValue": "",
+              "operator": {
+                "type": "object",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "286a76c7-9d60-4189-a028-4b6dfbd8daec",
+              "leftValue": "={{ $json.body.customInput }}",
+              "rightValue": "",
+              "operator": {
+                "type": "object",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1088,
+        112
+      ],
+      "id": "c2250bcf-1618-4965-a597-24d06c52e95f",
+      "name": "Custom Input?"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "body",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        80
+      ],
+      "id": "a68dcab5-7c46-4df5-be7f-d2aa4b0c0c6a",
+      "name": "Display keys and values"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3873c85d-7775-42b6-becc-81363267926e",
+              "name": "body",
+              "value": "={{ $json.body }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1264,
+        304
+      ],
+      "id": "ac7899af-1277-4ca8-84ec-af30d446937c",
+      "name": "Extract body"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "36ebbb65-1212-4841-8224-d03322c181d8",
+              "leftValue": "={{ $('Webhook').item.json.body.accepted }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        896,
+        128
+      ],
+      "id": "ea82fc8c-0baf-44a6-b0cd-b6ad0eacd857",
+      "name": "Accepted?"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:5678/webhook-test/90c571b3-f47f-4e72-be86-f4a434223539",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"title\": \"string\",\n  \"description\": \"string\",\n  \"providerType\": \"N8N\",\n  \"providerTaskId\": \"string\",\n  \"providerURL\": \"{{ $execution.resumeUrl }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        -32,
+        192
+      ],
+      "id": "9c938c49-3ec0-49fb-bbeb-13613a0f833b",
+      "name": "Mock svc external v1 API REST call",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resume": "webhook",
+        "httpMethod": "POST",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        496,
+        -32
+      ],
+      "id": "bbcc3294-8e5c-49f5-9a92-86bd0762dd05",
+      "name": "Wait for POST from adapter",
+      "webhookId": "fcb847cf-5142-4f27-8103-5ac551fcb6a8"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e1e43ac4-dcbe-486a-a5f6-818851b7fe49",
+              "name": "body.cutomInput",
+              "value": "={{ $json.body.customInput }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1264,
+        96
+      ],
+      "id": "43f00ce8-cb2a-46fd-bcec-4cda02054d5c",
+      "name": "Extract custom input"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://onecx-human-task-svc:8080/v1/tasks",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $json.access_token }}"
+            },
+            {
+              "name": "apm-principal-token",
+              "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJRVHhueUlUdGZaSGpVYUdPOXdaa3R1cTFuRmV2Z0U5VjhZZEtZMU1WNkxrIn0.eyJleHAiOjE3ODc3NDY5MDIsImlhdCI6MTc4Nzc0NjYwMiwiYXV0aF90aW1lIjoxNzg3NzQ1Mjg1LCJqdGkiOiJlYTcwOThhNy1mYTdiLTRhOTItODQyYS1mMjg0MzhlMDdjMzciLCJpc3MiOiJodHRwOi8va2V5Y2xvYWstYXBwLmxvY2FsaG9zdDo4MDgwL3JlYWxtcy9vbmVjeCIsImF1ZCI6Im9uZWN4LXNoZWxsLXVpLWNsaWVudCIsInN1YiI6ImY5OTRiMDMxLTgzMTYtNDdmZS04ZWJmLWM3NjgwM2IwNzFkNiIsInR5cCI6IklEIiwiYXpwIjoib25lY3gtc2hlbGwtdWktY2xpZW50Iiwic2lkIjoiYjZjMzFhYjEtNWM0MS00NzE0LWJmMzYtODAzMDFmY2UzOWQ4IiwiYXRfaGFzaCI6InJUV3M3ZzBPR2RkbEhhaEpqUHpwNXciLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6Ik9uZUNYIEFkbWluIiwicHJlZmVycmVkX3VzZXJuYW1lIjoib25lY3giLCJnaXZlbl9uYW1lIjoiT25lQ1giLCJmYW1pbHlfbmFtZSI6IkFkbWluIiwiZW1haWwiOiJvbmVjeF9hZG1pbkAxMDAwa2l0Lm9yZyJ9.SuOnLPwMtQHX-j_1pexeyXMyz-PeOsVO7oHkRhsnIWdj_APc9FuvkDMWKDt_ez9LraBQujfA7GDlG_9vqRctzWRIkKaPxgO_aUqGnHeWiwe0xhjT9B9zuCXErRU0m1UEe1_zPCL4bj-QseIzjXIXXqdQYNLabZOIh4soAQyCgUdzzXmC6kV28lHJ09rVE1N_6IJrKv2uisqFRsfdYrx-NDmIgqj7mJoHX40K3XjUcpUX_Gz_bHd_PpKE5MZ52mkVxdg7s1pRIDmgI2K7usweN7slR4OgOMmPP2LyytL42lqoJmNumNY_hT0zNuxd1TwcHVozVgox3fUbJMdAcFGJzw"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"title\": \"My Title\",\n  \"description\": \"My Description\",\n  \"providerType\": \"N8N\",\n  \"providerTaskId\": \"custom-n8n-id-123\",\n  \"providerURL\": \"http://n8n:5678/webhook-test/trigger\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        320,
+        192
+      ],
+      "id": "e986db0e-1629-437a-80a3-47babf0f9082",
+      "name": "REAL svc external v1 API REST call",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "content": "## Make sure that no more than one of these REST calls is activated.\n- Use none for testing with curl\n- Use MOCK with the mock n8n workflow \n- Use REAL for e2e testing in OneCX local env",
+        "height": 176,
+        "width": 432
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "5e439974-8bd7-48af-bc64-e77cd3f7720b",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "trigger",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        224,
+        448
+      ],
+      "id": "d6ad22cb-a5a9-4b76-807f-1d0885719e7a",
+      "name": "Webhook",
+      "webhookId": "b4e4b494-3751-4417-b1aa-87a60e4d2a64"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        784,
+        288
+      ],
+      "id": "a0aa6d1f-090e-479a-8157-b47747afc481",
+      "name": "Response code 200"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 403
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        896,
+        528
+      ],
+      "id": "9e009aec-893a-4820-8194-3ca12654b167",
+      "name": "Response code 403"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "f2b8a855-f10a-484e-b401-2c10236cceb7",
+              "leftValue": "={{ $json.active }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        640,
+        448
+      ],
+      "id": "c921b410-4799-4434-a518-374aa8c697ca",
+      "name": "Is Token active"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://keycloak-app.localhost:8080/realms/onecx/protocol/openid-connect/token/introspect",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "client_id",
+              "value": "n8n-client"
+            },
+            {
+              "name": "client_secret",
+              "value": "uMwvloB6RgIVm9wU6GcaDRqyfMYvMOas"
+            },
+            {
+              "name": "token",
+              "value": "={{ $json.headers.authorization.replace('Bearer ', '') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        448,
+        448
+      ],
+      "id": "21f852e8-c95e-4103-960b-50b16b8777bd",
+      "name": "Checking token"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://keycloak-app.localhost:8080/realms/onecx/protocol/openid-connect/token",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "grant_type",
+              "value": "client_credentials"
+            },
+            {
+              "name": "client_id",
+              "value": "n8n-client"
+            },
+            {
+              "name": "client_secret",
+              "value": "uMwvloB6RgIVm9wU6GcaDRqyfMYvMOas"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        144,
+        192
+      ],
+      "id": "ecc007a7-eb37-43c5-82ea-932cca832fcb",
+      "name": "Get token"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Mock svc external v1 API REST call",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Custom Input?": {
+      "main": [
+        [
+          {
+            "node": "Extract custom input",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extract body",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Accepted?": {
+      "main": [
+        [
+          {
+            "node": "Custom Input?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Mock svc external v1 API REST call": {
+      "main": [
+        [
+          {
+            "node": "Get token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for POST from adapter": {
+      "main": [
+        []
+      ]
+    },
+    "Extract custom input": {
+      "main": [
+        [
+          {
+            "node": "Display keys and values",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "REAL svc external v1 API REST call": {
+      "main": [
+        []
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Checking token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Response code 200": {
+      "main": [
+        [
+          {
+            "node": "Accepted?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Response code 403": {
+      "main": [
+        []
+      ]
+    },
+    "Is Token active": {
+      "main": [
+        [
+          {
+            "node": "Response code 200",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Response code 403",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Checking token": {
+      "main": [
+        [
+          {
+            "node": "Is Token active",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get token": {
+      "main": [
+        [
+          {
+            "node": "REAL svc external v1 API REST call",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d95a47c8-c020-49f7-9ada-bef2857b8d72",
+  "meta": {
+    "instanceId": "3050dc2418231646c1f34b045e7799c359fcfcdab84c56882e47cc645c93f661"
+  },
+  "nodeGroups": [],
+  "id": "gUeRHHTDADdifxGG",
+  "tags": []
+}
