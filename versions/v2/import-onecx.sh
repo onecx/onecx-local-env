@@ -91,21 +91,22 @@ kc_apm_client_id=$(grep "^KC_CLIENT_ID=" "$ENV_FILE" | cut -d '=' -f2)
 kc_auth_client_id=$(grep "^ONECX_OIDC_CLIENT_CLIENT_ID=" "$ENV_FILE" | cut -d '=' -f2)
 kc_auth_client_secret=$(grep "^ONECX_OIDC_CLIENT_S_E_C_R_E_T=" "$ENV_FILE" | cut -d '=' -f2)
 
-# Check existence
-declare -A required_vars=(
-  [KC_REALM]=kc_realm
-  [KC_URL]=kc_base_url
-  [KC_CLIENT_ID]=kc_apm_client_id
-  [ONECX_OIDC_CLIENT_CLIENT_ID]=kc_auth_client_id
-  [ONECX_OIDC_CLIENT_S_E_C_R_E_T]=kc_auth_client_secret
-)
-for key in "${!required_vars[@]}"; do
-  var="${required_vars[$key]}"
-  if [[ -z "${!var:-}" ]]; then
+# Check existence. Avoid associative arrays, which require Bash 4; macOS ships Bash 3.2.
+require_env_value() {
+  local key="$1"
+  local value="$2"
+
+  if [[ -z "$value" ]]; then
     printf '  %b\n' "${RED}Could not read '$key' from $ENV_FILE${NC}"
     exit 1
   fi
-done
+}
+
+require_env_value "KC_REALM" "$kc_realm"
+require_env_value "KC_URL" "$kc_base_url"
+require_env_value "KC_CLIENT_ID" "$kc_apm_client_id"
+require_env_value "ONECX_OIDC_CLIENT_CLIENT_ID" "$kc_auth_client_id"
+require_env_value "ONECX_OIDC_CLIENT_S_E_C_R_E_T" "$kc_auth_client_secret"
 
 # Identify user for tenants
 case "${1:-}" in
