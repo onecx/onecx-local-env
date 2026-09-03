@@ -274,8 +274,8 @@ services:
     image: docker.n8n.io/n8nio/n8n:latest
     container_name: n8n
     environment:
-      GENERIC_TIMEZONE: "Europe/Warsaw"
-      TZ: "Europe/Warsaw"
+      GENERIC_TIMEZONE: "Europe/Berlin"
+      TZ: "Europe/Berlin"
       N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
       N8N_RUNNERS_ENABLED: true
       QUEUE_HEALTH_CHECK_ACTIVE: true
@@ -1779,7 +1779,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          "bash -c 'echo $PWD'",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
         ]
       interval: 10s
       timeout: 5s
@@ -1814,7 +1814,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          "bash -c 'echo $PWD'",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /q/health HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
         ]
       interval: 10s
       timeout: 5s
@@ -1858,7 +1858,6 @@ services:
       - onecx
     profiles:
       - all
-      - ht
 
   onecx-human-task-bff:
     image: ${ONECX_HUMAN_TASK_BFF}
@@ -1886,7 +1885,6 @@ services:
       - onecx
     profiles:
       - all
-      - ht
 
   onecx-human-task-ui:
     image: ${ONECX_HUMAN_TASK_UI}
@@ -1911,7 +1909,6 @@ services:
       - onecx
     profiles:
       - all
-      - ht
 
   onecx-human-task-n8n-adapter:
     image: ${ONECX_HUMAN_TASK_N8N_ADAPTER}
@@ -1939,7 +1936,6 @@ services:
       - onecx
     profiles:
       - all
-      - ht
 
   onecx-notification-ui:
     image: ${ONECX_NOTIFICATION_UI}
