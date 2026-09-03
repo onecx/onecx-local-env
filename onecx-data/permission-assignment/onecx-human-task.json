@@ -1,0 +1,23 @@
+{
+  "id": "onecx-local-env_import-permission-assignments_onecx-human-task",
+  "assignments": {
+    "onecx-human-task": {
+      "onecx-human-task-ui": {
+        "onecx-admin": {
+          "TASK": [ "CREATE", "DELETE", "EDIT", "SEARCH", "VIEW" ]
+        },
+        "onecx-user": {
+          "TASK": [ "SEARCH", "VIEW" ]
+        }
+      },
+      "onecx-human-task-bff": {
+        "onecx-admin": {
+          "task": ["read", "write", "delete"]
+        },
+        "onecx-user": {
+          "task": ["read"]
+        }
+      }
+    }
+  }
+}

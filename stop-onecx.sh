@@ -31,7 +31,7 @@ usage () {
     -c  Cleanup, remove volumes
     -e  Edition, one of [ 'v1', 'v2'], default: 'v2'
     -h  Display this help and exit
-    -p  Profile, one of [ 'all', 'base' ], default: 'base'
+    -p  Profile, one of [ 'all', 'base', 'ht' ], default: 'base'
   Examples:
     $0              => Standard OneCX setup is stopped, existing data remains
     $0  -p all -c   => Complete OneCX setup is stopped and all data are removed
@@ -83,8 +83,8 @@ while getopts ":ce:hp:" opt; do
     p ) if [[ "$OPTARG" == -* ]]; then
           printf '  %b\n' "${RED}Missing parameter for option -p${NC}"
           usage 1
-        elif [[ "$OPTARG" != "all" && "$OPTARG" != "base" ]]; then
-          printf '  %b\n' "${RED}Unacceptable Docker profile, should be one of [ 'all', 'base' ]${NC}"
+        elif [[ "$OPTARG" != "all" && "$OPTARG" != "base" && "$OPTARG" != "ht" ]]; then
+          printf '  %b\n' "${RED}Unacceptable Docker profile, should be one of [ 'all', 'base', 'ht' ]${NC}"
           usage 1
         else
           PROFILE=$OPTARG
@@ -166,6 +166,7 @@ if [[ "$number_of_services" -eq 0 && "$CLEANUP" == "true" ]]; then
     docker volume rm -f "${OLE_DOCKER_COMPOSE_PROJECT}_postgres" 2> /dev/null || true
     docker volume rm -f "${OLE_DOCKER_COMPOSE_PROJECT}_pgadmin"  2> /dev/null || true
     docker volume rm -f "${OLE_DOCKER_COMPOSE_PROJECT}_traefik"  2> /dev/null || true
+    docker volume rm -f "${OLE_DOCKER_COMPOSE_PROJECT}_n8n"  2> /dev/null || true
   fi
   number_of_volumes=$(count_lines "$(docker volume ls --filter "label=${OLE_DOCKER_COMPOSE_PROJECT}.volume")")
   ((number_of_volumes--)) || true  # Decrement in place

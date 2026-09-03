@@ -1,0 +1,8 @@
+{
+  "name": "onecx-human-task-bff",
+  "permissions": [
+    { "resource": "task", "action": "read", "description": "Permission to read tasks" },
+    { "resource": "task", "action": "write", "description": "Permission to write tasks" },
+    { "resource": "task", "action": "delete", "description": "Permission to delete tasks" }
+  ]
+}

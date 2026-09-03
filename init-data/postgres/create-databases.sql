@@ -118,3 +118,9 @@ CREATE USER onecx_workspace WITH ENCRYPTED PASSWORD 'onecx_workspace';
 CREATE DATABASE onecx_workspace with owner onecx_workspace;
 GRANT ALL PRIVILEGES ON DATABASE onecx_workspace TO onecx_workspace;
 GRANT ALL PRIVILEGES ON SCHEMA public TO onecx_workspace;
+
+-- -- onecx_human_task
+CREATE USER onecx_human_task WITH ENCRYPTED PASSWORD 'onecx_human_task';
+CREATE DATABASE onecx_human_task with owner onecx_human_task;
+GRANT ALL PRIVILEGES ON DATABASE onecx_human_task TO onecx_human_task;
+GRANT ALL PRIVILEGES ON SCHEMA public TO onecx_human_task;
