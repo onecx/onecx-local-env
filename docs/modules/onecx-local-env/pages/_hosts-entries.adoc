@@ -50,4 +50,7 @@
 127.0.0.1 onecx-user-profile-avatar-svc
 127.0.0.1 onecx-user-profile-svc
 127.0.0.1 onecx-user-profile-bff
+127.0.0.1 onecx-human-task-svc
+127.0.0.1 onecx-human-task-bff
+127.0.0.1 onecx-human-task-n8n-adapter
 ----
