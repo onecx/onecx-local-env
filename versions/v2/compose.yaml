@@ -1857,7 +1857,6 @@ services:
     networks:
       - onecx
     profiles:
-      - all
       - ht
 
   onecx-human-task-bff:
@@ -1885,7 +1884,6 @@ services:
     networks:
       - onecx
     profiles:
-      - all
       - ht
 
   onecx-human-task-ui:
@@ -1910,7 +1908,6 @@ services:
     networks:
       - onecx
     profiles:
-      - all
       - ht
 
   onecx-human-task-n8n-adapter:
@@ -1938,7 +1935,6 @@ services:
     networks:
       - onecx
     profiles:
-      - all
       - ht
 
   onecx-notification-ui:
@@ -2050,6 +2046,10 @@ services:
       onecx-workspace-ui:
         condition: service_healthy
       n8n:
+        condition: service_healthy
+      onecx-human-task-n8n-adapter:
+        condition: service_healthy     
+      onecx-human-task-ui:
         condition: service_healthy
       # camunda:
       #   condition: service_healthy
