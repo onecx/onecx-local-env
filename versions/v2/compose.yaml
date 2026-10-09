@@ -254,7 +254,7 @@ services:
 
   # Init container to create default S3 buckets in RustFS if they don't exist yet
   rustfs-init:
-    image: minio/mc:latest
+    image: pgsty/mc:latest
     container_name: rustfs-init
     depends_on:
       rustfs:
