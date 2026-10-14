@@ -228,16 +228,6 @@
           ]
         },
         {
-          "name": "onecx-chat-panel",
-          "components": [
-            {
-              "productName": "onecx-chat",
-              "appId": "onecx-chat-ui",
-              "name": "./OneCXChatPanelComponent"
-            }
-          ]
-        },
-        {
           "name": "onecx-column-group-selection",
           "components": [
             {
@@ -373,6 +363,16 @@
           ]
         },
         {
+          "name": "onecx-shell-body-end.center",
+          "components": [
+            {
+              "productName": "onecx-chat",
+              "appId": "onecx-chat-ui",
+              "name": "./OneCXChatPanelComponent"
+            }
+          ]
+        },
+        {
           "name": "onecx-shell-header.start",
           "components": [
             {
@@ -413,7 +413,7 @@
             {
               "productName": "onecx-chat",
               "appId": "onecx-chat-ui",
-              "name": "./OneCXChatPanelComponent"
+              "name": "./OneCXChatToggleComponent"
             },
             {
               "productName": "onecx-bookmark",

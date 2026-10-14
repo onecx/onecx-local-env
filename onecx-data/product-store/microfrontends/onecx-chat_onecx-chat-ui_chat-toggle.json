@@ -1,0 +1,16 @@
+{
+  "appVersion": "xxx",
+  "appName": "OneCX Chat UI",
+  "description": "OneCX Chat Toggle",
+  "contact": "onecx@1000kit.org",
+  "remoteBaseUrl": "/mfe/chat/",
+  "remoteEntry": "/mfe/chat/remoteEntry.js",
+  "note": "Imported MFE",
+  "exposedModule": "./OneCXChatToggleComponent",
+  "technology": "WEBCOMPONENTMODULE",
+  "remoteName": "onecx-chat",
+  "tagName": "ocx-chat-toggle-component",
+  "type": "COMPONENT",
+  "deprecated": false,
+  "undeployed": false
+}
