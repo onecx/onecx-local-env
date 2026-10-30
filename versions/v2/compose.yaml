@@ -666,6 +666,46 @@ services:
       - all
       - ht
 
+  onecx-pipecat:
+    image: ${ONECX_PIPECAT}
+    container_name: onecx-pipecat
+    environment:
+      ONECX_LLM__PROVIDER_OVERRIDE: inmemory
+      ONECX_SPEECH__STT_PROVIDER: inmemory
+      ONECX_SPEECH__TTS_PROVIDER: inmemory
+      ONECX_AUTH__ISSUER: ${ONECX_AUTH_SERVER_URL}
+      ONECX_AUTH__JWKS: ${ONECX_AUTH_SERVER_URL}/protocol/openid-connect/certs
+      ONECX_AUTH__TOKEN_ENDPOINT: ${ONECX_AUTH_SERVER_URL}/protocol/openid-connect/token
+      ONECX_AUTH__CLIENT_ID: ${ONECX_OIDC_CLIENT_CLIENT_ID}
+      ONECX_AUTH__CLIENT_SECRET: ${ONECX_OIDC_CLIENT_S_E_C_R_E_T}
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "bash -c 'exec 3<>/dev/tcp/localhost/8080 && printf \"GET /healthz HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && read line <&3 && case \"$$line\" in *200*) exit 0;; *) exit 1;; esac'",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      keycloak-app:
+        condition: service_healthy
+      onecx-ai-provider-svc:
+        condition: service_healthy
+      onecx-chat-svc:
+        condition: service_healthy
+      onecx-permission-svc:
+        condition: service_healthy
+    labels:
+      - "traefik.http.services.onecx-pipecat.loadbalancer.server.port=8080"
+      - "traefik.http.routers.onecx-pipecat.rule=Host(`onecx.localhost`) && PathPrefix(`/ws/voice`)"
+      - "traefik.http.routers.onecx-pipecat.entrypoints=web"
+    networks:
+      - onecx
+    profiles:
+      - all
+      - ht
+
   ########## ONECX DOCUMENT
   onecx-document-svc:
     image: ${ONECX_DOCUMENT_SVC}

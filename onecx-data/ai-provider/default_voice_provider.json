@@ -1,0 +1,8 @@
+{
+  "name": "Voice Mock Provider",
+  "description": "Placeholder provider for the voice mock agent. onecx-pipecat runs with in-memory AI and never calls it.",
+  "type": "OLLAMA",
+  "llmUrl": "http://localhost:11434",
+  "authMode": "API_KEY",
+  "apiKey": "not-used"
+}
