@@ -8,7 +8,7 @@
   "exposedModule": "./OneCXShellToastComponent",
   "technology": "WEBCOMPONENTMODULE",
   "remoteName": "onecx-shell",
-  "shareScope": "angular_21",
+  "shareScope": "angular_22",
   "tagName": "ocx-shell-toast-component",
   "type": "COMPONENT",
   "deprecated": false,
