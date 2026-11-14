@@ -1,0 +1,5 @@
+{
+  "name": "Voice Mock Model",
+  "modelIdentifier": "mock",
+  "communicationMode": "SYNC"
+}

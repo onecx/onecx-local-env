@@ -31,7 +31,7 @@ The script accepts several optional options to customize its behavior. Some opti
 Specify a set of data to be imported (all, base) or a specific data type like workspace, theme etc.
   * base (Default).
   * all
-  * one of [ ai, bookmark, assignment, parameter, permission, mfe, ms, product, slot, tenant theme, welcome, workspace]
+  * one of [ ai, voice, bookmark, assignment, parameter, permission, mfe, ms, product, slot, tenant theme, welcome, workspace]
 
 -e::
 The edition of OneCX. This must match the edition that was used to start the environment. Supported editions are:

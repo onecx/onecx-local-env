@@ -1,0 +1,8 @@
+{
+  "name": "Voice Mock Agent",
+  "description": "Voice agent for local testing. onecx-pipecat answers with in-memory speech and LLM, no AI model is connected.",
+  "status": "LIVE",
+  "voiceEnabled": true,
+  "languageCode": "en",
+  "tools": []
+}
