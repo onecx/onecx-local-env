@@ -670,6 +670,7 @@ services:
     image: ${ONECX_PIPECAT}
     container_name: onecx-pipecat
     environment:
+      ONECX_VOICE__ORIGIN_POLICY: same-host
       ONECX_LLM__PROVIDER_OVERRIDE: inmemory
       ONECX_SPEECH__STT_PROVIDER: inmemory
       ONECX_SPEECH__TTS_PROVIDER: inmemory
