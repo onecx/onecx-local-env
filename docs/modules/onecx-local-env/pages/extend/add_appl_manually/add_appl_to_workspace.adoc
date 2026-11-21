@@ -2,7 +2,9 @@ ifdef::env-site[]
 include::partial$_attributes.adoc[]
 endif::[]
 :imagesdir: ../../images
-:workspace_link: xref:documentation:onecx-workspace:index.adoc[OneCX Workspace]
+
+:workspace_link: xref:onecx-workspace:index.adoc[OneCX Workspace]
+
 
 = Add the application to the workspace
 
@@ -11,17 +13,17 @@ endif::[]
 * Click on the workspace you want to add the application to (e.g. `Onecx Admin`). See {workspace_link} documentation for more details on workspaces.
 
 .Navigate to the workspace
-image::extend/add_application_manually/workspace_left_panel.png[Select the workspace to which you want to add the application]
+image::extend/add_appl_manually/workspace_left_panel.png[Select the workspace to which you want to add the application]
 
 * Click `Applications` tab in the workspace view, your application should be visible in the list of available applications.
 
 .Applications tab in the workspace
-image::extend/add_application_manually/workspaces_applications.png[Find the "Applications" tab in the workspace view]
+image::extend/add_appl_manually/workspaces_applications.png[Find the "Applications" tab in the workspace view]
 
 * Click on the application you want to add to the workspace, then click `>` button in the middle of the view.
 
 .Add the application to the workspace
-image::extend/add_application_manually/workspace_add_app.png[Select the application and click ">" button to add it to the workspace]
+image::extend/add_appl_manually/workspace_add_app.png[Select the application and click ">" button to add it to the workspace]
 
 * You can access the application in the workspace now by entering the following link:
 

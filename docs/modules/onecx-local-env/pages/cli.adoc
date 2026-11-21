@@ -1,0 +1,3 @@
+ifdef::env-site[]
+include::documentation:onecx-local-env-cli:index.adoc[]
+endif::[]

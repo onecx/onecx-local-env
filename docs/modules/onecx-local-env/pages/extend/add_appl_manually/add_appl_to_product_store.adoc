@@ -3,15 +3,12 @@ include::partial$_attributes.adoc[]
 endif::[]
 :imagesdir: ../../images
 
-:module_federation_webpack_link: xref:documentation:onecx-docs-overview:module-federation/webpack.adoc[Module Federation with Webpack]
+:module_federation_webpack_config_example_link: xref:onecx-docs-overview:module-federation/webpack.adoc#important-elements-of-webpack-configuration[Important Elements of Webpack Configuration]
 
-:module_federation_webpack_config_example_link: xref:documentation:onecx-docs-overview:module-federation/webpack.adoc#important-elements-of-webpack-configuration[Important Elements of Webpack Configuration]
+:module_federation_bootstrap_link: xref:onecx-docs-overview:module-federation/bootstrapping.adoc#module-bootstrapping-and-configuration[Bootstrap Application]
 
-:module_federation_bootstrap_link: xref:documentation:onecx-docs-overview:module-federation/bootstrapping.adoc#module-bootstrapping-and-configuration[Bootstrap Application]
+:module_federation_app_types_link: xref:onecx-docs-overview:module-federation/microfrontend-content-loading.adoc[Microfrontend Content Loading]
 
-:module_federation_app_types_link: xref:documentation:onecx-docs-overview:module-federation/microfrontend-content-loading.adoc[Microfrontend Content Loading]
-
-:achitecture_microfrontends_link: xref:documentation:onecx-docs-overview:architecture/microservices.adoc[Microservices and Microfrontends]
 
 = Add the App to the product store
 You can find out more about applications here: xref:documentation:onecx-docs-overview:architecture/index.adoc#applications[Applications]
@@ -23,7 +20,7 @@ You can find out more about applications here: xref:documentation:onecx-docs-ove
 * Click three dots in the top right corner of the application store and select `Add Application` from the dropdown menu.
 
 .Locate the "Add Application" button
-image::extend/add_application_manually/application_store.png[Find the "Add Application" button in the top right corner of the application store]
+image::extend/add_appl_manually/application_store.png[Find the "Add Application" button in the top right corner of the application store]
 
 * Fill in the form with the following details:
 
@@ -52,19 +49,19 @@ image::extend/add_application_manually/application_store.png[Find the "Add Appli
 * Click `Save` to add the application to the product store.
 
 .Example application details
-image::extend/add_application_manually/example_application_parameters.png[Example of filled application details form]
+image::extend/add_appl_manually/example_application_parameters.png[Example of filled application details form]
 
 == Add a UI component for the application
 
 * Return to the `Application Store` and click the `Apps` button in the top right corner to change the view.
 
 .Apps button in the application store
-image::extend/add_application_manually/change_to_apps_tab.png[Find the "Apps" button in the top right corner of the application store]
+image::extend/add_appl_manually/change_to_apps_tab.png[Find the "Apps" button in the top right corner of the application store]
 
 * Click three dots in the top right corner of the application store and select `Create UI Component` from the dropdown menu.
 
 .Locate the "Create UI Component" button
-image::extend/add_application_manually/create_ui_component_pick.png[Find the "Create UI Component" button in the top right corner of the application store]
+image::extend/add_appl_manually/create_ui_component_pick.png[Find the "Create UI Component" button in the top right corner of the application store]
 
 * Fill in the `management details` with the following information:
 
@@ -97,7 +94,7 @@ let's use {module_federation_webpack_config_example_link} as a reference for `we
 |===
 
 .Example management details
-image::extend/add_application_manually/create_ui_component_management_details.png[Example of filled management details form]
+image::extend/add_appl_manually/create_ui_component_management_details.png[Example of filled management details form]
 
 * Click `Remote Module` tab in the top of the card 
 * Fill in the `Remote Module` details with the following information:
@@ -138,14 +135,14 @@ image::extend/add_application_manually/create_ui_component_management_details.pn
 |===
 
 .Example remote module details
-image::extend/add_application_manually/create_ui_component_remote_module.png[Example of filled remote module details form]
+image::extend/add_appl_manually/create_ui_component_remote_module.png[Example of filled remote module details form]
 
 * Click `Save` to add the UI component for the application.
 
 * Check that the UI component is added to the application created in the previous step. You can click on the application in the application store and click the `Components` tab to see the list of UI components added for the application. 
 
 .Successfully added UI component
-image::extend/add_application_manually/successfuly_added_ui_component.png[Example of the UI component added to the application]
+image::extend/add_appl_manually/successfuly_added_ui_component.png[Example of the UI component added to the application]
 
 [NOTE]
 ====

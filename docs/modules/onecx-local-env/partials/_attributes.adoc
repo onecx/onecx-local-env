@@ -2,11 +2,49 @@
 :idseparator: -
 :page-pagination:
 
-// Local references
-:ole_run_onecx:              xref:./run-onecx.adoc[Run OneCX]
+// Internal links to OneCX Start module
+:onecx_docs_apps_create:          xref:onecx-docs-start:create_application.adoc[Creating a OneCX Application]
 
-// Other module references
-:onecx_docs_setup_ref:       xref:documentation:onecx-docs-doc:setup.adoc[OneCX Docs: Setting up]
+// External links to OneCX resources
+:onecx_docs_overview_ref:         xref:onecx-docs-overview:index.adoc[OneCX Platform Overview]
+:onecx_docs_overview_app_ref:     xref:onecx-docs-overview:architecture/index.adoc#applications[OneCX Application Concept]
+:onecx_docs_overview_mfe_ref:     xref:onecx-docs-overview:architecture/microservices.adoc[Microservices and Microfrontends]
+:onecx_docs_overview_mf_ref:      xref:onecx-docs-overview:module-federation/webpack.adoc[Module Federation with Webpack]
+:onecx_docs_apps_ref:             xref:onecx-docs-apps:index.adoc[OneCX Application List]
+:onecx_docs_dev_ref:              xref:onecx-docs-dev:index.adoc[OneCX Developer Documentation]
+:onecx_api_guidelines_ref:        xref:onecx-docs-dev:guidelines/api_guidelines.adoc[API Guidelines]
+:onecx_local_env_docs_ref:        xref:onecx-local-env:index.adoc[OneCX Local Environment]
+:onecx_local_env_setup_ref:       xref:onecx-local-env:setup.adoc[OneCX Local Environment Setup]
+:onecx_local_env_extend_ref:      xref:onecx-local-env:extend/extend.adoc[Extend OneCX]
+:onecx_local_env_cli_ref:   xref:documentation:onecx-docs-start:first-app/app_setup_cli.adoc[local-env-cli]
 
-// External references
+:onecx_app_generator_ref:         xref:onecx-nx-plugins:index.adoc[OneCX App Generator]
+:group_by_count_diagram_ref:      xref:onecx-portal-ui-libs:components/group-by-count-diagram.adoc[GroupByCountDiagram Component]
+
+:onecx_ui_datatable_columns_ref: xref:documentation:onecx-portal-ui-libs:components/interactive-data-view/data-table-column.adoc
+
+:onecx_ui_translations_ref:             xref:documentation:docs-guides-ui:angular/translation/multi-language.adoc
+:ngrx_search_criteria_ref:              xref:documentation:docs-guides-ui:angular/ngrx/search-criteria/search-criteria.adoc
+:ngrx_search_criteria_parameter_ref:    xref:documentation:docs-guides-ui:angular/ngrx/search-criteria/search-criteria.adoc#parameters
+:ngrx_search_criteria_html_ref:         xref:documentation:docs-guides-ui:angular/ngrx/search-criteria/search-criteria.adoc#html
+:ngrx_search_criteria_html_example_ref: xref:documentation:docs-guides-ui:angular/ngrx/search-criteria/search-criteria.adoc#examples-for-different-input-fields
+:permissions_in_angular_ref:            xref:documentation:docs-guides-ui:angular/permissions/permissions.adoc[permissions in Angular]
+:permission_management_ref:             xref:documentation:onecx-permission:index.adoc[Permission Management]
+
+
+// External links to general resources
+:onecx_local_env_repo_link:       link:https://github.com/onecx/onecx-local-env[OneCX Local Environment]
+:onecx_local_env_cli_repo_link:   link:https://github.com/onecx/onecx-local-env-cli[OneCX Local Environment CLI]
+:onecx_docs_repo_link:            link:https://github.com/onecx/docs[OneCX Docs]
+:kiss_principle_link:             link:https://en.wikipedia.org/wiki/KISS_principle[KISS]
+:swagger_editor_link:             link:https://editor.swagger.io/[Swagger Editor]
+:openapi_spec_link:               link:https://spec.openapis.org/oas/[OpenAPI Specification]
+:antora_doc_link:                 link:https://docs.antora.org/antora/latest/[Antora]
+:asciidoc_doc_link:               link:https://docs.asciidoctor.org/asciidoc/latest/[AsciiDoc]
+:angular_link:                    link:https://angular.de/[Angular]
+:react_link:                      link:https://reactjs.org/[React]
+:nx_link:                         link:https://nx.dev/[Nx]
+:ngrx_link:                       link:https://ngrx.io/[NgRx]
+:node_js_link:                    link:https://nodejs.org/en[Node.js]
+:helm_link:                       link:https://helm.sh/[Helm]
 :docker_compose_profiles_link:  link:https://docs.docker.com/compose/how-tos/profiles/[Docker Compose Profiles]

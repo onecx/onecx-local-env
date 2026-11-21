@@ -5,10 +5,11 @@
 
 ** xref:onecx-local-env:extend/extend.adoc[Extend OneCX]
 *** xref:onecx-local-env:extend/local-mfe.adoc[Integrate Microfrontend]
-*** xref:onecx-local-env:extend/add_application_manually/add_application_manually.adoc[Add App UI Manually]
+*** xref:onecx-local-env:extend/add_appl_manually/add_appl_manually.adoc[Add Application Manually]
 *** xref:onecx-local-env:extend/local-images.adoc[Integrate Images]
 *** xref:onecx-local-env:extend/custom-imports.adoc[Import Custom Data]
 *** xref:onecx-local-env:extend/advanced.adoc[Advanced Usage]
+*** xref:onecx-local-env:extend/mock-data.adoc[Mock Data]
 
 ** xref:onecx-local-env:ai-setup.adoc[Use AI]
 
@@ -22,6 +23,8 @@
 *** xref:onecx-local-env:scripts/list-containers.adoc[list-containers.sh]
 *** xref:onecx-local-env:scripts/setup-truststore.adoc[setup-truststore.sh]
 
+** xref:onecx-local-env:cli.adoc[CLI]
+
 ** xref:onecx-local-env:internal.adoc[Internal]
 *** xref:onecx-local-env:internal/onecx-data.adoc[Initial Data]
 *** xref:onecx-local-env:internal/networking.adoc[Networking]
@@ -29,9 +32,6 @@
 *** xref:onecx-local-env:internal/custom-certificates.adoc[Custom Certificates]
 *** xref:onecx-local-env:internal/utils.adoc[Utilities]
 *** xref:onecx-local-env:./wsl2.adoc[Setup wsl2]
-ifdef::env-site[]
-include::documentation:onecx-local-env-cli:partial$nav.adoc[]
-endif::[]
 
 ** xref:onecx-local-env:troubleshooting.adoc[Troubleshooting]
 
