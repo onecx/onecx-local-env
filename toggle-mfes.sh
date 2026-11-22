@@ -33,9 +33,9 @@ MFE_COUNT=0
 MFES=()
 MODE=""
 LINE_PREFIX="   * "
-onecx_products="announcement|bookmark|chat|document|help|iam|parameter|permission|product-store|tenant|theme|search-config|shell|user-profile|welcome|workspace|bookstore"
+onecx_products="announcement|bookmark|chat|data|document|help|iam|parameter|permission|product-store|tenant|theme|search-config|shell|user-profile|welcome|workspace|bookstore"
 declare -A onecx_products_predefined_ports=( \
-  ["announcement"]="5024" ["bookmark"]="5031" ["chat"]="5032" ["document"]="5033" \
+  ["announcement"]="5024" ["bookmark"]="5031" ["chat"]="5032" ["data"]="5010" ["document"]="5033" \
   ["help"]="5023" ["iam"]="5029" \
   ["parameter"]="5030" ["permission"]="5026" ["product-store"]="5021" \
   ["search-config"]="5034" ["shell"]="5000" ["tenant"]="5022" ["theme"]="5020" \
