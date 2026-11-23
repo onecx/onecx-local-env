@@ -13,15 +13,16 @@
 :onecx_docs_apps_ref:             xref:onecx-docs-apps:index.adoc[OneCX Application List]
 :onecx_docs_dev_ref:              xref:onecx-docs-dev:index.adoc[OneCX Developer Documentation]
 :onecx_api_guidelines_ref:        xref:onecx-docs-dev:guidelines/api_guidelines.adoc[API Guidelines]
+:onecx_docs_doc_ref:              xref:onecx-docs-doc:index.adoc[OneCX Documentation]
 :onecx_local_env_docs_ref:        xref:onecx-local-env:index.adoc[OneCX Local Environment]
 :onecx_local_env_setup_ref:       xref:onecx-local-env:setup.adoc[OneCX Local Environment Setup]
 :onecx_local_env_extend_ref:      xref:onecx-local-env:extend/extend.adoc[Extend OneCX]
-:onecx_local_env_cli_ref:   xref:documentation:onecx-docs-start:first-app/app_setup_cli.adoc[local-env-cli]
+:onecx_local_env_cli_ref:         xref:onecx-docs-start:first-app/app_setup_cli.adoc[local-env-cli]
 
 :onecx_app_generator_ref:         xref:onecx-nx-plugins:index.adoc[OneCX App Generator]
 :group_by_count_diagram_ref:      xref:onecx-portal-ui-libs:components/group-by-count-diagram.adoc[GroupByCountDiagram Component]
 
-:onecx_ui_datatable_columns_ref: xref:documentation:onecx-portal-ui-libs:components/interactive-data-view/data-table-column.adoc
+:onecx_ui_datatable_columns_ref:  xref:documentation:onecx-portal-ui-libs:components/interactive-data-view/data-table-column.adoc
 
 :onecx_ui_translations_ref:             xref:documentation:docs-guides-ui:angular/translation/multi-language.adoc
 :ngrx_search_criteria_ref:              xref:documentation:docs-guides-ui:angular/ngrx/search-criteria/search-criteria.adoc
@@ -47,4 +48,4 @@
 :ngrx_link:                       link:https://ngrx.io/[NgRx]
 :node_js_link:                    link:https://nodejs.org/en[Node.js]
 :helm_link:                       link:https://helm.sh/[Helm]
-:docker_compose_profiles_link:  link:https://docs.docker.com/compose/how-tos/profiles/[Docker Compose Profiles]
+:docker_compose_profiles_link:    link:https://docs.docker.com/compose/how-tos/profiles/[Docker Compose Profiles]

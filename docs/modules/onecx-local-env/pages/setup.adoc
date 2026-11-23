@@ -18,7 +18,7 @@ endif::[]
 
 This guide provides instructions for setting up and installing *onecx-local-env*, the local development environment for OneCX. Once setup is done the environment can be started, see {ole_run_onecx}.
 
-If you want to setup a development environment for writing OneCX documentation, please refer to the {onecx_docs_setup_ref} guide instead.
+If you want to setup a development environment for writing OneCX documentation, please refer to the {onecx_docs_doc_ref} guide instead.
 
 == Prerequisites
 === Operating Systems
