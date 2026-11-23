@@ -16,6 +16,7 @@
 :onecx_docs_doc_ref:              xref:onecx-docs-doc:index.adoc[OneCX Documentation]
 :onecx_local_env_docs_ref:        xref:onecx-local-env:index.adoc[OneCX Local Environment]
 :onecx_local_env_setup_ref:       xref:onecx-local-env:setup.adoc[OneCX Local Environment Setup]
+:onecx_local_env_run_ref:         xref:onecx-local-env:setup.adoc[Running OneCX locally]
 :onecx_local_env_extend_ref:      xref:onecx-local-env:extend/extend.adoc[Extend OneCX]
 :onecx_local_env_cli_ref:         xref:onecx-docs-start:first-app/app_setup_cli.adoc[local-env-cli]
 
