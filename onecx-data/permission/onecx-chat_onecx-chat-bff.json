@@ -9,6 +9,7 @@
     { "resource": "message", "action": "delete", "description": "Permission to delete messages" },
     { "resource": "participant", "action": "read", "description": "Permission to read participants" },
     { "resource": "participant", "action": "write", "description": "Permission to write participants" },
-    { "resource": "participant", "action": "delete", "description": "Permission to delete participants" }
+    { "resource": "participant", "action": "delete", "description": "Permission to delete participants" },
+    { "resource": "agent", "action": "read", "description": "Permission to read agents" }
   ]
 }

@@ -1,0 +1,108 @@
+ifdef::env-site[]
+include::partial$_attributes.adoc[]
+endif::[]
+:imagesdir: ../images
+
+= Use Voice in OneCX Local Environment
+
+The voice service *onecx-pipecat* lets users talk with a chat agent. +
+In the local environment it runs *without AI models*: speech-to-text, the LLM and text-to-speech are in-memory fakes. Only the voice activity detection (Silero VAD) is real. +
+Use it to test the voice flow of the chat (connection, permission, agent configuration, turn detection, messages in the chat) without an AI provider or API key.
+
+== What is mocked
+
+[cols="1,3"]
+|===
+| Part | Behaviour in the local environment
+
+| Speech-to-text
+| Every user turn becomes the text `in-memory transcript`.
+
+| LLM
+| The answer is `in-memory reply to: in-memory transcript`.
+
+| Text-to-speech
+| Silent audio: you hear nothing.
+
+| Voice activity detection
+| Real: the user turn ends when you stop speaking.
+|===
+
+Both texts are stored as messages of the chat (onecx-chat-svc), so they appear in the chat panel.
+
+
+== Prerequisites
+
+Environment Set up::
+A working OneCX Local Environment set up. +
+If you haven't done this yet, follow the instructions in the xref:./setup.adoc[Setting up] documentation.
+
+Start Environment::
+A started OneCX Local Environment with the *all* profile enabled. onecx-pipecat runs in the same profiles as the chat services (*all*, *ht*).
+
+Current Images::
+onecx-pipecat reads the agent configuration from onecx-ai-provider-svc. Use current images, see xref:./scripts/update-images.adoc[update-images.sh].
+
+
+== Set up Voice
+
+. Start OneCX with *all* profile
++
+[source,bash]
+----
+./start-onecx.sh -p all
+----
+
+. Import voice data, *-s* is mandatory:
++
+[source,bash]
+----
+./import-onecx.sh -d voice -x -s
+----
++
+This imports:
++
+* The permission *VOICE / USE* of the application `onecx-chat-ui` (product `onecx-chat`), assigned to the role *onecx-admin* (user `onecx`). onecx-pipecat checks this permission when a voice session starts.
+* The agent *Voice Mock Agent* with voice enabled. Its provider and model are placeholders, onecx-pipecat never calls them. If the agent exists, its import is skipped.
+
+
+== Using Voice
+
+. Click on the *Open AI Chat* button in the top bar and select the agent *Voice Mock Agent*.
+. Open a chat that is already saved: a voice session needs an existing chat. In a new chat, send a first message.
+. Start the voice session with the microphone button and allow the browser to use the microphone.
+. Speak, then pause: the transcript and the answer appear in the chat.
+
+The browser connects to `ws://onecx.localhost/ws/voice`, Traefik forwards it to onecx-pipecat.
+
+
+== Use Local Builds
+
+The published images contain only merged changes. To test unmerged changes:
+
+onecx-pipecat::
+Build the image and start the environment with it:
++
+[source,bash]
+----
+docker build -t onecx-pipecat:local ../onecx-pipecat
+ONECX_PIPECAT=onecx-pipecat:local ./start-onecx.sh -p all
+----
+
+Chat UI::
+Start the chat microfrontend locally and integrate it, see xref:./scripts/toggle-mfes.adoc[toggle-mfes.sh]:
++
+[source,bash]
+----
+./toggle-mfes.sh -a chat
+----
+
+[TIP]
+====
+If the voice session does not start, check the logs of onecx-pipecat and of the services it calls (onecx-ai-provider-svc, onecx-chat-svc, onecx-permission-svc):
+
+[source,bash]
+----
+docker logs onecx-pipecat
+----
+====

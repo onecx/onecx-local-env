@@ -35,6 +35,11 @@
       "resource": "CHAT",
       "action": "IMPORT",
       "description": "Permission to import chats"
+    },
+    {
+      "resource": "VOICE",
+      "action": "USE",
+      "description": "Permission to use voice chat"
     }
   ]
 }

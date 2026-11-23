@@ -4,7 +4,8 @@
     "onecx-chat": {
       "onecx-chat-ui": {
         "onecx-admin": {
-          "CHAT": [ "CREATE", "DELETE", "EDIT", "SEARCH", "VIEW", "EXPORT", "IMPORT" ]
+          "CHAT": [ "CREATE", "DELETE", "EDIT", "SEARCH", "VIEW", "EXPORT", "IMPORT" ],
+          "VOICE": [ "USE" ]
         },
         "onecx-user": {
           "CHAT": [ "SEARCH", "VIEW" ]
@@ -14,12 +15,14 @@
         "onecx-admin": {
           "chat": ["read", "write", "delete"],
           "message": ["read", "write", "delete"],
-          "participant": ["read", "write", "delete"]
+          "participant": ["read", "write", "delete"],
+          "agent": ["read"]
         },
         "onecx-user": {
           "chat": ["read"],
           "message": ["read"],
-          "participant": ["read"]
+          "participant": ["read"],
+          "agent": ["read"]
         }
       }
     }
